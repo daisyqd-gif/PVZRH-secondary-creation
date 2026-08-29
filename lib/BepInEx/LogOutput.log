@@ -1,0 +1,1593 @@
+[Message: Preloader] BepInEx 6.0.0-dev - PlantsVsZombiesRH (7/18/2026 8:05:30 PM)
+[Message: Preloader] Built from commit 344bef209045be43d9ecef175e0e9532fee2214c
+[Info   :   BepInEx] System platform: Windows 10 64-bit
+[Info   :   BepInEx] Process bitness: 64-bit (x64)
+[Info   :   BepInEx] Running under Unity 2022.3.62f1c1
+[Info   :   BepInEx] Runtime version: 6.0.7
+[Info   :   BepInEx] Runtime information: .NET 6.0.7
+[Info   : Preloader] 0 patcher plugins loaded
+[Info   : Preloader] 0 assemblies discovered
+[Message:AssemblyPatcher] Executing 0 patch(es)
+[Info   :   BepInEx] Chainloader initialized
+[Warning:Il2CppInterop] Class::Init signatures have been exhausted, using a substitute!
+[Info   :Il2CppInterop] Registered mono type Il2CppInterop.Runtime.DelegateSupport+Il2CppToMonoDelegateReference in il2cpp domain
+[Info   :   BepInEx] 44 plugins to load
+[Info   :   BepInEx] Loading [AllWaterLevel_Fog 3.7.0]
+[Info   :AllWaterLevel_Fog] AllWaterLevel_Fog 3.7 loaded.
+[Info   :   BepInEx] Loading [CharmSniper 3.7.0]
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[System.Collections.Generic.KeyValuePair`2[System.String,System.String]] GetLiveInfo() on type CustomPlantClass.BaseCustomPlant has unsupported return type System.Collections.Generic.List`1[System.Collections.Generic.KeyValuePair`2[System.String,System.String]]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator PFWrapper() on type CustomPlantClass.BaseCustomPlant has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type CustomPlantClass.BaseCustomPlant has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.BaseCustomPlant in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CharmSniper.CharmSniper in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle charmsniper.
+[Info   :CharmSniper] CharmSniper 3.7 loaded.
+[Info   :   BepInEx] Loading [UnityExplorer 1.4.0]
+[Message:UnityExplorer] CinematicUnityExplorer 1.4.0 initializing...
+[Message:UnityExplorer] [UniverseLib] UniverseLib 1.5.11 initializing...
+[Info   :Il2CppInterop] Registered mono type UniverseLib.UniversalBehaviour in il2cpp domain
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named _Main_d__5 Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnBoardStart_b__4_0_d Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnSelect_b__0_d Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named _OnSelect_d__3 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnSelect_b__0_d Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Warning:UnityExplorer] [UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[Info   :Il2CppInterop] Registered mono type UniverseLib.Runtime.Il2Cpp.Il2CppManagedEnumerator in il2cpp domain
+[Message:UnityExplorer] [UniverseLib] Loaded Unhollowed modules in 0.004 seconds.
+[Message:UnityExplorer] [UniverseLib] Setup deobfuscation cache in 0.17 seconds.
+[Message:UnityExplorer] [UniverseLib] Finished UniverseLib initial setup.
+[Info   :Il2CppInterop] Registered mono type UnityExplorer.ExplorerBehaviour in il2cpp domain
+[Message:UnityExplorer] Initialized UnityCrashPrevention for: Canvas.get_renderingDisplaySize
+[Info   :   BepInEx] Loading [GargantuarHypnoEmperor 3.7.0]
+[Info   :Il2CppInterop] Registered mono type GargantuarHypnoEmperor.GargantuarHypnoEmperor in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type GargantuarHypnoEmperor.ORadiation in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type GargantuarHypnoEmperor.BlackFootballGargantuar in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle gargantuarhypnoemperor.
+[Info   :   BepInEx] Loading [GatlingUltimateChomper 3.7.0]
+[Info   :Il2CppInterop] Registered mono type GatlingUltimateChomper.GatlingUltimateChomper in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle gatlingchomper.
+[Info   :GatlingUltimateChomper] GatlingUltimateChomper 3.7 loaded.
+[Info   :   BepInEx] Loading [PVZRHTools 5.1.5]
+[Warning:Il2CppInterop] Failed to init IL2CPP patch backend for void UltimateMinigun::.ctor(), using normal patch handlers: Derived classes must provide an implementation.
+[Info   :Il2CppInterop] Registered mono type ToolMod.Components.DataProcessor in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type ToolMod.Components.ToolsUpdater in il2cpp domain
+[Warning:Il2CppInterop] Method Void AddPropertyRow(UnityEngine.Transform, System.Reflection.PropertyInfo) on type ToolMod.Components.PlantStatisticsModifier has unsupported parameter System.Reflection.PropertyInfo prop of type System.Reflection.PropertyInfo
+[Info   :Il2CppInterop] Registered mono type ToolMod.Components.PlantStatisticsModifier in il2cpp domain
+[Warning:Il2CppInterop] Method Void Bind(System.Linq.Expressions.Expression`1[System.Func`1[UnityEngine.KeyCode]]) on type ToolMod.Components.KeyBindingButton has unsupported parameter System.Linq.Expressions.Expression`1[System.Func`1[UnityEngine.KeyCode]] propertyExpression of type System.Linq.Expressions.Expression`1[System.Func`1[UnityEngine.KeyCode]]
+[Info   :Il2CppInterop] Registered mono type ToolMod.Components.KeyBindingButton in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type ToolMod.Components.KeyBindingUI in il2cpp domain
+[Info   :   BepInEx] Loading [MegaGatlingExpansion 3.8.1]
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ExtremeFirePea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ElectricPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.GooPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.FlameGooPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.PrimalPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.HypnoMegaPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.MegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MegaGatlingExpansion.MegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.MegaGatlingPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MegaGatlingExpansion.CherryMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.CherryMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.CherryMegaGatlingPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.DoomMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MegaGatlingExpansion.DoomMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.DoomMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.UltimateDoomMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.IceMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.FireMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.GooMegaGatlingPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator MakeSun() on type MegaGatlingExpansion.SunMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.SunMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ElectricMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.PrimalMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ChronoMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.RegularCherryMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.HypnoCherryMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.SmallMegaGatlingPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.MegaGatlingPeaZombie has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type MegaGatlingExpansion.MegaGatlingPeaZombie has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.MegaGatlingPeaZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.HypnoMegaGatlingPeaZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.SnowMegaGatlingPeaZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ElectricMegaGatlingPeaZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.DoomMegaGatlingPeaZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.GatlingPaperZombie_d in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.DoomPaperZombie_d in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator AttackZombie(Target) on type MegaGatlingExpansion.LightMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator ChargePlant(Plant) on type MegaGatlingExpansion.LightMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method Zombie GetNearestAvailableZombie(Target) on type MegaGatlingExpansion.LightMegaGatlingPea has unsupported parameter Target currentTarget of type MegaGatlingExpansion.LightMegaGatlingPea+Target
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.LightMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.PlantSkinComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.RedGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomShooter in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.StarMegaGating has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.StarMegaGating in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MegaGatlingExpansion.ThreeMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.ThreeMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.ThreeMegaGatlingPea in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type MegaGatlingExpansion.UltimateExplodeGatlingBlover has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.UltimateExplodeGatlingBlover in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting_Custom() on type MegaGatlingExpansion.WildMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.WildMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomLevelComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansion.Plugin+BoardEnablerEffect in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle megagatlingpea.
+[Info   :MegaGatlingExpansion] MegaGatlingExpansion.Bepinex 3.8.1 loaded.
+[Info   :   BepInEx] Loading [MegaGatlingExpansionRShooting 3.7.0]
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansionRShooting.PeaGatling in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansionRShooting.MegaGatlingPeaUniqueUpgrade in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansionRShooting.MegaGatlingPea_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MegaGatlingExpansionRShooting.StarUpElectricBuff in il2cpp domain
+[Info   :MegaGatlingExpansionRShooting] MegaGatlingExpansionRShooting 3.7 loaded.
+[Info   :   BepInEx] Loading [Modified-Plus 2.2.1]
+[Info   :Modified-Plus] Plugin Modified-Plus is loaded!
+[Info   :Modified-Plus] Start Listening
+[Info   :   BepInEx] Loading [MoreBlackHorse 3.7.0]
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.ZombieComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreBlackHorse.BlackHorse_A in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreBlackHorse.BlackHorse_B in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreBlackHorse.BlackHorse_C in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreBlackHorse.BlackHorse_C2 in il2cpp domain
+[Info   :MoreBlackHorse] MoreBlackHorse 3.7 loaded.
+[Info   :   BepInEx] Loading [MoreBossSlider 3.7.0]
+[Info   :PVZCustomization] Successfully load AssetBundle morebossslider.
+[Info   :   BepInEx] Loading [MoreDolphinZombie 3.7.0]
+[Info   :Il2CppInterop] Registered mono type MoreDolphinZombie.DolphinGatlingZombie_a in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreDolphinZombie.DolphinGatlingZombie_c in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreDolphinZombie.DolphinGatlingZombie_d in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle moredolphinzombie.
+[Info   :MoreDolphinZombie] MoreDolphinZombie 3.7 loaded.
+[Info   :   BepInEx] Loading [MoreDoomGatling 3.8.1]
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.Bullet_fireDoom in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type MoreDoomGatling.DestroyerCherryGatling has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.DestroyerCherryGatling in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type MoreDoomGatling.DestroyerCherryMinigun has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type MoreDoomGatling.DestroyerCherryMinigun has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.DestroyerCherryMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.GatlingDoomPaper_a in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.GatlingDoomPaper_b in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.GatlingDoomPaper_c in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type MoreDoomGatling.UltimateFireDoomGatling has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.UltimateFireDoomGatling in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type MoreDoomGatling.UltimateFireDoomScared has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreDoomGatling.UltimateFireDoomScared in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle moredoomgatling.
+[Info   :MoreDoomGatling] MoreDoomGatling 3.8.1 loaded.
+[Info   :   BepInEx] Loading [MoreMinigun 3.8.1]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MoreMinigun.Minigun has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.Minigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.SnowMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.JalaMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.CherryMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.CherryMinigun_Ulti in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.DoomMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.UltimateDoomMinigun in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.SkinUltimateMinigun in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type MoreMinigun.DoomMinigunScaredy has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.DoomMinigunScaredy in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type MoreMinigun.UltimateDoomMinigunScaredy in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle moreminigun.
+[Info   :MoreMinigun] MoreMinigun 3.8.1 loaded.
+[Info   :   BepInEx] Loading [MowerFix 3.7.0]
+[Info   :  MowerFix] MowerFix 3.7 loaded.
+[Info   :   BepInEx] Loading [PVZDataMgr 1.0.0]
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomBigStar in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.BaseCustomBullet in il2cpp domain
+[Error  :Il2CppInterop] Assembly CustomPlant.dll is not registered in il2cpp
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomEffect in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomOnZombieBomb in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomOnZombieComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomParticle in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomSolarBomb in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.CustomThrower in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.BaseCustomZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.BulletComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.RogueShootingMgr.CustomRogueShootingManager in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Main.DataMgr in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Main.GameAPPInitBehaviour in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Main.GameObjectMgr in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Main.PlantMgr in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Examples.DoomSniper_Example in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Examples.SniperPea_Example in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Examples.StaticExamples in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type CustomPlantClass.Examples.SuperHypnoGatling_Example has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Examples.SuperHypnoGatling_Example in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomPlantClass.Level.CustomLevelMgr in il2cpp domain
+[Info   :PVZDataMgr] [PVZDataMgr] Info — Loaded from cache: all_water_night_land.png
+[Info   :PVZDataMgr] [PVZDataMgr] Info — Created registry NeutralZombies of type ZombieType.
+[Info   :PVZDataMgr] PVZDataMgr 1.0.0 loaded.
+[Info   :   BepInEx] Loading [RemoveCrater 3.7.0]
+[Info   :   BepInEx] Loading [RemoveHypnoMiner 3.7.0]
+[Info   :RemoveHypnoMiner] RemoveHypnoMiner 3.7 loaded.
+[Info   :   BepInEx] Loading [EvolveGodSuperSnowGatling 1.0.0]
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.SnowGatling in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.SuperSnowGatling_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.UniqueUpgrade in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.BombBuff in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.BulletBuff in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type EvolveGodSuperSnowGatling.BepInEx.ShootingDataSave in il2cpp domain
+[Info   :   BepInEx] Loading [GGGGPenguin 1.0.0]
+[Info   :Il2CppInterop] Registered mono type GGGGPenguin.BepInEx.GGGGPenguinZombie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type GGGGPenguin.BepInEx.SuperGGGGPenguinZombie in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle 凑企鹅.
+[Info   :   BepInEx] Loading [GoldImitater 1.0.0]
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[PlantType] GetPlantsList() on type GoldImitater.BepInEx.GoldImitater has unsupported return type System.Collections.Generic.List`1[PlantType]
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[ZombieType] GetZombiesList() on type GoldImitater.BepInEx.GoldImitater has unsupported return type System.Collections.Generic.List`1[ZombieType]
+[Info   :Il2CppInterop] Registered mono type GoldImitater.BepInEx.GoldImitater in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type GoldImitater.BepInEx.ClearCold in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle goldimitater.
+[Info   :   BepInEx] Loading [PVZCustomization 3.8.0]
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.CustomPlantMonoBehaviour in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.SelectCustomPlants in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.CheckCardState in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.Generic.Dictionary`2[System.String,System.Object] get_data() on type CustomizeLib.BepInEx.ExtensionData.Basic.ExtensionDataComponent has unsupported return type System.Collections.Generic.Dictionary`2[System.String,System.Object]
+[Warning:Il2CppInterop] Method Void set_data(System.Collections.Generic.Dictionary`2[System.String,System.Object]) on type CustomizeLib.BepInEx.ExtensionData.Basic.ExtensionDataComponent has unsupported parameter System.Collections.Generic.Dictionary`2[System.String,System.Object] value of type System.Collections.Generic.Dictionary`2[System.String,System.Object]
+[Warning:Il2CppInterop] Method System.Object GetData(System.String) on type CustomizeLib.BepInEx.ExtensionData.Basic.ExtensionDataComponent has unsupported return type System.Object
+[Warning:Il2CppInterop] Method Void SetData(System.String, System.Object) on type CustomizeLib.BepInEx.ExtensionData.Basic.ExtensionDataComponent has unsupported parameter System.Object data of type System.Object
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.ExtensionData.Basic.ExtensionDataComponent in il2cpp domain
+[Warning:Il2CppInterop] Method System.Object GetData(System.String) on type CustomizeLib.BepInEx.ExtensionData.Unity.DataComponent has unsupported return type System.Object
+[Warning:Il2CppInterop] Method Void SetData(System.String, System.Object) on type CustomizeLib.BepInEx.ExtensionData.Unity.DataComponent has unsupported parameter System.Object value of type System.Object
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.ExtensionData.Unity.DataComponent in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.CoreBehaviour in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.PositionRecorder in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.EmptyDie in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.InterfaceBehaviour in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.CustomHealthText in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.SaveMaterial in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type CustomizeLib.BepInEx.UltimateWinterMelonSkin in il2cpp domain
+[Info   :   Console] Not found patcher in C:\Users\brigh\OneDrive\Desktop\games\植物大战僵尸融合版3.8.1\植物大战僵尸融合版3.8.1\BepInEx\patchers\MapValue.BepInEx.dll
+[Info   :   BepInEx] Loading [PotaoExplode 1.0.0]
+[Info   :   BepInEx] Loading [UltimateCherryTorch 1.0.0]
+[Info   :Il2CppInterop] Registered mono type UltimateCherryTorch.BepInEx.UltimateCherryTorch in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimatecherrytorch.
+[Info   :   BepInEx] Loading [UltimateCornFume 1.0.0]
+[Info   :Il2CppInterop] Registered mono type UltimateCornFume.BepInEx.UltimateCornFume in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimatecornfume.
+[Info   :   BepInEx] Loading [UltimateDoomSniperPea 1.0.0]
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniperPea.BepInEx.UltimateDoomSniperPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniperPea.BepInEx.Piece in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniperPea.BepInEx.DoomHunter in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimatedoomsniperpea.
+[Info   :   BepInEx] Loading [UltimateGoldImitater 1.0.0]
+[Info   :Il2CppInterop] Registered mono type UltimateGoldImitater.BepInEx.UltimateGoldImitater in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateGoldImitater.BepInEx.ClearCold in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimategoldimitater.
+[Info   :   BepInEx] Loading [ZombieImitater 1.0.0]
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[ZombieType] GetAllowZombies() on type ZombieImitater.BepInEx.ZombieImitater has unsupported return type System.Collections.Generic.List`1[ZombieType]
+[Info   :Il2CppInterop] Registered mono type ZombieImitater.BepInEx.ZombieImitater in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type ZombieImitater.BepInEx.ClearCold in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle zombieimitater.
+[Info   :   BepInEx] Loading [StarPeashooter 3.8.1]
+[Info   :Il2CppInterop] Registered mono type StarPeashooter.StarPeashooter_Base in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StarPeashooter.GatlingStarPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StarPeashooter.SplitStarPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StarPeashooter.SuperStarGatling in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle starshooter.
+[Info   :StarPeashooter] StarPeashooter 3.8.1 loaded.
+[Info   :   BepInEx] Loading [Starupmgr 3.7.0]
+[Info   : Starupmgr] Starupmgr 3.7 loaded.
+[Info   :   BepInEx] Loading [SuperCherryThreeGatling 3.7.0]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type SuperCherryThreeGatling.SuperCherryThreeGatling has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type SuperCherryThreeGatling.SuperCherryThreeGatling in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle supercherrythree.
+[Info   :SuperCherryThreeGatling] SuperCherryThreeGatling 3.7 loaded.
+[Info   :   BepInEx] Loading [SuperHammer 3.7.0]
+[Info   :SuperHammer] SuperHammer 3.7 loaded.
+[Info   :   BepInEx] Loading [SuperPortalGatling 3.6.1]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type UltimatePortalGatling.SuperPortalGatling has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimatePortalGatling.SuperPortalGatling in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimatePortalGatling.UltimatePortalPea in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle portalsupergatling.
+[Info   :SuperPortalGatling] SuperPortalGatling 3.6.1 loaded.
+[Info   :   BepInEx] Loading [UltimateCherryFireShooter_Remade 3.6.1]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type UltimateCherryFireShooter_Remade.UltimateCherryFireShooter_Remade has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimateCherryFireShooter_Remade.UltimateCherryFireShooter_Remade in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type UltimateCherryFireShooter_Remade.FinalCherryFireShooter_Remade has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot() on type UltimateCherryFireShooter_Remade.FinalCherryFireShooter_Remade has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimateCherryFireShooter_Remade.FinalCherryFireShooter_Remade in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle cherryfireshooter.
+[Info   :UltimateCherryFireShooter_Remade] UltimateCherryFireShooter_Remade 3.6.1 loaded.
+[Info   :   BepInEx] Loading [UltimateDoomSniper_RogueShooting 3.7.0]
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper_RogueShooting.UltimateDoomSniper_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper_RogueShooting.UltimateDestroySniper_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper_RogueShooting.DevilPowerBuff in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper_RogueShooting.UDoomUniqueUpgrade in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper_RogueShooting.UDoomHeartUpgrade in il2cpp domain
+[Info   :   BepInEx] Loading [UltimateDoomSniper 3.7.0]
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper.DestroySniper in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper.UltimateDestroySniper in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper.UltimateDoomSniper in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateDoomSniper.DoomSniperComponent in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimatedoomsniper.
+[Info   :UltimateDoomSniper] UltimateDoomSniper 3.7 loaded.
+[Info   :   BepInEx] Loading [UltimateGatlingBloverBuff 3.7.0]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type UltimateGatlingBloverBuff.UltimateGatlingBloverBuff has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimateGatlingBloverBuff.UltimateGatlingBloverBuff in il2cpp domain
+[Info   :UltimateGatlingBloverBuff] UltimateGatlingBloverBuff 3.7 loaded.
+[Info   :   BepInEx] Loading [UltimatePlanternSkin 3.7.0]
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator AuroraSpam() on type UltimatePlanternSkin.LightComp has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimatePlanternSkin.LightComp in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle skin_949_0.
+[Info   :UltimatePlanternSkin] UltimatePlanternSkin 3.7 loaded.
+[Info   :   BepInEx] Loading [UltimateRedLunar_RogueShooting 3.7.0]
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[ZombieType] get_SummonTypes() on type UltimateRedLunar_RogueShooting.RSHootingSave_LunarEclipse has unsupported return type System.Collections.Generic.List`1[ZombieType]
+[Info   :Il2CppInterop] Registered mono type UltimateRedLunar_RogueShooting.RSHootingSave_LunarEclipse in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateRedLunar_RogueShooting.UltimateRedLunar_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateRedLunar_RogueShooting.LunarEclipseBuff in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateRedLunar_RogueShooting.LunarEclipseBuff2 in il2cpp domain
+[Info   :   BepInEx] Loading [UltimateSniper_FlameGatlingRShooting 3.7.0]
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.JalaGatling_Rogue in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.UltimateFlameGatlingUniqueUpgrade in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.UltimateFlameGatlingUniqueUpgrade2 in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.UltimateFlameGatling_Shooting in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.WildfireBuff in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper_FlameGatlingRShooting.MeteorBuff in il2cpp domain
+[Info   :UltimateSniper_FlameGatlingRShooting] UltimateSniper_FlameGatlingRShooting 3.7 loaded.
+[Info   :   BepInEx] Loading [UltimateSniper 3.8.1]
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateFirePea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateCherryPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateExplosivePea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FlamePea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FlamePea_Fire in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FlamePea_Explosive in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FlamePea_Explosive_Ice in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.Burn in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.ZombieBurn_2 in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FireMeteor in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.FireStar in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.IceStar in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator Shooting() on type UltimateSniper.UltimateFlameGatling_Remade has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateFlameGatling_Remade in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateFlameSniper in il2cpp domain
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator SuperShoot_Custom() on type UltimateSniper.UltimateMegaGatlingPea has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateMegaGatlingPea in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSniper.UltimateSniper in il2cpp domain
+[Info   :PVZCustomization] Successfully load AssetBundle ultimatesniper.
+[Info   :UltimateSniper] UltimateSniper 3.8.1 loaded.
+[Info   :   BepInEx] Loading [UltimateSolarCoronaCabbage_Remade 3.7.0]
+[Info   :Il2CppInterop] Registered mono type UltimateSolarCoronaCabbage_Remade.SuperSolar in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSolarCoronaCabbage_Remade.SuperSolarEmit in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type UltimateSolarCoronaCabbage_Remade.UltimateSolarCoronaCabbage_Remade in il2cpp domain
+[Info   :UltimateSolarCoronaCabbage_Remade] UltimateSolarCoronaCabbage_Remade 3.7 loaded.
+[Info   :   BepInEx] Loading [Utils 3.7.0]
+[Info   :     Utils] Utils 3.7 loaded.
+[Info   :   BepInEx] Loading [ZombossAddon 3.8.1]
+[Info   :Il2CppInterop] Registered mono type ZombossAddon.SizeChanger_HeiTa in il2cpp domain
+[Info   :ZombossAddon] ZombossAddon 3.8.1 loaded.
+[Message:   BepInEx] Chainloader startup complete
+[Info   :Il2CppInterop] Registered mono type BepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumerator in il2cpp domain
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.Collections.Generic.KeyNotFoundException: The given key '(GatlingPea, Bullet_pea, 1)' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at CustomizeLib.BepInEx.PatchMgr.RegisterSkin()+MoveNext()
+   at Trampoline_ByteThisBepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumeratorMoveNext(IntPtr , Il2CppMethodInfo* )
+[Info   :PVZDataMgr] [PVZDataMgr] Info — Loaded custom level AllWaterLevel_Fog.
+[Info   :PVZDataMgr] [PVZDataMgr] Info — Loaded custom level Super gatling challenge.
+[Message:StarPeashooter] 魅惑狙击豌豆  Charm Sniper
+[Message:StarPeashooter] 鬼影魅惑菇
+[Message:StarPeashooter] Ultimate Gatling Chomper 
+[Message:StarPeashooter] 初版超级机枪射手
+[Message:StarPeashooter] 初版火辣超级机枪射手
+[Message:StarPeashooter] 初版小喷超级机枪射手
+[Message:StarPeashooter] 初版寒冰超级机枪射手
+[Message:StarPeashooter] 初版阳光超级机枪射手
+[Message:StarPeashooter] 初版毒液超级机枪射手
+[Message:StarPeashooter] 初版流光超级机枪射手
+[Message:StarPeashooter] 初版电能超级机枪射手
+[Message:StarPeashooter] 初版原始超级机枪射手
+[Message:StarPeashooter] 初版时空超级机枪射手
+[Message:StarPeashooter] 初版毁灭超级机枪射手
+[Message:StarPeashooter] 初版余烬毁灭超级机枪射手
+[Message:StarPeashooter] 初版樱桃超级机枪射手
+[Message:StarPeashooter] 终极樱桃机枪
+[Message:StarPeashooter] 初版魅惑超级机枪射手
+[Message:StarPeashooter] 初版三线超级机枪射手
+[Message:StarPeashooter] 初版狂野超级机枪射手
+[Message:StarPeashooter] 初版杨桃超级机枪射手
+[Message:StarPeashooter] 终极浮空樱桃机枪
+[Message:StarPeashooter] 初版•究极毁火射手 
+[Message:StarPeashooter] 初版•究极毁火胆小菇 
+[Message:StarPeashooter] 速射机枪射手
+[Message:StarPeashooter] 寒冰速射机枪射手
+[Message:StarPeashooter] 火爆速射机枪射手
+[Message:StarPeashooter] 樱桃速射机枪射手
+[Message:StarPeashooter] 毁灭速射机枪射手
+[Message:StarPeashooter] 毁灭速射机枪胆小菇
+[Message:StarPeashooter] 究极毁灭速射机枪射手
+[Message:StarPeashooter] 究极毁灭速射机枪胆小菇
+[Message:StarPeashooter] 黄金模仿者
+[Message:StarPeashooter] 终极核爆火炬
+[Message:StarPeashooter] 窝油帝菇
+[Message:StarPeashooter] 邪神狙击射手
+[Message:StarPeashooter] 究极黄金模仿者
+[Message:StarPeashooter] 僵尸模仿者
+[Message:StarPeashooter] 红眼僵尸模仿者
+[Message:StarPeashooter] 杨桃双发射手
+[Message:StarPeashooter] 杨桃裂荚射手
+[Message:StarPeashooter] 杨桃机枪射手
+[Message:StarPeashooter] 超级杨桃机枪射手
+[Message:StarPeashooter] 樱桃三线超级机枪射手
+[Message:StarPeashooter] 终极超时空机枪射手
+[Message:StarPeashooter] 究极樱火射手 • 重制版
+[Message:StarPeashooter] 终极樱火射手 • 重制版
+[Message:StarPeashooter] 毁灭狙击射手
+[Message:StarPeashooter] 究极死神猎手
+[Message:StarPeashooter] 究极毁灭狙击射手
+[Message:StarPeashooter] 终极狙击豌豆 
+[Message:StarPeashooter] 终极大哥豌豆 
+[Message:StarPeashooter] 究极炽焰机枪
+[Message:StarPeashooter] 究极炽焰狙击射手
+[Message:StarPeashooter] 终极圣辉日冕太阳神 • 重制版
+[Message:StarPeashooter] 礼盒模仿者
+[Message:StarPeashooter] 礼盒模仿者
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CustomizeLib.BepInEx.TravelPackagePatch.PostInit(TravelPackage __instance)
+   at DMD<TravelPackage::Init>(TravelPackage this)
+   at (il2cpp -> managed) Init(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CustomizeLib.BepInEx.TravelPackagePatch.PostInit(TravelPackage __instance)
+   at DMD<TravelPackage::Init>(TravelPackage this)
+   at (il2cpp -> managed) Init(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CustomizeLib.BepInEx.TravelPackagePatch.PostInit(TravelPackage __instance)
+   at DMD<TravelPackage::Init>(TravelPackage this)
+   at (il2cpp -> managed) Init(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CustomizeLib.BepInEx.TravelPackagePatch.PostInit(TravelPackage __instance)
+   at DMD<TravelPackage::Init>(TravelPackage this)
+   at (il2cpp -> managed) Init(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at CustomizeLib.BepInEx.TravelPackagePatch.PostInit(TravelPackage __instance)
+   at DMD<TravelPackage::Init>(TravelPackage this)
+   at (il2cpp -> managed) Init(IntPtr , Il2CppMethodInfo* )
+[Info   :PVZDataMgr] ================================
+[Info   :PVZDataMgr]      Registered 23 custom plants, 0 custom plant skins, 0 custom big stars, and 0 custom bullets.
+[Info   :PVZDataMgr]      In total, there are now 719 plants
+[Info   :PVZDataMgr]      [PVZDataMgr] Info — Loaded from cache: all_water_night_land.png
+[Info   :PVZDataMgr]      [PVZDataMgr] Info — Created registry NeutralZombies of type ZombieType.
+[Info   :PVZDataMgr]      Thank you for using PVZDataMgr 1.0.0!
+[Info   :PVZDataMgr]      [PVZDataMgr] Info — Loaded custom level AllWaterLevel_Fog.
+[Info   :PVZDataMgr]      [PVZDataMgr] Info — Loaded custom level Super gatling challenge.
+[Info   :PVZDataMgr] ================================
+[Message:UnityExplorer] [UniverseLib] Initialized Legacy Input support
+[Message:UnityExplorer] [UniverseLib] 	 IL2CPP method has no corresponding pointer, aborting patch of UnityEngine.Cursor.visible
+[Message:UnityExplorer] [UniverseLib] 	 IL2CPP method has no corresponding pointer, aborting patch of UnityEngine.AssetBundle.UnloadAllAssetBundles
+[Info   :Il2CppInterop] Registered mono type UniverseLib.AssetBundle in il2cpp domain
+[Message:UnityExplorer] [UniverseLib] Loaded modern bundle for Unity 2022.3.62f1c1
+[Message:UnityExplorer] [UniverseLib] UniverseLib 1.5.11 initialized.
+[Message:UnityExplorer] Creating UI...
+[Warning:UnityExplorer] UnityIGCSConnector.dll was not found so IGCSDof will not be available
+[Message:UnityExplorer] CinematicUnityExplorer 1.4.0 (IL2CPP) initialized.
+[Info   :Il2CppInterop] Registered mono type UnityExplorer.KeypressListener in il2cpp domain
+[Message:PVZRHTools] 修改器已连接
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at UltimateGoldImitater.BepInEx.UltimateGoldImitater.SetZombie(Probability probability)
+   at UltimateGoldImitater.BepInEx.UltimateGoldImitater.AnimSpawn()
+   at Trampoline_VoidThisUltimateGoldImitater.BepInEx.UltimateGoldImitaterAnimSpawn(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at Bullet_hypnoPea.HitZombie (Zombie zombie) [0x00000] in <00000000000000000000000000000000>:0 
+  at Bullet.CheckZombie (Zombie zombie) [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at DMD<Bullet::CheckZombie>(Bullet this, Zombie zombie)
+   at (il2cpp -> managed) CheckZombie(IntPtr , IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at GargantuarHypnoEmperor.GargantuarHypnoEmperor.FixedUpdate() in C:\pvzrhmod\combinemod - 3.8\GargantuarHypnoEmperor.Bepinex\Plugin.cs:line 90
+   at Trampoline_VoidThisGargantuarHypnoEmperor.GargantuarHypnoEmperorFixedUpdate(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at MoreDoomGatling.UltimateFireDoomScared.OnDestroy() in C:\pvzrhmod\combinemod - 3.8\MoreDoomGatling\UltimateFireDoomScared.cs:line 237
+   at Trampoline_VoidThisMoreDoomGatling.UltimateFireDoomScaredOnDestroy(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at UnityEngine.Transform.get_position () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at UnityEngine.Transform.get_position()
+   at MegaGatlingExpansion.LightMegaGatlingPea.CheckZombie(Zombie zombie) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 558
+   at MegaGatlingExpansion.LightMegaGatlingPea.GetNearestAvailableZombie(Target currentTarget) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 466
+   at MegaGatlingExpansion.LightMegaGatlingPea.AttackZombie(Target target)+MoveNext() in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 210
+   at Trampoline_ByteThisBepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumeratorMoveNext(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at UnityEngine.Transform.get_position () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at UnityEngine.Transform.get_position()
+   at MegaGatlingExpansion.LightMegaGatlingPea.CheckZombie(Zombie zombie) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 558
+   at MegaGatlingExpansion.LightMegaGatlingPea.GetNearestAvailableZombie(Target currentTarget) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 466
+   at MegaGatlingExpansion.LightMegaGatlingPea.AttackZombie(Target target)+MoveNext() in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 210
+   at Trampoline_ByteThisBepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumeratorMoveNext(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at UnityEngine.Transform.get_position () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at UnityEngine.Transform.get_position()
+   at MegaGatlingExpansion.LightMegaGatlingPea.CheckZombie(Zombie zombie) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 558
+   at MegaGatlingExpansion.LightMegaGatlingPea.GetNearestAvailableZombie(Target currentTarget) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 466
+   at MegaGatlingExpansion.LightMegaGatlingPea.AttackZombie(Target target)+MoveNext() in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 210
+   at Trampoline_ByteThisBepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumeratorMoveNext(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at UnityEngine.Transform.get_position () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at UnityEngine.Transform.get_position()
+   at MegaGatlingExpansion.LightMegaGatlingPea.CheckZombie(Zombie zombie) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 558
+   at MegaGatlingExpansion.LightMegaGatlingPea.GetNearestAvailableZombie(Target currentTarget) in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 466
+   at MegaGatlingExpansion.LightMegaGatlingPea.AttackZombie(Target target)+MoveNext() in C:\pvzrhmod\combinemod - 3.8\MegaGatlingExpansion.Bepinex\LightMegaGatlingPea.cs:line 210
+   at Trampoline_ByteThisBepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumeratorMoveNext(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.MissingMethodException: Method not found: 'Boolean Zombie.get_isIdle()'.
+   at MoreDolphinZombie.DolphinGatlingZombie_d.Start()
+   at Trampoline_VoidThisMoreDolphinZombie.DolphinGatlingZombie_dStart(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] Exception in IL2CPP-to-Managed trampoline, not passing it to il2cpp: System.NullReferenceException: Object reference not set to an instance of an object.
+   at MoreDoomGatling.UltimateFireDoomScared.OnDestroy() in C:\pvzrhmod\combinemod - 3.8\MoreDoomGatling\UltimateFireDoomScared.cs:line 237
+   at Trampoline_VoidThisMoreDoomGatling.UltimateFireDoomScaredOnDestroy(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at TravelBuffOptionButton.SetPlant (PlantType thePlantType) [0x00000] in <00000000000000000000000000000000>:0 
+  at TravelBuffOptionButton.SetPlant () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at DMD<TravelBuffOptionButton::SetPlant>(TravelBuffOptionButton this)
+   at (il2cpp -> managed) SetPlant(IntPtr , Il2CppMethodInfo* )
+[Error  :Il2CppInterop] During invoking native->managed trampoline
+Exception: Il2CppInterop.Runtime.Il2CppException: System.NullReferenceException: Object reference not set to an instance of an object.
+--- BEGIN IL2CPP STACK TRACE ---
+System.NullReferenceException: Object reference not set to an instance of an object.
+  at TravelBuffOptionButton.SetPlant (PlantType thePlantType) [0x00000] in <00000000000000000000000000000000>:0 
+  at TravelBuffOptionButton.SetPlant () [0x00000] in <00000000000000000000000000000000>:0 
+--- END IL2CPP STACK TRACE ---
+
+   at Il2CppInterop.Runtime.Il2CppException.RaiseExceptionIfNecessary(IntPtr returnedException) in D:\Beta\projects\Il2CppInterop\Il2CppInterop.Runtime\Il2CppException.cs:line 36
+   at DMD<TravelBuffOptionButton::SetPlant>(TravelBuffOptionButton this)
+   at (il2cpp -> managed) SetPlant(IntPtr , Il2CppMethodInfo* )
+[Message:PVZRHTools] 修改器已断开

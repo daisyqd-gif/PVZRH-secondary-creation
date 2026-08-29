@@ -1,0 +1,13 @@
+using GameLevel.RogueShooting;
+using HarmonyLib;
+
+[HarmonyPatch(typeof(GameLevel.RogueShooting.{{configName}}))]
+public static class {{configName}}_Patch_{{GUID}}
+{
+    [HarmonyPatch("Buffs", MethodType.Getter)]
+    [HarmonyPostfix]
+    public static void PostGetBuffs(ref Il2CppSystem.Collections.Generic.List<BaseBuff> __result)
+    {
+        __result.Add(new UpgradeBuff(new GameLevel.RogueShooting.{{configName}}().PlantType,(PlantType){{PlantID}}));
+    }
+}

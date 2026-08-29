@@ -1,0 +1,110 @@
+using System;
+using Il2CppInterop.Runtime.Injection;
+using GameLevel.RogueShooting;
+using System.Collections.Generic;
+using CustomPlantClass.RogueShootingManager;
+using UI;
+
+public class RogueClass_{{GUID}} : BaseBuff
+{
+    public RogueClass_{{GUID}}(IntPtr ptr) : base(ptr) { }
+
+    public RogueClass_{{GUID}}()
+        : base(ClassInjector.DerivedConstructorPointer<RogueClass_{{GUID}}>())
+    {
+        ClassInjector.DerivedConstructorBody(this);
+    }
+
+    private static string TheClassID => "{{GUID}}";
+
+    // Lookup into your managed registry
+    public virtual CustomRogueShootingBuff buff
+        => RegistryHelper.Buffs[TheClassID];
+
+    public override PlantType ShowType => buff.CustomPlantType;
+    public override string Title => buff.CustomTitle;
+    public override string Description => buff.CustomDescription;
+
+    public override void OnGet()
+    {
+        buff.CustomOnGet?.Invoke();
+    }
+
+    public override int MaxCount
+    {
+        get
+        {
+            switch (buff.CustomBuffType)
+            {
+                case ShootingBuffType.UniqueUpgrade: return 10;
+                case ShootingBuffType.QualitativeChange:
+                case ShootingBuffType.SuperUpgrade: return 1;
+                case ShootingBuffType.General: return 250;
+                case ShootingBuffType.CurseBuff: return 1;
+            }
+            return 1;
+        }
+    }
+
+    public override float AppearWeight
+    {
+        get
+        {
+            switch (buff.CustomBuffType)
+            {
+                case ShootingBuffType.UniqueUpgrade: return 0.33f;
+                case ShootingBuffType.QualitativeChange: return 0.05f;
+                case ShootingBuffType.SuperUpgrade: return 0.003f;
+                case ShootingBuffType.General: return 1f;
+                case ShootingBuffType.CurseBuff: return 0.1f;
+            }
+            return 1f;
+        }
+    }
+
+    public static Quality GetRandomQuality()
+    {
+        if(ShootingManager.Instance == null)
+        {
+            return Quality.gold;
+        }
+        float luck = ShootingManager.Instance.Lucky;
+
+        float wWood    = 65f * (1f + 1f * luck / 100f);
+        float wSilver  = 23f * (1f + 2f * luck / 100f);
+        float wGold    = 10f * (1f + 3f * luck / 100f);
+        float wDiamond =  2f * (1f + 5f * luck / 100f);
+
+        float total = wWood + wSilver + wGold + wDiamond;
+        float roll = UnityEngine.Random.Range(0f, total);
+
+        if (roll < wWood) return Quality.Default;
+        roll -= wWood;
+
+        if (roll < wSilver) return Quality.silver;
+        roll -= wSilver;
+
+        if (roll < wGold) return Quality.gold;
+        roll -= wGold;
+
+        return Quality.diamond;
+    }
+
+    protected Quality randomquality = GetRandomQuality();
+
+    public override Quality Rarity
+    {
+        get
+        {
+            switch (buff.CustomBuffType)
+            {
+                case ShootingBuffType.UniqueUpgrade: return Quality.gold;
+                case ShootingBuffType.QualitativeChange: return Quality.diamond;
+                case ShootingBuffType.SuperUpgrade: return Quality.diamond;
+                case ShootingBuffType.General: return randomquality;
+                case ShootingBuffType.CurseBuff: return Quality.curse;
+            }
+            return Quality.Default;
+        }
+    }
+}

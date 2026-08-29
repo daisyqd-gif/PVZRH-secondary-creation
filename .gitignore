@@ -1,0 +1,33 @@
+# Build artifacts
+bin/
+obj/
+
+# IDE files
+.vscode/
+.idea/
+
+# Unity / BepInEx runtime folders
+lib/
+BepInEx/
+BepInExPack/
+UnityPlayer.dll
+GameAssembly.dll
+
+# IL2CPP dumps
+il2cpp/
+dump/
+*_dump.cs
+*_dump.json
+
+# Logs
+*.log
+*.stacktrace
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Temporary files
+*.tmp
+*.temp
+*.bak

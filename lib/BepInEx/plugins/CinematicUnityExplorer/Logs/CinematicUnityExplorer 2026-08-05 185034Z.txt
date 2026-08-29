@@ -1,0 +1,267 @@
+CinematicUnityExplorer 1.4.0 initializing...
+[UniverseLib] UniverseLib 1.5.11 initializing...
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named _Main_d__5 Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnBoardStart_b__4_0_d Error: System.TypeLoadException: GenericArguments[0], 'TravelDebuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass2_0 Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'InvestBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnSelect_b__0_d Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named _OnSelect_d__3 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __OnSelect_b__0_d Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c__DisplayClass3_0 Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] THIS WARNING IS NOT BUG!!!! DON'T REPORT THIS!!!!!
+ Can't cache type named __c Error: System.TypeLoadException: GenericArguments[0], 'AdvBuff', on 'BaseBuff`1[T]' violates the constraint of type parameter 'T'.
+   at System.RuntimeTypeHandle.GetDeclaringType(RuntimeType type)
+   at System.RuntimeType.RuntimeTypeCache.GetEnclosingType()
+   at System.RuntimeType.RuntimeTypeCache.GetNameSpace()
+   at System.RuntimeType.get_Namespace()
+   at UniverseLib.ReflectionUtility.CacheTypes(Assembly asm) in C:\Users\Nico\Documents\GitHub\CinematicUnityExplorer\UniverseLib\src\Reflection\ReflectionUtility.cs:line 126
+[UniverseLib] Loaded Unhollowed modules in 0.0050000004 seconds.
+[UniverseLib] Setup deobfuscation cache in 0.155 seconds.
+[UniverseLib] Finished UniverseLib initial setup.
+Initialized UnityCrashPrevention for: Canvas.get_renderingDisplaySize
+[UniverseLib] Initialized Legacy Input support
+[UniverseLib] 	 IL2CPP method has no corresponding pointer, aborting patch of UnityEngine.Cursor.visible
+[UniverseLib] 	 IL2CPP method has no corresponding pointer, aborting patch of UnityEngine.AssetBundle.UnloadAllAssetBundles
+[UniverseLib] Loaded modern bundle for Unity 2022.3.62f1c1
+[UniverseLib] UniverseLib 1.5.11 initialized.
+Creating UI...
+
+UnityIGCSConnector.dll was not found so IGCSDof will not be available
+CinematicUnityExplorer 1.4.0 (IL2CPP) initialized.

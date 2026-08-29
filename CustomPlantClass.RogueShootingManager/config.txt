@@ -1,0 +1,36 @@
+using System;
+using Il2CppInterop.Runtime.Injection;
+using GameLevel.RogueShooting;
+using System.Collections.Generic;
+using CustomPlantClass.RogueShootingManager;
+using CustomizeLib.BepInEx;
+
+public class RogueClass_{{GUID}} : BaseConfig
+{
+    private static string TheClassID => "{{GUID}}";
+
+    public RogueClass_{{GUID}}(IntPtr ptr) : base(ptr) { }
+
+    public RogueClass_{{GUID}}()
+        : base(ClassInjector.DerivedConstructorPointer<RogueClass_{{GUID}}>())
+    {
+        ClassInjector.DerivedConstructorBody(this);
+    }
+
+    public CustomRogueShootingConfig config
+        => RegistryHelper.Specs[TheClassID];
+
+#pragma warning disable CS0114
+    public PlantType PlantType => config.CustomPlantType;
+
+    public Il2CppSystem.Collections.Generic.List<BaseBuff> Buffs => config.CustomBuffs().ToIl2CppList();
+#pragma warning restore CS0114
+
+    public override void ReinforcePlant(Plant plant)
+    {
+        if (config.CustomReinforcePlant != null)
+            config.CustomReinforcePlant(plant);
+    }
+
+    public override string Role => config.CustomRole;
+}

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+
+    <!-- Output DLLs into combinemod/Build -->
+    <OutputPath>$(MSBuildThisFileDirectory)..\Build\</OutputPath>
+
+    <!-- IL2CPP mods don't need dependency/runtime files -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <!-- Import shared references -->
+  <Import Project="$(MSBuildThisFileDirectory)..\ModReferences.props" />
+
+</Project>
