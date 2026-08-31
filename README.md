@@ -23,10 +23,12 @@ It is built on top of:
 4. A custom mod loader ( Incomplete )
 5. Registries and an event manager for cross mod communication
 6. Custom structs and data types for easier data storage
+7. Limited and untested support for the easier .NET based F# language.
 ### Future
 1. A way to run mods in Lua
 2. Runtime compilation of mods
 3. A visual plant creator that allows modders or designers to create plants with minimal coding
+4. Full support for the easier .NET based F# language.
 ## Installation
 1. Install this custom fork of BepInEx 6.0.0 and CustomizeLib from https://pan.quark.cn/s/6461fdaccff5#/list/share -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located) and also locate customizelib in any of salmon's mods and put it in. TEMPORARY WARNING: Do not use the August 22 version
 2. Locate the release for PVZ Fusion Custom Plant Class Framework in the releases tab in this repo and download it into: gamedirectory/BepInEx/plugins
