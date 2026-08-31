@@ -15,6 +15,7 @@ It is built on top of:
 - CustomizeLib (Apache‑2.0)
 - BepInEx (LGPL‑2.1)
 - PVZ Fusion’s internal gameplay architecture
+- - [![Roslyn](https://img.shields.io/nuget/v/Microsoft.CodeAnalysis.CSharp?label=Roslyn&color=blue)](https://www.nuget.org/packages/Microsoft.CodeAnalysis.CSharp/)
 ## Features
 1. Base classes for plants, zombies, levels, etc...
 2. A central framework for registration
