@@ -15,6 +15,7 @@ It is built on top of:
 - CustomizeLib (Apache‑2.0)
 - BepInEx (LGPL‑2.1)
 - PVZ Fusion’s internal gameplay architecture
+- [![Roslyn](https://img.shields.io/nuget/v/Microsoft.CodeAnalysis.CSharp?label=Roslyn&color=blue)](https://www.nuget.org/packages/Microsoft.CodeAnalysis.CSharp/)
 ## Features
 1. Base classes for plants, zombies, levels, etc...
 2. A central framework for registration
@@ -22,12 +23,21 @@ It is built on top of:
 4. A custom mod loader ( Incomplete )
 5. Registries and an event manager for cross mod communication
 6. Custom structs and data types for easier data storage
+7. Limited and untested support for the easier .NET based F# language
+8. A central command dispatcher for mods to communicate with each other and external apps via TCP
+9. An async state machine runner that replaces UniTask and Task.Delay
+10. Python like support for collections
+11. A bridge for converting data from Il2cpp collections to managed collections
 ### Future
 1. A way to run mods in Lua
 2. Runtime compilation of mods
 3. A visual plant creator that allows modders or designers to create plants with minimal coding
+4. Full support for the easier .NET based F# language
+5. Sub frame timing in the async state machine runner
+6. An interrupt system
+7. A repl for compiling code at runtime
 ## Installation
-1. Install this custom fork of BepInEx 6.0.0 and CustomizeLib from https://pan.quark.cn/s/6461fdaccff5#/list/share -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located) and also locate customizelib in any of salmon's mods and put it in. TEMPORARY WARNING: Do not use the August 22 version
+1. Install this custom fork of BepInEx 6.0.0 and CustomizeLib from https://pan.quark.cn/s/6461fdaccff5#/list/share -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located) and also locate customizelib in any of salmon's mods and put it in. TEMPORARY WARNING: Do not use the August 22 version, and if you insist, use dnspy to remove the native hooks in Customizelib on Plant.Update and Plant.FixedUpdate
 2. Locate the release for PVZ Fusion Custom Plant Class Framework in the releases tab in this repo and download it into: gamedirectory/BepInEx/plugins
 3. Run the game. You should see a black window open up and its name should be: BepInEx 6.0.0 dev - PlantsVsZombiesRH.exe). When the game is fully booted up and it is in the main menu, wait 5 seconds and close the game.
 4. You should see a folder called interop in the BepInEx folder
