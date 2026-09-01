@@ -28,7 +28,8 @@ namespace CustomPlantClass.Main
 
             self.Die(2);
             Vector3 target;
-            try{
+            try
+            {
                 // get bg SpriteRenderer
                 SpriteRenderer sr = self.board.background.transform.Find("bg").Find("bg").GetComponent<SpriteRenderer>();
 

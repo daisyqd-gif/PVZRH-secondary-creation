@@ -228,17 +228,17 @@ namespace CustomPlantClass.Main
             await DelayTask.Delay(delaySeconds);
             a(parameter);
         }
-        public static async Task<Tout> WaitAndExecute<T,Tout>(Func<T,Tout> a, T parameter, float delaySeconds)
+        public static async Task<Tout> WaitAndExecute<T, Tout>(Func<T, Tout> a, T parameter, float delaySeconds)
         {
             await DelayTask.Delay(delaySeconds);
             return a(parameter);
         }
         public static async void CreateLine(
-            Transform parent, 
-            Vector2 from, Vector2 to, 
+            Transform parent,
+            Vector2 from, Vector2 to,
             Color fromColor, Color toColor, int row,
-            CancellationToken token = null, float stayTime = 1f, 
-            float startWidth = 0.5f, float endWidth = 0.5f, 
+            CancellationToken token = null, float stayTime = 1f,
+            float startWidth = 0.5f, float endWidth = 0.5f,
             Material mat = null
         )
         {
@@ -247,37 +247,37 @@ namespace CustomPlantClass.Main
             var line = obj.GetComponent<LineRenderer>();
 
             line.positionCount = 2;
-            line.SetPosition(0,from);
-            line.SetPosition(1,to);
+            line.SetPosition(0, from);
+            line.SetPosition(1, to);
             line.startWidth = startWidth;
             line.endWidth = endWidth;
             line.startColor = fromColor;
             line.endColor = toColor;
             line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}",row);
+            line.sortingLayerName = string.Format("plant{0}", row);
 
             float a = stayTime;
 
-            if( token==null ) token = new();
+            if (token == null) token = new();
 
             do
             {
-                a -= Time.deltaTime *5;
+                a -= Time.deltaTime * 5;
                 var color1 = line.startColor;
                 var color2 = line.endColor;
-                color1.a=a;
-                color2.a=a;
+                color1.a = a;
+                color2.a = a;
                 line.startColor = color1;
                 line.endColor = color2;
                 await DelayTask.WaitForFixedUpdate(token);
             }
-            while(a > 0f && !token.IsCanceled);
+            while (a > 0f && !token.IsCanceled);
         }
         public static async void CreateLine(
-            Transform parent, 
+            Transform parent,
             Color fromColor, Color toColor, int row,
-            CancellationToken token = null, float stayTime = 1f, 
-            float startWidth = 0.5f, float endWidth = 0.5f, 
+            CancellationToken token = null, float stayTime = 1f,
+            float startWidth = 0.5f, float endWidth = 0.5f,
             Material mat = null, params Vector2[] pts
         )
         {
@@ -291,40 +291,40 @@ namespace CustomPlantClass.Main
             var line = obj.GetComponent<LineRenderer>();
 
             line.positionCount = pts.Length;
-            for(int i = 0 ; i<pts.Length ; i++)
+            for (int i = 0; i < pts.Length; i++)
             {
-                line.SetPosition(i,pts[i]);
+                line.SetPosition(i, pts[i]);
             }
             line.startWidth = startWidth;
             line.endWidth = endWidth;
             line.startColor = fromColor;
             line.endColor = toColor;
             line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}",row);
+            line.sortingLayerName = string.Format("plant{0}", row);
 
             float a = stayTime;
 
-            if( token==null ) token = new();
+            if (token == null) token = new();
 
             do
             {
-                a -= Time.deltaTime *5;
+                a -= Time.deltaTime * 5;
                 var color1 = line.startColor;
                 var color2 = line.endColor;
-                color1.a=a;
-                color2.a=a;
+                color1.a = a;
+                color2.a = a;
                 line.startColor = color1;
                 line.endColor = color2;
                 await DelayTask.WaitForFixedUpdate(token);
             }
-            while(a > 0f && !token.IsCanceled);
+            while (a > 0f && !token.IsCanceled);
         }
         public static async void CreateLine(
-            Transform parent, 
-            Vector2 from, Vector2 to, 
+            Transform parent,
+            Vector2 from, Vector2 to,
             Color fromColor, Color toColor, int row,
-            Il2CppSystem.Threading.CancellationToken token = null, float stayTime = 1f, 
-            float startWidth = 0.5f, float endWidth = 0.5f, 
+            Il2CppSystem.Threading.CancellationToken token = null, float stayTime = 1f,
+            float startWidth = 0.5f, float endWidth = 0.5f,
             Material mat = null
         )
         {
@@ -333,37 +333,37 @@ namespace CustomPlantClass.Main
             var line = obj.GetComponent<LineRenderer>();
 
             line.positionCount = 2;
-            line.SetPosition(0,from);
-            line.SetPosition(1,to);
+            line.SetPosition(0, from);
+            line.SetPosition(1, to);
             line.startWidth = startWidth;
             line.endWidth = endWidth;
             line.startColor = fromColor;
             line.endColor = toColor;
             line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}",row);
+            line.sortingLayerName = string.Format("plant{0}", row);
 
             float a = stayTime;
 
-            if( token==null ) token = new();
+            if (token == null) token = new();
 
             do
             {
-                a -= Time.deltaTime *5;
+                a -= Time.deltaTime * 5;
                 var color1 = line.startColor;
                 var color2 = line.endColor;
-                color1.a=a;
-                color2.a=a;
+                color1.a = a;
+                color2.a = a;
                 line.startColor = color1;
                 line.endColor = color2;
                 await DelayTask.WaitForFixedUpdate();
             }
-            while(a > 0f && !token.IsCancellationRequested);
+            while (a > 0f && !token.IsCancellationRequested);
         }
         public static async void CreateLine(
-            Transform parent, 
+            Transform parent,
             Color fromColor, Color toColor, int row,
-            Il2CppSystem.Threading.CancellationToken token = null, float stayTime = 1f, 
-            float startWidth = 0.5f, float endWidth = 0.5f, 
+            Il2CppSystem.Threading.CancellationToken token = null, float stayTime = 1f,
+            float startWidth = 0.5f, float endWidth = 0.5f,
             Material mat = null, params Vector2[] pts
         )
         {
@@ -377,33 +377,33 @@ namespace CustomPlantClass.Main
             var line = obj.GetComponent<LineRenderer>();
 
             line.positionCount = pts.Length;
-            for(int i = 0 ; i<pts.Length ; i++)
+            for (int i = 0; i < pts.Length; i++)
             {
-                line.SetPosition(i,pts[i]);
+                line.SetPosition(i, pts[i]);
             }
             line.startWidth = startWidth;
             line.endWidth = endWidth;
             line.startColor = fromColor;
             line.endColor = toColor;
             line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}",row);
+            line.sortingLayerName = string.Format("plant{0}", row);
 
             float a = stayTime;
 
-            if( token==null ) token = new();
+            if (token == null) token = new();
 
             do
             {
-                a -= Time.deltaTime *5;
+                a -= Time.deltaTime * 5;
                 var color1 = line.startColor;
                 var color2 = line.endColor;
-                color1.a=a;
-                color2.a=a;
+                color1.a = a;
+                color2.a = a;
                 line.startColor = color1;
                 line.endColor = color2;
                 await DelayTask.WaitForFixedUpdate();
             }
-            while(a > 0f && !token.IsCancellationRequested);
+            while (a > 0f && !token.IsCancellationRequested);
         }
     }
 }

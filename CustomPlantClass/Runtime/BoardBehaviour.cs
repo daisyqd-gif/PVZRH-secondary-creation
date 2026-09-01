@@ -161,15 +161,16 @@ namespace CustomPlantClass.Runtime
         }
         private static void ScanAssembly(Assembly asm)
         {
-            try{
+            try
+            {
                 foreach (var type in asm.GetTypes())
                     ScanType(type);
             }
             catch (Exception)
             {
-                
+
             }
         }
     }
-    
+
 }

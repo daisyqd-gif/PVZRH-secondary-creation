@@ -412,7 +412,7 @@ namespace CustomPlantClass
         {
             if (true)
             {
-                if (__instance.TryGetInterface<ICustomPF>(out var pf) && pf.IsImmune )
+                if (__instance.TryGetInterface<ICustomPF>(out var pf) && pf.IsImmune)
                 {
                     __instance.thePlantHealth = __instance.thePlantMaxHealth;
                     return false;
@@ -459,9 +459,9 @@ namespace CustomPlantClass
             }
             */
 
-            foreach( var comp in __instance.GetComponents<MonoBehaviour>())
+            foreach (var comp in __instance.GetComponents<MonoBehaviour>())
             {
-                if(comp is IOverrideDamagePipeline)
+                if (comp is IOverrideDamagePipeline)
                 {
                     damage = (comp as IOverrideDamagePipeline)!.GetDamage(damage, damageFrom, damageType);
                     return true;
@@ -637,9 +637,9 @@ namespace CustomPlantClass
         [HarmonyPrefix]
         public static bool AnimShoot_Prefix(Shooter __instance, ref Bullet __result)
         {
-            foreach( var comp in __instance.GetComponents<MonoBehaviour>())
+            foreach (var comp in __instance.GetComponents<MonoBehaviour>())
             {
-                if(comp is IRedirectAnimShoot)
+                if (comp is IRedirectAnimShoot)
                 {
                     __result = (comp as IRedirectAnimShoot)!.Shoot1();
                     return false;
@@ -651,9 +651,9 @@ namespace CustomPlantClass
         [HarmonyPrefix]
         public static bool AnimShoot2_Prefix(Shooter __instance)
         {
-            foreach( var comp in __instance.GetComponents<MonoBehaviour>())
+            foreach (var comp in __instance.GetComponents<MonoBehaviour>())
             {
-                if(comp is IRedirectAnimShoot2)
+                if (comp is IRedirectAnimShoot2)
                 {
                     (comp as IRedirectAnimShoot2)!.Shoot2();
                     return false;
@@ -1076,13 +1076,13 @@ namespace CustomPlantClass
         }
         public static bool TryGetInterface<T>(this MonoBehaviour self, out T outInterface) where T : class
         {
-            foreach ( var comp in self.GetComponents<MonoBehaviour>())
-                if(comp is T)
+            foreach (var comp in self.GetComponents<MonoBehaviour>())
+                if (comp is T)
                 {
                     outInterface = (comp as T)!;
                     return true;
                 }
-            outInterface=default!;
+            outInterface = default!;
             return false;
         }
     }
@@ -1497,8 +1497,8 @@ namespace CustomPlantClass
                                            (RaycastHit2D[])Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                            Vector2.zero) select raycastHit2D.collider.gameObject])
                 if (gameObject.TryGetComponent<Plant>(out var plant))
-                    foreach ( var comp in plant.GetComponents<MonoBehaviour>())
-                        if(comp is ICustomClick) (comp as ICustomClick)!.OnClicked(__instance);
+                    foreach (var comp in plant.GetComponents<MonoBehaviour>())
+                        if (comp is ICustomClick) (comp as ICustomClick)!.OnClicked(__instance);
         }
     }
     [HarmonyPatch(typeof(UltimateTorch))]
@@ -1532,7 +1532,7 @@ namespace CustomPlantClass
             if (!UltimateTorchBehaviour.FireTypes.TryGetValue(bullet.theBulletType, out var newType))
                 return true;
 
-            __instance.board.boardAction.FirePeas(bullet,__instance,bullet.Damage,newType);
+            __instance.board.boardAction.FirePeas(bullet, __instance, bullet.Damage, newType);
 
             __instance.fireTimes++;
 
@@ -1576,7 +1576,7 @@ namespace CustomPlantClass
             if (!UltimateTorchBehaviour.FireTypes.TryGetValue(bullet.theBulletType, out var newType))
                 return true;
 
-            __instance.board.boardAction.FirePeas(bullet,__instance,bullet.Damage,newType);
+            __instance.board.boardAction.FirePeas(bullet, __instance, bullet.Damage, newType);
 
             __instance.fireTimes++;
 
@@ -1649,7 +1649,7 @@ namespace CustomPlantClass
         [HarmonyPrefix]
         public static bool FormatToChineseUnit_Prefix_int(int num, ref string __result)
         {
-            if(!ScientificNumberMgr.IsEnglishNumber) return true;
+            if (!ScientificNumberMgr.IsEnglishNumber) return true;
 
             __result = num.FormatToScientificNotation();
             return false; // block original IL2CPP logic
@@ -1658,7 +1658,7 @@ namespace CustomPlantClass
         [HarmonyPrefix]
         public static bool FormatToChineseUnit_Prefix_long(long num, ref string __result)
         {
-            if(!ScientificNumberMgr.IsEnglishNumber) return true;
+            if (!ScientificNumberMgr.IsEnglishNumber) return true;
 
             __result = num.FormatToScientificNotation();
             return false; // block original IL2CPP logic

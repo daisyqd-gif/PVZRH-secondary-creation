@@ -355,7 +355,7 @@ namespace CustomPlantClass.Main
 
             );
         }
-        public static List<T> GetEnumValues<T>() where T : Enum => [..(T[])typeof(T).GetEnumValues()];
+        public static List<T> GetEnumValues<T>() where T : Enum => [.. (T[])typeof(T).GetEnumValues()];
         public static string FormatToChineseUnits(this long num)
         {
             // Chinese large-number units

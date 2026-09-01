@@ -220,7 +220,7 @@ namespace CustomPlantClass
             (var _, Plant umbrella) = FindUmbrella(startPos);
             if (umbrella != null)
             {
-                b.ThrowTo(umbrella,new(startPos),new(flightTime));
+                b.ThrowTo(umbrella, new(startPos), new(flightTime));
                 goto ApplyCommon;
             }
 
@@ -228,7 +228,7 @@ namespace CustomPlantClass
             Zombie z = _plant.targetZombie;
             if (z != null && z.col != null)
             {
-                b.ThrowTo(z,new(startPos),new(flightTime));
+                b.ThrowTo(z, new(startPos), new(flightTime));
                 goto ApplyCommon;
             }
 
@@ -249,7 +249,7 @@ namespace CustomPlantClass
             return null;
 
         ApplyCommon:
-            b.Damage=_plant.attackDamage;
+            b.Damage = _plant.attackDamage;
             b.fromType = _plant.thePlantType;
             b.melonSputter = _plant.melonSputter;
 
@@ -317,7 +317,7 @@ namespace CustomPlantClass
             {
                 var arcStart = new Il2CppSystem.Nullable<Vector2>(startPos);
 
-                b.ThrowTo(umbrella,arcStart);
+                b.ThrowTo(umbrella, arcStart);
                 goto ApplyCommon;
             }
 
@@ -348,7 +348,7 @@ namespace CustomPlantClass
             return null;
 
         ApplyCommon:
-            b.Damage=_plant.attackDamage;
+            b.Damage = _plant.attackDamage;
             b.fromType = _plant.thePlantType;
             b.melonSputter = _plant.melonSputter;
 

@@ -591,6 +591,7 @@ namespace CustomPlantClass
         }
     }
     */
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public interface IUpgradeBuff
     {
         PlantType Plant { get; }
@@ -598,7 +599,7 @@ namespace CustomPlantClass
         Quality Rarity { get; }
         void Apply();
     }
-
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public sealed class VanillaUpgradeWrapper : IUpgradeBuff
     {
         private readonly GeneralBuff _buff;
@@ -610,7 +611,7 @@ namespace CustomPlantClass
         public Quality Rarity => _buff.Rarity;
         public void Apply() => _buff.OnGet();
     }
-
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public sealed class CustomUpgradeWrapper : IUpgradeBuff
     {
         private readonly CustomRogueBuff _buff;

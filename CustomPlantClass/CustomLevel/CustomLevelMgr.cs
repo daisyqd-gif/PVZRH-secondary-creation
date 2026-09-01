@@ -8,6 +8,7 @@ namespace CustomPlantClass.Level
     public class CustomLevelMgr : MonoBehaviour
     {
         public static Dictionary<int, Func<bool>> CanUnlockLevel = new();
+        [OnLoad]
         public static void OnLoad()
         {
 

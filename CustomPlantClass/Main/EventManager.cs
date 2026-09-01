@@ -1,5 +1,6 @@
 namespace CustomPlantClass.Main
 {
+    [Obsolete("Use CustomPlantClass.Networking.TCPManager instead.")]
     public static class InterModCommunications
     {
         private static readonly HashSet<string> presentMods = new();

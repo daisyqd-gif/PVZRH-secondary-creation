@@ -2,6 +2,7 @@
 
 namespace CustomPlantClass.RogueShootingMgr
 {
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public abstract class CustomRogueBuff
     {
         public abstract PlantType ShowType { get; }
@@ -27,6 +28,7 @@ namespace CustomPlantClass.RogueShootingMgr
         public abstract Quality Rarity { get; }
         public abstract void OnGet();
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public abstract class GeneralCustomBuff : CustomRogueBuff
     {
         protected PlantType plantType; // 0x10
@@ -37,6 +39,7 @@ namespace CustomPlantClass.RogueShootingMgr
         public override bool General { get => true; }
         public override Quality Rarity { get => randomQuality; }
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public class CustomDamageBuff : GeneralCustomBuff // TypeDefIndex: 2881
     {
         // Fields
@@ -76,6 +79,7 @@ namespace CustomPlantClass.RogueShootingMgr
             randomQuality = ShootingManager.Instance.GetRandomQuality();
         }
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public class CustomSpeedBuff : GeneralCustomBuff // TypeDefIndex: 2881
     {
         // Fields
@@ -115,6 +119,7 @@ namespace CustomPlantClass.RogueShootingMgr
             randomQuality = ShootingManager.Instance.GetRandomQuality();
         }
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public class CustomUpgradeBuff : CustomRogueBuff // TypeDefIndex: 2881
     {
         // Fields

@@ -121,25 +121,25 @@ namespace CustomPlantClass.Main
             return result;
         }
 
-        public static IEnumerable<T> CreateList<T>(params T[] input) => [..input];
+        public static IEnumerable<T> CreateList<T>(params T[] input) => [.. input];
 
         public static void AddMultiple<T>(this IList<T> self, params T[] input)
         {
-            foreach(var i in input)
+            foreach (var i in input)
             {
                 self.Add(i);
             }
         }
         public static void AddMultiple<T>(this HashSet<T> self, params T[] input)
         {
-            foreach(var i in input)
+            foreach (var i in input)
             {
                 self.Add(i);
             }
         }
-        public static void AddMultiple<Tkey,Tvalue>(this Dictionary<Tkey,Tvalue> self, params KeyValuePair<Tkey,Tvalue>[] input)
+        public static void AddMultiple<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> self, params KeyValuePair<Tkey, Tvalue>[] input)
         {
-            foreach(var i in input)
+            foreach (var i in input)
             {
                 if (!self.TryAdd(i.Key, i.Value))
                 {
@@ -149,7 +149,7 @@ namespace CustomPlantClass.Main
         }
         public static void ActionPerItem<T>(this IEnumerable<T> self, Action<T> action)
         {
-            foreach( T i in self)
+            foreach (T i in self)
             {
                 try
                 {
@@ -161,13 +161,13 @@ namespace CustomPlantClass.Main
                 }
             }
         }
-        public static void ActionPerItem<T>(this IEnumerable<T> self, Func<T,bool> filter, Action<T> action)
+        public static void ActionPerItem<T>(this IEnumerable<T> self, Func<T, bool> filter, Action<T> action)
         {
-            foreach( T i in self)
+            foreach (T i in self)
             {
                 try
                 {
-                    if(filter(i)) action(i);
+                    if (filter(i)) action(i);
                 }
                 catch (Exception e)
                 {
@@ -175,7 +175,7 @@ namespace CustomPlantClass.Main
                 }
             }
         }
-        public static (IEnumerable<T> yes, IEnumerable<T> no) Partition<T>(this IEnumerable<T> seq, Func<T,bool> pred)
+        public static (IEnumerable<T> yes, IEnumerable<T> no) Partition<T>(this IEnumerable<T> seq, Func<T, bool> pred)
         {
             var yes = new List<T>();
             var no = new List<T>();

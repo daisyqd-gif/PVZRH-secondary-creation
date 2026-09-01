@@ -2,9 +2,10 @@ namespace CustomPlantClass.Examples
 {
     public class StaticExamples : MonoBehaviour
     {
+        [OnLoad]
         public static void OnLoad()
         {
-            Plugin.plugin.AddComponent<StaticExamples>();
+            PluginBehaviour.AddComponentToPlugin<StaticExamples>();
         }
         public static void UltimateGatling_StarShoot(BaseCustomPlant plant, BulletType theBulletType)
         {
@@ -185,12 +186,12 @@ namespace CustomPlantClass.Examples
     }
     public static class UltimateTorchBehaviour
     {
-        public static Dictionary<BulletType,BulletType> FireTypes = new();
-        public static void AddBulletToPool(BulletType fromType, BulletType toType) => FireTypes[fromType]=toType;
+        public static Dictionary<BulletType, BulletType> FireTypes = new();
+        public static void AddBulletToPool(BulletType fromType, BulletType toType) => FireTypes[fromType] = toType;
     }
     public static class SuperTorchBehaviour
     {
-        public static Dictionary<BulletType,(BulletType,int)> FireTypes = new();
-        public static void AddBulletToPool(BulletType fromType, BulletType toType, int DmgMultiplier) => FireTypes[fromType]=(toType,DmgMultiplier);
+        public static Dictionary<BulletType, (BulletType, int)> FireTypes = new();
+        public static void AddBulletToPool(BulletType fromType, BulletType toType, int DmgMultiplier) => FireTypes[fromType] = (toType, DmgMultiplier);
     }
 }

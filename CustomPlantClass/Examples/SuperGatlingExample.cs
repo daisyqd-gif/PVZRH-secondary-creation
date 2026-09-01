@@ -7,7 +7,7 @@ namespace CustomPlantClass.Examples
         {
             return BulletType.Bullet_hypnoPea;
         }
-        public override int AttackDamage => Lawnf.TravelUltimate(UltiBuff.EnumValue51) ?_plant.attackDamage * 2 : _plant.attackDamage;
+        public override int AttackDamage => Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? _plant.attackDamage * 2 : _plant.attackDamage;
         public override Bullet Shoot_Custom()
         {
             if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)))

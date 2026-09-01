@@ -4,11 +4,11 @@ namespace CustomPlantClass.Examples
 {
     public class ArmedChomperBase : CustomShooter
     {
-	    public GameObject changeSprite { get; }
-	    public Transform shoot3;
+        public GameObject changeSprite { get; }
+        public Transform shoot3;
         protected Sprite WallnutSprite;
         protected override bool OverrideDamagePipeline => true;
-        protected override int DamageLimit => _plant.thePlantMaxHealth/3;
+        protected override int DamageLimit => _plant.thePlantMaxHealth / 3;
         public int ShootTimes = 0;
         public bool IsSuper = false;
         public override int OnTakeDamage(int damage, IDamageMaker damageFrom, DamageType damageType)
@@ -18,29 +18,29 @@ namespace CustomPlantClass.Examples
         }
         public virtual void ReplaceSprite()
         {
-            Lawnf.ChangeSprite(_plant.thePlantHealth,_plant.thePlantMaxHealth,changeSprite);
+            Lawnf.ChangeSprite(_plant.thePlantHealth, _plant.thePlantMaxHealth, changeSprite);
         }
-        public virtual Color LaserStartColor => new(0.6f,0,1,1);
+        public virtual Color LaserStartColor => new(0.6f, 0, 1, 1);
         public virtual Color LaserEndColor => LaserStartColor;
         public override Bullet Shoot_Custom()
         {
             var condition = CheckZombie;
-            Zombie target=Lawnf.GetNearestZombie(_plant.board,_plant.shoot.position,condition);
+            Zombie target = Lawnf.GetNearestZombie(_plant.board, _plant.shoot.position, condition);
             var col = target?.col;
             if (col != null)
             {
-                _plant.targetZombie=target;
+                _plant.targetZombie = target;
                 var pos = col.bounds.center;
                 var shoot = _plant.shoot.position;
-                int row = Mathf.Max(target.theZombieRow,_plant.thePlantRow);
+                int row = Mathf.Max(target.theZombieRow, _plant.thePlantRow);
                 Core.Lawnf.FromTo
                 (
-                    shoot,pos,row,_plant.board.transform,
+                    shoot, pos, row, _plant.board.transform,
                     _plant.board.GetCancellationTokenOnDestroy(),
-                    LaserStartColor,LaserEndColor
+                    LaserStartColor, LaserEndColor
                 );
                 ShootTimes++;
-                if(ShootTimes < 6 - _plant.shootingLevel)
+                if (ShootTimes < 6 - _plant.shootingLevel)
                 {
                     target.TakeDamage
                     (
@@ -61,47 +61,47 @@ namespace CustomPlantClass.Examples
                         _plant.thePlantType
                     );
                     StartPF();
-                    ShootTimes=0;
+                    ShootTimes = 0;
                     _plant.Recover(_plant.thePlantMaxHealth);
                 }
             }
-            GameAPP.PlaySound(SoundType.CherryBomb,0.2f);
+            GameAPP.PlaySound(SoundType.CherryBomb, 0.2f);
             _plant.anim.SetTrigger("shoot2");
             return null;
         }
         public virtual bool CheckZombie(Zombie z)
         {
-            return z != null && z.col != null && z.axis.position.x > _plant.shoot.position.x && (Lawnf.InLandStatus(z.theStatus) || z.theStatus==ZombieStatus.Flying) && z.Alive && z.gameObject != null && z.Team != _plant.Team;
+            return z != null && z.col != null && z.axis.position.x > _plant.shoot.position.x && (Lawnf.InLandStatus(z.theStatus) || z.theStatus == ZombieStatus.Flying) && z.Alive && z.gameObject != null && z.Team != _plant.Team;
         }
         public override BulletType GetBulletType() => BulletType.Bullet_pea_chomper;
         public override BulletType GetBulletType2() => GetBulletType();
         public IEnumerator SuperShoot_Custom()
         {
-            List<Transform> shoots = new(){_plant.shoot2,shoot3};
-            for ( int i = 0 ; i < 8 ; i++)
+            List<Transform> shoots = new() { _plant.shoot2, shoot3 };
+            for (int i = 0; i < 8; i++)
             {
-                for ( int j = 0 ; j < 3 ; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     var loc = shoots.GetRandomItem().position;
-                    int dmg=_plant.attackDamage;
-                    PlantMgr.SetBullet(_plant,loc,GetBulletType2(),BulletMoveWay.SuperGatling,(int)((dmg + ((dmg>>31) & 3U)) >> 2),Vector2.zero,Random.Range(-15f, 15f)).normalSpeed=Random.Range(12f,14f);
+                    int dmg = _plant.attackDamage;
+                    PlantMgr.SetBullet(_plant, loc, GetBulletType2(), BulletMoveWay.SuperGatling, (int)((dmg + ((dmg >> 31) & 3U)) >> 2), Vector2.zero, Random.Range(-15f, 15f)).normalSpeed = Random.Range(12f, 14f);
                 }
                 yield return new WaitForSeconds(0.05f);
             }
-            var nut=CreatePlant.Instance.SetPlant(_plant.thePlantColumn,_plant.thePlantRow,PlantType.HugeWallNut);
+            var nut = CreatePlant.Instance.SetPlant(_plant.thePlantColumn, _plant.thePlantRow, PlantType.HugeWallNut);
             if (nut != null)
             {
-                nut.damageAdder=_plant.damageAdder;
-                nut.ModifyDamage(PlantDamageAdder.Update,0);
+                nut.damageAdder = _plant.damageAdder;
+                nut.ModifyDamage(PlantDamageAdder.Update, 0);
                 var renderer = nut.GetComponentInChildren<SpriteRenderer>();
-                if(renderer!= null)
+                if (renderer != null)
                 {
-                    renderer.sprite=WallnutSprite;
+                    renderer.sprite = WallnutSprite;
                 }
-                if(nut is BigWallNut)
+                if (nut is BigWallNut)
                 {
                     var a = (Zombie z) => z.KnockBack(1);
-                    (nut as BigWallNut).onCrash=a;
+                    (nut as BigWallNut).onCrash = a;
                 }
             }
         }
@@ -124,19 +124,19 @@ namespace CustomPlantClass.Examples
         {
             if (!isPF)
             {
-                int dmg=_plant.attackDamage;
-                var bullet=PlantMgr.SetBullet(
-                    _plant,_plant.shoot2.position,
-                    GetBulletType(),BulletMoveWay.Track,
-                    (int)((dmg + ((dmg>>31) & 3U)) >> 2)
+                int dmg = _plant.attackDamage;
+                var bullet = PlantMgr.SetBullet(
+                    _plant, _plant.shoot2.position,
+                    GetBulletType(), BulletMoveWay.Track,
+                    (int)((dmg + ((dmg >> 31) & 3U)) >> 2)
                 );
-                bullet.targetZombie=_plant.targetZombie;
-                var bullet2=PlantMgr.SetBullet(
-                    _plant,shoot3.position,
-                    GetBulletType(),BulletMoveWay.Track,
-                    (int)((dmg + ((dmg>>31) & 3U)) >> 2)
+                bullet.targetZombie = _plant.targetZombie;
+                var bullet2 = PlantMgr.SetBullet(
+                    _plant, shoot3.position,
+                    GetBulletType(), BulletMoveWay.Track,
+                    (int)((dmg + ((dmg >> 31) & 3U)) >> 2)
                 );
-                bullet2.targetZombie=_plant.targetZombie;
+                bullet2.targetZombie = _plant.targetZombie;
                 return bullet;
             }
             else
@@ -194,7 +194,7 @@ namespace CustomPlantClass.Examples
     {
         public override bool HitZombie(Zombie zombie)
         {
-            SetParticle(_bullet.col.bounds.center,11);
+            SetParticle(_bullet.col.bounds.center, 11);
             GameAPP.PlaySound(SoundType.BigChomp);
             if (!TypeMgr.IsBossZombie(zombie.theZombieType) && PlantMgr.GetPercent(12.5f))
             {
@@ -202,7 +202,7 @@ namespace CustomPlantClass.Examples
             }
             else
             {
-                zombie.TakeDamage(_bullet.Damage,_bullet.Cast<IDamageMaker>(),DamageType.NormalAll,_bullet.fromType);
+                zombie.TakeDamage(_bullet.Damage, _bullet.Cast<IDamageMaker>(), DamageType.NormalAll, _bullet.fromType);
             }
             _bullet.Die();
             return false;

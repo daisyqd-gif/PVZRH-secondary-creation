@@ -23,6 +23,13 @@ namespace UltimateDoomSniper
 
             GameObject particle = CreateParticle.SetParticle(Plugin.ParticleID, shootPos, 11);
             particle.transform.rotation = MathHelper.DirectionToRotation(dir);
+            if (plant.starUp)
+            {
+                particle.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                var b = PlantMgr.SetBullet(plant,BulletType.Bullet_doom_big, BulletMoveWay.Free,plant.attackDamage * 12);
+                b.transform.rotation = MathHelper.DirectionToRotation(dir);
+                b.theStatus = BulletStatus.Doom_big;
+            }
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(shootPos, dir, float.PositiveInfinity, LayerMask.GetMask("Zombie"));
 
@@ -92,17 +99,16 @@ namespace UltimateDoomSniper
             plant.anim.SetBoolString("backwards", backwards);
         }
     }
-    public class DoomSniperComponent : BaseCustomPlant
+    public class DoomSniperComponent : MonoBehaviour, IPlantGetTextStringHandler
     {
         public DoomSniper plant => GetComponent<DoomSniper>();
-        public override Transform FindShoot() => transform.FindChild("PeaShooter_Head/gun_lower/Shoot");
-        public override string GetTextString() =>
+        public void Start()
+        {
+            plant.shoot=transform.FindChild("PeaShooter_Head/gun_lower/Shoot");
+        }
+        public string GetTextString() =>
         $"大招充能 : {plant.attributeCount}/{(Lawnf.TravelAdvanced(Plugin.Buff2) ? 150 : 300)}\n" +
         $"狂热能量 : {plant.craze}/{(Lawnf.TravelAdvanced(Plugin.Buff2) ? 50 : 100)}\n" +
         $"狂热时间 : {Mathf.CeilToInt(plant.crazeTimer)}/{(Lawnf.TravelAdvanced(Plugin.Buff2) ? 16 : 8)}";
-        public override Bullet AnimShoot_Custom()
-        {
-            return plant.Shoot1();
-        }
     }
 }

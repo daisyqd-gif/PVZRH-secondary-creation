@@ -34,10 +34,11 @@ namespace CustomPlantClass.Main
         public static Dictionary<(LevelType, int), List<ZombieType>> AddedZombiesInLevel = new();
         public static bool IsGameStarted = false;
         #endregion
+        [OnLoad]
         public static void OnLoad()
         {
             StartUpMessages.Add($"Thank you for using {MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion}!");
-            Plugin.plugin.AddComponent<DataMgr>();
+            PluginBehaviour.AddComponentToPlugin<DataMgr>();
         }
         ///*
         #region ID Allocation
@@ -448,7 +449,7 @@ namespace CustomPlantClass.Main
             Plant plant => GetComponent<Plant>();
             public void Update()
             {
-                if(GameAPP.theGameStatus != GameStatus.InGame) return;
+                if (GameAPP.theGameStatus != GameStatus.InGame) return;
                 TypeMgr.GetPlantTag(plant);
                 Destroy(this);
             }
@@ -487,19 +488,19 @@ namespace CustomPlantClass.Main
             {
                 //Prefab
                 Il2CppSystem.Collections.Generic.List<GameObject> lst = new();
-                GameAPP.resourcesManager.plantPrefabs.Add(data.PlantId,data.Prefab);
+                GameAPP.resourcesManager.plantPrefabs.Add(data.PlantId, data.Prefab);
                 GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<TClass>();
                 GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<PlantTagAdder>();
                 lst.Add(GameAPP.resourcesManager.plantPrefabs[data.PlantId]);
-                GameAPP.resourcesManager._plantPrefabs.Add(data.PlantId,lst);
+                GameAPP.resourcesManager._plantPrefabs.Add(data.PlantId, lst);
                 GameAPP.resourcesManager.allPlants.Add(data.PlantId);
-                TBase plant=GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<TBase>();
+                TBase plant = GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<TBase>();
                 plant.thePlantType = data.PlantId;
-                plant.tag="Plant";
+                plant.tag = "Plant";
                 plant.gameObject.layer = LayerMask.NameToLayer("Plant");
                 //Preview
                 Il2CppSystem.Collections.Generic.List<GameObject> lst2 = new();
-                GameAPP.resourcesManager.plantPreviews.Add(data.PlantId,data.Preview);
+                GameAPP.resourcesManager.plantPreviews.Add(data.PlantId, data.Preview);
                 GameAPP.resourcesManager.plantPreviews[data.PlantId].tag = "Preview";
                 lst2.Add(GameAPP.resourcesManager.plantPreviews[data.PlantId]);
                 GameAPP.resourcesManager._plantPreviews.Add(data.PlantId, lst2);
@@ -514,11 +515,11 @@ namespace CustomPlantClass.Main
                     cd = data.Cd,
                     attackDamage = data.AttackDamage
                 };
-                if(data.Fusions != null)
-                foreach( var recipe in data.Fusions )
-                {
-                    MixData.AddOrderedRecipe(recipe.Item1,recipe.Item2,data.PlantId);
-                }
+                if (data.Fusions != null)
+                    foreach (var recipe in data.Fusions)
+                    {
+                        MixData.AddOrderedRecipe(recipe.Item1, recipe.Item2, data.PlantId);
+                    }
             });
 
             if (data.CanPF)
@@ -583,18 +584,18 @@ namespace CustomPlantClass.Main
             {
                 //Prefab
                 Il2CppSystem.Collections.Generic.List<GameObject> lst = new();
-                GameAPP.resourcesManager.plantPrefabs.Add(data.PlantId,data.Prefab);
+                GameAPP.resourcesManager.plantPrefabs.Add(data.PlantId, data.Prefab);
                 GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<PlantTagAdder>();
                 lst.Add(GameAPP.resourcesManager.plantPrefabs[data.PlantId]);
-                GameAPP.resourcesManager._plantPrefabs.Add(data.PlantId,lst);
+                GameAPP.resourcesManager._plantPrefabs.Add(data.PlantId, lst);
                 GameAPP.resourcesManager.allPlants.Add(data.PlantId);
-                TBase plant=GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<TBase>();
+                TBase plant = GameAPP.resourcesManager.plantPrefabs[data.PlantId].AddComponent<TBase>();
                 plant.thePlantType = data.PlantId;
-                plant.tag="Plant";
+                plant.tag = "Plant";
                 plant.gameObject.layer = LayerMask.NameToLayer("Plant");
                 //Preview
                 Il2CppSystem.Collections.Generic.List<GameObject> lst2 = new();
-                GameAPP.resourcesManager.plantPreviews.Add(data.PlantId,data.Preview);
+                GameAPP.resourcesManager.plantPreviews.Add(data.PlantId, data.Preview);
                 GameAPP.resourcesManager.plantPreviews[data.PlantId].tag = "Preview";
                 lst2.Add(GameAPP.resourcesManager.plantPreviews[data.PlantId]);
                 GameAPP.resourcesManager._plantPreviews.Add(data.PlantId, lst2);
@@ -609,11 +610,11 @@ namespace CustomPlantClass.Main
                     cd = data.Cd,
                     attackDamage = data.AttackDamage
                 };
-                if(data.Fusions != null)
-                foreach( var recipe in data.Fusions )
-                {
-                    MixData.AddOrderedRecipe(recipe.Item1,recipe.Item2,data.PlantId);
-                }
+                if (data.Fusions != null)
+                    foreach (var recipe in data.Fusions)
+                    {
+                        MixData.AddOrderedRecipe(recipe.Item1, recipe.Item2, data.PlantId);
+                    }
             });
 
             if (data.CanPF)
@@ -1025,9 +1026,9 @@ namespace CustomPlantClass.Main
             string baseToVariant
         )
         {
-            return $"<nobr>解锁<color=red>{unlockedPlantName}</color>\n"+
-                    $"{basePlant1}+{baseplant2}</nobr>\n"+
-                    $"<nobr>解锁<color=red>{unlockedVariantPlantName}</color></nobr>\n"+
+            return $"<nobr>解锁<color=red>{unlockedPlantName}</color>\n" +
+                    $"{basePlant1}+{baseplant2}</nobr>\n" +
+                    $"<nobr>解锁<color=red>{unlockedVariantPlantName}</color></nobr>\n" +
                     $"<nobr>{variantToBase}←→{baseToVariant}</nobr>";
 
         }
@@ -1038,7 +1039,7 @@ namespace CustomPlantClass.Main
             string baseplant2
         )
         {
-            return $"<nobr>解锁<color=red>{unlockedPlantName}</color>\n"+
+            return $"<nobr>解锁<color=red>{unlockedPlantName}</color>\n" +
                     $"{basePlant1}+{baseplant2}</nobr>";
 
         }

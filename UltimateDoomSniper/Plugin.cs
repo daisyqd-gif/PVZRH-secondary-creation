@@ -9,6 +9,8 @@ global using Unity.VisualScripting;
 global using Random = UnityEngine.Random;
 global using CustomPlantClass.Main;
 using Core;
+using CustomPlantClass.RogueShootingManager;
+using GameLevel.RogueShooting;
 [assembly: CustomMod("UltimateDoomSniper")]
 namespace UltimateDoomSniper
 {
@@ -36,8 +38,8 @@ namespace UltimateDoomSniper
         }
         public override void InitializeBuffs()
         {
-            Buff1 = CustomCore.RegisterCustomBuff("防空炮：解锁死神狙击射手的锁空锁空并将解锁毁灭狙击射手, 毁灭狙击射手的攻击间隔缩短至4秒", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
-            Buff2 = CustomCore.RegisterCustomBuff("死神之力：死神狙击射手狂热时间*2, 狂热能量需求/2, 大招需求/2, 毁灭狙击射手只会爆头", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
+            Buff1 = Compatibility.CustomCore_Old.RegisterCustomBuff("防空炮：解锁死神狙击射手的锁空锁空并将解锁毁灭狙击射手, 毁灭狙击射手的攻击间隔缩短至4秒", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
+            Buff2 = Compatibility.CustomCore_Old.RegisterCustomBuff("死神之力：死神狙击射手狂热时间*2, 狂热能量需求/2, 大招需求/2, 毁灭狙击射手只会爆头", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
         }
         public override void InitializePlants()
         {
@@ -117,7 +119,7 @@ namespace UltimateDoomSniper
                 DefaultBullet = BulletType.Bullet_pea, // Shooter bullet type, this is never used for now so just leave it as is.
 
                 CanPF = false,     // Enable PF ability if the plant has one
-                CanStarUp = false, // Enable Star-Up ability if the plant has one
+                CanStarUp = true, // Enable Star-Up ability if the plant has one
 
                 CardColor = CardLevel.Gold, // Determines card rarity and UI color
                 /*
@@ -211,6 +213,36 @@ namespace UltimateDoomSniper
             DataMgr.AddCustomWeakUltimatePlant(PlantID,false);
             DataMgr.AddCustomWeakUltimatePlant(PlantID_Sniper2,true);
             
+            (_,BaseBuff buffConfig) = RegistryHelper.RegisterCustomQualitativeChangeBuff("死神之力","获得词条：死神之力",PlantID_Sniper2);
+            (_,BaseBuff buffConfig2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("神射手","每一发子弹都会造成爆头伤害",PlantID,() => TravelMgr.Instance.GetNormalBuff(AdvBuff.EnumValue12002));
+            BaseBuff buffConfig3 = RegistryHelper.MakeBuffType(new()
+            {
+                CustomPlantType = PlantID,
+                CustomTitle = "强化：死神之光",
+                CustomDescription = "释放的毁灭菇伤害+100%",
+                CustomBuffType = ShootingBuffType.UniqueUpgrade,
+                CustomOnGet = () =>
+                {
+                    if( ShootingManager.Instance.TryGetPlant(PlantID, out var plant))
+                        plant.shootingLevel ++;
+                }
+            });
+            BaseConfig cfg1 = RegistryHelper.MakeConfigType(new()
+            {
+                CustomPlantType = PlantID,
+                CustomBuffs = () => new(){ new DamageBuff(PlantID), new SpeedBuff(PlantID), buffConfig2, buffConfig3, new StarUpBuff(PlantID) },
+                CustomReinforcePlant = (Plant plant) => plant.ModifyDamage(PlantDamageAdder.Shooting, 14.0f, false, new Il2CppSystem.Nullable<float>(float.MaxValue)),
+                CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+            });
+            BaseConfig cfg2 = RegistryHelper.MakeConfigType(new()
+            {
+                CustomPlantType = PlantID_Sniper2,
+                CustomBuffs = () => new(){ new DamageBuff(PlantID), new SpeedBuff(PlantID), buffConfig },
+                CustomReinforcePlant = (Plant plant) => plant.ModifyDamage(PlantDamageAdder.Shooting, 14.0f, false, new Il2CppSystem.Nullable<float>(float.MaxValue)),
+                CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+            });
+            RegistryHelper.AddCustomRogueShootingPlant(PlantID,cfg1);
+            RegistryHelper.AddCustomExpertPlant(PlantID_Sniper2,cfg2);
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
     }
@@ -219,5 +251,16 @@ namespace UltimateDoomSniper
         public const string PluginGuid = "UltimateDoomSniper.Bepinex";
         public const string PluginName = "UltimateDoomSniper";
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
+    }
+    [HarmonyPatch(typeof(GameLevel.RogueShooting.DoomSniper))]
+    public static class DoomSniperPatch
+    {
+        [HarmonyPatch(nameof(GameLevel.RogueShooting.DoomSniper.Buffs), MethodType.Getter)]
+        [HarmonyPostfix]
+        public static void PostGetBuffs(ref Il2CppSystem.Collections.Generic.List<BaseBuff> __result)
+        {
+            __result.Clear();
+            __result.Add(new UpgradeBuff(PlantType.DoomSniper,Plugin.PlantID));
+        }
     }
 }

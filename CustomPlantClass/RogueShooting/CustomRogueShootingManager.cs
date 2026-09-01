@@ -3,6 +3,7 @@
 
 namespace CustomPlantClass.RogueShootingMgr
 {
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public class CustomRogueShootingManager : MonoBehaviour
     {
         #region Runtime
@@ -97,6 +98,7 @@ namespace CustomPlantClass.RogueShootingMgr
         }
         #endregion
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public interface ICustomRogueConfig
     {
         PlantType PlantType { get; }
@@ -105,6 +107,7 @@ namespace CustomPlantClass.RogueShootingMgr
 
         public void ApplyReinforcement(Plant plant);
     }
+    [Obsolete("Use CustomPlantClass.RogueShootingManager.RegistryHelper instead. (Requires external DLL)")]
     public interface ICustomOtherBuff
     {
         string Title { get; }

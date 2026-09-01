@@ -2,7 +2,7 @@ using CustomPlantClass.Runtime.Tasks;
 
 namespace CustomPlantClass
 {
-    public class BaseCustomPlant : MonoBehaviour, IRedirectAnimShoot, IRedirectAnimShoot2, 
+    public class BaseCustomPlant : MonoBehaviour, IRedirectAnimShoot, IRedirectAnimShoot2,
     IOverrideDamagePipeline, ICustomClick, ICustomPF, IPlantDieRedirector, IPlantDieHandler, IPlantTextHandler
     {
         public bool IsImmune => isPF;
@@ -203,7 +203,7 @@ namespace CustomPlantClass
             isPF = true;
             _plant.isFlashing = true;
 
-            if(IsAsyncPF) _ = PFWrapper_Async();
+            if (IsAsyncPF) _ = PFWrapper_Async();
             // Wrap the coroutine so we can detect when it finishes
             else _plant.StartCoroutine(PFWrapper());
         }
@@ -244,7 +244,7 @@ namespace CustomPlantClass
         public virtual bool CanClick => false;
         public virtual void OnClicked(Mouse mouse)
         {
-            
+
         }
     }
 }
