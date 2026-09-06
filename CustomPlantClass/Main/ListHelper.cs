@@ -183,5 +183,17 @@ namespace CustomPlantClass.Main
                 (pred(x) ? yes : no).Add(x);
             return (yes, no);
         }
+        public static void Shuffle( this IEnumerable<int> self )
+        {
+            var list = self.ToList();
+            var rng = new System.Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                (list[k], list[n]) = (list[n], list[k]);
+            }
+        }
     }
 }

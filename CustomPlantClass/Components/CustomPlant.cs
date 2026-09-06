@@ -3,7 +3,8 @@ using CustomPlantClass.Runtime.Tasks;
 namespace CustomPlantClass
 {
     public class BaseCustomPlant : MonoBehaviour, IRedirectAnimShoot, IRedirectAnimShoot2,
-    IOverrideDamagePipeline, ICustomClick, ICustomPF, IPlantDieRedirector, IPlantDieHandler, IPlantTextHandler
+        IOverrideDamagePipeline, ICustomClick, ICustomPF, IPlantDieRedirector, IPlantDieHandler,
+        IPlantTextHandler
     {
         public bool IsImmune => isPF;
         public bool isPF = false;

@@ -1,0 +1,35 @@
+using System;
+using Il2CppInterop.Runtime.Injection;
+using System.Collections.Generic;
+using CustomPlantClass.Main.BulletBehaviour;
+
+public class MoveWay_{{GUID}} : BulletMovement
+{
+    public MoveWay_{{GUID}}(IntPtr ptr) : base(ptr) { }
+
+    public MoveWay_{{GUID}}()
+        : base(ClassInjector.DerivedConstructorPointer<MoveWay_{{GUID}}>())
+    {
+        ClassInjector.DerivedConstructorBody(this);
+    }
+
+    private static string TheClassID => "{{GUID}}";
+
+    public CustomBulletMovement moveWay
+        => BulletRegistryManager.BulletMovements[TheClassID];
+
+	public override void PositionUpdate()
+    {
+        moveWay.PositionUpdate(bullet);
+    }
+
+	public override void ShadowUpdate()
+    {
+        moveWay.ShadowUpdate(bullet);
+    }
+
+	public override void UpdateHitFilter()
+    {
+        moveWay.UpdateHitFilter(bullet);
+    }
+}

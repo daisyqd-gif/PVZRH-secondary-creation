@@ -4,6 +4,7 @@ global using Il2CppInterop.Runtime.Injection;
 global using System;
 global using UnityEngine;
 global using System.Collections.Generic;
+using static CustomPlantClass.Runtime.Tasks.CancellationTokenExt;
 namespace CustomPlantClass.Runtime.Tasks
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -13,6 +14,7 @@ namespace CustomPlantClass.Runtime.Tasks
         {
             ClassInjector.RegisterTypeInIl2Cpp<DelayScheduler>();
             ClassInjector.RegisterTypeInIl2Cpp<WaitUntilScheduler>();
+            ClassInjector.RegisterTypeInIl2Cpp<MonobehaviourCancellationToken>();
             AddComponent<DelayScheduler>();
             AddComponent<WaitUntilScheduler>();
         }

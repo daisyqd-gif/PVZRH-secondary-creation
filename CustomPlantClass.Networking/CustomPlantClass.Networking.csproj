@@ -1,31 +1,24 @@
-<Project>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+
+    <!-- Output DLLs into combinemod/Build -->
+    <OutputPath>$(MSBuildThisFileDirectory)..\Build\</OutputPath>
+
+    <!-- IL2CPP mods don't need dependency/runtime files -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Import shared references -->
   <ItemGroup>
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomizeLib.Bepinex" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.RogueShootingManager" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.RogueShootingManager.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.Networking" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Core" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Core.dll</HintPath>
-    </Reference>
-    <Reference Include="UniTask" Private="false">
-      <HintPath>..\lib\DummyDll\UniTask.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>
@@ -310,4 +303,5 @@
       <HintPath>..\lib\BepInEx\interop\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
+
 </Project>

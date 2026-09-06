@@ -421,6 +421,26 @@ namespace CustomPlantClass.Main
                     if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
                         ClassInjector.RegisterTypeInIl2Cpp(type);
                 }
+                if (typeof(BaseConfig).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
+                        ClassInjector.RegisterTypeInIl2Cpp(type);
+                }
+                if (typeof(BaseBuff).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
+                        ClassInjector.RegisterTypeInIl2Cpp(type);
+                }
+                if (typeof(BaseEffect).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
+                        ClassInjector.RegisterTypeInIl2Cpp(type);
+                }
+                if (typeof(BulletMovement).IsAssignableFrom(type) && !type.IsAbstract)
+                {
+                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
+                        ClassInjector.RegisterTypeInIl2Cpp(type);
+                }
             }
         }
 

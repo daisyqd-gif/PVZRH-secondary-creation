@@ -40,15 +40,6 @@ namespace CustomPlantClass
             Tools.InitMod(Assembly.GetExecutingAssembly());
             assetBundle = AssetMgr.LoadBundleFromResource(Assembly.GetExecutingAssembly(), "datamgr", false);
             CustomCore.RegisterCustomCardToColorfulCards(PlantType.ElectricOnion, 1);
-            KeyBindingRegistry.Add
-            (
-                () => $"科学计数法",
-                (ActionButton btn) =>
-                {
-                    ScientificNumberMgr.IsEnglishNumber = !ScientificNumberMgr.IsEnglishNumber;
-                    btn.Label = ScientificNumberMgr.IsEnglishNumber ? "允许" : "不允许";
-                }
-            );
         }
     }
     public static class ScientificNumberMgr
@@ -57,6 +48,15 @@ namespace CustomPlantClass
         [OnLoad]
         public static void OnLoad()
         {
+            KeyBindingRegistry.Add
+            (
+                () => $"科学计数法",
+                (ActionButton btn) =>
+                {
+                    IsEnglishNumber = !IsEnglishNumber;
+                    btn.Label = IsEnglishNumber ? "允许" : "不允许";
+                }
+            );
             // If the key does not exist, create it
             if (!RegistryManager.TryGet<bool>("Is English Number", out _))
             {
@@ -109,7 +109,7 @@ namespace CustomPlantClass
                 }
             }
         }
-        public static async Task AddComponentToPlugin<T>() where T : Component
+        public static async void AddComponentToPlugin<T>() where T : Component
         {
             await WaitUntilTask.WaitUntil(() => IsActive == true);
             Plugin.behaviourObject.AddComponent<T>();

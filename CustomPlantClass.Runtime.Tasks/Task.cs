@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace CustomPlantClass.Runtime.Tasks
 {
@@ -458,6 +460,37 @@ namespace CustomPlantClass.Runtime.Tasks
             var token = new CancellationToken();
             WaitUntilScheduler.Schedule(new WaitUntil(predicate), () => token.Cancel());
             return token;
+        }
+    }
+    public static class CancellationTokenExt
+    {
+        public static CancellationToken CreateCancellationToken(this MonoBehaviour self)
+        {
+            var token = new CancellationToken();
+            WaitUntilScheduler.Schedule(new WaitUntil(() => self.destroyCancellationToken.IsCancellationRequested), () => token.Cancel());
+            return token;
+        }
+        public static CancellationToken CreateCancellationToken(this GameObject self) =>
+            self.TryGetComponent<MonoBehaviour>(out var mono)
+                ? CreateCancellationToken(mono)
+                : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
+        public static CancellationToken CreateCancellationToken(this Component self) =>
+            self.TryGetComponent<MonoBehaviour>(out var mono)
+                ? CreateCancellationToken(mono)
+                : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
+        public class MonobehaviourCancellationToken : MonoBehaviour
+        {
+            public CancellationToken Token { get; private set; }
+
+            public void Awake()
+            {
+                Token = new CancellationToken();
+            }
+
+            public void OnDestroy()
+            {
+                Token.Cancel();
+            }
         }
     }
     public interface IDelay : INotifyCompletion
