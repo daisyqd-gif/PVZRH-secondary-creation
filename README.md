@@ -133,7 +133,7 @@ namespace GatlingPea
             };
 
             // Register the plant and retrieve its ID
-            DataMgr.RegisterCustomPlant<80GatlingPea, Shooter>(Data);
+            DataMgr.RegisterCustomPlant<GatlingPea80, Shooter>(Data);
 
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
@@ -141,7 +141,7 @@ namespace GatlingPea
 
     // Your custom plant class. Put this into its own file if it gets too big
     // You can leave it empty or override BaseCustomPlant methods for custom behavior.
-    public class 80GatlingPea : BaseCustomPlant
+    public class GatlingPea80 : BaseCustomPlant
     {
         public override Transform FindShoot() => _plant.transform.FindChild("GatlingPea_head/Shoot");
         public override Bullet Shoot_Custom()
