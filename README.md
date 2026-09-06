@@ -70,6 +70,8 @@ global using UnityEngine;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
 global using Random = UnityEngine.Random
+using System.Threading.Tasks;
+using CustomPlantClass.Runtime.Tasks;
 
 namespace GatlingPea
 {
@@ -77,7 +79,7 @@ namespace GatlingPea
     public class Core : ModPlugin
     {
         private AssetBundle assetBundle;
-        private ID plantType = 1032;
+        private ID plantType = DataMgr.AllocateID();
         public override void InitializeMod()
         {
             assetBundle = CustomCore.GetAssetBundle(
@@ -95,9 +97,9 @@ namespace GatlingPea
                 Prefab = assetBundle.GetAsset<GameObject>("GatlingPeaPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("GatlingPeaPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorTuple((PlantType.GatlingPea,PlantType.WaterAloes)), // Optional fusion recipes
+                Fusions = new List<(ID,ID)>(), // Optional fusion recipes
 
-                AttackInterval = 1.5f,   // Time between attacks (shooters only)
+                AttackInterval = 0.75f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
                 AttackDamage = 80,      // Damage per attack
                 MaxHealth = 300,       // Plant HP
@@ -106,7 +108,7 @@ namespace GatlingPea
 
                 DefaultBullet = BulletType.Bullet_pea, // Shooter bullet type, this is never used for now so just leave it as is.
 
-                CanPF = false,     // Enable PF ability if the plant has one
+                CanPF = true,     // Enable PF ability if the plant has one
                 CanStarUp = false, // Enable Star-Up ability if the plant has one
 
                 CardColor = CardLevel.Green, // Determines card rarity and UI color
@@ -119,11 +121,11 @@ namespace GatlingPea
                     Red    = Special/Treasure mode plants
                 */
 
-                IsRainbowCard = false,  // Appears in the Rainbow Card menu
+                IsRainbowCard = true,  // Appears in the Rainbow Card menu
                 IsUltimatePlant = false, // Travel-locked ultimate plant
                 CardRepeatAmt = 1,       // How many copies appear in Rainbow Card menu
 
-                Name = "极冰机枪射手",           // Plant name (shown in UI)
+                Name = "80!射手",           // Plant name (shown in UI)
                 AlmanacEntry = "一次发射四颗豌豆。\n\n"+    // Almanac description (CN + EN recommended)
                 "<color=#3D1400>伤害：</color><color=red>20×4/1.5秒</color>\n" +
                 "<color=#3D1400>融合配方：</color><color=red>豌豆射手×4</color>\n"+
@@ -131,7 +133,7 @@ namespace GatlingPea
             };
 
             // Register the plant and retrieve its ID
-            plantType = DataMgr.RegisterCustomPlant<GatlingPea, Shooter>(Data);
+            DataMgr.RegisterCustomPlant<80GatlingPea, Shooter>(Data);
 
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
@@ -139,7 +141,7 @@ namespace GatlingPea
 
     // Your custom plant class. Put this into its own file if it gets too big
     // You can leave it empty or override BaseCustomPlant methods for custom behavior.
-    public class GatlingPea : BaseCustomPlant
+    public class 80GatlingPea : BaseCustomPlant
     {
         public override Transform FindShoot() => _plant.transform.FindChild("GatlingPea_head/Shoot");
         public override Bullet Shoot_Custom()
@@ -189,6 +191,80 @@ namespace GatlingPea
             b.Damage=_plant.attackDamage;
             b.fromType=_plant.thePlantType;
             return b;
+        }
+        protected override bool IsAsyncPF => true;
+        protected override async Task SuperShoot_Async()
+        {
+            isPF = true;
+            plant.invincible = true;
+            plant.uncrashable = true;
+            plant.anim.SetBool("shooting", true);
+            plant.flashCountDown = 5f;
+            plant.isFlashing = true;
+
+            int total = 90;
+
+            for (int i = 0; i < total; i++)
+            {
+                if (plant == null || plant.IsDestroyed()) return;
+                Vector3 pos = plant.shoot.position;
+                Bullet b = CreateBullet.Instance.SetBullet(
+                    pos.x, pos.y, plant.thePlantRow,
+                    BulletType.Bullet_pea,
+                    BulletMoveWay.MoveRight
+                );
+
+                b.Damage = plant.attackDamage;
+                b.fromType = plant.thePlantType;
+                
+                if(plant.thePlantRow < 0)
+                {
+                    Bullet b1 = CreateBullet.Instance.SetBullet(
+                        pos.x, pos.y, plant.thePlantRow,
+                        BulletType.Bullet_pea,
+                        BulletMoveWay.MoveRight
+                    );
+
+                    b1.Damage = plant.attackDamage;
+                    b1.fromType = plant.thePlantType;
+                }
+                else
+                {
+                    Bullet b1 = CreateBullet.Instance.SetBullet(
+                        pos.x, pos.y, plant.thePlantRow-1,
+                        BulletType.Bullet_pea,
+                        BulletMoveWay.MoveRight_threePeater
+                    );
+
+                    b1.Damage = plant.attackDamage;
+                    b1.fromType = plant.thePlantType;
+                }
+                
+                if(plant.thePlantRow > plant.board.rowNum - 1)
+                {
+                    Bullet b1 = CreateBullet.Instance.SetBullet(
+                        pos.x, pos.y, plant.thePlantRow,
+                        BulletType.Bullet_pea,
+                        BulletMoveWay.MoveRight
+                    );
+
+                    b1.Damage = plant.attackDamage;
+                    b1.fromType = plant.thePlantType;
+                }
+                else
+                {
+                    Bullet b1 = CreateBullet.Instance.SetBullet(
+                        pos.x, pos.y, plant.thePlantRow+1,
+                        BulletType.Bullet_pea,
+                        BulletMoveWay.MoveRight_threePeater
+                    );
+
+                    b1.Damage = plant.attackDamage;
+                    b1.fromType = plant.thePlantType;
+                }
+
+                await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+            }
         }
     }
 
