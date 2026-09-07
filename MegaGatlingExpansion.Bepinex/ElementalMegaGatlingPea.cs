@@ -49,7 +49,7 @@ namespace MegaGatlingExpansion
     {
         public override int GetSunCount() => 2;
         public override string GetShootPath() => "PeaShooter_Head/Shoot";
-        public override BulletType GetBulletType_Custom() => BulletType.Bullet_smallSun;
+        public override BulletType GetBulletType_Custom() => BulletType.Bullet_endoSun;
         public override Bullet Shoot_Custom()
         {
             if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
@@ -65,11 +65,17 @@ namespace MegaGatlingExpansion
         }
         public virtual async Task MakeSun()
         {
-            for (int i = 0; i < 15 + AttributeCount_Custom; i++)
+            try{
+                for (int i = 0; i < 15 + AttributeCount_Custom; i++)
+                {
+                    if (plant == null || plant.IsDestroyed()) return;
+                    CreateItem.Instance.SetCoin(plant.thePlantColumn, plant.thePlantRow, 0, 0);
+                    await DelayTask.Delay(0.25f,token);
+                }
+            }
+            catch (Exception)
             {
-                if (plant == null || plant.IsDestroyed()) return;
-                CreateItem.Instance.SetCoin(plant.thePlantColumn, plant.thePlantRow, 0, 0);
-                await DelayTask.Delay(0.1f,token);
+                
             }
         }
 

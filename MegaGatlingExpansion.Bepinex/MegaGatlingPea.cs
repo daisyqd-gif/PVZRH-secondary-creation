@@ -26,6 +26,7 @@ namespace MegaGatlingExpansion
         // -------------------------
         public override void OnSpawn()
         {
+            if(plant==null || plant.IsDestroyed()) return;
             plant.shoot = transform.FindChild(GetShootPath());
             type = plant.thePlantType;
 

@@ -37,15 +37,27 @@ namespace CustomPlantClass
         }
         public virtual void Start()
         {
+            if(_plant == null)
+            {
+                Destroy(this);
+                return;
+            }
             _plant.shoot = GetShoot();
             OnSpawn();
             Start_Async();
         }
         private async void Start_Async()
         {
-            await DelayTask.WaitForFixedUpdate(token);
-            _maxHealth = _plant.thePlantMaxHealth;
-            _pfLockedMaxHealth = _plant.thePlantMaxHealth;
+            try
+            {
+                await DelayTask.WaitForFixedUpdate(token);
+                _maxHealth = _plant.thePlantMaxHealth;
+                _pfLockedMaxHealth = _plant.thePlantMaxHealth;
+            }
+            catch( Exception e )
+            {
+                Debug.LogError(e.ToString());
+            }
         }
         public virtual void Awake()
         {
@@ -235,8 +247,15 @@ namespace CustomPlantClass
         }
         protected async Task PFWrapper_Async()
         {
-            await SuperShoot_Async();
-            SuperEnd();
+            try
+            {
+                await SuperShoot_Async();
+                SuperEnd();
+            }
+            catch( Exception e )
+            {
+                Debug.LogError(e.ToString());
+            }
         }
         protected virtual async Task SuperShoot_Async()
         {

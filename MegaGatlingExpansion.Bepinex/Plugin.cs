@@ -19,7 +19,7 @@ global using System.Linq;
 global using Core;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.Level;
-using Il2CppSystem.IO;
+using System.IO;
 
 namespace MegaGatlingExpansion
 {
@@ -39,7 +39,30 @@ namespace MegaGatlingExpansion
         public static Material? FontOutlineMaterial;
         public class BoardEnablerEffect : CustomLevelComponent
         {
-            
+            public static Sprite GetBGSprite()
+            {
+                Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("MegaGatlingPeaDLC.SuperGatlingChallengeMap.png")!;
+                if (s == null)
+                {
+                    Debug.LogError($"Resource not found: MegaGatlingPeaDLC.SuperGatlingChallengeMap.png");
+                    return null!;
+                }
+
+                MemoryStream ms = new MemoryStream();
+                s.CopyTo(ms);
+                var bytes = ms.ToArray();
+                Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+
+                // IL2CPP-safe PNG loader
+                ImageConversion.LoadImage(tex, bytes);
+
+                return Sprite.Create(
+                    tex,
+                    new Rect(0, 0, tex.width, tex.height),
+                    new Vector2(0.5f, 0.5f),
+                    100f
+                );
+            }
         }
         public override void Load()
         {
@@ -65,52 +88,49 @@ namespace MegaGatlingExpansion
                     {
                         enableAllTravelPlant=true,
                         enableTravelPlant=true,
-                        isConvey=true,
                         disableSelectCard=true
                     },
-                    SceneType=SceneType.Day_6,
+                    SceneType=SceneType.Day,
                     MaxWave=60,
-                    SunCounter=500,
-                    UltiBuffs=new(){UltiBuff.EnumValue50,UltiBuff.EnumValue51},
-                    selection=CustomLevelSelection.Convey,
+                    SunCounter=1000,
+                    UltiBuffs=new(){},
+                    selection=CustomLevelSelection.PreSelected,
                     SelectTypes=new PlantType[]
                     {
-                        PlantType.Peashooter,PlantTypeExpand.MegaGatlingPea,
-                        PlantType.IceShroom,PlantType.Jalapeno,
-                        PlantType.ThreePeater,PlantType.SmallPuff,
-                        PlantType.MixBomb,PlantType.ElectricOnion,
-                        PlantType.PortalPea,PlantType.IronPea,
-                        PlantType.SunFlower,PlantType.DoomShroom,
-                        PlantType.GatlingPea,PlantType.DoubleShooter,
-                        PlantType.SplitPea,PlantType.CherryBomb,
-                        PlantType.TorchWood,PlantType.HypnoShroom,
-                        PlantType.StarFruit
+                        PlantType.Peashooter, PlantTypeExpand.MegaGatlingPea,
+                        PlantType.SunFlower, PlantType.IronPea,
+                        PlantType.IceShroom, PlantType.Jalapeno,
+                        PlantType.ThreePeater, PlantType.SmallPuff,
+                        PlantType.ElectricOnion, PlantType.PortalPea,
+                        PlantType.GatlingPea, PlantType.CherryBomb,
+                        PlantType.HypnoShroom, PlantType.StarFruit
                     },
                     MapRoadTypes = new BoxType_Short[,]
                     {
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G }
+                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.D },
+                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.D },
+                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.D },
+                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.D },
+                        {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.D }
                     },
                     LevelName="超级机枪射手挑战",
                     LevelNameEn="Super gatling challenge",
-                    MusicType=MusicType.UltimateBattle,
+                    MusicType=(MusicType)(int)DataMgr.AllocateID(),
+                    MusicAudio=assetBundle.GetAsset<AudioClip>("MD_UB"),
                     LevelSprite=assetBundle.GetAsset<GameObject>("SuperGatlingPreview").GetComponent<SpriteRenderer>().sprite,
                     TravelUnlocks=new(){TravelUnlocks.UltimateGatling},
+                    AdvBuffs=new(){AdvBuff.EnumValue1000,AdvBuff.EnumValue1003,AdvBuff.EnumValue11000},
                     ZombieTypes=new(){ZombieType.PeaShooterZombie,ZombieType.NormalZombie,
-                    ZombieType.GatlingPeaZombie,ZombieType.RandomGargantuar,
-                    ZombieType.SnowGatlingPeaZombie,ZombieType.GatlingFootballZombie,
-                    ZombieType.BlackFootball_a,ZombieType.BlackFootball_c2,
-                    ZombieType.GatlingBlackFootball,ZombieType.CherryPaperZ95,
-                    ZombieType.GatlingPaper_b,ZombieType.GatlingPaper_c,
-                    ZombieType.CherryShooterZombie,ZombieType.CherryPaperZombie,
-                    ZombieType.IronPeaZombie,ZombieType.IronPeaDoorZombie,
-                    ZombieType.SuperCherryShooterZombie,(ZombieType)9000,
-                    (ZombieType)9001,(ZombieType)9005,ZombieType.ProtalZombie,
-                    ZombieType.DoomPaper,ZombieType.WhiteFootball}
+                    ZombieType.GatlingPeaZombie,ZombieType.RandomGargantuar, ZombieType.RandomZombie, ZombieType.RandomPlusZombie,
+                    ZombieType.SnowGatlingPeaZombie,ZombieType.GatlingFootballZombie, ZombieType.PenguinZombie, ZombieType.ZombieLoonNut,
+                    ZombieType.BlackFootball_a, ZombieType.ConeZombie, ZombieType.BucketZombie, ZombieType.DollSilver,
+                    ZombieType.GoldZombie,ZombieType.DollDiamond, ZombieType.ElephantZombie, ZombieType.PogoZombie,
+                    ZombieType.GatlingBlackFootball,ZombieType.CherryPaperZ95, ZombieType.PaperZombie, ZombieType.ElitePaperZombie,
+                    ZombieType.CherryShooterZombie,ZombieType.CherryPaperZombie, ZombieType.DoorZombie,
+                    ZombieType.IronPeaZombie,ZombieType.IronPeaDoorZombie, ZombieType.SandJackson,
+                    ZombieType.SuperCherryShooterZombie,(ZombieType)9000, ZombieType.RedZombieLoonNut,
+                    (ZombieType)9001,ZombieType.ProtalZombie,ZombieType.WhiteFootball},
+                    SceneBackground=BoardEnablerEffect.GetBGSprite()
                 };
                 CustomLevelMgr.RegisterCustomLevel<BoardEnablerEffect>(level);
             }catch(Exception e){
@@ -720,6 +740,7 @@ namespace MegaGatlingExpansion
                 CustomCore.RegisterCustomBanMix(PlantTypeExpand.DoomMegaGatlingPea, () => (TravelMgr.Instance != null && TravelMgr.Instance.data.unlockedWeaks.Contains(PlantType.DoomGatling)) ||
                 Board.Instance.boardTag.enableAllTravelPlant || Board.Instance.boardTag.isSuperRandom || Board.Instance.boardTag.isUltimateSuperRandom || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+                    //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.DoomMegaGatlingPea, "初版毁灭超级机枪射手", "");
 
                 // Ultimate Doom Mega Gatling
@@ -771,6 +792,7 @@ namespace MegaGatlingExpansion
                 CustomCore.RegisterCustomBanMix(PlantTypeExpand.UltimateDoomMegaGatlingPea, () => (Lawnf.TravelAdvanced(CoreTools.GetAdvBuffByString("枕戈待旦")) && Lawnf.TravelAdvanced(CoreTools.GetAdvBuffByString("核能威慑"))) ||
                 Board.Instance.boardTag.enableAllTravelPlant || Board.Instance.boardTag.isSuperRandom || Board.Instance.boardTag.isUltimateSuperRandom || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+                    //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.UltimateDoomMegaGatlingPea, "初版余烬毁灭超级机枪射手", "");
 
                 // Regular Cherry Mega Gatling
@@ -872,9 +894,10 @@ namespace MegaGatlingExpansion
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.CherryMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.CherryMegaGatlingPea, CardLevel.Gold);
                 CustomCore.AddUltimatePlant(PlantTypeExpand.CherryMegaGatlingPea);
-                CustomCore.RegisterCustomBanMix(PlantTypeExpand.CherryMegaGatlingPea, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate(UltiBuff.EnumValue2) && Lawnf.TravelUltimate(UltiBuff.EnumValue3)) ||
+                /*CustomCore.RegisterCustomBanMix(PlantTypeExpand.CherryMegaGatlingPea, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate(UltiBuff.EnumValue2) && Lawnf.TravelUltimate(UltiBuff.EnumValue3)) ||
                 Board.Instance.boardTag.enableAllTravelPlant || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+                    //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.CherryMegaGatlingPea, "终极樱桃机枪(SP究极樱桃射手)", "");
 
                 // Hypno Cherry Mega Gatling
@@ -1080,9 +1103,11 @@ namespace MegaGatlingExpansion
                 CustomCore.TypeMgrExtra.FlyingPlants.Add(PlantTypeExpand.ExplodeGatlingBlover);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.ExplodeGatlingBlover, CardLevel.Gold);
                 CustomCore.AddUltimatePlant(PlantTypeExpand.ExplodeGatlingBlover);
+                /*
                 CustomCore.RegisterCustomBanMix(PlantTypeExpand.ExplodeGatlingBlover, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate(UltiBuff.EnumValue2) && Lawnf.TravelUltimate(UltiBuff.EnumValue3)) ||
                 Utils.EnableTravelPlant() || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+                    //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.ExplodeGatlingBlover, "终极浮空樱桃机枪(SP究极浮空樱桃射手)", "");
             }
 
@@ -1318,7 +1343,7 @@ namespace MegaGatlingExpansion
                     }
                     if (!CustomCore.CustomBanMix.ContainsKey(target))
                     {
-                        CustomCore.RegisterCustomBanMix(target,()=>GlobalTracker.IsCustomLevel && GlobalTracker.CustomLevelID==LevelID || LevelProgressionManager.IsCompleted(LevelID) || Board.Instance.TryGetComponent<BoardEnablerEffect>(out _) ,null,() => InGameText.Instance.ShowText("配方未解锁", 3f));
+                        CustomCore.RegisterCustomBanMix(target,()=>LevelProgressionManager.IsCompleted(LevelID) || Board.Instance.TryGetComponent<BoardEnablerEffect>(out _) || Board.Instance.boardTag.isSuperRandom,null,() => InGameText.Instance.ShowText("配方未解锁", 3f));
                     }
                     if (!CustomCore.CustomUltimatePlants.Contains(target))
                     {

@@ -181,6 +181,10 @@ namespace MegaGatlingExpansion
                     {
                         if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center);
                         z.TakeDamage(_bullet.Damage * 3, _bullet, DamageType.Shieldless, _bullet.fromType);
+                        if (PlantMgr.GetPercent(1f))
+                        {
+                            z.Buttered(0.5f,false);
+                        }
                     }
                     if(col.TryGetComponent<ZombieBall>(out var ball) && !ball.plant)
                     {
@@ -332,20 +336,28 @@ namespace MegaGatlingExpansion
             if (plant != null)
             {
                 plant.TakeDamage(bullet.Damage,bullet);
-                if (plant.thePlantHealth <= 0 && !plant.GetData<bool>("CustomBullet_HasDestroyed"))
+                if (plant.thePlantHealth <= 0 && !plant.TryGetCustomEffect<RemovedEffect>(out _))
                 {
                     CreateZombie.Instance.SetZombie(plant.thePlantRow, (ZombieType)9000, Mouse.Instance.GetBoxXFromColumn(plant.thePlantColumn));
-                    plant.SetData("CustomBullet_HasDestroyed", true);
+                    plant.AddEffect<RemovedEffect>();
+                    ParticleManager.Instance.SetParticle(ParticleType.HypnoEmperorSkinCloud, bullet.transform.position, plant.thePlantRow);
                 }
                 else
                 {
-                    plant.SetData("CustomBullet_HasDestroyed", false);
+                    if(plant.TryGetCustomEffect<RemovedEffect>(out var effect))
+                    {
+                        Destroy(effect);
+                    }
                 }
                 plant.FlashOnce();
                 ParticleManager.Instance.SetParticle(ParticleType.RandomCloud, bullet.transform.position, plant.thePlantRow);
                 GameAPP.PlaySound((SoundType)Random.RandomRangeInt(0, 3));
                 bullet.Die();
             }
+        }
+        public class RemovedEffect : CustomEffect
+        {
+            public override CustomEffectUsage Usage => CustomEffectUsage.Plant;
         }
     }
 }

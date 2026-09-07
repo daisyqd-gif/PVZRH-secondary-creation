@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="megagatlingpea" />
+    <EmbeddedResource Include="SuperGatlingChallengeMap.png" />
   </ItemGroup>
 
   <!-- Import shared references -->
