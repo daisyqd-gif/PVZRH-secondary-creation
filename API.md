@@ -39,8 +39,8 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 ```
 </details>
 
-3. CustomLevelComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge)
-4. CustomOnZombieComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge)
+3. CustomLevelComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Unfinished-red)
+4. CustomOnZombieComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
 5. CustomParticle -> Used to add a destroy animation event to particles with non-particlesystem components
 6. BaseCustomPlant -> Central base class for most custom plants(see example code above)
 7. CustomShooter -> An extension to BaseCustomPlant and handles shooting to allow custom plants to use "Plant" as its base class
