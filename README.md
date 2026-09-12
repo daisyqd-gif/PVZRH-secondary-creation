@@ -64,6 +64,9 @@ It is built on top of:
 8. Locate the BepInEx folder and copy it into the lib folder.
 9. Copy the template folder and name it your mod and follow the instructions there.
 ### An example of a full mod
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 global using BepInEx;
 global using CustomizeLib.BepInEx;
@@ -279,12 +282,17 @@ namespace GatlingPea
     }
 }
 ```
+</details>
+
 ### Updating your mod
 1. Install the newest game version and repeat step 1, 2, 3, and 4  in the installation guide.
 2. Repeat steps 5, 7, 8, 9 in the creating a mod guide.
 3. Reopen all of your mods and rebuild all of them and fix all errors that resulted from the update.
 
 ## Mod Catalog
+<details>
+<summary>Click to show section</summary>
+  
 1. Charm Sniper ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge) : This will be replaced in a future remake of SniperDLC
 2. CustomPlant.dll : The central framework responsible for all mods
 3. CustomPlant.CustomPlant.RogueShootingManager : Rogue shooting support for some mods
@@ -322,26 +330,49 @@ namespace GatlingPea
 35. UltimateSolarCoronaCabbage
 36. Utilities : Debug tools
 37. zombossleveladdon : Contains HeiTa and Gift box imitater
+</details>
 
 ## API documentation
-### namespace CustomPlantClass
+### CustomPlantClass
+
+<details>
+<summary>Click to show section</summary>
+  
 1. CustomBigStar -> Big star monobehaviour (undocumented)
 2.  BaseCustomBullet -> Used for creating custom bullets, overridable methods are structured like prefixes, returning true will run the original method, returning false will skip the original method.(Currently supports bullet_pea and bullet_cabbage as its TBase) Example impl:
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 {
     public override bool HitLand()
     {
-        _bullet.board.boardAction.CreateCherryExplode(_bullet.col.bounds.center,_bullet.theBulletRow,Plugin.DataContainer.ParticleId,_bullet.Damage,_bullet.fromType);
+        _bullet.board.boardAction.CreateCherryExplode(
+            _bullet.col.bounds.center,
+            _bullet.theBulletRow,
+            Plugin.DataContainer.ParticleId,
+            _bullet.Damage,
+            _bullet.fromType
+        );
         return true;
     }
+
     public override bool HitZombie(Zombie zombie)
     {
-        _bullet.board.boardAction.CreateCherryExplode(_bullet.col.bounds.center,_bullet.theBulletRow,Plugin.DataContainer.ParticleId,_bullet.Damage,_bullet.fromType);
+        _bullet.board.boardAction.CreateCherryExplode(
+            _bullet.col.bounds.center,
+            _bullet.theBulletRow,
+            Plugin.DataContainer.ParticleId,
+            _bullet.Damage,
+            _bullet.fromType
+        );
         return true;
     }
 }
 ```
+</details>
+
 3. CustomLevelComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge)
 4. CustomOnZombieComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge)
 5. CustomParticle -> Used to add a destroy animation event to particles with non-particlesystem components
@@ -352,6 +383,9 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 10. BaseCustomZombie -> Used to add custom behaviour to zombies
 11. CustomEffect -> Used to add effects to monobehaviours
 12. InterfaceMgr -> Allows plants to implement base game behaviour without inhereting classes
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 public interface IRedirectAnimShoot
 {
@@ -419,11 +453,21 @@ public interface IPlantCannonAimHandler
     }
 }
 ```
+</details>
+
 13. PlantSkinComponent, BulletComponent, ZombieComponent -> Contains a getter property to get their respective property on its gameobject
 14. ModLogger -> Used to lod information about the mod and also to log errors/warnings
+</details>
+
 ### CustomPlantClass.Level
+<details>
+<summary>Click to show section</summary>
+  
 1. BranchAdventureManager -> Used to register custom branch adventures (Incomplete! do not use until verified!)
 2. CustomLevelMgr -> Used to load custom levels into the game. API (full code in repo):
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 public class CustomLevelMgr : MonoBehaviour
 {
@@ -436,7 +480,12 @@ public class CustomLevelMgr : MonoBehaviour
     public static int AllocateLevelID(string name) { }
 }
 ```
+</details>
+
 3. LevelProgressionManager -> Used to track what custom levels are completed. API  (full code in repo):
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 public static class LevelProgressionManager
 {
@@ -445,13 +494,27 @@ public static class LevelProgressionManager
     public static bool IsCompleted(int levelID) { }
 }
 ```
+</details>
+</details>
+
 ### CustomPlantClass.Examples (Provides inheretable classes for base game plants)
+<details>
+<summary>Click to show section</summary>
+  
 1. ArmedChomperBase -> Untested
 2. DoomSniper_Example
 3. SniperPea_Example
 4. SuperHypnoGatling_Example
+</details>
+
 ### CustomPlantClass.Main
+<details>
+<summary>Click to show section</summary>
+  
 1. AssetMgr -> Used to load/save assets from different sources. API  (full code in repo):
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 public static class AssetMgr
 {
@@ -498,7 +561,12 @@ public sealed class AssetDispatcher
     public void Switch(AssetBundle bundle) { }
 }
 ```
+</details>
+
 2. DataMgr -> The core of the framework and contains most APIs. API  (full code in repo):
+<details>
+<summary>Click to show code</summary>
+
 ```csharp
 /// <summary>
 /// Central utility manager for all custom plant registration,
@@ -856,3 +924,154 @@ public enum RogueZombieAttack
     Crashing = 100
 }
 ```
+</details>
+
+3. ExtensionManager -> Contains extensions to various tools
+4. GameObjectMgr -> A tool to store gameobjects, untested
+5. GeneralTools -> unfinished
+6. ListHelper -> An extension class
+7. MathHelper -> Contains math tools
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public static class MathHelper
+{
+    // ============================================================
+    //  ROTATION / QUATERNION HELPERS
+    // ============================================================
+    /// <summary>
+    /// Converts a 2D direction vector into a Z‑axis rotation.
+    /// This is a direct replacement for Core.Lawnf.GetRotateFromSpeed().
+    ///
+    /// Formula:
+    ///     angle = atan2(direction.y, direction.x)
+    ///     rotation = Quaternion.Euler(0, 0, angle_in_degrees)
+    /// </summary>
+    /// <param name="direction">A 2D direction vector.</param>
+    /// <returns>A Quaternion facing the direction.</returns>
+    public static Quaternion DirectionToRotation(Vector2 direction) { }
+
+    /// <summary>
+    /// Computes the facing angle (in degrees) of a 2D direction vector.
+    /// This is the scalar form of Core.Lawnf.GetRotateFromSpeed().
+    ///
+    /// Formula:
+    ///     angle = atan2(direction.y, direction.x)
+    /// </summary>
+    /// <param name="direction">A 2D direction vector.</param>
+    /// <returns>The facing angle in degrees.</returns>
+    public static float DirectionToDegrees(Vector2 direction) { }
+
+    /// <summary>
+    /// Converts a Z‑axis rotation into a normalized 2D direction vector.
+    /// This is a direct replacement for Core.Lawnf.GetVectorFromQuaternion().
+    ///
+    /// Formula:
+    ///     angle = rotation.eulerAngles.z * Deg2Rad
+    ///     direction = (cos(angle), sin(angle)).normalized
+    /// </summary>
+    /// <param name="rotation">A Quaternion whose Z‑axis angle determines the direction.</param>
+    /// <returns>A normalized Vector2 pointing in the facing direction.</returns>
+    public static Vector2 RotationToDirection(Quaternion rotation) { }
+
+    /// <summary>
+    /// Converts a degree angle into a normalized 2D direction vector.
+    /// This is the scalar form of Core.Lawnf.GetVectorFromQuaternion().
+    ///
+    /// Formula:
+    ///     angle = rotationInDegrees * Deg2Rad
+    ///     direction = (cos(angle), sin(angle)).normalized
+    /// </summary>
+    /// <param name="rotationInDegrees">A Z‑axis angle in degrees.</param>
+    /// <returns>A normalized Vector2 pointing in the facing direction.</returns>
+    public static Vector2 RotationToDirection(float rotationInDegrees) { }
+
+    public static Quaternion LookAt2D(Vector2 from, Vector2 to) { }
+
+    public static Quaternion RotateTowards2D(
+        Quaternion current,
+        float targetAngle,
+        float maxDegreesPerSecond) { }
+
+    public static Quaternion RandomRotation2D()
+        => Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+
+    // ============================================================
+    //  VECTOR HELPERS
+    // ============================================================
+    public static float DistanceSq(Vector2 a, Vector2 b) { }
+
+    public static Vector2 RotateVector(Vector2 v, float degrees) { }
+
+    public static Vector2 ClampMagnitude(Vector2 v, float max) { }
+
+    // ============================================================
+    //  RANDOM HELPERS
+    // ============================================================
+    public static T GetRandomValue<T>(List<T> values, Func<T, bool> selector = null) { }
+
+    public static float GetRandomWithMean(float min, float max, float targetMean) { }
+
+    public static float GetRandomLogSymmetric(float minRatio, float maxRatio) { }
+
+    // ============================================================
+    //  SCALAR HELPERS
+    // ============================================================
+    public static float Remap(float v, float a, float b, float c, float d)
+        => c + (v - a) * (d - c) / (b - a);
+
+    public static float RemapClamped(float v, float a, float b, float c, float d)
+    {
+        float t = Mathf.InverseLerp(a, b, v);
+        return Mathf.Lerp(c, d, t);
+    }
+
+    public static bool ApproximatelyZero(float v, float eps = 0.0001f)
+        => Mathf.Abs(v) < eps;
+
+    // ============================================================
+    //  BALLISTIC HELPERS
+    // ============================================================
+    public static Vector2 CalculateProjectileWithGravity(
+        Vector2 projectilePos,
+        Vector2 targetVelocity,
+        Vector2 targetPos,
+        float flightTime,
+        float gravity) { }
+
+    public static float[] CalculateProjectileWithSpeed(
+        Vector2 projectilePos,
+        Vector2 targetVelocity,
+        Vector2 targetPos,
+        float flightTime) { }
+
+    public static float[] CalculateProjectileParameters(
+        Vector2 startPos,
+        float t1,
+        Vector2 firstPlace,
+        float t2,
+        Vector2 secondPlace,
+        float flightTime) { }
+
+    // ============================================================
+    //  COROUTINE HELPERS
+    // ============================================================
+    public static IEnumerator SmoothRotate(
+        Transform t,
+        Quaternion target,
+        float smoothTime = 0.5f,
+        float rotationSpeed = 0.6f) { }
+    public static int NextEmptyIndex<T>(object source, Func<T, bool> isEmpty = null) { }
+    public static List<T> GetEnumValues<T>() where T : Enum => [.. (T[])typeof(T).GetEnumValues()];
+    public static string FormatToChineseUnits(this long num) { }
+    public static string FormatToChineseUnits(this int num) { }
+    public static string FormatToScientificNotation(this long num) { }
+    public static string FormatToScientificNotation(this int num) { }
+}
+```
+</details>
+
+8. ModRegistryManager -> A way for mods to make registries for other mods to add stuff to
+9. PlantMgr -> Tools
+</details>
