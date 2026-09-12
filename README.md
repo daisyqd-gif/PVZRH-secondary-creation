@@ -1076,3 +1076,1248 @@ public static class MathHelper
 8. ModRegistryManager -> A way for mods to make registries for other mods to add stuff to
 9. PlantMgr -> Tools
 </details>
+
+10. ModPlugin -> a plugin base
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+    public class ModPlugin : BasePlugin
+    {
+        public ManualLogSource Logger;
+        public virtual void InitializeMod() { }
+        public virtual void OnStart() { }
+        public virtual void InitializeBuffs() { }
+        public virtual void InitializePlants() { }
+        public virtual void InitializeZombies() { }
+        public virtual void InitializeConditions() { }
+        public virtual void OnGameStart() { }
+        public virtual void OnGameInit() { }
+        public virtual void OnDataMgrLoad() { }
+    }
+```
+</details>
+
+11. StructManager
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+/// <summary>
+/// Core metadata for defining a custom plant.
+/// </summary>
+public struct BaseCustomPlantData
+{
+    public ID PlantId;
+    public GameObject Prefab;
+    public GameObject Preview;
+
+    public List<(ID, ID)> Fusions;
+    public float AttackInterval;
+    public float ProduceInterval;
+    public int AttackDamage;
+    public int MaxHealth;
+    public float Cd;
+    public int Sun;
+    public BulletType DefaultBullet;
+    public bool CanPF;
+    public bool CanStarUp;
+    public CardLevel CardColor;
+    public bool IsRainbowCard;
+    public bool IsUltimatePlant;
+    public int CardRepeatAmt;
+    public string Name;
+    public string AlmanacEntry;
+
+    public static BaseCustomPlantData Create(
+        ID id,
+        GameObject prefab,
+        GameObject preview
+    ) => new BaseCustomPlantData
+    {
+        PlantId = id,
+        Prefab = prefab,
+        Preview = preview,
+
+        // defaults
+        Fusions = [],
+        AttackInterval = 0f,
+        ProduceInterval = 0f,
+        AttackDamage = 0,
+        MaxHealth = 300,
+        Cd = 0f,
+        Sun = 0,
+        DefaultBullet = BulletType.Bullet_pea,
+        CanPF = false,
+        CanStarUp = false,
+        CardColor = CardLevel.White,
+        IsRainbowCard = false,
+        IsUltimatePlant = false,
+        CardRepeatAmt = 1,
+        Name = "",
+        AlmanacEntry = ""
+    };
+}
+
+/// <summary>
+/// Metadata for defining a custom plant skin.
+/// </summary>
+public struct BasePlantSkinData
+{
+    public BaseCustomPlantData data;
+    public GameObject SkinPrefab;
+    public GameObject SkinPreview;
+    public List<(BulletType, List<GameObject?>)> BulletSkinList;
+}
+
+/// <summary>
+/// Metadata for defining a bullet.
+/// </summary>
+public struct BaseCustomBulletData
+{
+    public ID BulletId;
+    public GameObject Prefab;
+
+}
+public struct BaseCustomZombieData
+{
+    public ID theZombieType;
+    public GameObject Prefab;
+    public Sprite Preview;
+    public int theAtackDamage;
+    public int maxHealth;
+    public int theFirstArmorHealth;
+    public FirstArmorType theFirstArmorType;
+    public string theFirstArmorPath;
+    public int theSecondArmorHealth;
+    public SecondArmorType theSecondArmorType;
+    public string theSecondArmorPath;
+    public int SpawnLevel;
+    public int SpawnWeight;
+}
+public struct BaseCustomGridItemData
+{
+    public ID type;
+    public GameObject Prefab;
+}
+public struct CustomBossHealthSliderData
+{
+    public ZombieType theZombieType = ZombieType.Nothing;
+    public Sprite? Icon;
+    public Sprite? FillIcon;
+    public Color FillColor = Color.magenta;
+
+    public CustomBossHealthSliderData(Sprite icon)
+    {
+    }
+}
+public struct BoardPosition
+{
+    public int Row { get; }
+    public int Column { get; }
+
+    public BoardPosition(int row, int column)
+    {
+        Row = row;
+        Column = column;
+    }
+
+    // BoardPosition → world position
+    public static implicit operator Vector2(BoardPosition pos)
+    {
+        float x = pos.Column * 1.35f - 4.8f;
+
+        Board board = Instance;
+        bool roof = board.boardTag.isRoof;
+        int rows = board.rowNum;
+
+        float y;
+
+        if (!roof)
+        {
+            if (rows == 6)
+                y = 2.3f - pos.Row * 1.45f;
+            else
+                y = 2.3f - pos.Row * 1.67f;
+        }
+        else
+        {
+            // Roof math
+            if (x <= 1.5f)
+            {
+                float f = (pos.Row * 1.4f);
+                y = 1.6f - f + x * 0.22f + 0.5f;
+            }
+            else
+            {
+                y = 4.0f - pos.Row * 1.45f;
+            }
+        }
+
+        return new Vector2(x, y);
+    }
+
+    // world position → BoardPosition
+    public static implicit operator BoardPosition(Vector2 world)
+    {
+        float x = world.x;
+        float y = world.y;
+
+        Board board = Instance;
+        bool roof = board.boardTag.isRoof;
+        int rows = board.rowNum;
+
+        // Column
+        int col = Mathf.FloorToInt((x + 5.6f) / 1.35f);
+        col = Mathf.Clamp(col, 0, board.columnNum - 1);
+
+        // Row
+        int row;
+
+        if (!roof)
+        {
+            if (rows == 6)
+                row = Mathf.FloorToInt((3.7f - y) / 1.45f);
+            else
+                row = Mathf.FloorToInt((3.7f - y) / 1.67f);
+        }
+        else
+        {
+            if (x <= 1.5f)
+            {
+                float f = (y - x * 0.22f) - 0.5f;
+                row = Mathf.FloorToInt((1.6f - f) / 1.4f) + 1;
+            }
+            else
+            {
+                row = Mathf.FloorToInt((4.0f - y) / 1.45f);
+            }
+        }
+
+        row = Mathf.Clamp(row, 0, rows - 1);
+
+        return new BoardPosition(row, col);
+    }
+
+    public override string ToString() => $"({Row}, {Column})";
+}
+public struct Struct1_Plant
+{
+    public Type BaseType;
+    public Type CustomType;
+    public BaseCustomPlantData data;
+}
+public struct BaseCustomLevelData
+{
+    public BaseCustomLevelData()
+    {
+    }
+
+    public LevelType LevelType { readonly get; set; } = LevelType.Nothing;
+    public int LevelID { readonly get; set; } = -114514;
+    public string LevelName { readonly get; set; } = "";
+    public string LevelNameEn { readonly get; set; } = "";
+    public Sprite? LevelSprite { readonly get; set; } = default;
+    public SceneType SceneType { readonly get; set; } = SceneType.Day_6;
+    public GameObject? ScenePrefab { readonly get; set; } = default;
+    public Sprite? SceneBackground { readonly get; set; } = default;
+    public MusicType MusicType { readonly get; set; } = (MusicType)(-1);
+    public AudioClip? MusicAudio { readonly get; set; } = default;
+    public int MaxWave { readonly get; set; } = 100;
+    public List<ZombieType> ZombieTypes { readonly get; set; } = new() { ZombieType.RandomZombie, ZombieType.RandomPlusZombie, ZombieType.DiamondRandomZombie };
+    public BoxType_Short[,] MapRoadTypes { readonly get; set; } = new BoxType_Short[,] { };
+    public CustomLevelSelection selection { readonly get; set; } = default;
+    public PlantType[] SelectTypes { readonly get; set; } = new PlantType[] { };
+    public Action EnterAction { readonly get; set; } = () => { };
+    public Action<Board> EnterGameAction { readonly get; set; } = (Board b) => { };
+    public int SunCounter { readonly get; set; } = default;
+    public List<AdvBuff> AdvBuffs { readonly get; set; } = new();
+    public List<UltiBuff> UltiBuffs { readonly get; set; } = new();
+    public List<TravelUnlocks> TravelUnlocks { readonly get; set; } = new();
+    public List<TravelDebuff> TravelDebuffs { readonly get; set; } = new();
+    public BoardTag BoardTag { readonly get; set; } = default;
+}
+public enum CustomLevelSelection
+{
+    Normal = 0,
+    Convey = 1,
+    PreSelected = 2
+}
+public enum BossSliderType
+{
+    UltimateSword = 0,
+    ObsidianGarcantuar = 1,
+    UltimateDrown = 2,
+    UltimateFootball = 3,
+    UltimateHorse = 4,
+    UltimateImp = 5,
+    UltimateJackbox = 6,
+    UltimateJackson = 7,
+    UltimateKirov = 8,
+    UltimateLegion = 9,
+    UltimateMachineNut = 10,
+    UltimatePaper = 11,
+    UltimateSnow = 12
+}
+public enum PlantLevelData
+{
+    Basic = 0,
+    Secondary = 1,
+    Super = 2,
+    WeakUltimate = 3,
+    StrongUltimate = 4,
+    FinalUltimate = 5,
+    TreasurePlant = 6
+}
+public enum BoxType_Short
+{
+    G = 0,         // 草地
+    W = 1,         // 水域
+    D = 2,         // 泥土
+    R = 3,         // 屋顶
+    S = 4,         // 石头
+    River = 5,     // 河流
+    Dirt_water = 6 // 泥水域
+}
+```
+</details>
+
+12. ZombieMgr -> Some zombie helper class
+
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public static class ZombieMgr
+{
+    public static void LosePaper(this PaperZombie self) { }
+    public static void LosePaper(this GatlingPaperZombie_a self) { }
+    public static void FlyAway(this Zombie self) { }
+    public static void Crashed(this Zombie self) { }
+}
+```
+</details>
+
+### CustomPlantClass.Runtime
+
+1. BoardBehaviour -> A class for storing behaviour that is called by board
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public class BoardBehaviour : MonoBehaviour
+{
+    public static void AddStartEvent(Action<Board> action) { }
+    public static void AddUpdateEvent(Action<Board> action) { }
+    public static void AddFixedUpdateEvent(Action<Board> action) { }
+    public static void AddDestroyEvent(Action<Board> action) { }
+}
+[AttributeUsage(AttributeTargets.Field)]
+public sealed class ResetOnBoardDestroyAttribute : Attribute
+{
+    public object DefaultValue { get; }
+
+    public ResetOnBoardDestroyAttribute() { }
+
+    public ResetOnBoardDestroyAttribute(object defaultValue)
+    {
+        DefaultValue = defaultValue;
+    }
+}
+[AttributeUsage(AttributeTargets.Field)]
+public sealed class ActionOnBoardDestroyAttribute : Attribute
+{
+    public Func<object> Action { get; }
+
+    public ActionOnBoardDestroyAttribute(Func<object> action)
+    {
+        Action = action;
+    }
+}
+```
+</details>
+
+### CustomPlantClass.Networking:
+
+1. TCPManager -> used to send messages locally or on a localhost server
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public static class TCPManager
+{
+    public static void SendMessage(string message, string data) { } 
+    public static void SendMessageLocal(string message, string data)
+    {
+        commandQueue.Enqueue((message, data));
+    }
+    public static void PingMod(string modName, Action<string> callBack = null, string data = "")
+    {
+        callBack = callBack ?? ((s) => { });
+        commandQueue.Enqueue((modName+"Ping", data));
+        callBacks.Add((modName+"Pong",callBack));
+    }
+    public static void StartClient(string ip, int port)
+    {
+        _running = true;
+        Task.Run(() => RunClientAsync(ip, port));
+    }
+    public static void StartServer(int port)
+    {
+        _running = true;
+        Task.Run(() => RunServerAsync(port));
+    }
+    public static void StartAuto(int port)
+    {
+        _running = true;
+
+        Task.Run(async () =>
+        {
+            try
+            {
+                await RunServerAsync(port).ConfigureAwait(false);
+            }
+            catch
+            {
+                await RunClientAsync("127.0.0.1", port).ConfigureAwait(false);
+            }
+        });
+    }
+    public static bool IsConnected
+    {
+        get
+        {
+            WebSocket activeSocket = ActiveSocket;
+            return activeSocket != null && activeSocket.State == WebSocketState.Open;
+        }
+    }
+    private static WebSocket ActiveSocket => _clientSocket ?? _serverSocket;
+    public static void RegisterCommandListener(ICommandListener listener)
+    {
+        commandListeners.Add(listener);
+    }
+}
+public interface ICommandListener
+{
+    public string CommandName { get; }
+    public void OnCommandReceived(string data);
+}
+public abstract class PingListener : ICommandListener
+{
+    public abstract string Name { get; }
+    public string CommandName => Name + "Ping";
+    public virtual string Data => "";
+
+    public void OnCommandReceived(string data)
+    {
+        OnRecieved(data);
+        TCPManager.SendMessageLocal(Name+"Pong",Data);
+    }
+    public virtual void OnRecieved(string data) { }
+}
+```
+</details>
+
+### CustomPlantClass.Runtime.CSharp:
+1. This namespace is only a dll and is used to compile code on the go. An example mod:
+
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+using HarmonyLib;
+using GameLevel.RogueShooting;
+using Il2CppInterop.Runtime.Injection;
+using UnityEngine;
+using Random = UnityEngine.Random;
+using System.Reflection;
+using Unity.VisualScripting;
+using CustomPlantClass.Runtime.CSharp;
+public class UltimateFumeBuff_Main : ICompilableScript
+{
+    public string Name => "UltimateFumeBuff";
+
+    public void Main()
+    {
+        if(!ClassInjector.IsTypeRegisteredInIl2Cpp<UltimateCactusBulletBuff>())
+            ClassInjector.RegisterTypeInIl2Cpp<UltimateCactusBulletBuff>();
+
+        Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),"UltimateFumeBuff_Harmony");
+    }
+
+    public void Dispose()
+    {
+        Harmony.UnpatchID("UltimateFumeBuff_Harmony");
+    }
+}
+
+public class UltimateCactusBulletBuff : MonoBehaviour
+{
+    public Bullet __instance => GetComponent<Bullet>();
+    public void Start()
+    {
+        if (__instance.fromType == PlantType.UltimateFume && ShootingManager.Instance != null && ShootingManager.Instance.TryGetPlant(PlantType.UltimateFume, out Plant plant) && plant != null && plant.starUp)
+        {
+            __instance.MoveWay = BulletMoveWay.Free;
+            __instance.transform.Rotate(0f,0f,Random.Range(-15f,15f));
+        }
+        Destroy(this);
+    }
+}
+[HarmonyPatch(typeof(Bullet_ultimateCactus), nameof(Bullet_ultimateCactus.SetPenetrationTime))]
+public static class Bullet_ultimateCactus_SetPenetrationTime_Patch
+{
+    [HarmonyPostfix]
+    public static void Postfix(Bullet_ultimateCactus __instance)
+    {
+        if( __instance is not Bullet_ultimateCactus ) return; // Il2Cpp compresses methods that are the same
+        __instance.AddComponent<UltimateCactusBulletBuff>();
+    }
+}
+```
+</details>
+
+### CustomPlantClass.RogueShootingManager:
+
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public class RegistryHelper : MonoBehaviour
+{
+    //planning: use the dictionary lookup approach but modify it to use a compile time set string inside the class
+    public static BaseConfig MakeConfigType(CustomRogueShootingConfig spec) { }
+    public static BaseBuff MakeBuffType(CustomRogueShootingBuff buff) { }
+    public static void AddCustomExpertPlant(PlantType thePlantType, BaseConfig config) { }
+    public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config) { }
+    public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config) { }
+    public static void InjectUpgradeBuff(RSConfigType BasePlant, PlantType resultPlant) { }
+    public const string QualitativeChangeText = "质变";
+    public const string CurseText = "诅咒";
+    public const string ReversedCurseText = "祝福";
+    internal static 
+    Dictionary<BuffID,(BuffID reversed,Func<Plant,bool> canreverse,Action oncurse,Action onreverse)> CurseBuffInfo = new();
+    public static (BuffID curseBuff, BuffID reverseBuff, BaseBuff buffConfig) RegisterCustomCurseBuff(string name, string curseDesc, string reversedDesc, PlantType thePlantType, Func<Plant,bool> CanReverse, Action OnCurse = null, Action OnReverseEvent = null) { }
+    public static string GetStringFromRole(Roles role)
+    {
+        switch (role)
+        {
+            case Roles.Attacker: return "输出";
+            case Roles.Supporter: return "辅助";
+            case Roles.Defense: return "防御";
+            case Roles.Insta: return "灰烬";
+            default:
+            case Roles.Producer: return "未知";
+        }
+    }
+    public static string FormatBuffTitle(ShootingBuffType buffType, string Title)
+    {
+        switch (buffType)
+        {
+            case ShootingBuffType.General:
+            case ShootingBuffType.UniqueUpgrade:
+            default:
+            return $"强化：{Title}";
+            case ShootingBuffType.QualitativeChange:
+            return $"质变：{Title}";
+            case ShootingBuffType.SuperUpgrade:
+            return $"超进化：{Title}";
+            case ShootingBuffType.CurseBuff:
+            return $"诅咒：{Title}";
+        }
+    }
+    public static (BuffID AdvBuff,BaseBuff buffConfig) RegisterCustomQualitativeChangeBuff(string name, string desc, PlantType thePlantType, Action OnGetBuff = null) { }
+    private static bool IsManagedAssembly(string path) { }
+}
+public enum Roles
+{
+    Attacker = 0,
+    Supporter = 1,
+    Defense = 2,
+    Insta = 3,
+    Producer = 4
+}
+public enum RSConfigType
+{
+    Peashooter,
+    CherryGatling,
+    HelmetGatling,
+    //terminal plant, it is not recommended to add entries here
+    UltimateGatling,
+    //terminal plant, it is not recommended to add entries here
+    UltimateHelmetGatling,
+    LanternSplit,
+    //terminal plant, it is not recommended to add entries here
+    UltimateLanternSplit,
+    SniperPea,
+    //terminal plant, it is not recommended to add entries here
+    DoomSniper,
+    //terminal plant, it is not recommended to add entries here
+    FireSniper,
+    SnowPeaShooter,
+    //terminal plant, it is not recommended to add entries here
+    MagicSnowPea2,
+    WallNut,
+    SuperChomper,
+    //terminal plant, it is not recommended to add entries here
+    UltimateChomper,
+    TallNut,
+    //terminal plant, it is not recommended to add entries here
+    UltimateTallNut,
+    CabbageNut,
+    //terminal plant, it is not recommended to add entries here
+    MelonNut,
+    //terminal plant, it is not recommended to add entries here
+    MagnetNut,
+    PotatoMine,
+    PeaMine,
+    //terminal plant, it is not recommended to add entries here
+    ThreeMine,
+    Chomper,
+    CherryChomper,
+    //terminal plant, it is not recommended to add entries here
+    DoomChomper,
+    BigChomper,
+    //terminal plant, it is not recommended to add entries here
+    UltimateBigChomper,
+    SmallPuff,
+    IcePuff,
+    //terminal plant, it is not recommended to add entries here
+    SnowGatlingPuff,
+    IronPuff,
+    //terminal plant, it is not recommended to add entries here
+    IFVIronPuff,
+    FumeShroom,
+    IceFumeShroom,
+    //terminal plant, it is not recommended to add entries here
+    UltimateFume,
+    GarlicFume,
+    //terminal plant, it is not recommended to add entries here
+    UltimatePoisonFume,
+    GloomShroom,
+    //terminal plant, it is not recommended to add entries here
+    UltimateGloom,
+    HypnoShroom,
+    HypnoNut,
+    //terminal plant, it is not recommended to add entries here
+    HypnoEmperor,
+    ScaredyShroom,
+    SuperHypno,
+    //terminal plant, it is not recommended to add entries here
+    UltimateHypno,
+    ScaredyDoom,
+    //terminal plant, it is not recommended to add entries here
+    UltimateDoomScared,
+    Squash,
+    Squalour,
+    //terminal plant, it is not recommended to add entries here
+    CattailLour,
+    CherrySquash,
+    //terminal plant, it is not recommended to add entries here
+    NuclearSquash,
+    ThreePeater,
+    ThreeSquash,
+    //terminal plant, it is not recommended to add entries here
+    SuperThreePeater,
+    BigGatling,
+    //terminal plant, it is not recommended to add entries here
+    UltimateBigGatling,
+    Caltrop,
+    SpikeRock,
+    //terminal plant, it is not recommended to add entries here
+    ObsidianSpike,
+    CaltropNut,
+    //terminal plant, it is not recommended to add entries here
+    ObsidianWallNut,
+    Cactus,
+    DoomCactus,
+    //terminal plant, it is not recommended to add entries here
+    UltimateCactus,
+    StarFruit,
+    SuperStar,
+    //terminal plant, it is not recommended to add entries here
+    UltimateStar,
+    SwordStar,
+    //terminal plant, it is not recommended to add entries here
+    AbyssSwordStar,
+    Cabbagepult,
+    GoldCabbage,
+    UltimateCabbage,
+    CabbageCannon,
+    //terminal plant, it is not recommended to add entries here
+    UltimateCabbageCannon,
+    Melonpult,
+    SuperMelon,
+    //terminal plant, it is not recommended to add entries here
+    UltimateMelon,
+    FireMelon,
+    //terminal plant, it is not recommended to add entries here
+    UltimateSpring,
+    SilverMelon,
+    GoldMelon,
+    WinterMelon,
+    //terminal plant, it is not recommended to add entries here
+    UltimateWinterMelon,
+    Cornpult,
+    PortalCorn,
+    //terminal plant, it is not recommended to add entries here
+    UltimateCorn,
+    Umbrellaleaf,
+    LanternUmbrella,
+    //terminal plant, it is not recommended to add entries here
+    LaserUmbrella,
+    Bamboo,
+    LotusBamboo,
+    //terminal plant, it is not recommended to add entries here
+    UltimateBamboo,
+    SpruceShooter,
+    SuperSpruce,
+    //terminal plant, it is not recommended to add entries here
+    UltimateSpruce,
+    //expert plant, it is not recommended to add entries here
+    UltimateSniperGatling,
+    //expert plant, it is not recommended to add entries here
+    UltimateMinigun,
+    //expert plant, it is not recommended to add entries here
+    UltimateBlover,
+    //expert plant, it is not recommended to add entries here
+    EmeraleBlover,
+    //expert plant, it is not recommended to add entries here
+    UltimateStarTorch
+}
+public struct CustomRogueShootingConfig
+{
+    public CustomRogueShootingConfig()
+    {
+    }
+
+    public PlantType CustomPlantType { get; set; } = PlantType.Nothing;
+    public Func<List<BaseBuff>> CustomBuffs { get; set; } = () => new();
+    public Action<Plant> CustomReinforcePlant { get; set; } = null;
+    public string CustomRole { get; set; } = "";
+}
+public struct CustomRogueShootingBuff
+{
+    public CustomRogueShootingBuff()
+    {
+    }
+
+    public PlantType CustomPlantType { get; set; } = PlantType.Nothing;
+    public string CustomTitle { get; set; } = "";
+    public string CustomDescription { get; set; } = "";
+    public ShootingBuffType CustomBuffType { get; set; } = ShootingBuffType.UniqueUpgrade;
+    public Action CustomOnGet { get; set; } = () => {};
+}
+```
+</details>
+
+### CustomPlantClass.Runtime.Tasks:
+
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+public class Delay : IDelay
+{
+    private bool _isCompleted;
+    private Action _continuation;
+    private readonly CancellationToken _token;
+
+    // Mode 1: with cancellation
+    public Delay(CancellationToken token)
+    {
+        _token = token;
+    }
+
+    // Mode 2: without cancellation
+    public Delay()
+    {
+        _token = null;
+    }
+
+    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
+
+    public void OnCompleted(Action continuation)
+    {
+        _continuation = continuation;
+    }
+
+    public void Complete()
+    {
+        if (_token?.IsCanceled ?? false)
+        {
+            _isCompleted = true;
+            return;
+        }
+
+        _isCompleted = true;
+        _continuation?.Invoke();
+    }
+
+    public void GetResult() { }
+}
+public class DelayScaled : IDelay
+{
+    private bool _isCompleted;
+    private Action _continuation;
+    private readonly CancellationToken _token;
+    public float remaining;
+    public Func<float> speedMultiplier; // dynamic multiplier
+
+    public DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)
+    {
+        remaining = seconds;
+        speedMultiplier = speed;
+        _token = token;
+    }
+
+    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
+
+    public void OnCompleted(Action continuation) => _continuation = continuation;
+
+    public void Complete()
+    {
+        if (_isCompleted) return;
+        _isCompleted = true;
+        _continuation?.Invoke();
+    }
+
+    public void GetResult() { }
+}
+public class WaitUntil : IDelay
+{
+    private bool _isCompleted;
+    private Action _continuation;
+    private readonly CancellationToken _token;
+    private readonly Func<bool> _predicate;
+
+    // with cancellation
+    public WaitUntil(Func<bool> predicate, CancellationToken token)
+    {
+        _predicate = predicate;
+        _token = token;
+    }
+
+    // without cancellation
+    public WaitUntil(Func<bool> predicate)
+    {
+        _predicate = predicate;
+        _token = null;
+    }
+
+    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
+
+    public void OnCompleted(Action continuation)
+    {
+        _continuation = continuation;
+    }
+
+    internal bool Check()
+    {
+        if (_isCompleted) return true;
+        if (_token?.IsCanceled ?? false)
+        {
+            _isCompleted = true;
+            return true;
+        }
+
+        if (_predicate != null && _predicate())
+        {
+            Complete();
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Complete()
+    {
+        if (_isCompleted) return;
+
+        _isCompleted = true;
+        _continuation?.Invoke();
+    }
+
+    public void GetResult() { }
+}
+public readonly struct WaitUntilTask
+{
+    private readonly WaitUntil _awaiter;
+
+    public WaitUntilTask(WaitUntil awaiter)
+    {
+        _awaiter = awaiter;
+    }
+
+    public WaitUntil GetAwaiter() => _awaiter;
+
+    // with cancellation
+    public static WaitUntilTask WaitUntil(Func<bool> predicate, CancellationToken token)
+    {
+        var awaiter = new WaitUntil(predicate, token);
+        WaitUntilScheduler.Schedule(awaiter);
+        return new WaitUntilTask(awaiter);
+    }
+
+    // without cancellation
+    public static WaitUntilTask WaitUntil(Func<bool> predicate)
+    {
+        var awaiter = new WaitUntil(predicate);
+        WaitUntilScheduler.Schedule(awaiter);
+        return new WaitUntilTask(awaiter);
+    }
+}
+public struct DelayTask
+{
+    private readonly IDelay _awaiter;
+
+    public DelayTask(IDelay awaiter)
+    {
+        _awaiter = awaiter;
+    }
+
+    public IDelay GetAwaiter() => _awaiter;
+
+    // Mode 1: with cancellation
+    public static DelayTask Delay(float seconds, CancellationToken token)
+    {
+        var awaiter = new Delay(token);
+        DelayScheduler.Schedule(seconds, awaiter);
+        return new DelayTask(awaiter);
+    }
+
+    // Mode 2: without cancellation
+    public static DelayTask Delay(float seconds)
+    {
+        var awaiter = new Delay();
+        DelayScheduler.Schedule(seconds, awaiter);
+        return new DelayTask(awaiter);
+    }
+
+    // FixedUpdate (with cancellation)
+    public static DelayTask WaitForFixedUpdate(CancellationToken token)
+    {
+        var awaiter = new Delay(token);
+        DelayScheduler.ScheduleFixedUpate(awaiter);
+        return new DelayTask(awaiter);
+    }
+
+    // FixedUpdate (without cancellation)
+    public static DelayTask WaitForFixedUpdate()
+    {
+        var awaiter = new Delay();
+        DelayScheduler.ScheduleFixedUpate(awaiter);
+        return new DelayTask(awaiter);
+    }
+
+    // FixedUpdate steps (with cancellation)
+    public static DelayTask WaitForFixedUpdate(int steps, CancellationToken token)
+    {
+        var awaiter = new Delay(token);
+        for (int i = 0; i < steps; i++)
+            DelayScheduler.ScheduleFixedUpate(awaiter);
+        return new DelayTask(awaiter);
+    }
+
+    // FixedUpdate steps (without cancellation)
+    public static DelayTask WaitForFixedUpdate(int steps)
+    {
+        var awaiter = new Delay();
+        for (int i = 0; i < steps; i++)
+            DelayScheduler.ScheduleFixedUpate(awaiter);
+        return new DelayTask(awaiter);
+    }
+    public static DelayTask DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)
+    {
+        var awaiter = new DelayScaled(seconds, speed, token);
+        DelayScheduler.ScheduleScaled(awaiter);
+        return new DelayTask(awaiter);
+    }
+}
+public class DelayScheduler : MonoBehaviour
+{
+    private class Entry
+    {
+        public IDelay awaiter;
+        public float remaining;
+        public bool useFixedUpdate;
+        public bool isScaled;
+        public Action WhenDone = null;
+    }
+
+    private static readonly List<Entry> entries = new();
+
+    public static void Schedule(float seconds, Delay awaiter)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = seconds,
+            useFixedUpdate = false,
+            isScaled = false
+        });
+    }
+
+    public static void ScheduleScaled(DelayScaled awaiter)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = awaiter.remaining,
+            useFixedUpdate = false,
+            isScaled = true
+        });
+    }
+
+    public static void ScheduleFixedUpate(Delay awaiter)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = 0f,
+            useFixedUpdate = true,
+            isScaled = false
+        });
+    }
+
+    public static void Schedule(float seconds, Delay awaiter, Action whenDone)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = seconds,
+            useFixedUpdate = false,
+            isScaled = false,
+            WhenDone = whenDone
+        });
+    }
+
+    public static void ScheduleScaled(DelayScaled awaiter, Action whenDone)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = awaiter.remaining,
+            useFixedUpdate = false,
+            isScaled = true,
+            WhenDone = whenDone
+        });
+    }
+
+    public static void ScheduleFixedUpate(Delay awaiter, Action whenDone)
+    {
+        entries.Add(new Entry
+        {
+            awaiter = awaiter,
+            remaining = 0f,
+            useFixedUpdate = true,
+            isScaled = false,
+            WhenDone = whenDone
+        });
+    }
+
+    public void FixedUpdate()
+    {
+        for (int i = entries.Count - 1; i >= 0; i--)
+        {
+            var e = entries[i];
+
+            if (!e.useFixedUpdate)
+                continue;
+
+            if (e.awaiter.IsCompleted)
+            {
+                entries.RemoveAt(i);
+                continue;
+            }
+
+            e.awaiter.Complete();
+            if(e.WhenDone != null)
+            {
+                try
+                {
+                    e.WhenDone();
+                }
+                catch(Exception ex)
+                {
+                    Debug.LogError(ex.Message);
+                }
+            }
+            entries.RemoveAt(i);
+        }
+    }
+
+    public void Update()
+    {
+        float dt = Time.deltaTime;
+
+        for (int i = entries.Count - 1; i >= 0; i--)
+        {
+            var e = entries[i];
+
+            if (e.useFixedUpdate)
+                continue;
+
+            if (e.awaiter.IsCompleted)
+            {
+                entries.RemoveAt(i);
+                continue;
+            }
+
+            float mult = 1f;
+
+            if (e.isScaled && e.awaiter is DelayScaled scaled)
+                mult = scaled.speedMultiplier?.Invoke() ?? 1f;
+
+            e.remaining -= dt * mult;
+
+            if (e.remaining <= 0f)
+            {
+                e.awaiter.Complete();
+                if(e.WhenDone != null)
+                {
+                    try
+                    {
+                        e.WhenDone();
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.LogError(ex.Message);
+                    }
+                }
+                entries.RemoveAt(i);
+            }
+        }
+    }
+}
+public class WaitUntilScheduler : MonoBehaviour
+{
+    private class Entry
+    {
+        public WaitUntil awaiter;
+        public Action action; // null if no action
+    }
+
+    private static readonly List<Entry> entries = new();
+
+    public static void Schedule(WaitUntil awaiter)
+    {
+        entries.Add(new Entry { awaiter = awaiter, action = null });
+    }
+
+    public static void Schedule(WaitUntil awaiter, Action action)
+    {
+        entries.Add(new Entry { awaiter = awaiter, action = action });
+    }
+
+    public void Update()
+    {
+        for (int i = entries.Count - 1; i >= 0; i--)
+        {
+            var e = entries[i];
+            var w = e.awaiter;
+
+            if (w.IsCompleted || w.Check())
+            {
+                // run action if present
+                if (e.action != null)
+                {
+                    try
+                    {
+                        e.action();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError(ex.ToString());
+                    }
+                }
+
+                entries.RemoveAt(i);
+            }
+        }
+    }
+}
+public class CancellationToken
+{
+    public bool IsCanceled { get; private set; }
+
+    public void Cancel() => IsCanceled = true;
+
+    public static CancellationToken CancelAfterFixedUpate()
+    {
+        var token = new CancellationToken();
+        DelayScheduler.ScheduleFixedUpate(new Delay(), () => token.Cancel());
+        return token;
+    }
+    public static CancellationToken CancelAfterFixedUpate(int steps)
+    {
+        var token = new CancellationToken();
+        _ = WaitForFixedUpdates(steps,token);
+        return token;
+    }
+    private async static Task WaitForFixedUpdates(int steps,CancellationToken token)
+    {
+        await DelayTask.WaitForFixedUpdate(steps);
+        token.Cancel();
+    }
+    public static CancellationToken CancelAfterSeconds(float seconds)
+    {
+        var token = new CancellationToken();
+        DelayScheduler.Schedule(seconds, new Delay(), () => token.Cancel());
+        return token;
+    }
+    public static CancellationToken CancelWhen(Func<bool> predicate)
+    {
+        var token = new CancellationToken();
+        WaitUntilScheduler.Schedule(new WaitUntil(predicate), () => token.Cancel());
+        return token;
+    }
+}
+public static class CancellationTokenExt
+{
+    public static CancellationToken CreateCancellationToken(this MonoBehaviour self)
+    {
+        var token = new CancellationToken();
+        WaitUntilScheduler.Schedule(new WaitUntil(() => self.destroyCancellationToken.IsCancellationRequested), () => token.Cancel());
+        return token;
+    }
+    public static CancellationToken CreateCancellationToken(this GameObject self) =>
+        self.TryGetComponent<MonoBehaviour>(out var mono)
+            ? CreateCancellationToken(mono)
+            : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
+    public static CancellationToken CreateCancellationToken(this Component self) =>
+        self.TryGetComponent<MonoBehaviour>(out var mono)
+            ? CreateCancellationToken(mono)
+            : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
+    public class MonobehaviourCancellationToken : MonoBehaviour
+    {
+        public CancellationToken Token { get; private set; }
+
+        public void Awake()
+        {
+            Token = new CancellationToken();
+        }
+
+        public void OnDestroy()
+        {
+            Token.Cancel();
+        }
+    }
+}
+public interface IDelay : INotifyCompletion
+{
+    public bool IsCompleted { get; }
+    public void Complete();
+    public void GetResult();
+}
+```
+</details>
+
+### Materials:
+<details>
+<summary>Click to show code</summary>
+
+```csharp
+
+```
+</details>
