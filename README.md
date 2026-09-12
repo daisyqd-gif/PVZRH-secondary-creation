@@ -1,6 +1,12 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
 [![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
 
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
+
 [![License](https://img.shields.io/badge/License-Apache_2.0-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
 [![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/releases)
