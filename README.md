@@ -1075,7 +1075,6 @@ public static class MathHelper
 
 8. ModRegistryManager -> A way for mods to make registries for other mods to add stuff to
 9. PlantMgr -> Tools
-</details>
 
 10. ModPlugin -> a plugin base
 <details>
@@ -1396,6 +1395,8 @@ public static class ZombieMgr
     public static void Crashed(this Zombie self) { }
 }
 ```
+</details>
+
 </details>
 
 ### CustomPlantClass.Runtime
