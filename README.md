@@ -1,4 +1,4 @@
-# PVZ Fusion Custom Plant Class Framework
+# 🌱PVZ Fusion Custom Plant Class Framework
 
 A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allows modders to create custom plants, zombies, effects, projectiles, and gameplay systems using clean C# APIs.
 ## Overview
@@ -20,6 +20,7 @@ It is built on top of:
 - ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
 - -![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ## Features
+### ✅Completed
 1. Base classes for plants, zombies, levels, etc...
 2. A central framework for registration
 3. Convinence helpers for easier coding
@@ -33,13 +34,13 @@ It is built on top of:
 11. A bridge for converting data from Il2cpp collections to managed collections
 12. Runtime compilation of mods
 13. An interrupt system
-### Future
+### ⏰Future
 1. A way to run mods in Lua
 2. A visual plant creator that allows modders or designers to create plants with minimal coding
 3. Full support for the easier .NET based F# language
 4. Sub frame timing in the async state machine runner
 5. A repl for compiling code at runtime
-## Installation
+## ⇓Installation
 1. Install this custom fork of BepInEx 6.0.0 and CustomizeLib from https://pan.quark.cn/s/6461fdaccff5#/list/share -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located) and also locate customizelib in any of salmon's mods and put it in. TEMPORARY WARNING: Do not use the August 22 version, and if you insist, use dnspy to remove the native hooks in Customizelib on Plant.Update and Plant.FixedUpdate
 2. Locate the release for PVZ Fusion Custom Plant Class Framework in the releases tab in this repo and download it into: gamedirectory/BepInEx/plugins
 3. Run the game. You should see a black window open up and its name should be: BepInEx 6.0.0 dev - PlantsVsZombiesRH.exe). When the game is fully booted up and it is in the main menu, wait 5 seconds and close the game.
@@ -53,7 +54,7 @@ It is built on top of:
 - A 64 bit computer running Windows 10 or later
 - Basic drawing and animating capibilities in Unity
 
-### Guide:
+### 📚Guide:
 1. Create your modding folder.
 2. Install tools like dnspy(https://github.com/dnSpy/dnSpy/releases/tag/v6.1.8), Il2CppDumper(https://github.com/Perfare/Il2CppDumper/releases), Tuanjie editor 2022.3, Microsoft Visual Studio Code(https://apps.microsoft.com/detail/xp9khm4bk9fz7q), and idealy a dissasembler.
 3. Put your tools into the buid folder in their own folders.
@@ -63,7 +64,7 @@ It is built on top of:
 7. Run Il2CppDumper on the game and copy the generated dummydll folder into the lib folder.
 8. Locate the BepInEx folder and copy it into the lib folder.
 9. Copy the template folder and name it your mod and follow the instructions there.
-### An example of a full mod
+### 👾An example of a full mod
 <details>
 <summary>Click to show code</summary>
 
@@ -284,12 +285,12 @@ namespace GatlingPea
 ```
 </details>
 
-### Updating your mod
+### ⬆️Updating your mod
 1. Install the newest game version and repeat step 1, 2, 3, and 4  in the installation guide.
 2. Repeat steps 5, 7, 8, 9 in the creating a mod guide.
 3. Reopen all of your mods and rebuild all of them and fix all errors that resulted from the update.
 
-## Mod Catalog
+## 📁Mod Catalog
 <details>
 <summary>Click to show section</summary>
   
