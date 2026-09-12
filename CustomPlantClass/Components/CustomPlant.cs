@@ -50,18 +50,27 @@ namespace CustomPlantClass
         {
             try
             {
+                if(_plant == null)
+                {
+                    return;
+                }
                 await DelayTask.WaitForFixedUpdate(token);
                 _maxHealth = _plant.thePlantMaxHealth;
                 _pfLockedMaxHealth = _plant.thePlantMaxHealth;
             }
             catch( Exception e )
             {
-                Debug.LogError(e.ToString());
+                ModLogger.LogError(e.ToString());
             }
         }
         public virtual void Awake()
         {
             token = new();
+            if(_plant == null)
+            {
+                Destroy(this);
+                return;
+            }
         }
         public virtual void OnDestroy()
         {
@@ -254,7 +263,7 @@ namespace CustomPlantClass
             }
             catch( Exception e )
             {
-                Debug.LogError(e.ToString());
+                ModLogger.LogError(e.ToString());
             }
         }
         protected virtual async Task SuperShoot_Async()

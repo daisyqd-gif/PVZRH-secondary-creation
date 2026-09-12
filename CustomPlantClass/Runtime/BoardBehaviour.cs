@@ -94,13 +94,28 @@ namespace CustomPlantClass.Runtime
             DefaultValue = defaultValue;
         }
     }
+    [AttributeUsage(AttributeTargets.Field)]
+    public sealed class ActionOnBoardDestroyAttribute : Attribute
+    {
+        public Func<object> Action { get; }
+
+        public ActionOnBoardDestroyAttribute(Func<object> action)
+        {
+            Action = action;
+        }
+    }
     public static class ResetRegistry
     {
         private static readonly List<(FieldInfo field, object defaultValue)> entries = new();
+        private static readonly List<(FieldInfo field, Func<object> action)> entries2 = new();
 
         public static void Register(FieldInfo field, object defaultValue)
         {
             entries.Add((field, defaultValue));
+        }
+        public static void Register(FieldInfo field, Func<object> action)
+        {
+            entries.Add((field, action));
         }
 
         public static void ResetAll()
@@ -109,6 +124,11 @@ namespace CustomPlantClass.Runtime
             {
                 Debug.Log($"Defaulted field {field.Name}.");
                 field.SetValue(null, defaultValue); // static fields
+            }
+            foreach (var (field, action) in entries2)
+            {
+                Debug.Log($"Defaulted field {field.Name}.");
+                field.SetValue(null, action()); // static fields
             }
         }
     }
@@ -141,6 +161,16 @@ namespace CustomPlantClass.Runtime
                     defaultValue = field.FieldType.IsValueType
                         ? Activator.CreateInstance(field.FieldType)
                         : null;
+
+                ResetRegistry.Register(field, defaultValue);
+                Debug.Log($"Found field defaulter for field {field.Name}.");
+            }
+            foreach (var field in fields)
+            {
+                var attr = field.GetCustomAttribute<ActionOnBoardDestroyAttribute>();
+                if (attr == null) continue;
+
+                Func<object> defaultValue = attr.Action;
 
                 ResetRegistry.Register(field, defaultValue);
                 Debug.Log($"Found field defaulter for field {field.Name}.");

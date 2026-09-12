@@ -1076,10 +1076,32 @@ namespace CustomPlantClass
         }
         public static bool TryGetInterface<T>(this MonoBehaviour self, out T outInterface) where T : class
         {
-            foreach (var comp in self.GetComponents<MonoBehaviour>())
-                if (comp is T)
+            foreach (var comp in self.GetComponents<Component>())
+                if (comp is T output)
                 {
-                    outInterface = (comp as T)!;
+                    outInterface = output!;
+                    return true;
+                }
+            outInterface = default!;
+            return false;
+        }
+        public static bool TryGetInterface<T>(this GameObject self, out T outInterface) where T : class
+        {
+            foreach (var comp in self.GetComponents<Component>())
+                if (comp is T output)
+                {
+                    outInterface = output!;
+                    return true;
+                }
+            outInterface = default!;
+            return false;
+        }
+        public static bool TryGetInterface<T>(this Component self, out T outInterface) where T : class
+        {
+            foreach (var comp in self.GetComponents<Component>())
+                if (comp is T output)
+                {
+                    outInterface = output!;
                     return true;
                 }
             outInterface = default!;
@@ -1497,8 +1519,32 @@ namespace CustomPlantClass
                                            (RaycastHit2D[])Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                            Vector2.zero) select raycastHit2D.collider.gameObject])
                 if (gameObject.TryGetComponent<Plant>(out var plant))
-                    foreach (var comp in plant.GetComponents<MonoBehaviour>())
-                        if (comp is ICustomClick) (comp as ICustomClick)!.OnClicked(__instance);
+                    if (plant.TryGetInterface<ICustomClick>(out var click))
+                        click.OnClicked(__instance);
+        }
+        [HarmonyPatch(nameof(Mouse.LeftClickWithSomeThing))]
+        [HarmonyPostfix]
+        public static void PostLeftClickWithSomeThing(Mouse __instance)
+        {
+            // must have a plant and an item
+            if (__instance.cannonPlant == null || __instance.theItemOnMouse == null)
+                return;
+
+            // plant must have a handler
+            if(!__instance.cannonPlant.TryGetInterface<IPlantCannonAimHandler>(out var handler)) return;
+
+            // item name must match the handler's cannon name
+            if (__instance.theItemOnMouse.name != handler.CannonName)
+                return;
+
+            // compute aim position ONCE here
+            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // call modder's aim logic
+            handler.OnCannonAimed(pos);
+
+            // clear the item
+            __instance.ClearItemOnMouse(true);
         }
     }
     [HarmonyPatch(typeof(UltimateTorch))]

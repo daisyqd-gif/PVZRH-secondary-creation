@@ -1,4 +1,5 @@
 using System.IO;
+using Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Unity.VisualScripting;
@@ -10,11 +11,6 @@ namespace CustomPlantClass.RogueShootingManager
         internal static int classIndex=0;
         public static Dictionary<string,CustomRogueShootingConfig> Specs = new();
         public static Dictionary<string,CustomRogueShootingBuff> Buffs = new();
-        internal static string GetClassName()
-        {
-            classIndex++;
-            return $"CLASS_ROGUESHOOTING_{classIndex}";
-        }
         //planning: use the dictionary lookup approach but modify it to use a compile time set string inside the class
         public static BaseConfig MakeConfigType(CustomRogueShootingConfig spec)
         {
@@ -196,10 +192,11 @@ namespace CustomPlantClass.RogueShootingManager
             // 5. Parse syntax tree
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
 
-            var refs = new List<MetadataReference>();
-
-            // Load your own assembly
-            refs.Add(MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location));
+            var refs = new List<MetadataReference>
+            {
+                // Load your own assembly
+                MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location)
+            };
 
             // Load all managed assemblies under GameRoot
             foreach (var dll in Directory.EnumerateFiles(Paths.GameRootPath, "*.dll", SearchOption.AllDirectories))
@@ -288,6 +285,22 @@ namespace CustomPlantClass.RogueShootingManager
                 case Roles.Producer: return "未知";
             }
         }
+        public static string FormatBuffTitle(ShootingBuffType buffType, string Title)
+        {
+            switch (buffType)
+            {
+                case ShootingBuffType.General:
+                case ShootingBuffType.UniqueUpgrade:
+                default:
+                return $"强化：{Title}";
+                case ShootingBuffType.QualitativeChange:
+                return $"质变：{Title}";
+                case ShootingBuffType.SuperUpgrade:
+                return $"超进化：{Title}";
+                case ShootingBuffType.CurseBuff:
+                return $"诅咒：{Title}";
+            }
+        }
         public static (BuffID AdvBuff,BaseBuff buffConfig) RegisterCustomQualitativeChangeBuff(string name, string desc, PlantType thePlantType, Action OnGetBuff = null)
         {
             string name_formatted = $"质变-{name}：";
@@ -348,6 +361,7 @@ namespace CustomPlantClass.RogueShootingManager
                 {
                     TravelMgr.Instance.data.advBuffs.Remove(curseBuff);
                 }
+                InGameText.Instance.ShowText($"{Lawnf.GetName(thePlantType)}的诅咒效果已反转",1.5f,true);
                 Destroy(this);
             }
         }

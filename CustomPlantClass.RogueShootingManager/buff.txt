@@ -100,7 +100,7 @@ public class RogueClass_{{GUID}} : BaseBuff
             {
                 case ShootingBuffType.UniqueUpgrade: return Quality.gold;
                 case ShootingBuffType.QualitativeChange: return Quality.diamond;
-                case ShootingBuffType.SuperUpgrade: return Quality.diamond;
+                case ShootingBuffType.SuperUpgrade: return Quality.iridescent;
                 case ShootingBuffType.General: return randomquality;
                 case ShootingBuffType.CurseBuff: return Quality.curse;
             }

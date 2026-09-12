@@ -1,3 +1,5 @@
+using CustomPlantClass.Runtime;
+
 namespace CustomPlantClass
 {
     public interface IRedirectAnimShoot
@@ -41,5 +43,28 @@ namespace CustomPlantClass
         public virtual Color SetTextColor() => Color.cyan;
         public virtual Vector2? GetTextSize() => null;
         public string GetTextString();
+    }
+    public interface IPlantCannonAimHandler
+    {
+        string CannonName { get; }
+
+        void OnCannonAimed(Vector2 pos);
+
+        GameObject CannonObjReference =>
+            Resources.Load<GameObject>("items/CobCannon_target.prefab");
+
+        void CreateCannonAim(Plant p, Mouse mouse)
+        {
+            mouse.cannonPlant = p;
+
+            mouse.theItemOnMouse = Object.Instantiate(
+                CannonObjReference,
+                mouse.MousePosition,
+                Quaternion.identity,
+                p.board.transform
+            );
+
+            mouse.theItemOnMouse.name = CannonName;
+        }
     }
 }
