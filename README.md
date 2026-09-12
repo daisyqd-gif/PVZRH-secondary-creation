@@ -1,4 +1,6 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
+[![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
+
 [![License](https://img.shields.io/badge/License-Apache_2.0-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
 [![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/releases)
