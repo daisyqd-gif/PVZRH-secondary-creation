@@ -292,7 +292,7 @@ namespace GatlingPea
 <details>
 <summary>Click to show section</summary>
   
-1. Charm Sniper ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge) : This will be replaced in a future remake of SniperDLC
+1. Charm Sniper ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-This_will_be_replaced_by_the_future_Sniper_DLC-red)
 2. CustomPlant.dll : The central framework responsible for all mods
 3. CustomPlant.CustomPlant.RogueShootingManager : Rogue shooting support for some mods
 4. CustomPlantClass.Main.BulletBehaviour : Custom bullet moveway support
@@ -300,9 +300,9 @@ namespace GatlingPea
 6. CustomPlantClass.Runtime.Tasks : Async support for mods, required by all mods
 7. FireSniperPuff (Requires CustomPlant.CustomPlant.RogueShootingManager)
 8. MachineNutBuff
-9. MegaGatlingExpansionRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge) : Replaced by the rogue shooting framework
+9. MegaGatlingExpansionRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced_by_the_rogue_shooting_framework-red)
 10. MegaGatlingPeaDLC (Requires CustomPlant.CustomPlant.RogueShootingManager)
-11. Modified-Plus-Lite ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge)
+11. Modified-Plus-Lite ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
 12. MoreBlackHorse
 13. MoreBossSlider
 14. MoreDolphinZombie
@@ -318,13 +318,13 @@ namespace GatlingPea
 24. SuperHammer
 25. UltimateArtillerySpike (Requires CustomPlant.CustomPlant.RogueShootingManager)
 26. UltimateCherryFireShooter.Bepinex-Deconfused
-27. UltimateDoomSniper_RogueShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge) : Replaced by the rogue shooting framework
+27. UltimateDoomSniper_RogueShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced_by_the_rogue_shooting_framework-red)
 28. UltimateDoomSniper-2 (Requires CustomPlant.CustomPlant.RogueShootingManager)
 29. UltimateGatlingBloverBuff.Bepinex
 30. UltimateIFV
 31. UltimatePlanternSkin
 32. UltimateRedLunar_RogueShooting
-33. UltimateSniper_FlameGatlingRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced-red?style=for-the-badge) : Replaced by the rogue shooting framework
+33. UltimateSniper_FlameGatlingRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced_by_the_rogue_shooting_framework-red)
 34. UltimateSniperAndUltimateMegaGatlingPea (Requires CustomPlant.CustomPlant.RogueShootingManager) : Contains ultimate flame gatling and ultimate flame sniper
 35. UltimateSolarCoronaCabbage
 36. Utilities : Debug tools
