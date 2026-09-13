@@ -1,11 +1,15 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
 [![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
 
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
 
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
 
 [![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
+
+[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20customizelib-blue?style=for-the-badge&logo=pan.quark.cn%2Ffavicon.ico)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
+
+[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20bleeding%20edge%20customizelib-orange?style=for-the-badge&logo=github)]([https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7](https://github.com/SalmonCN-RH/CustomizeLib/tree/master/res/BepInEx))
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
