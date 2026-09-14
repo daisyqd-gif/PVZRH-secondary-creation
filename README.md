@@ -342,4 +342,6 @@ namespace GatlingPea
 </details>
 
 ## Disclaimer
-This repo does not contain or share copyrighted Plants vs. Zombies assets. Always respect the intellectual rights of the original creators of PVZ. Please mod responsibly and do not share copyrighted assets.
+This project does not include, distribute, or rely on any copyrighted Plants vs. Zombies assets. All game content referenced by this repository belongs to its respective copyright holders.
+
+Please mod responsibly. Do not upload or share any proprietary PVZ files, including textures, models, audio, or other game data.
