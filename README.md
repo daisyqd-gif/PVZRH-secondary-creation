@@ -341,4 +341,5 @@ namespace GatlingPea
 37. zombossleveladdon : Contains HeiTa and Gift box imitater
 </details>
 
-
+## Disclaimer
+This repo does not contain or share copyrighted Plants vs. Zombies assets. Always respect the intellectual rights of the original creators of PVZ. Please mod responsibly and do not share copyrighted assets.
