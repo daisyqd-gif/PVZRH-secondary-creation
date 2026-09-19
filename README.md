@@ -1,20 +1,7 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
 ![Notice](https://img.shields.io/badge/Update_4.0_is_not_out_yet._please_wait_until_the_update_is_out-red?style=for-the-badge)
 
-[![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
-
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
-
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
-
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
-
-[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20customizelib-blue?style=for-the-badge&logo=pan.quark.cn%2Ffavicon.ico)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
-
-[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20bleeding%20edge%20customizelib-orange?style=for-the-badge&logo=github)]([https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7](https://github.com/SalmonCN-RH/CustomizeLib/tree/master/res/BepInEx))
-
 [![License](https://img.shields.io/badge/Apache_2.0-License-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
-[![License](https://img.shields.io/badge/Dependency-Licenses-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/Licenses)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
 [![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/releases)
 [![Deps](https://img.shields.io/badge/Roslyn-v5.9.0-green.svg)](https://github.com/dotnet/roslyn)
@@ -32,6 +19,19 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 - new mechanics
 - new levels
 - etc...
+## Quick access
+[![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
+
+[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20customizelib-blue?style=for-the-badge&logo=pan.quark.cn%2Ffavicon.ico)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
+
+[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20bleeding%20edge%20customizelib-orange?style=for-the-badge&logo=github)]([https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7](https://github.com/SalmonCN-RH/CustomizeLib/tree/master/res/BepInEx))
+
 ## Features
 - [x] Base classes for plants, zombies, levels, etc...
 - [x] A central framework for registration
@@ -301,6 +301,9 @@ namespace GatlingPea
 2. Repeat steps 5, 7, 8, 9 in the creating a mod guide.
 3. Reopen all of your mods and rebuild all of them and fix all errors that resulted from the update.
 ## ❗Known Bugs
+<details>
+<summary>Click to show section</summary>
+    
 - Patching hot virtuals crashes the game.  ![Bug](https://img.shields.io/badge/Severity:-High-red)
 
 - Exceptions thrown in async state machines will go uncaught and crashes the game.  ![Bug](https://img.shields.io/badge/Severity:-High-red)
@@ -314,6 +317,8 @@ namespace GatlingPea
 - Some mods are missing from the release.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
 
 - Mods that use unitask will fail.  [![Bug](https://img.shields.io/badge/Severity:-Fixed-blue)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
+
+</details>
 
 ## 📁Mod Catalog
 <details>
@@ -359,6 +364,8 @@ namespace GatlingPea
 </details>
 
 ## Disclaimer
+[![License](https://img.shields.io/badge/Dependency-Licenses-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/Licenses)
+
 This project does not include, distribute, or rely on any copyrighted Plants vs. Zombies assets. All game content referenced by this repository belongs to its respective copyright holders.
 
 Please mod responsibly. Do not upload or share any proprietary PVZ files, including textures, models, audio, or other game data.
