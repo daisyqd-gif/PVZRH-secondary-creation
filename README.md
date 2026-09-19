@@ -300,6 +300,20 @@ namespace GatlingPea
 1. Install the newest game version and repeat step 1, 2, 3, and 4  in the installation guide.
 2. Repeat steps 5, 7, 8, 9 in the creating a mod guide.
 3. Reopen all of your mods and rebuild all of them and fix all errors that resulted from the update.
+## ❗Known Bugs
+- Patching hot virtuals crashes the game.  ![Bug](https://img.shields.io/badge/Severity:-High-red)
+
+- Exceptions thrown in async state machines will go uncaught and crashes the game.  ![Bug](https://img.shields.io/badge/Severity:-High-red)
+
+- Base custom plant throws a NullReferenceException in Start_Async. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
+
+- Index out of range exception thrown in the curtom levels menu. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
+
+- Some sniper plants shoot peas instead of sniping zombies.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
+
+- Some mods are missing from the release.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
+
+- Mods that use unitask will fail.  [![Bug](https://img.shields.io/badge/Severity:-Fixed-blue)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
 
 ## 📁Mod Catalog
 <details>
