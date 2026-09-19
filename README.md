@@ -1,4 +1,6 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
+![Notice](https://img.shields.io/badge/Update_4.0_is_not_out_yet._please_wait_until_the_update_is_out-red?style=for-the-badge)
+
 [![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
 
 [![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
