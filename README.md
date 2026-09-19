@@ -310,6 +310,8 @@ namespace GatlingPea
 
 - Base custom plant throws a NullReferenceException in Start_Async. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
+- Custom rogue shooting plants will never appear because of the unlock system. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
+
 - Index out of range exception thrown in the curtom levels menu. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
 - Some sniper plants shoot peas instead of sniping zombies.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
