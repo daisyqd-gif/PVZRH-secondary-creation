@@ -11,7 +11,8 @@
 
 [![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20bleeding%20edge%20customizelib-orange?style=for-the-badge&logo=github)]([https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7](https://github.com/SalmonCN-RH/CustomizeLib/tree/master/res/BepInEx))
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/Apache_2.0-License-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/Dependency-Licenses-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/Licenses)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
 [![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/releases)
 [![Deps](https://img.shields.io/badge/Roslyn-v5.9.0-green.svg)](https://github.com/dotnet/roslyn)
