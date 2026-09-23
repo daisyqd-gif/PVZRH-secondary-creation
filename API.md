@@ -1192,7 +1192,7 @@ public abstract class PingListener : ICommandListener
 
 ```csharp
 using HarmonyLib;
-using GameLevel.RogueShooting;
+using GameLevel.;
 using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -1261,8 +1261,14 @@ public class RegistryHelper : MonoBehaviour
     public const string QualitativeChangeText = "质变";
     public const string CurseText = "诅咒";
     public const string ReversedCurseText = "祝福";
-    internal static 
-    Dictionary<BuffID,(BuffID reversed,Func<Plant,bool> canreverse,Action oncurse,Action onreverse)> CurseBuffInfo = new();
+    public static void RegisterBuffsForPlant(PlantType thePlantType, bool damageBuff = true, bool speedBuff = true, bool starUp = true,params CustomRogueShootingBuff[] buffs) { }
+    /// <summary>
+    /// *Required for your mod to work and to not break the whole game*
+    /// Please register the upgrade buffs separately.
+    /// </summary>
+    /// <param name="thePlantType">The plant type of the starting plant</param>
+    /// <param name="order"> Ascending from base->intermediate->final</param>
+    public static void AddCustomEvolutionPathway(PlantType thePlantType, params PlantType[] order) { }
     public static (BuffID curseBuff, BuffID reverseBuff, BaseBuff buffConfig) RegisterCustomCurseBuff(string name, string curseDesc, string reversedDesc, PlantType thePlantType, Func<Plant,bool> CanReverse, Action OnCurse = null, Action OnReverseEvent = null) { }
     public static string GetStringFromRole(Roles role)
     {
