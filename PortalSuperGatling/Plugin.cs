@@ -8,6 +8,9 @@ global using CustomPlantClass;
 global using Unity.VisualScripting;
 global using Random = UnityEngine.Random;
 global using CustomPlantClass.Main;
+using System.Threading.Tasks;
+using System;
+using CustomPlantClass.Runtime.Tasks;
 //global using Object = UnityEngine.Object;
 
 namespace UltimatePortalGatling
@@ -139,10 +142,13 @@ namespace UltimatePortalGatling
 
             z.SetPortaled(10f);
         }
-        public override int GetDamage()
+        public override int AttackDamage
         {
-            if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
-            return _plant.attackDamage;
+            get
+            {
+                if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
+                return _plant.attackDamage;
+            }
         }
         public override Bullet Shoot_Custom()
         {
@@ -153,22 +159,30 @@ namespace UltimatePortalGatling
             }
             return PlantMgr.SetBullet(_plant,GetBulletType(),BulletMoveWay.MoveRight);
         }
-        public override IEnumerator SuperShoot()
+        protected override bool IsAsyncPF => true;
+        protected override async Task SuperShoot_Async()
         {
-            _plant.anim.SetBoolString("shooting",true);
-            for (int i = 0; i < 50; i++)
+            try
             {
-                counter2++;
-                if(counter2>=10) ApplyPortalAura();
-                for(int j = 0; j < 5 ; j++)
+                _plant.anim.SetBoolString("shooting",true);
+                for (int i = 0; i < 50; i++)
                 {
-                    PlantMgr.SetBullet(_plant,GetBulletType(),GetBulletMoveWayPF_SuperGatling(),GetDamage(),new Vector2(0,Random.Range(-0.1f,0.1f)),Random.Range(-15f,15f)).normalSpeed=Random.Range(12f,14f);
+                    counter2++;
+                    if(counter2>=10) ApplyPortalAura();
+                    for(int j = 0; j < 5 ; j++)
+                    {
+                        PlantMgr.SetBullet(_plant,GetBulletType(),GetBulletMoveWayPF_SuperGatling(),AttackDamage,new Vector2(0,Random.Range(-0.1f,0.1f)),Random.Range(-15f,15f)).normalSpeed=Random.Range(12f,14f);
+                    }
+                    _plant.thePlantAttackCountDown=10f;
+                    await DelayTask.DelayScaled(0.02f,()=>_plant.attributeSpeed,token);
                 }
-                _plant.thePlantAttackCountDown=10f;
-                yield return new WaitForSeconds(0.02f);
+                _plant.thePlantAttackCountDown=0.05f;
+                _plant.anim.SetBoolString("shooting",false);
             }
-            _plant.thePlantAttackCountDown=0.05f;
-            _plant.anim.SetBoolString("shooting",false);
+            catch(Exception e)
+            {
+                ModLogger.LogError(Assembly.GetExecutingAssembly(),e.ToString());
+            }
         }
         public override void SuperEnd()
         {

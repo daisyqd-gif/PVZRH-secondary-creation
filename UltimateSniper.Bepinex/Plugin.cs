@@ -357,6 +357,7 @@ namespace UltimateSniper
             RegistryHelper.AddCustomRogueShootingPlant(UFlameGatling,config1);
             RegistryHelper.AddCustomRogueShootingPlant(PlantType.JalaGatling,config2);
             RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter,PlantType.JalaGatling);
+            RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter,PlantType.Peashooter,PlantType.JalaGatling,UFlameGatling);
         }
         public override void OnStart()
         {

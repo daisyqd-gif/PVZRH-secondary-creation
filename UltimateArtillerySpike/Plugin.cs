@@ -230,7 +230,14 @@ namespace UltimateArtillerySpike
                 {
                     try
                     {
-                        if( _plant == null ) return;
+                        try
+                        {
+                            if( _plant == null ) return;
+                        }
+                        catch
+                        {
+                            return;
+                        }
                         await DelayTask.DelayScaled(1f,()=>_plant.attributeSpeed,token);
                         for( int i = 0; i < _plant.shootingLevel; i++)
                         {
@@ -249,6 +256,10 @@ namespace UltimateArtillerySpike
                     {
                         try
                         {
+                            if(e.Message.Contains(":line 235"))
+                            {
+                                return;
+                            }
                             ModLogger.LogError(e.Message);
                         }
                         catch ( Exception )

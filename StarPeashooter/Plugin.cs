@@ -268,10 +268,10 @@ namespace StarPeashooter
         {
             _plant.shoot2=transform.FindChild("PeaShooter_Head/Shoot2");
         }
-        public override Bullet AnimShoot_Custom()
+        public override Bullet Shoot_Custom()
         {
             Shoot2_Custom();
-            return base.AnimShoot_Custom();
+            return base.Shoot_Custom();
         }
         public override Bullet Shoot2_Custom()
         {

@@ -240,10 +240,13 @@ namespace UltimateIFV
         {
             return BulletType.Bullet_puffIronPea;
         }
-        public override int GetDamage()
+        public override int AttackDamage
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage * 2;
-            return _plant.attackDamage;
+            get
+            {
+                if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage * 2;
+                return _plant.attackDamage;
+            }
         }
         public override Bullet Shoot_Custom()
         {
@@ -266,7 +269,7 @@ namespace UltimateIFV
                         _plant,
                         GetBulletType(),
                         GetBulletMoveWayPF_SuperGatling(),
-                        GetDamage(),
+                        AttackDamage,
                         new Vector2(0, Random.Range(-0.15f, 0.15f)), Random.Range(-15f, 15f)
                     ).normalSpeed = Random.Range(12f, 14f);
                 _plant.thePlantAttackCountDown = 10f;
@@ -386,9 +389,10 @@ namespace UltimateIFV
                 plant.Recover(500);
             }
         }
-        public void Awake()
+        public override void Awake()
         {
             if ( plant == null ) return;
+            base.Awake();
             plant.shoot = transform.GetChild(2);
         }
         public void SetWingman_Custom()

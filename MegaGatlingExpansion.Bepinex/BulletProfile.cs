@@ -1,3 +1,6 @@
+using CustomPlantClass.Runtime.Tasks;
+using Cysharp.Threading.Tasks;
+
 namespace MegaGatlingExpansion
 {
     public readonly struct BulletProfile
@@ -91,13 +94,19 @@ namespace MegaGatlingExpansion
     public class ElectricPea : BaseCustomBullet
     {
         public List<PlantType> IsElectricPlant;
-        private const float AURA_RADIUS = 3f;
+        private const float AURA_RADIUS = 1.5f;
         private float AttrCountDown = 0f;
+        private CancellationToken token;
         public void Awake()
         {
             IsElectricPlant = ElementUpgrade
                 .GetPossibleUpgradeTypes(PlantType.ElectricOnion, true)
                 .ToSystemList();
+            token = new();
+        }
+        public void OnDestroy()
+        {
+            token.Cancel();
         }
         public override bool HitZombieCondition(Zombie zombie)
         {
@@ -128,7 +137,7 @@ namespace MegaGatlingExpansion
                 new Vector2(pos.x, pos.y),
                 AURA_RADIUS
             );
-
+            bool foundTarget = false;
             foreach (var col in hits)
             {
                 if (col == null || col.IsDestroyed())
@@ -147,8 +156,10 @@ namespace MegaGatlingExpansion
                         p.thePlantType != PlantType.Nothing &&
                         !IsElectricPlant.Contains(p.thePlantType))
                     {
-                        if(p.axis != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position);
-                        p.TakeDamage(_bullet.Damage * 3, _bullet);
+                        foundTarget=true;
+                        if(p.axis != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position,lim:false);
+                        p.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>());
+                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,p.axis.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
 
@@ -161,8 +172,10 @@ namespace MegaGatlingExpansion
                         z.theZombieType != (ZombieType)9002 &&
                         z.isMindControlled)
                     {
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center);
-                        z.TakeDamage(_bullet.Damage * 3, _bullet, DamageType.Shieldless);
+                        foundTarget=true;
+                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless);
+                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
                 }
@@ -179,22 +192,27 @@ namespace MegaGatlingExpansion
                         z.theZombieType != (ZombieType)9002 &&
                         !z.isMindControlled)
                     {
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center);
-                        z.TakeDamage(_bullet.Damage * 3, _bullet, DamageType.Shieldless, _bullet.fromType);
-                        if (PlantMgr.GetPercent(1f))
+                        foundTarget=true;
+                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
+                        if (PlantMgr.GetPercent(5f))
                         {
                             z.Buttered(0.5f,false);
                         }
+                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<ZombieBall>(out var ball) && !ball.plant)
                     {
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position);
+                        foundTarget=true;
+                        ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position,lim:false);
                         ball.bulletTime ++;
                         if(ball.bulletTime >= 31) ball.Die();
+                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,ball.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<FreezedPlant>(out var freezed))
                     {
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position);
+                        foundTarget=true;
+                        ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position,lim:false);
                         if (freezed.fired)
                         {
                             freezed.lightCountDown = 0.2f;
@@ -205,8 +223,14 @@ namespace MegaGatlingExpansion
                         {
                             freezed.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
                         }
+                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,freezed.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                 }
+            }
+            //Too loud
+            if(foundTarget)
+            {
+                //GameAPP.PlaySound(SoundType.Laser);
             }
         }
     }

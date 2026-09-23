@@ -26,7 +26,6 @@ namespace RogueShootingRandomFormation
             !TypeMgr.WaterZombie(type) && 
             !TypeMgr.IsBossZombie(type) && 
             !TypeMgr.UltimateZombie(type) && 
-            !TypeMgr.IsAirZombie(type) &&
             !TypeMgr.BannedInRandomZombies(type) &&
             type != ZombieType.BedRockSnowZombie &&
             type != ZombieType.SnowDrownZombie &&
@@ -40,7 +39,6 @@ namespace RogueShootingRandomFormation
             !TypeMgr.WaterZombie(type) &&
             !TypeMgr.IsBossZombie(type) &&
             TypeMgr.UltimateZombie(type) &&
-            !TypeMgr.IsAirZombie(type) &&
             !TypeMgr.BannedInRandomZombies(type) &&
             type != ZombieType.BedRockSnowZombie &&
             type != ZombieType.SnowDrownZombie &&

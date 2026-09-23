@@ -480,13 +480,6 @@ namespace MegaGatlingExpansion
             if (__instance.theZombieType == (ZombieType)9002 || __instance.theZombieType == (ZombieType)9004 || __instance.theZombieType == (ZombieType)9006) return false;
             return true;
         }
-        [HarmonyPatch(nameof(Zombie.TakeDamage))]
-        [HarmonyPrefix]
-        public static bool TakeDamage_Prefix(Zombie __instance, DmgType theDamageType, int theDamage, PlantType reportType, bool fix)
-        {
-            if ((__instance.theZombieType == (ZombieType)9004 || __instance.theZombieType == (ZombieType)9006) && (theDamageType == DmgType.Explode || theDamageType == DmgType.Carred)) return false;
-            return true;
-        }
         [HarmonyPatch(nameof(Zombie.BodyTakeDamage))]
         [HarmonyPrefix]
         public static bool BodyTakeDamage_Prefix(Zombie __instance, ref int theDamage)
@@ -510,7 +503,6 @@ namespace MegaGatlingExpansion
             // --- 2. Apply damage manually ---
             __instance.theHealth -= damageamt;
 
-            // --- 3. Trigger head loss ONLY at <= 270 HP ---
             if (__instance.theHealth <= 100 && __instance.beforeDying == false)
             {
                 __instance.beforeDying = true;

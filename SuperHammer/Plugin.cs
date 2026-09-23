@@ -3,6 +3,7 @@ global using BepInEx.Unity.IL2CPP;
 global using HarmonyLib;
 global using System.Reflection;
 using CustomizeLib.BepInEx;
+using CustomPlantClass;
 using UnityEngine;
 
 namespace SuperHammer
@@ -14,7 +15,7 @@ namespace SuperHammer
         public override void Load()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
-            id=CustomCore.RegisterCustomBuff("锤子大大的威武",BuffType.AdvancedBuff,() => true,5000,PlantType.EndoFlame);
+            id=Compatibility.CustomCore_Old.RegisterCustomBuff("锤子大大的威武",BuffType.AdvancedBuff,() => true,5000,PlantType.EndoFlame);
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
     }
@@ -66,8 +67,16 @@ namespace SuperHammer
             {
                 if (col == null) continue;
                 if (!col.TryGetComponent<Zombie>(out var z)) continue;
-                if(z.theZombieType ==ZombieType.ZombieBoss || z.theZombieType ==ZombieType.ZombieBoss2 || z.theZombieType ==ZombieType.HorseBoss ||
-                z.theZombieType ==ZombieType.UltimateSnowZombie && z.TryGetComponent<UltimateSnowZombie>(out var s) && s.boss) continue;
+                var id = z.theZombieType;
+                if
+                (
+                    id == ZombieType.ZombieBoss
+                ||  id == ZombieType.ZombieBoss2
+                ||  id == ZombieType.HorseBoss
+                ||  id == ZombieType.UltimateSnowZombie && z.TryGetComponent<UltimateSnowZombie>(out var z2) && z2.boss
+                ||  id == ZombieType.FootballBoss
+                ||  id == ZombieType.JacksonDriverBoss
+                ) continue;
 
                 // IL2CPP check: skip if zombie klass index == 1
                 // (you can add your own filter here if needed)

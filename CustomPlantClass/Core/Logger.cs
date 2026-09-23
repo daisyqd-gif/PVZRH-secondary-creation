@@ -1,22 +1,23 @@
+using Logger = BepInEx.Logging.Logger;
 namespace CustomPlantClass
 {
     public static class ModLogger
     {
-        private static ManualLogSource Log => Plugin.Logger;
-
+        private static Lazy<ManualLogSource> Log_Lazy = new( () => Logger.CreateLogSource("ModLogger") );
+        public static ManualLogSource Log => Log_Lazy.Value;
         private static void SafeInfo(string msg)
         {
-            PluginBehaviour.QueueOrExecute(() => Log.LogInfo(msg));
+            Log.LogInfo(msg);
         }
 
         private static void SafeWarn(string msg)
         {
-            PluginBehaviour.QueueOrExecute(() => Log.LogWarning(msg));
+            Log.LogWarning(msg);
         }
 
         private static void SafeError(string msg)
         {
-            PluginBehaviour.QueueOrExecute(() => Log.LogError(msg));
+            Log.LogError(msg);
         }
 
         // -------------------------

@@ -241,10 +241,15 @@ namespace ZombossAddon
                             }
                             else
                             {
-                                var buff3=buffs3.ToList().GetRandomItem();
-                                var str=TravelDictionary.debuffData[buff3].Item1;
-                                InGameText.Instance.ShowText($"黑塔：抽到一个旅行词条\n{(string.IsNullOrEmpty(str) ? "抽到词条：" + str : "")}", 4f, false);
-                                mgr.GetDebuff(buff3);
+                                var list = new List<TravelDebuff>();
+                                foreach (var kvp in TravelDictionary.debuffData)
+                                {
+                                    if (!data.travelDebuffs.Contains(kvp.Key))
+                                        list.Add(kvp.Key);
+                                }
+                                var debuff = list[Random.Range(0, list.Count)];
+                                TravelMgr.Instance.GetDebuff(debuff);
+                                InGameText.Instance.ShowText($"黑塔：抽到一个旅行词条\n抽到词条：{TravelDictionary.debuffData[debuff].Item1}", 5f);
                             }
                             CreateParticle.SetParticle(0xb, particlepos, __instance.thePlantRow, true);
                             break;

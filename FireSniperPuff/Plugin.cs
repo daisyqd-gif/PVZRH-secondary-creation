@@ -12,6 +12,7 @@ global using Unity.VisualScripting;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.RogueShootingManager;
 global using GameLevel.RogueShooting;
+global using CustomPlantClass.Runtime;
 
 namespace FireSniperPuff
 {
@@ -23,11 +24,11 @@ namespace FireSniperPuff
         public static BuffID curseReverseBuffID;
         public static BaseConfig config;
         public static BaseConfig config_2;
-        public static PlantType thePlantType;
 
         public override void Load()
         {
-            try{
+            try
+            {
                 // Apply all Harmony patches in this assembly
                 Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -50,7 +51,7 @@ namespace FireSniperPuff
                     Prefab = assetBundle.GetAsset<GameObject>("SniperPuffPrefab"),   // Main plant prefab
                     Preview = assetBundle.GetAsset<GameObject>("SniperPuffPreview"), // Card preview prefab
 
-                    Fusions = DataMgr.MirrorList(new List<(ID, ID)>(){(PlantType.SniperPuff,PlantType.Jalapeno)}), // Optional fusion recipes
+                    Fusions = ListHelper.MirrorList(new () { (PlantType.SniperPuff, PlantType.Jalapeno) }), // Optional fusion recipes
 
                     AttackInterval = 3f,   // Time between attacks (shooters only)
                     ProduceInterval = 0f,  // Time between sun/production cycles
@@ -59,7 +60,7 @@ namespace FireSniperPuff
                     Cd = 7.5f,               // Card cooldown
                     Sun = 375,               // Sun cost
 
-                    DefaultBullet = BulletType.Bullet_pea, // Shooter bullet type, this is never used for now so just leave it as is.
+                    DefaultBullet = BulletType.Bullet_ultimateCattail, // Shooter bullet type, this is never used for now so just leave it as is.
 
                     CanPF = false,     // Enable PF ability if the plant has one
                     CanStarUp = false, // Enable Star-Up ability if the plant has one
@@ -79,21 +80,21 @@ namespace FireSniperPuff
                     CardRepeatAmt = 1,       // How many copies appear in Rainbow Card menu
 
                     Name = "火焰狙击小队",           // Plant name (shown in UI)
-                    AlmanacEntry = "<color=#3D1400>火焰狙击小队常说：“话说天下大势，分久必合，合久必分……你。”他在战斗之余，总是会阅读《三绷演义》。“但当涉猎，见往事耳。我可是最聪明的狙击手！”</color>\n"+
-                    "狙击小喷菇连队，分可狙击点杀，合可爆破群攻。\n\n<color=#3D1400>使用条件：</color><color=red>旅行模式</color>\n"+
-                    "<color=#3D1400>伤害：</color><color=red>500×3/3秒（分散）\n1500/0.5秒（合体）</color>\n"+
-                    "<color=#3D1400>特性：</color><color=red>低矮</color>\n<color=#3D1400>特点：①</color><color=red>分散状态下，每第6次攻击爆头，造成100万伤害</color>\n"+
-                    "<color=#3D1400>②</color><color=red>攻击15次后，进入15秒的合体状态</color>\n<color=#3D1400>③</color><color=red>合体状态下，攻击对半径1格范围造成爆炸伤害</color>\n"+
+                    AlmanacEntry = "<color=#3D1400>火焰狙击小队常说：“话说天下大势，分久必合，合久必分……你。”他在战斗之余，总是会阅读《三绷演义》。“但当涉猎，见往事耳。我可是最聪明的狙击手！”</color>\n" +
+                    "狙击小喷菇连队，分可狙击点杀，合可爆破群攻。\n\n<color=#3D1400>使用条件：</color><color=red>旅行模式</color>\n" +
+                    "<color=#3D1400>伤害：</color><color=red>500×3/3秒（分散）\n1500/0.5秒（合体）</color>\n" +
+                    "<color=#3D1400>特性：</color><color=red>低矮</color>\n<color=#3D1400>特点：①</color><color=red>分散状态下，每第6次攻击爆头，造成1000万伤害</color>\n" +
+                    "<color=#3D1400>②</color><color=red>攻击15次后，进入15秒的合体状态</color>\n<color=#3D1400>③</color><color=red>合体状态下，攻击对半径1格范围造成爆炸伤害</color>\n" +
                     "<color=#3D1400>融合配方：</color>\n<color=red>火爆辣椒+狙击小队</color>"    // Almanac description (CN + EN recommended)
                 };
 
                 // Register the plant and retrieve its ID
                 ID plantID = DataMgr.RegisterCustomPlant<SniperPuff, FireSniperPuff>(Data);
-                CustomCore.RegisterCustomParticle(FireSniperPuff.pt=DataMgr.AllocateID(),assetBundle.GetAsset<GameObject>("BombCloud_vision_pea"));
+                CustomCore.RegisterCustomParticle(FireSniperPuff.pt = DataMgr.AllocateID(), assetBundle.GetAsset<GameObject>("BombCloud_vision_pea"));
 
-                (superBuffID, BaseBuff buff) = RegistryHelper.RegisterCustomQualitativeChangeBuff("枪神降临","火焰狙击小队始终保持合体状态",plantID);
-                (curseBuffID, curseReverseBuffID, BaseBuff curseBuff) = RegistryHelper.RegisterCustomCurseBuff("射击练习","火焰狙击小队爆头所需攻击次数固定在20, 当打出100次爆头时翻转诅咒","攻击对半径5格范围造成爆炸伤害和前方全场索敌",plantID,(Plant p) => FireSniperPuff.CD >= 100);
-                
+                (superBuffID, BaseBuff buff) = RegistryHelper.RegisterCustomQualitativeChangeBuff("枪神降临", "火焰狙击小队始终保持合体状态", plantID);
+                (curseBuffID, curseReverseBuffID, BaseBuff curseBuff) = RegistryHelper.RegisterCustomCurseBuff("射击练习", "火焰狙击小队爆头所需攻击次数固定在20, 当打出100次爆头时翻转诅咒", "攻击对半径5格范围造成爆炸伤害和前方全场索敌", plantID, (Plant p) => FireSniperPuff.CD >= 100);
+
 
                 BaseBuff uniqueUpgradeBuff = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff()
                 {
@@ -103,51 +104,51 @@ namespace FireSniperPuff
                     CustomBuffType = ShootingBuffType.UniqueUpgrade,
                     CustomOnGet = () =>
                     {
-                        if(ShootingManager.Instance.TryGetPlant(plantID, out var plant))
+                        if (ShootingManager.Instance.TryGetPlant(plantID, out var plant))
                         {
-                            plant.shootingLevel += 1;
+                            plant.shootingLevel++;
                         }
                     }
                 });
-                Func<List<BaseBuff>> buffs = () => new List<BaseBuff>()
-                    {
-                        new DamageBuff(plantID),
-                        new SpeedBuff(plantID),
-                        buff, uniqueUpgradeBuff, curseBuff
-                    };
                 config = RegistryHelper.MakeConfigType(
                     new CustomRogueShootingConfig()
-                {
-                    CustomPlantType = plantID,
-                    CustomBuffs=buffs,
-                    CustomReinforcePlant = (Plant plant) =>
                     {
-                        
-                    },
-                    CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
-                });
-                RegistryHelper.AddCustomRogueShootingPlant(plantID,config);
-                var buff2 = () => new List<BaseBuff>()
+                        CustomPlantType = plantID,
+                        CustomBuffs = () => new List<BaseBuff>()
+                        {
+                            new DamageBuff(plantID),
+                            new SpeedBuff(plantID),
+                            buff, uniqueUpgradeBuff, curseBuff
+                        },
+                        CustomReinforcePlant = (Plant plant) =>
+                        {
+                            plant.AddSpeed(PlantSpeedAdder.Shooting, 5f);
+                        },
+                        CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+                    });
+                RegistryHelper.AddCustomRogueShootingPlant(plantID, config);
+                config_2 = RegistryHelper.MakeConfigType(
+                    new CustomRogueShootingConfig()
                     {
-                        new UpgradeBuff(PlantType.SniperPuff,plantID)
-                    };
-                config_2 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
-                {
-                    CustomPlantType = PlantType.SniperPuff, 
-                    CustomBuffs=buff2,
-                    CustomReinforcePlant = (Plant plant) =>
-                    {
-                        
-                    },
-                    CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
-                });
-                RegistryHelper.AddCustomRogueShootingPlant(PlantType.SniperPuff,config_2);
-                RegistryHelper.InjectUpgradeBuff(RSConfigType.SmallPuff,PlantType.SniperPuff);
+                        CustomPlantType = PlantType.SniperPuff,
+                        CustomBuffs = () => new List<BaseBuff>()
+                        {
+                            new UpgradeBuff(PlantType.SniperPuff,plantID)
+                        },
+                        CustomReinforcePlant = (Plant plant) =>
+                        {
+
+                        },
+                        CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+                    });
+                RegistryHelper.AddCustomRogueShootingPlant(PlantType.SniperPuff, config_2);
+                RegistryHelper.InjectUpgradeBuff(RSConfigType.SmallPuff, PlantType.SniperPuff);
+                RegistryHelper.AddCustomEvolutionPathway(PlantType.SmallPuff, PlantType.SmallPuff, PlantType.SniperPuff, plantID);
                 Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
             }
             catch (Exception e)
             {
-                DataMgr.StartUpMessages.Add(MyPluginInfo.PluginName+" load failed.\n"+e.ToString());
+                ModLogger.LogError(MyPluginInfo.PluginName + " load failed.\n" + e.ToString());
             }
         }
     }
@@ -157,78 +158,79 @@ namespace FireSniperPuff
     public class FireSniperPuff : BaseCustomPlant
     {
         public static ParticleType pt;
+        [ResetOnBoardDestroy(0)]
         public static int CD = 0;
         public SniperPuff plant => GetComponent<SniperPuff>();
         public override void OnSpawn()
         {
-            plant.isShort=true;
+            plant.isShort = true;
             if (Lawnf.TravelAdvanced(Plugin.superBuffID))
             {
-                plant.anim.SetBoolString("gather",true);
-                plant.attributeCount=0;
-                plant.attributeCountdown=99999f;
-                plant.theStatus=PlantStatus.Raised;
+                plant.anim.SetBoolString("gather", true);
+                plant.attributeCount = 0;
+                plant.attributeCountdown = 99999f;
+                plant.theStatus = PlantStatus.Raised;
             }
         }
         public override void OnFixedUpdate()
         {
             if (Lawnf.TravelAdvanced(Plugin.superBuffID))
             {
-                plant.anim.SetBoolString("gather",true);
-                plant.attributeCount=0;
-                plant.attributeCountdown=99999f;
-                plant.theStatus=PlantStatus.Raised;
+                plant.anim.SetBoolString("gather", true);
+                plant.attributeCount = 0;
+                plant.attributeCountdown = 99999f;
+                plant.theStatus = PlantStatus.Raised;
             }
         }
         public override Bullet Shoot_Custom()
         {
             if (Lawnf.TravelAdvanced(Plugin.superBuffID))
             {
-                plant.anim.SetBoolString("gather",true);
-                plant.attributeCount=0;
-                plant.attributeCountdown=99999f;
-                plant.theStatus=PlantStatus.Raised;
+                plant.anim.SetBoolString("gather", true);
+                plant.attributeCount = 0;
+                plant.attributeCountdown = 99999f;
+                plant.theStatus = PlantStatus.Raised;
                 goto returning;
             }
-            Vector2 pos=plant.axis.position;
+            Vector2 pos = plant.axis.position;
             var check = (Zombie z) => plant.CheckZombie(z);
-            Zombie target = Lawnf.GetNearestZombie(plant.board,pos,check);
-            if(target==null || target.IsDestroyed() || target.isMindControlled) return null;
-            ParticleManager.Instance.SetParticle(0,target.col.bounds.center,target.theZombieRow,true);
+            Zombie target = Lawnf.GetNearestZombie(plant.board, pos, check);
+            if (target == null || target.IsDestroyed() || target.isMindControlled) return null;
+            ParticleManager.Instance.SetParticle(0, target.col.bounds.center, target.theZombieRow, true);
             plant.shootCount++;
             target.SetJalaed();
-            target.JalaedExplode(true,100);
+            target.JalaedExplode(true, 100);
             if (plant.shootCount >= GetHeadShot())
             {
-                plant.shootCount=0;
-                target.TakeDamage(2100000000,_plant.Cast<IDamageMaker>(),DamageType.MaxDamage,_plant.thePlantType,false);
+                plant.shootCount = 0;
+                target.TakeDamage(10000000, _plant.Cast<IDamageMaker>(), DamageType.Carred, _plant.thePlantType, false);
                 //target.TakeDamage(DamageType.MaxDamage, 2100000000, plant.thePlantType, false);
-                if(Lawnf.TravelAdvanced(Plugin.curseBuffID)) CD++;
+                if (Lawnf.TravelAdvanced(Plugin.curseBuffID)) CD++;
             }
             else
             {
-                target.TakeDamage(_plant.attackDamage,_plant.Cast<IDamageMaker>(),DamageType.NormalAll,_plant.thePlantType,false);
+                target.TakeDamage(_plant.attackDamage, _plant.Cast<IDamageMaker>(), DamageType.NormalAll, _plant.thePlantType, false);
             }
             GameAPP.PlaySound(0x28, 0.2f, 1f);
             plant.attributeCount++;
             if (plant.attributeCount == 14 || Lawnf.TravelAdvanced(Plugin.superBuffID))
             {
-                plant.anim.SetBoolString("gather",true);
-                plant.attributeCount=0;
-                plant.attributeCountdown=Lawnf.TravelAdvanced(Plugin.superBuffID) ? 99999f : 15f;
-                plant.theStatus=PlantStatus.Raised;
+                plant.anim.SetBoolString("gather", true);
+                plant.attributeCount = 0;
+                plant.attributeCountdown = Lawnf.TravelAdvanced(Plugin.superBuffID) ? 99999f : 15f;
+                plant.theStatus = PlantStatus.Raised;
             }
-            returning:
+        returning:
             return null;
         }
         public override Bullet Shoot2_Custom()
         {
             if (Lawnf.TravelAdvanced(Plugin.superBuffID))
             {
-                plant.anim.SetBoolString("gather",true);
-                plant.attributeCount=0;
-                plant.attributeCountdown=99999f;
-                plant.theStatus=PlantStatus.Raised;
+                plant.anim.SetBoolString("gather", true);
+                plant.attributeCount = 0;
+                plant.attributeCountdown = 99999f;
+                plant.theStatus = PlantStatus.Raised;
             }
             // 1. Get axis + board
             Transform axis = plant.axis;
@@ -241,7 +243,7 @@ namespace FireSniperPuff
             Vector2 shootPos = axis.position;
 
             // 3. Find nearest valid zombie
-            var variable= (Zombie z) => plant.CheckZombie(z);
+            var variable = (Zombie z) => plant.CheckZombie(z);
             Zombie target = Lawnf.GetNearestZombie(
                 board,
                 shootPos,
@@ -262,7 +264,7 @@ namespace FireSniperPuff
             LayerMask mask = plant.zombieLayer;
             Collider2D[] hits = Physics2D.OverlapCircleAll(center, Lawnf.TravelAdvanced(Plugin.curseReverseBuffID) ? 10f : 2f, mask);
             var c = plant.shootCount;
-            if(plant.shootCount >= (plant.board.boardTag.rogueShooting ? 11 - plant.shootingLevel : 6) && Lawnf.TravelAdvanced(Plugin.curseBuffID)) CD++;
+            if (plant.shootCount >= (plant.board.boardTag.rogueShooting ? 12 - plant.shootingLevel : 6) && Lawnf.TravelAdvanced(Plugin.curseBuffID)) CD++;
             if (hits != null)
             {
                 foreach (var hit in hits)
@@ -279,10 +281,10 @@ namespace FireSniperPuff
                             z.JalaedExplode(true);
                             if (plant.shootCount >= GetHeadShot())
                             {
-                                c=0;
+                                c = 0;
                                 z.TakeDamage(
                                     DamageType.Carred,   // 0x12
-                                    2100000000,
+                                    10000000,
                                     plant.thePlantType,
                                     false
                                 );
@@ -320,14 +322,17 @@ namespace FireSniperPuff
                 GameAPP.PlaySound(0x28, 0.2f, 1f);
             }
 
-            return null; // no bullet spawned
+            Bullet b = PlantMgr.SetBullet(plant, BulletType.Bullet_ultimateCattail, BulletMoveWay.Free);
+            b.transform.rotation = Quaternion.FromToRotation(b.transform.position, center);
+            b.normalSpeed *= 4;
+            return b;
         }
         private int GetHeadShot()
         {
-            if(Lawnf.TravelAdvanced(Plugin.curseBuffID)) return 20;
+            if (Lawnf.TravelAdvanced(Plugin.curseBuffID)) return 20;
             return plant.board.boardTag.rogueShooting ? 11 - plant.shootingLevel : 6;
         }
-        public override string GetTextString() => $"充能 : {plant.shootCount} / {GetHeadShot()}\n大招冷却 : {plant.attributeCount} / 14\n大招时间 : {(Lawnf.TravelAdvanced(Plugin.superBuffID) ? "∞" : (int)plant.attributeCountdown)} / 15{(Lawnf.TravelAdvanced(Plugin.curseBuffID)?$"\n{CD} / 200" : "")}";
+        public override string GetTextString() => $"充能 : {plant.shootCount} / {GetHeadShot()}\n大招冷却 : {plant.attributeCount} / 14\n大招时间 : {(Lawnf.TravelAdvanced(Plugin.superBuffID) ? "∞" : (int)plant.attributeCountdown)} / 15{(Lawnf.TravelAdvanced(Plugin.curseBuffID) ? $"\n{CD} / 200" : "")}";
     }
 
     public class MyPluginInfo
@@ -336,28 +341,6 @@ namespace FireSniperPuff
         public const string PluginName = "FireSniperPuff";
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
     }
-    /*
-    [HarmonyPatch(typeof(GameLevel.RogueShooting.SmallPuff))]
-    public static class SmallPuff_Patch
-    {
-        [HarmonyPatch(nameof(GameLevel.RogueShooting.SmallPuff.Buffs), MethodType.Getter)]
-        [HarmonyPostfix]
-        public static void PostGetBuffs(ref Il2CppSystem.Collections.Generic.List<BaseBuff> __result)
-        {
-            __result.Add(new UpgradeBuff(PlantType.SmallPuff, PlantType.SniperPuff));
-        }
-    }
-    */
-    [HarmonyPatch(typeof(Board))]
-    public static class Board_Die_Patch
-    {
-        [HarmonyPatch(nameof(Board.Die))]
-        [HarmonyPostfix]
-        public static void Postfix()
-        {
-            FireSniperPuff.CD = 0;
-        }
-    }
     [HarmonyPatch(typeof(SniperPuff))]
     public static class SniperPuff_SearchZombie_Patch
     {
@@ -365,26 +348,26 @@ namespace FireSniperPuff
         [HarmonyPostfix]
         public static void Postfix(SniperPuff __instance, ref GameObject __result)
         {
-            if(!Lawnf.TravelAdvanced(Plugin.curseReverseBuffID)) return;
+            if (!Lawnf.TravelAdvanced(Plugin.curseReverseBuffID)) return;
             __instance.zombieList.Clear();
             float bestDist = float.MaxValue;
             Zombie best = null;
             var pos = __instance.axis.position;
             foreach (var x in Lawnf.GetAllZombies())
             {
-                if(x.IsNotNull() && __instance.CheckZombie(x))
+                if (x.IsNotNull() && __instance.CheckZombie(x))
                 {
-                    float dist = Vector2.Distance(new Vector2(pos.x,pos.y),new Vector2(x.axis.position.x,x.axis.position.y));
-                    if(dist < bestDist)
+                    float dist = Vector2.Distance(new Vector2(pos.x, pos.y), new Vector2(x.axis.position.x, x.axis.position.y));
+                    if (dist < bestDist)
                     {
                         bestDist = dist;
                         best = x;
                     }
                 }
             }
-            if(best != null)
+            if (best != null)
             {
-                __result=best.gameObject;
+                __result = best.gameObject;
             }
         }
     }

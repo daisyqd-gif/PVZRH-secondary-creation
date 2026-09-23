@@ -55,6 +55,10 @@ namespace CustomPlantClass
                     return;
                 }
                 await DelayTask.WaitForFixedUpdate(token);
+                if(_plant == null)
+                {
+                    return;
+                }
                 _maxHealth = _plant.thePlantMaxHealth;
                 _pfLockedMaxHealth = _plant.thePlantMaxHealth;
             }

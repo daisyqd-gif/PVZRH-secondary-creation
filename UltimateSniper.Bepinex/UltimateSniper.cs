@@ -64,7 +64,7 @@ namespace UltimateSniper
                 PlantMgr.SetBullet(plant,UltimateExplosivePea.BULLET_ID,BulletMoveWay.Free,Vector2.zero,i*60f).normalSpeed*=2;
             }
         }
-        public override void AnimShoot_Custom() => plant.Shoot1();//use original shooting pipeline
+        public override Bullet Shoot_Custom() => plant.Shoot1();//use original shooting pipeline
         public override string GetTextString() => "充能:" + hitCount;
     }
     [HarmonyPatch(typeof(FireSniper), nameof(FireSniper.AttackZombie))]

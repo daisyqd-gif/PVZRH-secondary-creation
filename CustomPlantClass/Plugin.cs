@@ -167,7 +167,7 @@ namespace CustomPlantClass
     {
         public const string PluginGuid = "CustomPlantClass.Bepinex";
         public const string PluginName = "CustomPlantClass";
-        public const string PluginVersion = "1.0.0";
-        public const string TargetVersion = "3.9";
+        public const string PluginVersion = "1.0.1";
+        public const string TargetVersion = "4.0";
     }
 }

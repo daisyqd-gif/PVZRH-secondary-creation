@@ -20,6 +20,8 @@ global using Core;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.Level;
 using System.IO;
+using CustomPlantClass.RogueShootingManager;
+using GameLevel.RogueShooting;
 
 namespace MegaGatlingExpansion
 {
@@ -37,6 +39,9 @@ namespace MegaGatlingExpansion
         public static List<ID> CustomSuperPlants=new();
         public static BaseCustomLevelData level;
         public static Material? FontOutlineMaterial;
+        public static BuffID AngryBuff;
+        public static BuffID CurseBuff;
+        public static BuffID ReversedBuff;
         public class BoardEnablerEffect : CustomLevelComponent
         {
             public static Sprite GetBGSprite()
@@ -1405,6 +1410,49 @@ namespace MegaGatlingExpansion
             DataMgr.RegisterCustomBossHealthSlider((ZombieType)9002,assetBundle.GetAsset<GameObject>("ElectricSlider"));
             DataMgr.RegisterCustomBossHealthSlider((ZombieType)9004,assetBundle.GetAsset<GameObject>("CherryGSlider"));
             DataMgr.RegisterCustomBossHealthSlider((ZombieType)9006,assetBundle.GetAsset<GameObject>("DoomGSlider"));
+
+            (AngryBuff,BaseBuff qbuff) = RegistryHelper.RegisterCustomQualitativeChangeBuff("大哥生气了","子弹将会升级",PlantTypeExpand.MegaGatlingPea);
+            (CurseBuff,ReversedBuff,BaseBuff cbuff) = RegistryHelper.RegisterCustomCurseBuff("愤怒储存","大哥无法开大, 当大哥发射500颗子弹时反转诅咒","大哥将无限开大",PlantTypeExpand.MegaGatlingPea,(p)=>p.shootingCurse>=500);
+            BaseBuff ubuff = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff()
+            {
+                CustomPlantType = PlantTypeExpand.MegaGatlingPea,
+                CustomTitle = "进化：超级宇宙无敌雷霆子弹",
+                CustomDescription = "大哥的子弹数 +1",
+                CustomBuffType = ShootingBuffType.UniqueUpgrade,
+                CustomOnGet = () =>
+                {
+                    if( ShootingManager.Instance != null && ShootingManager.Instance.TryGetPlant(PlantTypeExpand.MegaGatlingPea, out var p))
+                    {
+                        p.shootingLevel ++;
+                    }
+                }
+            });
+            BaseConfig plantCfg = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
+            {
+                CustomPlantType = PlantTypeExpand.MegaGatlingPea,
+                CustomBuffs = () => new()
+                {
+                    new DamageBuff(PlantTypeExpand.MegaGatlingPea),
+                    new SpeedBuff(PlantTypeExpand.MegaGatlingPea),
+                    ubuff, qbuff, cbuff
+                },
+                CustomReinforcePlant = (p) => { },
+                CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+            });
+            BaseConfig oCfg = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
+            {
+                CustomPlantType = PlantType.GatlingPea,
+                CustomBuffs = () => new()
+                {
+                    new UpgradeBuff(PlantType.GatlingPea,PlantTypeExpand.MegaGatlingPea)
+                },
+                CustomReinforcePlant = (p) => { },
+                CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
+            });
+            RegistryHelper.AddCustomRogueShootingPlant(PlantTypeExpand.MegaGatlingPea, plantCfg);
+            RegistryHelper.AddCustomRogueShootingPlant(PlantType.GatlingPea, oCfg);
+            RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter,PlantType.GatlingPea);
+            RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.GatlingPea, PlantTypeExpand.MegaGatlingPea);
             Log.LogInfo($"{PluginGuid} {PluginVersion} loaded.");
         }
     }

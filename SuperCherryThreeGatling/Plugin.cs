@@ -7,6 +7,10 @@ global using System.Collections.Generic;
 global using CustomPlantClass;
 global using Random = UnityEngine.Random;
 global using CustomPlantClass.Main;
+using System.Threading.Tasks;
+using System;
+using System.Reflection;
+using CustomPlantClass.Runtime.Tasks;
 
 namespace SuperCherryThreeGatling
 {
@@ -83,61 +87,72 @@ namespace SuperCherryThreeGatling
     public class SuperCherryThreeGatling : BaseCustomPlant
     {
         public override Transform FindShoot() => transform.FindChild("headPos2/ThreePeater_head2/ThreePeater_mouth/Shoot");
-        public override int GetDamage()
+        public override int AttackDamage
         {
-            if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
-            return _plant.attackDamage;
+            get
+            {
+                if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
+                return _plant.attackDamage;
+            }
         }
         public float GetOffset()
         {
             if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return 0;
             return Random.Range(-0.25f,0.25f);
         }
-        public override IEnumerator SuperShoot()
+        protected override bool IsAsyncPF => true;
+        protected override async Task SuperShoot_Async()
         {
-            _plant.anim.SetBoolString("shooting",true);
-            for (int i = 0; i < 250; i++)
+            try
             {
-                Vector2 pos=_plant.shoot.position;
-                // 3 bullets per burst
-                if (_plant.thePlantRow == 0)
+                _plant.anim.SetBoolString("shooting",true);
+                for (int i = 0; i < 250; i++)
                 {
-                    var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset()+0.15f,_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
-                    b1.Damage=GetDamage();
-                    b1.fromType=_plant.thePlantType;
-                    b1.normalSpeed=Random.Range(12f,14f);
-                }
-                else
-                {
-                    var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow-1,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight_threePeater);
-                    b1.Damage=GetDamage();
-                    b1.fromType=_plant.thePlantType;
-                    b1.normalSpeed=Random.Range(12f,14f);
-                }
-                var b2=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
-                b2.Damage=GetDamage();
-                b2.fromType=_plant.thePlantType;
-                b2.normalSpeed=Random.Range(12f,14f);
-                if (_plant.thePlantRow == _plant.board.rowNum-1)
-                {
-                    var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset()-0.15f,_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
-                    b3.Damage=GetDamage();
-                    b3.fromType=_plant.thePlantType;
-                    b3.normalSpeed=Random.Range(12f,14f);
-                }
-                else
-                {
-                    var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow+1,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight_threePeater);
-                    b3.Damage=GetDamage();
-                    b3.fromType=_plant.thePlantType;
-                    b3.normalSpeed=Random.Range(12f,14f);
-                }
-                _plant.thePlantAttackCountDown=10f;
+                    Vector2 pos=_plant.shoot.position;
+                    // 3 bullets per burst
+                    if (_plant.thePlantRow == 0)
+                    {
+                        var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset()+0.15f,_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
+                        b1.Damage=AttackDamage;
+                        b1.fromType=_plant.thePlantType;
+                        b1.normalSpeed=Random.Range(12f,14f);
+                    }
+                    else
+                    {
+                        var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow-1,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight_threePeater);
+                        b1.Damage=AttackDamage;
+                        b1.fromType=_plant.thePlantType;
+                        b1.normalSpeed=Random.Range(12f,14f);
+                    }
+                    var b2=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
+                    b2.Damage=AttackDamage;
+                    b2.fromType=_plant.thePlantType;
+                    b2.normalSpeed=Random.Range(12f,14f);
+                    if (_plant.thePlantRow == _plant.board.rowNum-1)
+                    {
+                        var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset()-0.15f,_plant.thePlantRow,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight);
+                        b3.Damage=AttackDamage;
+                        b3.fromType=_plant.thePlantType;
+                        b3.normalSpeed=Random.Range(12f,14f);
+                    }
+                    else
+                    {
+                        var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y+GetOffset(),_plant.thePlantRow+1,BulletType.Bullet_pea_bombCherry,BulletMoveWay.MoveRight_threePeater);
+                        b3.Damage=AttackDamage;
+                        b3.fromType=_plant.thePlantType;
+                        b3.normalSpeed=Random.Range(12f,14f);
+                    }
+                    _plant.thePlantAttackCountDown=10f;
 
-                yield return new WaitForSeconds(0.01f);
+                    await DelayTask.DelayScaled(0.02f,()=>_plant.attributeSpeed,token);
+                }
+                _plant.thePlantAttackCountDown=0.05f;
+                _plant.anim.SetBoolString("shooting",false);
             }
-            _plant.thePlantAttackCountDown=0.05f;
-            _plant.anim.SetBoolString("shooting",false);
+            catch( Exception e )
+            {
+                ModLogger.LogError(Assembly.GetExecutingAssembly(),e.Message);
+            }
         }
         public override Bullet Shoot_Custom()
         {
@@ -150,28 +165,28 @@ namespace SuperCherryThreeGatling
             if (_plant.thePlantRow == 0)
             {
                 var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y+0.15f,_plant.thePlantRow,BulletType.Bullet_pea_threeCherry,BulletMoveWay.MoveRight);
-                b1.Damage=GetDamage();
+                b1.Damage=AttackDamage;
                 b1.fromType=_plant.thePlantType;
             }
             else
             {
                 var b1=CreateBullet.Instance.SetBullet(pos.x,pos.y,_plant.thePlantRow-1,BulletType.Bullet_pea_threeCherry,BulletMoveWay.MoveRight_threePeater);
-                b1.Damage=GetDamage();
+                b1.Damage=AttackDamage;
                 b1.fromType=_plant.thePlantType;
             }
             var b2=CreateBullet.Instance.SetBullet(pos.x,pos.y,_plant.thePlantRow,BulletType.Bullet_pea_threeCherry,BulletMoveWay.MoveRight);
-            b2.Damage=GetDamage();
+            b2.Damage=AttackDamage;
             b2.fromType=_plant.thePlantType;
             if (_plant.thePlantRow == _plant.board.rowNum)
             {
                 var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y-0.15f,_plant.thePlantRow,BulletType.Bullet_pea_threeCherry,BulletMoveWay.MoveRight);
-                b3.Damage=GetDamage();
+                b3.Damage=AttackDamage;
                 b3.fromType=_plant.thePlantType;
             }
             else
             {
                 var b3=CreateBullet.Instance.SetBullet(pos.x,pos.y,_plant.thePlantRow+1,BulletType.Bullet_pea_threeCherry,BulletMoveWay.MoveRight_threePeater);
-                b3.Damage=GetDamage();
+                b3.Damage=AttackDamage;
                 b3.fromType=_plant.thePlantType;
             }
             return b2;

@@ -51,7 +51,6 @@ namespace MegaGatlingExpansion
                     b2.fromType = plant.thePlantType;
                     b2.theExistTime += 0.5f;
                 }
-                count++;
                 TryAddHeat(1);
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();

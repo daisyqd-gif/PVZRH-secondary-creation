@@ -28,7 +28,7 @@ namespace DaYun
                 return true;
 
             if(zombie.theZombieType==ZombieType.HorseBoss || zombie.theZombieType==ZombieType.ZombieBoss || zombie.theZombieType==ZombieType.ZombieBoss2)
-            zombie.TakeDamage(999,__instance.Cast<IDamageMaker>(),DamageType.Shieldless,__instance.thePlantType);
+            zombie.TakeDamage(999999,__instance.Cast<IDamageMaker>(),DamageType.Shieldless,__instance.thePlantType);
             if(TypeMgr.IsBossZombie(zombie.theZombieType)) return true;
 
             if(TypeMgr.BigZombie(zombie.theZombieType)) zombie.Crashed();

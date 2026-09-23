@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CustomPlantClass.Runtime;
 using CustomPlantClass.Runtime.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
@@ -12,7 +13,6 @@ namespace MegaGatlingExpansion
         public PlantTypeExpand type;
         public Plant plant => GetComponent<Shooter>();
         public bool startPF = true;
-        public int count = 0;
         public float Heat = 0f;
         public float OverHeatTmr = 0f;
         public float PFChance = 10f;
@@ -72,12 +72,14 @@ namespace MegaGatlingExpansion
         public virtual BulletType GetBulletType_Custom()
         {
             if(isElectric) return BulletProfile.ElectricPea;
+            if(Lawnf.TravelAdvanced(Plugin.AngryBuff)) return AngryBullets.GetRandomItem();
             return AllCustomBullets[Random.Range(0, AllCustomBullets.Length)];
         }
 
         public virtual BulletType GetBulletType_Custom_PF()
         {
             if(isElectric) return BulletProfile.ElectricPea;
+            if(Lawnf.TravelAdvanced(Plugin.AngryBuff)) return AngryBullets.GetRandomItem();
             return GetBulletType_Custom();
         }
 
@@ -98,12 +100,19 @@ namespace MegaGatlingExpansion
             BulletType.Bullet_pea
         };
 
+        private static readonly BulletType[] AngryBullets =
+        {
+            BulletProfile.PrimalPea,
+            BulletProfile.GooPea,
+            BulletProfile.ElectricPea
+        };
+
         // -------------------------
         //  CUSTOM SHOOT LOGIC
         // -------------------------
         public virtual IEnumerator Shooting_Custom()
         {
-            for (int i = 0; i < 4 + AttributeCount_Custom; i++)
+            for (int i = 0; i < 4 + AttributeCount_Custom+_plant.shootingLevel; i++)
             {
                 if (plant == null || plant.IsDestroyed()) yield break;
                 Vector3 pos = plant.shoot.position;
@@ -115,7 +124,7 @@ namespace MegaGatlingExpansion
                 if (b.theBulletType == BulletType.Bullet_doom_big || b.theBulletType == BulletType.Bullet_doom_big_ulti) { b.theStatus = BulletStatus.Doom_big; b.Damage = GetDmg() * 6; }
                 else b.Damage = GetDmg();
                 b.fromType = plant.thePlantType;
-                count++;
+                plant.shootingCurse ++;
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();
@@ -153,46 +162,54 @@ namespace MegaGatlingExpansion
         protected override bool IsAsyncPF => true;
         protected override async Task SuperShoot_Async()
         {
-            plant.anim.SetBool("shooting", true);
-
-            int total = 150 + 10;
-
-            if (plant.skinType != 0)
+            try
             {
-                total += 30;
-            }
+                plant.anim.SetBool("shooting", true);
 
-            for (int i = 0; i < total/5; i++)
-            {
-                if (plant == null || plant.IsDestroyed()) return;
-                Vector3 pos = plant.shoot.position;
-                for (int j = 0; j < BulletCountPF * 5; j++)
+                int total = 150 + 10;
+
+                if (plant.skinType != 0)
                 {
-                    Bullet b = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow,
-                        GetBulletType_Custom_PF(),
-                        GetBulletMoveWay()
-                    );
-                    if (b.theBulletType == BulletType.Bullet_doom_big || b.theBulletType == BulletType.Bullet_doom_big_ulti) { b.theStatus = BulletStatus.Doom_big; b.Damage = GetDmg() * 6; }
-                    else b.Damage = GetDmg();
-                    b.fromType = plant.thePlantType;
-                    b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                    total += 30;
                 }
-                count++;
 
-                await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                for (int i = 0; i < total/5; i++)
+                {
+                    if (plant == null || plant.IsDestroyed()) return;
+                    Vector3 pos = plant.shoot.position;
+                    for (int j = 0; j < (BulletCountPF+_plant.shootingLevel) * 5; j++)
+                    {
+                        Bullet b = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f),
+                            pos.y + Random.Range(-0.25f,0.25f),
+                            plant.thePlantRow,
+                            GetBulletType_Custom_PF(),
+                            GetBulletMoveWay()
+                        );
+                        if (b.theBulletType == BulletType.Bullet_doom_big || b.theBulletType == BulletType.Bullet_doom_big_ulti) { b.theStatus = BulletStatus.Doom_big; b.Damage = GetDmg() * 6; }
+                        else b.Damage = GetDmg();
+                        b.fromType = plant.thePlantType;
+                        b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                    }
+
+                    await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                }
+
+                if (!startPF) AttributeCount_Custom = Mathf.Min(3, AttributeCount_Custom + 1);
+                ReplaceSprite_Custom();
+
+                plant.anim.SetBool("shooting", false);
             }
-
-            if (!startPF) AttributeCount_Custom = Mathf.Min(3, AttributeCount_Custom + 1);
-            ReplaceSprite_Custom();
-
-            plant.anim.SetBool("shooting", false);
+            catch ( Exception e)
+            {
+                ModLogger.LogError(e.Message);
+            }
         }
         public override void SuperEnd()
         {
             base.SuperEnd();
-            if(plant.starUp || PFChance>=100) Restart();
+            if(plant.starUp || PFChance>=100 || Lawnf.TravelAdvanced(Plugin.ReversedBuff)) Restart();
         }
 
         public void Restart()

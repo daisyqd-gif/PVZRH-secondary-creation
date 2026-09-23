@@ -1,7 +1,9 @@
 using System.IO;
+using System.Linq;
 using Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using UI;
 using Unity.VisualScripting;
 
 namespace CustomPlantClass.RogueShootingManager
@@ -11,7 +13,24 @@ namespace CustomPlantClass.RogueShootingManager
         internal static int classIndex=0;
         public static Dictionary<string,CustomRogueShootingConfig> Specs = new();
         public static Dictionary<string,CustomRogueShootingBuff> Buffs = new();
-        //planning: use the dictionary lookup approach but modify it to use a compile time set string inside the class
+        public static Dictionary<PlantType,HashSet<CustomRogueShootingBuff>> RogueBuffs = new();
+
+        internal static Dictionary<PlantType, ShootingAlmanacPlant> plants = new();
+	    internal static Dictionary<PlantType, List<PlantType>> routes = new();
+	    internal static Dictionary<PlantType, string> plantRoles = new();
+	    internal static Dictionary<PlantType, string> portraitPaths = new();
+	    internal static Dictionary<PlantType, Sprite> portraitSprites = new();
+	    internal static Dictionary<PlantType, GameObject> portraitPreviews = new();
+	    internal static Dictionary<ShootingAlmanacCategory, List<ShootingAlmanacEntry>> categories = new()
+        {
+            [ShootingAlmanacCategory.Plants] = new(), 
+            [ShootingAlmanacCategory.Other] = new(), 
+            [ShootingAlmanacCategory.SuperUpgrade] = new(), 
+            [ShootingAlmanacCategory.Trials] = new(), 
+            [ShootingAlmanacCategory.Expert] = new(), 
+            [ShootingAlmanacCategory.Tactics] = new()
+        };
+        
         public static BaseConfig MakeConfigType(CustomRogueShootingConfig spec)
         {
             string className = Guid.NewGuid().ToString("N");
@@ -24,10 +43,11 @@ namespace CustomPlantClass.RogueShootingManager
                 .Replace("{{GUID}}", className);
 
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
-            var refs = new List<MetadataReference>();
-
-            // Load your own assembly
-            refs.Add(MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location));
+            var refs = new List<MetadataReference>
+            {
+                // Load your own assembly
+                MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location)
+            };
 
             // Load all managed assemblies under GameRoot
             foreach (var dll in Directory.EnumerateFiles(Paths.GameRootPath, "*.dll", SearchOption.AllDirectories))
@@ -70,6 +90,8 @@ namespace CustomPlantClass.RogueShootingManager
             ClassInjector.RegisterTypeInIl2Cpp(t);
             var cashe = Specs[className];
             Specs[className] = cashe;
+
+            RogueConfigs[spec.CustomPlantType] = spec;
             
             return (BaseConfig)Activator.CreateInstance(t);
         }
@@ -146,8 +168,82 @@ namespace CustomPlantClass.RogueShootingManager
 
             // 11. Instantiate IL2CPP buff
             var instance = Activator.CreateInstance(t);
-
-            return (BaseBuff)instance;
+            var output = (BaseBuff)instance;
+            if (RogueBuffs.TryGetValue(buff.CustomPlantType, out var p))
+            {
+                p.Add(buff);
+            }
+            else
+            {
+                RogueBuffs[buff.CustomPlantType] = new()
+                {
+                    buff
+                };
+            }
+            return output;
+        }
+        public static void RegisterBuffsForPlant(PlantType thePlantType, bool damageBuff = true, bool speedBuff = true, bool starUp = true,params CustomRogueShootingBuff[] buffs)
+        {
+            if (!RogueBuffs.TryGetValue(thePlantType, out var p))
+            {
+                foreach(var i in buffs)
+                {
+                    p.Add(i);
+                }
+                if (damageBuff)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "强化：力量",
+                        CustomDescription = ""
+                    });
+                }
+                if (speedBuff)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "强化：速度",
+                        CustomDescription = ""
+                    });
+                }
+                if (starUp)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "超进化：星辉",
+                        CustomDescription = ""
+                    });
+                }
+            }
+            else
+            {
+                RogueBuffs[thePlantType] = [.. buffs];
+                p=RogueBuffs[thePlantType];
+                if (damageBuff)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "强化：力量",
+                        CustomDescription = ""
+                    });
+                }
+                if (speedBuff)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "强化：速度",
+                        CustomDescription = ""
+                    });
+                }
+                if (starUp)
+                {
+                    p.Add(new()
+                    {
+                        CustomTitle = "超进化：星辉",
+                        CustomDescription = ""
+                    });
+                }
+            }
         }
         internal static string LoadEmbeddedText(string resourceName)
         {
@@ -164,14 +260,102 @@ namespace CustomPlantClass.RogueShootingManager
             experts.Add(thePlantType);
             AddCustomRogueShootingPlant(thePlantType,config);
         }
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        public static void AddCustomExpertPlant(PlantType thePlantType, BaseConfig config, int cost)
+        {
+            
+        }
+        public static Dictionary<PlantType,CustomRogueShootingConfig> RogueConfigs = new();
         public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config)
         {
             roguePlants.TryAdd(thePlantType,config);
+        }
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
+        {
+            
         }
         public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config)
         {
             CustomBasePlants.Add(thePlantType);
             AddCustomRogueShootingPlant(thePlantType,config);
+        }
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
+        {
+            
+        }
+        internal static Dictionary<PlantType,Il2CppSystem.Collections.Generic.List<PlantType>> evolutionPathways = new();
+        /// <summary>
+        /// Placeholder
+        /// Please register the upgrade buffs separately.
+        /// </summary>
+        /// <param name="thePlantType">The plant type of the starting plant</param>
+        /// <param name="order"> Ascending from base->intermediate->final</param>
+        public static void AddCustomEvolutionPathway(PlantType thePlantType, params PlantType[] order)
+        {
+            // order must begin with the starting plant
+            if (order.Length < 2)
+            {
+                ModLogger.LogError("[EVOLUTION] Pathway must contain at least start -> next");
+                return;
+            }
+
+            if (order[0] != thePlantType)
+            {
+                ModLogger.LogError($"[EVOLUTION] First element of order[] must be the starting plant ({thePlantType})");
+                return;
+            }
+
+            // Build chain: order[i] -> order[i+1]
+            for (int i = 0; i < order.Length - 1; i++)
+            {
+                var parent = order[i];
+                var child  = order[i + 1];
+
+                if (!evolutionPathways.TryGetValue(parent, out var list))
+                    list = evolutionPathways[parent] = new Il2CppSystem.Collections.Generic.List<PlantType>();
+
+                list.Add(child);
+
+                ModLogger.LogInfo($"[EVOLUTION] {parent} -> {child}");
+            }
+        }
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        public static void AddCustomBattleBuff(string name, string desc, int cost, object unknown_type)
+        {
+            
+        }
+        internal static List<(string name, string desc, Func<ShootingManager,bool> canGet, Action<ShootingManager> onGet)> CustomMissionBuffs = new();
+        public static AdvBuff AddCustomCurseMissionBuff(
+            string name_formatted, 
+            string desc, 
+            Action<ShootingManager> onGet)
+        {
+            if (string.IsNullOrWhiteSpace(name_formatted))
+                throw new ArgumentException("Buff name cannot be empty.", nameof(name));
+
+            // Sanitize input (remove whitespace, weird characters, etc.)
+            name_formatted = name_formatted.Trim();
+
+            // Format according to Rogue Shooting’s new naming rules
+            string displayTitle = $"试炼：{name_formatted}";
+            string internalName = $"试炼 - {name_formatted}：{desc}";
+
+            // Register buff
+            BuffID buff = Compatibility.CustomCore_Old.RegisterCustomBuff(
+                internalName,
+                BuffType.AdvancedBuff,
+                () => Board.Instance != null && Board.Instance.boardTag.rogueShooting,
+                5000,
+                PlantType.ZombieEndoFlame
+            );
+
+            // Add to your mission buff list
+            CustomMissionBuffs.Add((displayTitle, desc, mgr => !Lawnf.TravelAdvanced(buff), onGet));
+
+            // TODO: return actual AdvBuff once Rogue Shooting update drops
+            return buff;
         }
         public static void InjectUpgradeBuff(RSConfigType BasePlant, PlantType resultPlant)
         {
@@ -271,6 +455,7 @@ namespace CustomPlantClass.RogueShootingManager
                 }
             });
             CurseBuffInfo[buff_Curse]=(buff_Reversed,CanReverse,OnCurse!=null ? OnCurse : ()=>{}, OnReverseEvent!=null ? OnReverseEvent : ()=>{});
+            //categories[ShootingAlmanacCategory.Trials].Add(new())
             return (buff_Curse,buff_Reversed,rogueBuff);
         }
         public static string GetStringFromRole(Roles role)
@@ -299,6 +484,8 @@ namespace CustomPlantClass.RogueShootingManager
                 return $"超进化：{Title}";
                 case ShootingBuffType.CurseBuff:
                 return $"诅咒：{Title}";
+                case ShootingBuffType.MissionBuff:
+                return $"试炼：{Title}";
             }
         }
         public static (BuffID AdvBuff,BaseBuff buffConfig) RegisterCustomQualitativeChangeBuff(string name, string desc, PlantType thePlantType, Action OnGetBuff = null)
@@ -331,249 +518,6 @@ namespace CustomPlantClass.RogueShootingManager
             catch
             {
                 return false;
-            }
-        }
-    }
-    public class CustomShootingCurseComponent : MonoBehaviour
-    {
-        BuffID reversed;
-        BuffID curseBuff;
-        Func<Plant,bool> canreverse;
-        Action onreverse;
-        PlantType thePlantType;
-        bool done = false;
-        public void Init(BuffID curseBuff, BuffID reversed,Func<Plant,bool> canreverse,Action onreverse,PlantType thePlantType)
-        {
-            this.curseBuff = curseBuff;
-            this.reversed=reversed;
-            this.canreverse = canreverse;
-            this.thePlantType = thePlantType;
-            this.onreverse = onreverse;
-        }
-        public void FixedUpdate()
-        {
-            if(ShootingManager.Instance.TryGetPlant(thePlantType,out Plant plant) && canreverse(plant) && !done)
-            {
-                done = true;
-                TravelMgr.Instance.GetNormalBuff(reversed);
-                if(onreverse!=null)onreverse();
-                if (TravelMgr.Instance.data.advBuffs.Contains(curseBuff))
-                {
-                    TravelMgr.Instance.data.advBuffs.Remove(curseBuff);
-                }
-                InGameText.Instance.ShowText($"{Lawnf.GetName(thePlantType)}的诅咒效果已反转",1.5f,true);
-                Destroy(this);
-            }
-        }
-    }
-    public enum Roles
-    {
-        Attacker = 0,
-        Supporter = 1,
-        Defense = 2,
-        Insta = 3,
-        Producer = 4
-    }
-    public enum RSConfigType
-    {
-        Peashooter,
-        CherryGatling,
-        HelmetGatling,
-        //terminal plant, it is not recommended to add entries here
-        UltimateGatling,
-        //terminal plant, it is not recommended to add entries here
-        UltimateHelmetGatling,
-        LanternSplit,
-        //terminal plant, it is not recommended to add entries here
-        UltimateLanternSplit,
-        SniperPea,
-        //terminal plant, it is not recommended to add entries here
-        DoomSniper,
-        //terminal plant, it is not recommended to add entries here
-        FireSniper,
-        SnowPeaShooter,
-        //terminal plant, it is not recommended to add entries here
-        MagicSnowPea2,
-        WallNut,
-        SuperChomper,
-        //terminal plant, it is not recommended to add entries here
-        UltimateChomper,
-        TallNut,
-        //terminal plant, it is not recommended to add entries here
-        UltimateTallNut,
-        CabbageNut,
-        //terminal plant, it is not recommended to add entries here
-        MelonNut,
-        //terminal plant, it is not recommended to add entries here
-        MagnetNut,
-        PotatoMine,
-        PeaMine,
-        //terminal plant, it is not recommended to add entries here
-        ThreeMine,
-        Chomper,
-        CherryChomper,
-        //terminal plant, it is not recommended to add entries here
-        DoomChomper,
-        BigChomper,
-        //terminal plant, it is not recommended to add entries here
-        UltimateBigChomper,
-        SmallPuff,
-        IcePuff,
-        //terminal plant, it is not recommended to add entries here
-        SnowGatlingPuff,
-        IronPuff,
-        //terminal plant, it is not recommended to add entries here
-        IFVIronPuff,
-        FumeShroom,
-        IceFumeShroom,
-        //terminal plant, it is not recommended to add entries here
-        UltimateFume,
-        GarlicFume,
-        //terminal plant, it is not recommended to add entries here
-        UltimatePoisonFume,
-        GloomShroom,
-        //terminal plant, it is not recommended to add entries here
-        UltimateGloom,
-        HypnoShroom,
-        HypnoNut,
-        //terminal plant, it is not recommended to add entries here
-        HypnoEmperor,
-        ScaredyShroom,
-        SuperHypno,
-        //terminal plant, it is not recommended to add entries here
-        UltimateHypno,
-        ScaredyDoom,
-        //terminal plant, it is not recommended to add entries here
-        UltimateDoomScared,
-        Squash,
-        Squalour,
-        //terminal plant, it is not recommended to add entries here
-        CattailLour,
-        CherrySquash,
-        //terminal plant, it is not recommended to add entries here
-        NuclearSquash,
-        ThreePeater,
-        ThreeSquash,
-        //terminal plant, it is not recommended to add entries here
-        SuperThreePeater,
-        BigGatling,
-        //terminal plant, it is not recommended to add entries here
-        UltimateBigGatling,
-        Caltrop,
-        SpikeRock,
-        //terminal plant, it is not recommended to add entries here
-        ObsidianSpike,
-        CaltropNut,
-        //terminal plant, it is not recommended to add entries here
-        ObsidianWallNut,
-        Cactus,
-        DoomCactus,
-        //terminal plant, it is not recommended to add entries here
-        UltimateCactus,
-        StarFruit,
-        SuperStar,
-        //terminal plant, it is not recommended to add entries here
-        UltimateStar,
-        SwordStar,
-        //terminal plant, it is not recommended to add entries here
-        AbyssSwordStar,
-        Cabbagepult,
-        GoldCabbage,
-        UltimateCabbage,
-        CabbageCannon,
-        //terminal plant, it is not recommended to add entries here
-        UltimateCabbageCannon,
-        Melonpult,
-        SuperMelon,
-        //terminal plant, it is not recommended to add entries here
-        UltimateMelon,
-        FireMelon,
-        //terminal plant, it is not recommended to add entries here
-        UltimateSpring,
-        SilverMelon,
-        GoldMelon,
-        WinterMelon,
-        //terminal plant, it is not recommended to add entries here
-        UltimateWinterMelon,
-        Cornpult,
-        PortalCorn,
-        //terminal plant, it is not recommended to add entries here
-        UltimateCorn,
-        Umbrellaleaf,
-        LanternUmbrella,
-        //terminal plant, it is not recommended to add entries here
-        LaserUmbrella,
-        Bamboo,
-        LotusBamboo,
-        //terminal plant, it is not recommended to add entries here
-        UltimateBamboo,
-        SpruceShooter,
-        SuperSpruce,
-        //terminal plant, it is not recommended to add entries here
-        UltimateSpruce,
-        //expert plant, it is not recommended to add entries here
-        UltimateSniperGatling,
-        //expert plant, it is not recommended to add entries here
-        UltimateMinigun,
-        //expert plant, it is not recommended to add entries here
-        UltimateBlover,
-        //expert plant, it is not recommended to add entries here
-        EmeraleBlover,
-        //expert plant, it is not recommended to add entries here
-        UltimateStarTorch
-    }
-    public struct CustomRogueShootingConfig
-    {
-        public CustomRogueShootingConfig()
-        {
-        }
-
-        public PlantType CustomPlantType { get; set; } = PlantType.Nothing;
-        public Func<List<BaseBuff>> CustomBuffs { get; set; } = () => new();
-        public Action<Plant> CustomReinforcePlant { get; set; } = null;
-        public string CustomRole { get; set; } = "";
-    }
-    public struct CustomRogueShootingBuff
-    {
-        public CustomRogueShootingBuff()
-        {
-        }
-
-        public PlantType CustomPlantType { get; set; } = PlantType.Nothing;
-        public string CustomTitle { get; set; } = "";
-        public string CustomDescription { get; set; } = "";
-        public ShootingBuffType CustomBuffType { get; set; } = ShootingBuffType.UniqueUpgrade;
-        public Action CustomOnGet { get; set; } = () => {};
-    }
-    [HarmonyPatch(typeof(ShootingManager))]
-    public static class ShootingManagerPatch
-    {
-        [HarmonyPatch(nameof(ShootingManager.Awake))]
-        [HarmonyPrefix]
-        public static void PreShootingManager(ShootingManager __instance)
-        {
-            __instance.AllPlants.Merge(RegistryHelper.CustomBasePlants);
-        }
-        [HarmonyPatch(nameof(ShootingManager.Awake))]
-        [HarmonyPostfix]
-        public static void PostShootingManager(ShootingManager __instance)
-        {
-            __instance.ExpertPlants.Merge(RegistryHelper.experts);
-        }
-
-        [HarmonyPatch(nameof(ShootingManager.ShowBuff))]
-        [HarmonyPrefix]
-        public static void ShowBuff()
-        {
-            if (Config.configs != null)
-            {
-                foreach( var i in RegistryHelper.roguePlants )
-                {
-                    if (!Config.configs.ContainsKey(i.Key))
-                    {
-                        Config.configs.Add(i.Key, i.Value);
-                    }
-                }
             }
         }
     }

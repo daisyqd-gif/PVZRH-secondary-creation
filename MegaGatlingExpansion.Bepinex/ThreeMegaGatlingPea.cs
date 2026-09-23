@@ -14,101 +14,108 @@ namespace MegaGatlingExpansion
         }
         protected override async Task SuperShoot_Async()
         {
-            isPF = true;
-            plant.invincible = true;
-            plant.uncrashable = true;
-            plant.anim.SetBool("shooting", true);
-            plant.flashCountDown = 5f;
-            plant.isFlashing = true;
-
-            int total = 150 + 10 * BulletCountPF;
-
-            if (plant.skinType != 0)
+            try
             {
-                total += 30;
-            }
+                isPF = true;
+                plant.invincible = true;
+                plant.uncrashable = true;
+                plant.anim.SetBool("shooting", true);
+                plant.flashCountDown = 5f;
+                plant.isFlashing = true;
 
-            for (int i = 0; i < total; i++)
+                int total = 150 + 10 * BulletCountPF;
+
+                if (plant.skinType != 0)
+                {
+                    total += 30;
+                }
+
+                for (int i = 0; i < total; i++)
+                {
+                    if (plant == null || plant.IsDestroyed()) return;
+                    Vector3 pos = plant.shoot.position;
+                    Bullet b = CreateBullet.Instance.SetBullet(
+                        pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                        GetBulletType_Custom(),
+                        GetBulletMoveWay()
+                    );
+
+                    b.Damage = plant.attackDamage;
+                    b.fromType = plant.thePlantType;
+                    b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                    
+                    if(plant.thePlantRow < 0)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                            GetBulletType_Custom(),
+                            Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight
+                        );
+
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                        b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow-1,
+                            GetBulletType_Custom(),
+                            Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight_threePeater
+                        );
+
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                        b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
+                    }
+                    
+                    if(plant.thePlantRow > plant.board.rowNum - 1)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                            GetBulletType_Custom(),
+                            Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight
+                        );
+
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                        b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow+1,
+                            GetBulletType_Custom(),
+                            Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight_threePeater
+                        );
+
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                        b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
+                    }
+
+                    await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                }
+
+                if (!startPF) AttributeCount_Custom = Mathf.Min(3, AttributeCount_Custom + 1);
+                ReplaceSprite_Custom();
+
+                plant.anim.SetBool("shooting", false);
+                plant.invincible = false;
+                plant.uncrashable = false;
+                plant.isFlashing = false;
+                isPF = false;
+                startPF = false;
+            }
+            catch ( Exception e)
             {
-                if (plant == null || plant.IsDestroyed()) return;
-                Vector3 pos = plant.shoot.position;
-                Bullet b = CreateBullet.Instance.SetBullet(
-                    pos.x, pos.y, plant.thePlantRow,
-                    GetBulletType_Custom(),
-                    GetBulletMoveWay()
-                );
-
-                b.Damage = plant.attackDamage;
-                b.fromType = plant.thePlantType;
-                b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
-                
-                if(plant.thePlantRow < 0)
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow,
-                        GetBulletType_Custom(),
-                        Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight
-                    );
-
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                    b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
-                }
-                else
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow-1,
-                        GetBulletType_Custom(),
-                        Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight_threePeater
-                    );
-
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                    b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
-                }
-                
-                if(plant.thePlantRow > plant.board.rowNum - 1)
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow,
-                        GetBulletType_Custom(),
-                        Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight
-                    );
-
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                    b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
-                }
-                else
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow+1,
-                        GetBulletType_Custom(),
-                        Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? BulletMoveWay.Free : BulletMoveWay.MoveRight_threePeater
-                    );
-
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                    b1.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b1.Damage *= 2;
-                }
-
-                await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                ModLogger.LogError(e.Message);
             }
-
-            if (!startPF) AttributeCount_Custom = Mathf.Min(3, AttributeCount_Custom + 1);
-            ReplaceSprite_Custom();
-
-            plant.anim.SetBool("shooting", false);
-            plant.invincible = false;
-            plant.uncrashable = false;
-            plant.isFlashing = false;
-            isPF = false;
-            startPF = false;
         }
         public override void ReplaceSprite_Custom() { }
         public override IEnumerator Shooting_Custom()

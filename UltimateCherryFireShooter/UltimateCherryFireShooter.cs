@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CustomPlantClass.Runtime.Tasks;
 
@@ -100,23 +101,7 @@ namespace UltimateCherryFireShooter_Remade
         {
             if (Utils.InGame() && _plant.board != null && _plant != null)
             {
-                float x = _plant.axis.position.x;
-                float y = _plant.axis.position.y;
-                int damage = AttackDamage;
-                var plantType = _plant.thePlantType;
-                var board = _plant.board;
-                for(int i = 0; i < 6; i++)
-                {
-                    for (int row = 0; row < board.rowNum; row++)
-                    {
-                        var a = (Zombie z) => z.SetJalaed();
-                        board.boardAction.CreateFireLine(row, 10 * damage, false, false, true, a, plantType);
-                        Bullet bullet = CreateBullet.Instance.SetBullet(x, y + 0.7f, row, Plugin.Bullet_FireCherryFinalFire, BulletMoveWay.MoveRight_threePeater);
-                        bullet.Damage = damage;
-                        bullet.fromType = plantType;
-                    }
-                    await DelayTask.Delay(0.167f);
-                }
+                CreateExplosion();
             }
         }
         public IEnumerator Shooting()
@@ -148,73 +133,84 @@ namespace UltimateCherryFireShooter_Remade
         protected override bool IsAsyncPF => true;
         protected override async Task SuperShoot_Async()
         {
-            _plant.anim.SetBoolString("shooting",true);
-            // Runs once per physics tick while skillTime > 0
-            for(int i=0;i<500;i++)
+            try
             {
-                // Play animation
-                _plant.anim.SetTrigger("shoot");
-                // Base 3 bullets
-                Bullet b0 = PlantMgr.SetBullet(
-                    _plant,
-                    Plugin.Bullet_FireCherryFinal,
-                    GetBulletMoveWay(),
-                    AttackDamage,
-                    Vector2.zero,
-                    Random.Range(-15, 15)
-                );
-
-                Bullet b1 = PlantMgr.SetBullet(
-                    _plant,
-                    Plugin.Bullet_FireCherryFinal,
-                    GetBulletMoveWay(),
-                    AttackDamage,
-                    new Vector2(0,0.3f),
-                    Random.Range(-15, 15)
-                );
-
-                Bullet b2 = PlantMgr.SetBullet(
-                    _plant,
-                    Plugin.Bullet_FireCherryFinal,
-                    GetBulletMoveWay(),
-                    AttackDamage,
-                    new Vector2(0,-0.3f),
-                    Random.Range(-15, 15)
-                );
-
-                b0.normalSpeed = 10f;
-                b1.normalSpeed = 10f;
-                b2.normalSpeed = 10f;
-
-                // Buff 51 extra bullets
-                if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                _plant.anim.SetBoolString("shooting",true);
+                // Runs once per physics tick while skillTime > 0
+                for(int i=0;i<500;i++)
                 {
-                    // Group 1
-                    Bullet g1a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
-                    Bullet g1b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
-                    g1b.theExistTime = 0.5f;
-                    g1a.normalSpeed = 10f;
-                    g1b.normalSpeed = 10f;
+                    // Play animation
+                    _plant.anim.SetTrigger("shoot");
+                    // Base 3 bullets
+                    Bullet b0 = PlantMgr.SetBullet(
+                        _plant,
+                        Plugin.Bullet_FireCherryFinal,
+                        GetBulletMoveWay(),
+                        AttackDamage,
+                        Vector2.zero,
+                        Random.Range(-15, 15)
+                    );
 
-                    // Group 2
-                    Bullet g2a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
-                    Bullet g2b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
-                    g2b.theExistTime = 0.5f;
-                    g2a.normalSpeed = 10f;
-                    g2b.normalSpeed = 10f;
+                    Bullet b1 = PlantMgr.SetBullet(
+                        _plant,
+                        Plugin.Bullet_FireCherryFinal,
+                        GetBulletMoveWay(),
+                        AttackDamage,
+                        new Vector2(0,0.3f),
+                        Random.Range(-15, 15)
+                    );
 
-                    // Group 3
-                    Bullet g3a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
-                    Bullet g3b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
-                    g3b.theExistTime = 0.5f;
-                    g3a.normalSpeed = 10f;
-                    g3b.normalSpeed = 10f;
+                    Bullet b2 = PlantMgr.SetBullet(
+                        _plant,
+                        Plugin.Bullet_FireCherryFinal,
+                        GetBulletMoveWay(),
+                        AttackDamage,
+                        new Vector2(0,-0.3f),
+                        Random.Range(-15, 15)
+                    );
+
+                    b0.normalSpeed = 10f;
+                    b1.normalSpeed = 10f;
+                    b2.normalSpeed = 10f;
+
+                    // Buff 51 extra bullets
+                    if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                    {
+                        // Group 1
+                        Bullet g1a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
+                        Bullet g1b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
+                        g1b.theExistTime = 0.5f;
+                        g1a.normalSpeed = 10f;
+                        g1b.normalSpeed = 10f;
+
+                        // Group 2
+                        Bullet g2a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
+                        Bullet g2b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
+                        g2b.theExistTime = 0.5f;
+                        g2a.normalSpeed = 10f;
+                        g2b.normalSpeed = 10f;
+
+                        // Group 3
+                        Bullet g3a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
+                        Bullet g3b = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,-15);
+                        g3b.theExistTime = 0.5f;
+                        g3a.normalSpeed = 10f;
+                        g3b.normalSpeed = 10f;
+                    }
+                    if (PlantMgr.GetPercent(3f))
+                    {
+                        CreateExplosion();
+                    }
+
+                    // Wait for next physics tick
+                    await DelayTask.DelayScaled(0.02f,()=>_plant.attributeSpeed,token);
                 }
-
-                // Wait for next physics tick
-                await DelayTask.DelayScaled(0.02f,()=>_plant.attributeSpeed,token);
+                _plant.anim.SetBoolString("shooting",false);
             }
-            _plant.anim.SetBoolString("shooting",false);
+            catch( Exception e )
+            {
+                ModLogger.LogError(e.Message);
+            }
         }
         public override Bullet Shoot_Custom()
         {
@@ -245,34 +241,40 @@ namespace UltimateCherryFireShooter_Remade
             // 3% chance to trigger fire line
             if (PlantMgr.GetPercent(3f))
             {
-                var a = (Zombie z) => { z.SetJalaed(); };
-                _plant.board.boardAction.CreateFireLine(
-                    _plant.thePlantRow,
-                    action:a,
-                    fromType:_plant.thePlantType
-                );
+                CreateExplosion();
             }
             return b;
         }
-        public async override void OnDie(Plant.DieReason reason)
+        public async void CreateExplosion()
         {
-            float x = _plant.axis.position.x;
-            float y = _plant.axis.position.y;
-            int damage = AttackDamage;
-            var plantType = _plant.thePlantType;
-            var board = _plant.board;
-            for(int i = 0; i < 6; i++)
+            try
             {
-                for (int row = 0; row < board.rowNum; row++)
+                float x = _plant.axis.position.x;
+                float y = _plant.axis.position.y;
+                int damage = AttackDamage;
+                var plantType = _plant.thePlantType;
+                var board = _plant.board;
+                for(int i = 0; i < 6; i++)
                 {
-                    var a = (Zombie z) => z.SetJalaed();
-                    board.boardAction.CreateFireLine(row, 10 * damage, false, false, true, a, plantType);
-                    Bullet bullet = CreateBullet.Instance.SetBullet(x, y + 0.7f, row, Plugin.Bullet_FireCherryFinalFire, BulletMoveWay.MoveRight_threePeater);
-                    bullet.Damage = damage;
-                    bullet.fromType = plantType;
+                    for (int row = 0; row < board.rowNum; row++)
+                    {
+                        var a = (Zombie z) => z.SetJalaed();
+                        board.boardAction.CreateFireLine(row, 10 * damage, false, false, true, a, plantType);
+                        Bullet bullet = CreateBullet.Instance.SetBullet(x, y + 0.7f, row, Plugin.Bullet_FireCherryFinalFire, BulletMoveWay.MoveRight_threePeater);
+                        bullet.Damage = damage;
+                        bullet.fromType = plantType;
+                    }
+                    await DelayTask.Delay(0.167f);
                 }
-                await DelayTask.Delay(0.167f);
             }
+            catch( Exception e )
+            {
+                ModLogger.LogError(e.Message);
+            }
+        }
+        public override void OnDie(Plant.DieReason reason)
+        {
+            CreateExplosion();
         }
         //public async Task DieEvent()
         //{

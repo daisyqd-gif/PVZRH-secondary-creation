@@ -1,5 +1,7 @@
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace CustomPlantClass.Main
 {
     /// <summary>
@@ -412,7 +414,7 @@ namespace CustomPlantClass.Main
         /// Registers all BaseCustomPlant-derived types in an assembly.
         /// </summary>
         public static void AutoRegisterTypes() => AutoRegisterTypes(Assembly.GetCallingAssembly());
-        public static void AutoRegisterTypes(Assembly asm)
+        public static void AutoRegisterTypes([NotNull] Assembly asm)
         {
             foreach (var type in asm.GetTypes())
             {

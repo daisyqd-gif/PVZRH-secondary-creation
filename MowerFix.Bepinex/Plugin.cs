@@ -61,7 +61,15 @@ namespace MowerFix{
             if (zombie == null)
                 return true;
             var id = zombie.theZombieType;
-            if(id==ZombieType.ZombieBoss || id==ZombieType.ZombieBoss2 || id==ZombieType.HorseBoss || id==ZombieType.UltimateSnowZombie && zombie.TryGetComponent<UltimateSnowZombie>(out var z) && z.boss)
+            if
+            (
+                id == ZombieType.ZombieBoss
+            ||  id == ZombieType.ZombieBoss2
+            ||  id == ZombieType.HorseBoss
+            ||  id == ZombieType.UltimateSnowZombie && zombie.TryGetComponent<UltimateSnowZombie>(out var z) && z.boss
+            ||  id == ZombieType.FootballBoss
+            ||  id == ZombieType.JacksonDriverBoss
+            )
             {
                 return false;
             }
@@ -113,7 +121,15 @@ namespace MowerFix{
             }
 
             var id = zombie.theZombieType;
-            if(id==ZombieType.ZombieBoss || id==ZombieType.ZombieBoss2 || id==ZombieType.HorseBoss || id==ZombieType.UltimateSnowZombie && zombie.TryGetComponent<UltimateSnowZombie>(out var z) && z.boss)
+            if
+            (
+                id == ZombieType.ZombieBoss
+            ||  id == ZombieType.ZombieBoss2
+            ||  id == ZombieType.HorseBoss
+            ||  id == ZombieType.UltimateSnowZombie && zombie.TryGetComponent<UltimateSnowZombie>(out var z) && z.boss
+            ||  id == ZombieType.FootballBoss
+            ||  id == ZombieType.JacksonDriverBoss
+            )
             {
                 return false;
             }
@@ -134,7 +150,14 @@ namespace MowerFix{
                 __instance.StartMove();
                 __instance.board.boardStatistics.mowerUsedCount++;
             }
-            __instance.AttackZombie(zombie);
+            if (TypeMgr.BigZombie(zombie.theZombieType))
+            {
+                zombie.Crashed();
+            }
+            else
+            {
+                zombie.FlyAway();
+            }
 
             return true;
         }

@@ -1,5 +1,7 @@
+using System.Text.Json.Serialization;
 using CustomPlantClass.Runtime.Tasks;
 using Il2CppInterop.Runtime.InteropTypes;
+using UnityEngine.Networking;
 
 namespace CustomPlantClass.Main
 {
@@ -53,6 +55,8 @@ namespace CustomPlantClass.Main
             _bundles[key] = bundle;
             return bundle;
         }
+
+
 
         // -----------------------------
         //  Load AssetBundle from file
@@ -115,6 +119,102 @@ namespace CustomPlantClass.Main
             _bundles[key] = bundle;
             return bundle;
         }
+        public static T LoadResource<T>(string partialName, Assembly asm, Func<Stream, T> loader)
+        {
+            var names = asm.GetManifestResourceNames();
+
+            string match = names.FirstOrDefault(n =>
+                n.IndexOf(partialName, StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (match == null)
+                throw new Exception($"Embedded resource not found: {partialName}");
+
+            using var stream = asm.GetManifestResourceStream(match);
+            return loader(stream);
+        }
+        public static string LoadStringFromResource(string partialName, Assembly asm)
+        {
+            return LoadResource(partialName, asm, stream =>
+            {
+                using var reader = new StreamReader(stream);
+                return reader.ReadToEnd();
+            });
+        }
+        public static byte[] LoadBytesFromResource(string partialName, Assembly asm)
+        {
+            return LoadResource(partialName, asm, stream =>
+            {
+                using var ms = new MemoryStream();
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            });
+        }
+        public static Texture2D LoadTextureFromResource(string partialName, Assembly asm)
+        {
+            return LoadResource(partialName, asm, stream =>
+            {
+                using var ms = new MemoryStream();
+                stream.CopyTo(ms);
+                var data = ms.ToArray();
+
+                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                ImageConversion.LoadImage(tex, data);
+                return tex;
+            });
+        }
+        public static Sprite LoadSpriteFromResource(string partialName, Assembly asm)
+        {
+            var tex = LoadTextureFromResource(partialName, asm);
+            return Sprite.Create(
+                tex,
+                new Rect(0, 0, tex.width, tex.height),
+                new Vector2(0.5f, 0.5f),
+                100f
+            );
+        }
+        public static T LoadJsonFromResource<T>(string partialName, Assembly asm)
+        {
+            return LoadResource(partialName, asm, stream =>
+            {
+                using var reader = new StreamReader(stream);
+                string json = reader.ReadToEnd();
+                return JsonSerializer.Deserialize<T>(json);
+            });
+        }
+        #nullable enable
+        public static async Task<AudioClip?> LoadAudioClipFromResource(string partialName, Assembly asm, AudioType type = AudioType.OGGVORBIS)
+        {
+            try
+            {
+                // Load raw bytes from your universal loader
+                byte[] data = LoadBytesFromResource(partialName, asm);
+
+                // Write to a temporary file Unity can decode
+                string path = Path.Combine(Application.temporaryCachePath, partialName + ".tmp");
+                File.WriteAllBytes(path, data);
+
+                string url = "file://" + path;
+
+                var req = UnityWebRequestMultimedia.GetAudioClip(url, type);
+                var op = req.SendWebRequest();
+
+                while (!op.isDone)
+                    await DelayTask.WaitForFixedUpdate();
+
+                if (req.result != UnityWebRequest.Result.Success)
+                    return null;
+
+                AudioClip clip = DownloadHandlerAudioClip.GetContent(req);
+                req.Dispose(); // manual cleanup
+
+                return clip;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        #nullable disable
         public static async Task<string> DownloadAndConvertToBase64Async(string url)
         {
             try
