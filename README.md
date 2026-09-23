@@ -310,6 +310,8 @@ namespace GatlingPea
 
 - Index out of range exception thrown in the curtom levels menu. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
+- Rogue almanac breaks sometimes.  ![Bug](https://img.shields.io/badge/Severity:-Unfixible._Please_remove_all_rogue_shooting_mods_that_don't_inject_into_the_almanac.-yellow)
+
 - Some sniper plants shoot peas instead of sniping zombies.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
 
 - Some mods are missing from the release.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
@@ -332,9 +334,7 @@ namespace GatlingPea
 6. CustomPlantClass.Runtime.Tasks : Async support for mods, required by all mods
 7. FireSniperPuff (Requires CustomPlant.CustomPlant.RogueShootingManager)
 8. MachineNutBuff
-9. MegaGatlingExpansionRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced_by_the_rogue_shooting_framework-red)
 10. MegaGatlingPeaDLC (Requires CustomPlant.CustomPlant.RogueShootingManager)
-11. Modified-Plus-Lite ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
 12. MoreBlackHorse
 13. MoreBossSlider
 14. MoreDolphinZombie
@@ -355,8 +355,6 @@ namespace GatlingPea
 29. UltimateGatlingBloverBuff.Bepinex
 30. UltimateIFV
 31. UltimatePlanternSkin
-32. UltimateRedLunar_RogueShooting
-33. UltimateSniper_FlameGatlingRShooting ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-Replaced_by_the_rogue_shooting_framework-red)
 34. UltimateSniperAndUltimateMegaGatlingPea (Requires CustomPlant.CustomPlant.RogueShootingManager) : Contains ultimate flame gatling and ultimate flame sniper
 35. UltimateSolarCoronaCabbage
 36. Utilities : Debug tools
