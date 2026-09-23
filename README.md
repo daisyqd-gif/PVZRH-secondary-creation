@@ -1,6 +1,4 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
-![Notice](https://img.shields.io/badge/Update_4.0_is_not_out_yet._please_wait_until_the_update_is_out-red?style=for-the-badge)
-
 [![License](https://img.shields.io/badge/Apache_2.0-License-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
 [![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
 [![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/releases)
@@ -310,8 +308,6 @@ namespace GatlingPea
 
 - Base custom plant throws a NullReferenceException in Start_Async. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
-- Custom rogue shooting plants will never appear because of the unlock system. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
-
 - Index out of range exception thrown in the curtom levels menu. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
 - Some sniper plants shoot peas instead of sniping zombies.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
@@ -319,6 +315,8 @@ namespace GatlingPea
 - Some mods are missing from the release.  ![Bug](https://img.shields.io/badge/Severity:-Low-green)
 
 - Mods that use unitask will fail.  [![Bug](https://img.shields.io/badge/Severity:-Fixed-blue)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
+
+- Custom rogue shooting plants will never appear because of the unlock system. ![Bug](https://img.shields.io/badge/Severity:-Fixed-blue)
 
 </details>
 
