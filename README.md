@@ -306,6 +306,8 @@ namespace GatlingPea
 
 - Exceptions thrown in async state machines will go uncaught and crashes the game.  ![Bug](https://img.shields.io/badge/Severity:-High-red)
 
+- System.Collections.Immutable can't be resolved. ![Bug](https://img.shields.io/badge/Severity:-High-red)
+
 - Base custom plant throws a NullReferenceException in Start_Async. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
 
 - Index out of range exception thrown in the curtom levels menu. ![Bug](https://img.shields.io/badge/Severity:-Medium-orange)
