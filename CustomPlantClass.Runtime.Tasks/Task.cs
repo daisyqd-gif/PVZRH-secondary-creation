@@ -335,10 +335,11 @@ namespace CustomPlantClass.Runtime.Tasks
                 entries.RemoveAt(i);
             }
         }
-
+        public static float prevTime = Time.time;
         public void Update()
         {
-            float dt = Time.deltaTime;
+            float dt = Time.time - prevTime;
+            prevTime = Time.time;
 
             for (int i = entries.Count - 1; i >= 0; i--)
             {

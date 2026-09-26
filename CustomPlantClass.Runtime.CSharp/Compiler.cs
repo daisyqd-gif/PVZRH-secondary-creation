@@ -46,9 +46,9 @@ namespace CustomPlantClass.Runtime.CSharp
 
             var compilation = CSharpCompilation.Create(
                 $"CustomizeLibDynamicScript{Interlocked.Increment(ref token)}",
-                new[] { syntaxTree },
+                [syntaxTree],
                 References,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release)
             );
             Console.Write("*");
 
@@ -125,7 +125,7 @@ namespace CustomPlantClass.Runtime.CSharp
         }
         public static List<Assembly> LoadAllScripts()
         {
-            CompilableScripts.Clear();
+            CompilableScripts = new();
             var assemblies = new List<Assembly>();
 
             foreach (var file in EnumerateScripts())

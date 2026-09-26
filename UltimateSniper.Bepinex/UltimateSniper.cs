@@ -25,10 +25,10 @@ namespace UltimateSniper
         }
         public override void Update()
         {
-            try{base.Update();}
-            catch(Exception){}
+            try { base.Update(); }
+            catch (Exception) { }
         }
-        public void AttackZombie(Zombie zombie,int damage)
+        public void AttackZombie(Zombie zombie, int damage)
         {
             if (hitCount >= 12 || (hitCount >= 12 && Lawnf.TravelUltimate(UltiBuff.EnumValue51)) || (plant.starUp && hitCount >= 4) || (plant.starUp && hitCount >= 2 && Lawnf.TravelUltimate(UltiBuff.EnumValue51)))
             {
@@ -39,9 +39,9 @@ namespace UltimateSniper
                 }
                 else
                 {
-                    zombie.theHealth=0;
-                    zombie.theFirstArmorHealth=0;
-                    zombie.theSecondArmorHealth=0;
+                    zombie.theHealth = 0;
+                    zombie.theFirstArmorHealth = 0;
+                    zombie.theSecondArmorHealth = 0;
                     zombie.UpdateHealthText();
                     zombie.FirstArmorFall();
                     zombie.SecondArmorFall();
@@ -61,7 +61,7 @@ namespace UltimateSniper
             Doom.SetDoom(plant.board, pos, DoomType.Fire);
             for (int i = 0; i < 6; i++)
             {
-                PlantMgr.SetBullet(plant,UltimateExplosivePea.BULLET_ID,BulletMoveWay.Free,Vector2.zero,i*60f).normalSpeed*=2;
+                PlantMgr.SetBullet(plant, UltimateExplosivePea.BULLET_ID, BulletMoveWay.Free, Vector2.zero, i * 60f).normalSpeed *= 2;
             }
         }
         public override Bullet Shoot_Custom() => plant.Shoot1();//use original shooting pipeline
@@ -80,14 +80,14 @@ namespace UltimateSniper
             if (zombie == null)
                 return;
 
-            if(__instance.TryGetComponent<UltimateSniper>(out var a))
+            if (__instance.TryGetComponent<UltimateSniper>(out var a))
             {
-                a.AttackZombie(zombie,damage);
+                a.AttackZombie(zombie, damage);
             }
 
-            if(__instance.TryGetComponent<UltimateFlameSniper>(out var b))
+            if (__instance.TryGetComponent<UltimateFlameSniper>(out var b))
             {
-                b.AttackZombie(zombie,damage);
+                b.AttackZombie(zombie, damage);
             }
             return;
         }

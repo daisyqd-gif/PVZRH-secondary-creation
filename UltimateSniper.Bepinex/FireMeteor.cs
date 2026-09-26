@@ -96,12 +96,12 @@ namespace UltimateSniper
                 {
                     for (int i = zombies.Count - 1; i >= 0; i--)
                     {
-                        
+
                         var z = zombies[i];
                         if (z == null || z.theStatus == ZombieStatus.Dying) continue;
                         if (z.isMindControlled) continue;
                         if (z.theMaxHealth <= 1000) { z.Die(); continue; }
-                        int dmg=damage;
+                        int dmg = damage;
                         z.SetPortaled(30f); //bosses are immune
                         // PortalEffect bonus
                         if (z.TryGetEffect<PortalEffect>(EffectType.Portal, out var portal) && portal.duration > 0)

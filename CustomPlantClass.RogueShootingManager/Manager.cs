@@ -94,6 +94,8 @@ namespace CustomPlantClass.RogueShootingManager
             RogueConfigs[spec.CustomPlantType] = spec;
             
             return (BaseConfig)Activator.CreateInstance(t);
+            //*/
+            //return new RogueClass_CONFIG(spec);
         }
         public static BaseBuff MakeBuffType(CustomRogueShootingBuff buff)
         {
@@ -181,6 +183,9 @@ namespace CustomPlantClass.RogueShootingManager
                 };
             }
             return output;
+            //*/
+            
+            //return new RogueClass_BUFF(buff);
         }
         public static void RegisterBuffsForPlant(PlantType thePlantType, bool damageBuff = true, bool speedBuff = true, bool starUp = true,params CustomRogueShootingBuff[] buffs)
         {

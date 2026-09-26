@@ -93,13 +93,15 @@ namespace UltimateSniper
         private Zombie Prop0 => GetComponent<Zombie>();
 
         // Token: 0x04000038 RID: 56
-        public int BurnLevel=0;
+        public int BurnLevel = 0;
 
         // Token: 0x04000039 RID: 57
         public float BurnTimer = 1f;
 
         [ResetOnBoardDestroy(0.75f)]
         public static float Radius = 0.75f;
+        [ResetOnBoardDestroy(0)]
+        public static int AccumulatedDamage = 0;
         public static bool ZhiBian => Lawnf.TravelAdvanced(Plugin.Buff2);
 
         public DamageType damageType = DamageType.Carred;
@@ -126,7 +128,7 @@ namespace UltimateSniper
                     CreateParticle.SetParticle(33, Prop0.axis.position, Prop0.theZombieRow, true);
 
                     // Determine burn radius based on TravelAdvanced
-                    float radius = Lawnf.TravelAdvanced(Plugin.Buff0) ? Radius*2 : Radius;
+                    float radius = Lawnf.TravelAdvanced(Plugin.Buff0) ? Radius * 2 : Radius;
 
                     // Get all colliders in radius
                     Collider2D[] hits = Physics2D.OverlapCircleAll(
@@ -144,7 +146,7 @@ namespace UltimateSniper
                         if (zombie.isMindControlled || Prop0.beforeDying)
                             continue;
                         int dmg = BurnLevel * 100;
-                        if(UltimateFlameGatling_Remade.IsRogue) dmg*=100;
+                        if (UltimateFlameGatling_Remade.IsRogue) dmg *= 25;
                         // Apply burn damage
                         zombie.TakeDamage(
                             damageType,
@@ -152,30 +154,34 @@ namespace UltimateSniper
                             Plugin.UFlameGatling,
                             false
                         );
+                        if (Lawnf.TravelAdvanced(Plugin.Buff_Curse))
+                        {
+                            AccumulatedDamage += dmg;
+                        }
 
                         // Reapply burn component (spread)
-                        if(ZhiBian)zombie.AddBurn();
+                        if (ZhiBian) zombie.AddBurn();
                     }
-                    if(Lawnf.TravelAdvanced(Plugin.Buff2))BurnTimer = 0.25f;
+                    if (Lawnf.TravelAdvanced(Plugin.Buff2)) BurnTimer = 0.25f;
                     else BurnTimer = 1f;
                 }
             }
         }
         public static void AddBurn(Zombie self, int level = 1)
         {
-            if (ReferenceEquals(self, null)) 
+            if (ReferenceEquals(self, null))
                 return;
 
-            if (self.IsDestroyed()) 
+            if (self.IsDestroyed())
                 return;
 
-            #pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             self.GetOrAddComponent<ZombieBurn_2>().BurnLevel += level;
-            #pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
     }
     public static class ExtensionMgr
     {
-        public static void AddBurn(this Zombie self, int level = 1) => ZombieBurn_2.AddBurn(self,level);
+        public static void AddBurn(this Zombie self, int level = 1) => ZombieBurn_2.AddBurn(self, level);
     }//*/
 }

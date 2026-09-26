@@ -177,7 +177,7 @@ namespace UltimateSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom),(UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
+                Fusions = DataMgr.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -209,7 +209,7 @@ namespace UltimateSniper
                 AlmanacEntry = "“燃尽，此身！”\n\n" +
                 "<color=#3D1400>使用条件：</color><color=red>旅行模式</color>\n<color=#3D1400>融合配方：</color><color=red>火辣机枪射手+超时空毁灭菇</color>\n\n" +
                 "<color=#3D1400>伤害:</color><color=red>450×4/1秒\n" +
-                "<color=#3D1400>特点:</color>\n"+
+                "<color=#3D1400>特点:</color>\n" +
                 "<color=#3D1400>①</color><color=red>每次射击增加1点充能，充能达到50时点击召唤赤焰陨星；</color>\n" +
                 "<color=#3D1400>②</color><color=red>子弹为僵尸附加灼烧状态，增加1点灼烧值，并使僵尸进入传送状态，增加5秒已等待时间,对进入传送状态的僵尸增加20×已等待时间的伤害,最多增加1500伤害，对不可进入传送状态的僵尸造成3倍伤害；\n" +
                 "<color=#3D1400>③</color><color=red>灼烧状态:每1秒对僵尸所在格内的所有僵尸造成100×灼烧值（灼烧值最高18点）的灰烬伤害，若僵尸不处于红温状态，则受到的伤害×1.5倍（怒火攻心改为2.5倍）；</color>\n" +
@@ -288,11 +288,11 @@ namespace UltimateSniper
             });
 
             DataMgr.RegisterCustomStarUp(UltimateSniper.PLANT_ID);
-            DataMgr.RegisterCustomStarUp(UltimateMegaGatlingPea.PLANT_ID);DataMgr.AddCustomStrongUltimatePlant
+            DataMgr.RegisterCustomStarUp(UltimateMegaGatlingPea.PLANT_ID); DataMgr.AddCustomStrongUltimatePlant
             (
                 UFlameGatling,
-                DataMgr.FormatStrongUltimateUnlockBuff("究极炽焰机枪","火辣机枪射手","超时空毁灭菇","究极炽焰狙击射手","豌豆射手","豌豆射手"),
-                Buff0,Buff1,BuffBgType.Day,UFlameSniper
+                DataMgr.FormatStrongUltimateUnlockBuff("究极炽焰机枪", "火辣机枪射手", "超时空毁灭菇", "究极炽焰狙击射手", "豌豆射手", "豌豆射手"),
+                Buff0, Buff1, BuffBgType.Day, UFlameSniper
             );
 
             //DataMgr.AddCustomPlantUpgrade(PlantType.FireSniper, UltimateSniper.PLANT_ID, 5f);
@@ -305,19 +305,21 @@ namespace UltimateSniper
         {
             Buff0 = Compatibility.CustomCore_Old.RegisterCustomBuff("星火燎原：究极炽焰机枪灼烧范围提升至3×3，灼烧值上限×3", BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
             Buff1 = Compatibility.CustomCore_Old.RegisterCustomBuff("飞沙走石：究极炽焰机枪赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星", BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
-            (Buff2,BaseBuff wildfire1) = RegistryHelper.RegisterCustomQualitativeChangeBuff("山火","灼烧将传播",UFlameGatling);
-            (AdvBuff _,BaseBuff Buff1_2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("飞沙走石","究极炽焰机枪赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星",UFlameGatling,()=>TravelMgr.Instance.GetNormalBuff(Buff1));
-            BaseBuff uBuff = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff(){
+            (Buff_Curse, Buff2, BaseBuff wildfire1) = RegistryHelper.RegisterCustomCurseBuff("山火", "子弹失去传送效果。当灼烧造成100万伤害时， 反转诅咒。", "灼烧将传播", UFlameGatling, (p) => p.shootingCurse >= 1_000_000);
+            (AdvBuff _, BaseBuff Buff1_2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("飞沙走石", "究极炽焰机枪赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星", UFlameGatling, () => TravelMgr.Instance.GetNormalBuff(Buff1));
+            BaseBuff uBuff = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff()
+            {
                 CustomPlantType = UFlameGatling,
                 CustomTitle = "强化：灼烧",
                 CustomDescription = "灼烧区域大小+1",
                 CustomOnGet = delegate
                 {
-                    ZombieBurn_2.Radius+=1;
+                    ZombieBurn_2.Radius += 1;
                 },
                 CustomBuffType = ShootingBuffType.UniqueUpgrade
             });
-            BaseBuff uBuff2 = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff(){
+            BaseBuff uBuff2 = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff()
+            {
                 CustomPlantType = UFlameGatling,
                 CustomTitle = "强化：赤焰陨星",
                 CustomDescription = "赤焰陨星所需子弹数量-10",
@@ -325,15 +327,16 @@ namespace UltimateSniper
                 {
                     if (ShootingManager.Instance.TryGetPlant(UFlameGatling, out var plant) && plant != null && plant.TryGetComponent<UltimateFlameGatling_Remade>(out var p))
                     {
-                        p.MeteorCD-=10;
+                        p.MeteorCD -= 10;
                     }
                 },
                 CustomBuffType = ShootingBuffType.UniqueUpgrade
             });
-            BaseConfig config1 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig(){
+            BaseConfig config1 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
+            {
                 CustomPlantType = UFlameGatling,
 
-                CustomBuffs = () => new(){wildfire1,Buff1_2,uBuff,uBuff2,new DamageBuff(UFlameGatling), new SpeedBuff(UFlameGatling), new StarUpBuff(UFlameGatling)},
+                CustomBuffs = () => new() { new DamageBuff(UFlameGatling), new SpeedBuff(UFlameGatling), uBuff, uBuff2, Buff1_2, new StarUpBuff(UFlameGatling), wildfire1 },
 
                 CustomReinforcePlant = (Plant plant) =>
                 {
@@ -342,10 +345,11 @@ namespace UltimateSniper
 
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });
-            BaseConfig config2 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig(){
+            BaseConfig config2 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
+            {
                 CustomPlantType = PlantType.JalaGatling,
 
-                CustomBuffs = () => new(){new UpgradeBuff(PlantType.JalaGatling,UFlameGatling)},
+                CustomBuffs = () => new() { new UpgradeBuff(PlantType.JalaGatling, UFlameGatling) },
 
                 CustomReinforcePlant = (Plant plant) =>
                 {
@@ -354,10 +358,10 @@ namespace UltimateSniper
 
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });
-            RegistryHelper.AddCustomRogueShootingPlant(UFlameGatling,config1);
-            RegistryHelper.AddCustomRogueShootingPlant(PlantType.JalaGatling,config2);
-            RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter,PlantType.JalaGatling);
-            RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter,PlantType.Peashooter,PlantType.JalaGatling,UFlameGatling);
+        RegistryHelper.AddCustomRogueShootingPlant(UFlameGatling, config1);
+            RegistryHelper.AddCustomRogueShootingPlant(PlantType.JalaGatling, config2);
+            RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter, PlantType.JalaGatling);
+            RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.JalaGatling, UFlameGatling);
         }
         public override void OnStart()
         {
@@ -387,31 +391,31 @@ namespace UltimateSniper
             FireStar.AddComponent<FireStar>();
             FireStar.GetComponent<SortingGroup>().sortingLayerName = "fog";
 
-            CustomCore.RegisterCustomParticle(ParticleID,assetBundle.GetAsset<GameObject>("ShootFire"));
+            CustomCore.RegisterCustomParticle(ParticleID, assetBundle.GetAsset<GameObject>("ShootFire"));
 
             CustomCore.RegisterCustomCherry(cherryType, assetBundle.GetAsset<GameObject>("BombCloud_bright"));
             #endregion
 
-            UltimateTorchBehaviour.AddBulletToPool(BType_Flame,BType_FireFlame);
+            UltimateTorchBehaviour.AddBulletToPool(BType_Flame, BType_FireFlame);
         }
     }
     // Token: 0x02000023 RID: 35
     [HarmonyPatch(typeof(Zombie), nameof(Zombie.GetDamage))]
-    public class ZombieGetDamagePatch
+public class ZombieGetDamagePatch
+{
+    // Token: 0x0600011C RID: 284 RVA: 0x00005920 File Offset: 0x00003B20
+    [HarmonyPrefix]
+    public static void Prefix(Zombie __instance, DmgType theDamageType, ref int theDamage)
     {
-        // Token: 0x0600011C RID: 284 RVA: 0x00005920 File Offset: 0x00003B20
-        [HarmonyPrefix]
-        public static void Prefix(Zombie __instance, DmgType theDamageType, ref int theDamage)
+        if (__instance.TryGetComponent<ZombieBurn_2>(out var _) && !__instance.effects.ContainsKey(EffectType.Freeze))
         {
-            if (__instance.TryGetComponent<ZombieBurn_2>(out var _) && !__instance.effects.ContainsKey(EffectType.Freeze))
+            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue15))
             {
-                if (Lawnf.TravelAdvanced(AdvBuff.EnumValue15))
-                {
-                    theDamage = Mathf.CeilToInt(theDamage * 2.5f);
-                    return;
-                }
-                theDamage = Mathf.CeilToInt(theDamage * 1.5f);
+                theDamage = Mathf.CeilToInt(theDamage * 2.5f);
+                return;
             }
+            theDamage = Mathf.CeilToInt(theDamage * 1.5f);
         }
     }
+}
 }

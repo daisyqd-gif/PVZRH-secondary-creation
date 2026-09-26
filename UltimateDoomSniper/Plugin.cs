@@ -243,6 +243,7 @@ namespace UltimateDoomSniper
             });
             RegistryHelper.AddCustomRogueShootingPlant(PlantID,cfg1);
             RegistryHelper.AddCustomExpertPlant(PlantID_Sniper2,cfg2);
+            RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter,PlantType.Peashooter,PlantType.SniperPea,PlantType.DoomSniper,PlantID);
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
     }

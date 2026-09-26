@@ -5,7 +5,7 @@ namespace UltimateSniper
         public override Vector3 SetSize() => new Vector3(4f, 4f, 4f);
         public override void GlobalEvent()
         {
-            Doom.SetDoom(InstanceManager.Board,transform.position,DoomType.IceDoom_big);
+            Doom.SetDoom(InstanceManager.Board, transform.position, DoomType.IceDoom_big);
         }
         public override void PerZombieEvent(Zombie zombie, DamageType theDamageType, int theDamage, PlantType reportType = PlantType.Nothing, bool fix = false)
         {
@@ -44,8 +44,8 @@ namespace UltimateSniper
                 );
 
                 b.Damage = 3600;
-                if(UltimateFlameGatling_Remade.IsRogue) b.Damage*=1000;
-                b.transform.Rotate(0,0,i * angleStep);
+                if (UltimateFlameGatling_Remade.IsRogue) b.Damage *= 1000;
+                b.transform.Rotate(0, 0, i * angleStep);
             }
         }
     }

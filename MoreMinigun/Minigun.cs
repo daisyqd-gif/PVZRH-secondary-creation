@@ -301,7 +301,6 @@ namespace MoreMinigun
         public static void Postfix(ref Il2CppSystem.Collections.Generic.List<BaseBuff> __result)
         {
             __result.Add(new StarUpBuff(PlantType.UltimateMinigun));
-            __result.Add(Plugin.realCherryBomb);
             __result.Add(Plugin.theBuff);
         }
     }

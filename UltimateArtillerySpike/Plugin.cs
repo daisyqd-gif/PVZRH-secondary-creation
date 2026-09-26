@@ -187,6 +187,7 @@ namespace UltimateArtillerySpike
             RegistryHelper.AddCustomRogueShootingPlant(DataContainer.PlantId_Spike,cfg);
             RegistryHelper.AddCustomRogueShootingPlant(PlantType.MelonCaltrop,cfg_inter);
             RegistryHelper.InjectUpgradeBuff(RSConfigType.Caltrop,PlantType.MelonCaltrop);
+            RegistryHelper.AddCustomEvolutionPathway(PlantType.Caltrop,PlantType.Caltrop,PlantType.MelonCaltrop,DataContainer.PlantId_Spike);
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }
     }

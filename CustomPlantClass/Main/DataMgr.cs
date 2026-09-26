@@ -537,6 +537,7 @@ namespace CustomPlantClass.Main
                     cd = data.Cd,
                     attackDamage = data.AttackDamage
                 };
+                PlantDataManager.unlocked.Add(data.PlantId, true);
                 if (data.Fusions != null)
                     foreach (var recipe in data.Fusions)
                     {
@@ -632,6 +633,7 @@ namespace CustomPlantClass.Main
                     cd = data.Cd,
                     attackDamage = data.AttackDamage
                 };
+                PlantDataManager.unlocked.Add(data.PlantId, true);
                 if (data.Fusions != null)
                     foreach (var recipe in data.Fusions)
                     {
@@ -950,74 +952,6 @@ namespace CustomPlantClass.Main
             });
             CustomStrongUltiPlants[(int)thePlantType] = (i, default, desc);
             CustomTravelUnlocks.Add((TravelUnlocks)i);
-
-            /*string desc = $"解锁<color=red>{PlantName}</color>\n{Description}";
-
-            BuffID id = CustomCore.RegisterCustomBuff(
-                desc,
-                BuffType.UnlockPlant,
-                PlantMgr.IsTravelStore,
-                2000,
-                thePlantType,
-                1,
-                bg);
-
-
-            GameAppInitActions.Add(() =>
-            {
-                InjectStrongUltimateUnlockEnum((int)thePlantType);
-            });
-        }
-        private static void InjectStrongUltimateUnlockEnum(int plantType)
-        {
-            var (buff, oldUnlock, desc) = CustomStrongUltiPlants[plantType];
-
-            int value = Enum.GetValues(typeof(TravelUnlocks)).Length + plantType + 100;
-            string key = $"EnumValue{value}";
-
-            ModLogger.LogInfo(
-                $"[StrongUltimate] Injecting unlock:\n" +
-                $"  • PlantType: {plantType}\n" +
-                $"  • BuffID:    {buff}\n" +
-                $"  • EnumName:  {key}\n" +
-                $"  • EnumValue: {value}"
-            );
-
-            var dict = new Dictionary<string, object> { { key, value } };
-
-            //LogEnumTable("Before injection");
-
-            // ⭐ Inject into the REAL runtime enum
-            Type runtimeEnum = typeof(TravelUnlocks).Assembly.GetType(typeof(TravelUnlocks).FullName!)!;
-            EnumInjector.InjectEnumValues(runtimeEnum, dict);
-
-            //LogEnumTable("After injection");
-
-            // No parsing needed
-            TravelUnlocks unlock = (TravelUnlocks)value;
-
-            CustomStrongUltiPlants[plantType] = (buff, unlock, desc);
-            UnlockValueToPlantType[value] = plantType;
-
-            ModLogger.LogInfo(
-                $"[StrongUltimate] Injection complete:\n" +
-                $"  • Unlock enum stored as: {unlock}\n" +
-                $"  • Reverse map: {value} → {plantType}"
-            );
-        }
-        private static void LogEnumTable(string label)
-        {
-            var names = Enum.GetNames(typeof(TravelUnlocks));
-            var values = Enum.GetValues(typeof(TravelUnlocks));
-
-            ModLogger.LogInfo($"[StrongUltimate] {label} — TravelUnlocks table:");
-
-            for (int i = 0; i < names.Length; i++)
-            {
-                ModLogger.LogInfo(
-                    $"  • {names[i],-25} = {(int)values.GetValue(i)!}"
-                );
-            }//*/
         }
         public static Dictionary<int, (BuffID buff, TravelUnlocks unlock, string desc)> CustomStrongUltiPlants = new();
         public static Dictionary<int, int> UnlockValueToPlantType = new();

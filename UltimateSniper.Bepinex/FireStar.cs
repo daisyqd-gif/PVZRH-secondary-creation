@@ -44,8 +44,8 @@ namespace UltimateSniper
                 );
 
                 b.Damage = 1800;
-                if(UltimateFlameGatling_Remade.IsRogue) b.Damage*=1000;
-                b.transform.Rotate(0,0,i * angleStep);
+                if (UltimateFlameGatling_Remade.IsRogue) b.Damage *= 1000;
+                b.transform.Rotate(0, 0, i * angleStep);
             }
         }
     }

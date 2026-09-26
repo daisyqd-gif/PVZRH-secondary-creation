@@ -7,8 +7,8 @@ namespace UltimateSniper
         public int energy = 0;
         public bool isSkill = false;
         public int MeteorCD = 200;
-        public override string GetTextString() => "充能:" + energy; 
-        public static bool IsRogue{get => ShootingManager.Instance != null || Board.Instance.boardTag.rogueShooting;}
+        public override string GetTextString() => "充能:" + energy;
+        public static bool IsRogue { get => ShootingManager.Instance != null || Board.Instance.boardTag.rogueShooting; }
         public override Transform FindShoot() => transform.FindChild("GatlingPea_head/Shoot");
         public IEnumerator Shooting()
         {
@@ -16,22 +16,22 @@ namespace UltimateSniper
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    
-                    SetBullet(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)),Random.Range(-15f, 15f)).normalSpeed = Random.Range(12f, 14f);
+
+                    SetBullet(new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), Random.Range(-15f, 15f)).normalSpeed = Random.Range(12f, 14f);
                 }
 
                 yield return new WaitForFixedUpdate();
             }
         }
-        public override void Update()
-        {
-            base.Update();
-        }
         public override void OnFixedUpdate()
         {
+            if(Lawnf.TravelAdvanced(Plugin.Buff_Curse) && _plant != null)
+            {
+                _plant.shootingCurse = ZombieBurn_2.AccumulatedDamage;
+            }
             if (energy >= 200 && !isSkill && Lawnf.TravelAdvanced(Plugin.Buff1))
             {
-                energy=125;
+                energy = 125;
                 SuperStart_Custom();
                 MakeMeteor();
             }
@@ -39,10 +39,10 @@ namespace UltimateSniper
         }
         public override Bullet Shoot_Custom()
         {
-            if(IsRogue)
+            if ( IsRogue && Lawnf.TravelAdvanced(Plugin.Buff2) )
             {
-                SetBullet(default,15);
-                SetBullet(default,-15);
+                SetBullet(default, 15);
+                SetBullet(default, -15);
             }
             if (_plant.starUp) _plant.StartCoroutine(Shooting());
             return SetBullet();
@@ -56,17 +56,17 @@ namespace UltimateSniper
                 MakeMeteor();
             }
         }
-        public Bullet SetBullet(Vector2 offset=default, float rotation=0)
+        public Bullet SetBullet(Vector2 offset = default, float rotation = 0)
         {
             energy++;
-            if(energy>=MeteorCD && IsRogue && !isSkill)
+            if (energy >= MeteorCD && IsRogue && !isSkill)
             {
                 SuperStart_Custom();
-                energy=0;
+                energy = 0;
             }
-            PlantMgr.GetPlantIn3x3(_plant.thePlantColumn,_plant.thePlantRow,(Plant p) =>
+            PlantMgr.GetPlantIn3x3(_plant.thePlantColumn, _plant.thePlantRow, (Plant p) =>
             {
-                if(p.TryGetComponent<UltimateFlameSniper>(out var c))
+                if (p.TryGetComponent<UltimateFlameSniper>(out var c))
                 {
                     c.hitCount++;
                     return true;

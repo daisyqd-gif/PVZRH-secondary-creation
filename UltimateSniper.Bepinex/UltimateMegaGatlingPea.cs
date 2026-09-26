@@ -52,7 +52,7 @@ namespace UltimateSniper
         }
         public virtual IEnumerator SuperShoot_Custom()
         {
-            if(isPF) yield break;
+            if (isPF) yield break;
             isPF = true;
             plant.invincible = true;
             plant.Recover(plant.thePlantMaxHealth);
@@ -63,7 +63,7 @@ namespace UltimateSniper
 
             int total = 180;
 
-            for (int i = 0; i < total; i++)   
+            for (int i = 0; i < total; i++)
             {
                 if (plant == null || plant.IsDestroyed()) yield break;
                 Vector3 pos = plant.shoot.position;

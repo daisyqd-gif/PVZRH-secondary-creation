@@ -10,7 +10,7 @@
 
     <!-- IL2CPP mods don't need dependency/runtime files -->
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,27 +36,6 @@
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Common" Private="false">
-      <HintPath>..\lib\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.HarmonySupport" Private="false">
-      <HintPath>..\lib\BepInEx\core\Il2CppInterop.HarmonySupport.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Runtime" Private="false">
-      <HintPath>..\lib\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2Cppmscorlib" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Il2CppSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Configuration" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Il2CppSystem.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Core" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 

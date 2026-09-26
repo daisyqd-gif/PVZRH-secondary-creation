@@ -25,7 +25,7 @@ namespace UltimateSniper
                 torch2.fireTimes++;
                 if (torch2.fireTimes >= 6)
                 {
-                    torch2.fireTimes=0;
+                    torch2.fireTimes = 0;
                     torch2.SummonPlant();
                 }
             }
@@ -60,7 +60,7 @@ namespace UltimateSniper
                 Burn.TryAddZombieBurn(zombie).damage = __instance.Damage;
                 if (__instance.TryGetComponent<UltimateExplosivePea>(out _))
                 {
-                    if(!GameAPP.config.distablexplodeFlash)Doom.SetDoom(__instance.board, __instance.transform.position, DoomType.Fire);
+                    if (!GameAPP.config.distablexplodeFlash) Doom.SetDoom(__instance.board, __instance.transform.position, DoomType.Fire);
                     for (int i = 0; i < 9; i++)
                     {
                         Bullet b = InstanceManager.CreateBullet.SetBullet(pos.x, pos.y, zombie.theZombieRow, UltimateFirePea.BULLET_ID, BulletMoveWay.Free, false);
@@ -92,11 +92,14 @@ namespace UltimateSniper
                     zombie.AddBurn();
 
                     // Portal slow
-                    zombie.SetPortaled(1.5f);
-                    if (!TypeMgr.IsBossZombie(zombie.theZombieType))
-                        zombie.SetPortaled(5f);
+                    if(!Lawnf.TravelAdvanced(Plugin.Buff_Curse))
+                    {
+                        zombie.SetPortaled(1.5f);
+                        if (!TypeMgr.IsBossZombie(zombie.theZombieType))
+                            zombie.SetPortaled(5f);
+                    }
                 }
-                zombie.TakeDamage(__instance.Damage,__instance.ToIDamageMaker(),DamageType.NormalAll,__instance.fromType);
+                zombie.TakeDamage(__instance.Damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                 CreateParticle.SetParticle(73, __instance.transform.position, __instance.theBulletRow, true);
                 GameAPP.PlaySound(61, 0.5f, 1f);
                 //__instance.Die();
@@ -104,7 +107,7 @@ namespace UltimateSniper
             }
             else if (__instance.TryGetComponent<FlamePea_Explosive>(out var _))
             {
-                Doom.SetDoom(__instance.board, __instance.transform.position, 0, null,!GameAPP.config.distablexplodeFlash);
+                Doom.SetDoom(__instance.board, __instance.transform.position, 0, null, !GameAPP.config.distablexplodeFlash);
                 foreach (Zombie z in Lawnf.GetAllZombies(false)) //locks out mind controlled zombies
                 {
                     if (z != null && !z.beforeDying && z.col != null)
@@ -112,12 +115,15 @@ namespace UltimateSniper
                         z.AddBurn();
 
                         // Portal slow
-                        z.SetPortaled(1.5f);
-                        if (!TypeMgr.IsBossZombie(z.theZombieType))
-                            z.SetPortaled(5f);
+                        if(!Lawnf.TravelAdvanced(Plugin.Buff_Curse))
+                        {
+                            zombie.SetPortaled(1.5f);
+                            if (!TypeMgr.IsBossZombie(zombie.theZombieType))
+                                zombie.SetPortaled(5f);
+                        }
                     }
                 }
-                zombie.TakeDamage(__instance.Damage,__instance.ToIDamageMaker(),DamageType.NormalAll,__instance.fromType);
+                zombie.TakeDamage(__instance.Damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                 GameAPP.PlaySound(61, 0.5f, 1f);
                 //__instance.Die();
                 return false;
@@ -137,7 +143,7 @@ namespace UltimateSniper
                             z.SetPortaled(5f);
                     }
                 }
-                zombie.TakeDamage(__instance.Damage,__instance.ToIDamageMaker(),DamageType.NormalAll,__instance.fromType);
+                zombie.TakeDamage(__instance.Damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                 GameAPP.PlaySound(61, 0.5f, 1f);
                 //__instance.Die();
                 return false;

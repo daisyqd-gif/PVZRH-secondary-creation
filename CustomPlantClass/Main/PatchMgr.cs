@@ -1281,7 +1281,6 @@ namespace CustomPlantClass
 
             if (entity.MusicType != (MusicType)(-1))
                 GameAPP.Instance.PlayMusic(entity.MusicType);
-            entity.EnterGameAction(board);
         }
         [HarmonyPatch(nameof(Lawnf.TravelDebuff))]
         [HarmonyPostfix]
@@ -1299,6 +1298,10 @@ namespace CustomPlantClass
             if (DataMgr.CustomUltiPlants.Contains(thePlantType))
             {
                 __result = true;
+            }
+            else if (!Enum.IsDefined(thePlantType) && !DataMgr.CustomUltiPlants.Contains(thePlantType))
+            {
+                __result = false;
             }
         }
     }
@@ -1505,6 +1508,19 @@ namespace CustomPlantClass
             foreach (var i in LevelProgressionManager.CompletedLevels.Keys)
             {
                 LevelProgressionManager.MarkNotCompleted(i);
+            }
+        }
+    }
+    [HarmonyPatch(typeof(AnimUIOver))]
+    public static class AnimUIOver_Patch
+    {
+        [HarmonyPatch(nameof(AnimUIOver.Die))]
+        [HarmonyPostfix]
+        public static void Die_Postfix()
+        {
+            if(PatchData.TryGetCustomLevel(GameAPP.theBoardType,GameAPP.theBoardLevel, out var data))
+            {
+                data.EnterGameAction(Board.Instance);
             }
         }
     }

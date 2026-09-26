@@ -127,9 +127,6 @@ namespace CustomPlantClass.Examples
             zombie.TakeDamage(DmgType.NormalAll, dmg, plant.thePlantType);
             return zombie;
         }
-        public virtual void DoomOnZombie(Zombie z)
-        {
-
-        }
+        public virtual void DoomOnZombie(Zombie z) { }
     }
 }
