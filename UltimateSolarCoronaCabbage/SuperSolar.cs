@@ -84,7 +84,7 @@ namespace UltimateSolarCoronaCabbage_Remade
                         if (board.theSun > 15000)
                         {
                             board.UseSun(200f);
-                            dmg *= 3;
+                            dmg *= 10;
                         }
                     }
 
@@ -120,8 +120,8 @@ namespace UltimateSolarCoronaCabbage_Remade
 
             if (getsuncd <= 0f)
             {
-                getsuncd=0.25f;
-                board.SetSun(1000);
+                getsuncd=1f;
+                board.theFallingSunCountDown = 0;
             }
             else
             {

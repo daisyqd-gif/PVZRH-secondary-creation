@@ -1,11 +1,27 @@
-## API documentation
-### CustomPlantClass
+# API documentation
+
+![API reference](https://img.shields.io/badge/documentation-API%20reference-2f6f9f)
+![Language](https://img.shields.io/badge/language-C%23-239120)
+
+---
+
+- [API documentation](#api-documentation)
+  - [CustomPlantClass](#customplantclass)
+  - [CustomPlantClass.Level](#customplantclasslevel)
+  - [CustomPlantClass.Examples (Provides inheretable classes for base game plants)](#customplantclassexamples-provides-inheretable-classes-for-base-game-plants)
+  - [CustomPlantClass.Main](#customplantclassmain)
+  - [CustomPlantClass.Runtime](#customplantclassruntime)
+  - [CustomPlantClass.Networking:](#customplantclassnetworking)
+  - [CustomPlantClass.Runtime.CSharp:](#customplantclassruntimecsharp)
+  - [CustomPlantClass.RogueShootingManager:](#customplantclassrogueshootingmanager)
+  - [CustomPlantClass.Runtime.Tasks:](#customplantclassruntimetasks)
+## CustomPlantClass
 
 <details>
 <summary>Click to show section</summary>
   
-1. CustomBigStar -> Big star monobehaviour (undocumented)
-2.  BaseCustomBullet -> Used for creating custom bullets, overridable methods are structured like prefixes, returning true will run the original method, returning false will skip the original method.(Currently supports bullet_pea and bullet_cabbage as its TBase) Example impl:
+1. `CustomBigStar` -> Big star monobehaviour (undocumented)
+2. `BaseCustomBullet` -> Used for creating custom bullets, overridable methods are structured like prefixes, returning `true` will run the original method, returning `false` will skip the original method.(Currently supports `bullet_pea` and `bullet_cabbage` as its TBase) Example impl:
 <details>
 <summary>Click to show code</summary>
 
@@ -39,16 +55,16 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 ```
 </details>
 
-3. CustomLevelComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Unfinished-red)
-4. CustomOnZombieComponent  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
-5. CustomParticle -> Used to add a destroy animation event to particles with non-particlesystem components
-6. BaseCustomPlant -> Central base class for most custom plants(see example code above)
-7. CustomShooter -> An extension to BaseCustomPlant and handles shooting to allow custom plants to use "Plant" as its base class
-8. CustomSolarBomb -> Untested
-9. CustomThrower -> An extension to CustmShooter to handle catapult plants
-10. BaseCustomZombie -> Used to add custom behaviour to zombies
-11. CustomEffect -> Used to add effects to monobehaviours
-12. InterfaceMgr -> Allows plants to implement base game behaviour without inhereting classes
+3. `CustomLevelComponent`  ![Deprecated: Replaced](https://img.shields.io/badge/Unfinished-red)
+4. `CustomOnZombieComponent`  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
+5. `CustomParticle` -> Used to add a destroy animation event to particles with non-particlesystem components
+6. `BaseCustomPlant` -> Central base class for most custom plants(see example code above)
+7. `CustomShooter` -> An extension to `BaseCustomPlant` and handles shooting to allow custom plants to use `Plant` as its base class
+8. `CustomSolarBomb` -> Untested
+9. `CustomThrower` -> An extension to `CustmShooter` to handle catapult plants
+10. `BaseCustomZombie` -> Used to add custom behaviour to zombies
+11. `CustomEffect` -> Used to add effects to monobehaviours
+12. `InterfaceMgr` -> Allows plants to implement base game behaviour without inhereting classes
 <details>
 <summary>Click to show code</summary>
 
@@ -121,16 +137,16 @@ public interface IPlantCannonAimHandler
 ```
 </details>
 
-13. PlantSkinComponent, BulletComponent, ZombieComponent -> Contains a getter property to get their respective property on its gameobject
-14. ModLogger -> Used to lod information about the mod and also to log errors/warnings
+13. `PlantSkinComponent`, `BulletComponent`, `ZombieComponent` -> Contains a getter property to get their respective property on its gameobject
+14. `ModLogger` -> Used to lod information about the mod and also to log errors/warnings
 </details>
 
-### CustomPlantClass.Level
+## CustomPlantClass.Level
 <details>
 <summary>Click to show section</summary>
   
-1. BranchAdventureManager -> Used to register custom branch adventures (Incomplete! do not use until verified!)
-2. CustomLevelMgr -> Used to load custom levels into the game. API (full code in repo):
+1. `BranchAdventureManager` -> Used to register custom branch adventures (Incomplete! do not use until verified!)
+2. `CustomLevelMgr` -> Used to load custom levels into the game. API (full code in repo):
 <details>
 <summary>Click to show code</summary>
 
@@ -148,7 +164,7 @@ public class CustomLevelMgr : MonoBehaviour
 ```
 </details>
 
-3. LevelProgressionManager -> Used to track what custom levels are completed. API  (full code in repo):
+3. `LevelProgressionManager` -> Used to track what custom levels are completed. API  (full code in repo):
 <details>
 <summary>Click to show code</summary>
 
@@ -163,21 +179,21 @@ public static class LevelProgressionManager
 </details>
 </details>
 
-### CustomPlantClass.Examples (Provides inheretable classes for base game plants)
+## CustomPlantClass.Examples (Provides inheretable classes for base game plants)
 <details>
 <summary>Click to show section</summary>
   
-1. ArmedChomperBase -> Untested
-2. DoomSniper_Example
-3. SniperPea_Example
-4. SuperHypnoGatling_Example
+1. `ArmedChomperBase` -> Untested
+2. `DoomSniper_Example`
+3. `SniperPea_Example`
+4. `SuperHypnoGatling_Example`
 </details>
 
-### CustomPlantClass.Main
+## CustomPlantClass.Main
 <details>
 <summary>Click to show section</summary>
   
-1. AssetMgr -> Used to load/save assets from different sources. API  (full code in repo):
+1. `AssetMgr` -> Used to load/save assets from different sources. API  (full code in repo):
 <details>
 <summary>Click to show code</summary>
 
@@ -229,7 +245,7 @@ public sealed class AssetDispatcher
 ```
 </details>
 
-2. DataMgr -> The core of the framework and contains most APIs. API  (full code in repo):
+2. `DataMgr` -> The core of the framework and contains most APIs. API  (full code in repo):
 <details>
 <summary>Click to show code</summary>
 
@@ -592,11 +608,61 @@ public enum RogueZombieAttack
 ```
 </details>
 
-3. ExtensionManager -> Contains extensions to various tools
-4. GameObjectMgr -> A tool to store gameobjects, untested
-5. GeneralTools -> unfinished
-6. ListHelper -> An extension class
-7. MathHelper -> Contains math tools
+3. `ExtensionManager` -> Contains extensions to various tools
+4. `GameObjectMgr` -> A tool to store gameobjects, untested
+5. `GeneralTools` -> unfinished
+6. `ListHelper` -> An extension class
+7. `MathHelper` -> Contains math tools
+
+<details>
+<summary>Click to show formulas</summary>
+
+`DirectionToDegrees`:
+```math
+\theta(x, y) = \frac{180}{\pi} \cdot \arctan\!\left(\frac{y}{x}\right) \text{ with quadrant correction}
+```
+
+`RotationToDirection`:
+```math
+f(\theta) = \frac{(\cos(\theta \cdot \pi / 180),\ \sin(\theta \cdot \pi / 180))}{\sqrt{\cos^2(\theta \cdot \pi / 180) + \sin^2(\theta \cdot \pi / 180)}}
+```
+
+`LookAt2D`:
+```math
+f(\vec{a}, \vec{b}) = \mathrm{atan2}\!\left(\frac{b_y - a_y}{\|\vec{b} - \vec{a}\|}, \frac{b_x - a_x}{\|\vec{b} - \vec{a}\|}\right) \cdot \frac{180}{\pi}
+```
+
+`RotateTowards2D`:
+```math
+f(\theta_c, \theta_t, \omega, \Delta t) =
+\theta_c + \mathrm{clamp}(\theta_t - \theta_c,\ -\omega \cdot \Delta t,\ \omega \cdot \Delta t)
+```
+
+`DistanceSq`:
+```math
+f(a_x, a_y, b_x, b_y) = (a_x - b_x)^2 + (a_y - b_y)^2
+```
+
+`RotateVector`:
+```math
+f(v_x, v_y, \theta) = \left( v_x \cos\left(\theta \cdot \frac{\pi}{180}\right) - v_y \sin\left(\theta \cdot \frac{\pi}{180}\right),\; v_x \sin\left(\theta \cdot \frac{\pi}{180}\right) + v_y \cos\left(\theta \cdot \frac{\pi}{180}\right) \right)
+```
+
+`ClampMagnitude`:
+```math
+f(\mathbf{v}) = \begin{cases}
+\mathbf{v} \cdot \dfrac{M}{\|\mathbf{v}\|}, & \text{if } \|\mathbf{v}\| > M, \\
+\mathbf{v}, & \text{otherwise}
+\end{cases}
+```
+
+`Remap`:
+```math
+f(v,a,b,c,d) = c + \frac{(v - a) \cdot (d - c)}{b - a}
+```
+
+</details>
+
 <details>
 <summary>Click to show code</summary>
 
@@ -738,10 +804,10 @@ public static class MathHelper
 ```
 </details>
 
-8. ModRegistryManager -> A way for mods to make registries for other mods to add stuff to
-9. PlantMgr -> Tools
+8. `ModRegistryManager` -> A way for mods to make registries for other mods to add stuff to
+9. `PlantMgr` -> Tools
 
-10. ModPlugin -> a plugin base
+10. `ModPlugin` -> a plugin base
 <details>
 <summary>Click to show code</summary>
 
@@ -762,7 +828,7 @@ public static class MathHelper
 ```
 </details>
 
-11. StructManager
+11. `StructManager`
 <details>
 <summary>Click to show code</summary>
 
@@ -1046,7 +1112,7 @@ public enum BoxType_Short
 ```
 </details>
 
-12. ZombieMgr -> Some zombie helper class
+12. `ZombieMgr` -> Some zombie helper class
 
 <details>
 <summary>Click to show code</summary>
@@ -1064,9 +1130,9 @@ public static class ZombieMgr
 
 </details>
 
-### CustomPlantClass.Runtime
+## CustomPlantClass.Runtime
 
-1. BoardBehaviour -> A class for storing behaviour that is called by board
+1. `BoardBehaviour` -> A class for storing behaviour that is called by board
 <details>
 <summary>Click to show code</summary>
 
@@ -1103,9 +1169,54 @@ public sealed class ActionOnBoardDestroyAttribute : Attribute
 ```
 </details>
 
-### CustomPlantClass.Networking:
+## CustomPlantClass.Networking:
 
-1. TCPManager -> used to send messages locally or on a localhost server
+1. `TCPManager` -> used to send messages locally or on a localhost server
+
+```mermaid
+flowchart TD
+    Awake["TCPBehaviour.Awake"] --> Running{"Already running?"}
+    Running -- "No" --> AutoServer["StartServer(54220)"]
+    Running -- "Yes" --> Ready["Leave current connection running"]
+
+    StartServer["StartServer(port)"] --> Server["RunServerAsync: listen, accept TCP client, upgrade to WebSocket"]
+    AutoServer --> Server
+    StartClient["StartClient(ip, port)"] --> Client["RunClientAsync: connect WebSocket"]
+    StartAuto["StartAuto(port)"] --> TryServer["Try RunServerAsync(port)"]
+    TryServer --> Server
+    TryServer -- "Task faults outward" --> ClientLocal["RunClientAsync(127.0.0.1, port)"]
+    TryServer -. "Most server exceptions are caught inside RunServerAsync" .-> NoteAuto["Fallback may not run for those errors"]
+
+    Server --> ServerReceive["Server receive loop"]
+    Client --> ClientReceive["Client receive loop"]
+    ServerReceive --> ParseServer["Parse Message/Data and enqueue command"]
+    ClientReceive --> ParseClient{"Message matches format?"}
+    ParseClient -- "No" --> Malformed["Log malformed command; continue receiving"]
+    ParseClient -- "Yes" --> Enqueue["Enqueue (message, data)"]
+    ParseServer --> Queue[("commandQueue")]
+    Enqueue --> Queue
+    Queue --> Update["TCPBehaviour.Update calls ProcessCommands"]
+    Update --> Drain["Dequeue commands"]
+    Drain --> Callback["Invoke matching registered callback"]
+    Drain --> Listener["Call matching ICommandListener"]
+    Listener --> Ping{"PingListener?"}
+    Ping -- "Yes" --> LocalPong["SendMessageLocal enqueues Pong"]
+    LocalPong --> Queue
+
+    SendMessage["SendMessage(message, data)"] --> SocketOpen{"Active WebSocket open?"}
+    SocketOpen -- "Yes" --> SendDirect["Send Message/Data payload over WebSocket"]
+    SocketOpen -- "No" --> SendError["Log send error"]
+    PingMod["PingMod(modName, callback, data)"] --> PingQueue["Enqueue modName + Ping"]
+    PingMod --> RegisterCallback["Register callback for modName + Pong"]
+    PingQueue --> Queue
+    PongArrives["Pong received from peer"] --> Queue
+
+    Stop["StopCommunication"] --> StopFlag["Set running false; cancel and close/dispose sockets"]
+    StopFlag --> StopTcp["Close TCP client and stop listener"]
+```
+
+`SendMessage` sends directly through the active WebSocket. `SendMessageLocal` only adds a command to `commandQueue`; it does not transmit it. `PingListener` therefore queues its `Pong` locally, while a `Pong` from a peer is dispatched to the callback registered by `PingMod`.
+
 <details>
 <summary>Click to show code</summary>
 
@@ -1184,7 +1295,7 @@ public abstract class PingListener : ICommandListener
 ```
 </details>
 
-### CustomPlantClass.Runtime.CSharp:
+## CustomPlantClass.Runtime.CSharp:
 1. This namespace is only a dll and is used to compile code on the go. An example mod:
 
 <details>
@@ -1243,7 +1354,7 @@ public static class Bullet_ultimateCactus_SetPenetrationTime_Patch
 ```
 </details>
 
-### CustomPlantClass.RogueShootingManager:
+## CustomPlantClass.RogueShootingManager:
 
 <details>
 <summary>Click to show code</summary>
@@ -1483,7 +1594,58 @@ public struct CustomRogueShootingBuff
 ```
 </details>
 
-### CustomPlantClass.Runtime.Tasks:
+## CustomPlantClass.Runtime.Tasks:
+
+```mermaid
+flowchart TD
+    Start["Call task helper"] --> Kind{"Which helper?"}
+
+    Kind -- "Delay(seconds)" --> DelayAwaiter["Create Delay awaiter"]
+    Kind -- "DelayScaled(seconds, speed)" --> ScaledAwaiter["Create DelayScaled awaiter"]
+    Kind -- "WaitForFixedUpdate(steps)" --> FixedAwaiter["Create one Delay awaiter"]
+    Kind -- "WaitUntil(predicate)" --> PredicateAwaiter["Create WaitUntil awaiter"]
+
+    DelayAwaiter --> DelaySchedule["Schedule with DelayScheduler; time-based"]
+    ScaledAwaiter --> ScaledSchedule["Schedule with DelayScheduler; scaled time"]
+    FixedAwaiter --> FixedSchedule["Schedule same awaiter steps times"]
+    PredicateAwaiter --> PredicateSchedule["Schedule with WaitUntilScheduler"]
+
+    DelaySchedule --> DelayTask["Return DelayTask"]
+    ScaledSchedule --> DelayTask
+    FixedSchedule --> DelayTask
+    PredicateSchedule --> WaitTask["Return WaitUntilTask"]
+    DelayTask --> Await["Awaiter stores continuation in OnCompleted"]
+    WaitTask --> Await
+
+    DelaySchedule --> Update["DelayScheduler.Update"]
+    ScaledSchedule --> Update
+    Update --> AlreadyDone{"IsCompleted?"}
+    AlreadyDone -- "Yes, including cancellation" --> RemoveDelay["Remove entry; skip Complete and WhenDone"]
+    AlreadyDone -- "No" --> Subtract["Subtract delta time, applying speed multiplier if scaled"]
+    Subtract --> TimeUp{"Remaining time <= 0?"}
+    TimeUp -- "No" --> Update
+    TimeUp -- "Yes" --> CompleteDelay["Complete awaiter; invoke continuation"]
+    CompleteDelay --> DelayAction["Invoke optional WhenDone action"]
+    DelayAction --> RemoveDelay
+
+    FixedSchedule --> FixedUpdate["DelayScheduler.FixedUpdate"]
+    FixedUpdate --> FixedDone{"IsCompleted?"}
+    FixedDone -- "Yes" --> RemoveFixed["Remove entry"]
+    FixedDone -- "No" --> CompleteFixed["Complete awaiter; invoke continuation"]
+    CompleteFixed --> FixedAction["Invoke optional WhenDone action"]
+    FixedAction --> RemoveFixed
+
+    PredicateSchedule --> WaitUpdate["WaitUntilScheduler.Update"]
+    WaitUpdate --> WaitDone{"Already completed or cancelled?"}
+    WaitDone -- "Yes" --> WaitAction["Invoke optional scheduled action"]
+    WaitDone -- "No" --> PredicateCheck{"Predicate true?"}
+    PredicateCheck -- "No" --> WaitUpdate
+    PredicateCheck -- "Yes" --> CompleteWait["Complete awaiter; invoke continuation"]
+    CompleteWait --> WaitAction
+    WaitAction --> RemoveWait["Remove entry"]
+```
+
+> **Behavior notes:** The fixed-update `steps` overload schedules the same awaiter multiple times, so the first fixed update completes it and later entries remove it; it does not currently wait for the requested number of steps. When a delay or wait is cancelled, its scheduler removes the entry without invoking the awaiter's continuation. `WaitUntilScheduler` can still invoke its optional scheduled action on cancellation.
 
 <details>
 <summary>Click to show code</summary>
