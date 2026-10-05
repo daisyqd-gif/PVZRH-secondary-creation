@@ -2,15 +2,28 @@
 
 namespace CustomPlantClass.Main
 {
+    /// <summary>
+    /// A tool to store GameObjects and instantiate them
+    /// </summary>
     public class GameObjectMgr : MonoBehaviour
     {
         private static readonly Dictionary<CustomItemType, GameObject> ObjectDictionary = new();
 
+        /// <summary>Adds the specified component to a game object and registers that object.</summary>
+        /// <typeparam name="T">The component type to add.</typeparam>
+        /// <param name="gameObject">The game object to configure and register.</param>
+        /// <param name="id">The ID to assign, or -1 to allocate one automatically.</param>
+        /// <returns>The registered object's custom item type.</returns>
         public static CustomItemType Register<T>(GameObject gameObject, int id = -1) where T : Component
         {
             gameObject.AddComponent<T>();
             return Register(gameObject, id);
         }
+        /// <summary>Registers a game object under a custom item type.</summary>
+        /// <param name="gameObject">The game object to register.</param>
+        /// <param name="id">The ID to assign, or -1 to allocate one automatically.</param>
+        /// <returns>The registered object's custom item type.</returns>
+        /// <exception cref="ArgumentException">The specified ID is already registered.</exception>
         public static CustomItemType Register(GameObject gameObject, int id = -1)
         {
             // If user manually passed an ID, ensure it's not taken
@@ -29,18 +42,35 @@ namespace CustomPlantClass.Main
             ObjectDictionary.Add(theItemType, gameObject);
             return theItemType;
         }
+        /// <summary>Gets the game object registered for a custom item type.</summary>
+        /// <param name="type">The custom item type to look up.</param>
+        /// <returns>The registered game object, or the safe default if no object is registered.</returns>
         public static GameObject Get(CustomItemType type)
         {
             return ObjectDictionary.GetValueSafe(type);
         }
+        /// <summary>Creates an instance of the registered object at a position and rotation.</summary>
+        /// <param name="type">The custom item type to instantiate.</param>
+        /// <param name="position">The instance's position.</param>
+        /// <param name="rotation">The instance's rotation.</param>
+        /// <returns>The instantiated game object.</returns>
         public static GameObject Instantiate(CustomItemType type, Vector3 position, Quaternion rotation)
         {
             return Instantiate(Get(type), position, rotation);
         }
+        /// <summary>Creates an instance of the registered object at a position and rotation under a parent.</summary>
+        /// <param name="type">The custom item type to instantiate.</param>
+        /// <param name="position">The instance's position.</param>
+        /// <param name="rotation">The instance's rotation.</param>
+        /// <param name="parent">The transform to parent the instance to.</param>
+        /// <returns>The instantiated game object.</returns>
         public static GameObject Instantiate(CustomItemType type, Vector3 position, Quaternion rotation, Transform parent)
         {
             return Instantiate(Get(type), position, rotation, parent);
         }
+        /// <summary>Creates an instance of the registered object using the default instantiate settings.</summary>
+        /// <param name="type">The custom item type to instantiate.</param>
+        /// <returns>The instantiated game object.</returns>
         public static GameObject Instantiate(CustomItemType type)
         {
             return Instantiate(Get(type));
@@ -50,6 +80,8 @@ namespace CustomPlantClass.Main
         //  Allocate prefab ID
         // ---------------------------------------------------------
 
+        /// <summary>Allocates a deterministic prefab ID for the calling mod and avoids registered ID collisions.</summary>
+        /// <returns>The allocated prefab ID.</returns>
         public static int AllocatePrefabID()
         {
             PrefabIDAllocator.LoadFreezeTable();
@@ -188,17 +220,28 @@ namespace CustomPlantClass.Main
             }
         }
     }
+    /// <summary>
+    /// s
+    /// </summary>
     public struct CustomItemType
     {
         private int id;
+        /// <summary>Converts a custom item type to its underlying integer ID.</summary>
+        /// <param name="type">The custom item type to convert.</param>
+        /// <returns>The integer ID.</returns>
         public static implicit operator int(CustomItemType type)
         {
             return type.id;
         }
+        /// <summary>Creates a custom item type from an integer ID.</summary>
+        /// <param name="type">The integer ID to convert.</param>
+        /// <returns>A custom item type containing the specified ID.</returns>
         public static implicit operator CustomItemType(int type)
         {
             return new CustomItemType(type);
         }
+        /// <summary>Initializes a custom item type with an ID.</summary>
+        /// <param name="id">The integer ID to store.</param>
         public CustomItemType(int id) => this.id = id;
     }
 }

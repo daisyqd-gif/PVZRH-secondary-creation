@@ -3,21 +3,36 @@
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="BepInExConfigManager.Il2Cpp.CoreCLR" Private="false">
+      <HintPath>..\lib\BepInEx\core\BepInExConfigManager.Il2Cpp.CoreCLR.dll</HintPath>
+    </Reference>
     <Reference Include="CustomizeLib.Bepinex" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="CustomPlantClass" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomPlant.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\plugins\CustomPlant.xml">
+      <Link>CustomPlant.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="CustomPlantClass.RogueShootingManager" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomPlant.RogueShootingManager.dll</HintPath>
     </Reference>
     <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.xml">
+      <Link>CustomPlantClass.Runtime.Tasks.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="CustomPlantClass.Networking" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Networking.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\plugins\CustomPlant.Networking.xml">
+      <Link>CustomPlant.Networking.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -30,15 +45,31 @@
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Core.xml">
+      <Link>BepInEx.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Preloader.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Preloader.Core.xml">
+      <Link>BepInEx.Preloader.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.Common.xml">
+      <Link>BepInEx.Unity.Common.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.xml">
+      <Link>BepInEx.Unity.IL2CPP.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="Il2CppInterop.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
     </Reference>

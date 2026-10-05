@@ -1,5 +1,6 @@
 namespace CustomPlantClass
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class CustomThrower : CustomShooter
     {
         protected Vector2 firstPostion;

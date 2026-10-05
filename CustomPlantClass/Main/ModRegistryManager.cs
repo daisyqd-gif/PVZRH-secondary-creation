@@ -1,6 +1,9 @@
 #nullable enable
 namespace CustomPlantClass.Main
 {
+    /// <summary>
+    /// Global registries for mods
+    /// </summary>
     public static class ModRegistryManager
     {
         // name -> typed registry (boxed as object)

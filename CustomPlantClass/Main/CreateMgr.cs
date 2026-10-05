@@ -1,5 +1,6 @@
 namespace CustomPlantClass.Main
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class CreateMgr
     {
         public static Plant SetPlant(int row, int column, PlantType thePlantType, Plant targetPlant = null, Vector2 puffV = default, bool isFreeSet = false, bool withEffect = true, Plant hidplant = null)

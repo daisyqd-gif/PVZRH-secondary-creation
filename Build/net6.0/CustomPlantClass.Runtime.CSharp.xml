@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomPlantClass.Runtime.Tasks</name>
+    </assembly>
+    <members>
+        <member name="T:CustomPlantClass.Runtime.Tasks.Delay">
+            <summary>
+            Represents an awaitable delay that completes after a scheduled duration.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.Delay.#ctor(CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Initializes a delay that can be canceled by the specified token.
+            </summary>
+            <param name="token">The token that can cancel the delay.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.Delay.#ctor">
+            <summary>
+            Initializes a delay that cannot be canceled.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.Delay.IsCompleted">
+            <summary>
+            Gets whether the delay has completed or its cancellation token has been canceled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.Delay.OnCompleted(System.Action)">
+            <summary>
+            Registers the continuation to invoke when the delay completes.
+            </summary>
+            <param name="continuation">The continuation to invoke.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.Delay.Complete">
+            <summary>
+            Marks the delay as complete and invokes its registered continuation unless canceled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.Delay.GetResult">
+            <summary>
+            Gets the result of the completed delay.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.DelayScaled">
+            <summary>
+            Represents an awaitable delay whose countdown is adjusted by a speed multiplier.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScaled.#ctor(System.Single,System.Func{System.Single},CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Initializes a scaled delay with a duration, a dynamic speed multiplier, and an optional cancellation token.
+            </summary>
+            <param name="seconds">The initial duration in seconds.</param>
+            <param name="speed">A function that supplies the multiplier applied to elapsed time.</param>
+            <param name="token">An optional token that can cancel the delay.</param>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.DelayScaled.IsCompleted">
+            <summary>
+            Gets whether the delay has completed or its cancellation token has been canceled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScaled.OnCompleted(System.Action)">
+            <summary>
+            Registers the continuation to invoke when the delay completes.
+            </summary>
+            <param name="continuation">The continuation to invoke.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScaled.Complete">
+            <summary>
+            Marks the delay as complete and invokes its registered continuation.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScaled.GetResult">
+            <summary>
+            Gets the result of the completed delay.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.WaitUntil">
+            <summary>
+            Represents an awaitable operation that completes when a predicate becomes true.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntil.#ctor(System.Func{System.Boolean},CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Initializes a wait that can be canceled by the specified token.
+            </summary>
+            <param name="predicate">The condition that must become true to complete the wait.</param>
+            <param name="token">The token that can cancel the wait.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntil.#ctor(System.Func{System.Boolean})">
+            <summary>
+            Initializes a wait that completes when the specified predicate becomes true.
+            </summary>
+            <param name="predicate">The condition that must become true to complete the wait.</param>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.WaitUntil.IsCompleted">
+            <summary>
+            Gets whether the wait has completed or its cancellation token has been canceled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntil.OnCompleted(System.Action)">
+            <summary>
+            Registers the continuation to invoke when the wait completes.
+            </summary>
+            <param name="continuation">The continuation to invoke.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntil.Complete">
+            <summary>
+            Marks the wait as complete and invokes its registered continuation.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntil.GetResult">
+            <summary>
+            Gets the result of the completed wait.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.WaitUntilTask">
+            <summary>
+            Provides an awaitable handle for a predicate-based wait.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilTask.#ctor(CustomPlantClass.Runtime.Tasks.WaitUntil)">
+            <summary>
+            Initializes the handle with the specified awaiter.
+            </summary>
+            <param name="awaiter">The awaiter that completes when its predicate is satisfied.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilTask.GetAwaiter">
+            <summary>
+            Gets the awaiter used by this handle.
+            </summary>
+            <returns>The underlying predicate-based awaiter.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilTask.WaitUntil(System.Func{System.Boolean},CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Schedules a wait that completes when the predicate is true or the token is canceled.
+            </summary>
+            <param name="predicate">The condition to wait for.</param>
+            <param name="token">The token that can cancel the wait.</param>
+            <returns>An awaitable handle for the scheduled wait.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilTask.WaitUntil(System.Func{System.Boolean})">
+            <summary>
+            Schedules a wait that completes when the predicate becomes true.
+            </summary>
+            <param name="predicate">The condition to wait for.</param>
+            <returns>An awaitable handle for the scheduled wait.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.DelayTask">
+            <summary>
+            Provides awaitable operations for timed and fixed-update delays.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.#ctor(CustomPlantClass.Runtime.Tasks.IDelay)">
+            <summary>
+            Initializes the handle with the specified delay awaiter.
+            </summary>
+            <param name="awaiter">The awaiter that represents the delay.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.GetAwaiter">
+            <summary>
+            Gets the awaiter used by this handle.
+            </summary>
+            <returns>The underlying delay awaiter.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.Delay(System.Single,CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Schedules a delay that can be canceled by the specified token.
+            </summary>
+            <param name="seconds">The duration of the delay in seconds.</param>
+            <param name="token">The token that can cancel the delay.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.Delay(System.Single)">
+            <summary>
+            Schedules a delay for the specified duration.
+            </summary>
+            <param name="seconds">The duration of the delay in seconds.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.WaitForFixedUpdate(CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Schedules a delay that completes on the next fixed update and can be canceled.
+            </summary>
+            <param name="token">The token that can cancel the delay.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.WaitForFixedUpdate">
+            <summary>
+            Schedules a delay that completes on the next fixed update.
+            </summary>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.WaitForFixedUpdate(System.Int32,CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Schedules a delay for the specified number of fixed updates with cancellation support.
+            </summary>
+            <param name="steps">The number of fixed updates to wait for.</param>
+            <param name="token">The token that can cancel the delay.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.WaitForFixedUpdate(System.Int32)">
+            <summary>
+            Schedules a delay for the specified number of fixed updates.
+            </summary>
+            <param name="steps">The number of fixed updates to wait for.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayTask.DelayScaled(System.Single,System.Func{System.Single},CustomPlantClass.Runtime.Tasks.CancellationToken)">
+            <summary>
+            Schedules a delay whose countdown is adjusted by a dynamic speed multiplier.
+            </summary>
+            <param name="seconds">The initial duration in seconds.</param>
+            <param name="speed">A function that supplies the multiplier applied to elapsed time.</param>
+            <param name="token">An optional token that can cancel the delay.</param>
+            <returns>An awaitable handle for the scheduled delay.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.DelayScheduler">
+            <summary>
+            Schedules and advances timed and fixed-update delay awaiters.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.Schedule(System.Single,CustomPlantClass.Runtime.Tasks.Delay)">
+            <summary>
+            Schedules a delay for the specified duration.
+            </summary>
+            <param name="seconds">The duration of the delay in seconds.</param>
+            <param name="awaiter">The delay awaiter to complete.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.ScheduleScaled(CustomPlantClass.Runtime.Tasks.DelayScaled)">
+            <summary>
+            Schedules a delay whose countdown uses its configured speed multiplier.
+            </summary>
+            <param name="awaiter">The scaled delay awaiter to complete.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.ScheduleFixedUpate(CustomPlantClass.Runtime.Tasks.Delay)">
+            <summary>
+            Schedules a delay to complete on the next fixed update.
+            </summary>
+            <param name="awaiter">The delay awaiter to complete.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.Schedule(System.Single,CustomPlantClass.Runtime.Tasks.Delay,System.Action)">
+            <summary>
+            Schedules a delay and invokes an action after it completes.
+            </summary>
+            <param name="seconds">The duration of the delay in seconds.</param>
+            <param name="awaiter">The delay awaiter to complete.</param>
+            <param name="whenDone">The action to invoke after completion.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.ScheduleScaled(CustomPlantClass.Runtime.Tasks.DelayScaled,System.Action)">
+            <summary>
+            Schedules a scaled delay and invokes an action after it completes.
+            </summary>
+            <param name="awaiter">The scaled delay awaiter to complete.</param>
+            <param name="whenDone">The action to invoke after completion.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.ScheduleFixedUpate(CustomPlantClass.Runtime.Tasks.Delay,System.Action)">
+            <summary>
+            Schedules a delay for the next fixed update and invokes an action after it completes.
+            </summary>
+            <param name="awaiter">The delay awaiter to complete.</param>
+            <param name="whenDone">The action to invoke after completion.</param>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler">
+            <summary>
+            Schedules and advances predicate-based waits.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler.Schedule(CustomPlantClass.Runtime.Tasks.WaitUntil)">
+            <summary>
+            Schedules a predicate-based wait.
+            </summary>
+            <param name="awaiter">The wait awaiter to check.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler.Schedule(CustomPlantClass.Runtime.Tasks.WaitUntil,System.Action)">
+            <summary>
+            Schedules a predicate-based wait and invokes an action when it completes.
+            </summary>
+            <param name="awaiter">The wait awaiter to check.</param>
+            <param name="action">The action to invoke after the wait completes.</param>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.CancellationToken">
+            <summary>
+            Signals cancellation for supported scheduled operations.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.CancellationToken.IsCanceled">
+            <summary>
+            Gets whether cancellation has been requested.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationToken.Cancel">
+            <summary>
+            Requests cancellation.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationToken.CancelAfterFixedUpate">
+            <summary>
+            Creates a token that is canceled on the next fixed update.
+            </summary>
+            <returns>The scheduled cancellation token.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationToken.CancelAfterFixedUpate(System.Int32)">
+            <summary>
+            Creates a token that is canceled after the specified number of fixed updates.
+            </summary>
+            <param name="steps">The number of fixed updates before cancellation.</param>
+            <returns>The scheduled cancellation token.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationToken.CancelAfterSeconds(System.Single)">
+            <summary>
+            Creates a token that is canceled after the specified duration.
+            </summary>
+            <param name="seconds">The duration in seconds before cancellation.</param>
+            <returns>The scheduled cancellation token.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationToken.CancelWhen(System.Func{System.Boolean})">
+            <summary>
+            Creates a token that is canceled when the specified predicate becomes true.
+            </summary>
+            <param name="predicate">The condition that triggers cancellation.</param>
+            <returns>The scheduled cancellation token.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.CancellationTokenExt">
+            <summary>
+            Provides extension methods for creating cancellation tokens tied to Unity object lifetimes.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.CreateCancellationToken(UnityEngine.MonoBehaviour)">
+            <summary>
+            Creates a cancellation token that is canceled when the component is destroyed.
+            </summary>
+            <param name="self">The component whose destruction triggers cancellation.</param>
+            <returns>A token canceled when the component is destroyed.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.CreateCancellationToken(UnityEngine.GameObject)">
+            <summary>
+            Creates a cancellation token associated with the specified game object's component lifetime.
+            </summary>
+            <param name="self">The game object for which to create the token.</param>
+            <returns>A token canceled when its associated component is destroyed.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.CreateCancellationToken(UnityEngine.Component)">
+            <summary>
+            Creates a cancellation token associated with the specified component's lifetime.
+            </summary>
+            <param name="self">The component for which to create the token.</param>
+            <returns>A token canceled when its associated component is destroyed.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.MonobehaviourCancellationToken">
+            <summary>
+            Provides a cancellation token that is canceled when this component is destroyed.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.MonobehaviourCancellationToken.Token">
+            <summary>
+            Gets the token associated with this component's lifetime.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Tasks.IDelay">
+            <summary>
+            Defines an awaiter for a delay or other scheduled operation.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.Tasks.IDelay.IsCompleted">
+            <summary>
+            Gets whether the operation has completed.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.IDelay.Complete">
+            <summary>
+            Marks the operation as complete.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.IDelay.GetResult">
+            <summary>
+            Gets the result of the completed operation.
+            </summary>
+        </member>
+    </members>
+</doc>

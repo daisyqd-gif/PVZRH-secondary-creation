@@ -1,8 +1,10 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace CustomPlantClass.Main
 {
+
     public class GameAPPInitBehaviour : MonoBehaviour
     {
-        public static List<Struct1_Plant> data_plant = new();
+        internal static List<Struct1_Plant> data_plant = new();
         public static ResourcesManager resourcesManager => GameAPP.resourcesManager;
         public static void RegisterAllPlants()
         {

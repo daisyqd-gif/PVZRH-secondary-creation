@@ -537,7 +537,7 @@ namespace MegaGatlingExpansion
                     CreateZombie.Instance.SetZombie(i, (ZombieType)9000);
                 }
             }
-            if (Random.Range(0, 100) <= 50 && (theZombieType == ZombieType.UltimatePaperZombie) && GameAPP.theGameStatus == GameStatus.InGame)
+            if (Random.Range(0, 100) <= 50 && (theZombieType == ZombieType.UltimatePaperZombie) && GameAPP.theGameStatus == GameStatus.InGame && Plugin.AllowZombieReplace)
             {
                 theZombieType = (ZombieType)9004;
             }

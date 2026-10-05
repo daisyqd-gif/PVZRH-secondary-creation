@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ultimategoldjacksondrivermusic" /> <!-- Change abname to the name of the assetbundle or remove if it is not a custom plant mod -->
+    <EmbeddedResource Include="rsmusic" /> <!-- Change abname to the name of the assetbundle or remove if it is not a custom plant mod -->
   </ItemGroup>
 
   <!-- Import shared references -->

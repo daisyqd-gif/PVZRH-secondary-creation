@@ -1,5 +1,8 @@
 namespace CustomPlantClass.Main
 {
+    /// <summary>
+    /// General tools used for various purposes
+    /// </summary>
     public static class GeneralTools
     {
         /// <summary>
@@ -47,6 +50,11 @@ namespace CustomPlantClass.Main
 
             return collidersInCone;
         }
+        /// <param name="center">The center of the oval</param>
+        /// <param name="radiusX">The X radius of the oval</param>
+        /// <param name="radiusY">The Y radius of the oval</param>
+        /// <param name="layerMask">The layer of the collider</param>
+        /// <returns>All colliders in an oval</returns>
         public static List<Collider2D> GetCollider2DsInOval(Vector2 center, float radiusX, float radiusY, LayerMask layerMask)
         {
             List<Collider2D> collidersInOval = new List<Collider2D>();

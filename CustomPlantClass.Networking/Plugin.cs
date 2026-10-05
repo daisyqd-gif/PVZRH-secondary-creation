@@ -1,3 +1,4 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 global using BepInEx;
 global using Il2CppInterop.Runtime.Injection;
 global using UnityEngine;
@@ -27,6 +28,6 @@ namespace CustomPlantClass.Networking
     {
         public const string PluginGuid = "CustomPlantClass.Networking.Bepinex";
         public const string PluginName = "CustomPlantClass.Networking";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.5";
     }
 }

@@ -1,3 +1,4 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 global using BepInEx;
 global using BepInEx.Unity.IL2CPP;
 global using Il2CppInterop.Runtime.Injection;

@@ -1,20 +1,33 @@
-
-
 namespace CustomPlantClass.Main
 {
+    /// <summary>
+    /// Various tools for custom behaviour involving zombies
+    /// </summary>
     public static class ZombieMgr
     {
         private static Vector3 cornerpos = new();
+        /// <summary>
+        /// Makes a newspaper zombie lose its newspaper.
+        /// </summary>
+        /// <param name="self">The affected zombie</param>
         public static void LosePaper(this PaperZombie self)
         {
             self.theSecondArmorHealth = 0;
             self.TakeDamage(1, self, DamageType.Normal); //It wants an Idamagemaker so I put itself in
         }
+        /// <summary>
+        /// Makes a newspaper zombie lose its newspaper.
+        /// </summary>
+        /// <param name="self">The affected zombie</param>
         public static void LosePaper(this GatlingPaperZombie_a self)
         {
             self.theSecondArmorHealth = 0;
             self.TakeDamage(1, self, DamageType.Normal); //It wants an Idamagemaker so I put itself in
         }
+        /// <summary>
+        /// Instantly kills a zombie and makes it fly away
+        /// </summary>
+        /// <param name="self">The zombie to fly away</param>
         public static void FlyAway(this Zombie self)
         {
             if (self == null) return;
@@ -78,6 +91,10 @@ namespace CustomPlantClass.Main
                 Object.Destroy(obj);
             }
         }
+        /// <summary>
+        /// Instantly kills a zombie and crushes it
+        /// </summary>
+        /// <param name="self">The zombie to be crushed</param>
         public static void Crashed(this Zombie self)
         {
             if (self == null) return;

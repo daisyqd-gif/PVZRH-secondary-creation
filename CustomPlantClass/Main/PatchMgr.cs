@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using CustomPlantClass.Examples;
 using CustomPlantClass.Runtime;
@@ -1701,28 +1702,6 @@ namespace CustomPlantClass
                 true
             );
 
-            return false; // block original IL2CPP logic
-        }
-    }
-    [HarmonyPatch(typeof(Core.Lawnf))]
-    public static class Core_Lawnf_Patch
-    {
-        [HarmonyPatch("FormatToChineseUnit", [typeof(int)])]
-        [HarmonyPrefix]
-        public static bool FormatToChineseUnit_Prefix_int(int num, ref string __result)
-        {
-            if (!ScientificNumberMgr.IsEnglishNumber) return true;
-
-            __result = num.FormatToScientificNotation();
-            return false; // block original IL2CPP logic
-        }
-        [HarmonyPatch("FormatToChineseUnit", [typeof(long)])]
-        [HarmonyPrefix]
-        public static bool FormatToChineseUnit_Prefix_long(long num, ref string __result)
-        {
-            if (!ScientificNumberMgr.IsEnglishNumber) return true;
-
-            __result = num.FormatToScientificNotation();
             return false; // block original IL2CPP logic
         }
     }

@@ -7,6 +7,7 @@ namespace CustomPlantClass.Level
     /// </summary>
     public class CustomLevelMgr : MonoBehaviour
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static Dictionary<int, Func<bool>> CanUnlockLevel = new();
         [OnLoad]
         public static void OnLoad()
@@ -51,6 +52,7 @@ namespace CustomPlantClass.Level
                 }
             });
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Registers a custom level with a custom component.
@@ -114,6 +116,9 @@ namespace CustomPlantClass.Level
             DataMgr.LoadedCustomLevels.Add(data);
             return data.LevelID;
         }
+        /// <summary>
+        /// Registers a custom level with a custom component.
+        /// </summary>
         public static int RegisterCustomLevel<T>(BaseCustomLevelData data, Func<bool> canUnlock) where T : MonoBehaviour
         {
             DataMgr.EnsureGameNotStarted();
@@ -142,6 +147,9 @@ namespace CustomPlantClass.Level
             CanUnlockLevel.Add(data.LevelID, canUnlock);
             return theLevelID;
         }
+        /// <summary>
+        /// Registers a custom level with a custom component.
+        /// </summary>
         public static int RegisterCustomLevel(BaseCustomLevelData data, Func<bool> canUnlock)
         {
             DataMgr.EnsureGameNotStarted();
@@ -171,6 +179,9 @@ namespace CustomPlantClass.Level
             CanUnlockLevel.Add(data.LevelID, canUnlock);
             return data.LevelID;
         }
+        /// <summary>
+        /// Allocates a level ID that is deterministic
+        /// </summary>
         public static int AllocateLevelID()
         {
             LevelIDAllocator.LoadFreezeTable();
@@ -225,6 +236,9 @@ namespace CustomPlantClass.Level
             //UsedLevelIDs.Add(candidate);
             return candidate;
         }
+        /// <summary>
+        /// Allocates a level ID that is deterministic
+        /// </summary>
         public static int AllocateLevelID(string name)
         {
             LevelIDAllocator.LoadFreezeTable();

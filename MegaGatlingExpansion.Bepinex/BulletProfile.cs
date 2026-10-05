@@ -245,7 +245,7 @@ namespace MegaGatlingExpansion
                 return;
             if (zombie.theZombieType == ZombieType.Nothing)
                 return;
-            Miasma.SetMiasma(bullet.transform.position, bullet.theBulletRow, zombie.board, false, true);
+            Miasma.SetMiasma(bullet.transform.position, bullet.theBulletRow, zombie.board, Plugin.IsOverpowered, true);
             base.HitZombie(zombie);
         }
     }
@@ -332,7 +332,7 @@ namespace MegaGatlingExpansion
                 if (Random.Range(0, 100) > 50 && !func(z)) z.KnockBack(2f, Zombie.KnockBackReason.Normal);
                 else z.Buttered(2, false); //2 seconds without sprite
 
-                if (col >= 9 && func(z))
+                if (func(z))
                 {
                     z.FlyAway();
                 }

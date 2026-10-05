@@ -1,5 +1,6 @@
 namespace CustomPlantClass.Examples
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class DoomSniper_Example : CustomShooter
     {
         public DoomSniper plant => GetComponent<DoomSniper>();

@@ -1,67 +1,233 @@
-global using BepInEx;
-global using BepInEx.Unity.IL2CPP;
-global using HarmonyLib;
-global using Il2CppInterop.Runtime.Injection;
-global using System.Reflection;
-global using UnityEngine;
-global using System.Collections.Generic;
-global using System.Linq;
-global using GameLevel.RogueShooting;
+using BepInEx;
+using BepInEx.Unity.IL2CPP;
+using GameLevel.RogueShooting;
+using HarmonyLib;
+using Il2CppInterop.Runtime.Injection;
 using System;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Il2CppInterop.Runtime;
+using System.Runtime.CompilerServices;
 namespace RogueShootingRandomFormation
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
     public class Plugin : BasePlugin
     {
-        public static List<ZombieType> RandomList = new();
-        public static List<ZombieType> UltimateRandomList = new();
+        public static IReadOnlyList<ZombieType> RandomList = 
+        [
+            ZombieType.NormalZombie,
+            ZombieType.ConeZombie,
+            ZombieType.PaperZombie,
+            ZombieType.BucketZombie,
+            ZombieType.DoorZombie,
+            ZombieType.PolevaulterZombie,
+            ZombieType.BucketPaper,
+            ZombieType.DancePolZombie,
+            ZombieType.CoachPaper,
+            ZombieType.JacksonZombie,
+            ZombieType.DriverZombie,
+            ZombieType.FootballZombie,
+            ZombieType.Gargantuar,
+            ZombieType.FlagFootball,
+            ZombieType.DollDiamond,
+            ZombieType.PogoZombie,
+            ZombieType.ElitePaperZombie,
+            ZombieType.MachineNutZombie,
+            ZombieType.TallNutFootballZombie,
+            ZombieType.RedGargantuar,
+            ZombieType.SuperPogoZombie,
+            ZombieType.SuperJackboxZombie,
+            ZombieType.LadderZombie,
+            ZombieType.SuperLadderZombie,
+            ZombieType.IronGargantuar,
+            ZombieType.NewYearZombie,
+            ZombieType.HorseZombie,
+            ZombieType.PenguinZombie,
+            ZombieType.SuperPenguinZombie,
+            ZombieType.ElephantZombie,
+            ZombieType.SuperPolevaulter,
+            ZombieType.PeaShooterZombie,
+            ZombieType.CherryPaperZombie,
+            ZombieType.CherryShooterZombie,
+            ZombieType.GatlingPeaZombie,
+            ZombieType.CatapultZombie,
+            ZombieType.GatlingFootballZombie,
+            ZombieType.CherryCatapultZombie,
+            ZombieType.DrownZombie,
+            ZombieType.SnowNormalZombie,
+            ZombieType.SnowConeZombie,
+            ZombieType.SnowBucketZombie,
+            ZombieType.SnowShieldZombie,
+            ZombieType.MiniSnowMonster,
+            ZombieType.SnowMonsterZombie,
+            ZombieType.SuperSnowMonsterZombie,
+            ZombieType.SnowDrownZombie,
+            ZombieType.SnowGatlingPeaZombie,
+            ZombieType.LevatationZombie,
+            ZombieType.BalloonZombie,
+            ZombieType.IronBalloonZombie
+        ];
+        public static IReadOnlyList<ZombieType> UltimateRandomList = 
+        [
+            ZombieType.Jackson_a,
+            ZombieType.Jackson_b,
+            ZombieType.Jackson_c,
+            ZombieType.BlackFootball_a,
+            ZombieType.BlackFootball_b,
+            ZombieType.BlackFootball_c,
+            ZombieType.BlackFootball_c2,
+            ZombieType.BlackFlagFootball,
+            ZombieType.Jackbox_a,
+            ZombieType.Jackbox_b,
+            ZombieType.GatlingPaper_b,
+            ZombieType.GatlingPaper_b,
+            ZombieType.GatlingPaper_c,
+            ZombieType.ArmedGargantuar,
+            ZombieType.SuperGargantuar,
+            ZombieType.BlackHorse,
+            ZombieType.BlackTrainZombie,
+            ZombieType.ElephantZombie_a,
+            ZombieType.ElephantZombie_b,
+            ZombieType.ElephantZombie_c,
+            ZombieType.BlackJackboxZombie,
+            ZombieType.LegionZombie,
+            ZombieType.ObsidianTallNutZombie,
+            ZombieType.GatlingBlackFootball,
+            ZombieType.Drown_a,
+            ZombieType.Drown_b,
+            ZombieType.Drown_c,
+            ZombieType.Driver_a,
+            ZombieType.Driver_b,
+            ZombieType.Driver_c,
+            ZombieType.Drownpult_a,
+            ZombieType.Drownpult_b,
+            ZombieType.Drownpult_c,
+            ZombieType.UltimateGoldGargantuar,
+            ZombieType.Kirov_a,
+            ZombieType.Kirov_b,
+            ZombieType.Kirov_c,
+            ZombieType.MachineLevatation,
+            ZombieType.SuperLevatation
+        ];
+        public static IReadOnlyList<ZombieType> MixedRandomList = 
+        [
+            ZombieType.NormalZombie,
+            ZombieType.ConeZombie,
+            ZombieType.PaperZombie,
+            ZombieType.BucketZombie,
+            ZombieType.DoorZombie,
+            ZombieType.PolevaulterZombie,
+            ZombieType.BucketPaper,
+            ZombieType.DancePolZombie,
+            ZombieType.CoachPaper,
+            ZombieType.JacksonZombie,
+            ZombieType.DriverZombie,
+            ZombieType.FootballZombie,
+            ZombieType.Gargantuar,
+            ZombieType.FlagFootball,
+            ZombieType.DollDiamond,
+            ZombieType.PogoZombie,
+            ZombieType.ElitePaperZombie,
+            ZombieType.MachineNutZombie,
+            ZombieType.TallNutFootballZombie,
+            ZombieType.RedGargantuar,
+            ZombieType.SuperPogoZombie,
+            ZombieType.SuperJackboxZombie,
+            ZombieType.LadderZombie,
+            ZombieType.SuperLadderZombie,
+            ZombieType.IronGargantuar,
+            ZombieType.NewYearZombie,
+            ZombieType.HorseZombie,
+            ZombieType.PenguinZombie,
+            ZombieType.SuperPenguinZombie,
+            ZombieType.ElephantZombie,
+            ZombieType.SuperPolevaulter,
+            ZombieType.PeaShooterZombie,
+            ZombieType.CherryPaperZombie,
+            ZombieType.CherryShooterZombie,
+            ZombieType.GatlingPeaZombie,
+            ZombieType.CatapultZombie,
+            ZombieType.GatlingFootballZombie,
+            ZombieType.CherryCatapultZombie,
+            ZombieType.DrownZombie,
+            ZombieType.SnowNormalZombie,
+            ZombieType.SnowConeZombie,
+            ZombieType.SnowBucketZombie,
+            ZombieType.SnowShieldZombie,
+            ZombieType.MiniSnowMonster,
+            ZombieType.SnowMonsterZombie,
+            ZombieType.SuperSnowMonsterZombie,
+            ZombieType.SnowDrownZombie,
+            ZombieType.SnowGatlingPeaZombie,
+            ZombieType.LevatationZombie,
+            ZombieType.BalloonZombie,
+            ZombieType.IronBalloonZombie,
+            ZombieType.Jackson_a,
+            ZombieType.Jackson_b,
+            ZombieType.Jackson_c,
+            ZombieType.BlackFootball_a,
+            ZombieType.BlackFootball_b,
+            ZombieType.BlackFootball_c,
+            ZombieType.BlackFootball_c2,
+            ZombieType.BlackFlagFootball,
+            ZombieType.Jackbox_a,
+            ZombieType.Jackbox_b,
+            ZombieType.GatlingPaper_b,
+            ZombieType.GatlingPaper_b,
+            ZombieType.GatlingPaper_c,
+            ZombieType.ArmedGargantuar,
+            ZombieType.SuperGargantuar,
+            ZombieType.BlackHorse,
+            ZombieType.BlackTrainZombie,
+            ZombieType.ElephantZombie_a,
+            ZombieType.ElephantZombie_b,
+            ZombieType.ElephantZombie_c,
+            ZombieType.BlackJackboxZombie,
+            ZombieType.LegionZombie,
+            ZombieType.ObsidianTallNutZombie,
+            ZombieType.GatlingBlackFootball,
+            ZombieType.Drown_a,
+            ZombieType.Drown_b,
+            ZombieType.Drown_c,
+            ZombieType.Driver_a,
+            ZombieType.Driver_b,
+            ZombieType.Driver_c,
+            ZombieType.Drownpult_a,
+            ZombieType.Drownpult_b,
+            ZombieType.Drownpult_c,
+            ZombieType.UltimateGoldGargantuar,
+            ZombieType.Kirov_a,
+            ZombieType.Kirov_b,
+            ZombieType.Kirov_c,
+            ZombieType.MachineLevatation,
+            ZombieType.SuperLevatation
+        ];
+        public static RandomZombieType mixed;
         public override void Load()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
         }
-        public static void LoadMod()
-        {
-            RandomList= new List<ZombieType>([..GameAPP.resourcesManager.allZombieTypes])
-            .Where((ZombieType type) => 
-            !TypeMgr.WaterZombie(type) && 
-            !TypeMgr.IsBossZombie(type) && 
-            !TypeMgr.UltimateZombie(type) && 
-            !TypeMgr.BannedInRandomZombies(type) &&
-            type != ZombieType.BedRockSnowZombie &&
-            type != ZombieType.SnowDrownZombie &&
-            type != ZombieType.RandomZombie &&
-            type != ZombieType.RandomPlusZombie &&
-            type != ZombieType.DiamondRandomZombie &&
-            type != ZombieType.TrainingDummy &&
-            type != ZombieType.EndoFlameZombie).ToList();
-            UltimateRandomList= new List<ZombieType>([.. GameAPP.resourcesManager.allZombieTypes])
-            .Where((ZombieType type) =>
-            !TypeMgr.WaterZombie(type) &&
-            !TypeMgr.IsBossZombie(type) &&
-            TypeMgr.UltimateZombie(type) &&
-            !TypeMgr.BannedInRandomZombies(type) &&
-            type != ZombieType.BedRockSnowZombie &&
-            type != ZombieType.SnowDrownZombie &&
-            type != ZombieType.RandomZombie &&
-            type != ZombieType.RandomPlusZombie &&
-            type != ZombieType.DiamondRandomZombie &&
-            type != ZombieType.TrainingDummy &&
-            type != ZombieType.EndoFlameZombie).ToList();
-        }
     }
+    
     [HarmonyPatch(typeof(GameAPP))]
     public static class GameAPP_Patch
     {
         [HarmonyPatch(nameof(GameAPP.Start))]
         [HarmonyPostfix]
-        public static void Start_Postfix()
+	    [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void GetZombieType_Prefix()
         {
-            Plugin.LoadMod();
+            Plugin.mixed=(RandomZombieType)1000;
         }
     }
     [HarmonyPatch(typeof(ShootingManager))]
     public static class ShootingManager_Patch
     {
+        public static T GetRandom<T>(this IEnumerable<T> self)
+            => self.ElementAt(UnityEngine.Random.Range(0,self.Count()));
+        
         [HarmonyPatch(nameof(ShootingManager.GetZombieType))]
         [HarmonyPrefix]
         public static bool GetZombieType_Prefix(ShootingManager __instance, ref ZombieType __result, int wave, int waveToAdd = 5)
@@ -69,26 +235,23 @@ namespace RogueShootingRandomFormation
             if(ShootingManager.randomType == RandomZombieType.Random)
             {
                 if(wave < 5)
-                {
                     __result = ZombieType.NormalZombie;
-                    goto done;
-                }
-                if(wave < 15)
-                {
-                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie }.OrderBy(_ => UnityEngine.Random.value).First();
-                    goto done;
-                }
-                if(wave < 30)
-                {
-                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie, ZombieType.RandomPlusZombie }.OrderBy(_ => UnityEngine.Random.value).First();
-                    goto done;
-                }
+                else if(wave < 30)
+                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie }.GetRandom();
+                else if(wave < 60)
+                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie, ZombieType.RandomPlusZombie }.GetRandom();
                 else
-                {
-                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie, ZombieType.RandomPlusZombie, ZombieType.DiamondRandomZombie }.OrderBy(_ => UnityEngine.Random.value).First();
-                    goto done;
-                }
-                done:
+                    __result = new List<ZombieType>() { ZombieType.NormalZombie, ZombieType.RandomZombie, ZombieType.RandomPlusZombie, ZombieType.DiamondRandomZombie }.GetRandom();
+                return false;
+            }
+            if(ShootingManager.randomType == Plugin.mixed)
+            {
+                if(wave < 5)
+                    __result = ZombieType.NormalZombie;
+                else if(wave < 30)
+                    __result = Plugin.RandomList.GetRandom();
+                else
+                    __result = Plugin.MixedRandomList.GetRandom();
                 return false;
             }
             return true;
@@ -97,35 +260,39 @@ namespace RogueShootingRandomFormation
         [HarmonyPostfix]
         public static void Start_Postfix(ShootingManager __instance)
         {
-            if((int)ShootingManager.randomType == 1000)
+            if(ShootingManager.randomType == RandomZombieType.Random)
             {
-                Board.Instance.config.applyRandomData = true;
+                __instance.board.config.applyRandomData = true;
 
-                Board.Instance.config.zombieScaleAvg = 1;
-                Board.Instance.config.zombieScaleMax = 1;
-                Board.Instance.config.zombieScaleMin = 1;
+                __instance.board.config.zombieScaleAvg = 1;
+                __instance.board.config.zombieScaleMax = 1;
+                __instance.board.config.zombieScaleMin = 1;
 
-                Board.Instance.config.zombieSpeedAvg = 0.5f;
-                Board.Instance.config.zombieSpeedMax = 1;
-                Board.Instance.config.zombieSpeedMin = 2f;
+                __instance.board.config.zombieSpeedAvg = 0.5f;
+                __instance.board.config.zombieSpeedMax = 1f;
+                __instance.board.config.zombieSpeedMin = 1.5f;
 
-                Board.Instance.config.zombieModifyAvg = 0.5f;
-                Board.Instance.config.zombieModifyMax = 1;
-                Board.Instance.config.zombieModifyMin = 2f;
+                __instance.board.config.zombieModifyAvg = 0.5f;
+                __instance.board.config.zombieModifyMin = 1f;
+                __instance.board.config.zombieModifyMax = 1.5f;
+
+                __instance.board.config.plantSpeedMax = 1f;
+                __instance.board.config.plantSpeedMin = 1f;
+                __instance.board.config.plantSpeedAvg = 1f;
+
+                __instance.board.config.plantModifyMin = 1f;
+                __instance.board.config.plantModifyMax = 1f;
+            }
+            if(ShootingManager.randomType == Plugin.mixed)
+            {
+                ShootingManager.randomType = RandomZombieType.Random;
+                __instance.shieldHealth += 15000;
             }
         }
         [HarmonyPatch(nameof(ShootingManager.RandomSettings))]
         [HarmonyPostfix]
         public static void RandomSettings_Postfix()
-        {
-            // Get the enum list again (managed)
-            var list = Enum.GetValues<RandomZombieType>().ToList();
-
-            // OPTIONAL: re-randomize using the corrected list
-            var chosen = list[UnityEngine.Random.Range(0, list.Count)];
-
-            ShootingManager.randomType = chosen;
-        }
+            => ShootingManager.randomType = Enum.GetValues<RandomZombieType>().Union([Plugin.mixed]).GetRandom();
     }
     [HarmonyPatch(typeof(RandomZombie))]
     public static class RandomZombie_Patch
@@ -135,105 +302,42 @@ namespace RogueShootingRandomFormation
         public static bool SetRandomZombie_Prefix(RandomZombie __instance, ref Zombie __result, Vector3 pos)
         {
             if(!__instance.board.boardTag.rogueShooting) return true;
-            // If your custom list is empty, let the original run
-            if (Plugin.RandomList.Count == 0)
-                return true;
+            if(__instance is RandomPlusZombie)
+            {
+                __result = CreateZombie.Instance.SetZombie(__instance.theZombieRow, Plugin.MixedRandomList.GetRandom(), pos.x, __instance.isMindControlled);
 
-            var cz = CreateZombie.Instance;
-            if (cz == null)
-                return true;
+                return false;
+            }
 
-            int row = __instance.theZombieRow;
+            __result = CreateZombie.Instance.SetZombie(__instance.theZombieRow, Plugin.RandomList.GetRandom(), pos.x, __instance.isMindControlled);
 
-            // Pick random from your list
-            ZombieType chosen = Plugin.RandomList[
-                UnityEngine.Random.Range(0, Plugin.RandomList.Count)
-            ];
-
-            // Spawn
-            if (!__instance.isMindControlled)
-                __result = cz.SetZombie(row, chosen, pos.x, false);
-            else
-                __result = cz.SetZombieWithMindControl(row, chosen, pos.x, false);
-
-            return false; // skip original SetRandomZombie
+            return false;
         }
+        [HarmonyPatch(nameof(RandomZombie.RandomEvent))]
+        [HarmonyPrefix]
+        public static bool RandomEvent_Prefix(RandomZombie __instance) => !__instance.board.boardTag.rogueShooting;
     }
     [HarmonyPatch(typeof(DiamondRandomZombie))]
     public static class DiamondRandomZombie_Patch
     {
-        [HarmonyPatch(typeof(DiamondRandomZombie), nameof(DiamondRandomZombie.SetRandomZombie))]
+        [HarmonyPatch(nameof(DiamondRandomZombie.SetRandomZombie))]
         [HarmonyPrefix]
-        public static bool DiamondRandomZombie_SetRandomZombie_Prefix(
+        public static bool SetRandomZombie_Prefix(
             DiamondRandomZombie __instance,
             ref Zombie __result,
             Vector3 pos)
         {
             if(!__instance.board.boardTag.rogueShooting) return true;
-            if (Plugin.UltimateRandomList.Count == 0)
-                return true;
 
-            var cz = CreateZombie.Instance;
-            if (cz == null)
-                return true;
-
-            int row = __instance.theZombieRow;
-
-            ZombieType chosen = Plugin.UltimateRandomList[
-                UnityEngine.Random.Range(0, Plugin.UltimateRandomList.Count)
-            ];
-
-            if (!__instance.isMindControlled)
-                __result = cz.SetZombie(row, chosen, pos.x, false);
-            else
-                __result = cz.SetZombieWithMindControl(row, chosen, pos.x, false);
+            __result = CreateZombie.Instance.SetZombie(__instance.theZombieRow, Plugin.UltimateRandomList.GetRandom(), pos.x, __instance.isMindControlled);
 
             return false;
         }
     }
-    [HarmonyPatch(typeof(FreezedPlant))]
-    public class FreezedPlant_Patch
-    {
-        [HarmonyPatch(nameof(FreezedPlant.CanFreeze))]
-        [HarmonyPrefix]
-        public static bool CanFreeze_Prefix(
-            Plant plant, ref bool __result)
-        {
-            if(!Board.Instance.boardTag.rogueShooting) return true;
-            __result = false;
-            return false;
-        }
-        [HarmonyPatch(nameof(FreezedPlant.CanFreezeFire))]
-        [HarmonyPrefix]
-        public static bool CanFreezeFire_Prefix(
-            Plant plant, ref bool __result)
-        {
-            if(!Board.Instance.boardTag.rogueShooting) return true;
-            __result = false;
-            return false;
-        }
-    }
-    [HarmonyPatch(typeof(Fertilize))]
-    public static class Fertilize_Patch
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch(nameof(Fertilize.Use), [typeof(int),typeof(int)])]
-        public static bool Use_Prefix(Fertilize __instance, int theColumn, int theRow)
-        {
-            // If this is zombie fertilizer AND rogue shooting is active → skip everything
-            if (__instance.zombie && Board.Instance.boardTag.rogueShooting)
-            {
-                __instance.Die();
-                return false; // do nothing
-            }
-
-            return true; // run original
-        }
-    }
-    public class MyPluginInfo
+    public static class MyPluginInfo
     {
         public const string PluginGuid = "RogueShootingRandomFormation.Bepinex";
         public const string PluginName = "RogueShootingRandomFormation";
-        public const string PluginVersion = "3.9";
+        public const string PluginVersion = "4.0";
     }
 }

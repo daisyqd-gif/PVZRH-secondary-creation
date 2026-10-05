@@ -32,7 +32,6 @@ global using TMPro;
 global using Core;
 global using UI;
 // ===== CustomPlantClass =====
-global using CustomPlantClass.RogueShootingMgr;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.Level;
 // ===== ModLoader =====

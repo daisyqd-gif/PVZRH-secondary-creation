@@ -1,28 +1,48 @@
 namespace CustomPlantClass.Runtime
 {
+    /// <summary>
+    /// Allows adding lifetime events to board.
+    /// </summary>
     public class BoardBehaviour : MonoBehaviour
     {
-        public Board board => GetComponent<Board>();
-        public static List<Action<Board>> StartEvents = new();
-        public static List<Action<Board>> UpdateEvents = new();
-        public static List<Action<Board>> FixedUpdateEvents = new();
-        public static List<Action<Board>> DestroyEvents = new();
+        internal Board board => GetComponent<Board>();
+        internal static List<Action<Board>> StartEvents = new();
+        internal static List<Action<Board>> UpdateEvents = new();
+        internal static List<Action<Board>> FixedUpdateEvents = new();
+        internal static List<Action<Board>> DestroyEvents = new();
+        /// <summary>
+        /// Runs when board starts.
+        /// </summary>
+        /// <param name="action">The action to run</param>
         public static void AddStartEvent(Action<Board> action)
         {
             StartEvents.Add(action);
         }
+        /// <summary>
+        /// Runs when board updates.
+        /// </summary>
+        /// <param name="action">The action to run</param>
         public static void AddUpdateEvent(Action<Board> action)
         {
             UpdateEvents.Add(action);
         }
+        /// <summary>
+        /// Runs when board updates during physics ticks.
+        /// </summary>
+        /// <param name="action">The action to run</param>
         public static void AddFixedUpdateEvent(Action<Board> action)
         {
             FixedUpdateEvents.Add(action);
         }
+        /// <summary>
+        /// Runs when board is destroyed.
+        /// </summary>
+        /// <param name="action">The action to run</param>
         public static void AddDestroyEvent(Action<Board> action)
         {
             DestroyEvents.Add(action);
         }
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public void Start()
         {
             ResetScanner.EnsureScanned();
@@ -81,29 +101,52 @@ namespace CustomPlantClass.Runtime
                 }
             }
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
+    /// <summary>
+    /// An attribute to reset a field to its default value when board is destroyed.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class ResetOnBoardDestroyAttribute : Attribute
     {
+        /// <summary>
+        /// The default value.
+        /// </summary>
         public object DefaultValue { get; }
 
+        /// <summary>
+        /// Use this constructor when the field's default value is enough.
+        /// </summary>
         public ResetOnBoardDestroyAttribute() { }
 
+        /// <summary>
+        /// Use this constructor to reset a field to a specific value (Please check that the field type is correct!).
+        /// </summary>
         public ResetOnBoardDestroyAttribute(object defaultValue)
         {
             DefaultValue = defaultValue;
         }
     }
+    /// <summary>
+    /// An attribute to run an attribute on a field when the board is destroyed.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class ActionOnBoardDestroyAttribute : Attribute
     {
+        /// <summary>
+        /// The action to run
+        /// </summary>
         public Func<object> Action { get; }
 
+        /// <summary>
+        /// An attribute to run an attribute on a field when the board is destroyed.
+        /// </summary>
         public ActionOnBoardDestroyAttribute(Func<object> action)
         {
             Action = action;
         }
     }
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class ResetRegistry
     {
         private static readonly List<(FieldInfo field, object defaultValue)> entries = new();

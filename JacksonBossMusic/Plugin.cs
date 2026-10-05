@@ -7,6 +7,7 @@ using UnityEngine;
 using System.IO;
 using Il2CppInterop.Runtime.Injection;
 using Unity.VisualScripting;
+using GameLevel.RogueShooting;
 namespace JacksonBossMusic
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -45,9 +46,13 @@ namespace JacksonBossMusic
         public override void Load()
         {
             ClassInjector.RegisterTypeInIl2Cpp<Await_Component>();
+            ClassInjector.RegisterTypeInIl2Cpp<Await_Component_2>();
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
-            var assetBundle = GetAssetBundle(Assembly.GetExecutingAssembly(), "ultimategoldjacksondrivermusic");
-            BossMusicManager.Clip = GetAsset<AudioClip>(assetBundle, "UltimateGoldJacksonDriverMusic");
+            var assetBundle = GetAssetBundle(Assembly.GetExecutingAssembly(), "rsmusic");
+            BossMusicManager.Clip = GetAsset<AudioClip>(assetBundle, "BeatIt");
+            BossMusicManager.Clip_Horse = GetAsset<AudioClip>(assetBundle, "HorseBoss");
+            BossMusicManager.Clip_LiuKun = GetAsset<AudioClip>(assetBundle, "LiuKun_BGM");
+            BossMusicManager.Clip_Beach = GetAsset<AudioClip>(assetBundle, "BWB_DMG");
         }
     }
     public class MyPluginInfo
@@ -59,9 +64,12 @@ namespace JacksonBossMusic
     public static class BossMusicManager
     {
         public static AudioClip Clip { get; set; }
+        public static AudioClip Clip_Horse { get; set; }
+        public static AudioClip Clip_LiuKun { get; set; }
+        public static AudioClip Clip_Beach { get; set; }
     }
     [HarmonyPatch(typeof(CreateZombie), nameof(CreateZombie.SetZombie))]
-    public static class Board_Update_Patch
+    public static class CreateZombie_SetZombie_Patch
     {
         [HarmonyPostfix]
         public static void Postfix(ZombieType theZombieType, ref Zombie __result)
@@ -70,9 +78,17 @@ namespace JacksonBossMusic
             {
                 GameAPP.soundManager.musics[(MusicType)2141983] = BossMusicManager.Clip;
             }
+            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141984) || GameAPP.soundManager.musics[(MusicType)2141984] != null)
+            {
+                GameAPP.soundManager.musics[(MusicType)2141984] = BossMusicManager.Clip_Horse;
+            }
             if (theZombieType == ZombieType.JacksonDriverBoss)
             {
                 __result.AddComponent<Await_Component>();
+            }
+            if (theZombieType == ZombieType.HorseBoss)
+            {
+                __result.AddComponent<Await_Component_2>();
             }
         }
     }
@@ -89,6 +105,19 @@ namespace JacksonBossMusic
             }
         }
     }
+    public class Await_Component_2 : MonoBehaviour
+    {
+        float wait = 0.1f;
+        public void FixedUpdate()
+        {
+            wait-=Time.deltaTime;
+            if (wait <= 0)
+            {
+                GameAPP.Instance.PlayMusic((MusicType)2141984);
+                Destroy(this);
+            }
+        }
+    }
     [HarmonyPatch(typeof(JacksonDriverBoss), nameof(JacksonDriverBoss.DieEvent))]
     public static class JacksonDriverBoss_DieEvent_Patch
     {
@@ -100,6 +129,51 @@ namespace JacksonBossMusic
                 return;
             }
             Lawnf.SetMusic(__instance.board);
+        }
+    }
+    [HarmonyPatch(typeof(HorseBoss), nameof(HorseBoss.AnimDestoryHorse))]
+    public static class HorseBoss_AnimDestoryHorse_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(JacksonDriverBoss __instance)
+        {
+            if (__instance == null || __instance.board == null)
+            {
+                return;
+            }
+            Lawnf.SetMusic(__instance.board);
+        }
+    }
+    [HarmonyPatch(typeof(AnimUIOver), nameof(AnimUIOver.Die))]
+    public static class AnimUIOver_Die_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix()
+        {
+            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141985) || GameAPP.soundManager.musics[(MusicType)2141985] != null)
+            {
+                GameAPP.soundManager.musics[(MusicType)2141985] = BossMusicManager.Clip_Beach;
+            }
+            if(ShootingManager.Instance!=null && ShootingManager.Instance.scene1 == SceneType.NormalBeach)
+            {
+                GameAPP.Instance.PlayMusic((MusicType)2141985);
+            }
+        }
+    }
+    [HarmonyPatch(typeof(Lawnf), nameof(Lawnf.SetMusic))]
+    public static class Lawnf_SetMusic_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Board board)
+        {
+            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141986) || GameAPP.soundManager.musics[(MusicType)2141986] != null)
+            {
+                GameAPP.soundManager.musics[(MusicType)2141986] = BossMusicManager.Clip_LiuKun;
+            }
+            if(board.sceneType == SceneType.Desert)
+            {
+                GameAPP.Instance.PlayMusic((MusicType)2141986);
+            }
         }
     }
 }

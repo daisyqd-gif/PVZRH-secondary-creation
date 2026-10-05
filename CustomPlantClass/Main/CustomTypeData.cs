@@ -1,10 +1,8 @@
 namespace CustomPlantClass.Main
 {
-    public struct PlantTypeData
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+    public struct PlantTypeData()
     {
-        public PlantTypeData()
-        {
-        }
 
         public bool BigNut { get; set; } = false;
         public bool DoubleBoxPlants { get; set; } = false;

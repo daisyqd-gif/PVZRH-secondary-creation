@@ -1,181 +1,141 @@
-
-#nullable enable
+using BepInEx.Configuration;
 namespace CustomPlantClass.Registry
 {
+    /// <summary>
+    /// A registry manager for plugins to register persistent memory in config files.
+    /// </summary>
     public static class RegistryManager
     {
-        // Actual stored registry objects
-        private static readonly Dictionary<string, object> Registry = new();
-
-        // Freeze table for deterministic name allocation
-        private static readonly string FreezePath =
-            Path.Combine(Application.persistentDataPath, "RegistryFreeze.json");
-        private static readonly string DataPath =
-            Path.Combine(Application.persistentDataPath, "RegistryData.json");
-
-        private static Dictionary<string, string> FreezeTable = new();
-        private static bool FreezeLoaded = false;
-
-        // Per-base-name call index (not saved)
-        private static readonly Dictionary<string, int> NameCallIndex = new();
-
-        private static readonly JsonSerializerOptions JsonOptions = new()
+        internal static ConfigFile _cfg;
+        [OnLoad]
+        internal static void OnLoad()
         {
-            WriteIndented = true,
-            AllowTrailingCommas = true,
-            ReadCommentHandling = JsonCommentHandling.Skip,
-            PropertyNameCaseInsensitive = true
-        };
-
-        // ---------------------------------------------------------
-        // Freeze table load/save
-        // ---------------------------------------------------------
-
-        private static void LoadFreeze()
-        {
-            if (FreezeLoaded) return;
-
-            try
-            {
-                if (File.Exists(FreezePath))
-                {
-                    string json = File.ReadAllText(FreezePath);
-                    FreezeTable = JsonSerializer.Deserialize<Dictionary<string, string>>(json, JsonOptions)
-                                 ?? new Dictionary<string, string>();
-                }
-            }
-            catch
-            {
-                FreezeTable = new Dictionary<string, string>();
-            }
-
-            FreezeLoaded = true;
-        }
-
-        private static void SaveFreeze()
-        {
-            try
-            {
-                string json = JsonSerializer.Serialize(FreezeTable, JsonOptions);
-                File.WriteAllText(FreezePath, json);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[RegistryFreeze] Failed to save: {e}");
-            }
-        }
-
-        // ---------------------------------------------------------
-        // Name allocator (LevelIDAllocator-style)
-        // ---------------------------------------------------------
-
-        private static string AllocateName(string baseName)
-        {
-            LoadFreeze();
-
-            if (!NameCallIndex.TryGetValue(baseName, out int index))
-                index = 0;
-
-            string freezeKey = $"{baseName}::{index}";
-            NameCallIndex[baseName] = index + 1;
-
-            // If frozen, return it
-            if (FreezeTable.TryGetValue(freezeKey, out string? frozen) && frozen != null)
-                return frozen;
-
-            // Deterministic hash
-            int hash = Math.Abs(freezeKey.GetHashCode());
-            string resolved = $"{baseName}_{hash:X8}";
-
-            FreezeTable[freezeKey] = resolved;
-            SaveFreeze();
-
-            return resolved;
-        }
-
-        // ---------------------------------------------------------
-        // Public API: Generic Add/Get
-        // ---------------------------------------------------------
-
-        /// <summary>
-        /// Add a serializable object to the registry.
-        /// Returns the resolved unique name.
-        /// </summary>
-        public static string Add<T>(string baseName, T data)
-        {
-            string resolved = AllocateName(baseName);
-            Registry[resolved] = data!;
-            SaveData();
-            return resolved;
+            _cfg = Plugin.Instance.Config;
         }
         /// <summary>
-        /// Try to get a registry object by resolved name.
+        /// Creates a config entry.
         /// </summary>
-        public static bool TryGet<T>(string resolvedName, out T? value)
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="defaultVal">The default value</param>
+        public static void CreateConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T defaultVal = default!) where T : IEquatable<T>
         {
-            if (Registry.TryGetValue(resolvedName, out var obj) && obj is T typed)
+            PluginBehaviour.QueueOrExecute(() => 
             {
-                value = typed;
-                return true;
-            }
-
-            value = default;
-            return false;
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
         }
         /// <summary>
-        /// Sets a registry object by resolved name.
+        /// Creates a dropdown config entry.
         /// </summary>
-        public static void Set<T>(string name, T value)
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="defaultVal">The default value</param>
+        /// <param name="acceptableValues">Values present in the dropdown</param>
+        public static void CreateConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T defaultVal = default!, params T[] acceptableValues) where T : IEquatable<T>
         {
-            Registry[name] = value!;
-            SaveData();
+            var accList = new AcceptableValueList<T>(acceptableValues);
+            PluginBehaviour.QueueOrExecute(() => 
+            {
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description, accList));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
         }
         /// <summary>
-        /// Get all resolved names.
+        /// Creates a ranged config entry.
         /// </summary>
-        public static IEnumerable<string> GetNames()
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use an icomparible)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="minVal">The minimum value of the range</param>
+        /// <param name="maxVal">The maximum value of the range</param>
+        /// <param name="defaultVal">The default value</param>
+        public static void CreateConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T minVal, T maxVal , T defaultVal = default!) where T : IComparable
         {
-            return Registry.Keys;
-        }
-        private static void SaveData()
-        {
-            try
+            var accList = new AcceptableValueRange<T>(minVal, maxVal);
+            PluginBehaviour.QueueOrExecute(() => 
             {
-                string json = JsonSerializer.Serialize(Registry, JsonOptions);
-                File.WriteAllText(DataPath, json);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[RegistryData] Failed to save: {e}");
-            }
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description, accList));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
         }
+        /// <summary>
+        /// Creates a slider config entry.
+        /// </summary>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="minVal">The minimum value of the slider</param>
+        /// <param name="maxVal">The maximum value of the slider</param>
+        /// <param name="defaultVal">The default value</param>
+        public static void CreateConfigSlider(string modName, string settingName, string description, Action<ConfigEntry<int>> callBack, int minVal, int maxVal , int defaultVal = 0)
+            => CreateConfigRegistry(modName,settingName,description,callBack,minVal,maxVal,defaultVal);
 
-        private static void LoadData()
+        /// <summary>
+        /// Creates an advanced config entry.
+        /// </summary>
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="defaultVal">The default value</param>
+        public static void CreateAdvancedConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T defaultVal = default!) where T : IEquatable<T>
         {
-            try
+            PluginBehaviour.QueueOrExecute(() => 
             {
-                if (File.Exists(DataPath))
-                {
-                    string json = File.ReadAllText(DataPath);
-                    Registry.Clear();
-
-                    var dict = JsonSerializer.Deserialize<Dictionary<string, object>>(json, JsonOptions);
-                    if (dict != null)
-                    {
-                        foreach (var kv in dict)
-                            Registry[kv.Key] = kv.Value!;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[RegistryData] Failed to load: {e}");
-            }
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description, tags: "Advanced"));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
         }
-        static RegistryManager()
+        /// <summary>
+        /// Creates an advanced dropdown config entry.
+        /// </summary>
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="defaultVal">The default value</param>
+        /// <param name="acceptableValues">Values present in the dropdown</param>
+        public static void CreateAdvancedConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T defaultVal = default!, params T[] acceptableValues) where T : IEquatable<T>
         {
-            LoadFreeze();
-            LoadData();
+            var accList = new AcceptableValueList<T>(acceptableValues);
+            PluginBehaviour.QueueOrExecute(() => 
+            {
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description, accList, "Advanced"));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
+        }
+        /// <summary>
+        /// Creates an advanced ranged config entry.
+        /// </summary>
+        /// <typeparam name="T">The type of the config entry(It is recommended that you use an icomparible)</typeparam>
+        /// <param name="modName">The name of the mod</param>
+        /// <param name="settingName">The name of the setting</param>
+        /// <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+        /// <param name="callBack">This is called when the setting is changed.</param>
+        /// <param name="minVal">The minimum value of the range</param>
+        /// <param name="maxVal">The maximum value of the range</param>
+        /// <param name="defaultVal">The default value</param>
+        public static void CreateAdvancedConfigRegistry<T>(string modName, string settingName, string description, Action<ConfigEntry<T>> callBack, T minVal, T maxVal , T defaultVal = default!) where T : IComparable
+        {
+            var accList = new AcceptableValueRange<T>(minVal, maxVal);
+            PluginBehaviour.QueueOrExecute(() => 
+            {
+                var entry = _cfg.Bind("Mods", $"{modName} : {settingName}", defaultVal, new ConfigDescription(description, accList, "Advanced"));
+                entry.SettingChanged+= (_,_) => callBack(entry);
+            });
         }
     }
 }

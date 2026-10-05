@@ -1,5 +1,6 @@
 namespace CustomPlantClass.Level
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class GlobalTracker
     {
         public static bool IsCustomLevel = false;

@@ -22,6 +22,7 @@ global using CustomPlantClass.Level;
 using System.IO;
 using CustomPlantClass.RogueShootingManager;
 using GameLevel.RogueShooting;
+using CustomPlantClass.Registry;
 
 namespace MegaGatlingExpansion
 {
@@ -31,7 +32,8 @@ namespace MegaGatlingExpansion
         public const string PluginGuid = "MegaGatlingExpansion.Bepinex";
         public const string PluginName = "MegaGatlingExpansion";
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
-        public const bool IsOverpowered = false;
+        public static bool IsOverpowered = false;
+        public static bool AllowZombieReplace = false;
         public static int Buff1 = -1;
         public static int Buff2 = -1;
         public static int Buff3 = -1;
@@ -141,7 +143,6 @@ namespace MegaGatlingExpansion
             }catch(Exception e){
                 Debug.LogError(e.ToString());
             }
-
             //Plant registration
             {
                 // Base Mega Gatling
@@ -1453,6 +1454,8 @@ namespace MegaGatlingExpansion
             RegistryHelper.AddCustomRogueShootingPlant(PlantType.GatlingPea, oCfg);
             RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter,PlantType.GatlingPea);
             RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.GatlingPea, PlantTypeExpand.MegaGatlingPea);
+            RegistryManager.CreateConfigRegistry("MegaGatlingPeaDLC","Enable super mode", "Enables overpowered mode for mega gatlings", (entry) => IsOverpowered = entry.Value, false);
+            RegistryManager.CreateConfigRegistry("MegaGatlingPeaDLC","Allow boss replacement", "Enables ultimate gatling paper to randomly replace ultimate professor Z", (entry) => AllowZombieReplace = entry.Value, false);
             Log.LogInfo($"{PluginGuid} {PluginVersion} loaded.");
         }
     }

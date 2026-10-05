@@ -1,10 +1,10 @@
-using CustomPlantClass.Registry;
 using CustomPlantClass.Runtime.Tasks;
-using CustomPlantClass.UI;
+
 
 namespace CustomPlantClass
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Plugin : BasePlugin
     {
         public static ManualLogSource Logger;
@@ -39,63 +39,30 @@ namespace CustomPlantClass
             Logger = Instance.Log;
             Tools.InitMod(Assembly.GetExecutingAssembly());
             assetBundle = AssetMgr.LoadBundleFromResource(Assembly.GetExecutingAssembly(), "datamgr", false);
-            CustomCore.RegisterCustomCardToColorfulCards(PlantType.ElectricOnion, 1);
         }
     }
-    public static class ScientificNumberMgr
-    {
-        public static string name;
-        [OnLoad]
-        public static void OnLoad()
-        {
-            KeyBindingRegistry.Add
-            (
-                () => $"科学计数法",
-                (ActionButton btn) =>
-                {
-                    IsEnglishNumber = !IsEnglishNumber;
-                    btn.Label = IsEnglishNumber ? "允许" : "不允许";
-                }
-            );
-            // If the key does not exist, create it
-            if (!RegistryManager.TryGet<bool>("Is English Number", out _))
-            {
-                name = RegistryManager.Add("Is English Number", false);
-            }
-            else
-            {
-                // If it exists, resolved name is just the base name
-                name = "Is English Number";
-            }
-        }
-
-        public static bool IsEnglishNumber
-        {
-            get
-            {
-                if (RegistryManager.TryGet<bool>(name, out var val))
-                    return val;
-
-                return false;
-            }
-
-            set
-            {
-                // ALWAYS write the new value
-                RegistryManager.Set(name, value);
-            }
-        }
-    }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+    /// <summary>
+    /// Behaviour to run when CustomPlantClass loads.
+    /// </summary>
     public class PluginBehaviour : MonoBehaviour
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static Queue<Action> queued = new();
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// Queues an action to run if called before CustomPlantClass loads and runs it if CustomPlantClass is loaded already.
+        /// </summary>
+        /// <param name="a">The action to run when the plugin loads</param>
         public static void QueueOrExecute(Action a)
         {
             if (Plugin.Loaded) a();
             else queued.Enqueue(a);
         }
         [OnLoad]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static void OnLoad()
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             while (queued.Count > 0)
             {
@@ -109,14 +76,20 @@ namespace CustomPlantClass
                 }
             }
         }
+        /// <summary>
+        /// Waits for game load and adds a component to CustomPlantClass's plugin's behaviour.
+        /// </summary>
+        /// <typeparam name="T">The component to add to CustomPlantClass's plugin's behaviour object</typeparam>
         public static async void AddComponentToPlugin<T>() where T : Component
         {
             await WaitUntilTask.WaitUntil(() => IsActive == true);
             Plugin.behaviourObject.AddComponent<T>();
         }
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static bool IsActive { get; private set; } = false;
         public virtual void Awake() => IsActive = true;
         public virtual void OnDestroy() => IsActive = false;
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
     internal static class Loader
     {
@@ -163,11 +136,19 @@ namespace CustomPlantClass
     internal sealed class OnLoadAttribute : Attribute { }
     [AttributeUsage(AttributeTargets.Method)]
     internal sealed class OnUnloadAttribute : Attribute { }
+    /// <summary>
+    /// CustomPlantClass's plugin info. TargetVersion can be used as mod plugin's version.
+    /// </summary>
     public static class MyPluginInfo
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public const string PluginGuid = "CustomPlantClass.Bepinex";
         public const string PluginName = "CustomPlantClass";
-        public const string PluginVersion = "1.0.1";
+        public const string PluginVersion = "1.0.5";
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// The mod framework's target game version
+        /// </summary>
         public const string TargetVersion = "4.0";
     }
 }

@@ -138,7 +138,7 @@ public interface IPlantCannonAimHandler
 </details>
 
 13. `PlantSkinComponent`, `BulletComponent`, `ZombieComponent` -> Contains a getter property to get their respective property on its gameobject
-14. `ModLogger` -> Used to lod information about the mod and also to log errors/warnings
+14. `ModLogger` -> Used to log information about the mod and also to log errors/warnings
 </details>
 
 ## CustomPlantClass.Level

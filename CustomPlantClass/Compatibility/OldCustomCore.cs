@@ -1,5 +1,6 @@
 namespace CustomPlantClass
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class Compatibility
     {
         public class CustomCore_Old
@@ -40,6 +41,7 @@ namespace CustomPlantClass
             /// 注册自定义僵尸词条
             /// </summary>
             /// <param name="text">词条描述</param>
+            /// <param name="unlock">?</param>
             /// <param name="zombieType">显示的僵尸类型</param>
             /// <param name="level">等级</param>
             /// <param name="bg">背景</param>

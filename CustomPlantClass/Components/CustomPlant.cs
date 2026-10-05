@@ -2,6 +2,7 @@ using CustomPlantClass.Runtime.Tasks;
 
 namespace CustomPlantClass
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class BaseCustomPlant : MonoBehaviour, IRedirectAnimShoot, IRedirectAnimShoot2,
         IOverrideDamagePipeline, ICustomClick, ICustomPF, IPlantDieRedirector, IPlantDieHandler,
         IPlantTextHandler
@@ -222,9 +223,11 @@ namespace CustomPlantClass
         }
         public virtual void OnFixedUpdate() { }
         protected virtual bool IsAsyncPF => false;
+        protected bool _prevUncrashable=false;
         public virtual void StartPF()
         {
             _plant.invincible = true;
+            _prevUncrashable = _plant.uncrashable;
             _plant.uncrashable = true;
             isPF = true;
             _plant.isFlashing = true;
@@ -253,7 +256,7 @@ namespace CustomPlantClass
         public virtual void SuperEnd()
         {
             _plant.invincible = false;
-            _plant.uncrashable = false;
+            _plant.uncrashable = _prevUncrashable;
             isPF = false;
             _plant.flashCountDown = 0f;
             _plant.isFlashing = false;

@@ -1,5 +1,7 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace CustomPlantClass.Main
 {
+
     public static class ExtensionManager
     {
         public static GridItemType ToGridItemType(this ID self)
@@ -48,6 +50,9 @@ namespace CustomPlantClass.Main
             });
             return output;
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.HashSet<T> self, Il2CppSystem.Collections.Generic.HashSet<T> value)
         {
             value.ToSystemHashSet().Where((T element) =>
@@ -56,6 +61,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.HashSet<T> self, HashSet<T> value)
         {
             value.Where((T element) =>
@@ -64,6 +72,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.HashSet<T> self, Il2CppSystem.Collections.Generic.List<T> value)
         {
             value.ToSystemList().Where((T element) =>
@@ -72,6 +83,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.HashSet<T> self, List<T> value)
         {
             value.Where((T element) =>
@@ -80,6 +94,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.List<T> self, Il2CppSystem.Collections.Generic.List<T> value)
         {
             value.ToSystemList().Where((T element) =>
@@ -88,6 +105,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.List<T> self, List<T> value)
         {
             value.Where((T element) =>
@@ -96,6 +116,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.List<T> self, Il2CppSystem.Collections.Generic.HashSet<T> value)
         {
             value.ToSystemHashSet().Where((T element) =>
@@ -104,6 +127,9 @@ namespace CustomPlantClass.Main
                 return true;
             });
         }
+        /// <summary>
+        /// Merges 2 sequences
+        /// </summary>
         public static void Merge<T>(this Il2CppSystem.Collections.Generic.List<T> self, HashSet<T> value)
         {
             value.Where((T element) =>
@@ -121,5 +147,16 @@ namespace CustomPlantClass.Main
 
             return temp[Random.Range(0, temp.Count)];
         }
+        public static bool IsActive(this TravelUnlocks self) => Lawnf.TravelUnlock(self);
+        public static bool IsActive(this AdvBuff self) => Lawnf.TravelAdvanced(self);
+        public static bool IsActive(this UltiBuff self) => Lawnf.TravelUltimate(self);
+        public static bool IsActive(this TravelDebuff self) => Lawnf.TravelDebuff(self);
+        public static bool IsActive(this InvestBuff self) => Lawnf.TravelInvest(self);
+        public static int GetBuffLevel(this UltiBuff self) => Lawnf.TravelUltimateLevel(self);
+        public static bool IsActiveUnlock(this BuffID self) => Lawnf.TravelUnlock(self);
+        public static bool IsActiveAdv(this BuffID self) => Lawnf.TravelAdvanced(self);
+        public static bool IsActiveUlti(this BuffID self) => Lawnf.TravelUltimate(self);
+        public static bool IsActiveDebuff(this BuffID self) => Lawnf.TravelDebuff(self);
+        public static int GetBuffLevelUlti(this BuffID self) => Lawnf.TravelUltimateLevel(self);
     }
 }

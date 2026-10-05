@@ -200,13 +200,17 @@ namespace UltimateIFV
             IEnumerator latestart()
             {
                 yield return new WaitForFixedUpdate();
-                TypeData.WallNutPlants.Add(DataContainer.PlantId_blover);
-                TypeData.WallNutPlants.Add(DataContainer.PlantId_ironPuff);
-                TypeData.MagnetPlants.Add(DataContainer.PlantId_blover);
-                TypeData.MagnetPlants.Add(DataContainer.PlantId_ironPuff);
-                TypeMgr.UncrashablePlants.Add(DataContainer.PlantId_blover);
-                TypeMgr.UncrashablePlants.Add(DataContainer.PlantId_ironPuff);
+                TypeMgrPatch();
             }
+        }
+        public static void TypeMgrPatch()
+        {
+            TypeData.WallNutPlants.Add(DataContainer.PlantId_blover);
+            TypeData.WallNutPlants.Add(DataContainer.PlantId_ironPuff);
+            TypeData.MagnetPlants.Add(DataContainer.PlantId_blover);
+            TypeData.MagnetPlants.Add(DataContainer.PlantId_ironPuff);
+            TypeMgr.UncrashablePlants.Add(DataContainer.PlantId_blover);
+            TypeMgr.UncrashablePlants.Add(DataContainer.PlantId_ironPuff);
         }
     }
 
@@ -234,6 +238,7 @@ namespace UltimateIFV
             plant.heartTransform = transform.FindChild("heart");
             plant.heart = plant.heartTransform.GetComponent<SortingGroup>();
             plant.pult = transform.FindChild("Puff3/Pult");
+            plant.uncrashable = true;
         }
         public override Transform FindShoot() => transform.FindChild("Puff1/outmouth");
         public override BulletType GetBulletType()
@@ -394,6 +399,7 @@ namespace UltimateIFV
             if ( plant == null ) return;
             base.Awake();
             plant.shoot = transform.GetChild(2);
+            plant.uncrashable = true;
         }
         public void SetWingman_Custom()
         {
@@ -533,6 +539,17 @@ namespace UltimateIFV
                 //__instance.cannonPlant.GetComponent<UltimatePortalSpring>().SetShootTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 __instance.ClearItemOnMouse(true);
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(TypeData),nameof(TypeData.InitSnowPlants))]
+    public static class TypeData_StaticConstructor_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix()
+        {
+            ModLogger.LogInfo("Added IFV plants to TypeMgr");
+            Plugin.TypeMgrPatch();
         }
     }
 

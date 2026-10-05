@@ -12,6 +12,8 @@
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.Runtime.CSharp.xml</DocumentationFile>
   </PropertyGroup>
 
   <!-- Import shared references -->
@@ -19,25 +21,6 @@
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
-    <!--
-    <Reference Include="CustomizeLib.Bepinex" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.RogueShootingManager" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.RogueShootingManager.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
-    </Reference> 
-    <Reference Include="Core" Private="false">
-      <HintPath>..\lib\BepInEx\interop\Core.dll</HintPath>
-    </Reference>
-    <Reference Include="UniTask" Private="false">
-      <HintPath>..\lib\DummyDll\UniTask.dll</HintPath>
-    </Reference>-->
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>

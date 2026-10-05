@@ -1,10 +1,9 @@
-using System.Text.Json.Serialization;
 using CustomPlantClass.Runtime.Tasks;
-using Il2CppInterop.Runtime.InteropTypes;
 using UnityEngine.Networking;
 
 namespace CustomPlantClass.Main
 {
+    /// <summary>Loads and caches asset bundles and assets embedded in assemblies or stored remotely.</summary>
     public static class AssetMgr
     {
         private static readonly HttpClient http = new HttpClient();
@@ -24,6 +23,9 @@ namespace CustomPlantClass.Main
         // -----------------------------
         //  Load AssetBundle from Base64
         // -----------------------------
+        /// <summary>Loads an asset bundle from a Base64 string, reusing a cached bundle when available.</summary>
+        /// <param name="base64">The Base64-encoded asset bundle.</param>
+        /// <returns>The loaded bundle, or <see langword="null"/> if the input is invalid or loading fails.</returns>
         public static AssetBundle LoadBundleBase64(string base64)
         {
             if (string.IsNullOrEmpty(base64))
@@ -61,6 +63,11 @@ namespace CustomPlantClass.Main
         // -----------------------------
         //  Load AssetBundle from file
         // -----------------------------
+        /// <summary>Loads an asset bundle from a file, optionally reusing a cached bundle.</summary>
+        /// <param name="path">The path to the asset bundle file.</param>
+        /// <param name="name">The cache name used to identify the bundle.</param>
+        /// <param name="deduplicate">Whether to return an existing cached bundle with the same name.</param>
+        /// <returns>The loaded bundle, or <see langword="null"/> if the file is unavailable or loading fails.</returns>
         public static AssetBundle LoadBundleFromFile(string path, string name, bool deduplicate = true)
         {
             string key = "file:" + name;
@@ -89,6 +96,11 @@ namespace CustomPlantClass.Main
         // -----------------------------------------
         //  Load AssetBundle from embedded resources
         // -----------------------------------------
+        /// <summary>Loads an asset bundle from an assembly resource, optionally reusing a cached bundle.</summary>
+        /// <param name="asm">The assembly containing the embedded resource.</param>
+        /// <param name="resourceName">The embedded resource name.</param>
+        /// <param name="deduplicate">Whether to return an existing cached bundle with the same resource name.</param>
+        /// <returns>The loaded bundle, or <see langword="null"/> if the resource is unavailable or loading fails.</returns>
         public static AssetBundle LoadBundleFromResource(Assembly asm, string resourceName, bool deduplicate = true)
         {
             string key = "res:" + resourceName;
@@ -119,6 +131,13 @@ namespace CustomPlantClass.Main
             _bundles[key] = bundle;
             return bundle;
         }
+        /// <summary>Finds an embedded resource by partial name and passes its stream to a loader.</summary>
+        /// <typeparam name="T">The type returned by the loader.</typeparam>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <param name="loader">The function that reads the resource stream and creates a value.</param>
+        /// <returns>The value produced by the loader.</returns>
+        /// <exception cref="Exception">No embedded resource name contains <paramref name="partialName"/>.</exception>
         public static T LoadResource<T>(string partialName, Assembly asm, Func<Stream, T> loader)
         {
             var names = asm.GetManifestResourceNames();
@@ -132,6 +151,10 @@ namespace CustomPlantClass.Main
             using var stream = asm.GetManifestResourceStream(match);
             return loader(stream);
         }
+        /// <summary>Reads an embedded resource as text.</summary>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <returns>The resource contents as a string.</returns>
         public static string LoadStringFromResource(string partialName, Assembly asm)
         {
             return LoadResource(partialName, asm, stream =>
@@ -140,6 +163,10 @@ namespace CustomPlantClass.Main
                 return reader.ReadToEnd();
             });
         }
+        /// <summary>Reads an embedded resource into a byte array.</summary>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <returns>The resource contents as bytes.</returns>
         public static byte[] LoadBytesFromResource(string partialName, Assembly asm)
         {
             return LoadResource(partialName, asm, stream =>
@@ -149,6 +176,10 @@ namespace CustomPlantClass.Main
                 return ms.ToArray();
             });
         }
+        /// <summary>Loads an embedded image resource into a texture.</summary>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <returns>The texture decoded from the resource.</returns>
         public static Texture2D LoadTextureFromResource(string partialName, Assembly asm)
         {
             return LoadResource(partialName, asm, stream =>
@@ -162,6 +193,10 @@ namespace CustomPlantClass.Main
                 return tex;
             });
         }
+        /// <summary>Loads an embedded image resource and creates a centered sprite from it.</summary>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <returns>A sprite created from the loaded texture.</returns>
         public static Sprite LoadSpriteFromResource(string partialName, Assembly asm)
         {
             var tex = LoadTextureFromResource(partialName, asm);
@@ -172,6 +207,11 @@ namespace CustomPlantClass.Main
                 100f
             );
         }
+        /// <summary>Deserializes an embedded JSON resource into the specified type.</summary>
+        /// <typeparam name="T">The type to deserialize the JSON into.</typeparam>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the resource.</param>
+        /// <returns>The deserialized value, or the default value if deserialization yields no value.</returns>
         public static T LoadJsonFromResource<T>(string partialName, Assembly asm)
         {
             return LoadResource(partialName, asm, stream =>
@@ -182,6 +222,11 @@ namespace CustomPlantClass.Main
             });
         }
         #nullable enable
+        /// <summary>Loads an embedded audio resource and decodes it as an audio clip.</summary>
+        /// <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+        /// <param name="asm">The assembly containing the audio resource.</param>
+        /// <param name="type">The audio encoding type used by Unity's decoder.</param>
+        /// <returns>A task containing the decoded clip, or <see langword="null"/> if loading fails.</returns>
         public static async Task<AudioClip?> LoadAudioClipFromResource(string partialName, Assembly asm, AudioType type = AudioType.OGGVORBIS)
         {
             try
@@ -215,6 +260,9 @@ namespace CustomPlantClass.Main
             }
         }
         #nullable disable
+        /// <summary>Downloads content from a URL and converts the response bytes to Base64.</summary>
+        /// <param name="url">The URL to download.</param>
+        /// <returns>A task containing the Base64 content, or <see langword="null"/> if the download fails.</returns>
         public static async Task<string> DownloadAndConvertToBase64Async(string url)
         {
             try
@@ -228,6 +276,11 @@ namespace CustomPlantClass.Main
                 return null;
             }
         }
+        /// <summary>Loads Base64 content from a local cache or downloads and caches it from a fallback URL.</summary>
+        /// <param name="cacheFolder">The directory in which the cached file is stored.</param>
+        /// <param name="filename">The cache filename.</param>
+        /// <param name="urlfallback">The URL to use when the cache file is missing.</param>
+        /// <returns>The content as Base64, or <see langword="null"/> if it cannot be loaded or downloaded.</returns>
         public static string GetBase64FromCache(string cacheFolder, string filename, string urlfallback)
         {
             try
@@ -273,26 +326,44 @@ namespace CustomPlantClass.Main
                 return null;
             }
         }
+        /// <summary>Casts a Unity object to the requested Unity object type.</summary>
+        /// <typeparam name="T">The target Unity object type.</typeparam>
+        /// <param name="obj">The object to cast.</param>
+        /// <returns>The object cast to <typeparamref name="T"/>.</returns>
         public static T CastAsset<T>(this Object obj) where T : Object => (T)obj;
     }
+    /// <summary>Holds a Unity asset together with its name.</summary>
+    /// <typeparam name="T">The Unity object type of the asset.</typeparam>
     public sealed class Asset<T> where T : Object
     {
+        /// <summary>Gets the wrapped Unity object.</summary>
         public T Obj { get; }
+        /// <summary>Gets the name of the wrapped Unity object.</summary>
         public string Name { get; }
 
+        /// <summary>Creates an asset wrapper for a Unity object.</summary>
+        /// <param name="obj">The object to wrap.</param>
         public Asset(T obj)
         {
             Obj = obj;
             Name = obj.name;
         }
 
+        /// <summary>Wraps a Unity object as an asset of the requested type.</summary>
+        /// <param name="obj">The Unity object to wrap.</param>
+        /// <returns>An asset wrapper containing the object and its name.</returns>
         public static Asset<T> FromObject(Object obj)
             => new((T)obj);
     }
+    /// <summary>Dispatches loaded assets to registered handlers based on their runtime type and predicates.</summary>
     public sealed class AssetDispatcher
     {
         private readonly Dictionary<Type, List<(Predicate<Object> match, Action<Object> action)>> _map = new();
 
+        /// <summary>Registers a predicate and action for assets of a specified Unity object type.</summary>
+        /// <typeparam name="T">The Unity object type handled by the registration.</typeparam>
+        /// <param name="match">Determines whether an asset should be handled by the action.</param>
+        /// <param name="action">The action to invoke for matching assets.</param>
         public void Add<T>(Predicate<T> match, Action<T> action) where T : Object
         {
             if (!_map.TryGetValue(typeof(T), out var list))
@@ -304,6 +375,9 @@ namespace CustomPlantClass.Main
             ));
         }
 
+        /// <summary>Invokes the first registered handler matching an asset's exact runtime type and predicate.</summary>
+        /// <param name="obj">The asset to dispatch.</param>
+        /// <returns><see langword="true"/> if a handler matched and was invoked; otherwise, <see langword="false"/>.</returns>
         public bool TryInvoke(Object obj)
         {
             var type = obj.GetType();
@@ -323,6 +397,8 @@ namespace CustomPlantClass.Main
             return false;
         }
 
+        /// <summary>Loads all assets in a bundle and dispatches each to its registered handler.</summary>
+        /// <param name="bundle">The bundle whose assets should be dispatched.</param>
         public void Switch(AssetBundle bundle)
         {
             foreach (var obj in bundle.LoadAllAssets())

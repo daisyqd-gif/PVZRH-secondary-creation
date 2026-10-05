@@ -12,10 +12,6 @@ namespace CustomPlantClass.Level
         internal static List<int> CustomAdventureLevels = new();
         /// <summary>
         /// Creates a new adventure branch
-        /// <param name="nameCN"> Chinese/visible name
-        /// <param name="nameEN"> internal name(ascii only)
-        /// <param name="bgSprite"> level background sprite
-        /// <param name="LevelUnlocks"> (LevelData, Plant to unlock that level) ordinal
         /// </summary>
         public static void RegisterCustomBranchAdventure<T>(BaseCustomBranchAdventureData data) where T : MonoBehaviour
         {
@@ -88,10 +84,6 @@ namespace CustomPlantClass.Level
         }
         /// <summary>
         /// Creates a new adventure branch
-        /// <param name="nameCN"> Chinese/visible name
-        /// <param name="nameEN"> internal name(ascii only)
-        /// <param name="bgSprite"> level background sprite
-        /// <param name="LevelUnlocks"> (LevelData, Plant to unlock that level) ordinal
         /// </summary>
         public static void RegisterCustomBranchAdventure(BaseCustomBranchAdventureData data)
         {
@@ -162,51 +154,14 @@ namespace CustomPlantClass.Level
         }
         /// <summary>
         /// Returns a hashset of zombie types for each level
-        /// <param name="WeightedZombieTypes"> (Zombie type, the minimum level it can appear in)
-        /// <param name="theLevelNumber"> the ordinal level number for the current level (1 base)
         /// </summary>
+        /// <param name="WeightedZombieTypes"> (Zombie type, the minimum level it can appear in)</param>
+        /// <param name="theLevelNumber"> the ordinal level number for the current level (1 base)</param>
         public static HashSet<ZombieType> GetZombiePoolPerLevel(HashSet<(ZombieType, int)> WeightedZombieTypes, int theLevelNumber)
         {
             return [..WeightedZombieTypes
                     .Where(p => p.Item2 <= theLevelNumber)
                     .Select(p => p.Item1)];
         }
-    }
-    public struct BaseCustomBranchAdventureData
-    {
-        public BaseCustomBranchAdventureData()
-        {
-        }
-        /// <summary>
-        /// (The unlocked plant, the zombie pool, the level sprite, wave count, sun count)
-        /// </summary>
-        public List<(PlantType, HashSet<ZombieType>, Sprite?, int, int)> PerLevelData { readonly get; set; } = new();
-        public string nameCN { readonly get; set; } = "";
-        public string nameEN { readonly get; set; } = "";
-        public Sprite? AlmanacBGSprite { readonly get; set; } = default;
-        public Sprite? CardSprite { readonly get; set; } = default;
-        public SceneType SceneType { readonly get; set; } = SceneType.Day;
-        /// <summary>
-        /// Custom music prefab, please use a custom scene type
-        /// </summary>
-        public GameObject? ScenePrefab { readonly get; set; } = default;
-        public Sprite? SceneBackground { readonly get; set; } = default;
-        public MusicType MusicType { readonly get; set; } = (MusicType)(-1);
-        /// <summary>
-        /// Custom music audio, please use a custom music type
-        /// </summary>
-        public AudioClip? MusicAudio { readonly get; set; } = default;
-        public BoxType_Short[,] MapRoadTypes { readonly get; set; } = new BoxType_Short[,]
-        {
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G },
-            {BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G,BoxType_Short.G }
-        };
-        public Action EnterAction { readonly get; set; } = () => { };
-        public Action<Board> EnterGameAction { readonly get; set; } = (Board b) => { };
-        public BoardTag BoardTag { readonly get; set; } = default;
     }
 }

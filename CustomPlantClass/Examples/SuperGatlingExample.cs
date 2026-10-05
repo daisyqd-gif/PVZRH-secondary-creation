@@ -1,5 +1,7 @@
 namespace CustomPlantClass.Examples
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class SuperHypnoGatling_Example : CustomShooter
     {
         public override Transform FindShoot() => transform.FindChild("GatlingPea_head/GatlingPea_mouth_overlay");

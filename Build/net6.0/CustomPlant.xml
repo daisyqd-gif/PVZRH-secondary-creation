@@ -1,0 +1,2647 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomPlant</name>
+    </assembly>
+    <members>
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+            <summary>
+            注册自定义词条
+            </summary>
+            <param name="text">词条描述</param>
+            <param name="buffType">词条类型</param>
+            <param name="canUnlock">解锁条件</param>
+            <param name="cost">价格</param>
+            <param name="plantType">显示的植物类型</param>
+            <param name="level">最大等级</param>
+            <param name="bg">背景</param>
+            <returns>词条ID</returns>
+        </member>
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Boolean,PlantType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+            <summary>
+            注册自定义词条
+            </summary>
+            <param name="text">词条描述</param>
+            <param name="buffType">词条类型</param>
+            <param name="canUnlock">解锁条件</param>
+            <param name="cost">价格</param>
+            <param name="plantType">显示的植物类型</param>
+            <param name="level">最大等级</param>
+            <param name="bg">背景</param>
+            <param name="infoType">判定类型</param>
+            <param name="addProbability">增加植物在场时词条抽取概率</param>
+            <returns>词条ID</returns>
+        </member>
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomDebuff(System.String,System.Func{System.Boolean},ZombieType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+            <summary>
+            注册自定义僵尸词条
+            </summary>
+            <param name="text">词条描述</param>
+            <param name="unlock">?</param>
+            <param name="zombieType">显示的僵尸类型</param>
+            <param name="level">等级</param>
+            <param name="bg">背景</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomPlantClass.EffectsMgr">
+            <summary>
+            Provides extension methods for adding, retrieving, and removing
+            custom effects on supported Unity objects.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.AddEffect``1(UnityEngine.MonoBehaviour,System.Single,System.Single)">
+            <summary>
+            Adds or retrieves a custom effect on a component, validating that
+            the component is attached to an object compatible with the effect.
+            </summary>
+            <typeparam name="T">The custom effect type to add or retrieve.</typeparam>
+            <param name="self">The component on which to add the effect.</param>
+            <param name="cycleTimer">An amount to add to the effect's cycle timer when positive.</param>
+            <param name="removeTimer">An amount to add to the effect's removal timer when positive.</param>
+            <returns>The effect component, or <see langword="null"/> if the target is invalid or incompatible.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.TryGetCustomEffect``1(UnityEngine.MonoBehaviour,``0@)">
+            <summary>
+            Attempts to retrieve a custom effect component from a
+            <see cref="T:UnityEngine.MonoBehaviour"/>.
+            </summary>
+            <typeparam name="T">The custom effect type to retrieve.</typeparam>
+            <param name="self">The component to search.</param>
+            <param name="effect">Receives the effect if one is found.</param>
+            <returns><see langword="true"/> if the effect component was found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.RemoveEffect``1(UnityEngine.MonoBehaviour)">
+            <summary>
+            Invokes the effect's removal callback and removes it from
+            the specified <see cref="T:UnityEngine.MonoBehaviour"/>.
+            </summary>
+            <typeparam name="T">The custom effect type to remove.</typeparam>
+            <param name="self">The component from which to remove the effect.</param>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.AddEffect``1(UnityEngine.Transform,System.Single,System.Single)">
+            <summary>
+            Adds or retrieves a custom effect on a transform, validating that
+            the object is compatible with the effect.
+            </summary>
+            <typeparam name="T">The custom effect type to add or retrieve.</typeparam>
+            <param name="self">The transform on which to add the effect.</param>
+            <param name="cycleTimer">An amount to add to the effect's cycle timer when positive.</param>
+            <param name="removeTimer">An amount to add to the effect's removal timer when positive.</param>
+            <returns>The effect component, or <see langword="null"/> if the target is invalid or incompatible.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.TryGetCustomEffect``1(UnityEngine.Transform,``0@)">
+            <summary>
+            Attempts to retrieve a custom effect component from
+            a <see cref="T:UnityEngine.Transform"/>.
+            </summary>
+            <typeparam name="T">The custom effect type to retrieve.</typeparam>
+            <param name="self">The transform to search.</param>
+            <param name="effect">Receives the effect if one is found.</param>
+            <returns><see langword="true"/> if the effect component was found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.RemoveEffect``1(UnityEngine.Transform)">
+            <summary>
+            Invokes the effect's removal callback and removes it from
+            the game object associated with the transform.
+            </summary>
+            <typeparam name="T">The custom effect type to remove.</typeparam>
+            <param name="self">The transform whose game object holds the effect.</param>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.AddEffect``1(UnityEngine.GameObject,System.Single,System.Single)">
+            <summary>
+            Adds or retrieves a custom effect on a game object, validating
+            that the object is compatible with the effect.
+            </summary>
+            <typeparam name="T">The custom effect type to add or retrieve.</typeparam>
+            <param name="self">The game object on which to add the effect.</param>
+            <param name="cycleTimer">An amount to add to the effect's cycle timer when positive.</param>
+            <param name="removeTimer">An amount to add to the effect's removal timer when positive.</param>
+            <returns>The effect component, or <see langword="null"/> if the target is invalid or incompatible.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.TryGetCustomEffect``1(UnityEngine.GameObject,``0@)">
+            <summary>
+            Attempts to retrieve a custom effect component from
+            a <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <typeparam name="T">The custom effect type to retrieve.</typeparam>
+            <param name="self">The game object to search.</param>
+            <param name="effect">Receives the effect if one is found.</param>
+            <returns><see langword="true"/> if the effect component was found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.EffectsMgr.RemoveEffect``1(UnityEngine.GameObject)">
+            <summary>
+            Invokes the effect's removal callback and removes it from
+            the specified game object.
+            </summary>
+            <typeparam name="T">The custom effect type to remove.</typeparam>
+            <param name="self">The game object from which to remove the effect.</param>
+        </member>
+        <member name="T:CustomPlantClass.CustomEffect">
+            <summary>
+            Base component for custom effects, with optional cycle and timed
+            removal countdowns and lifecycle callbacks.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.CustomEffect.CanCountDown">
+            <summary>
+            Gets whether the effect's cycle countdown should be processed
+            during fixed updates.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.CustomEffect.TimedEffect">
+            <summary>
+            Gets whether the effect should be removed when its removal
+            countdown reaches zero.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.CustomEffect.CycleCountDown">
+            <summary>
+            Gets or sets the interval used to reset the cycle countdown
+            after its timer callback runs.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.CustomEffect.RemoveCountDown">
+            <summary>
+            Gets or sets the countdown interval before this effect
+            is removed when timed removal is enabled.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.CustomEffect.Usage">
+            <summary>
+            Gets the kind of object this effect is designed to be used on.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.CustomEffect.Start">
+            <summary>
+            Initializes the effect's countdowns and invokes its add callback.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.CustomEffect.FixedUpdate">
+            <summary>
+            Updates the effect's cycle and removal countdowns
+            and invokes the corresponding callbacks when they expire.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.CustomEffect.OnAddEffect">
+            <summary>
+            Called when the effect is added and initialized.
+            Override this method to perform effect setup.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.CustomEffect.OnTimerZero">
+            <summary>
+            Called whenever an enabled cycle countdown reaches zero.
+            Override this method to handle the cycle event.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.CustomEffect.OnRemoveEffect">
+            <summary>
+            Called when the effect is removed, including timed removal.
+            Override this method to perform effect cleanup.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.CustomEffectUsage">
+            <summary>
+            Identifies the category of game object compatible with
+            a custom effect.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.ModLogger">
+            <summary>
+            Provides logging helpers that tag messages with a mod name,
+            add them to the appropriate startup log, and write them to BepInEx.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.ModLogger.Log">
+            <summary>
+            Gets the BepInEx log source used by this logger.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.String,System.String)">
+            <summary>
+            Logs an informational message tagged with the specified mod name
+            and records it in the startup messages.
+            </summary>
+            <param name="mod">The mod name to include in the log entry.</param>
+            <param name="msg">The informational message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String,System.String)">
+            <summary>
+            Logs a warning tagged with the specified mod name
+            and records it in the startup warnings.
+            </summary>
+            <param name="mod">The mod name to include in the log entry.</param>
+            <param name="msg">The warning message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.String,System.String)">
+            <summary>
+            Logs an error tagged with the specified mod name
+            and records it in the startup errors.
+            </summary>
+            <param name="mod">The mod name to include in the log entry.</param>
+            <param name="msg">The error message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.String)">
+            <summary>
+            Logs an informational message tagged with the current plugin name
+            and records it in the startup messages.
+            </summary>
+            <param name="msg">The informational message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String)">
+            <summary>
+            Logs a warning tagged with the current plugin name
+            and records it in the startup warnings.
+            </summary>
+            <param name="msg">The warning message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.String)">
+            <summary>
+            Logs an error tagged with the current plugin name
+            and records it in the startup errors.
+            </summary>
+            <param name="msg">The error message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.Reflection.Assembly,System.String)">
+            <summary>
+            Resolves the mod name from the assembly, logs an informational message
+            with that name, and records it in the startup messages.
+            </summary>
+            <param name="asm">The assembly used to resolve the mod name.</param>
+            <param name="msg">The informational message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Reflection.Assembly,System.String)">
+            <summary>
+            Resolves the mod name from the assembly, logs a warning
+            with that name, and records it in the startup warnings.
+            </summary>
+            <param name="asm">The assembly used to resolve the mod name.</param>
+            <param name="msg">The warning message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.Reflection.Assembly,System.String)">
+            <summary>
+            Resolves the mod name from the assembly, logs an error
+            with that name, and records it in the startup errors.
+            </summary>
+            <param name="asm">The assembly used to resolve the mod name.</param>
+            <param name="msg">The error message to log.</param>
+        </member>
+        <member name="T:CustomPlantClass.Level.BranchAdventureManager">
+            <summary>
+            Utility for creating branch adventure worlds
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.BranchAdventureManager.RegisterCustomBranchAdventure``1(CustomPlantClass.Main.BaseCustomBranchAdventureData)">
+            <summary>
+            Creates a new adventure branch
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.BranchAdventureManager.RegisterCustomBranchAdventure(CustomPlantClass.Main.BaseCustomBranchAdventureData)">
+            <summary>
+            Creates a new adventure branch
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.BranchAdventureManager.GetZombiePoolPerLevel(System.Collections.Generic.HashSet{System.ValueTuple{ZombieType,System.Int32}},System.Int32)">
+            <summary>
+            Returns a hashset of zombie types for each level
+            </summary>
+            <param name="WeightedZombieTypes"> (Zombie type, the minimum level it can appear in)</param>
+            <param name="theLevelNumber"> the ordinal level number for the current level (1 base)</param>
+        </member>
+        <member name="T:CustomPlantClass.Level.CustomLevelMgr">
+            <summary>
+            Central utility manager for all custom level registration
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel``1(CustomPlantClass.Main.BaseCustomLevelData)">
+            <summary>
+            Registers a custom level with a custom component.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel(CustomPlantClass.Main.BaseCustomLevelData)">
+            <summary>
+            Registers a custom level.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel``1(CustomPlantClass.Main.BaseCustomLevelData,System.Func{System.Boolean})">
+            <summary>
+            Registers a custom level with a custom component.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel(CustomPlantClass.Main.BaseCustomLevelData,System.Func{System.Boolean})">
+            <summary>
+            Registers a custom level with a custom component.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.AllocateLevelID">
+            <summary>
+            Allocates a level ID that is deterministic
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Level.CustomLevelMgr.AllocateLevelID(System.String)">
+            <summary>
+            Allocates a level ID that is deterministic
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.AssetMgr">
+            <summary>Loads and caches asset bundles and assets embedded in assemblies or stored remotely.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadBundleBase64(System.String)">
+            <summary>Loads an asset bundle from a Base64 string, reusing a cached bundle when available.</summary>
+            <param name="base64">The Base64-encoded asset bundle.</param>
+            <returns>The loaded bundle, or <see langword="null"/> if the input is invalid or loading fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadBundleFromFile(System.String,System.String,System.Boolean)">
+            <summary>Loads an asset bundle from a file, optionally reusing a cached bundle.</summary>
+            <param name="path">The path to the asset bundle file.</param>
+            <param name="name">The cache name used to identify the bundle.</param>
+            <param name="deduplicate">Whether to return an existing cached bundle with the same name.</param>
+            <returns>The loaded bundle, or <see langword="null"/> if the file is unavailable or loading fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadBundleFromResource(System.Reflection.Assembly,System.String,System.Boolean)">
+            <summary>Loads an asset bundle from an assembly resource, optionally reusing a cached bundle.</summary>
+            <param name="asm">The assembly containing the embedded resource.</param>
+            <param name="resourceName">The embedded resource name.</param>
+            <param name="deduplicate">Whether to return an existing cached bundle with the same resource name.</param>
+            <returns>The loaded bundle, or <see langword="null"/> if the resource is unavailable or loading fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadResource``1(System.String,System.Reflection.Assembly,System.Func{System.IO.Stream,``0})">
+            <summary>Finds an embedded resource by partial name and passes its stream to a loader.</summary>
+            <typeparam name="T">The type returned by the loader.</typeparam>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <param name="loader">The function that reads the resource stream and creates a value.</param>
+            <returns>The value produced by the loader.</returns>
+            <exception cref="T:System.Exception">No embedded resource name contains <paramref name="partialName"/>.</exception>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadStringFromResource(System.String,System.Reflection.Assembly)">
+            <summary>Reads an embedded resource as text.</summary>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <returns>The resource contents as a string.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadBytesFromResource(System.String,System.Reflection.Assembly)">
+            <summary>Reads an embedded resource into a byte array.</summary>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <returns>The resource contents as bytes.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadTextureFromResource(System.String,System.Reflection.Assembly)">
+            <summary>Loads an embedded image resource into a texture.</summary>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <returns>The texture decoded from the resource.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadSpriteFromResource(System.String,System.Reflection.Assembly)">
+            <summary>Loads an embedded image resource and creates a centered sprite from it.</summary>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <returns>A sprite created from the loaded texture.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadJsonFromResource``1(System.String,System.Reflection.Assembly)">
+            <summary>Deserializes an embedded JSON resource into the specified type.</summary>
+            <typeparam name="T">The type to deserialize the JSON into.</typeparam>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the resource.</param>
+            <returns>The deserialized value, or the default value if deserialization yields no value.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.LoadAudioClipFromResource(System.String,System.Reflection.Assembly,UnityEngine.AudioType)">
+            <summary>Loads an embedded audio resource and decodes it as an audio clip.</summary>
+            <param name="partialName">A case-insensitive substring of the embedded resource name.</param>
+            <param name="asm">The assembly containing the audio resource.</param>
+            <param name="type">The audio encoding type used by Unity's decoder.</param>
+            <returns>A task containing the decoded clip, or <see langword="null"/> if loading fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.DownloadAndConvertToBase64Async(System.String)">
+            <summary>Downloads content from a URL and converts the response bytes to Base64.</summary>
+            <param name="url">The URL to download.</param>
+            <returns>A task containing the Base64 content, or <see langword="null"/> if the download fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.GetBase64FromCache(System.String,System.String,System.String)">
+            <summary>Loads Base64 content from a local cache or downloads and caches it from a fallback URL.</summary>
+            <param name="cacheFolder">The directory in which the cached file is stored.</param>
+            <param name="filename">The cache filename.</param>
+            <param name="urlfallback">The URL to use when the cache file is missing.</param>
+            <returns>The content as Base64, or <see langword="null"/> if it cannot be loaded or downloaded.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetMgr.CastAsset``1(UnityEngine.Object)">
+            <summary>Casts a Unity object to the requested Unity object type.</summary>
+            <typeparam name="T">The target Unity object type.</typeparam>
+            <param name="obj">The object to cast.</param>
+            <returns>The object cast to <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.Asset`1">
+            <summary>Holds a Unity asset together with its name.</summary>
+            <typeparam name="T">The Unity object type of the asset.</typeparam>
+        </member>
+        <member name="P:CustomPlantClass.Main.Asset`1.Obj">
+            <summary>Gets the wrapped Unity object.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.Asset`1.Name">
+            <summary>Gets the name of the wrapped Unity object.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Asset`1.#ctor(`0)">
+            <summary>Creates an asset wrapper for a Unity object.</summary>
+            <param name="obj">The object to wrap.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.Asset`1.FromObject(UnityEngine.Object)">
+            <summary>Wraps a Unity object as an asset of the requested type.</summary>
+            <param name="obj">The Unity object to wrap.</param>
+            <returns>An asset wrapper containing the object and its name.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.AssetDispatcher">
+            <summary>Dispatches loaded assets to registered handlers based on their runtime type and predicates.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetDispatcher.Add``1(System.Predicate{``0},System.Action{``0})">
+            <summary>Registers a predicate and action for assets of a specified Unity object type.</summary>
+            <typeparam name="T">The Unity object type handled by the registration.</typeparam>
+            <param name="match">Determines whether an asset should be handled by the action.</param>
+            <param name="action">The action to invoke for matching assets.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetDispatcher.TryInvoke(UnityEngine.Object)">
+            <summary>Invokes the first registered handler matching an asset's exact runtime type and predicate.</summary>
+            <param name="obj">The asset to dispatch.</param>
+            <returns><see langword="true"/> if a handler matched and was invoked; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.AssetDispatcher.Switch(UnityEngine.AssetBundle)">
+            <summary>Loads all assets in a bundle and dispatches each to its registered handler.</summary>
+            <param name="bundle">The bundle whose assets should be dispatched.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomPlantAttribute">
+            <summary>Associates a custom plant implementation with its base type and registration data.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomPlantAttribute.BaseType">
+            <summary>Gets the base plant type used by the custom implementation.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomPlantAttribute.Data">
+            <summary>Gets the data used to register the custom plant.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomPlantAttribute.#ctor(System.Type,CustomPlantClass.Main.BaseCustomPlantData)">
+            <summary>Creates metadata for a custom plant implementation.</summary>
+            <param name="baseType">The plant base type to extend.</param>
+            <param name="data">The data used to register the custom plant.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomBulletAttribute">
+            <summary>Associates a custom bullet implementation with its base type and registration data.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomBulletAttribute.BaseType">
+            <summary>Gets the base bullet type used by the custom implementation.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomBulletAttribute.Data">
+            <summary>Gets the data used to register the custom bullet.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomBulletAttribute.#ctor(System.Type,CustomPlantClass.Main.BaseCustomBulletData)">
+            <summary>Creates metadata for a custom bullet implementation.</summary>
+            <param name="baseType">The bullet base type to extend.</param>
+            <param name="data">The data used to register the custom bullet.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomZombieAttribute">
+            <summary>Associates a custom zombie implementation with its base type and registration data.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomZombieAttribute.BaseType">
+            <summary>Gets the base zombie type used by the custom implementation.</summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.CustomZombieAttribute.Data">
+            <summary>Gets the data used to register the custom zombie.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomZombieAttribute.#ctor(System.Type,CustomPlantClass.Main.BaseCustomZombieData)">
+            <summary>Creates metadata for a custom zombie implementation.</summary>
+            <param name="baseType">The zombie base type to extend.</param>
+            <param name="data">The data used to register the custom zombie.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomModAttribute">
+            <summary>Specifies the display name for a mod at the assembly level.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomModAttribute.#ctor(System.String)">
+            <summary>Creates assembly-level mod metadata with the specified name.</summary>
+            <param name="name">The mod's display name.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomModModuleAttribute">
+            <summary>Specifies the display name for a mod at the module level.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomModModuleAttribute.#ctor(System.String)">
+            <summary>Creates module-level mod metadata with the specified name.</summary>
+            <param name="name">The mod's display name.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.AttributeMgr">
+            <summary>Loads custom plant, bullet, and zombie attributes and resolves mod display names.</summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.AttributeMgr.LoadAllAttributes(System.Reflection.Assembly)">
+            <summary>Finds custom implementation attributes in an assembly and registers their data.</summary>
+            <param name="asm">The assembly to scan for custom implementation attributes.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.AttributeMgr.GetModName(System.Reflection.Assembly)">
+            <summary>Resolves a mod's display name from its metadata or assembly information.</summary>
+            <param name="asm">The assembly whose mod name should be resolved.</param>
+            <returns>The resolved mod name, or <c>Unknown</c> if no name can be found.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.DataMgr">
+            <summary>
+            Central utility manager for all custom plant registration,
+            fusion helpers, skin helpers, ID allocation, and IL2CPP type registration.
+            This class is the backbone of the new custom plant framework.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.OnLoad">
+            <summary>
+            Initializes startup logging and adds the manager component
+            to the plugin's game object.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AllocateID">
+            <summary>
+            Allocates a deterministic ID for the calling mod
+            while avoiding collisions with built-in and custom IDs.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AllocatePlantID">
+            <summary>
+            Allocates an ID through <see cref="M:CustomPlantClass.Main.DataMgr.AllocateID"/>.
+            This legacy plant-specific wrapper is obsolete.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AllocateZombieID">
+            <summary>
+            Allocates an ID through <see cref="M:CustomPlantClass.Main.DataMgr.AllocateID"/>.
+            This legacy zombie-specific wrapper is obsolete.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AllocateBulletID">
+            <summary>
+            Allocates an ID through <see cref="M:CustomPlantClass.Main.DataMgr.AllocateID"/>.
+            This legacy bullet-specific wrapper is obsolete.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.MirrorTuple(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID})">
+            <summary>
+            Returns the original fusion pair and its mirrored version
+            with the pair elements in reversed order.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FlattenFusionArray(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}}[])">
+            <summary>
+            Flattens an array of fusion lists into one list
+            while preserving the order of the pairs.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.MirrorList(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+            <summary>
+            Mirrors every fusion pair in a list
+            by reversing the order of each pair's elements.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.DeduplicateFusions(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+            <summary>
+            Removes duplicate fusion pairs
+            from the supplied collection.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.Fusion(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}[])">
+            <summary>
+            Creates a fusion list from simple pair definitions
+            and includes the mirrored form of each pair.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.BulletSkin(System.ValueTuple{BulletType,UnityEngine.GameObject[]}[])">
+            <summary>
+            Creates bullet skin mappings for plant skins
+            from the supplied bullet and prefab entries.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBossHealthSlider(CustomizeLib.BepInEx.ID,UnityEngine.GameObject)">
+            <summary>
+            Registers a custom boss health slider using a prefab
+            after validating its required UI components.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBossHealthSlider(CustomPlantClass.Main.CustomBossHealthSliderData)">
+            <summary>
+            Registers a custom boss health slider from metadata
+            and applies its icon and fill appearance.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.CreatePlantData(CustomizeLib.BepInEx.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Creates plant registration data with default settings
+            and the supplied ID, prefab, and preview.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.CreateSkin(CustomPlantClass.Main.BaseCustomPlantData,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Creates plant skin data from the base plant data
+            and the supplied skin prefab and preview.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AutoRegisterTypes">
+            <summary>
+            Registers all eligible derived types from the calling assembly
+            with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AutoRegisterTypes(System.Reflection.Assembly)">
+            <summary>
+            Registers eligible derived types from an assembly
+            with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.EnsureTypeRegistered``1">
+            <summary>
+            Ensures the specified custom component type
+            is registered with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.DataMgr.PlantTagAdder">
+            <summary>
+            Registers a custom plant using BaseCustomPlantData.
+            Automatically registers TClass in IL2CPP.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.PlantTagAdder.Update">
+            <summary>
+            Applies the plant's registered tag on the first game update,
+            then removes this temporary helper component.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``2(CustomPlantClass.Main.BaseCustomPlantData)">
+            <summary>
+            Registers a custom plant using BaseCustomPlantData.
+            Automatically registers TClass in IL2CPP.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``1(CustomPlantClass.Main.BaseCustomPlantData)">
+            <summary>
+            Registers a custom plant using BaseCustomPlantData.
+            Automatically registers TClass in IL2CPP.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomUltiPlant(PlantType)">
+            <summary>
+            Adds a plant type to the custom ultimate plant set
+            so it is recognized as an ultimate plant.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``2(CustomPlantClass.Main.BasePlantSkinData)">
+            <summary>
+            Registers a custom plant and its skin in one call.
+            Automatically registers TClass in IL2CPP.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlantSkin``2(CustomPlantClass.Main.BasePlantSkinData)">
+            <summary>
+            Registers a custom plant skin.
+            Automatically registers TClass in IL2CPP.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddLevelPlant(CustomizeLib.BepInEx.ID,CardLevel)">
+            <summary>
+            Assigns a card level to a plant type
+            for use in treasure mode.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.GetCardLevel(CustomPlantClass.Main.PlantLevelData)">
+            <summary>
+            Maps a plant progression level to its card level
+            for use in card and treasure systems.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.CreateAlmanacEntry(System.String,System.String,System.ValueTuple{System.String,System.String},System.ValueTuple{System.Int32,System.Single},System.ValueTuple{System.Int32,System.Single,System.String},System.String[],System.ValueTuple{System.String,System.String},System.String,System.String,System.String,System.String)">
+            <summary>
+            Builds formatted almanac text for a plant
+            from its introduction and optional details.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Single)">
+            <summary>
+            Registers a chance-based transformation from one plant type
+            to another using the specified percentage.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBigStar``1(UnityEngine.GameObject@)">
+            <summary>
+            Registers a custom big star component
+            and assigns it to the fog sorting layer.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBullet``2(CustomPlantClass.Main.BaseCustomBulletData)">
+            <summary>
+            Registers a custom bullet type and its prefab
+            from the supplied bullet data.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomStarUp(CustomizeLib.BepInEx.ID)">
+            <summary>
+            Marks a plant type as supporting Star-Up
+            by adding it to the custom Star-Up set.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{Plant,System.Boolean})">
+            <summary>
+            Registers a plant transformation that succeeds when
+            the supplied plant-based condition returns true.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{System.Boolean})">
+            <summary>
+            Registers a plant transformation that succeeds when
+            the supplied condition returns true.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomZombie``2(CustomPlantClass.Main.BaseCustomZombieData)">
+            <summary>
+            Registers a custom zombie from its data
+            and records its spawn settings.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomOnZombieSpawnEvent(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{Zombie,System.Boolean})">
+            <summary>
+            Registers a condition that maps one zombie type to another
+            when the source zombie spawns.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddGameStartAction(System.Action)">
+            <summary>
+            Queues an action to run when the game starts,
+            or runs it immediately if the game has already started.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddGameAppInitAction(System.Action)">
+            <summary>
+            Queues an action for game application initialization
+            so it can run during the startup sequence.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomStrongUltimatePlant(CustomizeLib.BepInEx.ID,System.String,UltiBuff,UltiBuff,CustomizeLib.BepInEx.BuffBgType,System.Nullable{PlantType})">
+            <summary>
+            Registers a custom strong ultimate plant and marks it as ultimate
+            when necessary, then creates its unlock buff.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatSPUpgradeBuff(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Formats the strong-ultimate upgrade text for an unlocked plant
+            and its variant, including their parent plant recipes.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatStrongUltimateUnlockBuff(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Formats the unlock text for a strong-ultimate plant and its variant,
+            including the variant transformation recipe.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatStrongUltimateUnlockBuff(System.String,System.String,System.String)">
+            <summary>
+            Formats the unlock text for a strong-ultimate plant
+            and its two parent plants.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomLevel4Zombie(CustomizeLib.BepInEx.ID,ZombieType)">
+            <summary>
+            Registers a custom level 4 zombie based on a level 3 type
+            and assigns its spawn level and weight.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomizeLib.BepInEx.ID,System.Boolean,PlantType,System.Func{System.Boolean})">
+            <summary>
+            Registers a custom weak ultimate plant and its optional variant
+            and marks the involved types as ultimate when necessary.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomizeLib.BepInEx.ID,System.Boolean)">
+            <summary>
+            Registers a custom weak ultimate plant
+            and marks its type as ultimate when necessary.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddZombieToLevel(LevelType,System.Int32,ZombieType)">
+            <summary>
+            Adds a zombie type to the custom spawn list
+            for the specified level.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomGridItem``2(CustomPlantClass.Main.BaseCustomGridItemData)">
+            <summary>
+            Registers a custom grid item with a specified base type
+            and custom component class.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomGridItemWithType``1(CustomPlantClass.Main.BaseCustomGridItemData)">
+            <summary>
+            Registers a custom grid item with a custom component class
+            and the default grid item base type.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomGridItem(CustomPlantClass.Main.BaseCustomGridItemData)">
+            <summary>
+            Registers a custom grid item from its data
+            using the default grid item base type.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomGridItem``1(CustomPlantClass.Main.BaseCustomGridItemData)">
+            <summary>
+            Registers a custom grid item from its data
+            using the specified grid item base type.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomLevel``1(CustomPlantClass.Main.BaseCustomLevelData)">
+            <summary>
+            Registers a custom level through the legacy generic API.
+            Use <see cref="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel``1(CustomPlantClass.Main.BaseCustomLevelData)"/> instead.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomLevel(CustomPlantClass.Main.BaseCustomLevelData)">
+            <summary>
+            Registers a custom level through the legacy API.
+            Use <see cref="M:CustomPlantClass.Level.CustomLevelMgr.RegisterCustomLevel(CustomPlantClass.Main.BaseCustomLevelData)"/> instead.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AllocateLevelID">
+            <summary>
+            Allocates a custom level ID through the legacy API.
+            Use the level ID allocator in <see cref="T:CustomPlantClass.Level.CustomLevelMgr"/> instead.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.EnsureGameNotStarted">
+            <summary>
+            Verifies that registration is still allowed
+            and throws if the game has already started.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddLevelZombie(ZombieType,ZombieType,ZombieType,ZombieType,ZombieType)">
+            <summary>
+            Registers three ultimate zombie tiers without descriptions.
+            This legacy overload is obsolete.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddLevelZombie(ZombieType,System.String,ZombieType,System.String,ZombieType,System.String,System.Boolean,ZombieType,System.String,ZombieType,System.String)">
+            <summary>
+            Registers ultimate zombie tiers, their descriptions,
+            and whether they should be included in water levels.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RogueZombieTextFormatter(System.String,System.Int32,CustomPlantClass.Main.RogueZombieHealth,CustomPlantClass.Main.RogueZombieAttack,System.String)">
+            <summary>
+            Formats a rogue zombie description using health and attack
+            classifications from the corresponding enums.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RogueZombieTextFormatter(System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Formats a rogue zombie description from explicit health
+            and attack description strings.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomZombieSpawnRatio(CustomizeLib.BepInEx.ID,System.Int32,System.Int32)">
+            <summary>
+            Registers a custom zombie's spawn level
+            and its relative selection weight.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.DefaultPlantStats">
+            <summary>
+            Provides recommended baseline health values
+            for custom plants.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.DefaultZombieStats">
+            <summary>
+            Provides baseline health and damage values
+            for standard and ultimate zombies.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.RogueZombieHealth">
+            <summary>
+            Represents the relative health categories
+            used to describe rogue zombies.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.RogueZombieAttack">
+            <summary>
+            Represents the relative attack categories
+            used to describe rogue zombies.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.HashSet{``0},System.Collections.Generic.HashSet{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.HashSet{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.Il2CppExtensions.Merge``1(Il2CppSystem.Collections.Generic.List{``0},System.Collections.Generic.HashSet{``0})">
+            <summary>
+            Merges 2 sequences
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.GameObjectMgr">
+            <summary>
+            A tool to store GameObjects and instantiate them
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Register``1(UnityEngine.GameObject,System.Int32)">
+            <summary>Adds the specified component to a game object and registers that object.</summary>
+            <typeparam name="T">The component type to add.</typeparam>
+            <param name="gameObject">The game object to configure and register.</param>
+            <param name="id">The ID to assign, or -1 to allocate one automatically.</param>
+            <returns>The registered object's custom item type.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Register(UnityEngine.GameObject,System.Int32)">
+            <summary>Registers a game object under a custom item type.</summary>
+            <param name="gameObject">The game object to register.</param>
+            <param name="id">The ID to assign, or -1 to allocate one automatically.</param>
+            <returns>The registered object's custom item type.</returns>
+            <exception cref="T:System.ArgumentException">The specified ID is already registered.</exception>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Get(CustomPlantClass.Main.CustomItemType)">
+            <summary>Gets the game object registered for a custom item type.</summary>
+            <param name="type">The custom item type to look up.</param>
+            <returns>The registered game object, or the safe default if no object is registered.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Instantiate(CustomPlantClass.Main.CustomItemType,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>Creates an instance of the registered object at a position and rotation.</summary>
+            <param name="type">The custom item type to instantiate.</param>
+            <param name="position">The instance's position.</param>
+            <param name="rotation">The instance's rotation.</param>
+            <returns>The instantiated game object.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Instantiate(CustomPlantClass.Main.CustomItemType,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)">
+            <summary>Creates an instance of the registered object at a position and rotation under a parent.</summary>
+            <param name="type">The custom item type to instantiate.</param>
+            <param name="position">The instance's position.</param>
+            <param name="rotation">The instance's rotation.</param>
+            <param name="parent">The transform to parent the instance to.</param>
+            <returns>The instantiated game object.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.Instantiate(CustomPlantClass.Main.CustomItemType)">
+            <summary>Creates an instance of the registered object using the default instantiate settings.</summary>
+            <param name="type">The custom item type to instantiate.</param>
+            <returns>The instantiated game object.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GameObjectMgr.AllocatePrefabID">
+            <summary>Allocates a deterministic prefab ID for the calling mod and avoids registered ID collisions.</summary>
+            <returns>The allocated prefab ID.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomItemType">
+            <summary>
+            s
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomItemType.op_Implicit(CustomPlantClass.Main.CustomItemType)~System.Int32">
+            <summary>Converts a custom item type to its underlying integer ID.</summary>
+            <param name="type">The custom item type to convert.</param>
+            <returns>The integer ID.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomItemType.op_Implicit(System.Int32)~CustomPlantClass.Main.CustomItemType">
+            <summary>Creates a custom item type from an integer ID.</summary>
+            <param name="type">The integer ID to convert.</param>
+            <returns>A custom item type containing the specified ID.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomItemType.#ctor(System.Int32)">
+            <summary>Initializes a custom item type with an ID.</summary>
+            <param name="id">The integer ID to store.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.GeneralTools">
+            <summary>
+            General tools used for various purposes
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.GeneralTools.GetCollidersInCone(UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask,System.Int32)">
+            <summary>
+            Returns a list of colliders within a cone-shaped area defined by the origin, direction, maximum distance, and cone angle.
+            </summary>
+            <param name="origin">The origin point of the cone</param>
+            <param name="direction">The direction the cone is facing</param>
+            <param name="maxDistance">The maximum distance of the cone</param>
+            <param name="coneAngle">The angle of the cone in degrees</param>
+            <param name="layerMask">The layer mask to use for the raycasts</param>
+            <param name="rayCount">The number of rays to cast within the cone</param>
+            <returns>A null checked list of colliders within a cone-shaped area</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.GeneralTools.GetCollider2DsInOval(UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask)">
+            <param name="center">The center of the oval</param>
+            <param name="radiusX">The X radius of the oval</param>
+            <param name="radiusY">The Y radius of the oval</param>
+            <param name="layerMask">The layer of the collider</param>
+            <returns>All colliders in an oval</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.ListHelper">
+            <summary>
+            Helpers for IEnumerables and lists
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Range(System.Int32)">
+            <summary>
+            Works like python's range
+            </summary>
+            <param name="stop">The end of the range</param>
+            <returns>An ienuerable containing the range</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Range(System.Int32,System.Int32)">
+            <summary>
+            Works like python's range
+            </summary>
+            <param name="start">The start of the range</param>
+            <param name="stop">The end of the range</param>
+            <returns>An ienuerable containing the range</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Range(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Works like python's range
+            </summary>
+            <param name="start">The start of the range</param>
+            <param name="stop">The end of the range</param>
+            <param name="step">The step of the range</param>
+            <returns>An ienuerable containing the range</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Enumerate``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Enumerates a sequence while also returning the index of each element.
+            </summary>
+            <returns>A sequence that contains the index and the value</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Repeat(System.Action,System.Int32)">
+            <summary>
+            Run an action an amount of times
+            </summary>
+            <param name="action"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.MirrorTuple(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID})">
+            <summary>
+            Returns a list containing the original fusion pair and its mirrored version.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.FlattenFusionArray(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}}[])">
+            <summary>
+            Flattens an array of fusion lists into a single list.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.MirrorList(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+            <summary>
+            Mirrors every fusion pair in a list.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.DeduplicateFusions(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+            <summary>
+            Removes duplicate fusion pairs.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Fusion(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}[])">
+            <summary>
+            Creates a mirrored fusion list from simple pair definitions.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.CreateList``1(``0[])">
+            <summary>
+            Creates a list
+            </summary>
+            <returns>An IEnumerable</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``1(System.Collections.Generic.IList{``0},``0[])">
+            <summary>
+            Adds multiple items to a sequence
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``1(System.Collections.Generic.HashSet{``0},``0[])">
+            <summary>
+            Adds multiple items to a sequence
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.KeyValuePair{``0,``1}[])">
+            <summary>
+            Adds multiple items to a sequence
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.ActionPerItem``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Runs an action per item in a sequence
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.ActionPerItem``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Action{``0})">
+            <summary>
+            Runs an action per item in a sequence
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Partition``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Partitions an ienumerable based on a predicate
+            </summary>
+            <returns>A ValueTuple of yes and no</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.ListHelper.Shuffle(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Shuffles an IEnumerable
+            </summary>
+            <param name="self"></param>
+        </member>
+        <member name="T:CustomPlantClass.Main.MathHelper">
+            <summary>
+            Helpers for math in mods without doing extreme math work
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.DirectionToRotation(UnityEngine.Vector2)">
+             <summary>
+             Converts a 2D direction vector into a Z‑axis rotation.
+             This is a direct replacement for Core.Lawnf.GetRotateFromSpeed().
+            
+             Formula:
+                 angle = atan2(direction.y, direction.x)
+                 rotation = Quaternion.Euler(0, 0, angle_in_degrees)
+             </summary>
+             <param name="direction">A 2D direction vector.</param>
+             <returns>A Quaternion facing the direction.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.DirectionToDegrees(UnityEngine.Vector2)">
+             <summary>
+             Computes the facing angle (in degrees) of a 2D direction vector.
+             This is the scalar form of Core.Lawnf.GetRotateFromSpeed().
+            
+             Formula:
+                 angle = atan2(direction.y, direction.x)
+             </summary>
+             <param name="direction">A 2D direction vector.</param>
+             <returns>The facing angle in degrees.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RotationToDirection(UnityEngine.Quaternion)">
+             <summary>
+             Converts a Z‑axis rotation into a normalized 2D direction vector.
+             This is a direct replacement for Core.Lawnf.GetVectorFromQuaternion().
+            
+             Formula:
+                 angle = rotation.eulerAngles.z * Deg2Rad
+                 direction = (cos(angle), sin(angle)).normalized
+             </summary>
+             <param name="rotation">A Quaternion whose Z‑axis angle determines the direction.</param>
+             <returns>A normalized Vector2 pointing in the facing direction.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RotationToDirection(System.Single)">
+             <summary>
+             Converts a degree angle into a normalized 2D direction vector.
+             This is the scalar form of Core.Lawnf.GetVectorFromQuaternion().
+            
+             Formula:
+                 angle = rotationInDegrees * Deg2Rad
+                 direction = (cos(angle), sin(angle)).normalized
+             </summary>
+             <param name="rotationInDegrees">A Z‑axis angle in degrees.</param>
+             <returns>A normalized Vector2 pointing in the facing direction.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.LookAt2D(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>Creates a 2D rotation that faces from one position toward another.</summary>
+            <param name="from">The starting position.</param>
+            <param name="to">The position to face.</param>
+            <returns>A quaternion representing the direction from <paramref name="from"/> to <paramref name="to"/>.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RotateTowards2D(UnityEngine.Quaternion,System.Single,System.Single)">
+            <summary>Rotates a 2D orientation toward a target angle by at most a time-scaled amount.</summary>
+            <param name="current">The current orientation.</param>
+            <param name="targetAngle">The target Z-axis angle in degrees.</param>
+            <param name="maxDegreesPerSecond">The maximum rotation speed in degrees per second.</param>
+            <returns>The orientation after the bounded rotation step.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RandomRotation2D">
+            <summary>Creates a random 2D rotation from zero up to 360 degrees.</summary>
+            <returns>A quaternion with a random Z-axis rotation.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.DistanceSq(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>Calculates the squared distance between two points.</summary>
+            <param name="a">The first point.</param>
+            <param name="b">The second point.</param>
+            <returns>The distance between the points, squared.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RotateVector(UnityEngine.Vector2,System.Single)">
+            <summary>Rotates a vector by the specified angle.</summary>
+            <param name="v">The vector to rotate.</param>
+            <param name="degrees">The rotation angle in degrees.</param>
+            <returns>The rotated vector.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.ClampMagnitude(UnityEngine.Vector2,System.Single)">
+            <summary>Limits a vector's magnitude to the specified maximum.</summary>
+            <param name="v">The vector to clamp.</param>
+            <param name="max">The maximum allowed magnitude.</param>
+            <returns>The original vector if within the limit, otherwise a vector with the maximum magnitude.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.GetRandomValue``1(System.Collections.Generic.List{``0},System.Func{``0,System.Boolean})">
+            <summary>Selects a random item from a list, optionally filtering items first.</summary>
+            <typeparam name="T">The type of list items.</typeparam>
+            <param name="values">The list to select from.</param>
+            <param name="selector">The filter to apply, or <see langword="null"/> to accept every item.</param>
+            <returns>A randomly selected matching item, or the default value of <typeparamref name="T"/> if none match.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.GetRandomWithMean(System.Single,System.Single,System.Single)">
+            <summary>Generates a random value between bounds using a distribution weighted toward the target mean.</summary>
+            <param name="min">The lower bound.</param>
+            <param name="max">The upper bound.</param>
+            <param name="targetMean">The target mean, which must be strictly between the bounds.</param>
+            <returns>A generated value, or <paramref name="min"/> if the target mean is outside the open interval.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.GetRandomLogSymmetric(System.Single,System.Single)">
+            <summary>Generates a random value by sampling logarithmically between two ratios.</summary>
+            <param name="minRatio">The lower ratio bound; negative values are replaced with a small positive value.</param>
+            <param name="maxRatio">The upper ratio bound; negative values are replaced with a small positive value.</param>
+            <returns>The logarithmically sampled value, shifted down by one.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.Remap(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>Maps a value linearly from one range to another without clamping.</summary>
+            <param name="v">The value to remap.</param>
+            <param name="a">The input range start.</param>
+            <param name="b">The input range end.</param>
+            <param name="c">The output range start.</param>
+            <param name="d">The output range end.</param>
+            <returns>The linearly remapped value.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.RemapClamped(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>Maps a value from one range to another, clamping the input to its range.</summary>
+            <param name="v">The value to remap.</param>
+            <param name="a">The input range start.</param>
+            <param name="b">The input range end.</param>
+            <param name="c">The output range start.</param>
+            <param name="d">The output range end.</param>
+            <returns>The remapped value clamped to the output range.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.ApproximatelyZero(System.Single,System.Single)">
+            <summary>Determines whether a value's absolute magnitude is less than a tolerance.</summary>
+            <param name="v">The value to test.</param>
+            <param name="eps">The comparison tolerance.</param>
+            <returns><see langword="true"/> if the absolute value is below the tolerance.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.CalculateProjectileWithGravity(UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single)">
+            <summary>Calculates the initial velocity needed to intercept a moving target under gravity.</summary>
+            <param name="projectilePos">The projectile's starting position.</param>
+            <param name="targetVelocity">The target's velocity.</param>
+            <param name="targetPos">The target's current position.</param>
+            <param name="flightTime">The time until the projectile reaches the target.</param>
+            <param name="gravity">The vertical acceleration applied to the projectile.</param>
+            <returns>The projectile's initial velocity vector.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.CalculateProjectileWithSpeed(UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Vector2,System.Single)">
+            <summary>Calculates launch parameters for a projectile intercepting a moving target.</summary>
+            <param name="projectilePos">The projectile's starting position.</param>
+            <param name="targetVelocity">The target's velocity.</param>
+            <param name="targetPos">The target's current position.</param>
+            <param name="flightTime">The time until the projectile reaches the target.</param>
+            <returns>An array containing launch angle in degrees, horizontal speed, vertical speed, and gravity.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.CalculateProjectileParameters(UnityEngine.Vector2,System.Single,UnityEngine.Vector2,System.Single,UnityEngine.Vector2,System.Single)">
+            <summary>Estimates target velocity from two observations and calculates projectile launch parameters.</summary>
+            <param name="startPos">The projectile's starting position.</param>
+            <param name="t1">The time of the first target observation.</param>
+            <param name="firstPlace">The target's position at the first observation.</param>
+            <param name="t2">The time of the second target observation.</param>
+            <param name="secondPlace">The target's position at the second observation.</param>
+            <param name="flightTime">The time until the projectile reaches the target.</param>
+            <returns>An array containing launch angle in degrees, horizontal speed, vertical speed, and gravity.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.SmoothRotate(UnityEngine.Transform,UnityEngine.Quaternion,System.Single,System.Single)">
+            <summary>Gradually rotates a transform from its current orientation to a target orientation.</summary>
+            <param name="t">The transform to rotate.</param>
+            <param name="target">The target orientation.</param>
+            <param name="smoothTime">The duration of the interpolation.</param>
+            <param name="rotationSpeed">The multiplier applied to the fixed-step interpolation time.</param>
+            <returns>An enumerator that performs the rotation over fixed updates.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.NextEmptyIndex``1(System.Object,System.Func{``0,System.Boolean})">
+            <summary>Finds the first empty entry in a supported list or enumerable.</summary>
+            <typeparam name="T">The type of collection entries.</typeparam>
+            <param name="source">A managed list, IL2CPP list, or enumerable to inspect.</param>
+            <param name="isEmpty">An optional predicate that identifies empty entries.</param>
+            <returns>The index of the first empty entry, or the collection count if none is empty.</returns>
+            <exception cref="T:System.NotSupportedException">The source is not a supported collection type.</exception>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.GetEnumValues``1">
+            <summary>Gets all declared values of an enum type.</summary>
+            <typeparam name="T">The enum type whose values should be returned.</typeparam>
+            <returns>A list containing the enum values.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.FormatToChineseUnits(System.Int64)">
+            <summary>Formats a 64-bit integer using Chinese large-number units where applicable.</summary>
+            <param name="num">The number to format.</param>
+            <returns>The number represented with a Chinese large-number unit, or as digits if no unit applies.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.FormatToChineseUnits(System.Int32)">
+            <summary>Formats a 32-bit integer using Chinese large-number units where applicable.</summary>
+            <param name="num">The number to format.</param>
+            <returns>The number represented with a Chinese large-number unit, or as digits if no unit applies.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.FormatToScientificNotation(System.Int64)">
+            <summary>Formats a 64-bit integer in scientific notation when it is at least one billion.</summary>
+            <param name="num">The number to format.</param>
+            <returns>The number in scientific notation for large values, or as digits otherwise.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.FormatToScientificNotation(System.Int32)">
+            <summary>Formats a 32-bit integer in scientific notation when it is at least one billion.</summary>
+            <param name="num">The number to format.</param>
+            <returns>The number in scientific notation for large values, or as digits otherwise.</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.ModRegistryManager">
+            <summary>
+            Global registries for mods
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModRegistryManager.CreateRegistry``1(System.String)">
+            <summary>
+            Creates a registry with a specific item type T.
+            Only the owning mod should call this.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModRegistryManager.AddToRegistry``1(System.String,``0)">
+            <summary>
+            Adds an item to a registry of type T.
+            Other mods call this to add items.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModRegistryManager.GetRegistry``1(System.String)">
+            <summary>
+            Gets a registry of type T.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModRegistryManager.TryGetRegistry``1(System.String,System.Collections.Generic.List{``0}@)">
+            <summary>
+            Try-get pattern for safer access.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.PlantMgr">
+            <summary>
+            Various tools for custom behaviour
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetRandomBoardRow">
+            <summary>Gets a random board row, or zero if no board is available.</summary>
+            <returns>A random row</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetRandomBoardColumn">
+            <summary>Gets a random board column, or zero if no board is available.</summary>
+            <returns>A random column</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.getX(System.Int32)">
+            <summary>Gets the horizontal board position for a column.</summary>
+            <param name="column">A column</param>
+            <returns>The x value of the column</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.getY(System.Int32)">
+            <summary>Gets the vertical board position for a row.</summary>
+            <param name="row">A row</param>
+            <returns>The y value of the row</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.getCol(System.Single)">
+            <summary>Finds the board column containing the specified horizontal position.</summary>
+            <param name="x">The x value of the column</param>
+            <returns>A column</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.getRow(System.Single)">
+            <summary>Finds the board row containing the specified vertical position.</summary>
+            <param name="y">The y value of the row</param>
+            <returns>A row</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPos(System.Int32,System.Int32)">
+            <summary>Gets the board position at the specified row and column.</summary>
+            <param name="row">The board row.</param>
+            <param name="column">The board column.</param>
+            <returns>The world position of the board cell.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.MakeMeteor(UnityEngine.GameObject)">
+            <summary>Creates a meteor star using the supplied prefab.</summary>
+            <param name="customMeteorPrefab">The prefab to use for the meteor.</param>
+            <returns>The created meteor object.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetZombie(ZombieType,System.Int32,System.Int32,System.Boolean)">
+            <summary>Spawns a zombie at a board cell, optionally under mind control.</summary>
+            <param name="type">The type of zombie to spawn.</param>
+            <param name="row">The board row in which to spawn the zombie.</param>
+            <param name="column">The board column in which to spawn the zombie.</param>
+            <param name="isHypno">Whether to spawn the zombie under mind control.</param>
+            <returns>The spawned zombie, or <see langword="null"/> if the zombie spawner is unavailable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPercent(System.Single)">
+            <summary>Tests whether a random value from zero to one hundred is below the specified percentage.</summary>
+            <param name="percent">The percentage threshold.</param>
+            <returns><see langword="true"/> when the generated value is below the threshold; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetTextString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>Formats the dictionary entries as concatenated key and value text.</summary>
+            <param name="dic">The dictionary whose entries should be formatted.</param>
+            <returns>The formatted dictionary entries.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetAllPlantTypes(System.Func{PlantType,System.Boolean})">
+            <summary>Gets plant types accepted by the supplied selector.</summary>
+            <param name="selector">The filter to apply, or <see langword="null"/> to exclude the vector plant.</param>
+            <returns>The matching plant types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetAllPlantTypes(CardLevel)">
+            <summary>Gets non-vector plant types with the specified card level.</summary>
+            <param name="cardLevel">The card level to match.</param>
+            <returns>The matching plant types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetAllNormalPlantTypes">
+            <summary>Gets all non-vector plant types that are neither ultimate nor super plants.</summary>
+            <returns>The matching normal plant types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetAllUltimatePlantTypes">
+            <summary>Gets all non-vector ultimate plant types.</summary>
+            <returns>The matching ultimate plant types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetAllZombieTypes(System.Func{ZombieType,System.Boolean})">
+            <summary>Gets zombie types accepted by the supplied selector.</summary>
+            <param name="selector">The filter to apply, or <see langword="null"/> to exclude the training dummy.</param>
+            <returns>The matching zombie types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsTypeIn3x3(System.Int32,System.Int32,System.Func{Plant,System.Boolean})">
+            <summary>Checks whether any plant in the 3-by-3 area around a cell satisfies the selector.</summary>
+            <param name="theColumn">The center cell's column.</param>
+            <param name="theRow">The center cell's row.</param>
+            <param name="selector">The condition to test for each plant.</param>
+            <returns><see langword="true"/> if a matching plant is in the area.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsTypeIn3x3(System.Int32,System.Int32,PlantType)">
+            <summary>Checks whether a plant of the specified type is in the 3-by-3 area around a cell.</summary>
+            <param name="theColumn">The center cell's column.</param>
+            <param name="theRow">The center cell's row.</param>
+            <param name="thePlantType">The plant type to search for.</param>
+            <returns><see langword="true"/> if a plant of that type is in the area.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPlantIn3x3(System.Int32,System.Int32,System.Func{Plant,System.Boolean})">
+            <summary>Gets the first plant in the 3-by-3 area around a cell that satisfies the selector.</summary>
+            <param name="theColumn">The center cell's column.</param>
+            <param name="theRow">The center cell's row.</param>
+            <param name="selector">The condition to test for each plant.</param>
+            <returns>The first matching plant, or <see langword="null"/> if none is found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPlantIn3x3(System.Int32,System.Int32,PlantType)">
+            <summary>Gets the first plant of the specified type in the 3-by-3 area around a cell.</summary>
+            <param name="theColumn">The center cell's column.</param>
+            <param name="theRow">The center cell's row.</param>
+            <param name="thePlantType">The plant type to search for.</param>
+            <returns>The first matching plant, or <see langword="null"/> if none is found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsTypeIn1x1(System.Int32,System.Int32,System.Func{Plant,System.Boolean})">
+            <summary>Checks whether any plant in the specified cell satisfies the selector.</summary>
+            <param name="theColumn">The cell's column.</param>
+            <param name="theRow">The cell's row.</param>
+            <param name="selector">The condition to test for each plant.</param>
+            <returns><see langword="true"/> if a matching plant is in the cell.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsTypeIn1x1(System.Int32,System.Int32,PlantType)">
+            <summary>Checks whether a plant of the specified type is in the given cell.</summary>
+            <param name="theColumn">The cell's column.</param>
+            <param name="theRow">The cell's row.</param>
+            <param name="thePlantType">The plant type to search for.</param>
+            <returns><see langword="true"/> if a plant of that type is in the cell.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPlantIn1x1(System.Int32,System.Int32,System.Func{Plant,System.Boolean})">
+            <summary>Gets the first plant in the specified cell that satisfies the selector.</summary>
+            <param name="theColumn">The cell's column.</param>
+            <param name="theRow">The cell's row.</param>
+            <param name="selector">The condition to test for each plant.</param>
+            <returns>The first matching plant, or <see langword="null"/> if none is found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetPlantIn1x1(System.Int32,System.Int32,PlantType)">
+            <summary>Gets the first plant of the specified type in the given cell.</summary>
+            <param name="theColumn">The cell's column.</param>
+            <param name="theRow">The cell's row.</param>
+            <param name="thePlantType">The plant type to search for.</param>
+            <returns>The first matching plant, or <see langword="null"/> if none is found.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetRandomPlantType(System.Func{PlantType,System.Boolean})">
+            <summary>Gets a random plant type accepted by the selector.</summary>
+            <param name="selector">The filter to apply, or <see langword="null"/> to use the default plant-type filter.</param>
+            <returns>A randomly selected matching plant type.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsNotNull``1(``0,``0@)">
+            <summary>Copies a reference to the output and reports whether it is non-null.</summary>
+            <typeparam name="T">The reference type being checked.</typeparam>
+            <param name="input">The value to check.</param>
+            <param name="output">Receives the input value.</param>
+            <returns><see langword="true"/> if the input is non-null.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsNotNullMonoBehaviour``1(``0,``0@)">
+            <summary>Copies a Unity behaviour to the output and checks that it is not null or destroyed.</summary>
+            <typeparam name="T">The Unity behaviour type being checked.</typeparam>
+            <param name="input">The behaviour to check.</param>
+            <param name="output">Receives the input behaviour.</param>
+            <returns><see langword="true"/> if the behaviour exists and has not been destroyed.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,BulletType,BulletMoveWay,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from a plant's shoot position using the plant's attack damage and row.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,BulletType,BulletMoveWay,System.Int32,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from a plant's shoot position using the specified damage and the plant's row.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="damage">The damage dealt by the bullet.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,System.Int32,BulletType,BulletMoveWay,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from a plant's shoot position in the specified row using the plant's attack damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="theRow">The row in which the bullet is created.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,System.Int32,BulletType,BulletMoveWay,System.Int32,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from a plant's shoot position in the specified row using the specified damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="theRow">The row in which the bullet is created.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="damage">The damage dealt by the bullet.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,UnityEngine.Vector2,BulletType,BulletMoveWay,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from the specified position in the plant's row using the plant's attack damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="pos">The bullet's base spawn position.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,UnityEngine.Vector2,BulletType,BulletMoveWay,System.Int32,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from the specified position in the plant's row using the specified damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="pos">The bullet's base spawn position.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="damage">The damage dealt by the bullet.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,UnityEngine.Vector2,System.Int32,BulletType,BulletMoveWay,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Fires a bullet from the specified position and row using the plant's attack damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="pos">The bullet's base spawn position.</param>
+            <param name="theRow">The row in which the bullet is created.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.SetBullet(Plant,UnityEngine.Vector2,System.Int32,BulletType,BulletMoveWay,System.Int32,UnityEngine.Vector2,System.Single,System.Boolean)">
+            <summary>Creates a bullet at the specified position and row with the requested damage.</summary>
+            <param name="fromPlant">The plant firing the bullet.</param>
+            <param name="pos">The bullet's base spawn position.</param>
+            <param name="theRow">The row in which the bullet is created.</param>
+            <param name="theBulletType">The type of bullet to create.</param>
+            <param name="theMovingWay">The bullet's movement pattern.</param>
+            <param name="damage">The damage dealt by the bullet.</param>
+            <param name="offset">An offset applied to the bullet's spawn position.</param>
+            <param name="rotation">The bullet's rotation in degrees.</param>
+            <param name="fromEnemy">Whether the bullet is considered enemy-fired.</param>
+            <returns>The created bullet, or <see langword="null"/> if creation fails.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsTravelStore">
+            <summary>Checks whether the travel store is currently available.</summary>
+            <returns><see langword="true"/> if the travel store exists.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.GetBuffByString(System.String)">
+            <summary>Applies the travel effect or unlock represented by the specified string.</summary>
+            <param name="str">The string identifying the travel effect or unlock.</param>
+            <returns><see langword="true"/> if one of the supported travel effects was applied.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.IsInGame">
+            <summary>Checks whether a board exists and the game is currently in progress.</summary>
+            <returns><see langword="true"/> while the game is in progress.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.PlaySound(UnityEngine.AudioClip)">
+            <summary>Plays the specified sound clip.</summary>
+            <param name="soundClip">The audio clip to play.</param>
+            <returns>The result reported by the sound manager.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.WaitAndExecute(System.Action,System.Single)">
+            <summary>Runs an action after the specified delay.</summary>
+            <param name="a">The action to run.</param>
+            <param name="delaySeconds">The delay before running the action, in seconds.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.WaitAndExecute``1(System.Action{``0},``0,System.Single)">
+            <summary>Runs an action with a parameter after the specified delay.</summary>
+            <typeparam name="T">The type of the action parameter.</typeparam>
+            <param name="a">The action to run.</param>
+            <param name="parameter">The value passed to the action.</param>
+            <param name="delaySeconds">The delay before running the action, in seconds.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.WaitAndExecute``2(System.Func{``0,``1},``0,System.Single)">
+            <summary>Runs a function with a parameter after the specified delay and returns its result.</summary>
+            <typeparam name="T">The type of the function parameter.</typeparam>
+            <typeparam name="Tout">The type of the function result.</typeparam>
+            <param name="a">The function to run.</param>
+            <param name="parameter">The value passed to the function.</param>
+            <param name="delaySeconds">The delay before running the function, in seconds.</param>
+            <returns>A task that completes with the function's result.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.CreateLine(UnityEngine.Transform,UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Color,UnityEngine.Color,System.Int32,CustomPlantClass.Runtime.Tasks.CancellationToken,System.Single,System.Single,System.Single,UnityEngine.Material)">
+            <summary>Creates a two-point line renderer that fades after remaining visible for the specified time.</summary>
+            <param name="parent">The transform that will parent the line object.</param>
+            <param name="from">The line's starting position.</param>
+            <param name="to">The line's ending position.</param>
+            <param name="fromColor">The line's starting color.</param>
+            <param name="toColor">The line's ending color.</param>
+            <param name="row">The board row used to select the sorting layer.</param>
+            <param name="token">An optional token that can cancel the fade loop.</param>
+            <param name="stayTime">The initial opacity duration before fading.</param>
+            <param name="startWidth">The line width at its start.</param>
+            <param name="endWidth">The line width at its end.</param>
+            <param name="mat">The line material, or <see langword="null"/> to use the default.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.CreateLine(UnityEngine.Transform,UnityEngine.Color,UnityEngine.Color,System.Int32,CustomPlantClass.Runtime.Tasks.CancellationToken,System.Single,System.Single,System.Single,UnityEngine.Material,UnityEngine.Vector2[])">
+            <summary>Creates a line renderer through the supplied points and fades it after the specified time.</summary>
+            <param name="parent">The transform that will parent the line object.</param>
+            <param name="fromColor">The line's starting color.</param>
+            <param name="toColor">The line's ending color.</param>
+            <param name="row">The board row used to select the sorting layer.</param>
+            <param name="token">An optional token that can cancel the fade loop.</param>
+            <param name="stayTime">The initial opacity duration before fading.</param>
+            <param name="startWidth">The line width at its start.</param>
+            <param name="endWidth">The line width at its end.</param>
+            <param name="mat">The line material, or <see langword="null"/> to use the default.</param>
+            <param name="pts">The points connected by the line.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.CreateLine(UnityEngine.Transform,UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Color,UnityEngine.Color,System.Int32,Il2CppSystem.Threading.CancellationToken,System.Single,System.Single,System.Single,UnityEngine.Material)">
+            <summary>Creates and fades a two-point line renderer using an IL2CPP cancellation token.</summary>
+            <param name="parent">The transform that will parent the line object.</param>
+            <param name="from">The line's starting position.</param>
+            <param name="to">The line's ending position.</param>
+            <param name="fromColor">The line's starting color.</param>
+            <param name="toColor">The line's ending color.</param>
+            <param name="row">The board row used to select the sorting layer.</param>
+            <param name="token">An optional IL2CPP token that can cancel the fade loop.</param>
+            <param name="stayTime">The initial opacity duration before fading.</param>
+            <param name="startWidth">The line width at its start.</param>
+            <param name="endWidth">The line width at its end.</param>
+            <param name="mat">The line material, or <see langword="null"/> to use the default.</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.PlantMgr.CreateLine(UnityEngine.Transform,UnityEngine.Color,UnityEngine.Color,System.Int32,Il2CppSystem.Threading.CancellationToken,System.Single,System.Single,System.Single,UnityEngine.Material,UnityEngine.Vector2[])">
+            <summary>Creates and fades a line renderer through the supplied points using an IL2CPP cancellation token.</summary>
+            <param name="parent">The transform that will parent the line object.</param>
+            <param name="fromColor">The line's starting color.</param>
+            <param name="toColor">The line's ending color.</param>
+            <param name="row">The board row used to select the sorting layer.</param>
+            <param name="token">An optional IL2CPP token that can cancel the fade loop.</param>
+            <param name="stayTime">The initial opacity duration before fading.</param>
+            <param name="startWidth">The line width at its start.</param>
+            <param name="endWidth">The line width at its end.</param>
+            <param name="mat">The line material, or <see langword="null"/> to use the default.</param>
+            <param name="pts">The points connected by the line.</param>
+        </member>
+        <member name="T:CustomPlantClass.Main.ModPlugin">
+            <summary>
+            A base plugin for mods
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.ModPlugin.Logger">
+            <summary>
+            The logger of the plugin. Use ModLogger as an alternative
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.Load">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.InitializeMod">
+            <summary>
+            Priority: 1
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.InitializeBuffs">
+            <summary>
+            Priority: 4
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.InitializePlants">
+            <summary>
+            Priority: 2
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.InitializeZombies">
+            <summary>
+            Priority: 3
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.InitializeConditions">
+            <summary>
+            Priority: GameStart
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.OnGameStart">
+            <summary>
+            Priority: GameStart
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.OnGameInit">
+            <summary>
+            Priority: GameStart
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ModPlugin.OnDataMgrLoad">
+            <summary>
+            Priority: GameStart
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomPlantData">
+            <summary>
+            Core metadata for defining a custom plant.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.PlantId">
+            <summary>
+            The plant ID of the plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Prefab">
+            <summary>
+            The plant's prefab
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Preview">
+            <summary>
+            The plant's preview image
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Fusions">
+            <summary>
+            How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.AttackInterval">
+            <summary>
+            How fast should the plant attack (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.ProduceInterval">
+            <summary>
+            How fast should the plant produce sun (Set to 0 for non producers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.AttackDamage">
+            <summary>
+            How much damage should the plant do when attacking (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.MaxHealth">
+            <summary>
+            How much health should this plant have (Non defensive plants usually have 300)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Cd">
+            <summary>
+            How long should the seed's cooldown be
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Sun">
+            <summary>
+            How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.DefaultBullet">
+            <summary>
+            The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.CanPF">
+            <summary>
+            Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.CanStarUp">
+            <summary>
+            Sets if a plant can star up or not
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.CardColor">
+            <summary>
+            The card level of the plant
+            Normal plants: White
+            Fused plants: Green
+            Super plants: Blue
+            Weak ultimates / normal ultimates: Purple
+            Strong ultimates: Gold
+            Treasure mode exclusive plants: Red (Can't be imitated)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.IsRainbowCard">
+            <summary>
+            Sets if the plant will appear in the rainbow card menu
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.IsUltimatePlant">
+            <summary>
+            Sets if the plant is travel locked
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.CardRepeatAmt">
+            <summary>
+            Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Name">
+            <summary>
+            The name to be displayed in the almanac
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.AlmanacEntry">
+            <summary>
+            The description of the plant shown in the almanac
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Create(CustomizeLib.BepInEx.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Creates a default struct for the plant
+            </summary>
+            <param name="id">The plant ID of the plant</param>
+            <param name="prefab">The plant's prefab</param>
+            <param name="preview">The plant's preview</param>
+            <returns>The default struct</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.BasePlantSkinData">
+            <summary>
+            Metadata for defining a custom plant skin.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BasePlantSkinData.data">
+            <summary>
+            The base custom plant data
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BasePlantSkinData.SkinPrefab">
+            <summary>
+            The skin prefab
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BasePlantSkinData.SkinPreview">
+            <summary>
+            The skin preview
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BasePlantSkinData.BulletSkinList">
+            <summary>
+            The bullet skin list(replaces bullets the plant fires)
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomBulletData">
+            <summary>
+            Metadata for defining a bullet.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomBulletData.BulletId">
+            <summary>
+            The bullet ID
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomBulletData.Prefab">
+            <summary>
+            The bullet prefab
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomZombieData">
+            <summary>
+            Metadata for defining a custom zombie
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theZombieType">
+            <summary>
+            The zombie's ID
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.Prefab">
+            <summary>
+            The zombie's prefab
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.Preview">
+            <summary>
+            The zombie's preview
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theAtackDamage">
+            <summary>
+            How much damage the zombie will the zombie deal
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.maxHealth">
+            <summary>
+            The max health of the zombie
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theFirstArmorHealth">
+            <summary>
+            The zombie's first armor health
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theFirstArmorType">
+            <summary>
+            The zombie's first armor type
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theFirstArmorPath">
+            <summary>
+            The zombie's first armor path from the root of the prefab
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theSecondArmorHealth">
+            <summary>
+            The zombie's second armor health
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theSecondArmorType">
+            <summary>
+            The zombie's second armor type
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.theSecondArmorPath">
+            <summary>
+            The zombie's second armor path from the root of the prefab
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.SpawnLevel">
+            <summary>
+            The zombie's spawn level
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomZombieData.SpawnWeight">
+            <summary>
+            The zombie's spawn weight
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomGridItemData">
+            <summary>
+            Metadata for defining a custom grid item
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomGridItemData.type">
+            <summary>
+            The type of the grid item
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomGridItemData.Prefab">
+            <summary>
+            The prefab of the grid item
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.CustomBossHealthSliderData">
+            <summary>
+            The metadata for defining a custom boss health slider
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.CustomBossHealthSliderData.#ctor(UnityEngine.Sprite)">
+            <summary>
+            The metadata for defining a custom boss health slider
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.CustomBossHealthSliderData.theZombieType">
+            <summary>
+            The type of the zombie being displayed
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.CustomBossHealthSliderData.Icon">
+            <summary>
+            The zombie's icon (usually a head)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.CustomBossHealthSliderData.FillIcon">
+            <summary>
+            The fill image (optional)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.CustomBossHealthSliderData.FillColor">
+            <summary>
+            The color of the fill (overriden if the fill icon is not null)
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.BoardPosition">
+            <summary>
+            A position on the board
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BoardPosition.Row">
+            <summary>
+            The row
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BoardPosition.Column">
+            <summary>
+            The column
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BoardPosition.#ctor(System.Int32,System.Int32)">
+            <summary>
+            A position on the board
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BoardPosition.op_Implicit(CustomPlantClass.Main.BoardPosition)~UnityEngine.Vector2">
+            <summary>
+            BoardPosition → world position
+            </summary>
+            <param name="pos">The board position</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.BoardPosition.op_Implicit(UnityEngine.Vector2)~CustomPlantClass.Main.BoardPosition">
+            <summary>
+            world position → BoardPosition
+            </summary>
+            <param name="world">The world position</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.BoardPosition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Main.BoardPosition.Equals(CustomPlantClass.Main.BoardPosition)">
+            <inheritdoc/>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomLevelData">
+            <summary>
+            Metadata for defining a custom level
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomLevelData.#ctor">
+            <summary>
+            Metadata for defining a custom level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.LevelType">
+            <summary>
+            The type of the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.LevelID">
+            <summary>
+            The ID of the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.LevelName">
+            <summary>
+            The name of the level (Display)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.LevelNameEn">
+            <summary>
+            The name of the level (Internal)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.LevelSprite">
+            <summary>
+            The sprite of the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.SceneType">
+            <summary>
+            The scenetype of the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.ScenePrefab">
+            <summary>
+            The level's scene prefab (optional, overrides scenetype and background)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.SceneBackground">
+            <summary>
+            The background of the scene (leave null in not needed)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.MusicType">
+            <summary>
+            The type of the music played
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.MusicAudio">
+            <summary>
+            The audio of the music played (must use a new musictype)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.MaxWave">
+            <summary>
+            How many waves are present (one huge wave is 10 waves)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.ZombieTypes">
+            <summary>
+            The zombie types that appear in the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.MapRoadTypes">
+            <summary>
+            The grid types of the level (must be present)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.selection">
+            <summary>
+            How plants should be selected
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.SelectTypes">
+            <summary>
+            What plants are selected
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.EnterAction">
+            <summary>
+            The action to run when the level is opened
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.EnterGameAction">
+            <summary>
+            The action to run when the game starts
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.SunCounter">
+            <summary>
+            How much sun should the player get when the level starts
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.AdvBuffs">
+            <summary>
+            Unlocked buffs for the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.UltiBuffs">
+            <summary>
+            Unlocked ultimate buffs for the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.TravelUnlocks">
+            <summary>
+            Unlocked unlock buffs for the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.TravelDebuffs">
+            <summary>
+            Unlocked debuffs for the level
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomLevelData.BoardTag">
+            <summary>
+            The level's boardtag
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomLevelData.CreateFullScreenLayout(CustomPlantClass.Main.BoxType_Short,System.Int32,System.Int32)">
+            <summary>
+            A quick tool for generating full screen layouts
+            </summary>
+            <param name="tile">The type of the tile</param>
+            <param name="lanes">How many lanes are there</param>
+            <param name="cols">How manu columns are there</param>
+            <returns>The layout</returns>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomBranchAdventureData">
+            <summary>
+            Metadata for branch adventures
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomBranchAdventureData.#ctor">
+            <summary>
+            Metadata for branch adventures
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.PerLevelData">
+            <summary>
+            (The unlocked plant, the zombie pool, the level sprite, wave count, sun count)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.nameCN">
+            <summary>
+            The name of the level (Display)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.nameEN">
+            <summary>
+            The name of the level (Internal)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.AlmanacBGSprite">
+            <summary>
+            The background of the almanac plant
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.CardSprite">
+            <summary>
+            The background of the seed packed
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.SceneType">
+            <summary>
+            The scene type (Should not be defined in the enum)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.ScenePrefab">
+            <summary>
+            The level's scene prefab (optional, overrides scenetype and background)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.SceneBackground">
+            <summary>
+            The background of the scene (leave null in not needed)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.MusicType">
+            <summary>
+            The type of the music played
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.MusicAudio">
+            <summary>
+            The audio of the music played (must use a new musictype)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.MapRoadTypes">
+            <summary>
+            The grid types of the level (must be present)
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.EnterAction">
+            <summary>
+            The action to run when the level is opened
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.EnterGameAction">
+            <summary>
+            The action to run when the game starts
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomBranchAdventureData.BoardTag">
+            <summary>
+            The level's boardtag
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.G">
+            <summary>
+            Grass
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.W">
+            <summary>
+            Water
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.D">
+            <summary>
+            Dirt
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.R">
+            <summary>
+            Roof
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.S">
+            <summary>
+            Stone
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.River">
+            <summary>
+            River
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BoxType_Short.Dirt_water">
+            <summary>
+            Mud
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Main.ZombieMgr">
+            <summary>
+            Various tools for custom behaviour involving zombies
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.LosePaper(PaperZombie)">
+            <summary>
+            Makes a newspaper zombie lose its newspaper.
+            </summary>
+            <param name="self">The affected zombie</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.LosePaper(GatlingPaperZombie_a)">
+            <summary>
+            Makes a newspaper zombie lose its newspaper.
+            </summary>
+            <param name="self">The affected zombie</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.FlyAway(Zombie)">
+            <summary>
+            Instantly kills a zombie and makes it fly away
+            </summary>
+            <param name="self">The zombie to fly away</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.Crashed(Zombie)">
+            <summary>
+            Instantly kills a zombie and crushes it
+            </summary>
+            <param name="self">The zombie to be crushed</param>
+        </member>
+        <member name="T:CustomPlantClass.PluginBehaviour">
+            <summary>
+            Behaviour to run when CustomPlantClass loads.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.PluginBehaviour.QueueOrExecute(System.Action)">
+            <summary>
+            Queues an action to run if called before CustomPlantClass loads and runs it if CustomPlantClass is loaded already.
+            </summary>
+            <param name="a">The action to run when the plugin loads</param>
+        </member>
+        <member name="M:CustomPlantClass.PluginBehaviour.AddComponentToPlugin``1">
+            <summary>
+            Waits for game load and adds a component to CustomPlantClass's plugin's behaviour.
+            </summary>
+            <typeparam name="T">The component to add to CustomPlantClass's plugin's behaviour object</typeparam>
+        </member>
+        <member name="T:CustomPlantClass.MyPluginInfo">
+            <summary>
+            CustomPlantClass's plugin info. TargetVersion can be used as mod plugin's version.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.MyPluginInfo.TargetVersion">
+            <summary>
+            The mod framework's target game version
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Registry.RegistryManager">
+            <summary>
+            A registry manager for plugins to register persistent memory in config files.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0)">
+            <summary>
+            Creates a config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="defaultVal">The default value</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0,``0[])">
+            <summary>
+            Creates a dropdown config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="defaultVal">The default value</param>
+            <param name="acceptableValues">Values present in the dropdown</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0,``0,``0)">
+            <summary>
+            Creates a ranged config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use an icomparible)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="minVal">The minimum value of the range</param>
+            <param name="maxVal">The maximum value of the range</param>
+            <param name="defaultVal">The default value</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateConfigSlider(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{System.Int32}},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a slider config entry.
+            </summary>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="minVal">The minimum value of the slider</param>
+            <param name="maxVal">The maximum value of the slider</param>
+            <param name="defaultVal">The default value</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateAdvancedConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0)">
+            <summary>
+            Creates an advanced config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="defaultVal">The default value</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateAdvancedConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0,``0[])">
+            <summary>
+            Creates an advanced dropdown config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use a basic type)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="defaultVal">The default value</param>
+            <param name="acceptableValues">Values present in the dropdown</param>
+        </member>
+        <member name="M:CustomPlantClass.Registry.RegistryManager.CreateAdvancedConfigRegistry``1(System.String,System.String,System.String,System.Action{BepInEx.Configuration.ConfigEntry{``0}},``0,``0,``0)">
+            <summary>
+            Creates an advanced ranged config entry.
+            </summary>
+            <typeparam name="T">The type of the config entry(It is recommended that you use an icomparible)</typeparam>
+            <param name="modName">The name of the mod</param>
+            <param name="settingName">The name of the setting</param>
+            <param name="description">The setting's description(can be a blank string if if is not needed)</param>
+            <param name="callBack">This is called when the setting is changed.</param>
+            <param name="minVal">The minimum value of the range</param>
+            <param name="maxVal">The maximum value of the range</param>
+            <param name="defaultVal">The default value</param>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.BoardBehaviour">
+            <summary>
+            Allows adding lifetime events to board.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.BoardBehaviour.AddStartEvent(System.Action{Board})">
+            <summary>
+            Runs when board starts.
+            </summary>
+            <param name="action">The action to run</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.BoardBehaviour.AddUpdateEvent(System.Action{Board})">
+            <summary>
+            Runs when board updates.
+            </summary>
+            <param name="action">The action to run</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.BoardBehaviour.AddFixedUpdateEvent(System.Action{Board})">
+            <summary>
+            Runs when board updates during physics ticks.
+            </summary>
+            <param name="action">The action to run</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.BoardBehaviour.AddDestroyEvent(System.Action{Board})">
+            <summary>
+            Runs when board is destroyed.
+            </summary>
+            <param name="action">The action to run</param>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.ResetOnBoardDestroyAttribute">
+            <summary>
+            An attribute to reset a field to its default value when board is destroyed.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.ResetOnBoardDestroyAttribute.DefaultValue">
+            <summary>
+            The default value.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.ResetOnBoardDestroyAttribute.#ctor">
+            <summary>
+            Use this constructor when the field's default value is enough.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.ResetOnBoardDestroyAttribute.#ctor(System.Object)">
+            <summary>
+            Use this constructor to reset a field to a specific value (Please check that the field type is correct!).
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute">
+            <summary>
+            An attribute to run an attribute on a field when the board is destroyed.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute.Action">
+            <summary>
+            The action to run
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute.#ctor(System.Func{System.Object})">
+            <summary>
+            An attribute to run an attribute on a field when the board is destroyed.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.UI.KeyBindingUI">
+            <summary>
+            A generic mod options UI builder.
+            Builds rows dynamically from KeyBindingRegistry, but now uses ActionButton
+            instead of keybinding logic.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.UI.ActionButton">
+            <summary>
+            A simple modder‑friendly action button.
+            When clicked, it executes a provided Action.
+            No key binding, no input listening, no expression trees.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.UI.ActionButton.Label">
+            <summary>
+            The text displayed on the button.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.UI.ActionButton.OnClicked">
+            <summary>
+            The action to execute when clicked.
+            Modders can assign anything here.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.UI.ActionButton.OnSetup">
+            <summary>
+            Optional setup hook for modders.
+            Runs once in Start().
+            </summary>
+        </member>
+        <member name="T:FrameWorkLoader.API.ModCategory">
+            <summary>
+            Categorizes mods based on their purpose and scale.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModCategory.Normal">
+            <summary>
+            Mods that only fix bugs or improve the base game without adding new content.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModCategory.SecondaryCreation">
+            <summary>
+            Mods that add custom plants and/or custom zombies.
+            Typically single-content or small-scale creations.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModCategory.ModGroup">
+            <summary>
+            Mods that add multiple custom plants and/or zombies.
+            Essentially content packs or mod bundles.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModCategory.DLC">
+            <summary>
+            Large-scale mods that extend the game's systems and add a significant amount of content.
+            Comparable to DLC-level expansions.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModCategory.Framework">
+            <summary>
+            Mods that provide systems, APIs, or frameworks that other mods depend on.
+            </summary>
+        </member>
+        <member name="T:FrameWorkLoader.API.ModDanger">
+            <summary>
+            Indicates how dangerous a mod is to the runtime based on its patching behavior.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModDanger.VeryLow">
+            <summary>
+            Mods that do not patch anything.
+            Pure data/content mods; extremely safe.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModDanger.Low">
+            <summary>
+            Mods that patch small, isolated methods with low risk of conflict.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModDanger.Normal">
+            <summary>
+            Mods that patch frequently overridden virtual methods.
+            These can conflict with other mods and affect core gameplay behavior.
+            </summary>
+        </member>
+        <member name="F:FrameWorkLoader.API.ModDanger.High">
+            <summary>
+            Mods that use IL2CPP subclassing or other unsafe techniques.
+            Highest risk; may cause instability or memory corruption.
+            </summary>
+        </member>
+    </members>
+</doc>

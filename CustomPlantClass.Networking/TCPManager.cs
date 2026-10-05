@@ -11,6 +11,9 @@ using System;
 
 namespace CustomPlantClass.Networking
 {
+    /// <summary>
+    /// Central tool for using localhost servers and command recievers
+    /// </summary>
     public static class TCPManager
     {
         private static CancellationTokenSource _cts;
@@ -19,9 +22,25 @@ namespace CustomPlantClass.Networking
         private static bool _running;
         private static TcpClient _serverClient;
         private static WebSocket _serverSocket;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// Gets the list of registered ping callbacks keyed by response message.
+        /// </summary>
         public static List<(string,Action<string>)> callBacks = new();
+        /// <summary>
+        /// Gets the collection of command listeners registered to handle commands.
+        /// </summary>
         public static List<ICommandListener> commandListeners = new();
+        /// <summary>
+        /// Gets the queue of incoming command messages awaiting processing.
+        /// </summary>
         public static ConcurrentQueue<(string message, string data)> commandQueue = new();
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// Sends a message on the localhost server.
+        /// </summary>
+        /// <param name="message">The name of the message.</param>
+        /// <param name="data">The data payload carried by the message.</param>
         public static void SendMessage(string message, string data)
         {
             WebSocket activeSocket = ActiveSocket;
@@ -48,16 +67,30 @@ namespace CustomPlantClass.Networking
 
             Plugin.Logger.LogInfo("Error Send: " + message);
         }
+        /// <summary>
+        /// Queues a message for local processing without sending it over the localhost server.
+        /// </summary>
+        /// <param name="message">The name of the message.</param>
+        /// <param name="data">The data associated with the message.</param>
         public static void SendMessageLocal(string message, string data)
         {
             commandQueue.Enqueue((message, data));
         }
+        /// <summary>
+        /// Sends a ping to a mod and registers the callback that should run when the matching pong is received.
+        /// </summary>
+        /// <param name="modName">The name of the target mod receiver.</param>
+        /// <param name="callBack">The callback to invoke when the ping succeeds.</param>
+        /// <param name="data">Optional data payload sent with the ping.</param>
         public static void PingMod(string modName, Action<string> callBack = null, string data = "")
         {
             callBack = callBack ?? ((s) => { });
             commandQueue.Enqueue((modName+"Ping", data));
             callBacks.Add((modName+"Pong",callBack));
         }
+        /// <summary>
+        /// Stops communication and closes the active socket and listener resources.
+        /// </summary>
         public static void StopCommunication()
         {
             _running = false;
@@ -281,21 +314,15 @@ namespace CustomPlantClass.Networking
                 }
                 catch (Exception arg)
                 {
-                    Plugin.Logger.LogError(string.Format("TcpManager receive error: {0}", arg));
+                    Plugin.Logger.LogError($"TcpManager receive error: {arg}");
                     break;
                 }
             }
         }
-        public static void StartClient(string ip, int port)
-        {
-            _running = true;
-            Task.Run(() => RunClientAsync(ip, port));
-        }
-        public static void StartServer(int port)
-        {
-            _running = true;
-            Task.Run(() => RunServerAsync(port));
-        }
+        /// <summary>
+        /// Starts the automatic server/client networking loop for the specified port.
+        /// </summary>
+        /// <param name="port">The local port to bind to or connect to.</param>
         public static void StartAuto(int port)
         {
             _running = true;
@@ -312,6 +339,9 @@ namespace CustomPlantClass.Networking
                 }
             });
         }
+        /// <summary>
+        /// Gets a value indicating whether the active socket is currently open and connected.
+        /// </summary>
         public static bool IsConnected
         {
             get
@@ -321,10 +351,17 @@ namespace CustomPlantClass.Networking
             }
         }
         private static WebSocket ActiveSocket => _clientSocket ?? _serverSocket;
+        /// <summary>
+        /// Registers a command listener for incoming commands that match the listener's command name.
+        /// </summary>
+        /// <param name="listener">The command listener to register.</param>
         public static void RegisterCommandListener(ICommandListener listener)
         {
             commandListeners.Add(listener);
         }
+        /// <summary>
+        /// Processes all queued inbound commands and dispatches them to any matching callbacks or listeners.
+        /// </summary>
         public static void ProcessCommands()
         {
             while (commandQueue.TryDequeue(out var command))
@@ -353,7 +390,7 @@ namespace CustomPlantClass.Networking
             public void Awake()
             {
                 if (_running) return;
-                StartServer(54220);
+                StartAuto(54220);
             }
             public void Update()
             {
@@ -361,22 +398,52 @@ namespace CustomPlantClass.Networking
             }
         }
     }
+    /// <summary>
+    /// Defines the contract for objects that respond to incoming command messages.
+    /// </summary>
     public interface ICommandListener
     {
+        /// <summary>
+        /// Gets the command name that the listener handles.
+        /// </summary>
         public string CommandName { get; }
+        /// <summary>
+        /// Called when a matching command message is received.
+        /// </summary>
+        /// <param name="data">The command payload.</param>
         public void OnCommandReceived(string data);
     }
+    /// <summary>
+    /// Base implementation for listeners that respond to a ping command with a pong response.
+    /// </summary>
     public abstract class PingListener : ICommandListener
     {
+        /// <summary>
+        /// Gets the name used to identify the listener and its ping/pong messages.
+        /// </summary>
         public abstract string Name { get; }
+        /// <summary>
+        /// Gets the command name for the listener's ping message.
+        /// </summary>
         public string CommandName => Name + "Ping";
+        /// <summary>
+        /// Gets the data payload sent with the outgoing pong response.
+        /// </summary>
         public virtual string Data => "";
 
+        /// <summary>
+        /// Handles an incoming ping command and replies with a pong message.
+        /// </summary>
+        /// <param name="data">The data payload received with the ping command.</param>
         public void OnCommandReceived(string data)
         {
             OnRecieved(data);
             TCPManager.SendMessageLocal(Name+"Pong",Data);
         }
+        /// <summary>
+        /// Invoked when a matching ping command is received before the pong is sent.
+        /// </summary>
+        /// <param name="data">The incoming command payload.</param>
         public virtual void OnRecieved(string data) { }
     }
 }

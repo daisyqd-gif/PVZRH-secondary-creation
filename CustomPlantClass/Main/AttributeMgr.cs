@@ -1,23 +1,35 @@
 namespace CustomPlantClass.Main
 {
+    /// <summary>Associates a custom plant implementation with its base type and registration data.</summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class CustomPlantAttribute : Attribute
     {
+        /// <summary>Gets the base plant type used by the custom implementation.</summary>
         public Type BaseType { get; }
+        /// <summary>Gets the data used to register the custom plant.</summary>
         public BaseCustomPlantData Data { get; }
 
+        /// <summary>Creates metadata for a custom plant implementation.</summary>
+        /// <param name="baseType">The plant base type to extend.</param>
+        /// <param name="data">The data used to register the custom plant.</param>
         public CustomPlantAttribute(Type baseType, BaseCustomPlantData data)
         {
             BaseType = baseType;
             Data = data;
         }
     }
+    /// <summary>Associates a custom bullet implementation with its base type and registration data.</summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class CustomBulletAttribute : Attribute
     {
+        /// <summary>Gets the base bullet type used by the custom implementation.</summary>
         public Type BaseType { get; }
+        /// <summary>Gets the data used to register the custom bullet.</summary>
         public BaseCustomBulletData Data { get; }
 
+        /// <summary>Creates metadata for a custom bullet implementation.</summary>
+        /// <param name="baseType">The bullet base type to extend.</param>
+        /// <param name="data">The data used to register the custom bullet.</param>
         public CustomBulletAttribute(Type baseType, BaseCustomBulletData data)
         {
             BaseType = baseType;
@@ -25,12 +37,18 @@ namespace CustomPlantClass.Main
         }
     }
 
+    /// <summary>Associates a custom zombie implementation with its base type and registration data.</summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class CustomZombieAttribute : Attribute
     {
+        /// <summary>Gets the base zombie type used by the custom implementation.</summary>
         public Type BaseType { get; }
+        /// <summary>Gets the data used to register the custom zombie.</summary>
         public BaseCustomZombieData Data { get; }
 
+        /// <summary>Creates metadata for a custom zombie implementation.</summary>
+        /// <param name="baseType">The zombie base type to extend.</param>
+        /// <param name="data">The data used to register the custom zombie.</param>
         public CustomZombieAttribute(Type baseType, BaseCustomZombieData data)
         {
             BaseType = baseType;
@@ -38,28 +56,44 @@ namespace CustomPlantClass.Main
         }
     }
 
+    /// <summary>Specifies the display name for a mod at the assembly level.</summary>
     [AttributeUsage(AttributeTargets.Assembly)]
     public class CustomModAttribute : Attribute
     {
+#pragma warning disable CS1591 // Public field intentionally does not require XML documentation
         public string Name;
+#pragma warning restore CS1591
+
+        /// <summary>Creates assembly-level mod metadata with the specified name.</summary>
+        /// <param name="name">The mod's display name.</param>
         public CustomModAttribute(string name)
         {
             Name = name;
         }
     }
 
+    /// <summary>Specifies the display name for a mod at the module level.</summary>
     [AttributeUsage(AttributeTargets.Module)]
     public class CustomModModuleAttribute : Attribute
     {
+#pragma warning disable CS1591 // Public field intentionally does not require XML documentation
         public string Name;
+#pragma warning restore CS1591
+
+        /// <summary>Creates module-level mod metadata with the specified name.</summary>
+        /// <param name="name">The mod's display name.</param>
         public CustomModModuleAttribute(string name)
         {
             Name = name;
         }
     }
+
+    /// <summary>Loads custom plant, bullet, and zombie attributes and resolves mod display names.</summary>
     public static class AttributeMgr
     {
 
+        /// <summary>Finds custom implementation attributes in an assembly and registers their data.</summary>
+        /// <param name="asm">The assembly to scan for custom implementation attributes.</param>
         public static void LoadAllAttributes(Assembly asm)
         {
             foreach (Type t in asm.GetTypes())
@@ -111,6 +145,9 @@ namespace CustomPlantClass.Main
             }
         }
 
+        /// <summary>Resolves a mod's display name from its metadata or assembly information.</summary>
+        /// <param name="asm">The assembly whose mod name should be resolved.</param>
+        /// <returns>The resolved mod name, or <c>Unknown</c> if no name can be found.</returns>
         public static string GetModName(Assembly asm)
         {
             // 1. CustomModAttribute (assembly-level)

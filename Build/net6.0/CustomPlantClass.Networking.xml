@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomPlantClass.Networking</name>
+    </assembly>
+    <members>
+        <member name="T:CustomPlantClass.Networking.TCPBase">
+            <summary>
+            Abstract base class for defining 
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.OnCommandReceived(System.String,System.String)">
+            <summary>
+            Runs when the command is recieved
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.TCPBase.port">
+            <summary>
+            The port that the server is running on
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.SendMessage(System.String,System.String)">
+            <summary>
+            Sends a message on the localhost server
+            </summary>
+            <param name="message">The name of the message</param>
+            <param name="data">The data the message holds</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.ProcessCommands">
+            <summary>
+            Processes commands from the queue
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.StartClient">
+            <summary>
+            Starts the TCP server as a client
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Throws if TCP is already running</exception>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.StartServer">
+            <summary>
+            Starts the TCP server as a server
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Throws if TCP is already running</exception>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPBase.StartAuto">
+            <summary>
+            Starts the TCP server as a server. If the server is already running, switches to a client
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Throws if TCP is already running</exception>
+        </member>
+        <member name="T:CustomPlantClass.Networking.TCPManager">
+            <summary>
+            Central tool for using localhost servers and command recievers
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Networking.TCPManager.callBacks">
+            <summary>
+            Gets the list of registered ping callbacks keyed by response message.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Networking.TCPManager.commandListeners">
+            <summary>
+            Gets the collection of command listeners registered to handle commands.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Networking.TCPManager.commandQueue">
+            <summary>
+            Gets the queue of incoming command messages awaiting processing.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.SendMessage(System.String,System.String)">
+            <summary>
+            Sends a message on the localhost server.
+            </summary>
+            <param name="message">The name of the message.</param>
+            <param name="data">The data payload carried by the message.</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.SendMessageLocal(System.String,System.String)">
+            <summary>
+            Queues a message for local processing without sending it over the localhost server.
+            </summary>
+            <param name="message">The name of the message.</param>
+            <param name="data">The data associated with the message.</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.PingMod(System.String,System.Action{System.String},System.String)">
+            <summary>
+            Sends a ping to a mod and registers the callback that should run when the matching pong is received.
+            </summary>
+            <param name="modName">The name of the target mod receiver.</param>
+            <param name="callBack">The callback to invoke when the ping succeeds.</param>
+            <param name="data">Optional data payload sent with the ping.</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.StopCommunication">
+            <summary>
+            Stops communication and closes the active socket and listener resources.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.StartAuto(System.Int32)">
+            <summary>
+            Starts the automatic server/client networking loop for the specified port.
+            </summary>
+            <param name="port">The local port to bind to or connect to.</param>
+        </member>
+        <member name="P:CustomPlantClass.Networking.TCPManager.IsConnected">
+            <summary>
+            Gets a value indicating whether the active socket is currently open and connected.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.RegisterCommandListener(CustomPlantClass.Networking.ICommandListener)">
+            <summary>
+            Registers a command listener for incoming commands that match the listener's command name.
+            </summary>
+            <param name="listener">The command listener to register.</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.TCPManager.ProcessCommands">
+            <summary>
+            Processes all queued inbound commands and dispatches them to any matching callbacks or listeners.
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.Networking.ICommandListener">
+            <summary>
+            Defines the contract for objects that respond to incoming command messages.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.ICommandListener.CommandName">
+            <summary>
+            Gets the command name that the listener handles.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.ICommandListener.OnCommandReceived(System.String)">
+            <summary>
+            Called when a matching command message is received.
+            </summary>
+            <param name="data">The command payload.</param>
+        </member>
+        <member name="T:CustomPlantClass.Networking.PingListener">
+            <summary>
+            Base implementation for listeners that respond to a ping command with a pong response.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.PingListener.Name">
+            <summary>
+            Gets the name used to identify the listener and its ping/pong messages.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.PingListener.CommandName">
+            <summary>
+            Gets the command name for the listener's ping message.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.PingListener.Data">
+            <summary>
+            Gets the data payload sent with the outgoing pong response.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.PingListener.OnCommandReceived(System.String)">
+            <summary>
+            Handles an incoming ping command and replies with a pong message.
+            </summary>
+            <param name="data">The data payload received with the ping command.</param>
+        </member>
+        <member name="M:CustomPlantClass.Networking.PingListener.OnRecieved(System.String)">
+            <summary>
+            Invoked when a matching ping command is received before the pong is sent.
+            </summary>
+            <param name="data">The incoming command payload.</param>
+        </member>
+    </members>
+</doc>

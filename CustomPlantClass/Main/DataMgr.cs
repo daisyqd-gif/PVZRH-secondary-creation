@@ -12,6 +12,7 @@ namespace CustomPlantClass.Main
     public sealed class DataMgr : MonoBehaviour
     {
         #region Fields
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static HashSet<int> ID_List = new();
         public static int CustomPlantCount = 0;
         public static int CustomSkinCount = 0;
@@ -23,11 +24,13 @@ namespace CustomPlantClass.Main
         public static Dictionary<ZombieType, (ZombieType, Func<Zombie, bool>)> onZombieTypeSpawnActionList = new();
         public static Dictionary<ZombieType, GameObject> bossHealthSliders = new();
         public static Dictionary<ZombieType, BaseCustomZombieData> zombieDatas = new();
+        public static Dictionary<ZombieType, (int, int)> CustomZombieSpawns = new();
         public static Dictionary<int, Type> CustomLevelComponents = new();
         public static HashSet<BaseCustomLevelData> LoadedCustomLevels = new();
         public static HashSet<int> UsedLevelIDs = new();
         public static HashSet<int> CustomStarUps = new();
         public static HashSet<int> CustomGridItemTypes = new();
+        public static HashSet<PlantType> RegisteredPlants = new();
         public static List<string> StartUpMessages = new();
         public static List<string> StartUpErrors = new();
         public static List<string> StartUpWarnings = new();
@@ -35,32 +38,10 @@ namespace CustomPlantClass.Main
         public static List<Action> GameAppInitActions = new();
         public static Dictionary<(LevelType, int), List<ZombieType>> AddedZombiesInLevel = new();
         public static bool IsGameStarted = false;
-        #endregion
-        [OnLoad]
-        public static void OnLoad()
-        {
-            StartUpMessages.Add($"Thank you for using {MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion}!");
-            PluginBehaviour.AddComponentToPlugin<DataMgr>();
-        }
-        ///*
-        #region ID Allocation
-        // ---------------------------------------------------------
-        //  ID ALLOCATION
-        // ---------------------------------------------------------
-
-        /// <summary>
-        /// Allocates unique IDs for custom plants/zombies/bullets.
-        /// Deterministic, IL2CPP‑safe, multi‑ID‑per‑mod, collision‑proof.
-        /// </summary>
-
-        // === Freeze table backing ===
         static readonly string FreezePath = Path.Combine(Paths.ConfigPath, "IDFreeze.json");
         static Dictionary<string, int> FreezeTable = new();
         static bool FreezeLoaded = false;
-
-        // Per‑mod call index (not saved; order is deterministic)
         static readonly Dictionary<string, int> GuidCallIndex = new();
-
         static readonly JsonSerializerOptions FreezeJsonOptions = new()
         {
             WriteIndented = true,
@@ -68,6 +49,30 @@ namespace CustomPlantClass.Main
             ReadCommentHandling = JsonCommentHandling.Skip,
             PropertyNameCaseInsensitive = true
         };
+        internal static HashSet<PlantType> CustomUltiPlants = new();
+        public static Dictionary<int, (BuffID buff, TravelUnlocks unlock, string desc)> CustomStrongUltiPlants = new();
+        public static Dictionary<int, int> UnlockValueToPlantType = new();
+        public static HashSet<TravelUnlocks> CustomTravelUnlocks = new();
+        public static Dictionary<PlantType, (PlantType?, UltiBuff, UltiBuff)> CustomStrongUltimateInfo = new();
+        public static Dictionary<ZombieType, ZombieType> Level4Zombies = new();
+        public static Dictionary<int, bool> CustomWeakUltiPlants = new();
+        #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+        #endregion
+        /// <summary>
+        /// Initializes startup logging and adds the manager component
+        /// to the plugin's game object.
+        /// </summary>
+        [OnLoad]
+        public static void OnLoad()
+        {
+            StartUpMessages.Add($"Thank you for using {MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion}!");
+            PluginBehaviour.AddComponentToPlugin<DataMgr>();
+        }
+        ////*
+        #region ID Allocation
+        // ---------------------------------------------------------
+        //  ID ALLOCATION
+        // ---------------------------------------------------------
 
         static void LoadFreezeTable()
         {
@@ -140,6 +145,10 @@ namespace CustomPlantClass.Main
         }
 
         // === DROP‑IN REPLACEMENT ===
+        /// <summary>
+        /// Allocates a deterministic ID for the calling mod
+        /// while avoiding collisions with built-in and custom IDs.
+        /// </summary>
         public static ID AllocateID()
         {
             LoadFreezeTable();
@@ -220,10 +229,22 @@ namespace CustomPlantClass.Main
         }
 
         // Wrappers
+        /// <summary>
+        /// Allocates an ID through <see cref="AllocateID"/>.
+        /// This legacy plant-specific wrapper is obsolete.
+        /// </summary>
         [Obsolete("AllocatePlantID is deprecated. Use AllocateID.", false)]
         public static ID AllocatePlantID() => AllocateID();
+        /// <summary>
+        /// Allocates an ID through <see cref="AllocateID"/>.
+        /// This legacy zombie-specific wrapper is obsolete.
+        /// </summary>
         [Obsolete("AllocateZombieID is deprecated. Use AllocateID.", false)]
         public static ID AllocateZombieID() => AllocateID();
+        /// <summary>
+        /// Allocates an ID through <see cref="AllocateID"/>.
+        /// This legacy bullet-specific wrapper is obsolete.
+        /// </summary>
         [Obsolete("AllocateBulletID is deprecated. Use AllocateID.", false)]
         public static ID AllocateBulletID() => AllocateID();/**/
 
@@ -235,27 +256,32 @@ namespace CustomPlantClass.Main
         // ---------------------------------------------------------
 
         /// <summary>
-        /// Returns a list containing the original fusion pair and its mirrored version.
+        /// Returns the original fusion pair and its mirrored version
+        /// with the pair elements in reversed order.
         /// </summary>
         public static List<(ID, ID)> MirrorTuple((ID, ID) input) => ListHelper.MirrorTuple(input);
 
         /// <summary>
-        /// Flattens an array of fusion lists into a single list.
+        /// Flattens an array of fusion lists into one list
+        /// while preserving the order of the pairs.
         /// </summary>
         public static List<(ID, ID)> FlattenFusionArray(List<(ID, ID)>[] input) => ListHelper.FlattenFusionArray(input);
 
         /// <summary>
-        /// Mirrors every fusion pair in a list.
+        /// Mirrors every fusion pair in a list
+        /// by reversing the order of each pair's elements.
         /// </summary>
         public static List<(ID, ID)> MirrorList(List<(ID, ID)> input) => ListHelper.MirrorList(input);
 
         /// <summary>
-        /// Removes duplicate fusion pairs.
+        /// Removes duplicate fusion pairs
+        /// from the supplied collection.
         /// </summary>
         public static List<(ID, ID)> DeduplicateFusions(List<(ID, ID)> input) => ListHelper.DeduplicateFusions(input);
 
         /// <summary>
-        /// Creates a mirrored fusion list from simple pair definitions.
+        /// Creates a fusion list from simple pair definitions
+        /// and includes the mirrored form of each pair.
         /// </summary>
         public static List<(ID, ID)> Fusion(params (ID, ID)[] pairs) => ListHelper.Fusion(pairs);
 
@@ -267,7 +293,8 @@ namespace CustomPlantClass.Main
         // ---------------------------------------------------------
 
         /// <summary>
-        /// Creates a bullet skin mapping list for plant skins.
+        /// Creates bullet skin mappings for plant skins
+        /// from the supplied bullet and prefab entries.
         /// </summary>
         public static List<(BulletType, List<GameObject?>)> BulletSkin(params (BulletType, GameObject?[])[] entries)
         {
@@ -278,7 +305,10 @@ namespace CustomPlantClass.Main
         }
         #endregion
         #region Boss Slider
-
+        /// <summary>
+        /// Registers a custom boss health slider using a prefab
+        /// after validating its required UI components.
+        /// </summary>
         public static void RegisterCustomBossHealthSlider(ID zombieType, GameObject slider)
         {
             EnsureGameNotStarted();
@@ -320,7 +350,10 @@ namespace CustomPlantClass.Main
             }
             bossHealthSliders[zombieType] = slider;
         }
-
+        /// <summary>
+        /// Registers a custom boss health slider from metadata
+        /// and applies its icon and fill appearance.
+        /// </summary>
         public static void RegisterCustomBossHealthSlider(CustomBossHealthSliderData data)
         {
             Action a = () =>
@@ -362,7 +395,8 @@ namespace CustomPlantClass.Main
         // ---------------------------------------------------------
 
         /// <summary>
-        /// Creates a default-initialized plant data struct.
+        /// Creates plant registration data with default settings
+        /// and the supplied ID, prefab, and preview.
         /// </summary>
         public static BaseCustomPlantData CreatePlantData(ID id, GameObject prefab, GameObject preview)
         {
@@ -391,7 +425,8 @@ namespace CustomPlantClass.Main
         }
 
         /// <summary>
-        /// Creates a skin data struct for a plant.
+        /// Creates plant skin data from the base plant data
+        /// and the supplied skin prefab and preview.
         /// </summary>
         public static BasePlantSkinData CreateSkin(BaseCustomPlantData data, GameObject skinPrefab, GameObject skinPreview)
         {
@@ -411,43 +446,28 @@ namespace CustomPlantClass.Main
         // ---------------------------------------------------------
 
         /// <summary>
-        /// Registers all BaseCustomPlant-derived types in an assembly.
+        /// Registers all eligible derived types from the calling assembly
+        /// with the IL2CPP class injector.
         /// </summary>
         public static void AutoRegisterTypes() => AutoRegisterTypes(Assembly.GetCallingAssembly());
+        /// <summary>
+        /// Registers eligible derived types from an assembly
+        /// with the IL2CPP class injector.
+        /// </summary>
         public static void AutoRegisterTypes([NotNull] Assembly asm)
         {
-            foreach (var type in asm.GetTypes())
+            foreach (var type in SystemTools.GetAllDerivedTypes<Il2CppSystem.Object>(asm, containBase: false))
             {
-                if (typeof(MonoBehaviour).IsAssignableFrom(type) && !type.IsAbstract)
+                if (!type.IsAbstract && !ClassInjector.IsTypeRegisteredInIl2Cpp(type))
                 {
-                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
-                        ClassInjector.RegisterTypeInIl2Cpp(type);
-                }
-                if (typeof(BaseConfig).IsAssignableFrom(type) && !type.IsAbstract)
-                {
-                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
-                        ClassInjector.RegisterTypeInIl2Cpp(type);
-                }
-                if (typeof(BaseBuff).IsAssignableFrom(type) && !type.IsAbstract)
-                {
-                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
-                        ClassInjector.RegisterTypeInIl2Cpp(type);
-                }
-                if (typeof(BaseEffect).IsAssignableFrom(type) && !type.IsAbstract)
-                {
-                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
-                        ClassInjector.RegisterTypeInIl2Cpp(type);
-                }
-                if (typeof(BulletMovement).IsAssignableFrom(type) && !type.IsAbstract)
-                {
-                    if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
-                        ClassInjector.RegisterTypeInIl2Cpp(type);
+                    ClassInjector.RegisterTypeInIl2Cpp(type);
                 }
             }
         }
 
         /// <summary>
-        /// Ensures a specific custom plant class is IL2CPP-registered.
+        /// Ensures the specified custom component type
+        /// is registered with the IL2CPP class injector.
         /// </summary>
         public static void EnsureTypeRegistered<TClass>() where TClass : MonoBehaviour
         {
@@ -469,6 +489,10 @@ namespace CustomPlantClass.Main
         internal class PlantTagAdder : MonoBehaviour
         {
             Plant plant => GetComponent<Plant>();
+            /// <summary>
+            /// Applies the plant's registered tag on the first game update,
+            /// then removes this temporary helper component.
+            /// </summary>
             public void Update()
             {
                 if (GameAPP.theGameStatus != GameStatus.InGame) return;
@@ -476,7 +500,10 @@ namespace CustomPlantClass.Main
                 Destroy(this);
             }
         }
-        public static HashSet<PlantType> RegisteredPlants = new();
+        /// <summary>
+        /// Registers a custom plant using BaseCustomPlantData.
+        /// Automatically registers TClass in IL2CPP.
+        /// </summary>
         public static ID RegisterCustomPlant<TBase, TClass>(BaseCustomPlantData data)
             where TBase : Plant
             where TClass : MonoBehaviour
@@ -576,6 +603,10 @@ namespace CustomPlantClass.Main
 
             return data.PlantId;
         }
+        /// <summary>
+        /// Registers a custom plant using BaseCustomPlantData.
+        /// Automatically registers TClass in IL2CPP.
+        /// </summary>
         public static ID RegisterCustomPlant<TBase>(BaseCustomPlantData data)
             where TBase : Plant
         {
@@ -672,7 +703,10 @@ namespace CustomPlantClass.Main
 
             return data.PlantId;
         }
-        internal static HashSet<PlantType> CustomUltiPlants = new();
+        /// <summary>
+        /// Adds a plant type to the custom ultimate plant set
+        /// so it is recognized as an ultimate plant.
+        /// </summary>
         public static void AddCustomUltiPlant(PlantType thePlantType) => CustomUltiPlants.Add(thePlantType);
         /// <summary>
         /// Registers a custom plant and its skin in one call.
@@ -722,12 +756,20 @@ namespace CustomPlantClass.Main
         }
         #endregion
         #region Plant Helper
+        /// <summary>
+        /// Assigns a card level to a plant type
+        /// for use in treasure mode.
+        /// </summary>
         public static void AddLevelPlant(ID type, CardLevel level)
         {
             int type_internal = type;
             if (CustomCardLevel.ContainsKey(type_internal)) ModLogger.LogError(MyPluginInfo.PluginName, "Duplicate ID type: " + type_internal);
             CustomCardLevel.Add(type_internal, level);
         }
+        /// <summary>
+        /// Maps a plant progression level to its card level
+        /// for use in card and treasure systems.
+        /// </summary>
         public static CardLevel GetCardLevel(PlantLevelData data) =>
             data switch
             {
@@ -740,6 +782,10 @@ namespace CustomPlantClass.Main
                 PlantLevelData.TreasurePlant => CardLevel.Red,
                 _ => CardLevel.White
             };
+        /// <summary>
+        /// Builds formatted almanac text for a plant
+        /// from its introduction and optional details.
+        /// </summary>
         public static string CreateAlmanacEntry(
             string introduction,
             string specialtext = "removeifthisisdefaulted",
@@ -824,6 +870,10 @@ namespace CustomPlantClass.Main
 
             return sb.ToString();
         }
+        /// <summary>
+        /// Registers a chance-based transformation from one plant type
+        /// to another using the specified percentage.
+        /// </summary>
         public static void AddCustomPlantUpgrade(ID fromType, ID toType, float percentChance)
         {
             percentChance = Mathf.Clamp(percentChance, 0f, 100f);
@@ -835,6 +885,10 @@ namespace CustomPlantClass.Main
         #endregion
         #region Misc Registration
 
+        /// <summary>
+        /// Registers a custom big star component
+        /// and assigns it to the fog sorting layer.
+        /// </summary>
         public static void RegisterCustomBigStar<TClass>(ref GameObject Star) where TClass : CustomBigStar
         {
             EnsureGameNotStarted();
@@ -843,6 +897,10 @@ namespace CustomPlantClass.Main
             CustomBigStarCount++;
         }
 
+        /// <summary>
+        /// Registers a custom bullet type and its prefab
+        /// from the supplied bullet data.
+        /// </summary>
         public static ID RegisterCustomBullet<TBase, TClass>(BaseCustomBulletData data) where TBase : Bullet where TClass : MonoBehaviour
         {
             EnsureGameNotStarted();
@@ -852,16 +910,30 @@ namespace CustomPlantClass.Main
         }
 
         /// <summary>
-        /// Registers a plant as supporting Star-Up.
+        /// Marks a plant type as supporting Star-Up
+        /// by adding it to the custom Star-Up set.
         /// </summary>
         public static void RegisterCustomStarUp(ID thePlantType)
             => CustomStarUps.Add(thePlantType);
 
+        /// <summary>
+        /// Registers a plant transformation that succeeds when
+        /// the supplied plant-based condition returns true.
+        /// </summary>
         public static void AddCustomPlantUpgrade(ID fromType, ID toType, Func<Plant, bool> condition)
             => replaceList.TryAdd(fromType, (toType, condition));
 
+        /// <summary>
+        /// Registers a plant transformation that succeeds when
+        /// the supplied condition returns true.
+        /// </summary>
         public static void AddCustomPlantUpgrade(ID fromType, ID toType, Func<bool> condition)
             => replaceList.TryAdd(fromType, (toType, (Plant p) => condition.Invoke()));
+
+        /// <summary>
+        /// Registers a custom zombie from its data
+        /// and records its spawn settings.
+        /// </summary>
         public static ID RegisterCustomZombie<TBase, TClass>(BaseCustomZombieData data) where TBase : Zombie where TClass : MonoBehaviour
         {
             CustomCore.RegisterCustomZombie<TBase, TClass>(data.theZombieType, data.Prefab, data.Preview, data.theAtackDamage, data.maxHealth, data.theFirstArmorHealth, data.theSecondArmorHealth);
@@ -870,34 +942,35 @@ namespace CustomPlantClass.Main
             return data.theZombieType;
         }
 
+        /// <summary>
+        /// Registers a condition that maps one zombie type to another
+        /// when the source zombie spawns.
+        /// </summary>
         public static void AddCustomOnZombieSpawnEvent(ID fromType, ID toType, Func<Zombie, bool> condition)
             => onZombieTypeSpawnActionList.TryAdd(fromType, (toType, condition));
 
+        /// <summary>
+        /// Queues an action to run when the game starts,
+        /// or runs it immediately if the game has already started.
+        /// </summary>
         public static void AddGameStartAction(Action action)
         {
             if (IsGameStarted) action();
             else GameStartActions.Add(action);
         }
 
+        /// <summary>
+        /// Queues an action for game application initialization
+        /// so it can run during the startup sequence.
+        /// </summary>
         public static void AddGameAppInitAction(Action action)
         {
             GameAppInitActions.Add(action);
         }
-        [Obsolete("Use the one that takes in an action.")]
-        public static void AddGameStartAction(MethodBase method)
-        {
-            if (!method.IsStatic)
-                throw new InvalidOperationException("Startup method must be static.");
-
-            if (method.GetParameters().Length != 0)
-                throw new InvalidOperationException("Startup method must have no parameters.");
-
-            if (IsGameStarted) method.Invoke(null, null);
-            else GameStartActions.Add(() => method.Invoke(null, null));
-        }
         #endregion
         /// <summary>
-        /// Registers a custom strong ultimate plant and sets it to ultimate if it is not. Return the BuffID of its unlock buff.
+        /// Registers a custom strong ultimate plant and marks it as ultimate
+        /// when necessary, then creates its unlock buff.
         /// </summary>
         public static void AddCustomStrongUltimatePlant(
             ID thePlantType,
@@ -953,10 +1026,10 @@ namespace CustomPlantClass.Main
             CustomStrongUltiPlants[(int)thePlantType] = (i, default, desc);
             CustomTravelUnlocks.Add((TravelUnlocks)i);
         }
-        public static Dictionary<int, (BuffID buff, TravelUnlocks unlock, string desc)> CustomStrongUltiPlants = new();
-        public static Dictionary<int, int> UnlockValueToPlantType = new();
-        public static HashSet<TravelUnlocks> CustomTravelUnlocks = new();
-        public static Dictionary<PlantType, (PlantType?, UltiBuff, UltiBuff)> CustomStrongUltimateInfo = new();
+        /// <summary>
+        /// Formats the strong-ultimate upgrade text for an unlocked plant
+        /// and its variant, including their parent plant recipes.
+        /// </summary>
         public static string FormatSPUpgradeBuff(
             string unlockedPlantName,
             string baseUltimateName,
@@ -972,6 +1045,10 @@ namespace CustomPlantClass.Main
                 $"{baseVariantUltimateName} + {parentPlant2Name}</nobr>\n" +
                 "继承原转换配方";
         }
+        /// <summary>
+        /// Formats the unlock text for a strong-ultimate plant and its variant,
+        /// including the variant transformation recipe.
+        /// </summary>
         public static string FormatStrongUltimateUnlockBuff
         (
             string unlockedPlantName,
@@ -988,6 +1065,10 @@ namespace CustomPlantClass.Main
                     $"<nobr>{variantToBase}←→{baseToVariant}</nobr>";
 
         }
+        /// <summary>
+        /// Formats the unlock text for a strong-ultimate plant
+        /// and its two parent plants.
+        /// </summary>
         public static string FormatStrongUltimateUnlockBuff
         (
             string unlockedPlantName,
@@ -1000,7 +1081,8 @@ namespace CustomPlantClass.Main
 
         }
         /// <summary>
-        /// Registers a custom level 4 zombie and sets its spawn level and weight
+        /// Registers a custom level 4 zombie based on a level 3 type
+        /// and assigns its spawn level and weight.
         /// </summary>
         public static ID AddCustomLevel4Zombie(ID theZombieType, ZombieType BaseLevel3)
         {
@@ -1008,10 +1090,9 @@ namespace CustomPlantClass.Main
             AddCustomZombieSpawnRatio(theZombieType, 9, 0);
             return theZombieType;
         }
-        public static Dictionary<ZombieType, ZombieType> Level4Zombies = new();
-
         /// <summary>
-        /// Registers a custom weak ultimate plant and its variant and sets both to ultimate if it is not.
+        /// Registers a custom weak ultimate plant and its optional variant
+        /// and marks the involved types as ultimate when necessary.
         /// </summary>
         public static void AddCustomWeakUltimatePlant(ID thePlantType, bool isVariant = true, PlantType theVariantType = PlantType.Nothing, Func<bool> canUnlock = null!)
         {
@@ -1026,7 +1107,8 @@ namespace CustomPlantClass.Main
             }
         }
         /// <summary>
-        /// Registers a custom weak ultimate plant and sets it to ultimate if it is not.
+        /// Registers a custom weak ultimate plant
+        /// and marks its type as ultimate when necessary.
         /// </summary>
         public static void AddCustomWeakUltimatePlant(ID thePlantType, bool isVariant = false)
         {
@@ -1040,7 +1122,10 @@ namespace CustomPlantClass.Main
             CustomCore.RegisterCustomBanMix(thePlantType, ()=>Utils.EnableTravelPlant() || Lawnf.TravelAdvanced(id), null, )
         }
         */
-        public static Dictionary<int, bool> CustomWeakUltiPlants = new();
+        /// <summary>
+        /// Adds a zombie type to the custom spawn list
+        /// for the specified level.
+        /// </summary>
         public static void AddZombieToLevel(LevelType theLevelType, int theLevelID, ZombieType theZombieType)
         {
             var key = (theLevelType, theLevelID);
@@ -1056,7 +1141,8 @@ namespace CustomPlantClass.Main
         #region Grid Items
 
         /// <summary>
-        /// Registers a custom grid item.
+        /// Registers a custom grid item with a specified base type
+        /// and custom component class.
         /// </summary>
         public static GridItemType RegisterCustomGridItem<TBase, TClass>(BaseCustomGridItemData data) where TBase : GridItem where TClass : MonoBehaviour
         {
@@ -1066,7 +1152,8 @@ namespace CustomPlantClass.Main
         }
 
         /// <summary>
-        /// Registers a custom grid item.
+        /// Registers a custom grid item with a custom component class
+        /// and the default grid item base type.
         /// </summary>
         public static GridItemType RegisterCustomGridItemWithType<TClass>(BaseCustomGridItemData data) where TClass : MonoBehaviour
         {
@@ -1076,7 +1163,8 @@ namespace CustomPlantClass.Main
         }
 
         /// <summary>
-        /// Registers a custom grid item.
+        /// Registers a custom grid item from its data
+        /// using the default grid item base type.
         /// </summary>
         public static GridItemType RegisterCustomGridItem(BaseCustomGridItemData data)
         {
@@ -1085,7 +1173,8 @@ namespace CustomPlantClass.Main
         }
 
         /// <summary>
-        /// Registers a custom grid item.
+        /// Registers a custom grid item from its data
+        /// using the specified grid item base type.
         /// </summary>
         public static GridItemType RegisterCustomGridItem<TBase>(BaseCustomGridItemData data) where TBase : GridItem
         {
@@ -1099,10 +1188,22 @@ namespace CustomPlantClass.Main
         }
         #endregion
         #region Levels
+        /// <summary>
+        /// Registers a custom level through the legacy generic API.
+        /// Use <see cref="CustomLevelMgr.RegisterCustomLevel{T}(BaseCustomLevelData)"/> instead.
+        /// </summary>
         [Obsolete("RegisterCustomLevel is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
         public static int RegisterCustomLevel<T>(BaseCustomLevelData data) where T : CustomLevelComponent => CustomLevelMgr.RegisterCustomLevel<T>(data);
+        /// <summary>
+        /// Registers a custom level through the legacy API.
+        /// Use <see cref="CustomLevelMgr.RegisterCustomLevel(BaseCustomLevelData)"/> instead.
+        /// </summary>
         [Obsolete("RegisterCustomLevel is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
         public static int RegisterCustomLevel(BaseCustomLevelData data) => CustomLevelMgr.RegisterCustomLevel(data);
+        /// <summary>
+        /// Allocates a custom level ID through the legacy API.
+        /// Use the level ID allocator in <see cref="CustomLevelMgr"/> instead.
+        /// </summary>
         [Obsolete("AllocateLevelID is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
         public static int AllocateLevelID()
         {
@@ -1160,13 +1261,18 @@ namespace CustomPlantClass.Main
         }
         #endregion
         /// <summary>
-        /// Throws an InvalidOperationException if the game is started.
+        /// Verifies that registration is still allowed
+        /// and throws if the game has already started.
         /// </summary>
         public static void EnsureGameNotStarted()
         {
             if (IsGameStarted)
                 throw new InvalidOperationException("Can't do this after game start!");
         }
+        /// <summary>
+        /// Registers three ultimate zombie tiers without descriptions.
+        /// This legacy overload is obsolete.
+        /// </summary>
         [Obsolete]
         public static void AddLevelZombie(ZombieType A, ZombieType B, ZombieType C, ZombieType B2 = ZombieType.Nothing, ZombieType C2 = ZombieType.Nothing)
         {
@@ -1194,6 +1300,10 @@ namespace CustomPlantClass.Main
                 }
             );
         }
+        /// <summary>
+        /// Registers ultimate zombie tiers, their descriptions,
+        /// and whether they should be included in water levels.
+        /// </summary>
         public static void AddLevelZombie(
             ZombieType A,
             string A_Desc,
@@ -1252,6 +1362,10 @@ namespace CustomPlantClass.Main
             );
         }
 
+        /// <summary>
+        /// Formats a rogue zombie description using health and attack
+        /// classifications from the corresponding enums.
+        /// </summary>
         public static string RogueZombieTextFormatter(string name, int level, RogueZombieHealth healthDesc, RogueZombieAttack attackDesc, string special)
         => RogueZombieTextFormatter
         (
@@ -1279,10 +1393,17 @@ namespace CustomPlantClass.Main
             special
         );
 
+        /// <summary>
+        /// Formats a rogue zombie description from explicit health
+        /// and attack description strings.
+        /// </summary>
         public static string RogueZombieTextFormatter(string name, int level, string healthDesc, string attackDesc, string special)
         => $"{name?.Trim()}\n僵尸等级：{level}\n韧性：{healthDesc?.Trim()}\n攻击力：{attackDesc?.Trim()}\n特点：{special?.Trim()}\n";
 
-        public static Dictionary<ZombieType, (int, int)> CustomZombieSpawns = new();
+        /// <summary>
+        /// Registers a custom zombie's spawn level
+        /// and its relative selection weight.
+        /// </summary>
         public static void AddCustomZombieSpawnRatio(ID theZombieType, int level, int weight)
         {
             if (!CustomZombieSpawns.TryAdd(theZombieType, (level, weight)))
@@ -1291,17 +1412,32 @@ namespace CustomPlantClass.Main
             }
         }
     }
+
+    /// <summary>
+    /// Provides recommended baseline health values
+    /// for custom plants.
+    /// </summary>
     public class DefaultPlantStats
     {
+        #region Fields
+        #pragma warning disable CS1591 // Public constants are intentionally excluded from XML documentation
         public const int BaseHealth = 300;
         public const int NutPlantHealth = 4000;
         public const int TallNutHealth = 8000;
         public const int UltimateNutHealth = 16000;
         public const int UltimateTallNutHealth = 32000;
         public const int UltimateObsidianJalaHealth = 64000;
+        #pragma warning restore CS1591
+        #endregion
     }
+    /// <summary>
+    /// Provides baseline health and damage values
+    /// for standard and ultimate zombies.
+    /// </summary>
     public class DefaultZombieStats
     {
+        #region Fields
+        #pragma warning disable CS1591 // Public constants are intentionally excluded from XML documentation
         public const int NormalZombieDamage = 50;
         public const int NormalZombieHealth = 270;
         public const int ConeHealth = 370;
@@ -1319,22 +1455,36 @@ namespace CustomPlantClass.Main
         public const int UltiZombieC_Health_Armored = 24000;
         public const int UltiZombieD_Health_Light = 24000;
         public const int UltiZombieD_Health_Armored = 48000;
+        #pragma warning restore CS1591
+        #endregion
     }
+    /// <summary>
+    /// Represents the relative health categories
+    /// used to describe rogue zombies.
+    /// </summary>
     public enum RogueZombieHealth
     {
+#pragma warning disable CS1591 // Enum members are intentionally excluded from XML documentation
         VeryLow = -2,
         Low = -1,
         Mid = 0,
         High = 1,
         VeryHigh = 2
+#pragma warning restore CS1591
     }
+    /// <summary>
+    /// Represents the relative attack categories
+    /// used to describe rogue zombies.
+    /// </summary>
     public enum RogueZombieAttack
     {
+#pragma warning disable CS1591 // Enum members are intentionally excluded from XML documentation
         VeryLow = -2,
         Low = -1,
         Mid = 0,
         High = 1,
         VeryHigh = 2,
         Crashing = 100
+#pragma warning restore CS1591
     }
 }

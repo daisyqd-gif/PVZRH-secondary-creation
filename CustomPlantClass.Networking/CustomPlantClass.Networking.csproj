@@ -13,7 +13,9 @@
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.Networking.xml</DocumentationFile>
+ </PropertyGroup>
 
   <!-- Import shared references -->
   <ItemGroup>
@@ -23,15 +25,31 @@
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Core.xml">
+      <Link>BepInEx.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Preloader.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Preloader.Core.xml">
+      <Link>BepInEx.Preloader.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.Common.xml">
+      <Link>BepInEx.Unity.Common.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.xml">
+      <Link>BepInEx.Unity.IL2CPP.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="Il2CppInterop.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
     </Reference>
