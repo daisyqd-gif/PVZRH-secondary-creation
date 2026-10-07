@@ -1,11 +1,8 @@
 # 🌱PVZ Fusion Custom Plant Class Framework
-[![License](https://img.shields.io/badge/Apache_2.0-License-red.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/LICENSE)
-[![Deps](https://img.shields.io/badge/Customizelib-BepInEx-orange.svg)](https://github.com/SalmonCN-RH/CustomizeLib)
-[![Deps](https://img.shields.io/badge/BepInEx-v6.0.0_pre-yellow.svg)](https://github.com/BepInEx/BepInEx/)
-[![Deps](https://img.shields.io/badge/Roslyn-v5.9.0-green.svg)](https://github.com/dotnet/roslyn)
-[![Deps](https://img.shields.io/badge/VSCode-blue.svg)](https://code.visualstudio.com/download)
-[![Deps](https://img.shields.io/badge/C%23-v14-darkblue.svg)](https://learn.microsoft.com/en-us/dotnet/csharp/)
-[![Deps](https://img.shields.io/badge/.Net-v6.0-purple.svg)](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+
+<p align="center">
+	<a href="https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases/latest"><img src="https://img.shields.io/github/v/release/daisyqd-gif/PVZRH-secondary-creation?style=flat-square&color=0%20255%20128"></a>
+</p>
 
 A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allows modders to create custom plants, zombies, effects, projectiles, and gameplay systems using clean C# APIs.
 ## Table of contents
@@ -334,16 +331,16 @@ namespace GatlingPea
 
 | Bug | Severity | Fix |
 |:-|:-:|-:
-| Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red) | Don't |
-| Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red) | Wrap all async methods with try/catch blocks |
-| System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red) |  |
-| Base custom plant throws a NullReferenceException in Start_Async. | ![Bug](https://img.shields.io/badge/Medium-orange) | Fix is coming, please wait for it. |
-| Index out of range exception thrown in the curtom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange) | Fix is coming, please wait for it. |
-| Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange) | Delete all rogue shooting mods that don't inject into the almanac. A permanent fix is coming. |
-| Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
-| Some mods are missing from the release. | ![Bug](https://img.shields.io/badge/Low-green) | Those mods are not ready for release. |
-| Mods that use unitask will fail. | ![Bug](https://img.shields.io/badge/Low-green) | Go to [this link](https://github.com/daisyqd-gif/PVZRH-Modding-Patches) and follow the readme there |
-| Custom rogue shooting plants will never appear because of the unlock system. | ![Bug](https://img.shields.io/badge/Low-green) | Delete all rogue shooting mods that don't inject into the almanac. A permanent fix is coming. |
+| Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Don't |
+| Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Wrap all async methods with try/catch blocks |
+| System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) |  |
+| Base custom plant throws a NullReferenceException in Start_Async. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square?style=flat-square) | Fix is coming, please wait for it. |
+| Index out of range exception thrown in the curtom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square?style=flat-square) | Fix is coming, please wait for it. |
+| Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. Replace those mods with hengming's rogue shooting catalog. |
+| Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
+| Some mods are missing from the release. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Those mods are not ready for release. |
+| Mods that use unitask will fail. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Use salmon's or gaoshu's modified il2cppinterop |
+| Custom rogue shooting plants will never appear because of the unlock system. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. A permanent fix is coming. |
 
 </details>
 
@@ -355,38 +352,38 @@ namespace GatlingPea
 
 | Mod | Description | Status | Dependencies | Preview |
 |:-|:-:|:-:|:-:|-:|
-| CharmSniper | Deprecated | ![Status](https://img.shields.io/badge/Deprecated-red) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152726.png?raw=true) |
-| CustomPlant | Central framework responsible for all mods | ![Status](https://img.shields.io/badge/Active-green) | CustomPlantClass.Runtime.Tasks |  |
-| CustomPlant.RogueShootingManager | Rogue shooting support for some mods | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| CustomPlantClass.Main.BulletBehaviour | Custom bullet moveway support | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| CustomPlantClass.Networking | TCP support for mods that need to communicate | ![Status](https://img.shields.io/badge/Active-green) | None |  |
-| CustomPlantClass.Runtime.Tasks | Async support for mods, required by all mods | ![Status](https://img.shields.io/badge/Active-green) | None |  |
-| FireSniperPuff | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152732.png?raw=true) |
-| MachineNutBuff | Machine nut effect buff | ![Status](https://img.shields.io/badge/Active-green) |  |  |
-| MegaGatlingPeaDLC | 请输入文字 | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152546.png?raw=true) |
-| MoreBlackHorse | Black football horse evolution states | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| MoreBossSlider | Extra boss slider content | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| MoreDolphinZombie | Gatling dolphin evolution states | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| MoreMinigun | More minigun plants | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152719.png?raw=true) |
-| MowerFix | Mower behavior fix | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| PortalSuperGatling | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152655.png?raw=true) |
-| RemoveCraters | Removes crater effects | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| RemoveHypnoMiner | Removes hypno miner and other things | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| RogueShootingRandomFormation | Randomized rogue shooting formation support | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant |  |
-| StarPeashooter | Star peashooter | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152709.png?raw=true) |
-| StarUpManager | Increase star up chance and also add hotkey | ![Status](https://img.shields.io/badge/Active-green) |  |  |
-| SuperCherryThreeGatling | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152702.png?raw=true) |
-| SuperHammer | Buffs hammer when buff is selected | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| UltimateArtillerySpike | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152637.png?raw=true) |
-| UltimateCherryFireShooter.Bepinex-Deconfused | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| UltimateDoomSniper-2 | Doom sniper's SP form and variant | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152627.png?raw=true) |
-| UltimateGatlingBloverBuff.Bepinex | Gatling blover enhancement | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| UltimateIFV | SP form for ifv iron puff | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152740.png?raw=true) |
-| UltimatePlanternSkin | Fix for ultimate plantern's skin and also enhances the effect | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| UltimateSniperAndUltimateMegaGatlingPea | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://raw.githubusercontent.com/daisyqd-gif/pvzrh-mod-resources/refs/heads/main/Screenshot%202026-09-13%20152618.png) |
-| UltimateSolarCoronaCabbage | Check almanac | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| Utilities | Debug tools | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
-| zombossleveladdon | Contains HeiTa and Gift box imitater | ![Status](https://img.shields.io/badge/Active-green) | CustomPlant |  |
+| CharmSniper | Deprecated | ![Status](https://img.shields.io/badge/Deprecated-red?style=flat-square) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152726.png?raw=true) |
+| CustomPlant | Central framework responsible for all mods | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlantClass.Runtime.Tasks |  |
+| CustomPlant.RogueShootingManager | Rogue shooting support for some mods | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| CustomPlantClass.Main.BulletBehaviour | Custom bullet moveway support | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| CustomPlantClass.Networking | TCP support for mods that need to communicate | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | None |  |
+| CustomPlantClass.Runtime.Tasks | Async support for mods, required by all mods | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | None |  |
+| FireSniperPuff | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152732.png?raw=true) |
+| MachineNutBuff | Machine nut effect buff | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) |  |  |
+| MegaGatlingPeaDLC | 请输入文字 | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152546.png?raw=true) |
+| MoreBlackHorse | Black football horse evolution states | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| MoreBossSlider | Extra boss slider content | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| MoreDolphinZombie | Gatling dolphin evolution states | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| MoreMinigun | More minigun plants | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152719.png?raw=true) |
+| MowerFix | Mower behavior fix | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| PortalSuperGatling | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152655.png?raw=true) |
+| RemoveCraters | Removes crater effects | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| RemoveHypnoMiner | Removes hypno miner and other things | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| RogueShootingRandomFormation | Randomized rogue shooting formation support | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant |  |
+| StarPeashooter | Star peashooter | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152709.png?raw=true) |
+| StarUpManager | Increase star up chance and also add hotkey | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) |  |  |
+| SuperCherryThreeGatling | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152702.png?raw=true) |
+| SuperHammer | Buffs hammer when buff is selected | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| UltimateArtillerySpike | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152637.png?raw=true) |
+| UltimateCherryFireShooter.Bepinex-Deconfused | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| UltimateDoomSniper-2 | Doom sniper's SP form and variant | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152627.png?raw=true) |
+| UltimateGatlingBloverBuff.Bepinex | Gatling blover enhancement | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| UltimateIFV | SP form for ifv iron puff | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152740.png?raw=true) |
+| UltimatePlanternSkin | Fix for ultimate plantern's skin and also enhances the effect | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| UltimateSniperAndUltimateMegaGatlingPea | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://raw.githubusercontent.com/daisyqd-gif/pvzrh-mod-resources/refs/heads/main/Screenshot%202026-09-13%20152618.png) |
+| UltimateSolarCoronaCabbage | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| Utilities | Debug tools | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
+| zombossleveladdon | Contains HeiTa and Gift box imitater | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
 
 </details>
 
@@ -398,5 +395,11 @@ namespace GatlingPea
 This project does not include, distribute, or rely on any copyrighted Plants vs. Zombies assets. All game content referenced by this repository belongs to its respective copyright holders.
 
 Please mod responsibly. Do not upload or share any proprietary PVZ files, including textures, models, audio, or other game data.
+
+CustomPlantClass is not sponsored by, affiliated with or endorsed by Unity Technologies or its affiliates.
+"Unity" is a trademark or a registered trademark of Unity Technologies or its affiliates in the U.S. and elsewhere.
+
+CustomPlantClass is not sponsored by, affiliated with or endorsed by Electronic Arts or its affiliates.
+"Plants vs Zombies" is a trademark or a registered trademark of Electronic Arts or its affiliates in the U.S. and elsewhere.
 
 [⬆️ Back to table of contents](#table-of-contents)
