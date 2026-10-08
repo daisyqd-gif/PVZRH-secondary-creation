@@ -163,7 +163,7 @@ namespace CustomPlantClass.Main
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"[PrefabIDFreeze] Failed to load freeze table: {e}");
+                    ModLogger.LogError($"[PrefabIDFreeze] Failed to load freeze table: {e}");
                     FreezeTable = new Dictionary<string, int>();
                 }
 
@@ -183,7 +183,7 @@ namespace CustomPlantClass.Main
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"[PrefabIDFreeze] Failed to save freeze table: {e}");
+                    ModLogger.LogError($"[PrefabIDFreeze] Failed to save freeze table: {e}");
                 }
             }
 
@@ -221,7 +221,7 @@ namespace CustomPlantClass.Main
         }
     }
     /// <summary>
-    /// s
+    /// :)
     /// </summary>
     public struct CustomItemType
     {

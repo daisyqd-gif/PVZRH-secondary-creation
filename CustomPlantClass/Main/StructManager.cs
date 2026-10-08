@@ -371,12 +371,6 @@ namespace CustomPlantClass.Main
             return other.Row == Row && other.Column == Column;
         }
     }
-    internal struct Struct1_Plant
-    {
-        public Type BaseType;
-        public Type CustomType;
-        public BaseCustomPlantData data;
-    }
     /// <summary>
     /// Metadata for defining a custom level
     /// </summary>

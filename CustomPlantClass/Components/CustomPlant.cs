@@ -16,26 +16,6 @@ namespace CustomPlantClass
         public TextMeshPro extraTextShadow;
         private int _pfLockedMaxHealth;
         protected CancellationToken token;
-        public int _maxHealth
-        {
-            get => field;
-
-            set
-            {
-                field = value;
-
-                // Clamp upward to default max health if needed
-                if (PlantDataManager.PlantData_Default.TryGetValue(_plant.thePlantType, out var d))
-                {
-                    if (_pfLockedMaxHealth < d.maxHealth)
-                        _pfLockedMaxHealth = d.maxHealth;
-                }
-
-                // Apply the locked value
-                _plant.thePlantMaxHealth = _pfLockedMaxHealth;
-                _pfLockedMaxHealth = field;
-            }
-        }
         public virtual void Start()
         {
             if(_plant == null)
@@ -60,7 +40,6 @@ namespace CustomPlantClass
                 {
                     return;
                 }
-                _maxHealth = _plant.thePlantMaxHealth;
                 _pfLockedMaxHealth = _plant.thePlantMaxHealth;
             }
             catch( Exception e )
@@ -81,20 +60,44 @@ namespace CustomPlantClass
         {
             token.Cancel();
         }
+        /// <summary>
+        /// Called one frame after the object is created, original method is empty to allow for skipping the base call
+        /// </summary>
         public virtual void OnSpawn() { }
+        /// <summary>
+        /// Called when killed, original method is empty to allow for skipping the base call
+        /// </summary>
         public virtual void OnDie(DieReason reason) { }
         public virtual void Update()
         {
             OnUpdate();
         }
+        /// <summary>
+        /// Called every physics frame, original method is empty to allow for skipping the base call
+        /// </summary>
         public virtual void OnUpdate() { }
+        /// <summary>
+        /// Sets the plant's custom text style
+        /// </summary>
         public virtual void SetTextStyle(TextMeshPro text)
         {
             text.fontSize = 2.1f;
         }
+        /// <summary>
+        /// Sets the plant's custom text color
+        /// </summary>
         public virtual Color SetTextColor() => Color.cyan;
+        /// <summary>
+        /// Sets the plant's custom text size
+        /// </summary>
         public virtual Vector2? GetTextSize() => null;
+        /// <summary>
+        /// Sets the plant's custom text, called every frame to update the text
+        /// </summary>
         public virtual string GetTextString() => "";
+        /// <summary>
+        /// Shows up in the plant data menu
+        /// </summary>
         public virtual List<KeyValuePair<string, string>> GetLiveInfo()
         {
             return new List<KeyValuePair<string, string>>();
@@ -104,10 +107,15 @@ namespace CustomPlantClass
             Color color = SetTextColor();
             _plant.RegisterText(color, GetTextString, GetTextSize());
         }
-
+        /// <summary>
+        /// Locates the plant's shoot transform (can be empty for some plants that don't need it)
+        /// </summary>
         public virtual Transform FindShoot()
-            => _plant.transform.GetChild(0).Find(GetShootPath());
+            => _plant.transform.FindChild(GetShootPath());
 
+        /// <summary>
+        /// Gets the plant's shoot path from root
+        /// </summary>
         public virtual string GetShootPath() => "Shoot";
 
         public Transform GetShoot()
@@ -116,6 +124,9 @@ namespace CustomPlantClass
             return s != null ? s : _plant.transform;
         }
 
+        /// <summary>
+        /// Gets the plant's bullet type (defaulted for plants registered through datamgr)
+        /// </summary>
         public virtual BulletType GetBulletType()
         {
             if (DataMgr.plantBulletTypes.TryGetValue(_plant.thePlantType, out var a))
@@ -127,9 +138,18 @@ namespace CustomPlantClass
                 return BulletType.Bullet_pea;
             }
         }
+        /// <summary>
+        /// Gets the plant's alternate bullet type (calls GetBulletType() if not overriden)
+        /// </summary>
         public virtual BulletType GetBulletType2() => GetBulletType();
 
+        /// <summary>
+        /// Gets the plant's bullet move way
+        /// </summary>
         public virtual BulletMoveWay GetBulletMoveWay() => BulletMoveWay.MoveRight;
+        /// <summary>
+        /// Gets the plant's alternate move way (calls GetBulletMoveWay() if not overriden)
+        /// </summary>
         public virtual BulletMoveWay GetBulletMoveWay2() => GetBulletMoveWay();
         public virtual BulletMoveWay GetBulletMoveWayPF_SuperGatling()
         {
@@ -144,11 +164,6 @@ namespace CustomPlantClass
             dmg = Mathf.RoundToInt(dmg * (1f - DamageReductionPercent / 100f));
             return OnTakeDamage(dmg, damageFrom, damageType);
         }
-        [Obsolete]
-        public virtual int GetDamage() => AttackDamage;
-        [Obsolete]
-        public virtual int GetDamage2() => AttackDamage2;
-
         public virtual int AttackDamage => _plant.attackDamage;
         public virtual int AttackDamage2 => AttackDamage;
 

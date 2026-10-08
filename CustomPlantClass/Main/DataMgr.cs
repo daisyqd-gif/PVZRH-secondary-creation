@@ -89,7 +89,7 @@ namespace CustomPlantClass.Main
             }
             catch (Exception e)
             {
-                Debug.LogError($"[IDFreeze] Failed to load freeze table: {e}");
+                ModLogger.LogError($"[IDFreeze] Failed to load freeze table: {e}");
                 FreezeTable = new Dictionary<string, int>();
             }
 
@@ -1408,7 +1408,7 @@ namespace CustomPlantClass.Main
         {
             if (!CustomZombieSpawns.TryAdd(theZombieType, (level, weight)))
             {
-                Debug.LogError("Duplicate zombie type in spawn ratio: " + (int)theZombieType);
+                ModLogger.LogError("Duplicate zombie type in spawn ratio: " + (int)theZombieType);
             }
         }
     }

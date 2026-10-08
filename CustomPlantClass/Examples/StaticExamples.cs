@@ -1,3 +1,6 @@
+using CustomPlantClass.Runtime.Tasks;
+using Il2CppInterop.Runtime;
+
 namespace CustomPlantClass.Examples
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -26,8 +29,8 @@ namespace CustomPlantClass.Examples
         public static void UltimatePlantern_Shrink
         (
             Board board,
-            GameObject glow,
             Vector2 position,
+            GameObject glow,
             float growTargetScale = 40f,
             float growStep = 0.4f,
             int frameDelayMs = 8,
@@ -39,18 +42,20 @@ namespace CustomPlantClass.Examples
             int doomChancePerTile = 10
         )
         {
-            board.StartCoroutine(
-                Shrink_Internal(
-                    board, glow, position,
-                    growTargetScale, growStep,
-                    frameDelayMs,
-                    previewShrinkFactor, previewLerpFactor, previewSpinRadians,
-                    fadeFactor, minAlpha, doomChancePerTile
-                )
+            glow = glow ?? new GameObject("Ulti_Glow",[Il2CppType.From(typeof(SpriteRenderer)),Il2CppType.From(typeof(SortingGroup))]);
+            glow.GetComponent<SpriteRenderer>().sprite=Resources.Load<Sprite>("board/award/Glow");
+            glow.GetComponent<SortingGroup>().sortingLayerName="particle11";
+            glow.GetComponent<SortingGroup>();
+            Shrink_Internal(
+                board, glow, position,
+                growTargetScale, growStep,
+                frameDelayMs,
+                previewShrinkFactor, previewLerpFactor, previewSpinRadians,
+                fadeFactor, minAlpha, doomChancePerTile
             );
         }
 
-        private static IEnumerator Shrink_Internal
+        private static async void Shrink_Internal
         (
             Board board,
             GameObject glow,
@@ -66,125 +71,134 @@ namespace CustomPlantClass.Examples
             int doomChancePerTile
         )
         {
-            // ---------------------------------------------------------
-            // PHASE 0 — Setup
-            // ---------------------------------------------------------
-            var sprite = glow.GetComponent<SpriteRenderer>();
-            var sorting = glow.GetComponent<SortingGroup>();
-
-            if (sorting != null)
-                sorting.enabled = true;
-
-            glow.transform.position = position;
-            glow.transform.localScale = Vector3.one;
-
-            if (sprite != null)
-                sprite.color = Color.white;
-
-            float delay = frameDelayMs / 1000f;
-            WaitForSeconds wait = new WaitForSeconds(delay);
-
-            // ---------------------------------------------------------
-            // PHASE 1 — Spawn previews + kill zombies
-            // ---------------------------------------------------------
-            List<GameObject> previews = new List<GameObject>();
-            var zombies = Lawnf.GetAllZombies(false);
-
-            foreach (var z in zombies)
+            try
             {
-                if (z == null || z.beforeDying)
-                    continue;
+                CancellationToken cancellationToken = board.CreateCancellationToken();
+                SpriteRenderer glowRenderer = glow.GetComponent<SpriteRenderer>();
+                SortingGroup sortingGroup = glow.GetComponent<SortingGroup>();
+                var previews = new List<GameObject>();
 
-                var preview = CreateZombie.CreateZombiePreview(
-                    z.theZombieType,
-                    Color.white,
-                    board.transform,
-                    z.transform.position
-                );
+                glow.transform.SetParent(board.transform);
+                sortingGroup.enabled = true;
+                GameAPP.PlaySound(SoundType.Portal);
 
-                z.Die();
-
-                if (preview != null)
-                    previews.Add(preview);
-            }
-
-            // ---------------------------------------------------------
-            // PHASE 2 — Animate previews toward center
-            // ---------------------------------------------------------
-            while (previews.Count > 0)
-            {
-                for (int i = previews.Count - 1; i >= 0; i--)
+                while (glow.transform.localScale.x > 0.1f)
                 {
-                    var p = previews[i];
-                    if (p == null)
+                    glow.transform.localScale -= Vector3.one * 0.04f;
+
+                    List<Zombie> eligibleZombies = new List<Zombie>([..Lawnf.GetAllZombies()])
+                        .Where(zombie => zombie != null
+                            && !TypeMgr.IsBossZombie(zombie.theZombieType)
+                            && !zombie.isMindControlled)
+                        .ToList();
+
+                    if (eligibleZombies.Count > 0)
                     {
-                        previews.RemoveAt(i);
-                        continue;
-                    }
-
-                    var t = p.transform;
-
-                    // Move toward center (faster than Lerp)
-                    t.position += (Vector3)(position - (Vector2)t.position) * previewLerpFactor;
-
-                    // Shrink
-                    t.localScale *= previewShrinkFactor;
-
-                    // Spin
-                    t.Rotate(0f, 0f, previewSpinRadians);
-
-                    // Cull tiny previews
-                    if (t.localScale.x < 0.05f)
-                    {
-                        Object.Destroy(p);
-                        previews.RemoveAt(i);
-                    }
-                }
-
-                yield return wait;
-            }
-
-            // ---------------------------------------------------------
-            // PHASE 3 — Doom tiles
-            // ---------------------------------------------------------
-            for (int col = 0; col < board.columnNum; col++)
-            {
-                for (int row = 0; row < board.rowNum; row++)
-                {
-                    if (UnityEngine.Random.Range(0, doomChancePerTile) == 0)
-                    {
-                        Doom.SetDoom(
-                            board,
-                            new BoardPosition(row, col),
-                            DoomType.IceDoom_big,
-                            null,
-                            false
+                        Zombie zombie = eligibleZombies.GetRandomItem();
+                        GameObject preview = CreateZombie.CreateZombiePreview(
+                            zombie.theZombieType,
+                            Color.white,
+                            board.transform,
+                            zombie.axis.position
                         );
+                        zombie.Die(1);
+
+                        if (preview != null)
+                        {
+                            previews.Add(preview);
+                        }
+                    }
+
+                    for (int i = previews.Count - 1; i >= 0; i--)
+                    {
+                        GameObject preview = previews[i];
+                        if (preview == null)
+                        {
+                            previews.RemoveAt(i);
+                            continue;
+                        }
+
+                        Transform previewTransform = preview.transform;
+                        Vector3 target = new(position.x, previewTransform.position.y, position.y);
+                        previewTransform.position = Vector3.Lerp(
+                            previewTransform.position,
+                            target,
+                            previewLerpFactor
+                        );
+                        previewTransform.localScale *= previewShrinkFactor;
+                        previewTransform.Rotate(0f, 0f, previewSpinRadians);
+                    }
+
+                    await DelayTask.DelayScaled(frameDelayMs/1000,()=>Time.timeScale,cancellationToken);
+                }
+
+                foreach (GameObject preview in previews)
+                {
+                    if (preview != null)
+                    {
+                        Destroy(preview);
                     }
                 }
-            }
+                previews.Clear();
 
-            // ---------------------------------------------------------
-            // PHASE 4 — Fade glow
-            // ---------------------------------------------------------
-            if (sprite != null)
-            {
-                var c = sprite.color;
+                sortingGroup.sortingLayerName = "up";
+                Color glowColor = glowRenderer.color;
+                glowColor.a = 1f;
+                glowRenderer.color = glowColor;
 
-                while (c.a > minAlpha)
+                while (glow.transform.localScale.x < growTargetScale)
                 {
-                    c.a *= fadeFactor;
-                    sprite.color = c;
-                    yield return wait;
-                }
-            }
+                    glow.transform.localScale += Vector3.one * growStep;
 
-            // ---------------------------------------------------------
-            // PHASE 5 — Cleanup
-            // ---------------------------------------------------------
-            Object.Destroy(glow);
+                    foreach (Zombie zombie in Lawnf.GetAllZombies())
+                    {
+                        if (zombie != null)
+                        {
+                            zombie.Die(1);
+                        }
+                    }
+
+                    GameAPP.PlaySound(SoundType.DoomShroom);
+                    if (doomChancePerTile > 0)
+                    {
+                        for (int column = 0; column < board.columnNum; column++)
+                        {
+                            for (int row = 0; row < board.rowNum; row++)
+                            {
+                                if (Random.Range(0, doomChancePerTile) == 0)
+                                {
+                                    Vector2 tilePosition = Lawnf.GetPlantPosition(
+                                        board,
+                                        column,
+                                        row,
+                                        PlantType.Pot
+                                    );
+                                    Doom.SetDoom(board, tilePosition, DoomType.IceDoom_big);
+                                }
+                            }
+                        }
+                    }
+                    await DelayTask.DelayScaled(frameDelayMs/1000,()=>Time.timeScale,cancellationToken);
+                }
+
+                glow.transform.SetParent(board.transform);
+                while (glowRenderer.color.a > minAlpha)
+                {
+                    Color color = glowRenderer.color;
+                    color.a *= fadeFactor;
+                    glowRenderer.color = color;
+                    await DelayTask.DelayScaled(frameDelayMs/1000,()=>Time.timeScale,cancellationToken);
+                }
+
+                Destroy(glow.gameObject);
+            }
+            catch (Exception exception)
+            {
+                ModLogger.LogError(exception.ToString());
+            }
         }
     }
+
     public static class UltimateTorchBehaviour
     {
         public static Dictionary<BulletType, BulletType> FireTypes = new();

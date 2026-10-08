@@ -165,12 +165,12 @@ namespace CustomPlantClass.Runtime
         {
             foreach (var (field, defaultValue) in entries)
             {
-                Debug.Log($"Defaulted field {field.Name}.");
+                ModLogger.LogInfo($"Defaulted field {field.Name}.");
                 field.SetValue(null, defaultValue); // static fields
             }
             foreach (var (field, action) in entries2)
             {
-                Debug.Log($"Defaulted field {field.Name}.");
+                ModLogger.LogInfo($"Defaulted field {field.Name}.");
                 field.SetValue(null, action()); // static fields
             }
         }
@@ -206,7 +206,7 @@ namespace CustomPlantClass.Runtime
                         : null;
 
                 ResetRegistry.Register(field, defaultValue);
-                Debug.Log($"Found field defaulter for field {field.Name}.");
+                ModLogger.LogInfo($"Found field defaulter for field {field.Name}.");
             }
             foreach (var field in fields)
             {
@@ -216,7 +216,7 @@ namespace CustomPlantClass.Runtime
                 Func<object> defaultValue = attr.Action;
 
                 ResetRegistry.Register(field, defaultValue);
-                Debug.Log($"Found field defaulter for field {field.Name}.");
+                ModLogger.LogInfo($"Found field defaulter for field {field.Name}.");
             }
         }
         private static void ScanAllManagedAssemblies()

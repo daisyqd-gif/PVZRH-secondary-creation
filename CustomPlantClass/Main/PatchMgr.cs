@@ -874,7 +874,7 @@ namespace CustomPlantClass
             if (DataMgr.LoadedCustomLevels.Count == 0)
                 return;
 
-            Debug.Log("Initializing custom level button.");
+            ModLogger.LogInfo("Initializing custom level button.");
             GameAPP.Instance.StartCoroutine(init());
 
             static IEnumerator init()
@@ -926,7 +926,7 @@ namespace CustomPlantClass
                 Object.Destroy(pages.FindChild("Page3").gameObject);
 
                 int levelIndex = 0;
-                Debug.Log("Initialized custom level button.");
+                ModLogger.LogInfo("Initialized custom level button.");
 
                 yield return null;
 
@@ -972,7 +972,7 @@ namespace CustomPlantClass
                     btn.levelType = level.LevelType;
                     btn.buttonNumber = level.LevelID;
                     item.SetActive(!(CustomLevelMgr.CanUnlockLevel.TryGetValue(level.LevelID, out var func) && !func()));
-                    Debug.Log("Created level " + level.LevelName + " ID " + level.LevelID + " in custom levels page.");
+                    ModLogger.LogInfo("Created level " + level.LevelName + " ID " + level.LevelID + " in custom levels page.");
 
                     levelIndex++;
                 }

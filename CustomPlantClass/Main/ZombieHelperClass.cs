@@ -1,3 +1,5 @@
+using CustomPlantClass.Runtime.Tasks;
+
 namespace CustomPlantClass.Main
 {
     /// <summary>
@@ -126,6 +128,51 @@ namespace CustomPlantClass.Main
                 }
                 Object.Destroy(obj);
             }
+        }
+        /// <summary>
+        /// Stuns a zombie
+        /// </summary>
+        public static void StunZombie(this Zombie self, float timeInSeconds = 4, Action<Zombie> onStun = null, Action<Zombie> done = null, Vector2 offset = default)
+        {
+            onStun = onStun ?? ((z) =>
+            {
+            self.ChangeStatus(ZombieStatus.Default);
+            GameAPP.PlaySound(SoundType.Bonk);
+                z.anim.CrossFade("idle", 0.2f);
+                z.theFirstArmor?.SetActive(false);
+                z.theSecondArmor?.SetActive(false);
+                CreateParticle.SetParticle(107, self.transform.position + Vector3.up, 0, setLayer: false);
+            });
+            done = done ??((z) => z.anim.CrossFade("walk", 0.2f));
+            if(offset == default)
+            {
+                offset = new(0,1.5f);
+            }
+            StunZombie_async(self,timeInSeconds,onStun,done,offset);
+        }
+        private static async void StunZombie_async(Zombie self, float time, Action<Zombie> onStun, Action<Zombie> done, Vector2 offset)
+        {
+            if (self == null)
+            {
+                return;
+            }
+
+            var cancellationToken = self.CreateCancellationToken();
+            onStun(self);
+
+            await DelayTask.WaitForFixedUpdate();
+
+            Vector2 dizzinessPosition = self.transform.position;
+            dizzinessPosition += offset;
+            ParticleManager.Instance.SetParticle(ParticleType.Dizziness, dizzinessPosition, 0, false, 1f);
+
+            await DelayTask.DelayScaled(
+                time,
+                () => Time.timeScale,
+                cancellationToken
+            );
+
+            done(self);
         }
         internal static void TrySetDTierZombies(Board board, int theWave, int theRound, List<ZombieType> zombieTypes)
         {

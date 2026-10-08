@@ -316,7 +316,7 @@ namespace CustomPlantClass.Level
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"[LevelIDFreeze] Failed to load freeze table: {e}");
+                    ModLogger.LogError($"[LevelIDFreeze] Failed to load freeze table: {e}");
                     FreezeTable = new Dictionary<string, int>();
                 }
 

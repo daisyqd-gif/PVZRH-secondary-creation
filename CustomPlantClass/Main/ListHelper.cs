@@ -185,7 +185,7 @@ namespace CustomPlantClass.Main
             {
                 if (!self.TryAdd(i.Key, i.Value))
                 {
-                    Debug.LogError($"Duplicate key {i.Key}");
+                    ModLogger.LogError($"Duplicate key {i.Key}");
                 }
             }
         }
@@ -202,7 +202,7 @@ namespace CustomPlantClass.Main
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError(e.ToString());
+                    ModLogger.LogError(e.ToString());
                 }
             }
         }
@@ -219,7 +219,7 @@ namespace CustomPlantClass.Main
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError(e.ToString());
+                    ModLogger.LogError(e.ToString());
                 }
             }
         }
