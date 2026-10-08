@@ -1,8 +1,8 @@
-# 🌱PVZ Fusion Custom Plant Class Framework
+![🌱PVZ Fusion Custom Plant Class Framework](https://forthebadge.com/api/badges/generate?panels=3&primaryLabel=pvzrh&secondaryLabel=Custom+plant+class+framework&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=900&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=600&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&tertiaryLabel=1.0.5&tertiaryBGColor=%232674A4&tertiaryTextColor=%23FFFFFF&tertiaryFontSize=12&tertiaryFontWeight=500&tertiaryLetterSpacing=2&tertiaryFontFamily=Roboto&tertiaryTextTransform=uppercase&scale=2&secondaryTextShadowColor=%23000000&secondaryTextShadowOffsetX=1.5&secondaryTextShadowOffsetY=1.5&secondaryTextShadowBlur=2)
 
-<p align="center">
-	<a href="https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases/latest"><img src="https://img.shields.io/github/v/release/daisyqd-gif/PVZRH-secondary-creation?style=flat-square&color=0%20255%20128"></a>
-</p>
+---
+
+![C#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=Made+with&secondaryLabel=C%23%2014&primaryBGColor=%239179e4&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase)
 
 A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allows modders to create custom plants, zombies, effects, projectiles, and gameplay systems using clean C# APIs.
 ## Table of contents
@@ -32,17 +32,11 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 [⬆️ Back to table of contents](#table-of-contents)
 
 ## Quick access
-[![API Documentation](https://img.shields.io/badge/Click_me_to_show_documentation-blue?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
+[![API Documentation](https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/documentation_learn.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/blob/main/API.md)
 
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20stable%20release-blue?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
+[![Static Badge](https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/download.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
 
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20latest%20bleeding%20edge%20release-red?style=for-the-badge&logo=github)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/tree/main/Build/net6.0)
-
-[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
-
-[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20customizelib-blue?style=for-the-badge&logo=pan.quark.cn%2Ffavicon.ico)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
-
-[![Static Badge](https://img.shields.io/badge/Click%20to%20download%20the%20latest%20bleeding%20edge%20customizelib-orange?style=for-the-badge&logo=github)]([https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7](https://github.com/SalmonCN-RH/CustomizeLib/tree/master/res/BepInEx))
+[![Static Badge](https://forthebadge.com/api/badges/generate?panels=3&primaryLabel=CustomizeLib&secondaryLabel=4.0&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Montserrat&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=600&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&tertiaryLabel=By+SalmonCN-RH&tertiaryBGColor=%232674A4&tertiaryTextColor=%23FFFFFF&tertiaryFontSize=12&tertiaryFontWeight=500&tertiaryLetterSpacing=2&tertiaryFontFamily=Roboto&tertiaryTextTransform=uppercase&primaryIcon=github&primaryIconColor=%23ffffff&primaryIconSize=16&primaryIconPosition=left)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
 
 [⬆️ Back to table of contents](#table-of-contents)
 
@@ -58,7 +52,7 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 - [x] An async state machine runner that replaces UniTask and Task.Delay
 - [x] Python like support for collections
 - [x] A bridge for converting data from Il2cpp collections to managed collections
-- [x] Runtime compilation of mods [![Bug](https://img.shields.io/badge/Broken-red)](#known-bugs)
+- [x] Runtime compilation of mods
 - [x] An interrupt system
 - [ ] A way to run mods in Lua
 - [ ] A visual plant creator that allows modders or designers to create plants with minimal coding
@@ -334,13 +328,14 @@ namespace GatlingPea
 | Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Don't |
 | Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Wrap all async methods with try/catch blocks |
 | System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) |  |
-| Base custom plant throws a NullReferenceException in Start_Async. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square?style=flat-square) | Fix is coming, please wait for it. |
-| Index out of range exception thrown in the curtom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square?style=flat-square) | Fix is coming, please wait for it. |
+| Index out of range exception thrown in the curtom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Ignore this bug, it doesn't break anyting. |
 | Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. Replace those mods with hengming's rogue shooting catalog. |
 | Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
 | Some mods are missing from the release. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Those mods are not ready for release. |
 | Mods that use unitask will fail. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Use salmon's or gaoshu's modified il2cppinterop |
 | Custom rogue shooting plants will never appear because of the unlock system. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. A permanent fix is coming. |
+
+[![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
 
 </details>
 
