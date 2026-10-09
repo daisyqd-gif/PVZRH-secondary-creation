@@ -4,6 +4,17 @@
         <name>CustomPlantClass.Runtime.Tasks</name>
     </assembly>
     <members>
+        <member name="T:CustomPlantClass.Runtime.Tasks.PlayerLoopTask">
+            <summary>
+            Helper for registering events that run on player loop update
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.PlayerLoopTask.AddRunAction(System.Action)">
+            <summary>
+            Registers an even that runs every 
+            </summary>
+            <param name="run"></param>
+        </member>
         <member name="T:CustomPlantClass.Runtime.Tasks.Delay">
             <summary>
             Represents an awaitable delay that completes after a scheduled duration.

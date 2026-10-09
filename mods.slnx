@@ -1,0 +1,112 @@
+<Solution>
+  <Folder Name="/CharmSniper.Bepinex/">
+    <Project Path="CharmSniper.Bepinex/CharmSniper.csproj" />
+  </Folder>
+  <!--<Folder Name="/CherryMinigun.Bepinex/">
+    <Project Path="CherryMinigun.Bepinex/CherryMinigun.csproj" />
+  </Folder>
+  <Folder Name="/CherryScaredyGatling.Bepinex/">
+    <Project Path="CherryScaredyGatling.Bepinex/CherryScaredyGatling.csproj" />
+  </Folder>0
+  <Folder Name="/CustomLevels.Bepinex_New/">
+    <Project Path="CustomLevels.Bepinex_New/CustomLevelLoader.csproj" />
+  </Folder>-->
+  <Folder Name="/CustomPlantClass.RogueShootingManager/">
+    <Project Path="CustomPlantClass.RogueShootingManager/CustomPlant.RogueShootingManager.csproj" />
+  </Folder>
+  <Folder Name="/CustomPlantClass/">
+    <Project Path="CustomPlantClass/CustomPlant.csproj" />
+  </Folder>
+  <Folder Name="/f# plugin test/">
+    <Project Path="f# plugin test/FSharpPluginTest.fsproj" />
+  </Folder>
+  <!--<Folder Name="/FixCards.Bepinex/">
+    <Project Path="FixCards.Bepinex/ClickCardFix.csproj" />
+  </Folder>-->
+  <!--<Folder Name="/GargantuarHypnoEmperor.Bepinex/">
+    <Project Path="GargantuarHypnoEmperor.Bepinex/GhostlyEnchantingMushroom.csproj" />
+  </Folder>
+  <Folder Name="/GatlingUltimateChomper.Bepinex/">
+    <Project Path="GatlingUltimateChomper.Bepinex/GatlingUltimateChomper.csproj" />
+  </Folder>
+  <Folder Name="/MagnetBox.Bepinex/">
+    <Project Path="MagnetBox.Bepinex/MagnetBox.csproj" />
+  </Folder>-->
+  <Folder Name="/MegaGatlingExpansion.Bepinex/">
+    <Project Path="MegaGatlingExpansion.Bepinex/MegaGatlingPeaDLC.csproj" />
+  </Folder>
+  <Folder Name="/MowerFix.Bepinex/">
+    <Project Path="MowerFix.Bepinex/MowerFix.csproj" />
+  </Folder>
+  <Folder Name="/RemoveCrater/">
+    <Project Path="RemoveCrater/RemoveCraters.csproj" />
+  </Folder>
+  <Folder Name="/RemoveHypnoMiner.Bepinex/">
+    <Project Path="RemoveHypnoMiner.Bepinex/RemoveHypnoMiner.csproj" />
+  </Folder>
+  <Folder Name="/StarUp.Bepinex/">
+    <Project Path="StarUp.Bepinex/StarUpManager.csproj" />
+  </Folder>
+  <!--<Folder Name="/UltiDoomSniper_RogueShooting/">
+    <Project Path="UltiDoomSniper_RogueShooting/UltimateDoomSniper_RogueShooting.csproj" />
+  </Folder>
+  <Folder Name="/UltiFireThree.Bepinex/">
+    <Project Path="UltiFireThree.Bepinex/UltiFireThree.csproj" />
+  </Folder>-->
+  <Folder Name="/UltimateCherryFireShooter/">
+    <Project Path="UltimateCherryFireShooter/UltimateCherryFireShooter.Bepinex-Deconfused.csproj" />
+  </Folder>
+  <!--<Folder Name="/UltimateDoomPaperZombie-Remade/">
+    <Project Path="UltimateDoomPaperZombie-Remade/template.csproj" />
+  </Folder>-->
+  <Folder Name="/UltimateDoomSniper/">
+    <Project Path="UltimateDoomSniper/UltimateDoomSniper-2.csproj" />
+  </Folder>
+  <!--<Folder Name="/UltimateGatlingSupport/">
+    <Project Path="UltimateGatlingSupport/template.csproj" />
+  </Folder>-->
+  <Folder Name="/UltimateSniper.Bepinex/">
+    <Project Path="UltimateSniper.Bepinex/UltimateSniperAndUltimateMegaGatlingPea.csproj" />
+  </Folder>
+  <!--<Folder Name="/UltimateSwordZombie-NoWudi/">
+    <Project Path="UltimateSwordZombie-NoWudi/UltimateSwordZombie_NoWudi.csproj" />
+  </Folder>-->
+  <Folder Name="/Utils.Bepinex/">
+    <Project Path="Utils.Bepinex/Utilities.csproj" />
+  </Folder>
+  <!--<Folder Name="/VIPGoldenMelon/">
+    <Project Path="VIPGoldenMelon/VIPGoldenMelom.Bepinex.csproj" />
+  </Folder>-->
+  <!--<Project Path="CustomLevelLoader/CustomLevelLoader.csproj" />-->
+  <Project Path="CustomPlantClass.Main.BulletBehaviour/CustomPlantClass.Main.BulletBehaviour.csproj" />
+  <Project Path="CustomPlantClass.Networking/CustomPlantClass.Networking.csproj" />
+  <Project Path="CustomPlantClass.Runtime.CSharp/CustomPlantClass.Runtime.CSharp.csproj" />
+  <Project Path="CustomPlantClass.Runtime.Tasks/CustomPlantClass.Runtime.Tasks.csproj" />
+  <!--<Project Path="CustomPlantCreator/CustomPlantCreator.csproj" />-->
+  <Project Path="DaYun/DaYun.csproj" />
+  <Project Path="FireSniperPuff/FireSniperPuff.csproj" />
+  <!--<Project Path="FreezeGatlingPea/FreezeGatlingPea.csproj" />-->
+  <Project Path="JacksonBossMusic/JacksonBossMusic.csproj" />
+  <Project Path="MachineNutBuff/MachineNutBuff.csproj" />
+  <!--<Project Path="MegaGatlingExpansionRShooting/MegaGatlingExpansionRShooting.csproj" />-->
+  <Project Path="MoreBlackHorse/MoreBlackHorse.csproj" />
+  <Project Path="MoreBossSlider/MoreBossSlider.csproj" />
+  <Project Path="MoreDolphinZombie/MoreDolphinZombie.csproj" />
+  <!--<Project Path="MoreDoomGatling/MoreDoomGatling.csproj" />-->
+  <Project Path="MoreMinigun/MoreMinigun.csproj" />
+  <!--<Project Path="PlantMixTreeCreator/PlantMixTreeCreator.csproj" />-->
+  <Project Path="PortalSuperGatling/PortalSuperGatling.csproj" />
+  <!--<Project Path="RogueShootingAdventure/RogueShootingAdventure.csproj" />-->
+  <Project Path="RogueShootingRandomFormation/RogueShootingRandomFormation.csproj" />
+  <Project Path="StarPeashooter/StarPeashooter.csproj" />
+  <Project Path="SuperCherryThreeGatling/SuperCherryThreeGatling.csproj" />
+  <Project Path="SuperHammer/SuperHammer.csproj" />
+  <Project Path="UltimateArtillerySpike/UltimateArtillerySpike.csproj" />
+  <Project Path="UltimateGatlingBloverBuff.Bepinex/UltimateGatlingBloverBuff.Bepinex.csproj" />
+  <Project Path="UltimateIFV/UltimateIFV.csproj" />
+  <Project Path="UltimatePlanternSkin/UltimatePlanternSkin.csproj" />
+  <!--<Project Path="UltimateRepeater/UltimateRepeater.csproj" />
+  <Project Path="UltimateSniper_FlameGatlingRShooting/UltimateSniper_FlameGatlingRShooting.csproj" />-->
+  <Project Path="UltimateSolarCoronaCabbage/UltimateSolarCoronaCabbage.csproj" />
+  <Project Path="zombossleveladdon/zombossleveladdon.csproj" />
+</Solution>

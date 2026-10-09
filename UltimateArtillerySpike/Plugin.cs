@@ -13,6 +13,7 @@ global using CustomPlantClass.Runtime;
 global using CustomPlantClass.RogueShootingManager;
 global using GameLevel.RogueShooting;
 global using CustomPlantClass.Runtime.Tasks;
+using Unity.VisualScripting;
 namespace UltimateArtillerySpike
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -221,65 +222,31 @@ namespace UltimateArtillerySpike
         public override void OnSpawn()
         {
             plant.isShort = true;
-            UpdateLoop();
         }
-        public async void UpdateLoop()
+        private float cd = 1.0f;
+        public override void OnFixedUpdate()
         {
-            try
+            cd-=Time.fixedDeltaTime;
+            if(cd>0f) return;
+            else cd = 1.0f;
+            if( _plant == null || _plant.IsDestroyed() )
             {
-                while (!token.IsCanceled)
+                if (!this.IsDestroyed())
                 {
-                    try
-                    {
-                        try
-                        {
-                            if( _plant == null ) return;
-                        }
-                        catch
-                        {
-                            return;
-                        }
-                        await DelayTask.DelayScaled(1f,()=>_plant.attributeSpeed,token);
-                        for( int i = 0; i < _plant.shootingLevel; i++)
-                        {
-                            if( _plant == null ) return;
-                            AccumulatedEnergy ++;
-                            if(AccumulatedEnergy > MaxEnergy())
-                            {
-                                isSuper = true;
-                                AccumulatedEnergy = 0;
-                            }
-                            StoredBullets.Enqueue((Plugin.DataContainer.BulletId,_plant.attackDamage));
-                            _plant.anim.SetTriggerString("supply");
-                        }
-                    }
-                    catch( Exception e )
-                    {
-                        try
-                        {
-                            if(e.Message.Contains(":line 235"))
-                            {
-                                return;
-                            }
-                            ModLogger.LogError(e.Message);
-                        }
-                        catch ( Exception )
-                        {
-                            
-                        }
-                    }
+                    Destroy(this);
                 }
+                return;
             }
-            catch( Exception e )
+            for( int i = 0; i < _plant.shootingLevel; i++)
             {
-                try
+                AccumulatedEnergy ++;
+                if(AccumulatedEnergy > MaxEnergy())
                 {
-                    ModLogger.LogError(e.Message);
+                    isSuper = true;
+                    AccumulatedEnergy = 0;
                 }
-                catch ( Exception )
-                {
-                    
-                }
+                StoredBullets.Enqueue((Plugin.DataContainer.BulletId,_plant.attackDamage));
+                _plant.anim.SetTriggerString("supply");
             }
         }
         public void OnBulletHitLand(Bullet bullet)

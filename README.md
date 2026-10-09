@@ -54,9 +54,9 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 - [x] Runtime compilation of mods
 - [x] An interrupt system
 - [x] Full support for the easier .NET based F# language
+- [x] Sub frame timing in the async state machine runner
 - [ ] A way to run mods in Lua
 - [ ] A visual plant creator that allows modders or designers to create plants with minimal coding
-- [ ] Sub frame timing in the async state machine runner
 - [ ] A repl for compiling code at runtime
 
 [⬆️ Back to table of contents](#table-of-contents)

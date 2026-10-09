@@ -52,6 +52,8 @@ namespace CustomPlantClass
             }
         }
 
+        
+
         private void SetStartPosition()
         {
             // EXACT Solar Eclipse Bomb arc logic

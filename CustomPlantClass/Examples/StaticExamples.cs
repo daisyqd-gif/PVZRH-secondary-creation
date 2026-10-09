@@ -197,6 +197,37 @@ namespace CustomPlantClass.Examples
                 ModLogger.LogError(exception.ToString());
             }
         }
+        public static void KillAllZombies()
+        {
+            foreach( var i in Lawnf.GetAllZombies(Board.Instance).ToSystemList()) 
+            {
+                i.Die(1);
+            }
+        }
+        public static void CreateRadiation(Board board, Vector2 pos, PlantType fromType = PlantType.NuclearDoomCherry, int damage = 3600)
+        {
+            GameObject gameObject = Instantiate(Resources.Load<GameObject>("plants/cherrybomb/nucleardoomcherry/Radiation"),pos,Quaternion.identity,board.transform);
+            Radiation component = gameObject.GetComponent<Radiation> ();
+            component.fromType = fromType;
+            component.damage = damage;
+        }
+        public static (Crater,Doom) CreateNuclearCherry(Board board, int row, int col, int damage = 3600, bool enableRadiation = true, PlantType fromType = PlantType.NuclearDoomCherry,int bulletOffsetDegree = 10, bool isCrater = true)
+        {
+            Crater crater = board.boardAction.SetDoom (col, row, isCrater,false,default,0,0,null,false,fromType,0);
+            Vector2 pos = new(Mouse.Instance.GetBoxXFromColumn(col),Mouse.Instance.GetBoxYFromRow(row));
+            Doom doom = Doom.SetDoom (board, pos, DoomType.Nuclear, null, true);
+            if(enableRadiation)
+                CreateRadiation(board,pos,fromType,damage);
+            for( int i = 0 ; i < 360 ; i += bulletOffsetDegree)
+            {
+                Bullet bullet = CreateBullet.Instance.SetBullet (pos.x, pos.y, row, BulletType.Bullet_nuclear, BulletMoveWay.Free, false);
+                bullet.Damage = damage;
+                bullet.transform.Rotate(0,0,i);
+                bullet.normalSpeed = 10f;
+                bullet.fromType = fromType;
+            }
+            return (crater,doom);
+        }
     }
 
     public static class UltimateTorchBehaviour

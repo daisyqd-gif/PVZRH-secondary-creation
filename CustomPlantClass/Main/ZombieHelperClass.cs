@@ -187,5 +187,28 @@ namespace CustomPlantClass.Main
                 }
             }
         }
+        /// <summary>
+        /// Gets the closest zombies closest to a position
+        /// </summary>
+        public static IEnumerable<Zombie> GetClosestZombies(int amount, Vector2 origin, bool containsMindControlled = false, Func<Zombie,bool> selector = default)
+        {
+            List<(float,Zombie)> zombies = new();
+            Func<Zombie,bool> select = null;
+            if(selector == null)  select = (z) => containsMindControlled || !z.isMindControlled;
+            else select = (z) => (containsMindControlled || !z.isMindControlled) && selector(z);
+            foreach( var i in Lawnf.GetAllZombies(select))
+            {
+                float dist = Vector2.Distance(i.axis.position,origin);
+                zombies.Add((dist,i));
+            }
+
+            if (zombies.Count <= amount)
+                return zombies.Select(t => t.Item2);
+
+            return zombies
+                .OrderBy(t => t.Item1)
+                .Take(amount)
+                .Select(t => t.Item2);
+        }
     }
 }

@@ -23,48 +23,62 @@
         "runtime": {
           "lib/net6.0/Microsoft.CodeAnalysis.dll": {
             "assemblyVersion": "4.8.0.0",
-            "fileVersion": "4.800.23.55801"
+            "fileVersion": "4.800.23.55801",
+            "localPath": "Microsoft.CodeAnalysis.dll"
           }
         },
         "resources": {
           "lib/net6.0/cs/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "cs"
+            "locale": "cs",
+            "localPath": "cs/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/de/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "de"
+            "locale": "de",
+            "localPath": "de/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/es/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "es"
+            "locale": "es",
+            "localPath": "es/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/fr/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "fr"
+            "locale": "fr",
+            "localPath": "fr/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/it/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "it"
+            "locale": "it",
+            "localPath": "it/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/ja/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "ja"
+            "locale": "ja",
+            "localPath": "ja/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/ko/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "ko"
+            "locale": "ko",
+            "localPath": "ko/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/pl/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "pl"
+            "locale": "pl",
+            "localPath": "pl/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/pt-BR/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "pt-BR"
+            "locale": "pt-BR",
+            "localPath": "pt-BR/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/ru/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "ru"
+            "locale": "ru",
+            "localPath": "ru/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/tr/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "tr"
+            "locale": "tr",
+            "localPath": "tr/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "zh-Hans"
+            "locale": "zh-Hans",
+            "localPath": "zh-Hans/Microsoft.CodeAnalysis.resources.dll"
           },
           "lib/net6.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll": {
-            "locale": "zh-Hant"
+            "locale": "zh-Hant",
+            "localPath": "zh-Hant/Microsoft.CodeAnalysis.resources.dll"
           }
         }
       },
@@ -75,48 +89,62 @@
         "runtime": {
           "lib/net6.0/Microsoft.CodeAnalysis.CSharp.dll": {
             "assemblyVersion": "4.8.0.0",
-            "fileVersion": "4.800.23.55801"
+            "fileVersion": "4.800.23.55801",
+            "localPath": "Microsoft.CodeAnalysis.CSharp.dll"
           }
         },
         "resources": {
           "lib/net6.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "cs"
+            "locale": "cs",
+            "localPath": "cs/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "de"
+            "locale": "de",
+            "localPath": "de/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "es"
+            "locale": "es",
+            "localPath": "es/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "fr"
+            "locale": "fr",
+            "localPath": "fr/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "it"
+            "locale": "it",
+            "localPath": "it/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "ja"
+            "locale": "ja",
+            "localPath": "ja/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "ko"
+            "locale": "ko",
+            "localPath": "ko/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "pl"
+            "locale": "pl",
+            "localPath": "pl/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "pt-BR"
+            "locale": "pt-BR",
+            "localPath": "pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "ru"
+            "locale": "ru",
+            "localPath": "ru/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "tr"
+            "locale": "tr",
+            "localPath": "tr/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "zh-Hans"
+            "locale": "zh-Hans",
+            "localPath": "zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll"
           },
           "lib/net6.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll": {
-            "locale": "zh-Hant"
+            "locale": "zh-Hant",
+            "localPath": "zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll"
           }
         }
       },
@@ -124,7 +152,8 @@
         "runtime": {
           "lib/net6.0/System.Collections.Immutable.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "fileVersion": "7.0.22.51805",
+            "localPath": "System.Collections.Immutable.dll"
           }
         }
       },
@@ -135,7 +164,8 @@
         "runtime": {
           "lib/net6.0/System.Reflection.Metadata.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "fileVersion": "7.0.22.51805",
+            "localPath": "System.Reflection.Metadata.dll"
           }
         }
       }

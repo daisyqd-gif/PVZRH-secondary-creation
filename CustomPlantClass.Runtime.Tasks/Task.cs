@@ -1,7 +1,3 @@
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-
 namespace CustomPlantClass.Runtime.Tasks
 {
     /// <summary>
@@ -498,7 +494,13 @@ namespace CustomPlantClass.Runtime.Tasks
             }
         }
         public static float prevTime = Time.time;
+        /*
         public void Update()
+        {
+            OnPlayerLoop();
+        }
+        */
+        public static void OnPlayerLoop()
         {
             float dt = Time.time - prevTime;
             prevTime = Time.time;
@@ -576,7 +578,7 @@ namespace CustomPlantClass.Runtime.Tasks
         }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        public void Update()
+        public static void OnPlayerLoop()
         {
             for (int i = entries.Count - 1; i >= 0; i--)
             {

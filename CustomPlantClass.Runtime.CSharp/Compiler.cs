@@ -185,7 +185,7 @@ namespace CustomPlantClass.Runtime.CSharp
                 using var stream = asm.GetManifestResourceStream("CustomPlantClass.Runtime.CSharp.Project.txt");
                 using var reader = new StreamReader(stream!);
                 string project = reader.ReadToEnd();
-                File.WriteAllText("Project.csproj", project);
+                File.WriteAllText(Path.Combine(Paths.PluginPath,"ModScripts","Project.csproj"), project);
                 Plugin.Instance.Logger.LogInfo("Project.csproj created successfully.");
             }
         }

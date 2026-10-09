@@ -134,6 +134,6 @@ namespace Template
     {
         public const string PluginGuid = "Template.Bepinex";
         public const string PluginName = "Template";
-        public const string PluginVersion = "3.7";
+        public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
     }
 }

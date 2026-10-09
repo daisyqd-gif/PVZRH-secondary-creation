@@ -31,3 +31,5 @@ packages/
 *.tmp
 *.temp
 *.bak
+
+.fake

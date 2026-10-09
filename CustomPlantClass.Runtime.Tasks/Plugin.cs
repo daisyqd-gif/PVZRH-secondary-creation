@@ -5,7 +5,14 @@ global using Il2CppInterop.Runtime.Injection;
 global using System;
 global using UnityEngine;
 global using System.Collections.Generic;
-global using static CustomPlantClass.Runtime.Tasks.CancellationTokenExt;
+global using System.Threading.Tasks;
+global using UnityEngine.LowLevel;
+global using HarmonyLib;
+global using System.Reflection;
+global using Il2CppInterop.Runtime;
+global using UnityEngine.PlayerLoop;
+global using System.Runtime.CompilerServices;
+global using Unity.VisualScripting;
 namespace CustomPlantClass.Runtime.Tasks
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -14,57 +21,103 @@ namespace CustomPlantClass.Runtime.Tasks
         public override void Load()
         {
             ClassInjector.RegisterTypeInIl2Cpp<DelayScheduler>();
+            ClassInjector.RegisterTypeInIl2Cpp<PlayerLoopTask>();
             ClassInjector.RegisterTypeInIl2Cpp<WaitUntilScheduler>();
-            ClassInjector.RegisterTypeInIl2Cpp<MonobehaviourCancellationToken>();
+            ClassInjector.RegisterTypeInIl2Cpp<CancellationTokenExt.MonobehaviourCancellationToken>();
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
             AddComponent<DelayScheduler>();
             AddComponent<WaitUntilScheduler>();
-
-            /*
-            ClassInjector.RegisterTypeInIl2Cpp<PlayerLoopMgr>();
-            var insert = new PlayerLoopSystem();
-            var action = PlayerLoopMgr.Do;
-            insert.updateDelegate = action;
-            insert.type = Il2CppType.From(typeof(PlayerLoopMgr));
-            insert.subSystemList = null;
-            insert.loopConditionFunction = IntPtr.Zero;
-            InsertPlayerLoop(insert, typeof(Update));
-        }
-        private static void InsertPlayerLoop(PlayerLoopSystem loopSystem, Type targetType)
-        {
-            var origin = PlayerLoop.GetCurrentPlayerLoop();
-            if (origin == null) return;
-            if (origin.subSystemList == null) origin.subSystemList = new Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppReferenceArray<PlayerLoopSystem>(0);
-            for (int i = 0; i < origin.subSystemList.Length; i++)
-            {
-                var item = origin.subSystemList[i];
-                if (item.type == Il2CppType.From(targetType))
-                {
-                    var oldSystems = item.subSystemList;
-                    var newSystems = new Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppReferenceArray<PlayerLoopSystem>(oldSystems.Length + 1);
-                    newSystems[0] = loopSystem;
-                    oldSystems.CopyTo(newSystems, 1);
-                    item.subSystemList = newSystems;
-                    origin.subSystemList[i] = item;
-                    break;
-                }
-            }
-            PlayerLoop.SetPlayerLoop(origin);//*/
+            PlayerLoopTask.AddToPlayerLoop(() => PlayerLoopTask.OnPlayerLoop());
         }
     }
-    /*
-    public class PlayerLoopMgr : Il2CppSystem.Object
-    {
-        public static void Do()
-        {
-            DelayScheduler.OnPlayerLoop();
-            WaitUntilScheduler.OnPlayerLoop();
-        }
-    }//*/
 
     public class MyPluginInfo
     {
         public const string PluginGuid = "CustomPlantClass.Runtime.Tasks.Bepinex";
         public const string PluginName = "CustomPlantClass.Runtime.Tasks";
         public const string PluginVersion = "1.0.0";
+    }
+    /// <summary>
+    /// Helper for registering events that run on player loop update
+    /// </summary>
+    public class PlayerLoopTask : Il2CppSystem.Object
+    {
+        private static readonly List<Action> Run = new();
+
+        /// <summary>
+        /// Registers an even that runs every 
+        /// </summary>
+        /// <param name="run"></param>
+        public static void AddRunAction(Action run)
+        {
+            if (run != null) Run.Add(run);
+        }
+        public static void AddToPlayerLoop(Action run, Type type = null)
+        {
+            bool useUniqueType = false;
+            if(type != null && type.IsAssignableFrom(typeof(Il2CppSystem.Object)))
+            {
+                if(ClassInjector.IsTypeRegisteredInIl2Cpp(type))
+                    ClassInjector.RegisterTypeInIl2Cpp(type);
+                useUniqueType = true;
+            }
+            PlayerLoopSystem pl = PlayerLoop.GetCurrentPlayerLoop();
+            PlayerLoopSystem playerLoopSystem = new()
+            {
+                updateDelegate = run,
+                type = Il2CppType.From(useUniqueType ? type : typeof(PlayerLoopTask))
+            };
+            PlayerLoop.SetPlayerLoop(InsertSystemAfter<Update>(in pl,playerLoopSystem));
+            AddRunAction(DelayScheduler.OnPlayerLoop);
+            AddRunAction(WaitUntilScheduler.OnPlayerLoop);
+        }
+
+        public static void OnPlayerLoop()
+        {
+            var count = Run.Count;
+            for (int i = 0; i < count; i++)
+            {
+                try
+                {
+                    Run[i]?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex.ToString());
+                }
+            }
+        }
+        
+        internal static PlayerLoopSystem InsertSystemAfter<T>(in PlayerLoopSystem loopSystem, PlayerLoopSystem newSystem) where T : struct
+        {
+            // Create a new root PlayerLoopSystem
+            PlayerLoopSystem newPlayerLoop = new()
+            {
+                loopConditionFunction = loopSystem.loopConditionFunction,
+                type = loopSystem.type,
+                updateDelegate = loopSystem.updateDelegate,
+                updateFunction = loopSystem.updateFunction
+            };
+            // Create a new list to populate with subsystems, including the custom system
+            List<PlayerLoopSystem> newSubSystemList = new();
+
+            //Iterate through the subsystems in the existing loop we passed in and add them to the new list
+            if (loopSystem.subSystemList != null)
+            {
+                for (var i = 0; i < loopSystem.subSystemList.Length; i++)
+                {
+                    newSubSystemList.Add(loopSystem.subSystemList[i]);
+                    // If the previously added subsystem is of the type to add after, add the custom system
+                    if (loopSystem.subSystemList[i].type == Il2CppType.From(typeof(T)))
+                    {
+                        newSubSystemList.Add(newSystem);
+                        Debug.Log("Added system to playerloop");
+                    }
+                }
+            }
+
+            newPlayerLoop.subSystemList = newSubSystemList.ToArray();
+            return newPlayerLoop;
+        }
     }
 }

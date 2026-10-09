@@ -43,6 +43,76 @@
             <param name="bg">背景</param>
             <returns></returns>
         </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.OnSpawn">
+            <summary>
+            Called one frame after the object is created, original method is empty to allow for skipping the base call
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.OnDie(Plant.DieReason)">
+            <summary>
+            Called when killed, original method is empty to allow for skipping the base call
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.OnUpdate">
+            <summary>
+            Called every physics frame, original method is empty to allow for skipping the base call
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.SetTextStyle(TMPro.TextMeshPro)">
+            <summary>
+            Sets the plant's custom text style
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.SetTextColor">
+            <summary>
+            Sets the plant's custom text color
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetTextSize">
+            <summary>
+            Sets the plant's custom text size
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetTextString">
+            <summary>
+            Sets the plant's custom text, called every frame to update the text
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetLiveInfo">
+            <summary>
+            Shows up in the plant data menu
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.FindShoot">
+            <summary>
+            Locates the plant's shoot transform (can be empty for some plants that don't need it)
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetShootPath">
+            <summary>
+            Gets the plant's shoot path from root
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetBulletType">
+            <summary>
+            Gets the plant's bullet type (defaulted for plants registered through datamgr)
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetBulletType2">
+            <summary>
+            Gets the plant's alternate bullet type (calls GetBulletType() if not overriden)
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetBulletMoveWay">
+            <summary>
+            Gets the plant's bullet move way
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.BaseCustomPlant.GetBulletMoveWay2">
+            <summary>
+            Gets the plant's alternate move way (calls GetBulletMoveWay() if not overriden)
+            </summary>
+        </member>
         <member name="T:CustomPlantClass.EffectsMgr">
             <summary>
             Provides extension methods for adding, retrieving, and removing
@@ -1010,7 +1080,7 @@
         </member>
         <member name="T:CustomPlantClass.Main.CustomItemType">
             <summary>
-            s
+            :)
             </summary>
         </member>
         <member name="M:CustomPlantClass.Main.CustomItemType.op_Implicit(CustomPlantClass.Main.CustomItemType)~System.Int32">
@@ -2370,6 +2440,11 @@
             Instantly kills a zombie and crushes it
             </summary>
             <param name="self">The zombie to be crushed</param>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.StunZombie(Zombie,System.Single,System.Action{Zombie},System.Action{Zombie},UnityEngine.Vector2)">
+            <summary>
+            Stuns a zombie
+            </summary>
         </member>
         <member name="T:CustomPlantClass.PluginBehaviour">
             <summary>
