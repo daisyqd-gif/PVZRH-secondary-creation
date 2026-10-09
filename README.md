@@ -100,9 +100,9 @@ global using System.Reflection;
 global using UnityEngine;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
-global using Random = UnityEngine.Random
-using System.Threading.Tasks;
-using CustomPlantClass.Runtime.Tasks;
+global using Random = UnityEngine.Random;
+global using System.Threading.Tasks;
+global using CustomPlantClass.Runtime.Tasks;
 
 namespace GatlingPea
 {
@@ -316,6 +316,90 @@ namespace GatlingPea
 
 [⬆️ Back to table of contents](#table-of-contents)
 
+## F# mod support
+![f#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=Made+with&secondaryLabel=F%23&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&primaryIcon=fsharp&primaryIconColor=%23FFFFFF&primaryIconSize=16&primaryIconPosition=left)
+
+F# mods are supported by this framework. First, install `Ionide for F#` from the visual studio code marketplace. Then, make a .fsproj file named the name of your mod.
+```fsproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+
+    <!-- Output DLLs into combinemod/Build -->
+    <OutputPath>$(MSBuildThisFileDirectory)..\Build\</OutputPath>
+
+    <!-- IL2CPP mods don't need dependency/runtime files -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
+
+  <!-- Import shared references -->
+  <Import Project="$(MSBuildThisFileDirectory)..\ModReferences.props" />
+
+</Project>
+```
+After, make a .fs file that has the same structure as a normal mod.
+```fsharp
+namespace TestPlugin
+open BepInEx.Unity.IL2CPP
+open BepInEx
+open CustomPlantClass
+
+[<BepInPlugin("FSharpPluginTest", "F#", "1.0.0")>]
+type Plugin () =
+    inherit BasePlugin()
+
+    override this.Load(): unit =
+        ModLogger.LogInfo("F# test plugin", "Load successful!")
+```
+> Note: use the [Microsoft F# guide](https://learn.microsoft.com/en-us/dotnet/fsharp/)
+> You must also have .Net 8.0 installed with the F# runtime.
+
+## Compile-on-the-go mods
+![c#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=.Net&secondaryLabel=10&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase)
+
+Some mods are not big enough to need their own compiled plugin. Runtime mod compilation is when your mods are compiled at runtime.
+
+An example of a mod:
+```csharp
+using HarmonyLib;
+using System.Reflection;
+using CustomPlantClass.Runtime.CSharp;
+using Core;
+using CustomPlantClass;
+public class LogAllErrors : ICompilableScript
+{
+    public string Name => "LogAllErrors";
+
+    public void Main()
+    {
+        Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),"LogAllErrors_Harmony");
+    }
+
+    public void Dispose()
+    {
+        Harmony.UnpatchID("LogAllErrors_Harmony");
+    }
+}
+[HarmonyPatch(typeof(InGameText), nameof(InGameText.ShowText))]
+public static class InGameText_ShowText_Patch
+{
+    [HarmonyPostfix]
+    public static void Postfix(string text)
+    {
+        if (text.Contains("错误信息："))
+        {
+            ModLogger.LogError("InGameText",text);
+        }
+    }
+}
+```
+
+> Note: mods require `CustomPlantClass.Runtime.CSharp.dll` to load. 
+
 ## ❗Known Bugs
 
 <details>
@@ -326,7 +410,7 @@ namespace GatlingPea
 | Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Don't |
 | Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Wrap all async methods with try/catch blocks |
 | System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) |  |
-| Index out of range exception thrown in the curtom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Ignore this bug, it doesn't break anyting. |
+| Index out of range exception thrown in the custom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Ignore this bug, it doesn't break anyting. |
 | Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. Replace those mods with hengming's rogue shooting catalog. |
 | Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
 | Some mods are missing from the release. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Those mods are not ready for release. |
