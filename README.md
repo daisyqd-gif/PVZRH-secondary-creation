@@ -48,13 +48,12 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 - [x] Registries and an event manager for cross mod communication
 - [x] Custom structs and data types for easier data storage
 - [x] A central command dispatcher for mods to communicate with each other and external apps via TCP
-- [x] An async state machine runner that replaces UniTask and Task.Delay
+- [x] An async state machine runner that replaces UniTask and Task.Delay with sub frame timing
 - [x] Python like support for collections
 - [x] A bridge for converting data from Il2cpp collections to managed collections
 - [x] Runtime compilation of mods
 - [x] An interrupt system
 - [x] Full support for the easier .NET based F# language
-- [x] Sub frame timing in the async state machine runner
 - [ ] A way to run mods in Lua
 - [ ] A visual plant creator that allows modders or designers to create plants with minimal coding
 - [ ] A repl for compiling code at runtime
