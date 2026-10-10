@@ -1,3 +1,5 @@
+using CustomPlantClass.Runtime.Tasks;
+
 namespace CustomPlantClass.Examples
 {
 
@@ -18,25 +20,33 @@ namespace CustomPlantClass.Examples
             }
             return PlantMgr.SetBullet(_plant, GetBulletType(), BulletMoveWay.MoveRight);
         }
-        public override IEnumerator SuperShoot()
+        protected override bool IsAsyncPF => true;
+        protected override async Task SuperShoot_Async()
         {
-            _plant.anim.SetBoolString("shooting", true);
-            for (int i = 0; i < 250; i++)
+            try
             {
-                for (int j = 0; j < 5; j++)
-                    PlantMgr.SetBullet
-                    (
-                        _plant,
-                        GetBulletType(),
-                        GetBulletMoveWayPF_SuperGatling(),
-                        AttackDamage,
-                        new Vector2(0, Random.Range(-0.15f, 0.15f)), Random.Range(-15f, 15f)
-                    ).normalSpeed = Random.Range(12f, 14f);
-                _plant.thePlantAttackCountDown = 10f;
-                yield return new WaitForFixedUpdate();
+                _plant.anim.SetBoolString("shooting", true);
+                for (int i = 0; i < 250; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                        PlantMgr.SetBullet
+                        (
+                            _plant,
+                            GetBulletType(),
+                            GetBulletMoveWayPF_SuperGatling(),
+                            AttackDamage,
+                            new Vector2(0, Random.Range(-0.15f, 0.15f)), Random.Range(-15f, 15f)
+                        ).normalSpeed = Random.Range(12f, 14f);
+                    _plant.thePlantAttackCountDown = 10f;
+                    await DelayTask.DelayScaled(0.02f,()=>_plant.attributeSpeed,token);
+                }
+                _plant.thePlantAttackCountDown = 0.05f;
+                _plant.anim.SetBoolString("shooting", false);
             }
-            _plant.thePlantAttackCountDown = 0.05f;
-            _plant.anim.SetBoolString("shooting", false);
+            catch( Exception e)
+            {
+                ModLogger.LogError(e.ToString());
+            }
         }
         public override void SuperEnd()
         {

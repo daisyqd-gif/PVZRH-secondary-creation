@@ -237,7 +237,7 @@ namespace UltimateDoomSniper
             BaseConfig cfg2 = RegistryHelper.MakeConfigType(new()
             {
                 CustomPlantType = PlantID_Sniper2,
-                CustomBuffs = () => new(){ new DamageBuff(PlantID), new SpeedBuff(PlantID), buffConfig },
+                CustomBuffs = () => new(){ new DamageBuff(PlantID_Sniper2), new SpeedBuff(PlantID_Sniper2), buffConfig },
                 CustomReinforcePlant = (Plant plant) => plant.ModifyDamage(PlantDamageAdder.Shooting, 14.0f, false, new Il2CppSystem.Nullable<float>(float.MaxValue)),
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });

@@ -17,6 +17,9 @@
   <Folder Name="/CustomPlantClass/">
     <Project Path="CustomPlantClass/CustomPlant.csproj" />
   </Folder>
+  <Folder Name="/EvilSuperGatling/">
+    <Project Path="EvilSuperGatling/EvilSuperGatling.csproj" />
+  </Folder>
   <Folder Name="/f# plugin test/">
     <Project Path="f# plugin test/FSharpPluginTest.fsproj" />
   </Folder>
@@ -43,6 +46,9 @@
   </Folder>
   <Folder Name="/RemoveHypnoMiner.Bepinex/">
     <Project Path="RemoveHypnoMiner.Bepinex/RemoveHypnoMiner.csproj" />
+  </Folder>
+  <Folder Name="/RedLunar_RShooting/">
+    <Project Path="RedLunar_RShooting/UltimateRedLunar_RogueShooting.csproj" />
   </Folder>
   <Folder Name="/StarUp.Bepinex/">
     <Project Path="StarUp.Bepinex/StarUpManager.csproj" />

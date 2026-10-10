@@ -687,6 +687,20 @@ namespace CustomPlantClass
             return true;
         }
     }
+    [HarmonyPatch(typeof(Bullet_sword))]
+    public static class Bullet_sword_Patch
+    {
+        [HarmonyPatch(nameof(Bullet_sword.HitZombie))]
+        [HarmonyPrefix]
+        public static bool HitZombie_Prefix(Bullet_sword __instance, Zombie zombie)
+        {
+            if (__instance.TryGetComponent<BaseCustomBullet>(out var a))
+            {
+                return a.HitZombie(zombie);
+            }
+            return true;
+        }
+    }
     [HarmonyPatch(typeof(Bullet))]
     public static class Bullet_Patch
     {

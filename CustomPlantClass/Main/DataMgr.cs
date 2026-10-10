@@ -871,6 +871,94 @@ namespace CustomPlantClass.Main
             return sb.ToString();
         }
         /// <summary>
+        /// Builds formatted almanac text for a plant
+        /// from its introduction and optional details.
+        /// </summary>
+        public static string CreateAlmanacEntry(
+            string introduction,
+            string specialtext = "removeifthisisdefaulted",
+            (string, string) recipe = default,
+            (string damage, float interval) attackinterval = default,
+            (string amount, float interval, string unit) produceinterval = default,
+            string[]? specialeffects = null,
+            (string, string) variantswitch = default,
+            string feature = "removeifthisisdefaulted",
+            string creator = "removeifthisisdefaulted",
+            string usageconditions = "removeifthisisdefaulted",
+            string flavor = "removeifthisisdefaulted")
+        {
+            specialeffects ??= Array.Empty<string>();
+
+            string[] skillNumber =
+            {
+                "①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩",
+                "⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳"
+            };
+
+            var sb = new StringBuilder();
+
+            // Introduction
+            sb.AppendLine(introduction);
+            sb.AppendLine();
+
+            // Special text (blue highlight)
+            if (specialtext != "removeifthisisdefaulted")
+            {
+                sb.AppendLine($"<color=#0000FF>{specialtext}</color>");
+                sb.AppendLine();
+            }
+
+            // Creator
+            if (creator != "removeifthisisdefaulted")
+                sb.AppendLine($"<color=#3D1400>作者：</color><color=red>{creator}</color>");
+
+            // Usage conditions
+            if (usageconditions != "removeifthisisdefaulted")
+                sb.AppendLine($"<color=#3D1400>使用条件：</color><color=red>{usageconditions}</color>");
+
+            // Recipe (optional for infuseable plants)
+            if (recipe != default)
+                sb.AppendLine($"<color=#3D1400>融合配方：</color><color=red>{recipe.Item1}+{recipe.Item2}</color>");
+
+            // Variant switch
+            if (variantswitch != default)
+                sb.AppendLine($"<color=#3D1400>转化配方：</color><color=red>{variantswitch.Item1}←→{variantswitch.Item2}</color>");
+
+            // Attack interval
+            if (attackinterval != default)
+                sb.AppendLine($"<color=#3D1400>伤害：</color><color=red>{attackinterval.damage}/{attackinterval.interval}秒</color>");
+
+            // Produce interval
+            if (produceinterval != default)
+                sb.AppendLine($"<color=#3D1400>生产：</color><color=red>{produceinterval.amount}{produceinterval.unit}/{produceinterval.interval}秒</color>");
+
+            // Feature
+            if (feature != "removeifthisisdefaulted")
+                sb.AppendLine($"<color=#3D1400>特性：</color><color=red>{feature}</color>");
+
+            // Special effects list
+            if (specialeffects.Length > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("<color=#3D1400>特点：</color><color=red>");
+                for (int i = 0; i < specialeffects.Length; i++)
+                {
+                    string num = i < skillNumber.Length ? skillNumber[i] : $"({i + 1})";
+                    sb.AppendLine($"{num}{specialeffects[i]}");
+                }
+                sb.AppendLine("</color>");
+            }
+
+            // Flavor text
+            if (flavor != "removeifthisisdefaulted")
+            {
+                sb.AppendLine();
+                sb.AppendLine($"<color=#3D1400>{flavor}</color>");
+            }
+
+            return sb.ToString();
+        }
+        /// <summary>
         /// Registers a chance-based transformation from one plant type
         /// to another using the specified percentage.
         /// </summary>

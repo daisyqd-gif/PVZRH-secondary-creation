@@ -780,6 +780,12 @@
             from its introduction and optional details.
             </summary>
         </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.CreateAlmanacEntry(System.String,System.String,System.ValueTuple{System.String,System.String},System.ValueTuple{System.String,System.Single},System.ValueTuple{System.String,System.Single,System.String},System.String[],System.ValueTuple{System.String,System.String},System.String,System.String,System.String,System.String)">
+            <summary>
+            Builds formatted almanac text for a plant
+            from its introduction and optional details.
+            </summary>
+        </member>
         <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Single)">
             <summary>
             Registers a chance-based transformation from one plant type
@@ -2444,6 +2450,11 @@
         <member name="M:CustomPlantClass.Main.ZombieMgr.StunZombie(Zombie,System.Single,System.Action{Zombie},System.Action{Zombie},UnityEngine.Vector2)">
             <summary>
             Stuns a zombie
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.ZombieMgr.GetClosestZombies(System.Int32,UnityEngine.Vector2,System.Boolean,System.Func{Zombie,System.Boolean})">
+            <summary>
+            Gets the closest zombies closest to a position
             </summary>
         </member>
         <member name="T:CustomPlantClass.PluginBehaviour">

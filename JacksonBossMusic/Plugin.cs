@@ -160,19 +160,19 @@ namespace JacksonBossMusic
             }
         }
     }
-    [HarmonyPatch(typeof(Lawnf), nameof(Lawnf.SetMusic))]
-    public static class Lawnf_SetMusic_Patch
+    [HarmonyPatch(typeof(GameAPP), nameof(GameAPP.PlayMusic))]
+    public static class GameAP_PlayMusic_Patch
     {
         [HarmonyPostfix]
-        public static void Postfix(Board board)
+        public static void Prefix(ref MusicType id)
         {
             if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141986) || GameAPP.soundManager.musics[(MusicType)2141986] != null)
             {
                 GameAPP.soundManager.musics[(MusicType)2141986] = BossMusicManager.Clip_LiuKun;
             }
-            if(board.sceneType == SceneType.Desert)
+            if(ShootingManager.Instance != null && ShootingManager.Instance.scene3 == SceneType.Desert && ShootingManager.Instance.stage == 3)
             {
-                GameAPP.Instance.PlayMusic((MusicType)2141986);
+                id=(MusicType)2141986;
             }
         }
     }

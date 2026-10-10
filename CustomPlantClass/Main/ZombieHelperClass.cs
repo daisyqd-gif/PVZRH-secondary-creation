@@ -16,6 +16,7 @@ namespace CustomPlantClass.Main
         {
             self.theSecondArmorHealth = 0;
             self.TakeDamage(1, self, DamageType.Normal); //It wants an Idamagemaker so I put itself in
+            self.SecondArmorFall();
         }
         /// <summary>
         /// Makes a newspaper zombie lose its newspaper.
@@ -25,6 +26,7 @@ namespace CustomPlantClass.Main
         {
             self.theSecondArmorHealth = 0;
             self.TakeDamage(1, self, DamageType.Normal); //It wants an Idamagemaker so I put itself in
+            self.SecondArmorFall();
         }
         /// <summary>
         /// Instantly kills a zombie and makes it fly away
