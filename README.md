@@ -435,6 +435,7 @@ public static class InGameText_ShowText_Patch
 | CustomPlantClass.Main.BulletBehaviour | Custom bullet moveway support | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant |  |
 | CustomPlantClass.Networking | TCP support for mods that need to communicate | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | None |  |
 | CustomPlantClass.Runtime.Tasks | Async support for mods, required by all mods | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | None |  |
+| EvilSuperGatling | Check almanac, inspired by pvz horror edition. | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant | ![Preview](https://raw.githubusercontent.com/daisyqd-gif/pvzrh-mod-resources/refs/heads/main/Screenshot%202026-10-09%20214512.png) |
 | FireSniperPuff | Check almanac | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152732.png?raw=true) |
 | MachineNutBuff | Machine nut effect buff | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) |  |  |
 | MegaGatlingPeaDLC | 请输入文字 | ![Status](https://img.shields.io/badge/Active-green?style=flat-square) | CustomPlant.RogueShootingManager, CustomPlant | ![Preview](https://github.com/daisyqd-gif/pvzrh-mod-resources/blob/main/Screenshot%202026-09-13%20152546.png?raw=true) |
