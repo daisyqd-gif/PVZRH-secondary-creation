@@ -410,6 +410,7 @@ public static class InGameText_ShowText_Patch
 | Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Don't |
 | Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Wrap all async methods with try/catch blocks |
 | System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) |  |
+| F# mods break bepinex. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Locate the f# core runtime and drag it into the bepinex folder |
 | Index out of range exception thrown in the custom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Ignore this bug, it doesn't break anyting. |
 | Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. Replace those mods with hengming's rogue shooting catalog. |
 | Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
