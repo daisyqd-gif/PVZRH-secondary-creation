@@ -5,6 +5,7 @@
 ![C#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=Made+with&secondaryLabel=C%23%2014&primaryBGColor=%239179e4&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase)
 
 A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allows modders to create custom plants, zombies, effects, projectiles, and gameplay systems using clean C# APIs.
+> Note: .Net 8.0 or .Net 10.0 might have to be installed for some mods to work. If ususual errors start appearing, try instaling .Net runtime 8.0 or 10.0
 ## Table of contents
 - [PVZ Fusion Custom Plant Class Framework](#pvz-fusion-custom-plant-class-framework)
   - [Overview](#overview)
