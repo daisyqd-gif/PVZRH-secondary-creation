@@ -37,6 +37,9 @@
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil" Private="false">
+      <HintPath>..\lib\BepInEx\core\Mono.Cecil.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

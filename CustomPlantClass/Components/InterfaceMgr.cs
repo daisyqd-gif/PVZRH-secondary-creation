@@ -37,6 +37,21 @@ namespace CustomPlantClass
     {
         public void InitText();
     }
+    public interface IPlantUseBucket
+    {
+        public bool IsBucketTypeValid(BucketType type);
+        public virtual void PreUseItem(BucketType type, Bucket bucket)
+        {
+            if(IsBucketTypeValid(type))
+            {
+                if(bucket != null)
+                    bucket.Die();
+                
+                OnItemUsed();
+            }
+        }
+        public void OnItemUsed();
+    }
     public interface IPlantGetTextStringHandler
     {
         public virtual Color SetTextColor() => Color.cyan;

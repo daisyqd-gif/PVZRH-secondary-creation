@@ -42,7 +42,7 @@ namespace MoreBlackHorse
             );
             DataMgr.AddCustomZombieSpawnRatio(DataContainer.ZombieId_A,5,1000);
             CustomCore.AddZombieAlmanacStrings(DataContainer.ZombieId_A,"黑橄榄骑兵僵尸",
-            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。",specialeffects:[
+            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。", default, default, default, default((int amount, float interval, string unit)), specialeffects:[
                 "1级僵尸",
                 "乘骑会碾压植物的战马。冲锋出场，撞到植物时施加该植物[5%×(植物血量+韧性)/2]的诅咒层数。"+
                 "随后稳步前进，碾压时施加[1%×(植物血量+韧性)/2]的诅咒层数。战马或本体被击杀时下马，回满并保留本体血量，变为黑橄榄僵尸"])+"\n韧性：6000+6000");
@@ -56,7 +56,7 @@ namespace MoreBlackHorse
             );
             DataMgr.AddCustomZombieSpawnRatio(DataContainer.ZombieId_B,6,600);
             CustomCore.AddZombieAlmanacStrings(DataContainer.ZombieId_B,"黑橄榄骑兵队长",
-            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。",specialeffects:[
+            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。", default, default, default, default((int amount, float interval, string unit)), specialeffects:[
                 "2级僵尸",
                 "乘骑会碾压植物的战马。冲锋出场，撞到植物时施加该植物[5%×(植物血量+韧性)/2]的诅咒层数。"+
                 "随后稳步前进，碾压时施加[1%×(植物血量+韧性)/2]的诅咒层数。战马或本体被击杀时下马，回满并保留本体血量，变为黑橄榄队长"])+"\n韧性：12000+12000");
@@ -70,7 +70,7 @@ namespace MoreBlackHorse
             );
             DataMgr.AddCustomZombieSpawnRatio(DataContainer.ZombieId_C,7,300);
             CustomCore.AddZombieAlmanacStrings(DataContainer.ZombieId_C,"黑橄榄骑兵副将",
-            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。",specialeffects:[
+            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑冲击植物。", default, default, default, default((int amount, float interval, string unit)), specialeffects:[
                 "3级僵尸",
                 "乘骑会碾压植物的战马。冲锋出场，撞到植物时施加该植物[5%×(植物血量+韧性)/2]的诅咒层数。"+
                 "随后稳步前进，碾压时施加[1%×(植物血量+韧性)/2]的诅咒层数。战马或本体被击杀时下马，回满并保留本体血量，变为黑橄榄副将"])+"\n韧性：24000+24000");
@@ -84,7 +84,7 @@ namespace MoreBlackHorse
             );
             DataMgr.AddCustomZombieSpawnRatio(DataContainer.ZombieId_C2,7,300);
             CustomCore.AddZombieAlmanacStrings(DataContainer.ZombieId_C2,"黑橄榄机枪骑兵副将", //that is a long name
-            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑稳步推进，情势不利时召集部下进攻。",specialeffects:[
+            DataMgr.CreateAlmanacEntry("驾驭着诅咒铁骑稳步推进，情势不利时召集部下进攻。", default, default, default((int damage, float interval)), specialeffects:[
                 "3级僵尸",
                 "免疫击退，持续发射铁豆子弹攻击植物，撞击植物会为其增加诅咒效果，血量过半将摇旗在每一行召唤一个黑橄榄骑兵副将僵尸，"+
                 "黑橄榄战马死亡后，自身下马转变为黑橄榄机枪副将"])

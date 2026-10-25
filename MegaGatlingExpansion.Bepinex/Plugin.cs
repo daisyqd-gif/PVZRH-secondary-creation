@@ -602,7 +602,7 @@ namespace MegaGatlingExpansion
                     },
                     1.4f,
                     0f,
-                    100,
+                    1000,
                     300,
                     5f,
                     500
@@ -617,7 +617,7 @@ namespace MegaGatlingExpansion
                     },
                     1.4f,
                     0f,
-                    100,
+                    1000,
                     300,
                     5f,
                     500
@@ -966,7 +966,7 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.HypnoMegaGatlingPea, "初版魅惑超级机枪射手", "");
 
                 // Three-lane Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, ThreeMegaGatlingPea>(
+                CustomCore.RegisterCustomPlant<ThreePeater, ThreeMegaGatlingPea>(
                     PlantTypeExpand.ThreeMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPreview"),
@@ -984,7 +984,7 @@ namespace MegaGatlingExpansion
                     5f,
                     500
                 );
-                CustomCore.RegisterCustomPlantSkin<Shooter, ThreeMegaGatlingPea>(
+                CustomCore.RegisterCustomPlantSkin<ThreePeater, ThreeMegaGatlingPea>(
                     PlantTypeExpand.ThreeMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperThreeGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPreview"),
@@ -1316,7 +1316,7 @@ namespace MegaGatlingExpansion
                     { PlantTypeExpand.SunMegaGatlingPea, PlantType.SunFlower },
                     { PlantTypeExpand.WildMegaGatlingPea, PlantType.GatlingPea },
                     { PlantTypeExpand.StarMegaGatlingPea, PlantType.StarFruit },
-                    { lanternID, PlantType.Plantern }
+                    //{ lanternID, PlantType.Plantern }
                 };
 
                 foreach (var target in coreMegas)
@@ -1326,8 +1326,12 @@ namespace MegaGatlingExpansion
                         if (source == target)
                             continue;
 
-                        int catalyst = (int)catalysts[target];
-                        CustomCore.AddFusion((int)target, (int)source, catalyst);
+                        try
+                        {
+                            int catalyst = (int)catalysts[target];
+                            CustomCore.AddFusion((int)target, (int)source, catalyst);
+                        }
+                        catch(KeyNotFoundException){ }
                         CustomCore.AddFusion(smallID, (int)PlantType.SmallPuff, (int)source);
                     }
                     if (target != lanternID && target != PlantTypeExpand.StarMegaGatlingPea)
@@ -1379,7 +1383,7 @@ namespace MegaGatlingExpansion
                 {
                     if (p.TryGetComponent<UltimateExplodeGatlingBlover>(out var component))
                     {
-                        component.plant.StartCoroutine(component.SuperShoot_Custom());
+                        component.StartPF();
                     }
                 });
                 CustomCore.RegisterSuperSkill(PlantTypeExpand.DoomMegaGatlingPea, p => 1000, (Plant p) =>
@@ -1437,7 +1441,11 @@ namespace MegaGatlingExpansion
                     new SpeedBuff(PlantTypeExpand.MegaGatlingPea),
                     ubuff, qbuff, cbuff
                 },
-                CustomReinforcePlant = (p) => { },
+                CustomReinforcePlant = (p) =>
+                {
+                    p.AddSpeed(PlantSpeedAdder.Shooting,3f);
+                    p.ModifyDamage(PlantDamageAdder.Shooting,5f);
+                },
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });
             BaseConfig oCfg = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()

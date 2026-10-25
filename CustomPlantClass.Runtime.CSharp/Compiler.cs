@@ -1,3 +1,5 @@
+using Mono.Cecil;
+
 namespace CustomPlantClass.Runtime.CSharp
 {
     public static class Compile
@@ -13,6 +15,20 @@ namespace CustomPlantClass.Runtime.CSharp
             ["BepInEx", "interop"],
             ["BepInEx", "plugins"],
         ];
+        static bool IsConfuserEx(string file)
+        {
+            try
+            {
+                var asmDef = AssemblyDefinition.ReadAssembly(file);
+                return asmDef.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == "ConfusedBy" ||
+                    attr.AttributeType.Name == "ConfusedByAttribute");
+            }
+            catch
+            {
+                return false; // Not a valid .NET assembly or unreadable
+            }
+        }
         public static Assembly? RunCSharpScript(string content)
         {
             Plugin.Instance.Logger.LogInfo("Compiling script...");
@@ -34,6 +50,7 @@ namespace CustomPlantClass.Runtime.CSharp
                         try
                         {
                             AssemblyName.GetAssemblyName(file);
+                            IsConfuserEx(file);
                         }
                         catch (BadImageFormatException) { continue; }
                         catch (FileNotFoundException) { continue; }

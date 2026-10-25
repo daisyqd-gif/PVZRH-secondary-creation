@@ -16,6 +16,7 @@ namespace CustomPlantClass.Runtime.CSharp
     {
         public ManualLogSource Logger => Log;
         public static Plugin Instance { get; private set; }
+        public HashSet<string> IgnoredFolders = new();
         public override void Load()
         {
             Instance = this;
@@ -27,6 +28,6 @@ namespace CustomPlantClass.Runtime.CSharp
     {
         public const string PluginGuid = "CustomPlantClass.Runtime.CSharp.Bepinex";
         public const string PluginName = "CustomPlantClass.Runtime.CSharp";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.5";
     }
 }

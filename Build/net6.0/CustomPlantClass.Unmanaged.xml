@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomPlantClass.Unmanaged</name>
+    </assembly>
+    <members>
+        <member name="T:CustomPlantClass.Unmanaged.MemoryPatch">
+            <summary>
+            Reads, writes, searches, and temporarily patches memory in the current process.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Unmanaged.MemoryPatch.Address">
+            <summary>
+            Gets the address at which this patch is applied.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Unmanaged.MemoryPatch.IsEnabled">
+            <summary>
+            Gets whether the replacement bytes are currently applied.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.FromRva(System.String,System.Int64,System.Byte[],System.Byte[])">
+            <summary>
+            Creates a patch at a module-relative address.
+            </summary>
+            <param name="moduleName">Name of the loaded module containing the patch.</param>
+            <param name="rva">Relative virtual address of the patch.</param>
+            <param name="replacement">Bytes to write when the patch is enabled.</param>
+            <param name="expected">Optional bytes that must currently exist at the patch address.</param>
+            <returns>A patch initialized with the bytes currently at the target address.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.FromPattern(System.String,System.String,System.Int32,System.Byte[],System.Byte[])">
+            <summary>
+            Creates a patch at an offset relative to a unique signature match.
+            </summary>
+            <param name="moduleName">Name of the loaded module to search.</param>
+            <param name="pattern">Space-separated hexadecimal bytes; use <c>?</c> or <c>??</c> as a wildcard.</param>
+            <param name="patchOffset">Offset from the start of the matched signature.</param>
+            <param name="replacement">Bytes to write when the patch is enabled.</param>
+            <param name="expected">Optional bytes that must currently exist at the patch address.</param>
+            <returns>A patch initialized with the bytes currently at the target address.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.Enable">
+            <summary>
+            Applies the replacement bytes, unless the patch is already enabled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.Disable">
+            <summary>
+            Restores the original bytes, unless the patch is already disabled.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.Dispose">
+            <summary>
+            Restores the original bytes if needed and releases this patch object.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.FindUniquePattern(System.String,System.String)">
+            <summary>
+            Finds the only occurrence of a byte pattern in a loaded module.
+            </summary>
+            <param name="moduleName">Name of the loaded module to search.</param>
+            <param name="pattern">Space-separated hexadecimal bytes; use <c>?</c> or <c>??</c> as a wildcard.</param>
+            <returns>The address of the pattern's first byte.</returns>
+            <exception cref="T:System.InvalidOperationException">The pattern is not found or occurs more than once.</exception>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.FindFirstPattern(System.String,System.String)">
+            <summary>
+            Finds the first occurrence of a byte pattern in a loaded module.
+            </summary>
+            <param name="moduleName">Name of the loaded module to search.</param>
+            <param name="pattern">Space-separated hexadecimal bytes; use <c>?</c> or <c>??</c> as a wildcard.</param>
+            <returns>The address of the first match.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.ResolveRipRelativeAddress(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Resolves the target address of an instruction containing a 32-bit RIP-relative displacement.
+            </summary>
+            <param name="instructionAddress">Address of the instruction's first byte.</param>
+            <param name="displacementOffset">Offset of the displacement within the instruction.</param>
+            <param name="instructionLength">Total length of the instruction in bytes.</param>
+            <returns>The address computed from the instruction end and its relative displacement.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.ReadFloat(System.IntPtr)">
+            <summary>
+            Reads a single-precision floating-point value from memory.
+            </summary>
+            <param name="address">Address from which to read.</param>
+            <returns>The floating-point value stored at the address.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.WriteFloat(System.IntPtr,System.Single)">
+            <summary>
+            Writes a single-precision floating-point value to memory.
+            </summary>
+            <param name="address">Address to write to.</param>
+            <param name="value">Value to write.</param>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.ReadBytes(System.IntPtr,System.Int32)">
+            <summary>
+            Reads a sequence of bytes from memory.
+            </summary>
+            <param name="address">Address from which to read.</param>
+            <param name="length">Number of bytes to read; must be greater than zero.</param>
+            <returns>The bytes read from memory.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.WriteBytes(System.IntPtr,System.Byte[])">
+            <summary>
+            Writes a sequence of bytes to memory and flushes the instruction cache.
+            </summary>
+            <param name="address">Address to write to.</param>
+            <param name="bytes">Bytes to write; the array must not be empty.</param>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.HexToBytes(System.String)">
+            <summary>
+            Converts hexadecimal text to bytes. Spaces, commas, tabs, and line breaks separate bytes.
+            </summary>
+            <param name="hex">Hexadecimal byte values to parse.</param>
+            <returns>The parsed bytes, or an empty array for null, empty, or whitespace input.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.BytesToHex(System.Byte[])">
+            <summary>
+            Converts bytes to uppercase, space-separated hexadecimal text.
+            </summary>
+            <param name="bytes">Bytes to format.</param>
+            <returns>The formatted bytes, or an empty string when the array is null.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.GetModuleBaseAddress(System.String)">
+            <summary>
+            Gets the base address of a loaded module in the current process.
+            </summary>
+            <param name="moduleName">Name of the loaded module.</param>
+            <returns>The module's base address.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.AddressToRva(System.String,System.IntPtr)">
+            <summary>
+            Converts an absolute address to an RVA relative to a loaded module.
+            </summary>
+            <param name="moduleName">Name of the loaded module.</param>
+            <param name="address">Absolute address to convert.</param>
+            <returns>The offset of the address from the module's base address.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Unmanaged.MemoryPatch.RvaToAddress(System.String,System.Int64)">
+            <summary>
+            Converts a module-relative address to an absolute address.
+            </summary>
+            <param name="moduleName">Name of the loaded module.</param>
+            <param name="rva">Relative virtual address within the module.</param>
+            <returns>The corresponding absolute address.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The RVA is outside the module.</exception>
+        </member>
+    </members>
+</doc>

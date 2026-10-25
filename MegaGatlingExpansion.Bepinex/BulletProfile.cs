@@ -38,25 +38,25 @@ namespace MegaGatlingExpansion
         public static readonly BulletProfile FlameGooPea = 3088;
     }
 
-    public class ExtremeFirePea : MonoBehaviour
+    public class ExtremeFirePea : BaseCustomBullet
     {
         public Bullet_firePea bullet => gameObject.GetComponent<Bullet_firePea>();
 
         public int Damage => bullet != null ? bullet.Damage : 0;
         public int Row => bullet != null ? bullet.theBulletRow : 0;
 
-        public void HitZombie(Zombie zombie)
+        public override bool HitZombie(Zombie zombie)
         {
             if (zombie == null || zombie.IsDestroyed())
-                return;
+                return true;
             if (zombie.board == null)
-                return;
+                return true;
             if (zombie.theZombieType == ZombieType.Nothing)
-                return;
+                return true;
 
             var b = bullet;
             if (b == null || b.board == null)
-                return;
+                return true;
 
             zombie.SetJalaed();
             zombie.JalaedExplode(true, Damage);
@@ -67,8 +67,9 @@ namespace MegaGatlingExpansion
                 Vector3 pos = t.position;
                 ParticleManager.Instance.SetParticle(ParticleType.Fire, pos, Row, true);
             }
+            return false;
         }
-        public void HitPlant(Plant plant)
+        public override bool HitPlant(Plant plant)
         {
             if (plant != null)
             {
@@ -88,6 +89,7 @@ namespace MegaGatlingExpansion
                 plant.FlashOnce();
                 bullet.Die();
             }
+            return false;
         }
     }
 
@@ -97,20 +99,62 @@ namespace MegaGatlingExpansion
         private const float AURA_RADIUS = 1.5f;
         private float AttrCountDown = 0f;
         private CancellationToken token;
+        private static int counter = 0;
+        public bool stopSpawn = false;
+        public bool isPF = false;
         public void Awake()
         {
             IsElectricPlant = ElementUpgrade
                 .GetPossibleUpgradeTypes(PlantType.ElectricOnion, true)
                 .ToSystemList();
             token = new();
+            counter++;
+            stopSpawn = false;
+            AttrCountDown = 0f;
+        }
+        public override void Start()
+        {
+            if (!isPF)
+            {
+                _bullet.col.enabled = false;
+            }
+            else
+            {
+                _bullet.col.enabled = true;
+            }
+            base.Start();
         }
         public void OnDestroy()
         {
             token.Cancel();
+            counter--;
         }
         public override bool HitZombieCondition(Zombie zombie)
         {
+            if (isPF)
+            {
+                return true;
+            }
             return false;
+        }
+        public override bool HitZombie(Zombie zombie)
+        {
+            if (!isPF || stopSpawn)
+            {
+                return false;
+            }
+            for(int i = 0; i<360; i += 60)
+            {
+                Bullet b = CreateBullet.Instance.SetBullet(transform.position.x,transform.position.y,_bullet.theBulletRow,BulletProfile.ElectricPea,BulletMoveWay.Free);
+                b.Damage = _bullet.Damage;
+                b.transform.Rotate(0,0, i);
+                b.fromType = _bullet.fromType;
+                b.normalSpeed /= 2;
+                b.GetComponent<ElectricPea>().isPF = false;
+            }
+            ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,_bullet.col.bounds.center).transform.localScale *= 4;
+            stopSpawn=true;
+            return true;
         }
         // -----------------------------
         // OPTIMIZED AURA DAMAGE
@@ -118,7 +162,7 @@ namespace MegaGatlingExpansion
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (GameAPP.theGameStatus != GameStatus.InGame)
+            if (GameAPP.theGameStatus != GameStatus.InGame || isPF)
                 return;
 
             // Aura tick timer
@@ -157,9 +201,9 @@ namespace MegaGatlingExpansion
                         !IsElectricPlant.Contains(p.thePlantType))
                     {
                         foundTarget=true;
-                        if(p.axis != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position,lim:false);
+                        if(p.axis != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position,lim:false);
                         p.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>());
-                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,p.axis.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,p.axis.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
 
@@ -173,9 +217,9 @@ namespace MegaGatlingExpansion
                         z.isMindControlled)
                     {
                         foundTarget=true;
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        if(z.col != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
                         z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless);
-                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
                 }
@@ -193,26 +237,26 @@ namespace MegaGatlingExpansion
                         !z.isMindControlled)
                     {
                         foundTarget=true;
-                        if(z.col != null) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        if(z.col != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
                         z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
                         if (PlantMgr.GetPercent(5f))
                         {
                             z.Buttered(0.5f,false);
                         }
-                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<ZombieBall>(out var ball) && !ball.plant)
                     {
                         foundTarget=true;
-                        ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position,lim:false);
+                        if(counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position,lim:false);
                         ball.bulletTime ++;
                         if(ball.bulletTime >= 31) ball.Die();
-                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,ball.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,ball.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<FreezedPlant>(out var freezed))
                     {
                         foundTarget=true;
-                        ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position,lim:false);
+                        if(counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position,lim:false);
                         if (freezed.fired)
                         {
                             freezed.lightCountDown = 0.2f;
@@ -223,48 +267,47 @@ namespace MegaGatlingExpansion
                         {
                             freezed.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
                         }
-                        PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,freezed.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,freezed.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                 }
             }
-            //Too loud
-            if(foundTarget)
+            if(foundTarget && counter < 50)
             {
-                //GameAPP.PlaySound(SoundType.Laser);
+                GameAPP.PlaySound(SoundType.ThunderLightning);
             }
         }
     }
 
     public class FlameGooPea : GooPea
     {
-        public override void HitZombie(Zombie zombie)
+        public override bool HitZombie(Zombie zombie)
         {
             if (zombie == null || zombie.IsDestroyed())
-                return;
+                return true;
             if (zombie.board == null)
-                return;
+                return true;
             if (zombie.theZombieType == ZombieType.Nothing)
-                return;
+                return true;
             Miasma.SetMiasma(bullet.transform.position, bullet.theBulletRow, zombie.board, Plugin.IsOverpowered, true);
-            base.HitZombie(zombie);
+            return base.HitZombie(zombie);
         }
     }
 
-    public class GooPea : MonoBehaviour
+    public class GooPea : BaseCustomBullet
     {
         public Bullet bullet => gameObject.GetComponent<Bullet>();
-        public virtual void HitZombie(Zombie zombie)
+        public override bool HitZombie(Zombie zombie)
         {
             if (zombie == null || zombie.IsDestroyed())
-                return;
+                return true;
             if (zombie.board == null)
-                return;
+                return true;
             if (zombie.theZombieType == ZombieType.Nothing)
-                return;
+                return true;
 
             var b = bullet;
             if (b == null || b.board == null || b.board.boardAction == null)
-                return;
+                return true;
 
             zombie.SetPoison(1);
 
@@ -290,8 +333,9 @@ namespace MegaGatlingExpansion
                 );
                 if(!Plugin.IsOverpowered)zombie.poisonLevel=0;
             }
+            return false;
         }
-        public void HitPlant(Plant plant)
+        public override bool HitPlant(Plant plant)
         {
             if (plant != null)
             {
@@ -300,10 +344,11 @@ namespace MegaGatlingExpansion
                 GameAPP.PlaySound((SoundType)Random.RandomRangeInt(0, 3));
                 bullet.Die();
             }
+            return false;
         }
     }
 
-    public class PrimalPea : MonoBehaviour
+    public class PrimalPea : BaseCustomBullet
     {
         public Bullet bullet => gameObject.GetComponent<Bullet>();
 
@@ -311,7 +356,7 @@ namespace MegaGatlingExpansion
         private bool CanAffect(Zombie z) =>
         !TypeMgr.IsBossZombie(z.theZombieType) && !TypeMgr.BigZombie(z.theZombieType) || Plugin.IsOverpowered;
 
-        public void HitZombie(Zombie zombie)
+        public override bool HitZombie(Zombie zombie)
         {
             var zlist = Lawnf.GetAllZombies();
             int targetCol = Mouse.Instance.GetColumnFromX(bullet.transform.position.x);
@@ -337,8 +382,9 @@ namespace MegaGatlingExpansion
                     z.FlyAway();
                 }
             }
+            return false;
         }
-        public void HitPlant(Plant plant)
+        public override bool HitPlant(Plant plant)
         {
             if (plant != null)
             {
@@ -348,14 +394,15 @@ namespace MegaGatlingExpansion
                 GameAPP.PlaySound((SoundType)Random.RandomRangeInt(0, 3));
                 bullet.Die();
             }
+            return false;
         }
     }
 
-    public class HypnoMegaPea : MonoBehaviour
+    public class HypnoMegaPea : BaseCustomBullet
     {
         public Bullet bullet => gameObject.GetComponent<Bullet>();
         public bool fromHypnoZombie = false;
-        public void HitPlant(Plant plant)
+        public override bool HitPlant(Plant plant)
         {
             if (plant != null)
             {
@@ -378,10 +425,39 @@ namespace MegaGatlingExpansion
                 GameAPP.PlaySound((SoundType)Random.RandomRangeInt(0, 3));
                 bullet.Die();
             }
+            return false;
+        }
+        public override bool HitZombie(Zombie zombie)
+        {
+            if (zombie != null)
+            {
+                zombie.TakeDamage(bullet.Damage,bullet,DamageType.Normal);
+                if (zombie.theHealth <= 0 && !zombie.TryGetCustomEffect<RemovedZEffect>(out _))
+                {
+                    CreateZombie.Instance.SetZombieWithMindControl(zombie.theZombieRow, (ZombieType)9000, zombie.Column);
+                    zombie.AddEffect<RemovedZEffect>();
+                    ParticleManager.Instance.SetParticle(ParticleType.HypnoEmperorSkinCloud, bullet.transform.position, zombie.theZombieRow);
+                }
+                else
+                {
+                    if(zombie.TryGetCustomEffect<RemovedZEffect>(out var effect))
+                    {
+                        Destroy(effect);
+                    }
+                }
+                ParticleManager.Instance.SetParticle(ParticleType.RandomCloud, bullet.transform.position, zombie.theZombieRow);
+                GameAPP.PlaySound(Random.RandomRangeInt(0, 3));
+                bullet.Die();
+            }
+            return false;
         }
         public class RemovedEffect : CustomEffect
         {
             public override CustomEffectUsage Usage => CustomEffectUsage.Plant;
+        }
+        public class RemovedZEffect : CustomEffect
+        {
+            public override CustomEffectUsage Usage => CustomEffectUsage.Zombie;
         }
     }
 }

@@ -11,6 +11,7 @@ global using System.Collections.Generic;
 global using UnityEngine;
 global using Unity.VisualScripting;
 global using Random = UnityEngine.Random;
+using System.Linq;
 namespace EvilSuperGatling
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -53,7 +54,7 @@ namespace EvilSuperGatling
 
                 Fusions = new List<(ID, ID)>(), // Optional fusion recipes
 
-                AttackInterval = 1f,   // Time between attacks (shooters only)
+                AttackInterval = 0.75f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
                 AttackDamage = 1000,      // Damage per attack
                 MaxHealth = 300,       // Plant HP
@@ -83,7 +84,7 @@ namespace EvilSuperGatling
                 AlmanacEntry = DataMgr.CreateAlmanacEntry("一轮发射六次豌豆，有概率一次发射大量随机豌豆。",usageconditions:"神秘模式",attackinterval:("1000×6",1),specialeffects : ["普通攻击时，每发子弹有2%概率触发大招：回复1倍韧性血量，5秒内无敌，每0.02秒散射3发伤害为1000的子弹"])    // Almanac description, use DataMgr.CreateAlmanacEntry for automatic formatting
             };
 
-            DataMgr.RegisterCustomPlant<Shooter, EvilSuperGatling>(Data);
+            DataMgr.RegisterCustomPlant<SuperSnowGatling, EvilSuperGatling>(Data);
             CustomCore.RegisterCustomBullet<Bullet_sword,EvilPea>(DataContainer.BulletId,assetBundle.GetAsset<GameObject>("Bullet_pea_evil"));
             CustomCore.RegisterCustomBullet<Bullet_sword,EvilPeaFire>(DataContainer.BulletId_Fire,assetBundle.GetAsset<GameObject>("Bullet_pea_fireEvil"));
             UltimateTorchBehaviour.AddBulletToPool(DataContainer.BulletId,DataContainer.BulletId_Fire);
@@ -118,6 +119,7 @@ namespace EvilSuperGatling
                 entered = _plant != null && !_plant.IsDestroyed();
                 if(! entered) return;
                 _plant.uncrashable = _prevUncrashable;
+                _plant.anim.SetBoolString("enter",true);
                 StartPF();
             }
             catch
@@ -171,8 +173,37 @@ namespace EvilSuperGatling
     {
         public override bool HitZombie(Zombie zombie)
         {
+            zombie.KnockBack(1f,Zombie.KnockBackReason.Normal);
+            ZombieType[] z = 
+            [
+                ZombieType.FootballDolphin,
+                ZombieType.FootballDrown,
+                ZombieType.FootballZombie,
+                ZombieType.PolFootballZombie,
+                ZombieType.FlagFootball,
+                ZombieType.SnowFootballDrown,
+                ZombieType.BlackFootball,
+                ZombieType.BlackFootball_a,
+                ZombieType.BlackFootball_b,
+                ZombieType.BlackFootball_c,
+                ZombieType.BlackFootball_c2,
+                ZombieType.WhiteFootball,
+                ZombieType.YellowFootball,
+                ZombieType.GatlingFootballZombie,
+                ZombieType.TallNutFootballZombie,
+                ZombieType.UltimateFootballDrown,
+                ZombieType.BlackFlagFootball,
+                ZombieType.SuperBlackFootball,
+                ZombieType.GatlingBlackFootball
+            ];
+            if(z.Contains(zombie.theZombieType) || (zombie is ZombieFootball && TypeMgr.IsBossZombie(zombie.theZombieType)))
+            {
+                zombie.Scared();
+            }
             zombie.TakeDamage(_bullet.Damage,_bullet.Cast<IDamageMaker>(),DamageType.RealDamage,_bullet.fromType);
-            zombie.AddEffect<EvilEffect>();
+            var effect = zombie.AddEffect<EvilEffect>() as EvilEffect;
+            effect.layers++;
+            effect.ResetCD();
             CreateParticle.SetParticle(Plugin.DataContainer.ParticleId,transform.position,_bullet.theBulletRow);
             GameAPP.PlaySound(Random.Range(0,2));
             return false;
@@ -182,8 +213,37 @@ namespace EvilSuperGatling
     {
         public override bool HitZombie(Zombie zombie)
         {
+            zombie.KnockBack(1f,Zombie.KnockBackReason.Normal);
+            ZombieType[] z = 
+            [
+                ZombieType.FootballDolphin,
+                ZombieType.FootballDrown,
+                ZombieType.FootballZombie,
+                ZombieType.PolFootballZombie,
+                ZombieType.FlagFootball,
+                ZombieType.SnowFootballDrown,
+                ZombieType.BlackFootball,
+                ZombieType.BlackFootball_a,
+                ZombieType.BlackFootball_b,
+                ZombieType.BlackFootball_c,
+                ZombieType.BlackFootball_c2,
+                ZombieType.WhiteFootball,
+                ZombieType.YellowFootball,
+                ZombieType.GatlingFootballZombie,
+                ZombieType.TallNutFootballZombie,
+                ZombieType.UltimateFootballDrown,
+                ZombieType.BlackFlagFootball,
+                ZombieType.SuperBlackFootball,
+                ZombieType.GatlingBlackFootball
+            ];
+            if(z.Contains(zombie.theZombieType) || (zombie is ZombieFootball && TypeMgr.IsBossZombie(zombie.theZombieType)))
+            {
+                zombie.Scared();
+            }
             zombie.TakeDamage(_bullet.Damage,_bullet.Cast<IDamageMaker>(),DamageType.RealDamage,_bullet.fromType);
-            zombie.AddEffect<EvilEffect>();
+            var effect = zombie.AddEffect<EvilEffect>() as EvilEffect;
+            effect.layers++;
+            effect.ResetCD();
             ParticleManager.Instance.SetParticle(ParticleType.Fire,transform.position,_bullet.theBulletRow);
             GameAPP.PlaySound(SoundType.FirePea);
             return false;
@@ -196,16 +256,21 @@ namespace EvilSuperGatling
         public override bool TimedEffect => true;
         public override float CycleCountDown { get; set; } = 1f;
         public override float RemoveCountDown { get; set; } = 15f;
+        public int layers = 0;
+        public void ResetCD()
+        {
+            RemoveCd=RemoveCountDown;
+        }
         public override CustomEffectUsage Usage { get => CustomEffectUsage.Zombie; }
         Zombie z => GetComponent<Zombie>();
         public override void OnTimerZero()
         {
-            if (z.theMaxHealth / 10 - 100000 >= int.MaxValue)
+            if ((z.theMaxHealth / 10 - 100000)*layers >= int.MaxValue)
             {
                 z.TakeDamage(2147383647, null, DamageType.RealDamage, (PlantType)Plugin.DataContainer.PlantId);
                 return;
             }
-            z.TakeDamage((int)z.theMaxHealth / 10, null, DamageType.RealDamage, (PlantType)Plugin.DataContainer.PlantId);
+            z.TakeDamage((int)((z.theMaxHealth / 10)*layers), null, DamageType.RealDamage, (PlantType)Plugin.DataContainer.PlantId);
         }
     }
 

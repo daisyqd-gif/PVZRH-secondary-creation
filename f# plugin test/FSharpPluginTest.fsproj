@@ -16,4 +16,4 @@
   <!-- Import shared references -->
   <Import Project="$(MSBuildThisFileDirectory)..\ModReferences.props" />
 
-</Project>
+<ItemGroup><Compile Include="plugin.fs" /></ItemGroup></Project>

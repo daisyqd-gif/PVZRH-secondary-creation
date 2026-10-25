@@ -470,6 +470,15 @@ namespace CustomPlantClass
             }
             return true;
         }
+        [HarmonyPatch(nameof(Plant.UseItem))]
+        [HarmonyPrefix]
+        public static void UseItem_Prefix(Plant __instance, BucketType type, Bucket bucket)
+        {
+            if (__instance.TryGetInterface<IPlantUseBucket>(out var outInterface))
+            {
+                outInterface.PreUseItem(type,bucket);
+            }
+        }
 
         // -------------------------
         //  StarUp()
@@ -554,6 +563,42 @@ namespace CustomPlantClass
                 p.thePlantHealth = p.thePlantMaxHealth;
                 p.UpdateText();
                 __result = false;
+                return false;
+            }
+            return true;
+        }
+    }
+    [HarmonyPatch(typeof(FootballBoss))]
+    public static class FootballBoss_Patch
+    {
+        [HarmonyPatch(nameof(FootballBoss.OnTriggerStay2D))]
+        [HarmonyPrefix]
+        public static bool OnTriggerStay2D_Prefix(FootballBoss __instance, Collider2D collision)
+        {
+            if(collision!= null && collision.TryGetComponent(out Plant p) && __instance != null && __instance.theStatus == ZombieStatus.Default && __instance.theZombieRow == p.thePlantRow)
+            {
+                if (p == null) return true;
+                if (p.TryGetInterface<IPlantDieRedirector>(out var r) && r.CanDie)
+                {
+                    goto reset;
+                }
+                else if (p.TryGetInterface<ICustomPF>(out var pf) && pf.IsImmune)
+                {
+                    goto reset;
+                }
+                return true;
+                reset:
+                p.thePlantHealth = p.thePlantMaxHealth;
+                p.UpdateText();
+                if(__instance.Alive)
+                {
+                    __instance.attributeCountDown = 0;
+                    __instance.RealKnockBack(0.5f);
+                    ParticleManager.Instance.SetParticle(ParticleType.Pow,__instance.col.bounds.center).transform.localScale*=3;
+                    GameAPP.PlaySound(SoundType.Bonk);
+                    __instance.ChangeStatus(ZombieStatus.Raised);
+			        __instance.anim.SetTrigger("jump");
+                }
                 return false;
             }
             return true;
@@ -699,6 +744,17 @@ namespace CustomPlantClass
                 return a.HitZombie(zombie);
             }
             return true;
+        }
+    }
+    [HarmonyPatch(typeof(ItemManager))]
+    public class ItemManager_Patch
+    {
+        [HarmonyPatch(nameof(ItemManager.SetBucket))]
+        [HarmonyPrefix]
+        public static void SetBucket_Prefix(ItemManager __instance)
+        {
+            foreach(var i in DataMgr.CustomBuckets)
+                __instance.bucketPrefabs.TryAdd(i.Key,i.Value);
         }
     }
     [HarmonyPatch(typeof(Bullet))]

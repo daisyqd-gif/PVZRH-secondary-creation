@@ -4,56 +4,6 @@ namespace MegaGatlingExpansion
     public static class Plant_Patch
     {
         // -------------------------
-        //  SearchZombie()
-        // -------------------------
-        [HarmonyPostfix]
-        [HarmonyPatch("SearchZombie")]
-        public static void SearchZombie_Postfix(Plant __instance, ref GameObject __result)
-        {
-            if (!__instance.TryGetComponent<ThreeMegaGatlingPea>(out var mg))
-                return;
-
-            __result = CustomSearchZombie(__instance);
-        }
-
-        private static GameObject CustomSearchZombie(Plant plant)
-        {
-            if (plant.board == null || plant.board.zombieArray == null)
-                return null;
-
-            int plantRow = plant.thePlantRow;
-            float vision = plant.vision;
-            Transform axis = plant.axis;
-
-            foreach (Zombie z in plant.board.zombieArray)
-            {
-                if (z == null)
-                    continue;
-
-                int rowDiff = Mathf.Abs(z.theZombieRow - plantRow);
-                if (rowDiff > 1)
-                    continue;
-
-                Transform zt = z.transform;
-                if (zt == null)
-                    continue;
-
-                Vector3 pos = zt.position;
-
-                if (pos.x > vision)
-                    continue;
-
-                if (axis != null && pos.x < axis.position.x)
-                    continue;
-
-                if (plant.SearchUniqueZombie(z))
-                    return z.gameObject;
-            }
-
-            return null;
-        }
-
-        // -------------------------
         //  Die()
         // -------------------------
         [HarmonyPrefix]
@@ -147,10 +97,13 @@ namespace MegaGatlingExpansion
         [HarmonyPatch(nameof(Plant.UpdateAttackCountDown))]
         public static void UpdateAttackCountDown_Postfix(Plant __instance)
         {
-            if (__instance.TryGetComponent<MegaGatlingPea>(out var _) && Lawnf.TravelUltimate(UltiBuff.EnumValue3) && __instance.thePlantType == PlantTypeExpand.CherryMegaGatlingPea)
+            if (__instance.TryGetComponent<CherryMegaGatlingPea>(out var _) && Lawnf.TravelUltimate(UltiBuff.EnumValue3))
                 __instance.thePlantAttackCountDown -= Time.deltaTime;
-            if (__instance.TryGetComponent<RedGatlingPea>(out var _))
+            if(__instance.thePlantType == PlantType.GatlingPea)
+            {
+                __instance.GetOrAddComponent<RedGatlingPea>();
                 __instance.thePlantAttackCountDown -= Time.deltaTime;
+            }
         }
 
         // -------------------------
@@ -165,6 +118,54 @@ namespace MegaGatlingExpansion
 
             __instance.starUp = true;
             __instance.UpdateStarIcon();
+        }
+    }
+    [HarmonyPatch(typeof(ThreePeater))]
+    public static class ThreePeater_Patch
+    {
+        [HarmonyPatch(nameof(ThreePeater.SearchZombie))]
+        [HarmonyPrefix]
+        public static bool SearchZombie_Prefix(ThreePeater __instance, ref GameObject __result)
+        {
+            if (__instance.TryGetComponent<ThreeMegaGatlingPea>(out var t))
+            {
+                if(t._mode == ThreeMegaGatlingPea.FireMode.Spread)
+                {
+                    var a = (Zombie z) =>
+                        z != null &&
+                        !z.isMindControlled &&
+                        __instance.SearchUniqueZombie(z);
+                    var zombies = Lawnf.GetAllZombies(a).ToSystemList();
+                    __result = zombies.Count > 0 ? zombies[0].gameObject : null;
+                    return false;
+                }
+                else if(t._mode == ThreeMegaGatlingPea.FireMode.Three)
+                {
+                    var a = (Zombie z) =>
+                        z != null &&
+                        !z.isMindControlled &&
+                        __instance.SearchUniqueZombie(z) &&
+                        z.theZombieRow == __instance.thePlantRow ||
+                        z.theZombieRow == __instance.thePlantRow-1 || 
+                        z.theZombieRow == __instance.thePlantRow+1;
+                    var zombies = Lawnf.GetAllZombies(a).ToSystemList();
+                    __result = zombies.Count > 0 ? zombies[0].gameObject : null;
+                    return false;
+                }
+                else if(t._mode == ThreeMegaGatlingPea.FireMode.Accurate)
+                {
+                    var a = (Zombie z) =>
+                        z != null &&
+                        !z.isMindControlled &&
+                        __instance.SearchUniqueZombie(z) &&
+                        z.theZombieRow == __instance.thePlantRow;
+                    var zombies = Lawnf.GetAllZombies(a).ToSystemList();
+                    __result = zombies.Count > 0 ? zombies[0].gameObject : null;
+                    return false;
+                }
+                return false;
+            }
+            return true;
         }
     }
     [HarmonyPatch(typeof(FreezedPlant))]
@@ -192,7 +193,11 @@ namespace MegaGatlingExpansion
         [HarmonyPrefix]
         [HarmonyPatch(nameof(FreezedPlant.HitBullet))]
         public static bool HitBullet_Prefix(FreezedPlant __instance, Bullet bullet)
-            => bullet.TryGetComponent<ElectricPea>(out _);
+        {
+            if(!bullet.TryGetComponent<ElectricPea>(out var b))
+                return true;
+            return b.isPF;
+        }
     }
     [HarmonyPatch(typeof(Money))]
     public static class Money_Patch
@@ -294,106 +299,23 @@ namespace MegaGatlingExpansion
         }
         [HarmonyPrefix]
         [HarmonyPatch(nameof(Bullet.HitLand))]
-        public static bool HitLand_Prefix(Bullet __instance) => !__instance.TryGetComponent<ElectricPea>(out var _);
-        [HarmonyPrefix]
-        [HarmonyPatch(nameof(Bullet.OnTriggerEnter2D))]
-        public static bool OnTriggerEnter2D_Prefix(Bullet __instance) => !__instance.TryGetComponent<ElectricPea>(out var _);
-    }
-
-    [HarmonyPatch(typeof(Bullet_pea))]
-    public static class Bullet_Pea_Patch
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch("HitZombie")]
-        public static bool HitZombie_Prefix(Bullet_pea __instance, Zombie zombie)
+        public static bool HitLand_Prefix(Bullet __instance)
         {
-            if (zombie == null || __instance == null)
-                return true;
-
-            int profile = (int)__instance.theBulletType;
-
-            switch (profile)
+            if(!__instance.TryGetComponent<ElectricPea>(out var b))
             {
-                case 3082:
-                    if (__instance.TryGetComponent<ExtremeFirePea>(out var fire))
-                        fire.HitZombie(zombie);
-                    return true;
-
-                case 3083:
-                    if (__instance.TryGetComponent<PrimalPea>(out var primal))
-                        primal.HitZombie(zombie);
-                    return true;
-
-                case 3084:
-                    if (__instance.TryGetComponent<GooPea>(out var goo))
-                        goo.HitZombie(zombie);
-                    return true;
-
-                case 3086:
-                    zombie.SetData("HypnoMarker", true);
-                    zombie.SetData("fromHypnoZombie", false);
-                    return true;
-
-                case 3087:
-                    zombie.SetData("HypnoMarker", true);
-                    zombie.SetData("fromHypnoZombie", true);
-                    return true;
-                case 3088:
-                    if (__instance.TryGetComponent<FlameGooPea>(out var flameGooPea))
-                        flameGooPea.HitZombie(zombie);
-                    return true;
-
-                case 3085:
-                    if (__instance.TryGetComponent<ElectricPea>(out var elec))
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
+                return true;
             }
-            return true;
+            return b.isPF;
         }
         [HarmonyPrefix]
-        [HarmonyPatch("HitPlant")]
-        public static bool HitPlant_Prefix(Bullet_pea __instance, Plant plant)
+        [HarmonyPatch(nameof(Bullet.OnTriggerEnter2D))]
+        public static bool OnTriggerEnter2D_Prefix(Bullet __instance)
         {
-            if (plant == null || __instance == null)
-                return true;
-
-            int profile = (int)__instance.theBulletType;
-
-            switch (profile)
+            if(!__instance.TryGetComponent<ElectricPea>(out var b))
             {
-                case 3082:
-                    if (__instance.TryGetComponent<ExtremeFirePea>(out var fire))
-                        fire.HitPlant(plant);
-                    return true;
-
-                case 3083:
-                    if (__instance.TryGetComponent<PrimalPea>(out var primal))
-                        primal.HitPlant(plant);
-                    return true;
-
-                case 3084:
-                    if (__instance.TryGetComponent<GooPea>(out var goo))
-                        goo.HitPlant(plant);
-                    return true;
-
-                case 3086:
-                case 3087:
-                    if (__instance.TryGetComponent<HypnoMegaPea>(out var hypnoMegaPea))
-                        hypnoMegaPea.HitPlant(plant);
-                    return true;
-                case 3085:
-                    return false;
-                case 3088:
-                    if (__instance.TryGetComponent<FlameGooPea>(out var flameGooPea))
-                        flameGooPea.HitPlant(plant);
-                    return true;
+                return true;
             }
-            return true;
+            return b.isPF;
         }
     }
     [HarmonyPatch(typeof(Lawnf))]
@@ -441,13 +363,6 @@ namespace MegaGatlingExpansion
         [HarmonyPatch(nameof(Zombie.Buttered))]
         [HarmonyPrefix]
         public static bool Buttered_Prefix(Zombie __instance)
-        {
-            if (__instance.theZombieType == (ZombieType)9002 || __instance.theZombieType == (ZombieType)9004 || __instance.theZombieType == (ZombieType)9006) return false;
-            return true;
-        }
-        [HarmonyPatch(nameof(Zombie.KnockBack))]
-        [HarmonyPrefix]
-        public static bool KnockBack_Prefix(Zombie __instance)
         {
             if (__instance.theZombieType == (ZombieType)9002 || __instance.theZombieType == (ZombieType)9004 || __instance.theZombieType == (ZombieType)9006) return false;
             return true;

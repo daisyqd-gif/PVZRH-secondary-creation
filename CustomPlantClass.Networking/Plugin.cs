@@ -13,14 +13,17 @@ namespace CustomPlantClass.Networking
         public override void Load()
         {
             Logger=Log;
+            IPCManager.Initialize(Log);
             ClassInjector.RegisterTypeInIl2Cpp<TCPManager.TCPBehaviour>();
             AddComponent<TCPManager.TCPBehaviour>();
+            IPCManager.StartAuto();
             TCPManager.TCPBehaviour.OnLoad();
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded as an expansion to CustomPlantClass.");
         }
         public override bool Unload()
         {
             TCPManager.StopCommunication();
+            IPCManager.StopCommunication();
             return base.Unload();
         }
     }

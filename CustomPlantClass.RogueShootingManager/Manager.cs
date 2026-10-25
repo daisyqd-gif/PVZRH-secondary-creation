@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using UI;
 using Unity.VisualScripting;
+using Mono.Cecil;
 
 namespace CustomPlantClass.RogueShootingManager
 {
@@ -30,6 +31,20 @@ namespace CustomPlantClass.RogueShootingManager
             [ShootingAlmanacCategory.Expert] = new(), 
             [ShootingAlmanacCategory.Tactics] = new()
         };
+        static bool IsConfuserEx(string file)
+        {
+            try
+            {
+                var asmDef = AssemblyDefinition.ReadAssembly(file);
+                return asmDef.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == "ConfusedBy" ||
+                    attr.AttributeType.Name == "ConfusedByAttribute");
+            }
+            catch
+            {
+                return true; // Not a valid .NET assembly or unreadable
+            }
+        }
         
         public static BaseConfig MakeConfigType(CustomRogueShootingConfig spec)
         {
@@ -52,7 +67,7 @@ namespace CustomPlantClass.RogueShootingManager
             // Load all managed assemblies under GameRoot
             foreach (var dll in Directory.EnumerateFiles(Paths.GameRootPath, "*.dll", SearchOption.AllDirectories))
             {
-                if (!IsManagedAssembly(dll))
+                if (!IsManagedAssembly(dll) || IsConfuserEx(dll))
                     continue;
 
                 try
@@ -122,7 +137,7 @@ namespace CustomPlantClass.RogueShootingManager
             // Load all managed assemblies under GameRoot
             foreach (var dll in Directory.EnumerateFiles(Paths.GameRootPath, "*.dll", SearchOption.AllDirectories))
             {
-                if (!IsManagedAssembly(dll))
+                if (!IsManagedAssembly(dll) || IsConfuserEx(dll))
                     continue;
 
                 try

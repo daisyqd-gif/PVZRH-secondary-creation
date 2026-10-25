@@ -5,6 +5,7 @@ namespace CustomPlantClass
     /// Provides logging helpers that tag messages with a mod name,
     /// add them to the appropriate startup log, and write them to BepInEx.
     /// </summary>
+    [Obsolete("Ignore this message if running game version 4.0, otherwise use the standalone one in customplantclass.runtime.core")]
     public static class ModLogger
     {
         private static Lazy<ManualLogSource> Log_Lazy = new( () => Logger.CreateLogSource("ModLogger") );
@@ -59,12 +60,38 @@ namespace CustomPlantClass
         }
 
         /// <summary>
+        /// Logs a warning tagged with the specified mod name
+        /// and records it in the startup warnings.
+        /// </summary>
+        /// <param name="mod">The mod name to include in the log entry.</param>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogWarn(string mod, Exception msg)
+        {
+            string line = $"[{mod}] Warning — {msg}";
+            SafeWarn(line);
+            DataMgr.StartUpWarnings.Add(line);
+        }
+
+        /// <summary>
         /// Logs an error tagged with the specified mod name
         /// and records it in the startup errors.
         /// </summary>
         /// <param name="mod">The mod name to include in the log entry.</param>
         /// <param name="msg">The error message to log.</param>
         public static void LogError(string mod, string msg)
+        {
+            string line = $"[{mod}] Error — {msg}";
+            SafeError(line);
+            DataMgr.StartUpErrors.Add(line);
+        }
+
+        /// <summary>
+        /// Logs an error tagged with the specified mod name
+        /// and records it in the startup errors.
+        /// </summary>
+        /// <param name="mod">The mod name to include in the log entry.</param>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogError(string mod, Exception msg)
         {
             string line = $"[{mod}] Error — {msg}";
             SafeError(line);
@@ -100,11 +127,35 @@ namespace CustomPlantClass
         }
 
         /// <summary>
+        /// Logs a warning tagged with the current plugin name
+        /// and records it in the startup warnings.
+        /// </summary>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogWarn(Exception msg)
+        {
+            string line = $"[{MyPluginInfo.PluginName}] Warning — {msg}";
+            SafeWarn(line);
+            DataMgr.StartUpWarnings.Add(line);
+        }
+
+        /// <summary>
         /// Logs an error tagged with the current plugin name
         /// and records it in the startup errors.
         /// </summary>
         /// <param name="msg">The error message to log.</param>
         public static void LogError(string msg)
+        {
+            string line = $"[{MyPluginInfo.PluginName}] Error — {msg}";
+            SafeError(line);
+            DataMgr.StartUpErrors.Add(line);
+        }
+
+        /// <summary>
+        /// Logs an error tagged with the current plugin name
+        /// and records it in the startup errors.
+        /// </summary>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogError(Exception msg)
         {
             string line = $"[{MyPluginInfo.PluginName}] Error — {msg}";
             SafeError(line);
@@ -144,12 +195,40 @@ namespace CustomPlantClass
         }
 
         /// <summary>
+        /// Resolves the mod name from the assembly, logs a warning
+        /// with that name, and records it in the startup warnings.
+        /// </summary>
+        /// <param name="asm">The assembly used to resolve the mod name.</param>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogWarn(Assembly asm, Exception msg)
+        {
+            string mod = AttributeMgr.GetModName(asm);
+            string line = $"[{mod}] Warning — {msg}";
+            SafeWarn(line);
+            DataMgr.StartUpWarnings.Add(line);
+        }
+
+        /// <summary>
         /// Resolves the mod name from the assembly, logs an error
         /// with that name, and records it in the startup errors.
         /// </summary>
         /// <param name="asm">The assembly used to resolve the mod name.</param>
         /// <param name="msg">The error message to log.</param>
         public static void LogError(Assembly asm, string msg)
+        {
+            string mod = AttributeMgr.GetModName(asm);
+            string line = $"[{mod}] Error — {msg}";
+            SafeError(line);
+            DataMgr.StartUpErrors.Add(line);
+        }
+
+        /// <summary>
+        /// Resolves the mod name from the assembly, logs an error
+        /// with that name, and records it in the startup errors.
+        /// </summary>
+        /// <param name="asm">The assembly used to resolve the mod name.</param>
+        /// <param name="msg">The exception to log.</param>
+        public static void LogError(Assembly asm, Exception msg)
         {
             string mod = AttributeMgr.GetModName(asm);
             string line = $"[{mod}] Error — {msg}";

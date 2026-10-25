@@ -74,18 +74,13 @@ namespace MegaGatlingExpansion
                 plant.coordination += 0.1f;
             }
 
-            if (Random.Range(0, 100) < 10) plant.StartCoroutine(SuperShoot_Custom());
+            if (Random.Range(0, 100) < 10) StartPF();
 
             GameAPP.PlaySound(Random.Range(3, 5), 0.5f, 1.0f);
             return bullet1;
         }
-        public virtual IEnumerator SuperShoot_Custom()
+        public override IEnumerator SuperShoot()
         {
-            isPF = true;
-            plant.invincible = true;
-            plant.uncrashable = true;
-            plant.flashCountDown = 5f;
-            plant.isFlashing = true;
 
             int total = 60;
 
@@ -113,11 +108,6 @@ namespace MegaGatlingExpansion
                 else
                     yield return null;
             }
-
-            plant.invincible = false;
-            plant.uncrashable = false;
-            plant.isFlashing = false;
-            isPF = false;
         }
     }
 }

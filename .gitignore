@@ -33,3 +33,7 @@ packages/
 *.bak
 
 .fake
+
+# Secrets
+
+Splash screen remover/

@@ -4,6 +4,83 @@
         <name>CustomPlantClass.Networking</name>
     </assembly>
     <members>
+        <member name="T:CustomPlantClass.Networking.IPCManager">
+            <summary>
+            Sends length-prefixed UTF-8 messages over a local named pipe.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Networking.IPCManager.DefaultPipeName">
+            <summary>
+            The default local named-pipe name used by this manager.
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Networking.IPCManager.IsConnected">
+            <summary>
+            Gets whether the active named-pipe connection is connected.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.Initialize(BepInEx.Logging.ManualLogSource)">
+            <summary>
+            Sets the logger used for IPC diagnostics.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.StartServer(System.String)">
+            <summary>
+            Starts this process as the named-pipe server.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.StartClient(System.String)">
+            <summary>
+            Starts this process as a client of the named-pipe server.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.StartAuto(System.String)">
+            <summary>
+            Starts as a server, falling back to a client if server startup fails.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.StopCommunication">
+            <summary>
+            Stops communication and closes the active pipe streams.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.SendMessage(System.String)">
+            <summary>
+            Queues a message for delivery to the connected pipe endpoint.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.SendMessage(System.String,System.String)">
+            <summary>
+            Queues a command message for delivery to the connected pipe endpoint.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.SendMessageLocal(System.String,System.String)">
+            <summary>
+            Queues a command for local processing without sending it over the pipe.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.RegisterCommandListener(CustomPlantClass.Networking.ICommandListener)">
+            <summary>
+            Registers a listener for matching incoming command messages.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.UnregisterCommandListener(CustomPlantClass.Networking.ICommandListener)">
+            <summary>
+            Removes a previously registered command listener.
+            </summary>
+            <returns><see langword="true"/> if the listener was registered and removed.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.PingMod(System.String,System.Action{System.String},System.String)">
+            <summary>
+            Sends a ping command and registers a callback for its matching pong.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Networking.IPCManager.ProcessCommands">
+            <summary>
+            Dispatches queued commands to matching ping callbacks and registered listeners.
+            Call this from the mod's main-thread update loop.
+            </summary>
+        </member>
         <member name="T:CustomPlantClass.Networking.TCPBase">
             <summary>
             Abstract base class for defining 

@@ -241,6 +241,16 @@
             Gets the kind of object this effect is designed to be used on.
             </summary>
         </member>
+        <member name="F:CustomPlantClass.CustomEffect.AttrCountDown">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.CustomEffect.RemoveCd">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:CustomPlantClass.CustomEffect.Start">
             <summary>
             Initializes the effect's countdowns and invokes its add callback.
@@ -303,6 +313,14 @@
             <param name="mod">The mod name to include in the log entry.</param>
             <param name="msg">The warning message to log.</param>
         </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String,System.Exception)">
+            <summary>
+            Logs a warning tagged with the specified mod name
+            and records it in the startup warnings.
+            </summary>
+            <param name="mod">The mod name to include in the log entry.</param>
+            <param name="msg">The exception to log.</param>
+        </member>
         <member name="M:CustomPlantClass.ModLogger.LogError(System.String,System.String)">
             <summary>
             Logs an error tagged with the specified mod name
@@ -310,6 +328,14 @@
             </summary>
             <param name="mod">The mod name to include in the log entry.</param>
             <param name="msg">The error message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.String,System.Exception)">
+            <summary>
+            Logs an error tagged with the specified mod name
+            and records it in the startup errors.
+            </summary>
+            <param name="mod">The mod name to include in the log entry.</param>
+            <param name="msg">The exception to log.</param>
         </member>
         <member name="M:CustomPlantClass.ModLogger.LogInfo(System.String)">
             <summary>
@@ -325,12 +351,26 @@
             </summary>
             <param name="msg">The warning message to log.</param>
         </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Exception)">
+            <summary>
+            Logs a warning tagged with the current plugin name
+            and records it in the startup warnings.
+            </summary>
+            <param name="msg">The exception to log.</param>
+        </member>
         <member name="M:CustomPlantClass.ModLogger.LogError(System.String)">
             <summary>
             Logs an error tagged with the current plugin name
             and records it in the startup errors.
             </summary>
             <param name="msg">The error message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.Exception)">
+            <summary>
+            Logs an error tagged with the current plugin name
+            and records it in the startup errors.
+            </summary>
+            <param name="msg">The exception to log.</param>
         </member>
         <member name="M:CustomPlantClass.ModLogger.LogInfo(System.Reflection.Assembly,System.String)">
             <summary>
@@ -348,6 +388,14 @@
             <param name="asm">The assembly used to resolve the mod name.</param>
             <param name="msg">The warning message to log.</param>
         </member>
+        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Reflection.Assembly,System.Exception)">
+            <summary>
+            Resolves the mod name from the assembly, logs a warning
+            with that name, and records it in the startup warnings.
+            </summary>
+            <param name="asm">The assembly used to resolve the mod name.</param>
+            <param name="msg">The exception to log.</param>
+        </member>
         <member name="M:CustomPlantClass.ModLogger.LogError(System.Reflection.Assembly,System.String)">
             <summary>
             Resolves the mod name from the assembly, logs an error
@@ -355,6 +403,14 @@
             </summary>
             <param name="asm">The assembly used to resolve the mod name.</param>
             <param name="msg">The error message to log.</param>
+        </member>
+        <member name="M:CustomPlantClass.ModLogger.LogError(System.Reflection.Assembly,System.Exception)">
+            <summary>
+            Resolves the mod name from the assembly, logs an error
+            with that name, and records it in the startup errors.
+            </summary>
+            <param name="asm">The assembly used to resolve the mod name.</param>
+            <param name="msg">The exception to log.</param>
         </member>
         <member name="T:CustomPlantClass.Level.BranchAdventureManager">
             <summary>
@@ -970,6 +1026,26 @@
             <summary>
             Registers a custom zombie's spawn level
             and its relative selection weight.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DataMgr.CustomBuckets">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomItem(CustomPlantClass.Main.CustomID,UnityEngine.GameObject)">
+            <summary>
+            Registers a custom bucket
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomItem``1(CustomPlantClass.Main.CustomID,UnityEngine.GameObject)">
+            <summary>
+            Registers a custom bucket
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomItem``2(CustomPlantClass.Main.CustomID,UnityEngine.GameObject)">
+            <summary>
+            Registers a custom bucket
             </summary>
         </member>
         <member name="T:CustomPlantClass.Main.DefaultPlantStats">

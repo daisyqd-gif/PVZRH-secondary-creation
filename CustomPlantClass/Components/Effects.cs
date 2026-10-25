@@ -302,8 +302,14 @@ namespace CustomPlantClass
         /// Gets the kind of object this effect is designed to be used on.
         /// </summary>
         public virtual CustomEffectUsage Usage { get => CustomEffectUsage.Other; }
-        private float AttrCountDown = 0f;
-        private float RemoveCd = 0f;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected float AttrCountDown = 0f;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected float RemoveCd = 0f;
         /// <summary>
         /// Initializes the effect's countdowns and invokes its add callback.
         /// </summary>

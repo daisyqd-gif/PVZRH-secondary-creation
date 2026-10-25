@@ -85,24 +85,43 @@ namespace MegaGatlingExpansion
 
         private static readonly BulletType[] AllCustomBullets =
         {
+            //Base bllet types
             BulletType.Bullet_extremeSnowPea,
-            BulletProfile.ExtremeFirePea,
-            BulletProfile.PrimalPea,
-            BulletProfile.GooPea,
-            BulletProfile.ElectricPea,
+            BulletType.Bullet_extremeSnowPea,
+            BulletType.Bullet_cherry,
             BulletType.Bullet_cherry,
             BulletType.Bullet_pea_threeCherry,
-            BulletProfile.HypnoMegaPea,
+            BulletType.Bullet_pea_threeCherry,
+            BulletType.Bullet_portalPea,
             BulletType.Bullet_portalPea,
             BulletType.Bullet_pea,
             BulletType.Bullet_pea,
             BulletType.Bullet_pea,
-            BulletType.Bullet_pea
+            BulletType.Bullet_pea,
+            BulletType.Bullet_pea,
+            BulletType.Bullet_pea,
+            //Custom bullet types
+            BulletProfile.HypnoMegaPea,
+            BulletProfile.HypnoMegaPea,
+            BulletProfile.ExtremeFirePea,
+            BulletProfile.ExtremeFirePea,
+            BulletProfile.PrimalPea,
+            BulletProfile.PrimalPea,
+            BulletProfile.GooPea,
+            BulletProfile.GooPea,
+            //Deweighted electric pea chance
+            BulletProfile.ElectricPea
         };
 
         private static readonly BulletType[] AngryBullets =
         {
             BulletProfile.PrimalPea,
+            BulletProfile.PrimalPea,
+            BulletProfile.PrimalPea,
+            BulletProfile.PrimalPea,
+            BulletProfile.GooPea,
+            BulletProfile.GooPea,
+            BulletProfile.GooPea,
             BulletProfile.GooPea,
             BulletProfile.ElectricPea
         };
@@ -195,8 +214,6 @@ namespace MegaGatlingExpansion
 
                     await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
                 }
-
-                if (!startPF) AttributeCount_Custom = Mathf.Min(3, AttributeCount_Custom + 1);
                 ReplaceSprite_Custom();
 
                 plant.anim.SetBool("shooting", false);
@@ -220,7 +237,7 @@ namespace MegaGatlingExpansion
 
         public override Bullet Shoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
+            if (((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp) && !((AdvBuff)Plugin.CurseBuff).IsActive())
             {
                 isPF = true;
                 StartPF();

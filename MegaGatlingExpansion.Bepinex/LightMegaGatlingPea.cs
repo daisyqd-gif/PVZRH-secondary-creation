@@ -566,5 +566,6 @@ namespace MegaGatlingExpansion
 
             return shootX <= zX && zX != shootX;
         }
+        
     }
 }

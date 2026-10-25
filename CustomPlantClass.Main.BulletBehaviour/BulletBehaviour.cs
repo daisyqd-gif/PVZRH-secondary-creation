@@ -1,3 +1,6 @@
+using System.Linq;
+using Mono.Cecil;
+
 namespace CustomPlantClass.Main.BulletBehaviour
 {
     public class BulletRegistryManager : MonoBehaviour
@@ -10,6 +13,20 @@ namespace CustomPlantClass.Main.BulletBehaviour
             using Stream s = asm.GetManifestResourceStream("CustomPlantClass.Main.BulletBehaviour."+resourceName);
             using StreamReader reader = new StreamReader(s);
             return reader.ReadToEnd();
+        }
+        static bool IsConfuserEx(string file)
+        {
+            try
+            {
+                var asmDef = AssemblyDefinition.ReadAssembly(file);
+                return asmDef.CustomAttributes.Any(attr =>
+                    attr.AttributeType.Name == "ConfusedBy" ||
+                    attr.AttributeType.Name == "ConfusedByAttribute");
+            }
+            catch
+            {
+                return false; // Not a valid .NET assembly or unreadable
+            }
         }
         //planning: use the dictionary lookup approach but modify it to use a compile time set string inside the class
         public static BulletMovement CreateBulletmovement(BulletMoveWay theMovingWay,CustomBulletMovement spec)
@@ -38,7 +55,7 @@ namespace CustomPlantClass.Main.BulletBehaviour
             // Load all managed assemblies under GameRoot
             foreach (var dll in Directory.EnumerateFiles(Paths.GameRootPath, "*.dll", SearchOption.AllDirectories))
             {
-                if (!IsManagedAssembly(dll))
+                if (!IsManagedAssembly(dll) || IsConfuserEx(dll))
                     continue;
 
                 try

@@ -54,6 +54,9 @@
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil" Private="false">
+      <HintPath>..\lib\BepInEx\core\Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="Il2CppInterop.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
     </Reference>

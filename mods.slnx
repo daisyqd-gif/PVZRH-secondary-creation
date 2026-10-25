@@ -14,6 +14,12 @@
   <Folder Name="/CustomPlantClass.RogueShootingManager/">
     <Project Path="CustomPlantClass.RogueShootingManager/CustomPlant.RogueShootingManager.csproj" />
   </Folder>
+  <Folder Name="/CustomPlantClass.Runtime.Core/">
+    <Project Path="CustomPlantClass.Runtime.Core/CustomPlantClass.Runtime.Core.csproj" />
+  </Folder>
+  <Folder Name="/CustomPlantClass.Unmanaged/">
+    <Project Path="CustomPlantClass.Unmanaged/CustomPlantClass.Unmanaged.csproj" />
+  </Folder>
   <Folder Name="/CustomPlantClass/">
     <Project Path="CustomPlantClass/CustomPlant.csproj" />
   </Folder>
@@ -50,15 +56,21 @@
   <Folder Name="/RedLunar_RShooting/">
     <Project Path="RedLunar_RShooting/UltimateRedLunar_RogueShooting.csproj" />
   </Folder>
+  <Folder Name="/Splash screen remover/">
+    <Project Path="Splash screen remover/SplashScreenRemover.csproj" />
+  </Folder>
   <Folder Name="/StarUp.Bepinex/">
     <Project Path="StarUp.Bepinex/StarUpManager.csproj" />
   </Folder>
+  <Folder Name="/SuperCherryGatling_RS/">
+    <Project Path="SuperCherryGatling_RS/SuperCherryGatling_RS.csproj" />
+  </Folder>
   <!--<Folder Name="/UltiDoomSniper_RogueShooting/">
     <Project Path="UltiDoomSniper_RogueShooting/UltimateDoomSniper_RogueShooting.csproj" />
-  </Folder>
+  </Folder>-->
   <Folder Name="/UltiFireThree.Bepinex/">
     <Project Path="UltiFireThree.Bepinex/UltiFireThree.csproj" />
-  </Folder>-->
+  </Folder>
   <Folder Name="/UltimateCherryFireShooter/">
     <Project Path="UltimateCherryFireShooter/UltimateCherryFireShooter.Bepinex-Deconfused.csproj" />
   </Folder>
@@ -80,9 +92,9 @@
   <Folder Name="/Utils.Bepinex/">
     <Project Path="Utils.Bepinex/Utilities.csproj" />
   </Folder>
-  <!--<Folder Name="/VIPGoldenMelon/">
+  <Folder Name="/VIPGoldenMelon/">
     <Project Path="VIPGoldenMelon/VIPGoldenMelom.Bepinex.csproj" />
-  </Folder>-->
+  </Folder>
   <!--<Project Path="CustomLevelLoader/CustomLevelLoader.csproj" />-->
   <Project Path="CustomPlantClass.Main.BulletBehaviour/CustomPlantClass.Main.BulletBehaviour.csproj" />
   <Project Path="CustomPlantClass.Networking/CustomPlantClass.Networking.csproj" />
@@ -108,6 +120,7 @@
   <Project Path="SuperCherryThreeGatling/SuperCherryThreeGatling.csproj" />
   <Project Path="SuperHammer/SuperHammer.csproj" />
   <Project Path="UltimateArtillerySpike/UltimateArtillerySpike.csproj" />
+  <Project Path="UltimateCannon_RS/UltimateCannon_RS.csproj" />
   <Project Path="UltimateGatlingBloverBuff.Bepinex/UltimateGatlingBloverBuff.Bepinex.csproj" />
   <Project Path="UltimateIFV/UltimateIFV.csproj" />
   <Project Path="UltimatePlanternSkin/UltimatePlanternSkin.csproj" />

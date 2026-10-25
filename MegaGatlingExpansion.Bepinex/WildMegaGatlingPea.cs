@@ -18,14 +18,13 @@ namespace MegaGatlingExpansion
                 b1.Damage = plant.attackDamage;
                 b1.fromType = plant.thePlantType;
                 b1.transform.Rotate(0, 0, 15);
-                Bullet b2 = CreateBullet.Instance.SetBullet(pos.x, pos.y, plant.thePlantRow, GetBulletType_Custom(), BulletMoveWay.Free);
+                Bullet b2 = CreateBullet.Instance.SetBullet(pos.x, pos.y, plant.thePlantRow, GetBulletType_Custom(), BulletMoveWay.Sin);
                 b2.Damage = plant.attackDamage;
                 b2.fromType = plant.thePlantType;
-                b2.transform.Rotate(0, 0, 7.5f);
-                Bullet b3 = CreateBullet.Instance.SetBullet(pos.x, pos.y, plant.thePlantRow, GetBulletType_Custom(), BulletMoveWay.Free);
+                Bullet b3 = CreateBullet.Instance.SetBullet(pos.x, pos.y, plant.thePlantRow, GetBulletType_Custom(), BulletMoveWay.Sin);
                 b3.Damage = plant.attackDamage;
                 b3.fromType = plant.thePlantType;
-                b3.transform.Rotate(0, 0, -7.5f);
+                b3.theExistTime+=0.5f;
                 Bullet b4 = CreateBullet.Instance.SetBullet(pos.x, pos.y, plant.thePlantRow, GetBulletType_Custom(), BulletMoveWay.Free);
                 b4.Damage = plant.attackDamage;
                 b4.fromType = plant.thePlantType;

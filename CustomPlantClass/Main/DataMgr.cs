@@ -196,6 +196,8 @@ namespace CustomPlantClass.Main
                 used.Add((int)dt);
             foreach (GridItemType gt in Enum.GetValues(typeof(GridItemType)))
                 used.Add((int)gt);
+            foreach (BucketType gt in Enum.GetValues(typeof(BucketType)))
+                used.Add((int)gt);
             foreach (int id in CustomGridItemTypes)
                 used.Add(id);
 
@@ -1498,6 +1500,38 @@ namespace CustomPlantClass.Main
             {
                 ModLogger.LogError("Duplicate zombie type in spawn ratio: " + (int)theZombieType);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Dictionary<BucketType,GameObject> CustomBuckets = new();
+        /// <summary>
+        /// Registers a custom bucket
+        /// </summary>
+        public static void RegisterCustomItem(CustomID id, GameObject prefab)
+        {
+            prefab.AddComponent<Bucket>();
+            CustomBuckets.TryAdd(id,prefab);
+        }
+
+        /// <summary>
+        /// Registers a custom bucket
+        /// </summary>
+        public static void RegisterCustomItem<TBase>(CustomID id, GameObject prefab) where TBase : Bucket
+        {
+            prefab.AddComponent<TBase>();
+            CustomBuckets.TryAdd(id,prefab);
+        }
+
+        /// <summary>
+        /// Registers a custom bucket
+        /// </summary>
+        public static void RegisterCustomItem<TBase,TClass>(CustomID id, GameObject prefab) where TBase : Bucket where TClass : Component
+        {
+            prefab.AddComponent<TBase>();
+            prefab.AddComponent<TClass>();
+            CustomBuckets.TryAdd(id,prefab);
         }
     }
 

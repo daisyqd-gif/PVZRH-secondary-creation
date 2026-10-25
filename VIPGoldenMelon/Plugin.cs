@@ -47,7 +47,7 @@ namespace VIPGoldenMelon
                 AttackInterval = 3f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
                 AttackDamage = 150,      // Damage per attack
-                MaxHealth = 300,       // Plant HP
+                MaxHealth = 1000,       // Plant HP
                 Cd = 1.5f,               // Card cooldown
                 Sun = 600,               // Sun cost
 
@@ -75,7 +75,7 @@ namespace VIPGoldenMelon
             };
 
             // Register the plant and retrieve its ID
-            ID plantID = DataMgr.RegisterCustomPlant<Melonpult, VIPGoldenMelon>(Data);
+            ID plantID = DataMgr.RegisterCustomPlant<PortalMelon, VIPGoldenMelon>(Data);
             CustomCore.TypeMgrExtra.IsSpecialPlant.Add(plantID);
             VIPGoldenMelon.thePlantType=plantID;
 
@@ -92,18 +92,18 @@ namespace VIPGoldenMelon
     // You can leave it empty or override BaseCustomPlant methods for custom behavior.
     public class VIPGoldenMelon : MonoBehaviour
     {
-        public Melonpult plant=>gameObject.GetComponent<Melonpult>();
+        public PortalMelon plant=>gameObject.GetComponent<PortalMelon>();
         public void Start()
         {
             plant.shoot = plant.gameObject.transform.GetChild(0);
         }
         public static ID thePlantType=PlantType.Nothing;
     } //melonpult uses shooter.getbullettype so it can be patched
-    [HarmonyPatch(typeof(Melonpult),nameof(Melonpult.GetBulletType))]
-    public class Melonpult_GetBulletType_Patch
+    [HarmonyPatch(typeof(PortalMelon),nameof(PortalMelon.GetBulletType))]
+    public class PortalMelon_GetBulletType_Patch
     {
         [HarmonyPrefix]
-        public static bool Prefix(Melonpult __instance, ref BulletType __result)
+        public static bool Prefix(PortalMelon __instance, ref BulletType __result)
         {
             if (__instance.thePlantType == VIPGoldenMelon.thePlantType)
             {
@@ -145,7 +145,7 @@ namespace VIPGoldenMelon
                 return;
 
             // Run jackpot logic
-            SpawnMelon(__instance, BulletType.Bullet_melon);
+            SpawnMelon(__instance, BulletType.Bullet_melon,__instance.transform.position);
         }
 
         private static void RunGoldenMelonJackpot(Bullet_melon bullet, Zombie zombie)
@@ -155,14 +155,14 @@ namespace VIPGoldenMelon
             // 49%: Drop a normal melon
             if (roll < 0.49f)
             {
-                SpawnMelon(bullet, BulletType.Bullet_melonCannon);
+                SpawnMelon(bullet, BulletType.Bullet_melon, zombie);
                 return;
             }
 
             // 35%: Drop an ice melon
             if (roll < 0.84f)
             {
-                SpawnMelon(bullet, BulletType.Bullet_melonCannon);
+                SpawnMelon(bullet, BulletType.Bullet_winterMelon, zombie);
                 zombie.SetFreeze(3f);
                 return;
             }
@@ -179,6 +179,9 @@ namespace VIPGoldenMelon
             {
                 zombie.theFirstArmorHealth=0;
                 zombie.theSecondArmorHealth=0;
+                zombie.TakeDamage(1,bullet.Cast<IDamageMaker>(),DamageType.RealDamage,bullet.fromType);
+                zombie.FirstArmorFall();
+                zombie.SecondArmorFall();
                 return;
             }
 
@@ -193,13 +196,18 @@ namespace VIPGoldenMelon
             DropTrophy();
         }
 
-        private static void SpawnMelon(Bullet_melon bullet, BulletType type)
+        private static void SpawnMelon(Bullet_melon bullet, BulletType type, Zombie zombie)
         {
-            var newBullet = CreateBullet.Instance.SetBullet(bullet.transform.position.x,bullet.transform.position.y+2f,bullet.theBulletRow,type,BulletMoveWay.Cannon);
-            var pos2 = newBullet.cannonPos;
-            pos2.x = bullet.transform.position.x - 0.15f;
-            pos2.y = bullet.transform.position.y;
-            newBullet.cannonPos = pos2;
+            var newBullet = CreateBullet.Instance.SetBullet(bullet.transform.position.x,bullet.transform.position.y+2f,bullet.theBulletRow,type,BulletMoveWay.Throw);
+            newBullet.ThrowTo(zombie);
+            newBullet.Damage=bullet.Damage;
+            newBullet.fromType = bullet.fromType;
+        }
+
+        private static void SpawnMelon(Bullet_melon bullet, BulletType type, Vector2 pos)
+        {
+            var newBullet = CreateBullet.Instance.SetBullet(bullet.transform.position.x,bullet.transform.position.y+2f,bullet.theBulletRow,type,BulletMoveWay.Throw);
+            newBullet.ThrowTo(pos);
             newBullet.Damage=bullet.Damage;
             newBullet.fromType = bullet.fromType;
         }
@@ -216,7 +224,7 @@ namespace VIPGoldenMelon
             bool flag = gameObject != null;
             if (flag)
             {
-                UnityEngine.Object.Instantiate(gameObject, new Vector2(0f, 0f), Quaternion.identity, GameAPP.board.transform).AddComponent<TrophyComp>();
+                Object.Instantiate(gameObject, new Vector2(0f, 0f), Quaternion.identity, GameAPP.board.transform).AddComponent<TrophyComp>();
             }
         }
     }

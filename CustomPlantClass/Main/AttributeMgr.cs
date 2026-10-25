@@ -57,6 +57,7 @@ namespace CustomPlantClass.Main
     }
 
     /// <summary>Specifies the display name for a mod at the assembly level.</summary>
+    [Obsolete("Use the one in CustomPlantClass.Runtime.Core instead")]
     [AttributeUsage(AttributeTargets.Assembly)]
     public class CustomModAttribute : Attribute
     {
@@ -73,6 +74,7 @@ namespace CustomPlantClass.Main
     }
 
     /// <summary>Specifies the display name for a mod at the module level.</summary>
+    [Obsolete("Put this on the assembly instead")]
     [AttributeUsage(AttributeTargets.Module)]
     public class CustomModModuleAttribute : Attribute
     {
@@ -151,6 +153,7 @@ namespace CustomPlantClass.Main
         public static string GetModName(Assembly asm)
         {
             // 1. CustomModAttribute (assembly-level)
+#pragma warning disable CS0618 // Type or member is obsolete
             var modAttr = asm.GetCustomAttribute<CustomModAttribute>();
             if (modAttr != null && !string.IsNullOrWhiteSpace(modAttr.Name))
                 return modAttr.Name;

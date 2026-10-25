@@ -395,6 +395,7 @@ namespace CustomPlantClass.Networking
             public void Update()
             {
                 ProcessCommands();
+                IPCManager.ProcessCommands();
             }
         }
     }
@@ -438,7 +439,7 @@ namespace CustomPlantClass.Networking
         public void OnCommandReceived(string data)
         {
             OnRecieved(data);
-            TCPManager.SendMessageLocal(Name+"Pong",Data);
+            IPCManager.SendPingResponse(Name + "Pong", Data);
         }
         /// <summary>
         /// Invoked when a matching ping command is received before the pong is sent.

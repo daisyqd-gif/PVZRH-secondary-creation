@@ -113,16 +113,6 @@ namespace MegaGatlingExpansion
             }
         }
     }
-    public class ElectricMegaGatlingPea : MegaGatlingPea
-    {
-        public override int GetSunCount() => 5;
-        public override string GetShootPath()
-        {
-            return "GatlingPea_head/paokou_mid";
-        }
-        public override BulletType GetBulletType_Custom() => BulletProfile.ElectricPea;
-        public override string GetTextString() => "充能:" + AttributeCount_Custom + "\n请输入文本";
-    }
     public class PrimalMegaGatlingPea : MegaGatlingPea
     {
         public override int GetSunCount() => 5;

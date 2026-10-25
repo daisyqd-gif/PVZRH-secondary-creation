@@ -623,4 +623,65 @@ namespace CustomPlantClass.Main
         /// </summary>
         Dirt_water = 6 // 泥水域
     }
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+    public struct CustomID
+    {
+        public int id = 0;
+        public CustomID(int id) { this.id = id; }
+        public CustomID(ID id) {  this.id = id.id; }
+        public CustomID(PlantType id) { this.id = (int)id; }
+        public CustomID(ZombieType id) { this.id = (int)id; }
+        public CustomID(ParticleType id) { this.id = (int)id; }
+        public CustomID(BulletType id) { this.id = (int)id; }
+        public CustomID(CherryBombType id) { this.id = (int)id; }
+        public CustomID(MusicType id) { this.id = (int)id; }
+        public CustomID(EffectType id) { this.id = (int)id; }
+        public CustomID(BucketType id) { this.id = (int)id; }
+        public CustomID(GridItemType id) { this.id = (int)id; }
+        public CustomID(Zombie.ZombieColor id) {  this.id = (int)id; }
+        public static implicit operator int(CustomID id) => id.id;
+        public static implicit operator ID(CustomID id) => id.id;
+        public static implicit operator PlantType(CustomID id) => (PlantType)id.id;
+        public static implicit operator ZombieType(CustomID id) => (ZombieType)id.id;
+        public static implicit operator ParticleType(CustomID id) => (ParticleType)id.id;
+        public static implicit operator BulletType(CustomID id) => (BulletType)id.id;
+        public static implicit operator CherryBombType(CustomID id) => (CherryBombType)id.id;
+        public static implicit operator MusicType(CustomID id) => (MusicType)id.id;
+        public static implicit operator EffectType(CustomID id) => (EffectType)id.id;
+        public static implicit operator BucketType(CustomID id) => (BucketType)id.id;
+        public static implicit operator GridItemType(CustomID id) => (GridItemType)id.id;
+        public static implicit operator Zombie.ZombieColor(CustomID id) => (Zombie.ZombieColor)id.id;
+
+        public static implicit operator CustomID(ID i) => new CustomID(i);
+        public static implicit operator CustomID(PlantType id) => new CustomID(id);
+        public static implicit operator CustomID(ZombieType id) => new CustomID(id);
+        public static implicit operator CustomID(ParticleType id) => new CustomID(id);
+        public static implicit operator CustomID(BulletType id) => new CustomID(id);
+        public static implicit operator CustomID(CherryBombType id) => new CustomID(id);
+        public static implicit operator CustomID(MusicType id) => new CustomID(id);
+        public static implicit operator CustomID(EffectType id) => new CustomID(id);
+        public static implicit operator CustomID(BucketType id) => new CustomID(id);
+        public static implicit operator CustomID(GridItemType id) => new CustomID(id);
+        public static implicit operator CustomID(Zombie.ZombieColor id) => new CustomID(id);
+        public CustomID(AdvBuff id) { this.id = (int)id; }
+        public CustomID(UltiBuff id) { this.id = (int)id; }
+        public CustomID(TravelDebuff id) { this.id = (int)id; }
+        public CustomID(TravelUnlocks id) { this.id = (int)id; }
+
+        public static implicit operator AdvBuff(CustomID id) => (AdvBuff)id.id;
+        public static implicit operator UltiBuff(CustomID id) => (UltiBuff)id.id;
+        public static implicit operator TravelDebuff(CustomID id) => (TravelDebuff)id.id;
+        public static implicit operator TravelUnlocks(CustomID id) => (TravelUnlocks)id.id;
+        public static implicit operator CustomID(AdvBuff i) => new CustomID(i);
+        public static implicit operator CustomID(UltiBuff id) => new CustomID(id);
+        public static implicit operator CustomID(TravelDebuff id) => new CustomID(id);
+        public static implicit operator CustomID(TravelUnlocks id) => new CustomID(id);
+        public static implicit operator CustomID(int id) => new CustomID(id);
+
+        public override string ToString()
+        {
+            return id.ToString();
+        }
+    }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
