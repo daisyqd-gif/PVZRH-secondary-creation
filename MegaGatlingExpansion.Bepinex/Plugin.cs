@@ -82,7 +82,7 @@ namespace MegaGatlingExpansion
             {
                 Log.LogError(e.ToString());
             }
-            DataMgr.AutoRegisterTypes(Assembly.GetExecutingAssembly());
+            CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes(Assembly.GetExecutingAssembly());
 
             AssetBundle assetBundle = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "megagatlingpea");
             PlantTypeExpand lanternID = DataMgr.AllocateID();
@@ -1351,10 +1351,12 @@ namespace MegaGatlingExpansion
                     {
                         CustomCore.RegisterCustomUseItemOnPlantEvent(target,BucketType.PortalHeart,PlantTypeExpand.ChronoMegaGatlingPea);
                     }
+                    /*
                     if (!CustomCore.CustomBanMix.ContainsKey(target))
                     {
                         CustomCore.RegisterCustomBanMix(target,()=>LevelProgressionManager.IsCompleted(LevelID) || Board.Instance.TryGetComponent<BoardEnablerEffect>(out _) || Board.Instance.boardTag.isSuperRandom,null,() => InGameText.Instance.ShowText("配方未解锁", 3f));
                     }
+                    */
                     if (!CustomCore.CustomUltimatePlants.Contains(target))
                     {
                         CustomSuperPlants.Add(target);

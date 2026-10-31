@@ -209,7 +209,7 @@ namespace UltimateCherryFireShooter_Remade
             }
             catch( Exception e )
             {
-                ModLogger.LogError(e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
             }
         }
         public override Bullet Shoot_Custom()
@@ -269,7 +269,7 @@ namespace UltimateCherryFireShooter_Remade
             }
             catch( Exception e )
             {
-                ModLogger.LogError(e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
             }
         }
         public override void OnDie(Plant.DieReason reason)

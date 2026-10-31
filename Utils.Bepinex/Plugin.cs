@@ -1,12 +1,12 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
-//using CustomizeLib.BepInEx;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace Utils{
+namespace Utils
+{
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
     public class Core : BasePlugin
     {
@@ -16,15 +16,15 @@ namespace Utils{
         public override void Load()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), null);
-            //CustomCore.AddFusion((int)PlantType.SolarSunflower,(int)PlantType.UltimateSunflower,(int)PlantType.SunBomb);
-            //CustomCore.AddFusion((int)PlantType.SolarSunflower,(int)PlantType.SunBomb,(int)PlantType.UltimateSunflower);
-            //CustomCore.AddFusion((int)PlantType.AbyssSwordStar,(int)PlantType.SwordStar,(int)PlantType.SwordStar);
+            var entry = Config.Bind("Cfg", $"Enable board start print(affects performance)", false);
+            entry.SettingChanged+= (_,_) => DumpBoardTag.Enable = entry.Value;
             Log.LogInfo($"{PluginName} {PluginVersion} loaded.");
         }
     }
     [HarmonyPatch(typeof(Board), nameof(Board.Start))]
     public static class DumpBoardTag
     {
+        public static bool Enable;
         private static string FormatBuffList<T>(Il2CppSystem.Collections.Generic.List<T> list)
         {
             var result = new List<int>();
@@ -43,6 +43,7 @@ namespace Utils{
         [HarmonyPostfix]
         public static void Postfix(Board __instance)
         {
+            if(!Enable) return;
             // 1. BoardTag flags
             var tag = __instance.boardTag;
             var fields = typeof(Board.BoardTag).GetFields();
@@ -132,48 +133,4 @@ namespace Utils{
             catch {}
         }
     }
-    /*[HarmonyPatch(typeof(SolarSunflower), nameof(SolarSunflower.Start))]
-    public static class UnsealSolarSunflower
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(SolarSunflower __instance)
-        {
-            if(__instance==null || __instance.board==null || GameAPP.theGameStatus!=GameStatus.InGame) return true;
-            Board.Instance.OnPlantCreate(__instance);
-            __instance.UpdateText();
-            __instance.ReplaceSprite();
-            __instance.FirstMeet();
-            Animator anim=__instance.anim;
-            anim.Play("enter");
-            return false;
-        }
-    }
-    [HarmonyPatch(typeof(AbyssSwordStar), nameof(AbyssSwordStar.Start))]
-    public static class UnsealAbyssSwordStar
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(AbyssSwordStar __instance)
-        {
-            if(__instance==null || __instance.board==null || GameAPP.theGameStatus!=GameStatus.InGame) return true;
-            Board.Instance.OnPlantCreate(__instance);
-            __instance.UpdateText();
-            __instance.ReplaceSprite();
-            __instance.FirstMeet();
-            return false;
-        }
-    }
-    [HarmonyPatch(typeof(UltimateMinigun), nameof(UltimateMinigun.Start))]
-    public static class UnsealUltimateMinigun
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(UltimateMinigun __instance)
-        {
-            if(__instance==null || __instance.board==null || GameAPP.theGameStatus!=GameStatus.InGame) return true;
-            Board.Instance.OnPlantCreate(__instance);
-            __instance.UpdateText();
-            __instance.ReplaceSprite();
-            __instance.FirstMeet();
-            return false;
-        }
-    }*/
 }

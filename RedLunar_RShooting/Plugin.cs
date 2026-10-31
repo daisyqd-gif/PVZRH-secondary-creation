@@ -62,7 +62,7 @@ namespace UltimateRedLunar_RogueShooting
             }
             catch(Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
             }
         }
     }

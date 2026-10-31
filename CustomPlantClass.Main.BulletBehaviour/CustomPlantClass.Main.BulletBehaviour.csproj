@@ -32,7 +32,7 @@
       <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="CustomPlantClass" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.dll</HintPath>
+      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>

@@ -12,7 +12,7 @@
     <Project Path="CustomLevels.Bepinex_New/CustomLevelLoader.csproj" />
   </Folder>-->
   <Folder Name="/CustomPlantClass.RogueShootingManager/">
-    <Project Path="CustomPlantClass.RogueShootingManager/CustomPlant.RogueShootingManager.csproj" />
+    <Project Path="CustomPlantClass.RogueShootingManager/CustomPlantClass.RogueShootingManager.csproj" />
   </Folder>
   <Folder Name="/CustomPlantClass.Runtime.Core/">
     <Project Path="CustomPlantClass.Runtime.Core/CustomPlantClass.Runtime.Core.csproj" />
@@ -21,7 +21,7 @@
     <Project Path="CustomPlantClass.Unmanaged/CustomPlantClass.Unmanaged.csproj" />
   </Folder>
   <Folder Name="/CustomPlantClass/">
-    <Project Path="CustomPlantClass/CustomPlant.csproj" />
+    <Project Path="CustomPlantClass/CustomPlantClass.csproj" />
   </Folder>
   <Folder Name="/EvilSuperGatling/">
     <Project Path="EvilSuperGatling/EvilSuperGatling.csproj" />
@@ -80,6 +80,9 @@
   <Folder Name="/UltimateDoomSniper/">
     <Project Path="UltimateDoomSniper/UltimateDoomSniper-2.csproj" />
   </Folder>
+  <Folder Name="/UltimateFreezingCherry/">
+    <Project Path="UltimateFreezingCherry/FreezingCherry.BepInEx.csproj" />
+  </Folder>
   <!--<Folder Name="/UltimateGatlingSupport/">
     <Project Path="UltimateGatlingSupport/template.csproj" />
   </Folder>-->
@@ -122,6 +125,7 @@
   <Project Path="UltimateArtillerySpike/UltimateArtillerySpike.csproj" />
   <Project Path="UltimateCannon_RS/UltimateCannon_RS.csproj" />
   <Project Path="UltimateGatlingBloverBuff.Bepinex/UltimateGatlingBloverBuff.Bepinex.csproj" />
+  <Project Path="UltimateHorseBoss-Phase2/UltimateHorseBoss-Phase2.csproj" />
   <Project Path="UltimateIFV/UltimateIFV.csproj" />
   <Project Path="UltimatePlanternSkin/UltimatePlanternSkin.csproj" />
   <!--<Project Path="UltimateRepeater/UltimateRepeater.csproj" />

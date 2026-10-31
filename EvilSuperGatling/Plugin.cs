@@ -159,7 +159,7 @@ namespace EvilSuperGatling
             }
             catch( Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
             }
         }
         public override void SuperEnd()

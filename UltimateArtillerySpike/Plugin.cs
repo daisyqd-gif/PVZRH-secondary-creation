@@ -284,7 +284,7 @@ namespace UltimateArtillerySpike
                 }
 
                 ShootBullets:
-                StoredBullets.ActionPerItem((b)=>ShootOnce(b.theBulletType,b.theDamage,GetRandomPosition()));
+                CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(StoredBullets, (b)=>ShootOnce(b.theBulletType,b.theDamage,GetRandomPosition()));
                 StoredBullets.Clear();
                 return;
             }
@@ -472,7 +472,7 @@ namespace UltimateArtillerySpike
         {
             if(Board.Instance != null && data.TryCast<BulletMovement>() != null)
             {
-                Lawnf.GetPlants(Plugin.DataContainer.PlantId_Spike,Board.Instance).ToSystemList().ActionPerItem((Plant p) =>
+                CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(Lawnf.GetPlants(Plugin.DataContainer.PlantId_Spike,Board.Instance).ToSystemList(), (Plant p) =>
                 {
                     if(p!= null && p.TryGetComponent<UltimateArtillerySpike>(out var spike))
                     {

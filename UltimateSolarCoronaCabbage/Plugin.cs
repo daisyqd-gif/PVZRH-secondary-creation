@@ -46,7 +46,7 @@ namespace UltimateSolarCoronaCabbage_Remade
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new(){(PlantType.UltimateCabbage,PlantType.UltimateCabbage)}), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new(){(PlantType.UltimateCabbage,PlantType.UltimateCabbage)}), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 2f,  // Time between sun/production cycles

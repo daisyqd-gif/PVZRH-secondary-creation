@@ -410,36 +410,6 @@ namespace CustomPlantClass.Main
         {
             return SoundManager.PlaySound(soundClip).GetAwaiter().GetResult();
         }
-        /// <summary>Runs an action after the specified delay.</summary>
-        /// <param name="a">The action to run.</param>
-        /// <param name="delaySeconds">The delay before running the action, in seconds.</param>
-        public static async void WaitAndExecute(Action a, float delaySeconds)
-        {
-            await DelayTask.Delay(delaySeconds);
-            a();
-        }
-        /// <summary>Runs an action with a parameter after the specified delay.</summary>
-        /// <typeparam name="T">The type of the action parameter.</typeparam>
-        /// <param name="a">The action to run.</param>
-        /// <param name="parameter">The value passed to the action.</param>
-        /// <param name="delaySeconds">The delay before running the action, in seconds.</param>
-        public static async void WaitAndExecute<T>(Action<T> a, T parameter, float delaySeconds)
-        {
-            await DelayTask.Delay(delaySeconds);
-            a(parameter);
-        }
-        /// <summary>Runs a function with a parameter after the specified delay and returns its result.</summary>
-        /// <typeparam name="T">The type of the function parameter.</typeparam>
-        /// <typeparam name="Tout">The type of the function result.</typeparam>
-        /// <param name="a">The function to run.</param>
-        /// <param name="parameter">The value passed to the function.</param>
-        /// <param name="delaySeconds">The delay before running the function, in seconds.</param>
-        /// <returns>A task that completes with the function's result.</returns>
-        public static async Task<Tout> WaitAndExecute<T, Tout>(Func<T, Tout> a, T parameter, float delaySeconds)
-        {
-            await DelayTask.Delay(delaySeconds);
-            return a(parameter);
-        }
         /// <summary>Creates a two-point line renderer that fades after remaining visible for the specified time.</summary>
         /// <param name="parent">The transform that will parent the line object.</param>
         /// <param name="from">The line's starting position.</param>

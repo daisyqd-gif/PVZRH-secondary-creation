@@ -8,6 +8,7 @@ global using System.Collections;
 global using System.Collections.Generic;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
+global using CustomPlantClass.Runtime.Core;
 global using Random = UnityEngine.Random;
 global using UnityEngine.Rendering;
 using Core;
@@ -50,7 +51,7 @@ namespace UltimateIFV
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>(
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(
                     [(PlantType.IFVIronPuff, PlantType.Peashooter), (DataContainer.PlantId_blover, PlantType.Magnetshroom)]
                 )), // Optional fusion recipes
 
@@ -111,7 +112,7 @@ namespace UltimateIFV
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>(
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(
                     [(PlantType.IFVBlover, PlantType.Peashooter), (DataContainer.PlantId_ironPuff, PlantType.Blover)]
                 )), // Optional fusion recipes
 
@@ -548,7 +549,7 @@ namespace UltimateIFV
         [HarmonyPostfix]
         public static void Postfix()
         {
-            ModLogger.LogInfo("Added IFV plants to TypeMgr");
+            global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo("Added IFV plants to TypeMgr");
             Plugin.TypeMgrPatch();
         }
     }

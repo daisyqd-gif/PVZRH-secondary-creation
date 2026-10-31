@@ -13,13 +13,17 @@
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
-    <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.Runtime.CSharp.xml</DocumentationFile>
+    <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.Runtime.Core.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <!-- Import shared references -->
   <ItemGroup>
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
+      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>

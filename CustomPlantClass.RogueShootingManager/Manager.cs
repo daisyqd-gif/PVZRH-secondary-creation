@@ -9,11 +9,15 @@ using Mono.Cecil;
 
 namespace CustomPlantClass.RogueShootingManager
 {
+    /// <summary>Registers custom plants and buffs for Rogue Shooting.</summary>
     public class RegistryHelper : MonoBehaviour
     {
         internal static int classIndex=0;
+        /// <summary>Maps generated config identifiers to their custom config data.</summary>
         public static Dictionary<string,CustomRogueShootingConfig> Specs = new();
+        /// <summary>Maps generated buff identifiers to their custom buff data.</summary>
         public static Dictionary<string,CustomRogueShootingBuff> Buffs = new();
+        /// <summary>Maps plant types to their registered custom Rogue Shooting buffs.</summary>
         public static Dictionary<PlantType,HashSet<CustomRogueShootingBuff>> RogueBuffs = new();
 
         internal static Dictionary<PlantType, ShootingAlmanacPlant> plants = new();
@@ -46,6 +50,9 @@ namespace CustomPlantClass.RogueShootingManager
             }
         }
         
+        /// <summary>Generates and registers an IL2CPP config type for a custom plant.</summary>
+        /// <param name="spec">The config data used by the generated type.</param>
+        /// <returns>An instance of the generated plant config.</returns>
         public static BaseConfig MakeConfigType(CustomRogueShootingConfig spec)
         {
             string className = Guid.NewGuid().ToString("N");
@@ -112,6 +119,9 @@ namespace CustomPlantClass.RogueShootingManager
             //*/
             //return new RogueClass_CONFIG(spec);
         }
+        /// <summary>Generates and registers an IL2CPP buff type for a custom buff.</summary>
+        /// <param name="buff">The buff data used by the generated type.</param>
+        /// <returns>An instance of the generated buff.</returns>
         public static BaseBuff MakeBuffType(CustomRogueShootingBuff buff)
         {
             // 1. Generate stable GUID
@@ -202,6 +212,12 @@ namespace CustomPlantClass.RogueShootingManager
             
             //return new RogueClass_BUFF(buff);
         }
+        /// <summary>Registers custom buffs and selected standard upgrades for a plant.</summary>
+        /// <param name="thePlantType">The plant that receives the buffs.</param>
+        /// <param name="damageBuff">Whether to add the standard damage upgrade.</param>
+        /// <param name="speedBuff">Whether to add the standard speed upgrade.</param>
+        /// <param name="starUp">Whether to add the standard star upgrade.</param>
+        /// <param name="buffs">Additional custom buffs to register.</param>
         public static void RegisterBuffsForPlant(PlantType thePlantType, bool damageBuff = true, bool speedBuff = true, bool starUp = true,params CustomRogueShootingBuff[] buffs)
         {
             if (!RogueBuffs.TryGetValue(thePlantType, out var p))
@@ -275,31 +291,53 @@ namespace CustomPlantClass.RogueShootingManager
         internal static Il2CppSystem.Collections.Generic.List<PlantType> experts = new();
         internal static Dictionary<PlantType,BaseConfig> roguePlants = new();
         internal static Il2CppSystem.Collections.Generic.HashSet<PlantType> CustomBasePlants = new();
+        /// <summary>Registers a plant as an expert plant and adds its config.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
         public static void AddCustomExpertPlant(PlantType thePlantType, BaseConfig config)
         {
             experts.Add(thePlantType);
             AddCustomRogueShootingPlant(thePlantType,config);
         }
+        /// <summary>Reserved overload for registering an expert plant with a cost.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
+        /// <param name="cost">The planned plant cost.</param>
         [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
         public static void AddCustomExpertPlant(PlantType thePlantType, BaseConfig config, int cost)
         {
             
         }
+        /// <summary>Maps custom plant types to their Rogue Shooting config data.</summary>
         public static Dictionary<PlantType,CustomRogueShootingConfig> RogueConfigs = new();
+        /// <summary>Registers a custom plant config for Rogue Shooting.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
         public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config)
         {
             roguePlants.TryAdd(thePlantType,config);
         }
+        /// <summary>Reserved overload for registering a custom plant with a cost.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
+        /// <param name="cost">The planned plant cost.</param>
         [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
         public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
         {
             
         }
+        /// <summary>Registers a custom plant config as a base plant in Rogue Shooting.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
         public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config)
         {
             CustomBasePlants.Add(thePlantType);
             AddCustomRogueShootingPlant(thePlantType,config);
         }
+        /// <summary>Reserved overload for registering a base plant with a cost.</summary>
+        /// <param name="thePlantType">The plant type to register.</param>
+        /// <param name="config">The plant's config.</param>
+        /// <param name="cost">The planned plant cost.</param>
         [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
         public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
         {
@@ -317,13 +355,13 @@ namespace CustomPlantClass.RogueShootingManager
             // order must begin with the starting plant
             if (order.Length < 2)
             {
-                ModLogger.LogError("[EVOLUTION] Pathway must contain at least start -> next");
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError("[EVOLUTION] Pathway must contain at least start -> next");
                 return;
             }
 
             if (order[0] != thePlantType)
             {
-                ModLogger.LogError($"[EVOLUTION] First element of order[] must be the starting plant ({thePlantType})");
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"[EVOLUTION] First element of order[] must be the starting plant ({thePlantType})");
                 return;
             }
 
@@ -338,15 +376,25 @@ namespace CustomPlantClass.RogueShootingManager
 
                 list.Add(child);
 
-                ModLogger.LogInfo($"[EVOLUTION] {parent} -> {child}");
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] {parent} -> {child}");
             }
         }
+        /// <summary>Reserved method for registering a custom battle buff.</summary>
+        /// <param name="name">The buff name.</param>
+        /// <param name="desc">The buff description.</param>
+        /// <param name="cost">The buff cost.</param>
+        /// <param name="unknown_type">Reserved data whose type is not yet defined.</param>
         [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
         public static void AddCustomBattleBuff(string name, string desc, int cost, object unknown_type)
         {
             
         }
         internal static List<(string name, string desc, Func<ShootingManager,bool> canGet, Action<ShootingManager> onGet)> CustomMissionBuffs = new();
+        /// <summary>Registers a mission buff that may be offered as a trial.</summary>
+        /// <param name="name_formatted">The buff name before its trial prefix is applied.</param>
+        /// <param name="desc">The buff description.</param>
+        /// <param name="onGet">Runs when the trial buff is acquired.</param>
+        /// <returns>The registered advanced buff identifier.</returns>
         public static AdvBuff AddCustomCurseMissionBuff(
             string name_formatted, 
             string desc, 
@@ -377,6 +425,9 @@ namespace CustomPlantClass.RogueShootingManager
             // TODO: return actual AdvBuff once Rogue Shooting update drops
             return buff;
         }
+        /// <summary>Injects an upgrade buff that transforms a configured base plant.</summary>
+        /// <param name="BasePlant">The base plant's config identifier.</param>
+        /// <param name="resultPlant">The plant type produced by the upgrade.</param>
         public static void InjectUpgradeBuff(RSConfigType BasePlant, PlantType resultPlant)
         {
             if(Enum.GetName(BasePlant)==null)
@@ -450,11 +501,23 @@ namespace CustomPlantClass.RogueShootingManager
 
             Harmony.CreateAndPatchAll(t.Assembly);
         }
+        /// <summary>The title prefix used for qualitative-change buffs.</summary>
         public const string QualitativeChangeText = "质变";
+        /// <summary>The title prefix used for curse buffs.</summary>
         public const string CurseText = "诅咒";
+        /// <summary>The title prefix used for reversed-curse buffs.</summary>
         public const string ReversedCurseText = "祝福";
         internal static 
         Dictionary<BuffID,(BuffID reversed,Func<Plant,bool> canreverse,Action oncurse,Action onreverse)> CurseBuffInfo = new();
+        /// <summary>Registers paired curse and reversal buffs for a plant.</summary>
+        /// <param name="name">The shared name of the curse and its reversal.</param>
+        /// <param name="curseDesc">The curse description.</param>
+        /// <param name="reversedDesc">The description shown after reversal.</param>
+        /// <param name="thePlantType">The plant associated with the curse.</param>
+        /// <param name="CanReverse">Determines when the curse can be reversed.</param>
+        /// <param name="OnCurse">Optionally runs when the curse is acquired.</param>
+        /// <param name="OnReverseEvent">Optionally runs when the curse is reversed.</param>
+        /// <returns>The curse identifier, reversal identifier, and generated buff config.</returns>
         public static (BuffID curseBuff, BuffID reverseBuff, BaseBuff buffConfig) RegisterCustomCurseBuff(string name, string curseDesc, string reversedDesc, PlantType thePlantType, Func<Plant,bool> CanReverse, Action OnCurse = null, Action OnReverseEvent = null)
         {
             var buffText_curse=$"诅咒-{name}：{curseDesc}";
@@ -478,6 +541,9 @@ namespace CustomPlantClass.RogueShootingManager
             //categories[ShootingAlmanacCategory.Trials].Add(new())
             return (buff_Curse,buff_Reversed,rogueBuff);
         }
+        /// <summary>Gets the display label associated with a plant role.</summary>
+        /// <param name="role">The role to format.</param>
+        /// <returns>The localized role label.</returns>
         public static string GetStringFromRole(Roles role)
         {
             switch (role)
@@ -490,6 +556,10 @@ namespace CustomPlantClass.RogueShootingManager
                 case Roles.Producer: return "未知";
             }
         }
+        /// <summary>Prefixes a buff title according to its category.</summary>
+        /// <param name="buffType">The category that determines the prefix.</param>
+        /// <param name="Title">The title to format.</param>
+        /// <returns>The title with its category prefix.</returns>
         public static string FormatBuffTitle(ShootingBuffType buffType, string Title)
         {
             switch (buffType)
@@ -508,6 +578,12 @@ namespace CustomPlantClass.RogueShootingManager
                 return $"试炼：{Title}";
             }
         }
+        /// <summary>Registers a qualitative-change buff for a plant.</summary>
+        /// <param name="name">The buff name.</param>
+        /// <param name="desc">The buff description.</param>
+        /// <param name="thePlantType">The plant associated with the buff.</param>
+        /// <param name="OnGetBuff">Optionally runs when the buff is acquired.</param>
+        /// <returns>The advanced buff identifier and generated buff config.</returns>
         public static (BuffID AdvBuff,BaseBuff buffConfig) RegisterCustomQualitativeChangeBuff(string name, string desc, PlantType thePlantType, Action OnGetBuff = null)
         {
             string name_formatted = $"质变-{name}：";

@@ -18,7 +18,7 @@ namespace UltimateCannon_RS
         public Harmony patch;
         public override void Load()
         {
-            DataMgr.AutoRegisterTypes(Assembly.GetExecutingAssembly());
+            CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes(Assembly.GetExecutingAssembly());
             patch=Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),MyPluginInfo.PluginGuid);
             BaseBuff buff1 = RegistryHelper.MakeBuffType(new()
             {
@@ -100,6 +100,10 @@ namespace UltimateCannon_RS
         CobCannon cannon => GetComponent<CobCannon>();
         [ResetOnBoardDestroy(0)]
         public static int level = 0;
+        public void Start()
+        {
+            cannon.attackDamage *= 6;
+        }
         public void FixedUpdate()
         {
             if (cannon.avaliable)

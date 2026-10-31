@@ -148,7 +148,7 @@ namespace FireSniperPuff
             }
             catch (Exception e)
             {
-                ModLogger.LogError(MyPluginInfo.PluginName + " load failed.\n" + e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(MyPluginInfo.PluginName + " load failed.\n" + e.ToString());
             }
         }
     }

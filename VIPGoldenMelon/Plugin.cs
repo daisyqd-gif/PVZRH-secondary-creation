@@ -16,7 +16,7 @@ namespace VIPGoldenMelon
         public const string PluginGuid = "VIPGoldenMelon.Bepinex";
         public const string PluginName = "VIPGoldenMelon";
         public const string PluginVersion = "3.7";
-        public static ID bulletType = BulletType.Bullet_melon;
+        public static ID bulletType = DataMgr.AllocateID();
         public override void Load()
         {
             // Apply all Harmony patches in this assembly
@@ -42,7 +42,7 @@ namespace VIPGoldenMelon
                 Prefab = assetBundle.GetAsset<GameObject>("MelonpultPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("MelonpultPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID,ID)>{(PlantType.GoldMelon,PlantType.Marigold)}), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID,ID)>{(PlantType.GoldMelon,PlantType.Marigold)}), // Optional fusion recipes
 
                 AttackInterval = 3f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles

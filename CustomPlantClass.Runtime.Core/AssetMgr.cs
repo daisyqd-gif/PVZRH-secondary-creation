@@ -1,5 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+using CustomPlantClass.Runtime.Core;
 using CustomPlantClass.Runtime.Tasks;
+using UnityEngine;
 using UnityEngine.Networking;
+using Object = UnityEngine.Object;
+using System.Linq;
 
 namespace CustomPlantClass.Main
 {
@@ -43,14 +56,14 @@ namespace CustomPlantClass.Main
             }
             catch
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, "AssetMgr: Invalid Base64 string.");
+                ModLogger.LogInfo("AssetMgr: Invalid Base64 string.");
                 return null;
             }
 
             var bundle = AssetBundle.LoadFromMemory(bytes);
             if (bundle == null)
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, "AssetMgr: Failed to load AssetBundle from Base64.");
+                ModLogger.LogInfo("AssetMgr: Failed to load AssetBundle from Base64.");
                 return null;
             }
 
@@ -77,7 +90,7 @@ namespace CustomPlantClass.Main
 
             if (!File.Exists(path))
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, $"AssetMgr: File not found: {path}");
+                ModLogger.LogInfo($"AssetMgr: File not found: {path}");
                 return null;
             }
 
@@ -85,7 +98,7 @@ namespace CustomPlantClass.Main
             var bundle = AssetBundle.LoadFromFile(path);
             if (bundle == null)
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, $"AssetMgr: Failed to load AssetBundle from file: {path}");
+                ModLogger.LogInfo($"AssetMgr: Failed to load AssetBundle from file: {path}");
                 return null;
             }
 
@@ -114,7 +127,7 @@ namespace CustomPlantClass.Main
 
             if (stream == null)
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, $"AssetMgr: Resource not found: {resourceName}");
+                ModLogger.LogInfo($"AssetMgr: Resource not found: {resourceName}");
                 return null;
             }
 
@@ -124,7 +137,7 @@ namespace CustomPlantClass.Main
             var bundle = AssetBundle.LoadFromMemory(ms.ToArray());
             if (bundle == null)
             {
-                ModLogger.LogInfo(MyPluginInfo.PluginName, $"AssetMgr: Failed to load AssetBundle from resource: {resourceName}");
+                ModLogger.LogInfo($"AssetMgr: Failed to load AssetBundle from resource: {resourceName}");
                 return null;
             }
 

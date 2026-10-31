@@ -13,19 +13,16 @@
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <LangVersion>latest</LangVersion>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="config.txt" />
-    <EmbeddedResource Include="buff.txt" />
-    <EmbeddedResource Include="buffinjector.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <EmbeddedResource Include="datamgr" /> <!-- Change abname to the name of the assetbundle or remove if it is not a custom plant mod -->
   </ItemGroup>
 
   <!-- Import shared references -->
+  
   <ItemGroup>
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
@@ -33,8 +30,8 @@
     <Reference Include="CustomizeLib.Bepinex" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="CustomPlantClass" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlant.dll</HintPath>
+    <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
+      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
@@ -45,18 +42,38 @@
     <Reference Include="BepInEx.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Core.xml">
+      <Link>BepInEx.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
+    <Reference Include="CustomPlantClass.Runtime.Core" Private="false">
+      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.dll</HintPath>
+    </Reference>
+    <None Include="..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.xml">
+      <Link>CustomPlantClass.Runtime.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Preloader.Core" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Preloader.Core.xml">
+      <Link>BepInEx.Preloader.Core.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
     </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.Common.xml">
+      <Link>BepInEx.Unity.Common.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="BepInEx.Unity.IL2CPP" Private="false">
       <HintPath>..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil" Private="false">
-      <HintPath>..\lib\BepInEx\core\Mono.Cecil.dll</HintPath>
-    </Reference>
+    <None Include="..\lib\BepInEx\core\BepInEx.Unity.IL2CPP.xml">
+      <Link>BepInEx.Unity.IL2CPP.xml</Link>
+      <CopyToOutputDirectory>false</CopyToOutputDirectory>
+    </None>
     <Reference Include="Il2CppInterop.Common" Private="false">
       <HintPath>..\lib\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
     </Reference>
@@ -92,6 +109,9 @@
     </Reference>
     <Reference Include="Unity.2D.Animation.Runtime" Private="false">
       <HintPath>..\lib\BepInEx\interop\Unity.2D.Animation.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Cysharp.Threading.Tasks" Private="false">
+      <HintPath>..\lib\BepInEx\interop\UniTask.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst" Private="false">
       <HintPath>..\lib\BepInEx\interop\Unity.Burst.dll</HintPath>
@@ -265,13 +285,13 @@
       <HintPath>..\lib\BepInEx\interop\UnityEngine.TLSModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI" Private="false">
-      <HintPath>..\lib\DummyDll\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\lib\BepInEx\interop\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule" Private="false">
-      <HintPath>..\lib\DummyDll\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>..\lib\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule" Private="false">
-      <HintPath>..\lib\DummyDll\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\lib\BepInEx\interop\UnityEngine.UIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UmbraModule" Private="false">
       <HintPath>..\lib\BepInEx\interop\UnityEngine.UmbraModule.dll</HintPath>
@@ -327,6 +347,10 @@
     <Reference Include="UnityEngine.XRModule" Private="false">
       <HintPath>..\lib\BepInEx\interop\UnityEngine.XRModule.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
   </ItemGroup>
 
 </Project>

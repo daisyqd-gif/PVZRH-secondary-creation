@@ -45,7 +45,7 @@ namespace CharmSniper
                     Prefab = assetBundle.GetAsset<GameObject>("CharmSniperPrefab"),   // Main plant prefab
                     Preview = assetBundle.GetAsset<GameObject>("CharmSniperPreview"), // Card preview prefab
 
-                    Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (PlantType.SniperPea, PlantType.HypnoShroom), (PlantType.SuperHypnoGatling, PlantType.Peashooter) }), // Optional fusion recipes
+                    Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.SniperPea, PlantType.HypnoShroom), (PlantType.SuperHypnoGatling, PlantType.Peashooter) }), // Optional fusion recipes
 
                     AttackInterval = 1.5f,   // Time between attacks (shooters only)
                     ProduceInterval = 0f,  // Time between sun/production cycles

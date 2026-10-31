@@ -1,5 +1,5 @@
 #nullable enable
-
+#pragma warning disable CS0618
 using System.Diagnostics.CodeAnalysis;
 
 namespace CustomPlantClass.Main
@@ -230,26 +230,6 @@ namespace CustomPlantClass.Main
             return candidate;
         }
 
-        // Wrappers
-        /// <summary>
-        /// Allocates an ID through <see cref="AllocateID"/>.
-        /// This legacy plant-specific wrapper is obsolete.
-        /// </summary>
-        [Obsolete("AllocatePlantID is deprecated. Use AllocateID.", false)]
-        public static ID AllocatePlantID() => AllocateID();
-        /// <summary>
-        /// Allocates an ID through <see cref="AllocateID"/>.
-        /// This legacy zombie-specific wrapper is obsolete.
-        /// </summary>
-        [Obsolete("AllocateZombieID is deprecated. Use AllocateID.", false)]
-        public static ID AllocateZombieID() => AllocateID();
-        /// <summary>
-        /// Allocates an ID through <see cref="AllocateID"/>.
-        /// This legacy bullet-specific wrapper is obsolete.
-        /// </summary>
-        [Obsolete("AllocateBulletID is deprecated. Use AllocateID.", false)]
-        public static ID AllocateBulletID() => AllocateID();/**/
-
         #endregion
         #region Fusion Helpers
 
@@ -261,30 +241,35 @@ namespace CustomPlantClass.Main
         /// Returns the original fusion pair and its mirrored version
         /// with the pair elements in reversed order.
         /// </summary>
+        [Obsolete("Use the alternative in listhelper instead")]
         public static List<(ID, ID)> MirrorTuple((ID, ID) input) => ListHelper.MirrorTuple(input);
 
         /// <summary>
         /// Flattens an array of fusion lists into one list
         /// while preserving the order of the pairs.
         /// </summary>
+        [Obsolete("Use the alternative in listhelper instead")]
         public static List<(ID, ID)> FlattenFusionArray(List<(ID, ID)>[] input) => ListHelper.FlattenFusionArray(input);
 
         /// <summary>
         /// Mirrors every fusion pair in a list
         /// by reversing the order of each pair's elements.
         /// </summary>
+        [Obsolete("Use the alternative in listhelper instead")]
         public static List<(ID, ID)> MirrorList(List<(ID, ID)> input) => ListHelper.MirrorList(input);
 
         /// <summary>
         /// Removes duplicate fusion pairs
         /// from the supplied collection.
         /// </summary>
+        [Obsolete("Use the alternative in listhelper instead")]
         public static List<(ID, ID)> DeduplicateFusions(List<(ID, ID)> input) => ListHelper.DeduplicateFusions(input);
 
         /// <summary>
         /// Creates a fusion list from simple pair definitions
         /// and includes the mirrored form of each pair.
         /// </summary>
+        [Obsolete("Use the alternative in listhelper instead")]
         public static List<(ID, ID)> Fusion(params (ID, ID)[] pairs) => ListHelper.Fusion(pairs);
 
         #endregion
@@ -400,6 +385,7 @@ namespace CustomPlantClass.Main
         /// Creates plant registration data with default settings
         /// and the supplied ID, prefab, and preview.
         /// </summary>
+        [Obsolete("Please use BaseCustomPlantData.CreatePlantData instead")]
         public static BaseCustomPlantData CreatePlantData(ID id, GameObject prefab, GameObject preview)
         {
             return new BaseCustomPlantData
@@ -451,11 +437,13 @@ namespace CustomPlantClass.Main
         /// Registers all eligible derived types from the calling assembly
         /// with the IL2CPP class injector.
         /// </summary>
+        [Obsolete("Please use the one in CustomPlantClass.Runtime.Core.RuntimeCore")]
         public static void AutoRegisterTypes() => AutoRegisterTypes(Assembly.GetCallingAssembly());
         /// <summary>
         /// Registers eligible derived types from an assembly
         /// with the IL2CPP class injector.
         /// </summary>
+        [Obsolete("Please use the one in CustomPlantClass.Runtime.Core.RuntimeCore")]
         public static void AutoRegisterTypes([NotNull] Assembly asm)
         {
             foreach (var type in SystemTools.GetAllDerivedTypes<Il2CppSystem.Object>(asm, containBase: false))
@@ -471,6 +459,7 @@ namespace CustomPlantClass.Main
         /// Ensures the specified custom component type
         /// is registered with the IL2CPP class injector.
         /// </summary>
+        [Obsolete("Please use the one in CustomPlantClass.Runtime.Core.RuntimeCore")]
         public static void EnsureTypeRegistered<TClass>() where TClass : MonoBehaviour
         {
             var type = typeof(TClass);
@@ -483,18 +472,9 @@ namespace CustomPlantClass.Main
         // ---------------------------------------------------------
         //  PLANT REGISTRATION
         // ---------------------------------------------------------
-
-        /// <summary>
-        /// Registers a custom plant using BaseCustomPlantData.
-        /// Automatically registers TClass in IL2CPP.
-        /// </summary>
         internal class PlantTagAdder : MonoBehaviour
         {
             Plant plant => GetComponent<Plant>();
-            /// <summary>
-            /// Applies the plant's registered tag on the first game update,
-            /// then removes this temporary helper component.
-            /// </summary>
             public void Update()
             {
                 if (GameAPP.theGameStatus != GameStatus.InGame) return;
@@ -1277,79 +1257,6 @@ namespace CustomPlantClass.Main
             return id;
         }
         #endregion
-        #region Levels
-        /// <summary>
-        /// Registers a custom level through the legacy generic API.
-        /// Use <see cref="CustomLevelMgr.RegisterCustomLevel{T}(BaseCustomLevelData)"/> instead.
-        /// </summary>
-        [Obsolete("RegisterCustomLevel is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
-        public static int RegisterCustomLevel<T>(BaseCustomLevelData data) where T : CustomLevelComponent => CustomLevelMgr.RegisterCustomLevel<T>(data);
-        /// <summary>
-        /// Registers a custom level through the legacy API.
-        /// Use <see cref="CustomLevelMgr.RegisterCustomLevel(BaseCustomLevelData)"/> instead.
-        /// </summary>
-        [Obsolete("RegisterCustomLevel is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
-        public static int RegisterCustomLevel(BaseCustomLevelData data) => CustomLevelMgr.RegisterCustomLevel(data);
-        /// <summary>
-        /// Allocates a custom level ID through the legacy API.
-        /// Use the level ID allocator in <see cref="CustomLevelMgr"/> instead.
-        /// </summary>
-        [Obsolete("AllocateLevelID is deprecated. Use the new one in CustomPlantClass.Level.CustomLevelMgr.", false)]
-        public static int AllocateLevelID()
-        {
-            CustomLevelMgr.LevelIDAllocator.LoadFreezeTable();
-
-            // 1. Resolve mod identity
-            Assembly? asm = CustomLevelMgr.LevelIDAllocator.ResolveModAssembly();
-
-            string guidBase;
-
-            if (asm != null)
-            {
-                var pluginAttr = asm.GetCustomAttribute<BepInPlugin>();
-                guidBase = pluginAttr?.GUID ?? asm.FullName!;
-            }
-            else
-            {
-                var calling = Assembly.GetCallingAssembly();
-                guidBase = calling?.FullName ?? "__LEVELIDFREEZE_UNKNOWN__";
-            }
-
-            // 2. Multi‑ID‑per‑mod: assign per‑mod call index
-            if (!CustomLevelMgr.LevelIDAllocator.GuidCallIndex.TryGetValue(guidBase, out int index))
-                index = 0;
-
-            string freezeKey = $"{guidBase}::{index}";
-            CustomLevelMgr.LevelIDAllocator.GuidCallIndex[guidBase] = index + 1;
-
-            // 3. If frozen, return it
-            if (CustomLevelMgr.LevelIDAllocator.FreezeTable.TryGetValue(freezeKey, out int frozen))
-                return frozen;
-
-            // 4. Build used set (custom levels only)
-            HashSet<int> used = new();
-
-            foreach (var lvl in LoadedCustomLevels)
-                used.Add(lvl.LevelID);
-
-            foreach (var id in UsedLevelIDs)
-                used.Add(id);
-
-            // 5. Deterministic base ID from freezeKey
-            int baseId = Math.Abs(freezeKey.GetHashCode()) % 50000 + 10000;
-            int candidate = baseId;
-
-            while (used.Contains(candidate))
-                candidate++;
-
-            // 6. Freeze and return
-            CustomLevelMgr.LevelIDAllocator.FreezeTable[freezeKey] = candidate;
-            CustomLevelMgr.LevelIDAllocator.SaveFreezeTable();
-
-            //UsedLevelIDs.Add(candidate);
-            return candidate;
-        }
-        #endregion
         /// <summary>
         /// Verifies that registration is still allowed
         /// and throws if the game has already started.
@@ -1577,6 +1484,7 @@ namespace CustomPlantClass.Main
         public const int UltiZombieC_Health_Armored = 24000;
         public const int UltiZombieD_Health_Light = 24000;
         public const int UltiZombieD_Health_Armored = 48000;
+        public const int IHateYou = 240000;
         #pragma warning restore CS1591
         #endregion
     }

@@ -47,22 +47,7 @@ namespace SuperCherryGatling_RS
                 CustomBuffs = () => new List<BaseBuff>(){new DamageBuff(PlantType.SuperCherryGatling), new SpeedBuff(PlantType.SuperCherryGatling), ubuff1, qbuff},
                 CustomReinforcePlant = (p) =>
                 {
-                    if (p.damageAdder == null)
-                    {
-                        p.damageAdder = new();
-                    }
-
-                    if (p.damageAdder.ContainsKey(PlantDamageAdder.Shooting))
-                    {
-                        p.damageAdder[PlantDamageAdder.Shooting] += 6f;
-                    }
-                    else
-                    {
-                        p.damageAdder[PlantDamageAdder.Shooting] = 6f;
-                    }
-
-                    var shootingBonus = p.damageAdder.TryGetValue(PlantDamageAdder.Shooting, out var bonus) ? bonus : 0f;
-                    p.attackDamage = Mathf.Max(1, Mathf.RoundToInt(p.attackDamage + shootingBonus));
+                    p.attackDamage *= 6;
                 },
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });

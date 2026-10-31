@@ -2,27 +2,46 @@ using CustomPlantClass;
 
 namespace FrameWorkLoader.API
 {
+    /// <summary>Associates mod metadata with a mod class.</summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class ModAttribute : Attribute
     {
+        /// <summary>Gets the metadata supplied for the mod.</summary>
         public ModInfo Info { get; }
 
+        /// <summary>Creates an attribute containing the specified mod metadata.</summary>
+        /// <param name="info">Metadata to associate with the mod.</param>
         public ModAttribute(ModInfo info)
         {
             Info = info;
         }
     }
+    /// <summary>Describes a mod's identity, compatibility, load order, and dependencies.</summary>
     [Serializable]
     public struct ModInfo
     {
+        /// <summary>The display name of the mod.</summary>
         public string Name;
+        /// <summary>The mod's version.</summary>
         public string Version;
+        /// <summary>The game version targeted by the mod.</summary>
         public string TargetGameVersion;
+        /// <summary>The mod's relative load priority.</summary>
         public int Priority;
+        /// <summary>The category assigned to the mod.</summary>
         public int Category;
+        /// <summary>The mod's runtime risk classification.</summary>
         public int Danger;
+        /// <summary>Whether the loader should automatically load this mod's attributes.</summary>
         public bool AutoLoadAttributes;
+        /// <summary>The names of mods that must load before this mod.</summary>
         public string[] Dependencies = Array.Empty<string>();
+        /// <summary>Creates metadata using the current mod version as both version values.</summary>
+        /// <param name="Name">The mod's display name.</param>
+        /// <param name="Priority">The mod's relative load priority.</param>
+        /// <param name="Category">The mod's category.</param>
+        /// <param name="Danger">The mod's runtime risk classification.</param>
+        /// <param name="AutoLoadAttributes">Whether to load the mod's attributes automatically.</param>
         public ModInfo(string Name, int Priority = 0, ModCategory Category = ModCategory.SecondaryCreation, ModDanger Danger = ModDanger.Normal, bool AutoLoadAttributes = false)
         {
             var Version = MyPluginInfo.TargetVersion;
@@ -34,6 +53,13 @@ namespace FrameWorkLoader.API
             this.Category = (int)Category;
             this.AutoLoadAttributes = AutoLoadAttributes;
         }
+        /// <summary>Creates metadata with an explicitly specified mod version.</summary>
+        /// <param name="Name">The mod's display name.</param>
+        /// <param name="Priority">The mod's relative load priority.</param>
+        /// <param name="Category">The mod's category.</param>
+        /// <param name="Danger">The mod's runtime risk classification.</param>
+        /// <param name="Version">The mod's version string.</param>
+        /// <param name="AutoLoadAttributes">Whether to load the mod's attributes automatically.</param>
         public ModInfo(string Name, int Priority = 0, ModCategory Category = ModCategory.SecondaryCreation, ModDanger Danger = ModDanger.Normal, string Version = "1.0.0", bool AutoLoadAttributes = false)
         {
             TargetGameVersion = MyPluginInfo.TargetVersion;
@@ -44,6 +70,8 @@ namespace FrameWorkLoader.API
             this.Category = (int)Category;
             this.AutoLoadAttributes = AutoLoadAttributes;
         }
+        /// <summary>Sets the mod assemblies that this mod depends on.</summary>
+        /// <param name="Dependencies">Names of the required mods.</param>
         public void DependsOn(string[] Dependencies)
         {
             this.Dependencies = Dependencies;

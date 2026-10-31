@@ -50,7 +50,7 @@ namespace MowerFix{
         }
     }
     [HarmonyPatch(typeof(GameLose))]
-    [HarmonyPriority(Priority.First)]
+    [HarmonyPriority(Priority.HigherThanNormal)]
     public static class GameLose_Patch
     {
         [HarmonyPatch(nameof(GameLose.OnTriggerEnter2D))]
@@ -105,7 +105,7 @@ namespace MowerFix{
         }
     }
     [HarmonyPatch(typeof(Mower), nameof(Mower.OnTriggerStay2D))]
-    [HarmonyPriority(Priority.First)]
+    [HarmonyPriority(Priority.HigherThanNormal)]
     public static class Mower_Patch
     {
         [HarmonyPrefix]
@@ -150,7 +150,11 @@ namespace MowerFix{
                 __instance.StartMove();
                 __instance.board.boardStatistics.mowerUsedCount++;
             }
-            if (TypeMgr.BigZombie(zombie.theZombieType))
+            if (TypeMgr.IsBossZombie(zombie.theZombieType))
+            {
+                __instance.AttackZombie(zombie);
+            }
+            else if (TypeMgr.BigZombie(zombie.theZombieType))
             {
                 zombie.Crashed();
             }

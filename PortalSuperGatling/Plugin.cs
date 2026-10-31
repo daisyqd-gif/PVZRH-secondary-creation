@@ -51,7 +51,7 @@ namespace UltimatePortalGatling
                 Prefab = assetBundle.GetAsset<GameObject>("PortalSuperGatlingPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("PortalSuperGatlingPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>(){(PlantType.UltimatePortalSniper,PlantType.Peashooter),(PlantType.UltimateHelmetGatling,PlantType.PortalPea)}), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(){(PlantType.UltimatePortalSniper,PlantType.Peashooter),(PlantType.UltimateHelmetGatling,PlantType.PortalPea)}), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -181,7 +181,7 @@ namespace UltimatePortalGatling
             }
             catch(Exception e)
             {
-                ModLogger.LogError(Assembly.GetExecutingAssembly(),e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(Assembly.GetExecutingAssembly(),e.ToString());
             }
         }
         public override void SuperEnd()

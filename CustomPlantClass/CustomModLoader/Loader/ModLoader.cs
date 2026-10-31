@@ -1,10 +1,14 @@
 namespace FrameWorkLoader.Loader
 {
+    /// <summary>Discovers, orders, and initializes mods registered with the loader.</summary>
     public class ModLoader
     {
+        /// <summary>Gets the registered mod assemblies and their metadata.</summary>
         public static List<(Assembly asm, ModInfo info)> Mods = new();
+        /// <summary>Maps each registered assembly to its mod metadata.</summary>
         public static Dictionary<Assembly, ModInfo> ModByAssembly = new();
 
+        /// <summary>Discovers mods, resolves their load order, and invokes their entry points.</summary>
         public static void OnGameStart()
         {
             Debug.Log("=== Discovering Mods ===");
@@ -76,6 +80,9 @@ namespace FrameWorkLoader.Loader
             Debug.Log("=== Mod Loading Complete ===");
         }
 
+        /// <summary>Adds a mod assembly and its metadata to the loader's registry.</summary>
+        /// <param name="asm">The assembly containing the mod.</param>
+        /// <param name="info">Metadata describing the mod.</param>
         public static void RegisterAssembly(Assembly asm, ModInfo info)
         {
             Mods.Add((asm, info));

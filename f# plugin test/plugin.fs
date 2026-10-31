@@ -8,5 +8,5 @@ type Plugin () =
     inherit BasePlugin()
 
     override this.Load(): unit =
-        ModLogger.LogInfo("F# test plugin", "Load successful!")
+        CustomPlantClass.Runtime.Core.ModLogger.LogInfo("F# test plugin", "Load successful!")
 

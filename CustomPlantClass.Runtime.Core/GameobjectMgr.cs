@@ -1,6 +1,15 @@
 #nullable enable
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Text.Json;
+using BepInEx;
+using HarmonyLib;
+using UnityEngine;
 
-namespace CustomPlantClass.Main
+namespace CustomPlantClass.Runtime.Core
 {
     /// <summary>
     /// A tool to store GameObjects and instantiate them

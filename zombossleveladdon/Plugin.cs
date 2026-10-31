@@ -27,7 +27,7 @@ namespace ZombossAddon
         public override void Load()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), null);
-            DataMgr.AutoRegisterTypes();
+            CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes();
             PresentImitaterAssets = AssetMgr.LoadBundleFromResource(Tools.GetAssembly(), "PresentImitater.BepInEx.presentimitater", false);
             HeiTaAssets = AssetMgr.LoadBundleFromResource(Tools.GetAssembly(), "heita.unity3d", false);
             id_PresentImitater = DataMgr.AllocateID();
@@ -103,7 +103,7 @@ namespace ZombossAddon
             }
             catch (Exception ex)
             {
-                ModLogger.LogError($"Fusion dump failed: {ex}");
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"Fusion dump failed: {ex}");
             }
         }
     }

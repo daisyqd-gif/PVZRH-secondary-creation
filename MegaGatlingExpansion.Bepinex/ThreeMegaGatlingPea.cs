@@ -142,7 +142,7 @@ namespace MegaGatlingExpansion
                         Vector3 pos = plant.shoot.position;
                         float[] angles = [ 90-mainAngle, mainAngle, 0f, -mainAngle, 270+mainAngle ];
                         
-                        angles.ActionPerItem( (angle =>
+                        CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(angles, (angle =>
                         {
                             Bullet b = CreateBullet.Instance.SetBullet(
                                 pos.x, pos.y, plant.thePlantRow,
@@ -164,7 +164,7 @@ namespace MegaGatlingExpansion
             }
             catch ( Exception e)
             {
-                ModLogger.LogError(e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
             }
         }
         public override void ReplaceSprite_Custom() { }

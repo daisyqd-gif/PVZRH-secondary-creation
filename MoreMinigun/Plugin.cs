@@ -41,7 +41,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("SuperMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("SuperMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorTuple((PlantType.GatlingPea, PlantType.SuperGatling)), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorTuple((PlantType.GatlingPea, PlantType.SuperGatling)), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -90,7 +90,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("SuperSnowMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("SuperSnowMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (PlantType.GatlingPea, PlantType.SuperSnowGatling), (PlantType.SnowGatling, PlantType.SuperGatling), (PlantType.IceShroom, plantID) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.GatlingPea, PlantType.SuperSnowGatling), (PlantType.SnowGatling, PlantType.SuperGatling), (PlantType.IceShroom, plantID) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -140,7 +140,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("SuperJalaMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("SuperJalaMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (PlantType.JalaGatling, PlantType.SuperGatling), (PlantType.Jalapeno, plantID) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.JalaGatling, PlantType.SuperGatling), (PlantType.Jalapeno, plantID) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -190,7 +190,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("SuperCherryMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("SuperCherryMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (PlantType.GatlingPea, PlantType.SuperCherryGatling), (PlantType.CherryGatling, PlantType.SuperGatling), (PlantType.CherryBomb, plantID) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.GatlingPea, PlantType.SuperCherryGatling), (PlantType.CherryGatling, PlantType.SuperGatling), (PlantType.CherryBomb, plantID) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -239,7 +239,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("DoomMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("DoomMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (PlantType.DoomGatling, PlantType.SuperGatling), (PlantType.DoomShroom, plantID) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.DoomGatling, PlantType.SuperGatling), (PlantType.DoomShroom, plantID) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -292,7 +292,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("DoomMinigunScaredyPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("DoomMinigunScaredyPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (plantIDDoom, PlantType.ScaredyShroom), (PlantType.ScaredyDoom, plantID) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (plantIDDoom, PlantType.ScaredyShroom), (PlantType.ScaredyDoom, plantID) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -349,7 +349,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateDoomMinigunPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateDoomMinigunPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (plantIDDoom, PlantType.DoomShroom) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (plantIDDoom, PlantType.DoomShroom) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -398,7 +398,7 @@ namespace MoreMinigun
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateDoomMinigunScaredyPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateDoomMinigunScaredyPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID, ID)>() { (plantIDDoomScaredy, PlantType.DoomShroom) }), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (plantIDDoomScaredy, PlantType.DoomShroom) }), // Optional fusion recipes
 
                 AttackInterval = 0.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles

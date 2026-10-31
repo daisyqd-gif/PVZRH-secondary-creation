@@ -54,7 +54,8 @@ namespace UltimateSniper
         public static ID cherryType = DataMgr.AllocateID();
         public static ID ParticleID = DataMgr.AllocateID();
         #endregion
-        public override void InitializeMod()
+        [System.Obsolete]
+        public override void OnStart()
         {
             assetBundle = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "ultimatesniper");
 
@@ -177,7 +178,7 @@ namespace UltimateSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -224,7 +225,7 @@ namespace UltimateSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorTuple((UFlameGatling, PlantType.Peashooter)), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorTuple((UFlameGatling, PlantType.Peashooter)), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -363,7 +364,7 @@ namespace UltimateSniper
             RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter, PlantType.JalaGatling);
             RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.JalaGatling, UFlameGatling);
         }
-        public override void OnStart()
+        public override void InitializeMod()
         {
 
             #region GameObject assignment

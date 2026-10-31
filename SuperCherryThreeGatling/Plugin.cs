@@ -35,7 +35,7 @@ namespace SuperCherryThreeGatling
                 Prefab = assetBundle.GetAsset<GameObject>("SuperThreeGatlingPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("SuperThreeGatlingPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new List<(ID,ID)>() { (PlantType.SuperThreeGatling,PlantType.CherryBomb), (PlantType.SuperGatling,PlantType.CherryThreePeater), (PlantType.SuperCherryGatling,PlantType.ThreePeater)}), // Optional fusion recipes
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID,ID)>() { (PlantType.SuperThreeGatling,PlantType.CherryBomb), (PlantType.SuperGatling,PlantType.CherryThreePeater), (PlantType.SuperCherryGatling,PlantType.ThreePeater)}), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -151,7 +151,7 @@ namespace SuperCherryThreeGatling
             }
             catch( Exception e )
             {
-                ModLogger.LogError(Assembly.GetExecutingAssembly(),e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(Assembly.GetExecutingAssembly(),e.Message);
             }
         }
         public override Bullet Shoot_Custom()

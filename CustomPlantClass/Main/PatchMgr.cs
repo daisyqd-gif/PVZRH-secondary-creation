@@ -1145,39 +1145,6 @@ namespace CustomPlantClass
 
             return true;
         }
-        public static bool TryGetInterface<T>(this MonoBehaviour self, out T outInterface) where T : class
-        {
-            foreach (var comp in self.GetComponents<Component>())
-                if (comp is T output)
-                {
-                    outInterface = output!;
-                    return true;
-                }
-            outInterface = default!;
-            return false;
-        }
-        public static bool TryGetInterface<T>(this GameObject self, out T outInterface) where T : class
-        {
-            foreach (var comp in self.GetComponents<Component>())
-                if (comp is T output)
-                {
-                    outInterface = output!;
-                    return true;
-                }
-            outInterface = default!;
-            return false;
-        }
-        public static bool TryGetInterface<T>(this Component self, out T outInterface) where T : class
-        {
-            foreach (var comp in self.GetComponents<Component>())
-                if (comp is T output)
-                {
-                    outInterface = output!;
-                    return true;
-                }
-            outInterface = default!;
-            return false;
-        }
     }
 
     // =========================

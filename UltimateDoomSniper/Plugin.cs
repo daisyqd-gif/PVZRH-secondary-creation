@@ -11,7 +11,7 @@ global using CustomPlantClass.Main;
 using Core;
 using CustomPlantClass.RogueShootingManager;
 using GameLevel.RogueShooting;
-[assembly: CustomMod("UltimateDoomSniper")]
+[assembly: CustomPlantClass.Runtime.Core.CustomMod("UltimateDoomSniper")]
 namespace UltimateDoomSniper
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -52,7 +52,7 @@ namespace UltimateDoomSniper
                 Prefab = assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new()
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
                 {
                     (PlantType.DoomSniper,PlantType.Peashooter)
                 }), // Optional fusion recipes
@@ -102,7 +102,7 @@ namespace UltimateDoomSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateDoomSniperPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateDoomSniperPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new()
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
                 {
                     (PlantType.DoomSniper,PlantType.DoomShroom),
                     (PlantID_Sniper1,PlantType.DoomPeashooter),
@@ -164,7 +164,7 @@ namespace UltimateDoomSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPreview"), // Card preview prefab
 
-                Fusions = DataMgr.MirrorList(new()
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
                 {
                     (PlantID_Sniper1,PlantType.DoomShroom),
                     (PlantType.DoomSniper,PlantType.DoomPeashooter),

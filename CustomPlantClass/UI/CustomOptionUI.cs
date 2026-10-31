@@ -19,11 +19,14 @@ namespace CustomPlantClass.UI
 
         #region Il2Cpp Constructors
 
+        /// <summary>Creates the UI component through the IL2CPP derived constructor.</summary>
         public KeyBindingUI() : base(ClassInjector.DerivedConstructorPointer<KeyBindingUI>())
         {
             ClassInjector.DerivedConstructorBody(this);
         }
 
+        /// <summary>Wraps an existing IL2CPP component pointer.</summary>
+        /// <param name="ptr">Pointer to the native component.</param>
         public KeyBindingUI(IntPtr ptr) : base(ptr)
         {
         }
@@ -32,6 +35,7 @@ namespace CustomPlantClass.UI
 
         #region Unity
 
+        /// <summary>Builds the options screen from the registered key-binding entries.</summary>
         public void Start()
         {
             // Disable original config menu

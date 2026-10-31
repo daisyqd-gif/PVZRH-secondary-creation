@@ -45,7 +45,7 @@ namespace StarPeashooter
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.Peashooter),(PlantType.DoubleShooter,PlantType.StarFruit)])
                 ), // Optional fusion recipes
@@ -91,7 +91,7 @@ namespace StarPeashooter
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.DoubleShooter),(PlantType.SplitPea,PlantType.StarFruit),
                     (DataContainer.PlantId_Double,PlantType.Peashooter)])
@@ -138,7 +138,7 @@ namespace StarPeashooter
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.SplitPea),(PlantType.GatlingPea,PlantType.StarFruit),
                     (DataContainer.PlantId_Double,PlantType.DoubleShooter),(DataContainer.PlantId_Split,PlantType.Peashooter)])
@@ -185,7 +185,7 @@ namespace StarPeashooter
                     nothing else
                 */
 
-                Fusions = DataMgr.MirrorList
+                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
                 (
                     new([(PlantType.SniperPea,PlantType.StarPea),(PlantType.SuperGatling,PlantType.StarFruit),
                     (PlantType.StarSniper,PlantType.Peashooter)])

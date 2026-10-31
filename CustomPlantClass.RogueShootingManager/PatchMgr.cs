@@ -5,15 +5,20 @@ using UI;
 
 namespace CustomPlantClass.RogueShootingManager
 {
+    /// <summary>Integrates registered custom plants and trial buffs with the shooting manager.</summary>
     [HarmonyPatch(typeof(ShootingManager))]
     public static class ShootingManagerPatch
     {
+        /// <summary>Adds registered custom plants after the shooting manager awakens.</summary>
+        /// <param name="__instance">The shooting manager being initialized.</param>
         [HarmonyPatch(nameof(ShootingManager.Awake))]
         [HarmonyPostfix]
         public static void Awake_Postfix(ShootingManager __instance)
         {
             InjectPlantTypes(__instance);
         }
+        /// <summary>Adds registered custom plants after the shooting manager starts.</summary>
+        /// <param name="__instance">The shooting manager being initialized.</param>
         [HarmonyPatch(nameof(ShootingManager.Start))]
         [HarmonyPostfix]
 		public static void StartAwake_Postfix(ShootingManager __instance)
@@ -70,6 +75,9 @@ namespace CustomPlantClass.RogueShootingManager
 				}
 			}
 		}
+        /// <summary>Adds an eligible custom trial buff to the mission selection menu.</summary>
+        /// <param name="__instance">The shooting manager for the current run.</param>
+        /// <param name="menu">The mission buff menu to update.</param>
         [HarmonyPatch(nameof(ShootingManager.RefisterMissionBuff))]
         [HarmonyPostfix]
         public static void RegisterMissionBuff_Postfix(ShootingManager __instance, ref MultipleChoiceMenu menu)
@@ -95,11 +103,16 @@ namespace CustomPlantClass.RogueShootingManager
             menu.RegisterOption(b.name, b.desc, action, frameType: Quality.curse);
         }
     }
+    /// <summary>Temporarily filters custom plant configs while building the game almanac.</summary>
 	[HarmonyPatch(typeof(ShootingAlmanacCatalog))]
 	public static class ShootingAlmanacCatalogPatch
 	{
+        /// <summary>Gets or sets the most recently built almanac directory.</summary>
 		public static ShootingAlmanacDirectory LastGoodDir = null;
 		// Token: 0x0600003D RID: 61 RVA: 0x000045CC File Offset: 0x000027CC
+        /// <summary>Temporarily removes unlisted custom configs before the catalog is built.</summary>
+        /// <param name="__result">Receives a fallback directory if the original build fails.</param>
+        /// <returns><see langword="true"/> to run the original build.</returns>
 		[HarmonyPatch(nameof(ShootingAlmanacCatalog.Build))]
 		[HarmonyPrefix]
 		[HarmonyPriority(800)]
@@ -168,7 +181,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								catch (Exception ex)
 								{
-									ModLogger.LogError(ex.ToString());
+									global::CustomPlantClass.Runtime.Core.ModLogger.LogError(ex.ToString());
 								}
 							}
 						}
@@ -178,7 +191,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				ModLogger.LogError(t.ToString());
+				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.ToString());
                 RestoreRemovedConfigs();
 				result = false;
 			}
@@ -186,6 +199,8 @@ namespace CustomPlantClass.RogueShootingManager
 		}
 
 		// Token: 0x0600003E RID: 62 RVA: 0x00004804 File Offset: 0x00002A04
+        /// <summary>Restores temporarily removed configs and injects registered plants into the result.</summary>
+        /// <param name="__result">The directory produced by the catalog build.</param>
 		[HarmonyPatch("Build")]
 		[HarmonyPostfix]
 		[HarmonyPriority(0)]
@@ -203,9 +218,13 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				ModLogger.LogError(t.Message);
+				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.Message);
 			}
 		}
+        /// <summary>Recovers from an invalid-operation build failure using the last valid directory.</summary>
+        /// <param name="__exception">The exception thrown by the original build, if any.</param>
+        /// <param name="__result">The directory produced by the build.</param>
+        /// <returns>The unhandled exception, or <see langword="null"/> when the failure is recovered.</returns>
 		[HarmonyPatch("Build")]
 		[HarmonyFinalizer]
 		public static Exception Finalizer(Exception __exception,
@@ -213,7 +232,7 @@ namespace CustomPlantClass.RogueShootingManager
 		{
 			if (__exception is InvalidOperationException)
 			{
-				ModLogger.LogError($"[Almanac] Build threw: {__exception.Message}");
+				global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"[Almanac] Build threw: {__exception.Message}");
 
 				// If this run failed, fall back to last known good directory
 				if (__result == null && LastGoodDir != null)
@@ -243,7 +262,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				ModLogger.LogError(t.Message);
+				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.Message);
 			}
 		}
 		private static Type GetConfigType(BaseConfig config)
@@ -275,7 +294,7 @@ namespace CustomPlantClass.RogueShootingManager
 				bool flag = textAsset == null || string.IsNullOrEmpty(textAsset.text);
 				if (flag)
 				{
-					ModLogger.LogError($"The catalog is invalid! Please fix any errors!");
+					global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"The catalog is invalid! Please fix any errors!");
 					return hashSet;
 				}
 				ShootingAlmanacIndexFile shootingAlmanacIndexFile = JsonUtility.FromJson<ShootingAlmanacIndexFile>(textAsset.text);
@@ -300,7 +319,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception e)
 			{
-                ModLogger.LogError(e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
 			}
 			return hashSet;
 		}
@@ -314,14 +333,18 @@ namespace CustomPlantClass.RogueShootingManager
 		// Token: 0x0400001C RID: 28
 		private static bool _gamePlantsLoaded;
 	}
+    /// <summary>Injects custom plants into a built shooting almanac directory.</summary>
 	public static class AlmanacDirectoryInjector
 	{
+        /// <summary>Clears the set of almanac directories already injected.</summary>
 		// Token: 0x0600002D RID: 45 RVA: 0x000032E0 File Offset: 0x000014E0
 		public static void ResetInjected()
 		{
             _injected.Clear();
 		}
 
+        /// <summary>Adds registered custom plant entries to an almanac directory once.</summary>
+        /// <param name="source">The directory to update.</param>
 		// Token: 0x0600002E RID: 46 RVA: 0x000032F0 File Offset: 0x000014F0
 		public static void Inject(ShootingAlmanacDirectory source)
 		{
@@ -356,7 +379,7 @@ namespace CustomPlantClass.RogueShootingManager
 						}
 						catch (Exception t)
 						{
-							ModLogger.LogError(t.ToString());
+							global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.ToString());
 						}
 					}
 				}
@@ -513,7 +536,7 @@ namespace CustomPlantClass.RogueShootingManager
 					{
 						PlantType key = keyValuePair.Key;
 						Il2CppSystem.Collections.Generic.List<Il2CppSystem.Collections.Generic.List<PlantType>> list = BuildRoutes(key);
-						ModLogger.LogInfo($"[EVOLUTION] BuildRoutes({key}) produced {routes.Count} routes");
+						global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] BuildRoutes({key}) produced {routes.Count} routes");
 						bool flag3 = list == null || list.Count == 0;
 						if (!flag3)
 						{
@@ -528,7 +551,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								else
 								{
-									ModLogger.LogWarn("Invalid data detected!");
+									global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 								}
 							}
 							else
@@ -560,7 +583,7 @@ namespace CustomPlantClass.RogueShootingManager
 									bool flag8 = readOnlyCollection != null;
 									if (!flag8)
 									{
-										ModLogger.LogWarn("Invalid data detected!");
+										global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 										continue;
 									}
 									for (int j = 0; j < readOnlyCollection.Count; j++)
@@ -584,7 +607,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								else
 								{
-                                    ModLogger.LogWarn($"TryCast merged routes failed: {key}");
+                                    global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn($"TryCast merged routes failed: {key}");
 								}
 							}
 						}
@@ -751,7 +774,7 @@ namespace CustomPlantClass.RogueShootingManager
             }
             catch(Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 
@@ -875,7 +898,7 @@ namespace CustomPlantClass.RogueShootingManager
 					{
 						Dfs(node2, ancestors, path, result); // recursive search algorithm
 					}
-					ModLogger.LogInfo($"[DFS] node={node}, children={string.Join(" , ", list.ToSystemList())}");
+					global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[DFS] node={node}, children={string.Join(" , ", list.ToSystemList())}");
 				}
 				else
 				{
@@ -885,7 +908,7 @@ namespace CustomPlantClass.RogueShootingManager
 						list2.Add(i);
 					}
 					result.Add(list2);
-					ModLogger.LogInfo($"Completed route: {string.Join(" -> ", path.ToSystemList())}");
+					global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"Completed route: {string.Join(" -> ", path.ToSystemList())}");
 				}
 				path.RemoveAt(path.Count - 1);
 				ancestors.Remove(node);
@@ -927,7 +950,7 @@ namespace CustomPlantClass.RogueShootingManager
 						bool flag4 = readOnlyCollection != null;
 						if (!flag4)
 						{
-							ModLogger.LogWarn("Unable to read original base plant list! Aborting injection.");
+							global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Unable to read original base plant list! Aborting injection.");
 							return;
 						}
 						for (int j = 0; j < readOnlyCollection.Count; j++)
@@ -952,13 +975,13 @@ namespace CustomPlantClass.RogueShootingManager
 				}
 				else
 				{
-					ModLogger.LogWarn("Invalid data detected!");
+					global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 				}
 			}
             }
             catch(Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 
@@ -1056,14 +1079,14 @@ namespace CustomPlantClass.RogueShootingManager
 					}
 					else
 					{
-						ModLogger.LogError("Invalid data found!");
+						global::CustomPlantClass.Runtime.Core.ModLogger.LogError("Invalid data found!");
 					}
 				}
 			}
             }
             catch(Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 

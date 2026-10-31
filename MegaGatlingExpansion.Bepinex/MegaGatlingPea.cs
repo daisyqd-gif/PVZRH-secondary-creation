@@ -220,7 +220,7 @@ namespace MegaGatlingExpansion
             }
             catch ( Exception e)
             {
-                ModLogger.LogError(e.Message);
+                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
             }
         }
         public override void SuperEnd()

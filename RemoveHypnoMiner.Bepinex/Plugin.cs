@@ -1,7 +1,7 @@
 ﻿﻿using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using CustomPlantClass.Main;
-[assembly:CustomMod("RemoveHypnoMiner")]
+[assembly:CustomPlantClass.Runtime.Core.CustomMod("RemoveHypnoMiner")]
 namespace RemoveHypnoMiner
 {
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
