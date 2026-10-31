@@ -12,10 +12,10 @@
   - [CustomPlantClass.Main](#customplantclassmain)
   - [CustomPlantClass.Runtime](#customplantclassruntime)
   - [CustomPlantClass.Runtime.Core](#customplantclassruntimecore)
-  - [CustomPlantClass.Networking:](#customplantclassnetworking)
+  - [CustomPlantClass.Networking](#customplantclassnetworking)
   - [CustomPlantClass.Runtime.CSharp:](#customplantclassruntimecsharp)
   - [CustomPlantClass.RogueShootingManager:](#customplantclassrogueshootingmanager)
-  - [CustomPlantClass.Runtime.Tasks:](#customplantclassruntimetasks)
+  - [CustomPlantClass.Runtime.Tasks](#customplantclassruntimetasks)
 
 > **Current API:** The framework is split across multiple assemblies. Several APIs moved to `CustomPlantClass.Runtime.Core.dll`; see [Runtime.Core](#customplantclassruntimecore) for current namespaces and replacements for obsolete APIs.
 
@@ -57,6 +57,7 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
     }
 }
 ```
+
 </details>
 
 3. `CustomLevelComponent`  ![Deprecated: Replaced](https://img.shields.io/badge/Unfinished-red)
@@ -69,6 +70,7 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 10. `BaseCustomZombie` -> Used to add custom behaviour to zombies
 11. `CustomEffect` -> Used to add effects to monobehaviours
 12. `InterfaceMgr` -> Allows plants to implement base game behaviour without inhereting classes
+
 <details>
 <summary>Click to show code</summary>
 
@@ -139,6 +141,7 @@ public interface IPlantCannonAimHandler
     }
 }
 ```
+
 </details>
 
 13. `PlantSkinComponent`, `BulletComponent`, `ZombieComponent` -> Contains a getter property to get their respective property on its gameobject
@@ -166,6 +169,7 @@ public class CustomLevelMgr : MonoBehaviour
     public static int AllocateLevelID(string name) { }
 }
 ```
+
 </details>
 
 3. `LevelProgressionManager` -> Used to track what custom levels are completed. API  (full code in repo):
@@ -180,6 +184,7 @@ public static class LevelProgressionManager
     public static bool IsCompleted(int levelID) { }
 }
 ```
+
 </details>
 </details>
 
@@ -247,6 +252,7 @@ public sealed class AssetDispatcher
     public void Switch(AssetBundle bundle) { }
 }
 ```
+
 </details>
 
 2. `DataMgr` -> The core of the framework and contains most APIs. API  (full code in repo):
@@ -614,6 +620,7 @@ public enum RogueZombieAttack
     Crashing = 100
 }
 ```
+
 </details>
 
 3. `ExtensionManager` -> Contains extensions to various tools
@@ -626,37 +633,44 @@ public enum RogueZombieAttack
 <summary>Click to show formulas</summary>
 
 `DirectionToDegrees`:
+
 ```math
 \theta(x, y) = \frac{180}{\pi} \cdot \arctan\!\left(\frac{y}{x}\right) \text{ with quadrant correction}
 ```
 
 `RotationToDirection`:
+
 ```math
 f(\theta) = \frac{(\cos(\theta \cdot \pi / 180),\ \sin(\theta \cdot \pi / 180))}{\sqrt{\cos^2(\theta \cdot \pi / 180) + \sin^2(\theta \cdot \pi / 180)}}
 ```
 
 `LookAt2D`:
+
 ```math
 f(\vec{a}, \vec{b}) = \mathrm{atan2}\!\left(\frac{b_y - a_y}{\|\vec{b} - \vec{a}\|}, \frac{b_x - a_x}{\|\vec{b} - \vec{a}\|}\right) \cdot \frac{180}{\pi}
 ```
 
 `RotateTowards2D`:
+
 ```math
 f(\theta_c, \theta_t, \omega, \Delta t) =
 \theta_c + \mathrm{clamp}(\theta_t - \theta_c,\ -\omega \cdot \Delta t,\ \omega \cdot \Delta t)
 ```
 
 `DistanceSq`:
+
 ```math
 f(a_x, a_y, b_x, b_y) = (a_x - b_x)^2 + (a_y - b_y)^2
 ```
 
 `RotateVector`:
+
 ```math
 f(v_x, v_y, \theta) = \left( v_x \cos\left(\theta \cdot \frac{\pi}{180}\right) - v_y \sin\left(\theta \cdot \frac{\pi}{180}\right),\; v_x \sin\left(\theta \cdot \frac{\pi}{180}\right) + v_y \cos\left(\theta \cdot \frac{\pi}{180}\right) \right)
 ```
 
 `ClampMagnitude`:
+
 ```math
 f(\mathbf{v}) = \begin{cases}
 \mathbf{v} \cdot \dfrac{M}{\|\mathbf{v}\|}, & \text{if } \|\mathbf{v}\| > M, \\
@@ -665,6 +679,7 @@ f(\mathbf{v}) = \begin{cases}
 ```
 
 `Remap`:
+
 ```math
 f(v,a,b,c,d) = c + \frac{(v - a) \cdot (d - c)}{b - a}
 ```
@@ -810,12 +825,13 @@ public static class MathHelper
     public static string FormatToScientificNotation(this int num) { }
 }
 ```
+
 </details>
 
 8. `ModRegistryManager` -> A way for mods to make registries for other mods to add stuff to
 9. `PlantMgr` -> Tools
-
 10. `ModPlugin` -> a plugin base
+
 <details>
 <summary>Click to show code</summary>
 
@@ -834,6 +850,7 @@ public static class MathHelper
         public virtual void OnDataMgrLoad() { }
     }
 ```
+
 </details>
 
 11. `StructManager`
@@ -1118,6 +1135,7 @@ public enum BoxType_Short
     Dirt_water = 6 // 泥水域
 }
 ```
+
 </details>
 
 12. `ZombieMgr` -> Some zombie helper class
@@ -1134,6 +1152,7 @@ public static class ZombieMgr
     public static void Crashed(this Zombie self) { }
 }
 ```
+
 </details>
 
 </details>
@@ -1141,6 +1160,7 @@ public static class ZombieMgr
 ## CustomPlantClass.Runtime
 
 1. `BoardBehaviour` -> A class for storing behaviour that is called by board
+
 <details>
 <summary>Click to show code</summary>
 
@@ -1175,6 +1195,7 @@ public sealed class ActionOnBoardDestroyAttribute : Attribute
     }
 }
 ```
+
 </details>
 
 ## CustomPlantClass.Runtime.Core
@@ -1188,7 +1209,7 @@ using CustomPlantClass.Runtime.Core;
 ### Moved and replacement APIs
 
 | API | Current namespace | Notes |
-|---|---|---|
+| --- | --- | --- |
 | `ModLogger` | `CustomPlantClass.Runtime.Core` | Use instead of the obsolete `CustomPlantClass.ModLogger`. |
 | `GeneralTools.AutoRegisterTypes()` / `AutoRegisterTypes(Assembly)` | `CustomPlantClass.Runtime.Core` | Replaces the obsolete `DataMgr.AutoRegisterTypes` methods. Pass the plugin assembly explicitly when registering a particular mod's types. |
 | `GameObjectMgr`, `CustomItemType` | `CustomPlantClass.Runtime.Core` | Registers, looks up, and instantiates custom GameObjects. |
@@ -1221,131 +1242,84 @@ GeneralTools.AutoRegisterTypes(Assembly.GetExecutingAssembly());
 
 `CollectionHelper` provides `Range`, `Enumerate`, `Repeat`, `AddMultiple`, `ActionPerItem`, `Partition`, and `Shuffle` helpers. `ModLogger` supports `LogInfo`, `LogWarn`, and `LogError` overloads that take a message, mod name, or assembly.
 
-## CustomPlantClass.Networking:
+## CustomPlantClass.Networking
 
-1. `TCPManager` -> used to send messages locally or on a localhost server
+This namespace contains two transports. `IPCManager` uses a local named pipe. `TCPManager` uses a localhost TCP listener upgraded to WebSocket. Both dispatch string command names and string payloads through `ICommandListener`.
 
-```mermaid
-flowchart TD
-    Awake["TCPBehaviour.Awake"] --> Running{"Already running?"}
-    Running -- "No" --> AutoServer["StartServer(54220)"]
-    Running -- "Yes" --> Ready["Leave current connection running"]
+### Named-pipe IPC (`IPCManager`)
 
-    StartServer["StartServer(port)"] --> Server["RunServerAsync: listen, accept TCP client, upgrade to WebSocket"]
-    AutoServer --> Server
-    StartClient["StartClient(ip, port)"] --> Client["RunClientAsync: connect WebSocket"]
-    StartAuto["StartAuto(port)"] --> TryServer["Try RunServerAsync(port)"]
-    TryServer --> Server
-    TryServer -- "Task faults outward" --> ClientLocal["RunClientAsync(127.0.0.1, port)"]
-    TryServer -. "Most server exceptions are caught inside RunServerAsync" .-> NoteAuto["Fallback may not run for those errors"]
-
-    Server --> ServerReceive["Server receive loop"]
-    Client --> ClientReceive["Client receive loop"]
-    ServerReceive --> ParseServer["Parse Message/Data and enqueue command"]
-    ClientReceive --> ParseClient{"Message matches format?"}
-    ParseClient -- "No" --> Malformed["Log malformed command; continue receiving"]
-    ParseClient -- "Yes" --> Enqueue["Enqueue (message, data)"]
-    ParseServer --> Queue[("commandQueue")]
-    Enqueue --> Queue
-    Queue --> Update["TCPBehaviour.Update calls ProcessCommands"]
-    Update --> Drain["Dequeue commands"]
-    Drain --> Callback["Invoke matching registered callback"]
-    Drain --> Listener["Call matching ICommandListener"]
-    Listener --> Ping{"PingListener?"}
-    Ping -- "Yes" --> LocalPong["SendMessageLocal enqueues Pong"]
-    LocalPong --> Queue
-
-    SendMessage["SendMessage(message, data)"] --> SocketOpen{"Active WebSocket open?"}
-    SocketOpen -- "Yes" --> SendDirect["Send Message/Data payload over WebSocket"]
-    SocketOpen -- "No" --> SendError["Log send error"]
-    PingMod["PingMod(modName, callback, data)"] --> PingQueue["Enqueue modName + Ping"]
-    PingMod --> RegisterCallback["Register callback for modName + Pong"]
-    PingQueue --> Queue
-    PongArrives["Pong received from peer"] --> Queue
-
-    Stop["StopCommunication"] --> StopFlag["Set running false; cancel and close/dispose sockets"]
-    StopFlag --> StopTcp["Close TCP client and stop listener"]
-```
-
-`SendMessage` sends directly through the active WebSocket. `SendMessageLocal` only adds a command to `commandQueue`; it does not transmit it. `PingListener` therefore queues its `Pong` locally, while a `Pong` from a peer is dispatched to the callback registered by `PingMod`.
-
-<details>
-<summary>Click to show code</summary>
+The networking plugin starts `IPCManager.StartAuto()` on load using `DefaultPipeName` (`"CustomPlantClass networking service"`). `StartAuto` runs the server loop and falls back to client mode if the server attempt throws (except during shutdown cancellation). Use a matching pipe name in every process. `StartServer` and `StartClient` select a role explicitly. `StopCommunication` stops the active connection. `IsConnected` reports whether the active pipe is connected. `Initialize(ManualLogSource)` sets the logger used for IPC diagnostics.
 
 ```csharp
-public static class TCPManager
-{
-    public static void SendMessage(string message, string data) { } 
-    public static void SendMessageLocal(string message, string data)
-    {
-        commandQueue.Enqueue((message, data));
-    }
-    public static void PingMod(string modName, Action<string> callBack = null, string data = "")
-    {
-        callBack = callBack ?? ((s) => { });
-        commandQueue.Enqueue((modName+"Ping", data));
-        callBacks.Add((modName+"Pong",callBack));
-    }
-    public static void StartClient(string ip, int port)
-    {
-        _running = true;
-        Task.Run(() => RunClientAsync(ip, port));
-    }
-    public static void StartServer(int port)
-    {
-        _running = true;
-        Task.Run(() => RunServerAsync(port));
-    }
-    public static void StartAuto(int port)
-    {
-        _running = true;
+using CustomPlantClass.Networking;
 
-        Task.Run(async () =>
-        {
-            try
-            {
-                await RunServerAsync(port).ConfigureAwait(false);
-            }
-            catch
-            {
-                await RunClientAsync("127.0.0.1", port).ConfigureAwait(false);
-            }
-        });
-    }
-    public static bool IsConnected
-    {
-        get
-        {
-            WebSocket activeSocket = ActiveSocket;
-            return activeSocket != null && activeSocket.State == WebSocketState.Open;
-        }
-    }
-    private static WebSocket ActiveSocket => _clientSocket ?? _serverSocket;
-    public static void RegisterCommandListener(ICommandListener listener)
-    {
-        commandListeners.Add(listener);
-    }
-}
-public interface ICommandListener
-{
-    public string CommandName { get; }
-    public void OnCommandReceived(string data);
-}
-public abstract class PingListener : ICommandListener
-{
-    public abstract string Name { get; }
-    public string CommandName => Name + "Ping";
-    public virtual string Data => "";
+IPCManager.RegisterCommandListener(new GameListener());
+IPCManager.SendMessage("InventoryChanged", "item-id");
 
+public sealed class GameListener : ICommandListener
+{
+    public string CommandName => "InventoryChanged";
     public void OnCommandReceived(string data)
     {
-        OnRecieved(data);
-        TCPManager.SendMessageLocal(Name+"Pong",Data);
+        // Handle data on the main thread.
     }
-    public virtual void OnRecieved(string data) { }
 }
 ```
-</details>
+
+| Member | Description |
+| --- | --- |
+| `const string DefaultPipeName` | Default local pipe name. |
+| `bool IsConnected` | Whether the running pipe endpoint is connected. |
+| `Initialize(ManualLogSource logSource)` | Configure diagnostic logging. |
+| `StartServer(string pipeName = null)` | Run as the named-pipe server. |
+| `StartClient(string pipeName = null)` | Connect to the named-pipe server; connection timeout is 3 seconds. |
+| `StartAuto(string pipeName = null)` | Run the server loop and fall back to client mode if the server attempt throws, except during shutdown cancellation. |
+| `StopCommunication()` | Stop the connection and close its streams. |
+| `SendMessage(string message)` | Queue a raw string for the connected endpoint. |
+| `SendMessage(string message, string data)` | Queue a command encoded as `Message:{message} Data:{data}`. |
+| `SendMessageLocal(string message, string data)` | Queue a command locally without transmitting it. |
+| `PingMod(string modName, Action<string> callback = null, string data = "")` | Send `{modName}Ping` and register a callback for `{modName}Pong`. |
+| `RegisterCommandListener(ICommandListener listener)` | Register a listener; duplicate registrations are ignored. |
+| `UnregisterCommandListener(ICommandListener listener)` | Remove a listener; returns whether it was registered. |
+| `ProcessCommands()` | Dispatch queued commands to matching ping callbacks and listeners. |
+
+Messages sent by `SendMessage` are queued for background pipe transmission. Command listeners and ping callbacks run when `ProcessCommands` drains the receive queue; the bundled plugin calls this from its Unity update loop. If managing the pump yourself, call it on the main thread. The framed pipe payload is UTF-8 and limited to 8 MiB. `SendMessageLocal` only queues work in the current process.
+
+### TCP/WebSocket compatibility API (`TCPManager`)
+
+`TCPManager` retains the WebSocket-based localhost transport. The bundled plugin starts it automatically on port `54220`; its `TCPBehaviour` also processes TCP and IPC command queues each update. The public manager API is:
+
+```csharp
+TCPManager.StartAuto(54220);
+TCPManager.RegisterCommandListener(new GameListener());
+TCPManager.SendMessage("InventoryChanged", "item-id");
+```
+
+| Member | Description |
+| --- | --- |
+| `List<(string, Action<string>)> callBacks` | Mutable callback registrations keyed by response command. |
+| `List<ICommandListener> commandListeners` | Mutable command-listener collection. Prefer `RegisterCommandListener`. |
+| `ConcurrentQueue<(string message, string data)> commandQueue` | Queue of received or locally enqueued commands. |
+| `bool IsConnected` | Whether its active WebSocket is open. |
+| `StartAuto(int port)` | Start a listener on the port; if `RunServerAsync` throws, attempt a localhost client connection. |
+| `SendMessage(string message, string data)` | Send a `Message:... Data:...` payload over the active WebSocket. |
+| `SendMessageLocal(string message, string data)` | Enqueue a command for local dispatch without sending it. |
+| `PingMod(string modName, Action<string> callBack = null, string data = "")` | Enqueue `{modName}Ping` locally and register for `{modName}Pong`. |
+| `RegisterCommandListener(ICommandListener listener)` | Register a listener for matching command names. |
+| `ProcessCommands()` | Dispatch queued commands to matching callbacks and listeners. |
+| `StopCommunication()` | Stop the listener and close active sockets. |
+
+`TCPManager` does not expose public `StartServer` or `StartClient` methods. Do not rely on the older examples that show those methods. Its `RunServerAsync` catches most server failures internally, so those failures do not reach `StartAuto` and may not trigger the client fallback.
+
+Unlike `IPCManager.PingMod`, `TCPManager.PingMod` only queues its ping command locally; it does not send that ping over the WebSocket. The callback registrations in both managers are retained after invocation, so later responses with the same pong command will invoke them again.
+
+### Listener and ping contracts
+
+`ICommandListener` requires `string CommandName { get; }` and `void OnCommandReceived(string data)`. The command name must exactly match the incoming message name.
+
+`PingListener` is a convenience base class. Override `Name` to identify the mod and optionally override `Data` and `OnRecieved(string data)` (the spelling is part of the current API). Its listener handles `{Name}Ping`, invokes `OnRecieved`, then queues `{Name}Pong` with `Data` on the same transport that dispatched the ping.
+
+The public abstract `TCPBase` is a lower-level WebSocket server/client base for custom implementations. Subclasses provide `int port` and `OnCommandReceived(string message, string data)`; `StartServer()`, `StartClient()`, and `StartAuto()` start its transport, while `SendMessage(message, data)` and `ProcessCommands()` send and dispatch messages. Each start method throws `InvalidOperationException` if that instance is already running.
 
 ## CustomPlantClass.Runtime.CSharp:
 1. This namespace is only a dll and is used to compile code on the go. An example mod:
@@ -1404,6 +1378,7 @@ public static class Bullet_ultimateCactus_SetPenetrationTime_Patch
     }
 }
 ```
+
 </details>
 
 ## CustomPlantClass.RogueShootingManager:
@@ -1644,557 +1619,62 @@ public struct CustomRogueShootingBuff
     public Action CustomOnGet { get; set; } = () => {};
 }
 ```
+
 </details>
 
-## CustomPlantClass.Runtime.Tasks:
+## CustomPlantClass.Runtime.Tasks
 
-```mermaid
-flowchart TD
-    Start["Call task helper"] --> Kind{"Which helper?"}
-
-    Kind -- "Delay(seconds)" --> DelayAwaiter["Create Delay awaiter"]
-    Kind -- "DelayScaled(seconds, speed)" --> ScaledAwaiter["Create DelayScaled awaiter"]
-    Kind -- "WaitForFixedUpdate(steps)" --> FixedAwaiter["Create one Delay awaiter"]
-    Kind -- "WaitUntil(predicate)" --> PredicateAwaiter["Create WaitUntil awaiter"]
-
-    DelayAwaiter --> DelaySchedule["Schedule with DelayScheduler; time-based"]
-    ScaledAwaiter --> ScaledSchedule["Schedule with DelayScheduler; scaled time"]
-    FixedAwaiter --> FixedSchedule["Schedule same awaiter steps times"]
-    PredicateAwaiter --> PredicateSchedule["Schedule with WaitUntilScheduler"]
-
-    DelaySchedule --> DelayTask["Return DelayTask"]
-    ScaledSchedule --> DelayTask
-    FixedSchedule --> DelayTask
-    PredicateSchedule --> WaitTask["Return WaitUntilTask"]
-    DelayTask --> Await["Awaiter stores continuation in OnCompleted"]
-    WaitTask --> Await
-
-    DelaySchedule --> Update["DelayScheduler.Update"]
-    ScaledSchedule --> Update
-    Update --> AlreadyDone{"IsCompleted?"}
-    AlreadyDone -- "Yes, including cancellation" --> RemoveDelay["Remove entry; skip Complete and WhenDone"]
-    AlreadyDone -- "No" --> Subtract["Subtract delta time, applying speed multiplier if scaled"]
-    Subtract --> TimeUp{"Remaining time <= 0?"}
-    TimeUp -- "No" --> Update
-    TimeUp -- "Yes" --> CompleteDelay["Complete awaiter; invoke continuation"]
-    CompleteDelay --> DelayAction["Invoke optional WhenDone action"]
-    DelayAction --> RemoveDelay
-
-    FixedSchedule --> FixedUpdate["DelayScheduler.FixedUpdate"]
-    FixedUpdate --> FixedDone{"IsCompleted?"}
-    FixedDone -- "Yes" --> RemoveFixed["Remove entry"]
-    FixedDone -- "No" --> CompleteFixed["Complete awaiter; invoke continuation"]
-    CompleteFixed --> FixedAction["Invoke optional WhenDone action"]
-    FixedAction --> RemoveFixed
-
-    PredicateSchedule --> WaitUpdate["WaitUntilScheduler.Update"]
-    WaitUpdate --> WaitDone{"Already completed or cancelled?"}
-    WaitDone -- "Yes" --> WaitAction["Invoke optional scheduled action"]
-    WaitDone -- "No" --> PredicateCheck{"Predicate true?"}
-    PredicateCheck -- "No" --> WaitUpdate
-    PredicateCheck -- "Yes" --> CompleteWait["Complete awaiter; invoke continuation"]
-    CompleteWait --> WaitAction
-    WaitAction --> RemoveWait["Remove entry"]
-```
-
-> **Behavior notes:** The fixed-update `steps` overload schedules the same awaiter multiple times, so the first fixed update completes it and later entries remove it; it does not currently wait for the requested number of steps. When a delay or wait is cancelled, its scheduler removes the entry without invoking the awaiter's continuation. `WaitUntilScheduler` can still invoke its optional scheduled action on cancellation.
-
-<details>
-<summary>Click to show code</summary>
+These awaitables are scheduled by the Runtime.Tasks plugin and can be used in C# `async` methods. Add a reference to `CustomPlantClass.Runtime.Tasks.dll` and import `CustomPlantClass.Runtime.Tasks`. The plugin registers the schedulers and inserts their update hook into Unity's player loop.
 
 ```csharp
-public class Delay : IDelay
-{
-    private bool _isCompleted;
-    private Action _continuation;
-    private readonly CancellationToken _token;
+using CustomPlantClass.Runtime.Tasks;
 
-    // Mode 1: with cancellation
-    public Delay(CancellationToken token)
-    {
-        _token = token;
-    }
-
-    // Mode 2: without cancellation
-    public Delay()
-    {
-        _token = null;
-    }
-
-    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
-
-    public void OnCompleted(Action continuation)
-    {
-        _continuation = continuation;
-    }
-
-    public void Complete()
-    {
-        if (_token?.IsCanceled ?? false)
-        {
-            _isCompleted = true;
-            return;
-        }
-
-        _isCompleted = true;
-        _continuation?.Invoke();
-    }
-
-    public void GetResult() { }
-}
-public class DelayScaled : IDelay
-{
-    private bool _isCompleted;
-    private Action _continuation;
-    private readonly CancellationToken _token;
-    public float remaining;
-    public Func<float> speedMultiplier; // dynamic multiplier
-
-    public DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)
-    {
-        remaining = seconds;
-        speedMultiplier = speed;
-        _token = token;
-    }
-
-    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
-
-    public void OnCompleted(Action continuation) => _continuation = continuation;
-
-    public void Complete()
-    {
-        if (_isCompleted) return;
-        _isCompleted = true;
-        _continuation?.Invoke();
-    }
-
-    public void GetResult() { }
-}
-public class WaitUntil : IDelay
-{
-    private bool _isCompleted;
-    private Action _continuation;
-    private readonly CancellationToken _token;
-    private readonly Func<bool> _predicate;
-
-    // with cancellation
-    public WaitUntil(Func<bool> predicate, CancellationToken token)
-    {
-        _predicate = predicate;
-        _token = token;
-    }
-
-    // without cancellation
-    public WaitUntil(Func<bool> predicate)
-    {
-        _predicate = predicate;
-        _token = null;
-    }
-
-    public bool IsCompleted => _isCompleted || (_token?.IsCanceled ?? false);
-
-    public void OnCompleted(Action continuation)
-    {
-        _continuation = continuation;
-    }
-
-    internal bool Check()
-    {
-        if (_isCompleted) return true;
-        if (_token?.IsCanceled ?? false)
-        {
-            _isCompleted = true;
-            return true;
-        }
-
-        if (_predicate != null && _predicate())
-        {
-            Complete();
-            return true;
-        }
-
-        return false;
-    }
-
-    public void Complete()
-    {
-        if (_isCompleted) return;
-
-        _isCompleted = true;
-        _continuation?.Invoke();
-    }
-
-    public void GetResult() { }
-}
-public readonly struct WaitUntilTask
-{
-    private readonly WaitUntil _awaiter;
-
-    public WaitUntilTask(WaitUntil awaiter)
-    {
-        _awaiter = awaiter;
-    }
-
-    public WaitUntil GetAwaiter() => _awaiter;
-
-    // with cancellation
-    public static WaitUntilTask WaitUntil(Func<bool> predicate, CancellationToken token)
-    {
-        var awaiter = new WaitUntil(predicate, token);
-        WaitUntilScheduler.Schedule(awaiter);
-        return new WaitUntilTask(awaiter);
-    }
-
-    // without cancellation
-    public static WaitUntilTask WaitUntil(Func<bool> predicate)
-    {
-        var awaiter = new WaitUntil(predicate);
-        WaitUntilScheduler.Schedule(awaiter);
-        return new WaitUntilTask(awaiter);
-    }
-}
-public struct DelayTask
-{
-    private readonly IDelay _awaiter;
-
-    public DelayTask(IDelay awaiter)
-    {
-        _awaiter = awaiter;
-    }
-
-    public IDelay GetAwaiter() => _awaiter;
-
-    // Mode 1: with cancellation
-    public static DelayTask Delay(float seconds, CancellationToken token)
-    {
-        var awaiter = new Delay(token);
-        DelayScheduler.Schedule(seconds, awaiter);
-        return new DelayTask(awaiter);
-    }
-
-    // Mode 2: without cancellation
-    public static DelayTask Delay(float seconds)
-    {
-        var awaiter = new Delay();
-        DelayScheduler.Schedule(seconds, awaiter);
-        return new DelayTask(awaiter);
-    }
-
-    // FixedUpdate (with cancellation)
-    public static DelayTask WaitForFixedUpdate(CancellationToken token)
-    {
-        var awaiter = new Delay(token);
-        DelayScheduler.ScheduleFixedUpate(awaiter);
-        return new DelayTask(awaiter);
-    }
-
-    // FixedUpdate (without cancellation)
-    public static DelayTask WaitForFixedUpdate()
-    {
-        var awaiter = new Delay();
-        DelayScheduler.ScheduleFixedUpate(awaiter);
-        return new DelayTask(awaiter);
-    }
-
-    // FixedUpdate steps (with cancellation)
-    public static DelayTask WaitForFixedUpdate(int steps, CancellationToken token)
-    {
-        var awaiter = new Delay(token);
-        for (int i = 0; i < steps; i++)
-            DelayScheduler.ScheduleFixedUpate(awaiter);
-        return new DelayTask(awaiter);
-    }
-
-    // FixedUpdate steps (without cancellation)
-    public static DelayTask WaitForFixedUpdate(int steps)
-    {
-        var awaiter = new Delay();
-        for (int i = 0; i < steps; i++)
-            DelayScheduler.ScheduleFixedUpate(awaiter);
-        return new DelayTask(awaiter);
-    }
-    public static DelayTask DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)
-    {
-        var awaiter = new DelayScaled(seconds, speed, token);
-        DelayScheduler.ScheduleScaled(awaiter);
-        return new DelayTask(awaiter);
-    }
-}
-public class DelayScheduler : MonoBehaviour
-{
-    private class Entry
-    {
-        public IDelay awaiter;
-        public float remaining;
-        public bool useFixedUpdate;
-        public bool isScaled;
-        public Action WhenDone = null;
-    }
-
-    private static readonly List<Entry> entries = new();
-
-    public static void Schedule(float seconds, Delay awaiter)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = seconds,
-            useFixedUpdate = false,
-            isScaled = false
-        });
-    }
-
-    public static void ScheduleScaled(DelayScaled awaiter)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = awaiter.remaining,
-            useFixedUpdate = false,
-            isScaled = true
-        });
-    }
-
-    public static void ScheduleFixedUpate(Delay awaiter)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = 0f,
-            useFixedUpdate = true,
-            isScaled = false
-        });
-    }
-
-    public static void Schedule(float seconds, Delay awaiter, Action whenDone)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = seconds,
-            useFixedUpdate = false,
-            isScaled = false,
-            WhenDone = whenDone
-        });
-    }
-
-    public static void ScheduleScaled(DelayScaled awaiter, Action whenDone)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = awaiter.remaining,
-            useFixedUpdate = false,
-            isScaled = true,
-            WhenDone = whenDone
-        });
-    }
-
-    public static void ScheduleFixedUpate(Delay awaiter, Action whenDone)
-    {
-        entries.Add(new Entry
-        {
-            awaiter = awaiter,
-            remaining = 0f,
-            useFixedUpdate = true,
-            isScaled = false,
-            WhenDone = whenDone
-        });
-    }
-
-    public void FixedUpdate()
-    {
-        for (int i = entries.Count - 1; i >= 0; i--)
-        {
-            var e = entries[i];
-
-            if (!e.useFixedUpdate)
-                continue;
-
-            if (e.awaiter.IsCompleted)
-            {
-                entries.RemoveAt(i);
-                continue;
-            }
-
-            e.awaiter.Complete();
-            if(e.WhenDone != null)
-            {
-                try
-                {
-                    e.WhenDone();
-                }
-                catch(Exception ex)
-                {
-                    Debug.LogError(ex.Message);
-                }
-            }
-            entries.RemoveAt(i);
-        }
-    }
-
-    public void Update()
-    {
-        float dt = Time.deltaTime;
-
-        for (int i = entries.Count - 1; i >= 0; i--)
-        {
-            var e = entries[i];
-
-            if (e.useFixedUpdate)
-                continue;
-
-            if (e.awaiter.IsCompleted)
-            {
-                entries.RemoveAt(i);
-                continue;
-            }
-
-            float mult = 1f;
-
-            if (e.isScaled && e.awaiter is DelayScaled scaled)
-                mult = scaled.speedMultiplier?.Invoke() ?? 1f;
-
-            e.remaining -= dt * mult;
-
-            if (e.remaining <= 0f)
-            {
-                e.awaiter.Complete();
-                if(e.WhenDone != null)
-                {
-                    try
-                    {
-                        e.WhenDone();
-                    }
-                    catch(Exception ex)
-                    {
-                        Debug.LogError(ex.Message);
-                    }
-                }
-                entries.RemoveAt(i);
-            }
-        }
-    }
-}
-public class WaitUntilScheduler : MonoBehaviour
-{
-    private class Entry
-    {
-        public WaitUntil awaiter;
-        public Action action; // null if no action
-    }
-
-    private static readonly List<Entry> entries = new();
-
-    public static void Schedule(WaitUntil awaiter)
-    {
-        entries.Add(new Entry { awaiter = awaiter, action = null });
-    }
-
-    public static void Schedule(WaitUntil awaiter, Action action)
-    {
-        entries.Add(new Entry { awaiter = awaiter, action = action });
-    }
-
-    public void Update()
-    {
-        for (int i = entries.Count - 1; i >= 0; i--)
-        {
-            var e = entries[i];
-            var w = e.awaiter;
-
-            if (w.IsCompleted || w.Check())
-            {
-                // run action if present
-                if (e.action != null)
-                {
-                    try
-                    {
-                        e.action();
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError(ex.ToString());
-                    }
-                }
-
-                entries.RemoveAt(i);
-            }
-        }
-    }
-}
-public class CancellationToken
-{
-    public bool IsCanceled { get; private set; }
-
-    public void Cancel() => IsCanceled = true;
-
-    public static CancellationToken CancelAfterFixedUpate()
-    {
-        var token = new CancellationToken();
-        DelayScheduler.ScheduleFixedUpate(new Delay(), () => token.Cancel());
-        return token;
-    }
-    public static CancellationToken CancelAfterFixedUpate(int steps)
-    {
-        var token = new CancellationToken();
-        _ = WaitForFixedUpdates(steps,token);
-        return token;
-    }
-    private async static Task WaitForFixedUpdates(int steps,CancellationToken token)
-    {
-        await DelayTask.WaitForFixedUpdate(steps);
-        token.Cancel();
-    }
-    public static CancellationToken CancelAfterSeconds(float seconds)
-    {
-        var token = new CancellationToken();
-        DelayScheduler.Schedule(seconds, new Delay(), () => token.Cancel());
-        return token;
-    }
-    public static CancellationToken CancelWhen(Func<bool> predicate)
-    {
-        var token = new CancellationToken();
-        WaitUntilScheduler.Schedule(new WaitUntil(predicate), () => token.Cancel());
-        return token;
-    }
-}
-public static class CancellationTokenExt
-{
-    public static CancellationToken CreateCancellationToken(this MonoBehaviour self)
-    {
-        var token = new CancellationToken();
-        WaitUntilScheduler.Schedule(new WaitUntil(() => self.destroyCancellationToken.IsCancellationRequested), () => token.Cancel());
-        return token;
-    }
-    public static CancellationToken CreateCancellationToken(this GameObject self) =>
-        self.TryGetComponent<MonoBehaviour>(out var mono)
-            ? CreateCancellationToken(mono)
-            : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
-    public static CancellationToken CreateCancellationToken(this Component self) =>
-        self.TryGetComponent<MonoBehaviour>(out var mono)
-            ? CreateCancellationToken(mono)
-            : self.GetOrAddComponent<MonobehaviourCancellationToken>().Token;
-    public class MonobehaviourCancellationToken : MonoBehaviour
-    {
-        public CancellationToken Token { get; private set; }
-
-        public void Awake()
-        {
-            Token = new CancellationToken();
-        }
-
-        public void OnDestroy()
-        {
-            Token.Cancel();
-        }
-    }
-}
-public interface IDelay : INotifyCompletion
-{
-    public bool IsCompleted { get; }
-    public void Complete();
-    public void GetResult();
-}
+await DelayTask.Delay(0.5f);
+await DelayTask.DelayScaled(1f, () => gameSpeed);
+await DelayTask.WaitForFixedUpdate();
+await WaitUntilTask.WaitUntil(() => isReady);
 ```
-</details>
+
+### Awaitable helpers
+
+| API | Behavior |
+| --- | --- |
+| `DelayTask.Delay(float seconds)` | Await for elapsed Unity game time. |
+| `DelayTask.Delay(float seconds, CancellationToken token)` | Timed wait with the custom cancellation token. |
+| `DelayTask.DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)` | Timed wait; each update subtracts elapsed game time multiplied by the current `speed()` result (or `1` if the function is null). |
+| `DelayTask.WaitForFixedUpdate()` | Await the next Unity fixed update. |
+| `DelayTask.WaitForFixedUpdate(CancellationToken token)` | Fixed-update wait with cancellation. |
+| `DelayTask.WaitForFixedUpdate(int steps)` | Current implementation completes on the next fixed update for any positive `steps`; see behavior notes below. |
+| `DelayTask.WaitForFixedUpdate(int steps, CancellationToken token)` | Same fixed-update behavior with cancellation. |
+| `WaitUntilTask.WaitUntil(Func<bool> predicate)` | Check the predicate on the player-loop update until it becomes true. |
+| `WaitUntilTask.WaitUntil(Func<bool> predicate, CancellationToken token)` | Predicate wait with cancellation. |
+
+`DelayTask` is a struct wrapping an `IDelay` awaiter, and `WaitUntilTask` is a readonly struct wrapping a `WaitUntil` awaiter. Their `GetAwaiter()` methods make them awaitable; these helpers do not return `System.Threading.Tasks.Task`.
+
+### Cancellation
+
+`CustomPlantClass.Runtime.Tasks.CancellationToken` is a framework token, not `System.Threading.CancellationToken`. It exposes `IsCanceled`, `Cancel()`, and these factories:
+
+- `CancelAfterSeconds(float seconds)`
+- `CancelWhen(Func<bool> predicate)`
+- `CancelAfterFixedUpate()`
+- `CancelAfterFixedUpate(int steps)`
+
+The `FixedUpate` spelling is the actual public method name. `CancellationTokenExt.CreateCancellationToken` has overloads for `MonoBehaviour`, `GameObject`, and `Component`; the returned token is canceled when the associated Unity object's component is destroyed.
+
+**Current implementation limitations:** if a token is canceled after its await has been scheduled, the scheduler removes the awaiter without invoking its continuation. The suspended `await` therefore does not resume, and no cancellation exception is thrown. If the token is already canceled when awaited, the awaiter reports itself complete immediately. The fixed-update `steps` overload schedules the same awaiter repeatedly, so any positive value completes on the next fixed update rather than after that many updates; zero or a negative value schedules nothing. `CancelAfterFixedUpate(int steps)` uses that overload and has the same step-count limitation. Avoid depending on these behaviors as general cancellation or multi-step timing semantics.
+
+### Lower-level scheduler APIs
+
+Most mods should use the `DelayTask` and `WaitUntilTask` helpers. The public lower-level types are available for custom scheduling:
+
+- `Delay()` and `Delay(CancellationToken token)` implement a timed awaiter.
+- `DelayScaled(float seconds, Func<float> speed, CancellationToken token = null)` implements a speed-adjusted awaiter; `remaining` and `speedMultiplier` are public fields.
+- `WaitUntil(Func<bool> predicate)` and `WaitUntil(Func<bool> predicate, CancellationToken token)` implement predicate-based awaiters.
+- `DelayScheduler.Schedule(float, Delay)` and `Schedule(float, Delay, Action whenDone)` enqueue time delays.
+- `DelayScheduler.ScheduleScaled(DelayScaled)` and `ScheduleScaled(DelayScaled, Action whenDone)` enqueue scaled delays.
+- `DelayScheduler.ScheduleFixedUpate(Delay)` and `ScheduleFixedUpate(Delay, Action whenDone)` enqueue fixed-update delays. The `FixedUpate` spelling is part of the API.
+- `WaitUntilScheduler.Schedule(WaitUntil)` and `Schedule(WaitUntil, Action)` enqueue predicate waits.
+- `DelayScheduler.FixedUpdate()` and `WaitUntilScheduler.OnPlayerLoop()` are public scheduler hooks; the plugin invokes them through Unity's player loop.
+- `PlayerLoopTask.AddRunAction(Action)` registers an action to run on each custom player-loop update; there is no corresponding public removal method.
+- `IDelay : INotifyCompletion` defines `IsCompleted`, `Complete()`, and `GetResult()` for custom awaiters.

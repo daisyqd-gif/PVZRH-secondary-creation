@@ -13,6 +13,7 @@ global using System.Threading.Tasks;
 global using CustomPlantClass.Runtime.Tasks;
 global using System.Runtime.CompilerServices;
 global using CustomPlantClass.Runtime.Core;
+using CustomParticle = CustomPlantClass.Main.CustomParticle;
 namespace HorseBossPhase2
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]

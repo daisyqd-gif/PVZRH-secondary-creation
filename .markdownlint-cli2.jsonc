@@ -1,0 +1,10 @@
+{
+  "globs": ["README.md"],
+  "config": {
+    // The README intentionally uses long URLs/tables, collapsed HTML examples,
+    // and a badge as its first line.
+    "MD013": false,
+    "MD033": false,
+    "MD041": false
+  }
+}
