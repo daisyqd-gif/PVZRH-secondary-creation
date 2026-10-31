@@ -10,6 +10,7 @@ A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allo
 - [PVZ Fusion Custom Plant Class Framework](#pvz-fusion-custom-plant-class-framework)
   - [Overview](#overview)
   - [Quick access](#quick-access)
+  - [Current API layout](#current-api-layout)
   - [Features](#features)
   - [Installation](#installation)
   - [Creating a mod](#creating-a-mod)
@@ -38,6 +39,21 @@ This framework provides a unified API for extending PVZ Fusion without modifying
 [![Static Badge](https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/download.svg)](https://github.com/daisyqd-gif/PVZRH-secondary-creation/releases)
 
 [![Static Badge](https://forthebadge.com/api/badges/generate?panels=3&primaryLabel=CustomizeLib&secondaryLabel=4.0&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Montserrat&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=600&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&tertiaryLabel=By+SalmonCN-RH&tertiaryBGColor=%232674A4&tertiaryTextColor=%23FFFFFF&tertiaryFontSize=12&tertiaryFontWeight=500&tertiaryLetterSpacing=2&tertiaryFontFamily=Roboto&tertiaryTextTransform=uppercase&primaryIcon=github&primaryIconColor=%23ffffff&primaryIconSize=16&primaryIconPosition=left)](https://pan.quark.cn/s/6461fdaccff5#/list/share/36e088bfe7cc4167ac502c32cad813b7)
+
+[⬆️ Back to table of contents](#table-of-contents)
+
+## Current API layout
+
+The current framework is split across several assemblies. Keep the framework DLLs together in `BepInEx/plugins` and reference them from your mod project:
+
+| Assembly | Main namespaces | Purpose |
+|---|---|---|
+| `CustomPlantClass.dll` | `CustomPlantClass`, `CustomPlantClass.Main` | Plant, zombie, level, and plugin APIs |
+| `CustomPlantClass.Runtime.Core.dll` | `CustomPlantClass.Runtime.Core`, `CustomPlantClass.Main`, `CustomPlantClass.Registry` | Runtime helpers, asset loading, logging, collections, and registries |
+| `CustomPlantClass.Runtime.Tasks.dll` | `CustomPlantClass.Runtime.Tasks` | Async delay and scheduling helpers |
+| `CustomPlantClass.Runtime.CSharp.dll` | `CustomPlantClass.Runtime.CSharp` | Runtime compilation support |
+
+Some APIs retained their namespace but moved into `CustomPlantClass.Runtime.Core.dll`. Others moved namespaces: for example, use `CustomPlantClass.Runtime.Core.ModLogger`, `CustomPlantClass.Runtime.Core.GameObjectMgr`, and `CustomPlantClass.Runtime.Core.GeneralTools`. The [API reference](API.md) lists current namespaces and legacy replacements.
 
 [⬆️ Back to table of contents](#table-of-contents)
 
@@ -101,6 +117,7 @@ global using System.Reflection;
 global using UnityEngine;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
+global using CustomPlantClass.Runtime.Core;
 global using Random = UnityEngine.Random;
 global using System.Threading.Tasks;
 global using CustomPlantClass.Runtime.Tasks;
@@ -348,13 +365,14 @@ namespace TestPlugin
 open BepInEx.Unity.IL2CPP
 open BepInEx
 open CustomPlantClass
+open CustomPlantClass.Runtime.Core
 
 [<BepInPlugin("FSharpPluginTest", "F#", "1.0.0")>]
 type Plugin () =
     inherit BasePlugin()
 
     override this.Load(): unit =
-        ModLogger.LogInfo("F# test plugin", "Load successful!")
+        CustomPlantClass.Runtime.Core.ModLogger.LogInfo("F# test plugin", "Load successful!")
 ```
 > Note: use the [Microsoft F# guide](https://learn.microsoft.com/en-us/dotnet/fsharp/)
 > You must also have .Net 8.0 installed with the F# runtime.
@@ -369,8 +387,8 @@ An example of a mod:
 using HarmonyLib;
 using System.Reflection;
 using CustomPlantClass.Runtime.CSharp;
+using CustomPlantClass.Runtime.Core;
 using Core;
-using CustomPlantClass;
 public class LogAllErrors : ICompilableScript
 {
     public string Name => "LogAllErrors";

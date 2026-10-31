@@ -11,10 +11,14 @@
   - [CustomPlantClass.Examples (Provides inheretable classes for base game plants)](#customplantclassexamples-provides-inheretable-classes-for-base-game-plants)
   - [CustomPlantClass.Main](#customplantclassmain)
   - [CustomPlantClass.Runtime](#customplantclassruntime)
+  - [CustomPlantClass.Runtime.Core](#customplantclassruntimecore)
   - [CustomPlantClass.Networking:](#customplantclassnetworking)
   - [CustomPlantClass.Runtime.CSharp:](#customplantclassruntimecsharp)
   - [CustomPlantClass.RogueShootingManager:](#customplantclassrogueshootingmanager)
   - [CustomPlantClass.Runtime.Tasks:](#customplantclassruntimetasks)
+
+> **Current API:** The framework is split across multiple assemblies. Several APIs moved to `CustomPlantClass.Runtime.Core.dll`; see [Runtime.Core](#customplantclassruntimecore) for current namespaces and replacements for obsolete APIs.
+
 ## CustomPlantClass
 
 <details>
@@ -57,7 +61,7 @@ public class Bullet_ultimateMelonCabbage : BaseCustomBullet
 
 3. `CustomLevelComponent`  ![Deprecated: Replaced](https://img.shields.io/badge/Unfinished-red)
 4. `CustomOnZombieComponent`  ![Deprecated: Replaced](https://img.shields.io/badge/Deprecated-red)
-5. `CustomParticle` -> Used to add a destroy animation event to particles with non-particlesystem components
+5. `CustomParticle` (`CustomPlantClass.Main`) -> Adds a `Die()` method that destroys the particle's GameObject.
 6. `BaseCustomPlant` -> Central base class for most custom plants(see example code above)
 7. `CustomShooter` -> An extension to `BaseCustomPlant` and handles shooting to allow custom plants to use `Plant` as its base class
 8. `CustomSolarBomb` -> Untested
@@ -138,7 +142,7 @@ public interface IPlantCannonAimHandler
 </details>
 
 13. `PlantSkinComponent`, `BulletComponent`, `ZombieComponent` -> Contains a getter property to get their respective property on its gameobject
-14. `ModLogger` -> Used to log information about the mod and also to log errors/warnings
+14. `CustomPlantClass.ModLogger` -> Legacy logger. Use `CustomPlantClass.Runtime.Core.ModLogger` for current code.
 </details>
 
 ## CustomPlantClass.Level
@@ -193,7 +197,7 @@ public static class LevelProgressionManager
 <details>
 <summary>Click to show section</summary>
   
-1. `AssetMgr` -> Used to load/save assets from different sources. API  (full code in repo):
+1. `AssetMgr` (`CustomPlantClass.Main`, supplied by `CustomPlantClass.Runtime.Core.dll`) -> Loads and caches asset bundles and embedded resources. API (full code in repo):
 <details>
 <summary>Click to show code</summary>
 
@@ -303,7 +307,11 @@ public sealed class DataMgr : MonoBehaviour
     /// <summary>
     /// Registers all BaseCustomPlant-derived types in an assembly.
     /// </summary>
-    public static void AutoRegisterTypes() => AutoRegisterTypes(Assembly.GetCallingAssembly());
+    // Obsolete compatibility methods. Use
+    // CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes instead.
+    [Obsolete]
+    public static void AutoRegisterTypes() { }
+    [Obsolete]
     public static void AutoRegisterTypes(Assembly asm) { }
 
     /// <summary>
@@ -343,7 +351,7 @@ public sealed class DataMgr : MonoBehaviour
     public static void AddLevelPlant(ID type, CardLevel level)
     {
         int type_internal = type;
-        if (CustomCardLevel.ContainsKey(type_internal)) ModLogger.LogError(MyPluginInfo.PluginName, "Duplicate ID type: " + type_internal);
+        if (CustomCardLevel.ContainsKey(type_internal)) CustomPlantClass.Runtime.Core.ModLogger.LogError(MyPluginInfo.PluginName, "Duplicate ID type: " + type_internal);
         CustomCardLevel.Add(type_internal, level);
     }
     public static CardLevel GetCardLevel(PlantLevelData data) =>
@@ -609,8 +617,8 @@ public enum RogueZombieAttack
 </details>
 
 3. `ExtensionManager` -> Contains extensions to various tools
-4. `GameObjectMgr` -> A tool to store gameobjects, untested
-5. `GeneralTools` -> unfinished
+4. `GameObjectMgr` -> Now in `CustomPlantClass.Runtime.Core`; registers and instantiates custom prefab GameObjects.
+5. `GeneralTools` -> Now in `CustomPlantClass.Runtime.Core`; includes IL2CPP type registration and utility helpers.
 6. `ListHelper` -> An extension class
 7. `MathHelper` -> Contains math tools
 
@@ -1168,6 +1176,50 @@ public sealed class ActionOnBoardDestroyAttribute : Attribute
 }
 ```
 </details>
+
+## CustomPlantClass.Runtime.Core
+
+The current runtime helper API is in `CustomPlantClass.Runtime.Core.dll`. Import this namespace when using its types:
+
+```csharp
+using CustomPlantClass.Runtime.Core;
+```
+
+### Moved and replacement APIs
+
+| API | Current namespace | Notes |
+|---|---|---|
+| `ModLogger` | `CustomPlantClass.Runtime.Core` | Use instead of the obsolete `CustomPlantClass.ModLogger`. |
+| `GeneralTools.AutoRegisterTypes()` / `AutoRegisterTypes(Assembly)` | `CustomPlantClass.Runtime.Core` | Replaces the obsolete `DataMgr.AutoRegisterTypes` methods. Pass the plugin assembly explicitly when registering a particular mod's types. |
+| `GameObjectMgr`, `CustomItemType` | `CustomPlantClass.Runtime.Core` | Registers, looks up, and instantiates custom GameObjects. |
+| `CollectionHelper` | `CustomPlantClass.Runtime.Core` | Provides range, enumeration, collection, and per-item action helpers. |
+| `RegisteredPlugin` | `CustomPlantClass.Runtime.Core` | Optional `BasePlugin` class with `RegisterData`, `OnLoad`, and `Load_Async` phases. |
+| `CustomModAttribute` | `CustomPlantClass.Runtime.Core` | Assembly-level mod display-name attribute; replaces the obsolete `CustomPlantClass.Main.CustomModAttribute`. |
+| `AssetMgr`, `MathHelper`, `CustomParticle`, `UnityExtensions` | `CustomPlantClass.Main` | These types are supplied by the Runtime.Core assembly; their namespaces remain `CustomPlantClass.Main`. |
+| `RegistryManager` | `CustomPlantClass.Registry` | Creates persistent and advanced BepInEx configuration entries. |
+
+`DataMgr.MirrorList` and `DataMgr.MirrorTuple` are obsolete. Use `CustomPlantClass.Main.ListHelper.MirrorList` and `CustomPlantClass.Main.ListHelper.MirrorTuple`. The old `ListHelper.ActionPerItem` overload is obsolete; use `CollectionHelper.ActionPerItem`.
+
+### Type registration
+
+```csharp
+using System.Reflection;
+using CustomPlantClass.Runtime.Core;
+
+GeneralTools.AutoRegisterTypes(Assembly.GetExecutingAssembly());
+```
+
+### Registered plugin lifecycle
+
+`RegisteredPlugin` runs `RegisterData()`, then `OnLoad()`, then `Load_Async()` when BepInEx calls `Load()`. Override these methods to split synchronous registration and initialization from asynchronous startup work. Exceptions from the first two phases are logged; exceptions from `Load_Async()` must be handled by the override.
+
+### Custom GameObjects
+
+`GameObjectMgr.Register` stores a GameObject and returns a `CustomItemType`. The generic overload also adds a component before registration. `Get` retrieves a registered object, and `Instantiate` creates instances. A custom ID may be supplied; otherwise, the manager allocates one.
+
+### Collections and logging
+
+`CollectionHelper` provides `Range`, `Enumerate`, `Repeat`, `AddMultiple`, `ActionPerItem`, `Partition`, and `Shuffle` helpers. `ModLogger` supports `LogInfo`, `LogWarn`, and `LogError` overloads that take a message, mod name, or assembly.
 
 ## CustomPlantClass.Networking:
 
