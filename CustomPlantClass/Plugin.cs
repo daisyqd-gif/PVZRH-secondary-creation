@@ -1,4 +1,6 @@
+using CustomPlantClass.Runtime.Core;
 using CustomPlantClass.Runtime.Tasks;
+using CustomPlantClass.CustomizeLib;
 
 
 namespace CustomPlantClass
@@ -37,7 +39,8 @@ namespace CustomPlantClass
         public static void OnLoad()
         {
             Logger = Instance.Log;
-            Tools.InitMod(Assembly.GetExecutingAssembly());
+            GeneralTools.AutoRegisterTypes(Assembly.GetExecutingAssembly());
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
             assetBundle = AssetMgr.LoadBundleFromResource(Assembly.GetExecutingAssembly(), "datamgr", false);
         }
     }
@@ -144,7 +147,7 @@ namespace CustomPlantClass
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public const string PluginGuid = "CustomPlantClass.Bepinex";
         public const string PluginName = "CustomPlantClass";
-        public const string PluginVersion = "1.0.5";
+        public const string PluginVersion = "1.0.7";
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         /// <summary>
         /// The mod framework's target game version

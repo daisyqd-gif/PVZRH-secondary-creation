@@ -36,8 +36,6 @@ namespace CustomPlantClass.Runtime.Tasks
                 type = Il2CppType.From(useUniqueType ? type : typeof(PlayerLoopTask))
             };
             PlayerLoop.SetPlayerLoop(InsertSystemAfter<Update>(in pl,playerLoopSystem));
-            AddRunAction_internal(DelayScheduler.OnPlayerLoop);
-            AddRunAction_internal(WaitUntilScheduler.OnPlayerLoop);
         }
 
         internal static void OnPlayerLoop()
@@ -61,7 +59,10 @@ namespace CustomPlantClass.Runtime.Tasks
                 {
                     Run_internal[i]?.Invoke();
                 }
-                catch {}
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex.ToString());
+                }
             }
         }
         

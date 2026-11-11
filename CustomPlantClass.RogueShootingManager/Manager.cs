@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using UI;
 using Unity.VisualScripting;
 using Mono.Cecil;
+using CustomPlantClass.Runtime.CSharp;
 
 namespace CustomPlantClass.RogueShootingManager
 {
@@ -35,6 +36,7 @@ namespace CustomPlantClass.RogueShootingManager
             [ShootingAlmanacCategory.Expert] = new(), 
             [ShootingAlmanacCategory.Tactics] = new()
         };
+        /*
         static bool IsConfuserEx(string file)
         {
             try
@@ -49,6 +51,7 @@ namespace CustomPlantClass.RogueShootingManager
                 return true; // Not a valid .NET assembly or unreadable
             }
         }
+        */
         
         /// <summary>Generates and registers an IL2CPP config type for a custom plant.</summary>
         /// <param name="spec">The config data used by the generated type.</param>
@@ -63,6 +66,8 @@ namespace CustomPlantClass.RogueShootingManager
 
             string source = template
                 .Replace("{{GUID}}", className);
+            
+            /*
 
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
             var refs = new List<MetadataReference>
@@ -106,6 +111,8 @@ namespace CustomPlantClass.RogueShootingManager
 
             ms.Seek(0, SeekOrigin.Begin);
             var asm = Assembly.Load(ms.ToArray());
+            */
+            var asm = Compiler.RunCSharpScript(source);
 
             Type t = asm.GetType("RogueClass_"+className);
 
@@ -114,7 +121,6 @@ namespace CustomPlantClass.RogueShootingManager
             Specs[className] = cashe;
 
             RogueConfigs[spec.CustomPlantType] = spec;
-            
             return (BaseConfig)Activator.CreateInstance(t);
             //*/
             //return new RogueClass_CONFIG(spec);
@@ -135,6 +141,8 @@ namespace CustomPlantClass.RogueShootingManager
 
             // 4. Replace placeholders
             string source = template.Replace("{{GUID}}", guid);
+            
+            /*
 
             // 5. Parse syntax tree
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
@@ -183,7 +191,8 @@ namespace CustomPlantClass.RogueShootingManager
 
             // 8. Load assembly
             var asm = Assembly.Load(ms.ToArray());
-
+            */
+            var asm = Compiler.RunCSharpScript(source);
             // 9. Resolve type name
             string typeName = "RogueClass_" + guid;
             Type t = asm.GetType(typeName);
@@ -284,7 +293,7 @@ namespace CustomPlantClass.RogueShootingManager
         internal static string LoadEmbeddedText(string resourceName)
         {
             var asm = Assembly.GetExecutingAssembly();
-            using Stream s = asm.GetManifestResourceStream("CustomPlant.RogueShootingManager."+resourceName);
+            using Stream s = asm.GetManifestResourceStream("CustomPlantClass.RogueShootingManager."+resourceName);
             using StreamReader reader = new StreamReader(s);
             return reader.ReadToEnd();
         }
@@ -299,15 +308,6 @@ namespace CustomPlantClass.RogueShootingManager
             experts.Add(thePlantType);
             AddCustomRogueShootingPlant(thePlantType,config);
         }
-        /// <summary>Reserved overload for registering an expert plant with a cost.</summary>
-        /// <param name="thePlantType">The plant type to register.</param>
-        /// <param name="config">The plant's config.</param>
-        /// <param name="cost">The planned plant cost.</param>
-        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
-        public static void AddCustomExpertPlant(PlantType thePlantType, BaseConfig config, int cost)
-        {
-            
-        }
         /// <summary>Maps custom plant types to their Rogue Shooting config data.</summary>
         public static Dictionary<PlantType,CustomRogueShootingConfig> RogueConfigs = new();
         /// <summary>Registers a custom plant config for Rogue Shooting.</summary>
@@ -321,7 +321,7 @@ namespace CustomPlantClass.RogueShootingManager
         /// <param name="thePlantType">The plant type to register.</param>
         /// <param name="config">The plant's config.</param>
         /// <param name="cost">The planned plant cost.</param>
-        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl")]
         public static void AddCustomRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
         {
             
@@ -338,7 +338,7 @@ namespace CustomPlantClass.RogueShootingManager
         /// <param name="thePlantType">The plant type to register.</param>
         /// <param name="config">The plant's config.</param>
         /// <param name="cost">The planned plant cost.</param>
-        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl for the 4.0 update")]
+        [Obsolete("This code IS NOT DONE YET, calling it will DO NOTHING. This is a future impl")]
         public static void AddCustomBaseRogueShootingPlant(PlantType thePlantType, BaseConfig config, int cost)
         {
             
@@ -355,13 +355,13 @@ namespace CustomPlantClass.RogueShootingManager
             // order must begin with the starting plant
             if (order.Length < 2)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError("[EVOLUTION] Pathway must contain at least start -> next");
+                Runtime.Core.ModLogger.LogError("[EVOLUTION] Pathway must contain at least start -> next");
                 return;
             }
 
             if (order[0] != thePlantType)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"[EVOLUTION] First element of order[] must be the starting plant ({thePlantType})");
+                Runtime.Core.ModLogger.LogError($"[EVOLUTION] First element of order[] must be the starting plant ({thePlantType})");
                 return;
             }
 
@@ -376,7 +376,7 @@ namespace CustomPlantClass.RogueShootingManager
 
                 list.Add(child);
 
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] {parent} -> {child}");
+                Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] {parent} -> {child}");
             }
         }
         /// <summary>Reserved method for registering a custom battle buff.</summary>
@@ -443,7 +443,7 @@ namespace CustomPlantClass.RogueShootingManager
                 .Replace("{{GUID}}", guid)
                 .Replace("{{configName}}", Enum.GetName(BasePlant))
                 .Replace("{{PlantID}}", ((int)resultPlant).ToString());
-
+            /*
             // 5. Parse syntax tree
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
 
@@ -492,6 +492,8 @@ namespace CustomPlantClass.RogueShootingManager
 
             // 8. Load assembly
             var asm = Assembly.Load(ms.ToArray());
+            */
+            var asm = Compiler.RunCSharpScript(source);
 
             // 9. Resolve type name
             string typeName = $"{Enum.GetName(BasePlant)}_Patch_{guid}";

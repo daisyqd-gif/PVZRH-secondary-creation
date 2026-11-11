@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.Examples;
@@ -12,6 +12,7 @@ global using UnityEngine;
 global using Unity.VisualScripting;
 global using Random = UnityEngine.Random;
 using System.Linq;
+using CustomPlantClass.Runtime.Core;
 namespace EvilSuperGatling
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -100,7 +101,7 @@ namespace EvilSuperGatling
     {
         public bool entered = false;
         protected override bool IsAsyncPF => true;
-        public override int AttackDamage => Lawnf.TravelUltimate(UltiBuff.EnumValue51) && isPF ? _plant.attackDamage * 2 : _plant.attackDamage;
+        public override int AttackDamage => Lawnf.TravelUltimate((UltiBuff)51) && isPF ? _plant.attackDamage * 2 : _plant.attackDamage;
         public override Transform FindShoot() => transform.FindChild("GatlingPea_head/GatlingPea_mouth_overlay");
         public override BulletType GetBulletType() => Plugin.DataContainer.BulletId;
         public override void Awake()
@@ -129,7 +130,7 @@ namespace EvilSuperGatling
         }
         public override Bullet Shoot_Custom()
         {
-            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)))
+            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(6f)))
             {
                 StartPF();
             }
@@ -159,7 +160,7 @@ namespace EvilSuperGatling
             }
             catch( Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
+                ModLogger.LogError(e.ToString());
             }
         }
         public override void SuperEnd()

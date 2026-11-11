@@ -17,7 +17,7 @@ namespace MegaGatlingExpansion
         public float OverHeatTmr = 0f;
         public float PFChance = 10f;
         public bool isElectric=false;
-        public virtual int MaxHeat() => Lawnf.TravelUltimate(UltiBuff.EnumValue3) ? 100 : 50;
+        public virtual int MaxHeat() => Lawnf.TravelUltimate((UltiBuff)3) ? 100 : 50;
 
         public virtual int GetDmg() => Mathf.RoundToInt(plant.attackDamage * Mathf.Max(1, Heat * 12.5f));
 
@@ -56,7 +56,7 @@ namespace MegaGatlingExpansion
 
         public override BulletMoveWay GetBulletMoveWay()
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return BulletMoveWay.MoveRight;
+            if (Lawnf.TravelUltimate((UltiBuff)51)) return BulletMoveWay.MoveRight;
             else return BulletMoveWay.Free;
         }
 
@@ -209,7 +209,7 @@ namespace MegaGatlingExpansion
                         else b.Damage = GetDmg();
                         b.fromType = plant.thePlantType;
                         b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                        if (Lawnf.TravelUltimate((UltiBuff)51)) b.Damage *= 2;
                     }
 
                     await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
@@ -237,7 +237,7 @@ namespace MegaGatlingExpansion
 
         public override Bullet Shoot_Custom()
         {
-            if (((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp) && !((AdvBuff)Plugin.CurseBuff).IsActive())
+            if (((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp) && !((AdvBuff)Plugin.CurseBuff).IsActive())
             {
                 isPF = true;
                 StartPF();

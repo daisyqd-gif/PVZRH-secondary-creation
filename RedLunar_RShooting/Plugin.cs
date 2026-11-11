@@ -7,11 +7,12 @@ using CustomPlantClass.Main;
 using GameLevel.RogueShooting;
 using Unity.VisualScripting;
 using UnityEngine;
-using CustomizeLib.BepInEx;
+using CustomPlantClass.CustomizeLib;
 using CustomPlantClass.RogueShootingManager;
 using CustomPlantClass.Runtime;
 using CustomPlantClass;
 using CustomPlantClass.Runtime.Tasks;
+using CustomPlantClass.Runtime.Core;
 namespace UltimateRedLunar_RogueShooting
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -22,13 +23,13 @@ namespace UltimateRedLunar_RogueShooting
         {
             ClassInjector.RegisterTypeInIl2Cpp<RSHootingSave_LunarEclipse>();
 
-            (ZhiBianBuff,BaseBuff QBuff) = RegistryHelper.RegisterCustomQualitativeChangeBuff("质变：赤渊蚀月","血月召唤的僵尸将升级为异次元二级和三级僵尸",PlantType.UltimateRedLunar);
+            (ZhiBianBuff,BaseBuff QBuff) = RegistryHelper.RegisterCustomQualitativeChangeBuff("赤渊蚀月","血月召唤的僵尸将升级为异次元二级和三级僵尸",PlantType.UltimateRedLunar);
             BaseBuff UBuff = RegistryHelper.MakeBuffType(new()
             {
                 CustomPlantType = PlantType.UltimateRedLunar,
                 CustomBuffType = ShootingBuffType.UniqueUpgrade,
                 CustomTitle = "强化：月食",
-                CustomDescription = "血月召唤冷却-1秒 (最低 1/2 秒), 血月召唤的僵尸攻击伤害x2",
+                CustomDescription = "血月召唤冷却-0.5秒, 血月召唤的僵尸攻击伤害x1.25",
                 CustomOnGet = () =>
                 {
                     if (ShootingManager.Instance.TryGetPlant(PlantType.UltimateRedLunar, out var plant))
@@ -62,7 +63,7 @@ namespace UltimateRedLunar_RogueShooting
             }
             catch(Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
+                ModLogger.LogError(e.ToString());
             }
         }
     }
@@ -70,7 +71,7 @@ namespace UltimateRedLunar_RogueShooting
     {
         public int SelectBuffTimes = 0;
         public bool ZhiBian => Plugin.ZhiBianBuff.IsActive();
-        public float Timer { get => Mathf.Max(0.5f, 10 - SelectBuffTimes); }
+        public float Timer => 10 - SelectBuffTimes/2;
         public static List<ZombieType> NormalTypes = new()
         {
             ZombieType.BlackFootball,
@@ -210,7 +211,7 @@ namespace UltimateRedLunar_RogueShooting
                 if(save.ZhiBian) zombie.theOriginSpeed*=6f;
                 if(save.ZhiBian) zombie.theMaxHealth*=3;
                 if(save.ZhiBian) zombie.theHealth*=3;
-                zombie.theAttackDamage = (int)(zombie.theAttackDamage * Mathf.Pow(2f, save.SelectBuffTimes));
+                zombie.theAttackDamage = (int)(zombie.theAttackDamage * Mathf.Pow(1.25f, save.SelectBuffTimes));
 
                 // lunar color tint
                 zombie.UpdateColor(Zombie.ZombieColor.Lunar);

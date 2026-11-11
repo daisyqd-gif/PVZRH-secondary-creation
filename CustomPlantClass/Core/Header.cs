@@ -26,7 +26,7 @@ global using Unity.VisualScripting;
 // ===== Other =====
 global using Il2CppInterop.Runtime.Injection;
 global using GameLevel.RogueShooting;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using TMPro;
 global using Core;
@@ -46,5 +46,5 @@ global using Random = UnityEngine.Random;
 global using Object = UnityEngine.Object;
 global using Debug = UnityEngine.Debug;
 global using File = System.IO.File;
-[assembly: CustomMod(CustomPlantClass.MyPluginInfo.PluginName)]
+[assembly: CustomPlantClass.Runtime.Core.CustomMod(CustomPlantClass.MyPluginInfo.PluginName)]
 namespace CustomPlantClass;

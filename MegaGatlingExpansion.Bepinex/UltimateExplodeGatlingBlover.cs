@@ -6,7 +6,7 @@ namespace MegaGatlingExpansion
         public override Transform FindShoot() => transform.FindChild("PeaShooter_Head/Shoot");
         public override BulletMoveWay GetBulletMoveWay()
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return BulletMoveWay.MoveRight;
+            if (Lawnf.TravelUltimate((UltiBuff)51)) return BulletMoveWay.MoveRight;
             else return BulletMoveWay.Free;
         }
         public override Bullet Shoot_Custom()
@@ -24,7 +24,7 @@ namespace MegaGatlingExpansion
             var plants = Lawnf.Get1x1Plants(plant.thePlantColumn, plant.thePlantRow);
 
             // IL2CPP predicate
-            var predicate = UltimateGatlingBlover.__c.__9__4_0;
+            var predicate = UltimateGatlingBlover.__c.__9__5_0;
 
             // Convert IL2CPP Func → System Func
             Func<Plant, bool> sysPredicate = p =>
@@ -35,7 +35,7 @@ namespace MegaGatlingExpansion
                 try
                 {
                     // Call the patched predicate exactly like vanilla
-                    return UltimateGatlingBlover.__c.__9._AttributeEvent_b__4_0(p);
+                    return UltimateGatlingBlover.__c.__9._AttributeEvent_b__5_0(p);
                 }
                 catch (Exception e)
                 {
@@ -52,7 +52,7 @@ namespace MegaGatlingExpansion
             // Use System LINQ (compatible with other mods)
             Plant target = sysPlants.FirstOrDefault(sysPredicate);
 
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3006) && target != null)
+            if (Lawnf.TravelAdvanced((AdvBuff)3006) && target != null)
             {
                 for (int i = 0; i < plant.coordination; i++)
                 {
@@ -98,7 +98,7 @@ namespace MegaGatlingExpansion
                     b.Damage = plant.attackDamage;
                     b.fromType = plant.thePlantType;
                     b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                    if (Lawnf.TravelUltimate((UltiBuff)51)) b.Damage *= 2;
                 }
 
                 if (Time.timeScale > 0f)

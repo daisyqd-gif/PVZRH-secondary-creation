@@ -3,7 +3,7 @@ using Il2CppInterop.Runtime.Injection;
 using GameLevel.RogueShooting;
 using System.Collections.Generic;
 using CustomPlantClass.RogueShootingManager;
-using CustomizeLib.BepInEx;
+using CustomPlantClass.CustomizeLib;
 
 public class RogueClass_{{GUID}} : BaseConfig
 {

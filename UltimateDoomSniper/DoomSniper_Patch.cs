@@ -125,8 +125,8 @@ namespace UltimateDoomSniper
                         if (hit.collider.TryGetComponent(out Zombie zombie))
                         {
                             var hasEmber = zombie.TryGetEffect<EmberEffect>(EffectType.Ember, out var _);
-                            int finalDamage = hasEmber || Lawnf.TravelAdvanced(AdvBuff.EnumValue12002) ? damage * 6 : damage;
-                            zombie.TakeDamage(DmgType.NormalAll, finalDamage, __instance.thePlantType);
+                            int finalDamage = hasEmber || Lawnf.TravelAdvanced((AdvBuff)12002) ? damage * 6 : damage;
+                            zombie.TakeDamage(finalDamage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.thePlantType);
                             hitCount++;
 
                             if (MathHelper.ApproximatelyZero(__instance.crazeTimer))

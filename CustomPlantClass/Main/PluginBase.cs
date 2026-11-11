@@ -1,4 +1,4 @@
-
+using CustomPlantClass.Runtime.Core;
 
 namespace CustomPlantClass.Main
 {
@@ -19,7 +19,7 @@ namespace CustomPlantClass.Main
                 Logger = Log;
                 try
                 {
-                    DataMgr.AutoRegisterTypes(GetType().Assembly);
+                    GeneralTools.AutoRegisterTypes(GetType().Assembly);
                     Harmony.CreateAndPatchAll(GetType().Assembly);
                 }
                 catch (Exception e)

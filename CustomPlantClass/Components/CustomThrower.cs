@@ -141,7 +141,7 @@ namespace CustomPlantClass
                 if (grid == null || grid.plants == null)
                     break;
 
-                foreach (var p in grid.plants)
+                foreach (var p in grid.plants.Cast<Il2CppSystem.Collections.Generic.List<Plant>>())
                 {
                     if (p == null)
                         continue;

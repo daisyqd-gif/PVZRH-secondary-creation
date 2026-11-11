@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using Il2CppInterop.Runtime.Injection;
 global using System;
@@ -9,6 +9,7 @@ global using System.Collections.Generic;
 global using CustomPlantClass.Main;
 global using GameLevel.RogueShooting;
 using UI;
+using CustomPlantClass.Runtime.Core;
 namespace CustomPlantClass.RogueShootingManager
 {
     /// <summary>Initializes the Rogue Shooting expansion and its IL2CPP types.</summary>
@@ -32,17 +33,25 @@ namespace CustomPlantClass.RogueShootingManager
                 ClassInjector.RegisterTypeInIl2Cpp<RogueClass_CONFIG>();
             }
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded as an expansion to CustomPlantClass.");
-            global::CustomPlantClass.Runtime.Core.ModLogger.LogError("Release notes", "This mod is not ready yet! Please wait until the game's 4.0.1 update.");
+            //global::CustomPlantClass.Runtime.Core.ModLogger.LogError("Release notes", "This mod is not ready yet! Please wait until the game's 4.0.1 update.");
         }
     }
-    /// <summary>Identifies this plugin to BepInEx.</summary>
+    /// <summary>
+    /// 
+    /// </summary>
     public class MyPluginInfo
     {
-        /// <summary>The plugin's unique identifier.</summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public const string PluginGuid = "CustomPlantClass.RogueShootingManager.Bepinex";
-        /// <summary>The plugin's display name.</summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public const string PluginName = "CustomPlantClass.RogueShootingManager";
-        /// <summary>The plugin's version.</summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.PluginVersion;
     }
     /// <summary>Provides fallback config data for a plant whose Rogue Shooting data is unavailable.</summary>
@@ -279,7 +288,7 @@ namespace CustomPlantClass.RogueShootingManager
             fail:
             if(ShootingAlmanacCatalogPatch.LastGoodDir == null)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError("Something happened");
+                ModLogger.LogError("Something happened");
                 return true;
             }
             __result = ShootingAlmanacCatalogPatch.LastGoodDir;

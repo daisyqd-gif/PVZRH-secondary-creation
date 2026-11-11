@@ -53,6 +53,7 @@ namespace JacksonBossMusic
             BossMusicManager.Clip_Horse = GetAsset<AudioClip>(assetBundle, "HorseBoss");
             BossMusicManager.Clip_LiuKun = GetAsset<AudioClip>(assetBundle, "LiuKun_BGM");
             BossMusicManager.Clip_Beach = GetAsset<AudioClip>(assetBundle, "BWB_DMG");
+            BossMusicManager.Clip_Jungle = GetAsset<AudioClip>(assetBundle, "LC_minigame");
         }
     }
     public class MyPluginInfo
@@ -67,6 +68,12 @@ namespace JacksonBossMusic
         public static AudioClip Clip_Horse { get; set; }
         public static AudioClip Clip_LiuKun { get; set; }
         public static AudioClip Clip_Beach { get; set; }
+        public static AudioClip Clip_Jungle { get; set; }
+        public const MusicType JacksonBoss = (MusicType)2141983;
+        public const MusicType HorseBoss = (MusicType)2141984;
+        public const MusicType BigWaveBeach_DMG = (MusicType)2141985;
+        public const MusicType AncientEgypt_FinalWave = (MusicType)2141986;
+        public const MusicType LostCity_DMG = (MusicType)2141987;
     }
     [HarmonyPatch(typeof(CreateZombie), nameof(CreateZombie.SetZombie))]
     public static class CreateZombie_SetZombie_Patch
@@ -74,13 +81,13 @@ namespace JacksonBossMusic
         [HarmonyPostfix]
         public static void Postfix(ZombieType theZombieType, ref Zombie __result)
         {
-            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141983) || GameAPP.soundManager.musics[(MusicType)2141983] != null)
+            if (!GameAPP.soundManager.musics.ContainsKey(BossMusicManager.JacksonBoss) || GameAPP.soundManager.musics[BossMusicManager.JacksonBoss] != null)
             {
-                GameAPP.soundManager.musics[(MusicType)2141983] = BossMusicManager.Clip;
+                GameAPP.soundManager.musics[BossMusicManager.JacksonBoss] = BossMusicManager.Clip;
             }
-            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141984) || GameAPP.soundManager.musics[(MusicType)2141984] != null)
+            if (!GameAPP.soundManager.musics.ContainsKey(BossMusicManager.HorseBoss) || GameAPP.soundManager.musics[BossMusicManager.HorseBoss] != null)
             {
-                GameAPP.soundManager.musics[(MusicType)2141984] = BossMusicManager.Clip_Horse;
+                GameAPP.soundManager.musics[BossMusicManager.HorseBoss] = BossMusicManager.Clip_Horse;
             }
             if (theZombieType == ZombieType.JacksonDriverBoss)
             {
@@ -100,7 +107,7 @@ namespace JacksonBossMusic
             wait-=Time.deltaTime;
             if (wait <= 0)
             {
-                GameAPP.Instance.PlayMusic((MusicType)2141983);
+                GameAPP.Instance.PlayMusic(BossMusicManager.JacksonBoss);
                 Destroy(this);
             }
         }
@@ -113,7 +120,7 @@ namespace JacksonBossMusic
             wait-=Time.deltaTime;
             if (wait <= 0)
             {
-                GameAPP.Instance.PlayMusic((MusicType)2141984);
+                GameAPP.Instance.PlayMusic(BossMusicManager.HorseBoss);
                 Destroy(this);
             }
         }
@@ -150,13 +157,21 @@ namespace JacksonBossMusic
         [HarmonyPostfix]
         public static void Postfix()
         {
-            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141985) || GameAPP.soundManager.musics[(MusicType)2141985] != null)
+            if (!GameAPP.soundManager.musics.ContainsKey(BossMusicManager.BigWaveBeach_DMG) || GameAPP.soundManager.musics[BossMusicManager.BigWaveBeach_DMG] != null)
             {
-                GameAPP.soundManager.musics[(MusicType)2141985] = BossMusicManager.Clip_Beach;
+                GameAPP.soundManager.musics[BossMusicManager.BigWaveBeach_DMG] = BossMusicManager.Clip_Beach;
+            }
+            if (!GameAPP.soundManager.musics.ContainsKey(BossMusicManager.LostCity_DMG) || GameAPP.soundManager.musics[BossMusicManager.LostCity_DMG] != null)
+            {
+                GameAPP.soundManager.musics[BossMusicManager.LostCity_DMG] = BossMusicManager.Clip_Jungle;
             }
             if(ShootingManager.Instance!=null && ShootingManager.Instance.scene1 == SceneType.NormalBeach)
             {
-                GameAPP.Instance.PlayMusic((MusicType)2141985);
+                GameAPP.Instance.PlayMusic(BossMusicManager.BigWaveBeach_DMG);
+            }
+            else if(ShootingManager.Instance!=null && ShootingManager.Instance.scene1 == SceneType.Swamp)
+            {
+                GameAPP.Instance.PlayMusic(BossMusicManager.LostCity_DMG);
             }
         }
     }
@@ -166,13 +181,13 @@ namespace JacksonBossMusic
         [HarmonyPostfix]
         public static void Prefix(ref MusicType id)
         {
-            if (!GameAPP.soundManager.musics.ContainsKey((MusicType)2141986) || GameAPP.soundManager.musics[(MusicType)2141986] != null)
+            if (!GameAPP.soundManager.musics.ContainsKey(BossMusicManager.AncientEgypt_FinalWave) || GameAPP.soundManager.musics[BossMusicManager.AncientEgypt_FinalWave] != null)
             {
-                GameAPP.soundManager.musics[(MusicType)2141986] = BossMusicManager.Clip_LiuKun;
+                GameAPP.soundManager.musics[BossMusicManager.AncientEgypt_FinalWave] = BossMusicManager.Clip_LiuKun;
             }
-            if(ShootingManager.Instance != null && ShootingManager.Instance.scene3 == SceneType.Desert && ShootingManager.Instance.stage == 3)
+            if(ShootingManager.Instance != null && id == MusicType.Day && ShootingManager.Instance.scene3 == SceneType.Desert && ShootingManager.Instance.stage == 3)
             {
-                id=(MusicType)2141986;
+                id=BossMusicManager.AncientEgypt_FinalWave;
             }
         }
     }

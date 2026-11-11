@@ -1,3 +1,5 @@
+using CustomPlantClass.Runtime.Core;
+
 namespace CustomPlantClass.Main
 {
     /// <summary>Associates a custom plant implementation with its base type and registration data.</summary>
@@ -56,40 +58,6 @@ namespace CustomPlantClass.Main
         }
     }
 
-    /// <summary>Specifies the display name for a mod at the assembly level.</summary>
-    [Obsolete("Use the one in CustomPlantClass.Runtime.Core instead")]
-    [AttributeUsage(AttributeTargets.Assembly)]
-    public class CustomModAttribute : Attribute
-    {
-#pragma warning disable CS1591 // Public field intentionally does not require XML documentation
-        public string Name;
-#pragma warning restore CS1591
-
-        /// <summary>Creates assembly-level mod metadata with the specified name.</summary>
-        /// <param name="name">The mod's display name.</param>
-        public CustomModAttribute(string name)
-        {
-            Name = name;
-        }
-    }
-
-    /// <summary>Specifies the display name for a mod at the module level.</summary>
-    [Obsolete("Put this on the assembly instead")]
-    [AttributeUsage(AttributeTargets.Module)]
-    public class CustomModModuleAttribute : Attribute
-    {
-#pragma warning disable CS1591 // Public field intentionally does not require XML documentation
-        public string Name;
-#pragma warning restore CS1591
-
-        /// <summary>Creates module-level mod metadata with the specified name.</summary>
-        /// <param name="name">The mod's display name.</param>
-        public CustomModModuleAttribute(string name)
-        {
-            Name = name;
-        }
-    }
-
     /// <summary>Loads custom plant, bullet, and zombie attributes and resolves mod display names.</summary>
     public static class AttributeMgr
     {
@@ -141,7 +109,7 @@ namespace CustomPlantClass.Main
                         .GetMethod("RegisterCustomZombie")
                         .MakeGenericMethod(tBase, tClass);
 
-                    method.Invoke(null, new object[] { zombieAttr.Data });
+                    method.Invoke(null, [zombieAttr.Data]);
                     continue;
                 }
             }
@@ -153,18 +121,9 @@ namespace CustomPlantClass.Main
         public static string GetModName(Assembly asm)
         {
             // 1. CustomModAttribute (assembly-level)
-#pragma warning disable CS0618 // Type or member is obsolete
             var modAttr = asm.GetCustomAttribute<CustomModAttribute>();
             if (modAttr != null && !string.IsNullOrWhiteSpace(modAttr.Name))
                 return modAttr.Name;
-
-            // 2. CustomModAttribute (module-level, ConfuserEx style)
-            foreach (var module in asm.GetModules())
-            {
-                var moduleAttr = module.GetCustomAttribute<CustomModModuleAttribute>();
-                if (moduleAttr != null && !string.IsNullOrWhiteSpace(moduleAttr.Name))
-                    return moduleAttr.Name;
-            }
 
             // 3. MyPluginInfo locator
             foreach (var type in asm.GetTypes())

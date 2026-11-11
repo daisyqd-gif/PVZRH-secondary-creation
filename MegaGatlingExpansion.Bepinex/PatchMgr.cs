@@ -97,7 +97,7 @@ namespace MegaGatlingExpansion
         [HarmonyPatch(nameof(Plant.UpdateAttackCountDown))]
         public static void UpdateAttackCountDown_Postfix(Plant __instance)
         {
-            if (__instance.TryGetComponent<CherryMegaGatlingPea>(out var _) && Lawnf.TravelUltimate(UltiBuff.EnumValue3))
+            if (__instance.TryGetComponent<CherryMegaGatlingPea>(out var _) && Lawnf.TravelUltimate((UltiBuff)3))
                 __instance.thePlantAttackCountDown -= Time.deltaTime;
             if(__instance.thePlantType == PlantType.GatlingPea)
             {
@@ -257,17 +257,17 @@ namespace MegaGatlingExpansion
             if (bt == 3 || bt == 0xC2)
             {
                 __instance.Damage = 1000;
-                plant.TakeDamage(200, 0);
+                //plant.TakeDamage(200, 0);
                 plant.FlashOnce();
             }
             else if (bt == 0x65)
             {
-                plant.TakeDamage(50, 0);
+                //plant.TakeDamage(50, 0);
                 plant.FlashOnce();
             }
             else if (bt == 0x7E)
             {
-                plant.TakeDamage(600, 0);
+                //plant.TakeDamage(600, 0);
                 plant.FlashOnce();
             }
 

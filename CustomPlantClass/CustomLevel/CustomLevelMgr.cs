@@ -1,5 +1,7 @@
 #nullable enable
 
+using CustomPlantClass.Runtime.Core;
+
 namespace CustomPlantClass.Level
 {
     /// <summary>

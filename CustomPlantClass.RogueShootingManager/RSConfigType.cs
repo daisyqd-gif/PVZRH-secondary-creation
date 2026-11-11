@@ -249,6 +249,10 @@ namespace CustomPlantClass.RogueShootingManager
         EmeraleBlover,
         //expert plant, it is not recommended to add entries here
         /// <summary>Configuration identifier for Ultimate Star Torch.</summary>
-        UltimateStarTorch
+        UltimateStarTorch,
+        /// <summary>
+        /// 
+        /// </summary>
+        JalaGatling
     }
 }

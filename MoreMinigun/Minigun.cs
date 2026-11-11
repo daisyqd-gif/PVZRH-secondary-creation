@@ -265,7 +265,7 @@ namespace MoreMinigun
                 {
                     __instance.damageMultiplier = 1;
                 }
-                if(b && Lawnf.TravelAdvanced(AdvBuff.EnumValue2) && (__instance.TryGetComponent<DoomMinigun>(out var _) || __instance.TryGetComponent<UltimateDoomMinigun>(out var _)))
+                if(b && Lawnf.TravelAdvanced((AdvBuff)2) && (__instance.TryGetComponent<DoomMinigun>(out var _) || __instance.TryGetComponent<UltimateDoomMinigun>(out var _)))
                 {
                     __instance.anim.Play("shooting");
                 }

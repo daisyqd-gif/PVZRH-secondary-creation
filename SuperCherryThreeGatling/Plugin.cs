@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 //global using HarmonyLib;
 global using UnityEngine;
 global using System.Collections;
@@ -91,13 +91,13 @@ namespace SuperCherryThreeGatling
         {
             get
             {
-                if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
+                if(Lawnf.TravelUltimate((UltiBuff)51)) return _plant.attackDamage*2;
                 return _plant.attackDamage;
             }
         }
         public float GetOffset()
         {
-            if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return 0;
+            if(Lawnf.TravelUltimate((UltiBuff)51)) return 0;
             return Random.Range(-0.25f,0.25f);
         }
         protected override bool IsAsyncPF => true;
@@ -156,7 +156,7 @@ namespace SuperCherryThreeGatling
         }
         public override Bullet Shoot_Custom()
         {
-            if(PlantMgr.GetPercent(2f) || (PlantMgr.GetPercent(6f) && Lawnf.TravelUltimate(UltiBuff.EnumValue50)))
+            if(PlantMgr.GetPercent(2f) || (PlantMgr.GetPercent(6f) && Lawnf.TravelUltimate((UltiBuff)50)))
             {
                 this.StartCoroutine(SuperShoot());
                 return null;

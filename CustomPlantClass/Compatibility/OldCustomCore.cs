@@ -53,8 +53,8 @@ namespace CustomPlantClass
                 BuffBgType bgType = default, ZombieType zombieType = ZombieType.NormalZombie,
                 int buffID = -1, PlantType plantType = PlantType.Nothing, bool addProbability = false)
             {
-                if (buffType == BuffType.UnlockPlant)
-                    buffID = -5422; //<-as long as it is not -1, it allocates an ID
+                //if (buffType == BuffType.UnlockPlant)
+                //    buffID = -5422; //<-as long as it is not -1, it allocates an ID
                 return CustomCore.RegisterCustomBuff(new BuffConfig()
                 {
                     desc = text,

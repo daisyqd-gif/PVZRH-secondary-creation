@@ -1,4 +1,6 @@
 #nullable enable
+using CustomPlantClass.Runtime.Core;
+
 namespace CustomPlantClass.Main
 {
     /// <summary>

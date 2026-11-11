@@ -3,6 +3,7 @@
 
 using CustomPlantClass.Examples;
 using CustomPlantClass.Runtime;
+using CustomPlantClass.Runtime.Core;
 
 namespace CustomPlantClass
 {
@@ -116,6 +117,7 @@ namespace CustomPlantClass
             return true;
         }
     }
+
     [HarmonyPatch(typeof(HealthSliderManager), nameof(HealthSliderManager.Awake))]
     public static class HealthSliderManagerAwakePatch
     {
@@ -795,28 +797,50 @@ namespace CustomPlantClass
             return true;
         }
     }
+    [HarmonyPatch(typeof(PlantDataManager))]
+    public static class PlantDataManager_Patch
+    {
+        [HarmonyPatch(nameof(PlantDataManager.GetPlantData))]
+        [HarmonyPrefix]
+        public static bool GetPlantData_Prefix(PlantType plantType, ref PlantDataManager.PlantData __result)
+        {
+            if (!PlantDataManager.PlantData_Default.TryGetValue(plantType, out _) && DataMgr.CustomPlantDatas.TryGetValue(plantType, out var res))
+            {
+                __result = res;
+                return false;
+            }
+            return true;
+        }
+        [HarmonyPatch(nameof(PlantDataManager.GetPlantOriginalData))]
+        [HarmonyPrefix]
+        public static bool GetPlantOriginalData_Prefix(PlantType plantType, ref PlantDataManager.PlantData __result)
+        {
+            if (!PlantDataManager.PlantData_Default.TryGetValue(plantType, out _) && DataMgr.CustomPlantDatas.TryGetValue(plantType, out var res))
+            {
+                __result = res;
+                return false;
+            }
+            return true;
+        }
+    }
     [HarmonyPatch(typeof(PlantDataMenu))]
     public static class PlantDataMenuPatch
     {
-        [HarmonyPatch(nameof(PlantDataMenu.Start))]
+        [HarmonyPatch(nameof(PlantDataMenu.GetPlantInfo))]
         [HarmonyPostfix]
-        public static void Start_Postfix(PlantDataMenu __instance)
+        public static void Start_Postfix(PlantDataMenu __instance, ref string __result)
         {
-            if (__instance == null || __instance.IsDestroyed()) return;
-            if (__instance.plant == null || __instance.plant.IsDestroyed()) return;
+            if (__instance == null || __instance.IsDestroyed() || __instance.plant == null || __instance.plant.IsDestroyed()) return;
 
-            var basePlant = __instance.plant.GetComponent<BaseCustomPlant>();
-            if (basePlant == null) return;
+            if (!__instance.plant.TryGetInterface<IGetPlantInfo>(out var basePlant)) return;
 
             var info = basePlant.GetLiveInfo();
             if (info.Count == 0) return;
-
-            var sb = new StringBuilder();
+            
             foreach (var pair in info)
-                sb.AppendLine($"{pair.Key}：{pair.Value}");
+                __result+=$"{pair.Key}：{pair.Value}\n";
 
-            foreach (var text in __instance.infoText)
-                text.text += sb.ToString();
+            __result.TrimEnd();
         }
     }
     [HarmonyPatch(typeof(UltimateFootballZombie))]
@@ -1324,7 +1348,7 @@ namespace CustomPlantClass
         [HarmonyPostfix]
         public static void TravelDebuff_Postfix(TravelDebuff buff, ref bool __result)
         {
-            if (buff == TravelDebuff.EnumValue1018 || buff == TravelDebuff.EnumValue1019)
+            if (buff == (TravelDebuff)1018 || buff == (TravelDebuff)1019)
             {
                 __result = false;
             }
@@ -1616,15 +1640,15 @@ namespace CustomPlantClass
             if (!__instance.CheckFire(bullet))
                 return true;
 
-            // Advanced buff: 0x1778 → 6008 → AdvBuff.EnumValue6008
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue6008))
+            // Advanced buff: 0x1778 → 6008 → (AdvBuff)6008
+            if (Lawnf.TravelAdvanced((AdvBuff)6008))
             {
                 bullet.Damage = bullet.Damage + bullet.Damage / 2;
             }
 
-            // Ultimate buff: 6 → UltiBuff.EnumValue6
+            // Ultimate buff: 6 → (UltiBuff)6
             int attributeCount = __instance.attributeCount;
-            int threshold = Lawnf.TravelUltimate(UltiBuff.EnumValue6)
+            int threshold = Lawnf.TravelUltimate((UltiBuff)6)
                 ? attributeCount / 2
                 : attributeCount;
 
@@ -1660,15 +1684,15 @@ namespace CustomPlantClass
             if (!__instance.CheckFire(bullet))
                 return true;
 
-            // Advanced buff: 0x1778 → 6008 → AdvBuff.EnumValue6008
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue6008))
+            // Advanced buff: 0x1778 → 6008 → (AdvBuff)6008
+            if (Lawnf.TravelAdvanced((AdvBuff)6008))
             {
                 bullet.Damage = bullet.Damage + bullet.Damage / 2;
             }
 
-            // Ultimate buff: 6 → UltiBuff.EnumValue6
+            // Ultimate buff: 6 → (UltiBuff)6
             int attributeCount = __instance.attributeCount;
-            int threshold = Lawnf.TravelUltimate(UltiBuff.EnumValue6)
+            int threshold = Lawnf.TravelUltimate((UltiBuff)6)
                 ? attributeCount / 2
                 : attributeCount;
 

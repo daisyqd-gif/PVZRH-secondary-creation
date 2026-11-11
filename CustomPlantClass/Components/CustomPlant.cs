@@ -1,3 +1,4 @@
+using CustomPlantClass.Runtime.Core;
 using CustomPlantClass.Runtime.Tasks;
 
 namespace CustomPlantClass
@@ -5,7 +6,7 @@ namespace CustomPlantClass
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class BaseCustomPlant : MonoBehaviour, IRedirectAnimShoot, IRedirectAnimShoot2,
         IOverrideDamagePipeline, ICustomClick, ICustomPF, IPlantDieRedirector, IPlantDieHandler,
-        IPlantTextHandler
+        IPlantTextHandler, IGetPlantInfo
     {
         public bool IsImmune => isPF;
         public bool isPF = false;
@@ -44,7 +45,7 @@ namespace CustomPlantClass
             }
             catch( Exception e )
             {
-                ModLogger.LogError(e.ToString());
+                ModLogger.LogError(e);
             }
         }
         public virtual void Awake()
@@ -153,7 +154,7 @@ namespace CustomPlantClass
         public virtual BulletMoveWay GetBulletMoveWay2() => GetBulletMoveWay();
         public virtual BulletMoveWay GetBulletMoveWayPF_SuperGatling()
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return BulletMoveWay.MoveRight;
+            if (Lawnf.TravelUltimate((UltiBuff)51)) return BulletMoveWay.MoveRight;
             return BulletMoveWay.SuperGatling;
         }
         public int GetDamage(int damage, IDamageMaker damageFrom, DamageType damageType)

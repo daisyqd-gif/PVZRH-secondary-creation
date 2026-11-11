@@ -131,7 +131,7 @@ namespace MegaGatlingExpansion
 
         public Bullet AnimShoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= 30) || Random.Range(0, 100) <= 10)
+            if ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= 30) || Random.Range(0, 100) <= 10)
             {
                 isPF = true;
                 zombie.StartCoroutine(SuperShoot_Custom());

@@ -114,7 +114,7 @@ namespace UltimateSniper
                             dmg *= 3;
                         z.SetJalaed(); //Custom logic
                         z.SetPortaled(3f);
-                        z.TakeDamage(DmgType.Carred, dmg);
+                        z.TakeDamage(dmg, null, DamageType.NormalAll);
                         Burn.TryAddZombieBurn(z, true);
                     }
                 }

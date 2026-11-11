@@ -39,7 +39,7 @@ namespace UltimateSniper
             b.Damage = plant.attackDamage;
             b.fromType = plant.thePlantType;
             if (plant.starUp) HitCount++;
-            if (PlantMgr.GetPercent(2f) || (plant.starUp && PlantMgr.GetPercent(15f)) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)) || (plant.starUp && Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(45f)))
+            if (PlantMgr.GetPercent(2f) || (plant.starUp && PlantMgr.GetPercent(15f)) || (Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(6f)) || (plant.starUp && Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(45f)))
             {
                 plant.StartCoroutine(SuperShoot_Custom());
             }
@@ -47,7 +47,7 @@ namespace UltimateSniper
         }
         public override BulletMoveWay GetBulletMoveWay()
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue51) || !isPF) return BulletMoveWay.MoveRight;
+            if (Lawnf.TravelUltimate((UltiBuff)51) || !isPF) return BulletMoveWay.MoveRight;
             return BulletMoveWay.SuperGatling;
         }
         public virtual IEnumerator SuperShoot_Custom()
@@ -73,7 +73,7 @@ namespace UltimateSniper
                     GetBulletMoveWay()
                 );
                 b.Damage = plant.attackDamage;
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 3;
+                if (Lawnf.TravelUltimate((UltiBuff)51)) b.Damage *= 3;
                 b.fromType = plant.thePlantType;
                 b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
                 if (plant.starUp) HitCount++;

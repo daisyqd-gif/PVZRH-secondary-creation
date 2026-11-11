@@ -1,6 +1,6 @@
 global using BepInEx;
 global using BepInEx.Unity.IL2CPP;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 //global using HarmonyLib;
 global using System;
 global using System.Collections.Generic;

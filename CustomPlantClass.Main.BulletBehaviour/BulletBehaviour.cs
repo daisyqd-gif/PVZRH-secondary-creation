@@ -1,4 +1,5 @@
 using System.Linq;
+using CustomPlantClass.Runtime.CSharp;
 using Mono.Cecil;
 
 namespace CustomPlantClass.Main.BulletBehaviour
@@ -45,7 +46,8 @@ namespace CustomPlantClass.Main.BulletBehaviour
 
             string source = template
                 .Replace("{{GUID}}", className);
-
+            
+            /*
             var syntaxTree = CSharpSyntaxTree.ParseText(source);
             var refs = new List<MetadataReference>();
 
@@ -86,7 +88,10 @@ namespace CustomPlantClass.Main.BulletBehaviour
             }
 
             ms.Seek(0, SeekOrigin.Begin);
+            
             var asm = Assembly.Load(ms.ToArray());
+            */
+            var asm = Compiler.RunCSharpScript(source);
 
             Type t = asm.GetType("MoveWay_"+className);
 

@@ -1,6 +1,6 @@
 using BepInEx;
-using CustomizeLib.BepInEx;
-using CustomizeLib.BepInEx.ExtensionData.Basic;
+using CustomPlantClass.CustomizeLib;
+using CustomPlantClass.CustomizeLib.ExtensionData.Basic;
 using HarmonyLib;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,8 +21,8 @@ namespace FreezingCherry.BepInEx
             Tools.InitMod();
             var ab = CustomCore.GetAssetBundle(Tools.GetAssembly(), "freezingcherry");
             {
-                CustomCore.RegisterCustomPlant<IceCherry, FreezingCherry>(Regular_PlantID, ab.GetAsset<GameObject>("FreezingCherryPrefab"),
-                    ab.GetAsset<GameObject>("FreezingCherryPreview"), new List<(int, int)>
+                DataMgr.RegisterCustomPlant<IceCherry, FreezingCherry>(Regular_PlantID, ab.GetAsset<GameObject>("FreezingCherryPrefab"),
+                    ab.GetAsset<GameObject>("FreezingCherryPreview"), new List<(ID, ID)>
                     {
                         ((int)PlantType.IceCherry, (int)PlantType.DoomShroom),
                         ((int)PlantType.DoomShroom, (int)PlantType.IceCherry),
@@ -56,8 +56,8 @@ namespace FreezingCherry.BepInEx
                 CustomCore.AddUltimatePlant(Regular_PlantID);
             }
             {
-                CustomCore.RegisterCustomPlant<IceCherry, UltimateFreezingCherry>(UltimateFreezingCherry.PlantID, ab.GetAsset<GameObject>("UltimateFreezingCherryPrefab"),
-                    ab.GetAsset<GameObject>("UltimateFreezingCherryPreview"), new List<(int, int)>
+                DataMgr.RegisterCustomPlant<IceCherry, UltimateFreezingCherry>(UltimateFreezingCherry.PlantID, ab.GetAsset<GameObject>("UltimateFreezingCherryPrefab"),
+                    ab.GetAsset<GameObject>("UltimateFreezingCherryPreview"), new List<(ID, ID)>
                     {
                         (Regular_PlantID, (int)PlantType.IceShroom),
                         ((int)PlantType.IceShroom, Regular_PlantID),
@@ -102,7 +102,7 @@ namespace FreezingCherry.BepInEx
                     {
                         z.SetFreeze(10f);
                         z.SetCold(15f);
-                        z.TakeDamage(DmgType.NormalAll, p.attackDamage / 2, p.thePlantType);
+                        z.TakeDamage(p.attackDamage / 2, p.ToIDamageMaker(), DamageType.NormalAll, p.thePlantType);
                     };
                     p.board.boardAction.CreateCherryExplode(p.axis.transform.position, p.thePlantRow, CherryBombType.IceCharry, p.attackDamage, p.thePlantType, action);
                 }, onPlant: new CustomClickCardOnPlant
@@ -116,7 +116,7 @@ namespace FreezingCherry.BepInEx
                     {
                         z.SetFreeze(10f);
                         z.SetCold(15f);
-                        z.TakeDamage(DmgType.NormalAll, p.attackDamage / 2, p.thePlantType);
+                        z.TakeDamage(p.attackDamage / 2, p.ToIDamageMaker(), DamageType.NormalAll, p.thePlantType);
                     };
                     p.board.boardAction.CreateCherryExplode(p.axis.transform.position, p.thePlantRow, CherryBombType.IceCharry, p.attackDamage, p.thePlantType, action);
                 }, onPlant: new CustomClickCardOnPlant
@@ -175,7 +175,7 @@ namespace FreezingCherry.BepInEx
                     int damage = __instance.attackDamage;
                     if (z.GetAttrTimers().freezeTimer > 0f)
                         damage *= 4;
-                    z.TakeDamage(DmgType.NormalAll, damage, __instance.thePlantType);
+                    z.TakeDamage(damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.thePlantType);
                 };
                 __instance.board.boardAction.CreateCherryExplode(__instance.axis.transform.position, __instance.thePlantRow, CherryBombType.IceCharry, __instance.attackDamage, __instance.thePlantType, action);
                 __instance.board.boardAction.SetDoom(0, 0, false, true, __instance.axis.transform.position, 3600, fromType: __instance.thePlantType);
@@ -237,7 +237,7 @@ namespace FreezingCherry.BepInEx
                         int damage = 3600;
                         if (z.GetAttrTimers().freezeTimer > 0f)
                             damage *= 4;
-                        z.TakeDamage(DmgType.NormalAll, damage, __instance.GetData<PlantType>("FreezingCherry_FromType"));
+                        z.TakeDamage(damage, null, DamageType.NormalAll, __instance.GetData<PlantType>("FreezingCherry_FromType"));
                     };
                     var bomb = CoreTools.CreateCherryExplode(__instance.transform.position, Mouse.Instance.GetRowFromY(__instance.transform.position.x, __instance.transform.position.y), CherryBombType.IceCharry,
                         3600, __instance.GetData<PlantType>("FreezingCherry_FromType"), action).Item2;
@@ -271,9 +271,9 @@ namespace FreezingCherry.BepInEx
                         z.SetCold(10f);
                         z.AddfreezeLevel(25);
                         if (z.GetAttrTimers().freezeTimer > 0f)
-                            z.TakeDamage(DmgType.NormalAll, __instance.Damage * 4, __instance.fromType);
+                            z.TakeDamage(__instance.Damage * 4, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                         else
-                            z.TakeDamage(DmgType.NormalAll, __instance.Damage, __instance.fromType);
+                            z.TakeDamage(__instance.Damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                     };
                     var cherry = CoreTools.CreateCherryExplode(__instance.transform.position, __instance.theBulletRow, UltimateFreezingCherry.CherrySmallID, __instance.Damage, action: action, volume: 0.2f).Item1;
                     cherry.bombRow = __instance.theBulletRow;
@@ -303,9 +303,9 @@ namespace FreezingCherry.BepInEx
                     z.SetCold(10f);
                     z.AddfreezeLevel(25);
                     if (z.GetAttrTimers().freezeTimer > 0f)
-                        z.TakeDamage(DmgType.NormalAll, __instance.Damage * 4, __instance.fromType);
+                        z.TakeDamage(__instance.Damage * 4, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                     else
-                        z.TakeDamage(DmgType.NormalAll, __instance.Damage, __instance.fromType);
+                        z.TakeDamage(__instance.Damage, __instance.ToIDamageMaker(), DamageType.NormalAll, __instance.fromType);
                 };
                 var cherry = CoreTools.CreateCherryExplode(__instance.transform.position, __instance.theBulletRow, UltimateFreezingCherry.CherrySmallID, __instance.Damage, action: action, volume: 0.2f).Item1;
                 cherry.bombRow = __instance.theBulletRow;

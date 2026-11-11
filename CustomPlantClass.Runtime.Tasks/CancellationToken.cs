@@ -99,18 +99,16 @@ namespace CustomPlantClass.Runtime.Tasks
             /// Gets the token associated with this component's lifetime.
             /// </summary>
             public CancellationToken Token { get; private set; }
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            /// <summary/>
             public void Awake()
             {
                 Token = new CancellationToken();
             }
-
+            /// <summary/>
             public void OnDestroy()
             {
                 Token.Cancel();
             }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         }
     }
 }

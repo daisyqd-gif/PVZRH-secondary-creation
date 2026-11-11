@@ -77,7 +77,7 @@ namespace UltimateSolarCoronaCabbage_Remade
                     if (dmg < 238609294)
                     {
                         // UltiBuff 人造太阳 (ID 23)
-                        if (Lawnf.TravelUltimate(UltiBuff.EnumValue23))
+                        if (Lawnf.TravelUltimate((UltiBuff)23))
                             dmg *= 3;
 
                         // Sun > 15000 → triple damage + consume 200 sun
@@ -99,8 +99,9 @@ namespace UltimateSolarCoronaCabbage_Remade
                         {
                             // Base-game Solar damage call
                             obj.TakeDamage(
-                                DmgType.Shieldless,
                                 dmg,
+                                null,
+                                DamageType.Shieldless,
                                 Plugin.DataContainer.thePlantType    // plant ID 934 (0x3A6)
                             );
                         }
@@ -156,7 +157,7 @@ namespace UltimateSolarCoronaCabbage_Remade
         bool God()
         {
             // AdvBuff 3001 (0xBB9) – 星神合一
-            if (!Lawnf.TravelAdvanced(AdvBuff.EnumValue3001))
+            if (!Lawnf.TravelAdvanced((AdvBuff)3001))
                 return false;
 
             int countA = Lawnf.GetPlantCount(PlantType.UltimateStar, board);

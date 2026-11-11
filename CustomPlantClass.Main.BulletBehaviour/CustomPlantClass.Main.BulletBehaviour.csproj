@@ -23,16 +23,17 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CustomPlantClass.Runtime.Core\CustomPlantClass.Runtime.Core.csproj" />
+    <ProjectReference Include="..\CustomPlantClass\CustomPlantClass.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.CustomizeLib.BepInEx\CustomPlantClass.CustomizeLib.BepInEx.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Runtime.CSharp\CustomPlantClass.Runtime.CSharp.csproj" />
+  </ItemGroup>
+
   <!-- Import shared references -->
   <ItemGroup>
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomizeLib.Bepinex" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>

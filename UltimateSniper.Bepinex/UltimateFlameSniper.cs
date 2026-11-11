@@ -25,7 +25,7 @@ namespace UltimateSniper
         {
             if (hitCount >= (Lawnf.TravelUltimate(Plugin.Buff2) ? 125 : 250) || plant.starUp)
             {
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue50) || plant.starUp) plant.anim.SetTriggerString("shoot");
+                if (Lawnf.TravelUltimate((UltiBuff)50) || plant.starUp) plant.anim.SetTriggerString("shoot");
                 damage *= 6;
                 for (int i = 0; i < 360; i += 10)
                 {

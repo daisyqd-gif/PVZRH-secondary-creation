@@ -1,6 +1,6 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
-using CustomizeLib.BepInEx;
+using CustomPlantClass.CustomizeLib;
 using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
 using System.Reflection;

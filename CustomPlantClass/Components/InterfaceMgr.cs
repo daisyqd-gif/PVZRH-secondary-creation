@@ -17,6 +17,10 @@ namespace CustomPlantClass
     {
         public void OnClicked(Mouse mouse);
     }
+    public interface IGetPlantInfo
+    {
+        public List<KeyValuePair<string, string>> GetLiveInfo();
+    }
     public interface ICustomPF
     {
         public bool IsImmune { get; }

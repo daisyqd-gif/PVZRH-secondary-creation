@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using System.Reflection;
 global using UnityEngine;
@@ -456,7 +456,7 @@ namespace MoreMinigun
         public override void OnGameInit()
         {
             (theCurseID,theSuperID,theBuff) = RegistryHelper.RegisterCustomCurseBuff("数学的力量","伤害增加不会影响子弹以及攻击伤害/2, 子弹变成, 当伤害叠加到500%时, 反转诅咒","伤害增加从线性转换为二次及子弹变成小爆竹子弹",PlantType.UltimateMinigun,(Plant p)=> p.TryGetComponent<UltimateMinigun>(out var b) && b.damageMultiplier > 6);
-            (_, realCherryBomb) = RegistryHelper.RegisterCustomQualitativeChangeBuff("核能射线","获得词条：核能射线",PlantType.UltimateMinigun,()=>TravelMgr.Instance.GetNormalBuff(AdvBuff.EnumValue30));
+            (_, realCherryBomb) = RegistryHelper.RegisterCustomQualitativeChangeBuff("核能射线","获得词条：核能射线",PlantType.UltimateMinigun,()=>TravelMgr.Instance.GetNormalBuff((AdvBuff)30));
         }
     }
     public class MyPluginInfo

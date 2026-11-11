@@ -31,7 +31,7 @@ namespace RemoveCrater{
         [HarmonyPostfix]
         public static void Postfix(AdvBuff buff, ref bool __result)
         {
-            if(buff==AdvBuff.EnumValue18) __result=true;
+            if(buff==(AdvBuff)18) __result=true;
         }
     }
 }

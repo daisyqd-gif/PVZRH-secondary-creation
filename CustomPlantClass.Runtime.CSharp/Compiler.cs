@@ -2,7 +2,7 @@ using Mono.Cecil;
 
 namespace CustomPlantClass.Runtime.CSharp
 {
-    public static class Compile
+    public static class Compiler
     {
         private static uint token = 0;
         public static List<MetadataReference> References { get; private set; } = null;

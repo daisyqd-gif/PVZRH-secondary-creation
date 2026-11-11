@@ -24,14 +24,15 @@
   <!-- Import shared references -->
   
   <ItemGroup>
+    <ProjectReference Include="..\CustomPlantClass.CustomizeLib.BepInEx\CustomPlantClass.CustomizeLib.BepInEx.csproj" />
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="CustomizeLib.Bepinex" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomizeLib.BepInEx.dll</HintPath>
-    </Reference>
     <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
       <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomPlantClass.Runtime.Core" Private="false">
+      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
@@ -350,7 +351,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
   </ItemGroup>
 
 </Project>

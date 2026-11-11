@@ -4,7 +4,7 @@
         <name>CustomPlantClass</name>
     </assembly>
     <members>
-        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Int32,CustomPlantClass.CustomizeLib.BuffBgType)">
             <summary>
             注册自定义词条
             </summary>
@@ -17,7 +17,7 @@
             <param name="bg">背景</param>
             <returns>词条ID</returns>
         </member>
-        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Boolean,PlantType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomBuff(System.String,BuffType,System.Func{System.Boolean},System.Int32,PlantType,System.Boolean,PlantType,System.Int32,CustomPlantClass.CustomizeLib.BuffBgType)">
             <summary>
             注册自定义词条
             </summary>
@@ -32,7 +32,7 @@
             <param name="addProbability">增加植物在场时词条抽取概率</param>
             <returns>词条ID</returns>
         </member>
-        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomDebuff(System.String,System.Func{System.Boolean},ZombieType,System.Int32,CustomizeLib.BepInEx.BuffBgType)">
+        <member name="M:CustomPlantClass.Compatibility.CustomCore_Old.RegisterCustomDebuff(System.String,System.Func{System.Boolean},ZombieType,System.Int32,CustomPlantClass.CustomizeLib.BuffBgType)">
             <summary>
             注册自定义僵尸词条
             </summary>
@@ -286,132 +286,6 @@
             a custom effect.
             </summary>
         </member>
-        <member name="T:CustomPlantClass.ModLogger">
-            <summary>
-            Provides logging helpers that tag messages with a mod name,
-            add them to the appropriate startup log, and write them to BepInEx.
-            </summary>
-        </member>
-        <member name="P:CustomPlantClass.ModLogger.Log">
-            <summary>
-            Gets the BepInEx log source used by this logger.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.String,System.String)">
-            <summary>
-            Logs an informational message tagged with the specified mod name
-            and records it in the startup messages.
-            </summary>
-            <param name="mod">The mod name to include in the log entry.</param>
-            <param name="msg">The informational message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String,System.String)">
-            <summary>
-            Logs a warning tagged with the specified mod name
-            and records it in the startup warnings.
-            </summary>
-            <param name="mod">The mod name to include in the log entry.</param>
-            <param name="msg">The warning message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String,System.Exception)">
-            <summary>
-            Logs a warning tagged with the specified mod name
-            and records it in the startup warnings.
-            </summary>
-            <param name="mod">The mod name to include in the log entry.</param>
-            <param name="msg">The exception to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.String,System.String)">
-            <summary>
-            Logs an error tagged with the specified mod name
-            and records it in the startup errors.
-            </summary>
-            <param name="mod">The mod name to include in the log entry.</param>
-            <param name="msg">The error message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.String,System.Exception)">
-            <summary>
-            Logs an error tagged with the specified mod name
-            and records it in the startup errors.
-            </summary>
-            <param name="mod">The mod name to include in the log entry.</param>
-            <param name="msg">The exception to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.String)">
-            <summary>
-            Logs an informational message tagged with the current plugin name
-            and records it in the startup messages.
-            </summary>
-            <param name="msg">The informational message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.String)">
-            <summary>
-            Logs a warning tagged with the current plugin name
-            and records it in the startup warnings.
-            </summary>
-            <param name="msg">The warning message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Exception)">
-            <summary>
-            Logs a warning tagged with the current plugin name
-            and records it in the startup warnings.
-            </summary>
-            <param name="msg">The exception to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.String)">
-            <summary>
-            Logs an error tagged with the current plugin name
-            and records it in the startup errors.
-            </summary>
-            <param name="msg">The error message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.Exception)">
-            <summary>
-            Logs an error tagged with the current plugin name
-            and records it in the startup errors.
-            </summary>
-            <param name="msg">The exception to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogInfo(System.Reflection.Assembly,System.String)">
-            <summary>
-            Resolves the mod name from the assembly, logs an informational message
-            with that name, and records it in the startup messages.
-            </summary>
-            <param name="asm">The assembly used to resolve the mod name.</param>
-            <param name="msg">The informational message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Reflection.Assembly,System.String)">
-            <summary>
-            Resolves the mod name from the assembly, logs a warning
-            with that name, and records it in the startup warnings.
-            </summary>
-            <param name="asm">The assembly used to resolve the mod name.</param>
-            <param name="msg">The warning message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogWarn(System.Reflection.Assembly,System.Exception)">
-            <summary>
-            Resolves the mod name from the assembly, logs a warning
-            with that name, and records it in the startup warnings.
-            </summary>
-            <param name="asm">The assembly used to resolve the mod name.</param>
-            <param name="msg">The exception to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.Reflection.Assembly,System.String)">
-            <summary>
-            Resolves the mod name from the assembly, logs an error
-            with that name, and records it in the startup errors.
-            </summary>
-            <param name="asm">The assembly used to resolve the mod name.</param>
-            <param name="msg">The error message to log.</param>
-        </member>
-        <member name="M:CustomPlantClass.ModLogger.LogError(System.Reflection.Assembly,System.Exception)">
-            <summary>
-            Resolves the mod name from the assembly, logs an error
-            with that name, and records it in the startup errors.
-            </summary>
-            <param name="asm">The assembly used to resolve the mod name.</param>
-            <param name="msg">The exception to log.</param>
-        </member>
         <member name="T:CustomPlantClass.Level.BranchAdventureManager">
             <summary>
             Utility for creating branch adventure worlds
@@ -511,20 +385,6 @@
             <param name="baseType">The zombie base type to extend.</param>
             <param name="data">The data used to register the custom zombie.</param>
         </member>
-        <member name="T:CustomPlantClass.Main.CustomModAttribute">
-            <summary>Specifies the display name for a mod at the assembly level.</summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.CustomModAttribute.#ctor(System.String)">
-            <summary>Creates assembly-level mod metadata with the specified name.</summary>
-            <param name="name">The mod's display name.</param>
-        </member>
-        <member name="T:CustomPlantClass.Main.CustomModModuleAttribute">
-            <summary>Specifies the display name for a mod at the module level.</summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.CustomModModuleAttribute.#ctor(System.String)">
-            <summary>Creates module-level mod metadata with the specified name.</summary>
-            <param name="name">The mod's display name.</param>
-        </member>
         <member name="T:CustomPlantClass.Main.AttributeMgr">
             <summary>Loads custom plant, bullet, and zombie attributes and resolves mod display names.</summary>
         </member>
@@ -556,43 +416,13 @@
             while avoiding collisions with built-in and custom IDs.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.MirrorTuple(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID})">
-            <summary>
-            Returns the original fusion pair and its mirrored version
-            with the pair elements in reversed order.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.FlattenFusionArray(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}}[])">
-            <summary>
-            Flattens an array of fusion lists into one list
-            while preserving the order of the pairs.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.MirrorList(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
-            <summary>
-            Mirrors every fusion pair in a list
-            by reversing the order of each pair's elements.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.DeduplicateFusions(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
-            <summary>
-            Removes duplicate fusion pairs
-            from the supplied collection.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.Fusion(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}[])">
-            <summary>
-            Creates a fusion list from simple pair definitions
-            and includes the mirrored form of each pair.
-            </summary>
-        </member>
         <member name="M:CustomPlantClass.Main.DataMgr.BulletSkin(System.ValueTuple{BulletType,UnityEngine.GameObject[]}[])">
             <summary>
             Creates bullet skin mappings for plant skins
             from the supplied bullet and prefab entries.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBossHealthSlider(CustomizeLib.BepInEx.ID,UnityEngine.GameObject)">
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomBossHealthSlider(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject)">
             <summary>
             Registers a custom boss health slider using a prefab
             after validating its required UI components.
@@ -604,35 +434,81 @@
             and applies its icon and fill appearance.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.CreatePlantData(CustomizeLib.BepInEx.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
-            <summary>
-            Creates plant registration data with default settings
-            and the supplied ID, prefab, and preview.
-            </summary>
-        </member>
         <member name="M:CustomPlantClass.Main.DataMgr.CreateSkin(CustomPlantClass.Main.BaseCustomPlantData,UnityEngine.GameObject,UnityEngine.GameObject)">
             <summary>
             Creates plant skin data from the base plant data
             and the supplied skin prefab and preview.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AutoRegisterTypes">
+        <member name="F:CustomPlantClass.Main.DataMgr.CustomPlantDatas">
             <summary>
-            Registers all eligible derived types from the calling assembly
-            with the IL2CPP class injector.
+            
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AutoRegisterTypes(System.Reflection.Assembly)">
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``1(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32)">
             <summary>
-            Registers eligible derived types from an assembly
-            with the IL2CPP class injector.
+            Registers a custom plant based on arguments.
             </summary>
+            <typeparam name="TBase">The base type of the plant</typeparam>
+            <param name="PlantId">The plant's ID. Can't overlap with other plants.</param>
+            <param name="Prefab">The plant's prefab gameobject</param>
+            <param name="Preview">The plant's preview gameobject (should be a single gameobject with 1 spriterenderer)</param>
+            <param name="Fusions">How to fuse the plant, can be null to be unfusable</param>
+            <param name="AttackInterval">Interval between attacks</param>
+            <param name="ProduceInterval">Interval between production</param>
+            <param name="AttackDamage">Attack damage</param>
+            <param name="MaxHealth">Max health</param>
+            <param name="Cd">Seed packet's cooldown</param>
+            <param name="Sun">Sun cost</param>
+            <returns>The plant's ID</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.EnsureTypeRegistered``1">
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``2(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32)">
             <summary>
-            Ensures the specified custom component type
-            is registered with the IL2CPP class injector.
+            Registers a custom plant based on arguments.
             </summary>
+            <typeparam name="TBase">The base type of the plant</typeparam>
+            <typeparam name="TClass">Additional component to add to the plant</typeparam>
+            <param name="PlantId">The plant's ID. Can't overlap with other plants.</param>
+            <param name="Prefab">The plant's prefab gameobject</param>
+            <param name="Preview">The plant's preview gameobject (should be a single gameobject with 1 spriterenderer)</param>
+            <param name="Fusions">How to fuse the plant, can be null to be unfusable</param>
+            <param name="AttackInterval">Interval between attacks</param>
+            <param name="ProduceInterval">Interval between production</param>
+            <param name="AttackDamage">Attack damage</param>
+            <param name="MaxHealth">Max health</param>
+            <param name="Cd">Seed packet's cooldown</param>
+            <param name="Sun">Sun cost</param>
+            <returns>The plant's ID</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``2(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.IEnumerable{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,BulletType,System.Boolean,System.Boolean,CardLevel,System.Boolean,System.Boolean,System.Int32,System.String,System.String)">
+            <summary>
+            Registers a custom plant based on arguments.
+            </summary>
+            <typeparam name="TBase">The base type of the plant</typeparam>
+            <typeparam name="TClass">Additional component to add to the plant</typeparam>
+            <param name="PlantId">The plant's ID. Can't overlap with other plants.</param>
+            <param name="Prefab">The plant's prefab gameobject</param>
+            <param name="Preview">The plant's preview gameobject (should be a single gameobject with 1 spriterenderer)</param>
+            <param name="Fusions">How to fuse the plant, can be null to be unfusable</param>
+            <param name="AttackInterval">Interval between attacks</param>
+            <param name="ProduceInterval">Interval between production</param>
+            <param name="AttackDamage">Attack damage</param>
+            <param name="MaxHealth">Max health</param>
+            <param name="Cd">Seed packet's cooldown</param>
+            <param name="Sun">Sun cost</param>
+            <param name="DefaultBullet">Default bullet(requires basecustomplant)</param>
+            <param name="CanPF">Enables golden coffee bean ability on the plant(requires ICustomPF)</param>
+            <param name="CanStarUp">Enables star up ability</param>
+            <param name="CardColor">Card color of the plant</param>
+            <param name="IsRainbowCard">Enbles directly selecting from the rainbow card menu</param>
+            <param name="IsUltimatePlant">Locks plant to travel mode</param>
+            <param name="CardRepeatAmt">Rainbow card menu amount</param>
+            <param name="Name">Plant's name</param>
+            <param name="AlmanacEntry">Plant's almanac description</param>
+            <returns>The plant's ID</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``2(CustomPlantClass.Main.BaseCustomPlantData)">
             <summary>
@@ -640,10 +516,36 @@
             Automatically registers TClass in IL2CPP.
             </summary>
         </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``1(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.IEnumerable{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,BulletType,System.Boolean,System.Boolean,CardLevel,System.Boolean,System.Boolean,System.Int32,System.String,System.String)">
+            <summary>
+            Registers a custom plant based on arguments.
+            </summary>
+            <typeparam name="TBase">The base type of the plant</typeparam>
+            <param name="PlantId">The plant's ID. Can't overlap with other plants.</param>
+            <param name="Prefab">The plant's prefab gameobject</param>
+            <param name="Preview">The plant's preview gameobject (should be a single gameobject with 1 spriterenderer)</param>
+            <param name="Fusions">How to fuse the plant, can be null to be unfusable</param>
+            <param name="AttackInterval">Interval between attacks</param>
+            <param name="ProduceInterval">Interval between production</param>
+            <param name="AttackDamage">Attack damage</param>
+            <param name="MaxHealth">Max health</param>
+            <param name="Cd">Seed packet's cooldown</param>
+            <param name="Sun">Sun cost</param>
+            <param name="DefaultBullet">Default bullet(requires basecustomplant)</param>
+            <param name="CanPF">Enables golden coffee bean ability on the plant(requires ICustomPF)</param>
+            <param name="CanStarUp">Enables star up ability</param>
+            <param name="CardColor">Card color of the plant</param>
+            <param name="IsRainbowCard">Enbles directly selecting from the rainbow card menu</param>
+            <param name="IsUltimatePlant">Locks plant to travel mode</param>
+            <param name="CardRepeatAmt">Rainbow card menu amount</param>
+            <param name="Name">Plant's name</param>
+            <param name="AlmanacEntry">Plant's almanac description</param>
+            <returns>The plant's ID</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
         <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomPlant``1(CustomPlantClass.Main.BaseCustomPlantData)">
             <summary>
             Registers a custom plant using BaseCustomPlantData.
-            Automatically registers TClass in IL2CPP.
             </summary>
         </member>
         <member name="M:CustomPlantClass.Main.DataMgr.AddCustomUltiPlant(PlantType)">
@@ -664,7 +566,7 @@
             Automatically registers TClass in IL2CPP.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddLevelPlant(CustomizeLib.BepInEx.ID,CardLevel)">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddLevelPlant(CustomPlantClass.CustomizeLib.ID,CardLevel)">
             <summary>
             Assigns a card level to a plant type
             for use in treasure mode.
@@ -688,7 +590,7 @@
             from its introduction and optional details.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Single)">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID,System.Single)">
             <summary>
             Registers a chance-based transformation from one plant type
             to another using the specified percentage.
@@ -706,19 +608,19 @@
             from the supplied bullet data.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomStarUp(CustomizeLib.BepInEx.ID)">
+        <member name="M:CustomPlantClass.Main.DataMgr.RegisterCustomStarUp(CustomPlantClass.CustomizeLib.ID)">
             <summary>
             Marks a plant type as supporting Star-Up
             by adding it to the custom Star-Up set.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{Plant,System.Boolean})">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID,System.Func{Plant,System.Boolean})">
             <summary>
             Registers a plant transformation that succeeds when
             the supplied plant-based condition returns true.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{System.Boolean})">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomPlantUpgrade(CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID,System.Func{System.Boolean})">
             <summary>
             Registers a plant transformation that succeeds when
             the supplied condition returns true.
@@ -730,7 +632,7 @@
             and records its spawn settings.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomOnZombieSpawnEvent(CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID,System.Func{Zombie,System.Boolean})">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomOnZombieSpawnEvent(CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID,System.Func{Zombie,System.Boolean})">
             <summary>
             Registers a condition that maps one zombie type to another
             when the source zombie spawns.
@@ -748,7 +650,7 @@
             so it can run during the startup sequence.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomStrongUltimatePlant(CustomizeLib.BepInEx.ID,System.String,UltiBuff,UltiBuff,CustomizeLib.BepInEx.BuffBgType,System.Nullable{PlantType})">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomStrongUltimatePlant(CustomPlantClass.CustomizeLib.ID,System.String,UltiBuff,UltiBuff,CustomPlantClass.CustomizeLib.BuffBgType,System.Nullable{PlantType})">
             <summary>
             Registers a custom strong ultimate plant and marks it as ultimate
             when necessary, then creates its unlock buff.
@@ -772,19 +674,19 @@
             and its two parent plants.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomLevel4Zombie(CustomizeLib.BepInEx.ID,ZombieType)">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomLevel4Zombie(CustomPlantClass.CustomizeLib.ID,ZombieType)">
             <summary>
             Registers a custom level 4 zombie based on a level 3 type
             and assigns its spawn level and weight.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomizeLib.BepInEx.ID,System.Boolean,PlantType,System.Func{System.Boolean})">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomPlantClass.CustomizeLib.ID,System.Boolean,PlantType,System.Func{System.Boolean})">
             <summary>
             Registers a custom weak ultimate plant and its optional variant
             and marks the involved types as ultimate when necessary.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomizeLib.BepInEx.ID,System.Boolean)">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomWeakUltimatePlant(CustomPlantClass.CustomizeLib.ID,System.Boolean)">
             <summary>
             Registers a custom weak ultimate plant
             and marks its type as ultimate when necessary.
@@ -850,7 +752,7 @@
             and attack description strings.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomZombieSpawnRatio(CustomizeLib.BepInEx.ID,System.Int32,System.Int32)">
+        <member name="M:CustomPlantClass.Main.DataMgr.AddCustomZombieSpawnRatio(CustomPlantClass.CustomizeLib.ID,System.Int32,System.Int32)">
             <summary>
             Registers a custom zombie's spawn level
             and its relative selection weight.
@@ -982,73 +884,30 @@
             <param name="action"></param>
             <param name="count"></param>
         </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.MirrorTuple(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID})">
+        <member name="M:CustomPlantClass.Main.ListHelper.MirrorTuple(System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID})">
             <summary>
             Returns a list containing the original fusion pair and its mirrored version.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.FlattenFusionArray(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}}[])">
+        <member name="M:CustomPlantClass.Main.ListHelper.FlattenFusionArray(System.Collections.Generic.List{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}}[])">
             <summary>
             Flattens an array of fusion lists into a single list.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.MirrorList(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+        <member name="M:CustomPlantClass.Main.ListHelper.MirrorList(System.Collections.Generic.List{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}})">
             <summary>
             Mirrors every fusion pair in a list.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.DeduplicateFusions(System.Collections.Generic.List{System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}})">
+        <member name="M:CustomPlantClass.Main.ListHelper.DeduplicateFusions(System.Collections.Generic.List{System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}})">
             <summary>
             Removes duplicate fusion pairs.
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.Fusion(System.ValueTuple{CustomizeLib.BepInEx.ID,CustomizeLib.BepInEx.ID}[])">
+        <member name="M:CustomPlantClass.Main.ListHelper.Fusion(System.ValueTuple{CustomPlantClass.CustomizeLib.ID,CustomPlantClass.CustomizeLib.ID}[])">
             <summary>
             Creates a mirrored fusion list from simple pair definitions.
             </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.CreateList``1(``0[])">
-            <summary>
-            Creates a list
-            </summary>
-            <returns>An IEnumerable</returns>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``1(System.Collections.Generic.IList{``0},``0[])">
-            <summary>
-            Adds multiple items to a sequence
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``1(System.Collections.Generic.HashSet{``0},``0[])">
-            <summary>
-            Adds multiple items to a sequence
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.AddMultiple``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.KeyValuePair{``0,``1}[])">
-            <summary>
-            Adds multiple items to a sequence
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.ActionPerItem``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
-            <summary>
-            Runs an action per item in a sequence
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.ActionPerItem``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Action{``0})">
-            <summary>
-            Runs an action per item in a sequence
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.Partition``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Partitions an ienumerable based on a predicate
-            </summary>
-            <returns>A ValueTuple of yes and no</returns>
-        </member>
-        <member name="M:CustomPlantClass.Main.ListHelper.Shuffle(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>
-            Shuffles an IEnumerable
-            </summary>
-            <param name="self"></param>
         </member>
         <member name="T:CustomPlantClass.Main.PlantMgr">
             <summary>
@@ -1560,7 +1419,7 @@
             The description of the plant shown in the almanac
             </summary>
         </member>
-        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Create(CustomizeLib.BepInEx.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Create(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
             <summary>
             Creates a default struct for the plant
             </summary>

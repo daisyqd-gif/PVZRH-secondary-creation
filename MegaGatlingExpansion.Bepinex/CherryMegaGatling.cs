@@ -33,7 +33,7 @@ namespace MegaGatlingExpansion
                 );
                 b.Damage = GetDmg();
                 b.fromType = plant.thePlantType;
-                if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                if (Lawnf.TravelAdvanced((AdvBuff)3002))
                 {
                     Bullet b1 = CreateBullet.Instance.SetBullet(
                         pos.x, pos.y, plant.thePlantRow,

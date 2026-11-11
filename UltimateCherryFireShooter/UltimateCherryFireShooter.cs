@@ -70,7 +70,7 @@ namespace UltimateCherryFireShooter_Remade
             {
                 PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherry,BulletMoveWay.MoveRight,new Vector2(0,0.4f));
                 PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherry,BulletMoveWay.MoveRight,new Vector2(0,-0.4f));
-                if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                if (Lawnf.TravelAdvanced((AdvBuff)3002))
                 {
                     PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherry,BulletMoveWay.Sin);
                     PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherry,BulletMoveWay.Sin,new Vector2(0,0.4f));
@@ -125,11 +125,11 @@ namespace UltimateCherryFireShooter_Remade
         }
         public override BulletMoveWay GetBulletMoveWay()
         {
-            if(Lawnf.TravelUltimate(UltiBuff.EnumValue51) && isPF) return BulletMoveWay.MoveRight;
+            if(Lawnf.TravelUltimate((UltiBuff)51) && isPF) return BulletMoveWay.MoveRight;
             return BulletMoveWay.SuperGatling;
         }
         public override int AttackDamage => 
-        Lawnf.TravelUltimate(UltiBuff.EnumValue51) && isPF ? _plant.attackDamage*2 : _plant.attackDamage;
+        Lawnf.TravelUltimate((UltiBuff)51) && isPF ? _plant.attackDamage*2 : _plant.attackDamage;
         protected override bool IsAsyncPF => true;
         protected override async Task SuperShoot_Async()
         {
@@ -174,7 +174,7 @@ namespace UltimateCherryFireShooter_Remade
                     b2.normalSpeed = 10f;
 
                     // Buff 51 extra bullets
-                    if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                    if (Lawnf.TravelAdvanced((AdvBuff)3002))
                     {
                         // Group 1
                         Bullet g1a = PlantMgr.SetBullet(_plant, Plugin.Bullet_FireCherryFinal, BulletMoveWay.Sin, AttackDamage, Vector2.zero,15);
@@ -226,7 +226,7 @@ namespace UltimateCherryFireShooter_Remade
             {
                 PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherryFinal,BulletMoveWay.SuperGatling,Vector2.zero,15);
                 PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherryFinal,BulletMoveWay.SuperGatling,Vector2.zero,-15);
-                if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3002))
+                if (Lawnf.TravelAdvanced((AdvBuff)3002))
                 {
                     PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherryFinal,BulletMoveWay.Sin);
                     PlantMgr.SetBullet(_plant,Plugin.Bullet_FireCherryFinal,BulletMoveWay.Sin,new Vector2(0,0.4f));

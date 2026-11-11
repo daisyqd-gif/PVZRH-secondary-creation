@@ -31,6 +31,6 @@ namespace CustomPlantClass.Networking
     {
         public const string PluginGuid = "CustomPlantClass.Networking.Bepinex";
         public const string PluginName = "CustomPlantClass.Networking";
-        public const string PluginVersion = "1.0.5";
+        public const string PluginVersion = "1.0.7";
     }
 }

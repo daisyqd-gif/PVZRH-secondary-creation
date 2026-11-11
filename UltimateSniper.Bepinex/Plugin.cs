@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using System.Reflection;
 global using System.Collections;
@@ -54,39 +54,48 @@ namespace UltimateSniper
         public static ID cherryType = DataMgr.AllocateID();
         public static ID ParticleID = DataMgr.AllocateID();
         #endregion
-        [System.Obsolete]
-        public override void OnStart()
+        public override void InitializePlants()
         {
-            assetBundle = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "ultimatesniper");
-
-            UltimateSniper.PLANT_ID = DataMgr.AllocateID();
-            UltimateMegaGatlingPea.PLANT_ID = DataMgr.AllocateID();
-            UltimateFirePea.BULLET_ID = DataMgr.AllocateID();
-            UltimateCherryPea.BULLET_ID = DataMgr.AllocateID();
-            UltimateExplosivePea.BULLET_ID = DataMgr.AllocateID();
 
             #region Ultimate Sniper
-            CustomCore.RegisterCustomPlant<FireSniper, UltimateSniper>(
-                UltimateSniper.PLANT_ID,
-                assetBundle.GetAsset<GameObject>("FireSniperPrefab"),
-                assetBundle.GetAsset<GameObject>("FireSniperPreview"),
-                new List<(int, int)> { },
-                3f,
-                0f,
-                4000,
-                300,
-                0f,
-                1000
-            );
+            
+            BaseCustomPlantData Data_Red = new BaseCustomPlantData()
+            {
+                PlantId = UltimateSniper.PLANT_ID, // Automatically assigns a unique ID
 
-            CustomCore.AddUltimatePlant(UltimateSniper.PLANT_ID);
-            CustomCore.TypeMgrExtra.IsCustomPlant.Add(UltimateSniper.PLANT_ID);
-            CustomCore.TypeMgrExtra.LevelPlants.Add(UltimateSniper.PLANT_ID, (CardLevel)5);
-            CustomCore.TypeMgrExtra.IsFirePlant.Add(UltimateSniper.PLANT_ID);
-            CustomCore.AddPlantAlmanacStrings(
-                UltimateSniper.PLANT_ID,
-                $"终极狙击豌豆 ({UltimateSniper.PLANT_ID})",
-                "精准狙杀型终极火力单位，每次射击都在积蓄能量。\n" +
+                Prefab = assetBundle.GetAsset<GameObject>("FireSniperPrefab"),   // Main plant prefab
+                Preview = assetBundle.GetAsset<GameObject>("FireSniperPreview"), // Card preview prefab
+
+                Fusions = new(), // Optional fusion recipes
+
+                AttackInterval = 3f,   // Time between attacks (shooters only)
+                ProduceInterval = 0f,  // Time between sun/production cycles
+                AttackDamage = 4000,      // Damage per attack
+                MaxHealth = 300,       // Plant HP
+                Cd = 1.5f,               // Card cooldown
+                Sun = 2000,               // Sun cost
+
+                DefaultBullet = BulletType.Bullet_pea, // Shooter bullet type, this is never used for now so just leave it as is.
+
+                CanPF = false,     // Enable PF ability if the plant has one
+                CanStarUp = true, // Enable Star-Up ability if the plant has one
+
+                CardColor = CardLevel.Red, // Determines card rarity and UI color
+                /*
+                    White  = Normal plants
+                    Green  = Fusion plants
+                    Blue   = Super plants
+                    Purple = Weak ultimate plants
+                    Gold   = Strong ultimate plants
+                    Red    = Special/Treasure mode plants
+                */
+
+                IsRainbowCard = false,  // Appears in the Rainbow Card menu
+                IsUltimatePlant = true, // Travel-locked ultimate plant
+                CardRepeatAmt = 1,       // How many copies appear in Rainbow Card menu
+
+                Name = $"终极狙击射手",           // Plant name (shown in UI)
+                AlmanacEntry = "精准狙杀型终极火力单位，每次射击都在积蓄能量。\n" +
                 "<color=#3D1400>伤害：</color><color=red>高额单体伤害，具备处决能力</color>\n" +
                 "<color=#3D1400>特性：</color><color=red>精准狙击 / 充能处决 / 星级强化后更快触发</color>\n" +
                 "<color=#3D1400>特点：</color><color=red>①每次命中都会累积充能。\n" +
@@ -97,78 +106,19 @@ namespace UltimateSniper
 
                 "<color=#3D1400>终极狙击豌豆说：</color><color=red>“我不需要扫射，也不需要乱枪。\n" +
                 "只要一颗子弹，就能让战场安静下来。\n" +
-                "僵尸们永远不知道下一发会落在谁的头上。”</color>\n\n" +
-
-                // English Section
-                "<color=#3D1400>English Description:</color>\n" +
-                "<color=red>The Ultimate Sniper is a precision execution unit.\n" +
-                "Each shot builds charge, and upon reaching the threshold,\n" +
-                "it instantly eliminates the sniped zombie regardless of health.</color>\n\n" +
-                "<color=#3D1400>Traits:</color><color=red> Precision / Charge Execution / Star‑Up Boost</color>\n" +
-                "<color=#3D1400>Notes:</color><color=red> Builds charge with each hit.\n" +
-                "Executes the target on full charge.\n" +
-                "Star‑Up reduces the required hits.</color>\n\n" +
-                "<color=#3D1400>Ultimate Sniper says:</color><color=red>“One shot. One silence.\n" +
-                "I don’t spray — I decide.”</color>"
-            );
+                "僵尸们永远不知道下一发会落在谁的头上。”</color>\n\n"    // Almanac description (CN + EN recommended)
+            };
+            DataMgr.RegisterCustomPlant<SniperPea, UltimateSniper>(Data_Red);
             #endregion
-
-            #region Ultimate Mega Gatling Pea
-            CustomCore.RegisterCustomPlant<SuperSnowGatling, UltimateMegaGatlingPea>(
-                UltimateMegaGatlingPea.PLANT_ID,
-                assetBundle.GetAsset<GameObject>("SuperSnowGatlingPrefab"),
+            CustomCore.RegisterCustomPlantSkin<UltimateJalaGatling>(
+                (int)PlantType.UltimateJalaGatling,
+                assetBundle.GetAsset<GameObject>("SuperSnowGatlingPrefab"), // I forgot to rename the prefab. Evolution: super snow gatling -> its own plant -> now a skin
                 assetBundle.GetAsset<GameObject>("SuperSnowGatlingPreview"),
-                new List<(int, int)> { (UltimateSniper.PLANT_ID, (int)PlantType.Peashooter), ((int)PlantType.Peashooter, UltimateSniper.PLANT_ID) },
-                1.5f,
-                0f,
-                4000,
-                300,
-                0f,
-                1000
-            );
-
-            CustomCore.AddUltimatePlant(UltimateMegaGatlingPea.PLANT_ID);
-            CustomCore.TypeMgrExtra.IsCustomPlant.Add(UltimateMegaGatlingPea.PLANT_ID);
-            CustomCore.TypeMgrExtra.LevelPlants.Add(UltimateMegaGatlingPea.PLANT_ID, (CardLevel)5);
-            CustomCore.TypeMgrExtra.IsFirePlant.Add(UltimateMegaGatlingPea.PLANT_ID);
-            CustomCore.AddPlantAlmanacStrings(
-                UltimateMegaGatlingPea.PLANT_ID,
-                $"终极机枪 ({UltimateMegaGatlingPea.PLANT_ID})",
-                "终极火力压制单位，能在短时间内倾泻毁灭性弹幕。\n" +
-                "<color=#3D1400>伤害：</color><color=red>超高速连射 + 火樱桃混合弹</color>\n" +
-                "<color=#3D1400>特性：</color><color=red>火力压制 / 终极扫射 / 终极陨石召唤</color>\n" +
-                "<color=#3D1400>特点：</color><color=red>①每次命中都会累积全局充能。\n" +
-                "②充能满后可召唤终极火陨石，造成毁灭性范围伤害。\n" +
-                "③星级强化后可触发终极狂暴扫射（PF）。</color>\n" +
-                "<color=#3D1400>词条1：</color><color=red>火樱混弹：随机发射火焰或樱桃爆裂弹</color>\n" +
-                "<color=#3D1400>词条2：</color><color=red>终极狂暴：小概率进入超高速扫射模式</color>\n\n" +
-
-                "<color=#3D1400>终极大哥豌豆说：</color><color=red>“我不是普通的加特林，我是战场的终极火力点。\n" +
-                "当我开始扫射时，僵尸们最好祈祷自己不在射程内。”</color>\n\n" +
-
-                // English Section
-                "<color=#3D1400>English Description:</color>\n" +
-                "<color=red>The Ultimate Mega Gatling Pea unleashes overwhelming firepower.\n" +
-                "Every hit builds global charge, allowing it to summon a devastating fire meteor.\n" +
-                "Star‑Up grants a chance to enter a rapid‑fire frenzy.</color>\n\n" +
-                "<color=#3D1400>Traits:</color><color=red> Rapid Fire / Fire‑Cherry Hybrid / Meteor Summon</color>\n" +
-                "<color=#3D1400>Notes:</color><color=red> Builds global charge.\n" +
-                "Can summon a fire meteor.\n" +
-                "May enter frenzy mode.</color>\n\n" +
-                "<color=#3D1400>Ultimate Mega Gatling says:</color><color=red>“When I spin up, the battlefield belongs to me.”</color>"
-            );
-            CustomCore.CustomPlantClicks.Add(UltimateMegaGatlingPea.PLANT_ID, (Plant p) =>
-            {
-                p.FlashOnce();
-                if (UltimateMegaGatlingPea.HitCount >= 10 && !FireMeteor.exists)
+                p =>
                 {
-                    UltimateMegaGatlingPea.MakeMeteor();
-                }
-            });
-            CustomCore.AddFusion(UltimateSniper.PLANT_ID, (int)PlantType.Peashooter, UltimateMegaGatlingPea.PLANT_ID);
-            CustomCore.AddFusion(UltimateSniper.PLANT_ID, UltimateMegaGatlingPea.PLANT_ID, (int)PlantType.Peashooter);
-            #endregion
-
+                    p.shoot = p.transform.FindChild("GatlingPea_head/Shoot");
+                    p.back =  p.transform.FindChild("Back/Back (1)").GetComponent<SpriteRenderer>();
+                });
             #region Ultimate Flame Gatling
             // Fill out the plant metadata
             BaseCustomPlantData Data = new BaseCustomPlantData()
@@ -178,7 +128,7 @@ namespace UltimateSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPreview"), // Card preview prefab
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
+                Fusions = ListHelper.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -225,7 +175,7 @@ namespace UltimateSniper
                 Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPrefab"),   // Main plant prefab
                 Preview = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPreview"), // Card preview prefab
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorTuple((UFlameGatling, PlantType.Peashooter)), // Optional fusion recipes
+                Fusions = ListHelper.MirrorTuple((UFlameGatling, PlantType.Peashooter)), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -346,27 +296,18 @@ namespace UltimateSniper
 
                 CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
             });
-            BaseConfig config2 = RegistryHelper.MakeConfigType(new CustomRogueShootingConfig()
-            {
-                CustomPlantType = PlantType.JalaGatling,
-
-                CustomBuffs = () => new() { new UpgradeBuff(PlantType.JalaGatling, UFlameGatling) },
-
-                CustomReinforcePlant = (Plant plant) =>
-                {
-                    plant.ModifyDamage(PlantDamageAdder.Shooting, 14.0f, false, new Il2CppSystem.Nullable<float>(float.MaxValue));
-                },
-
-                CustomRole = RegistryHelper.GetStringFromRole(Roles.Attacker)
-            });
-        RegistryHelper.AddCustomRogueShootingPlant(UFlameGatling, config1);
-            RegistryHelper.AddCustomRogueShootingPlant(PlantType.JalaGatling, config2);
-            RegistryHelper.InjectUpgradeBuff(RSConfigType.Peashooter, PlantType.JalaGatling);
+            RegistryHelper.AddCustomRogueShootingPlant(UFlameGatling, config1);
+            RegistryHelper.InjectUpgradeBuff(RSConfigType.JalaGatling, UFlameGatling);
             RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.JalaGatling, UFlameGatling);
         }
         public override void InitializeMod()
         {
-
+            assetBundle = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "ultimatesniper");
+            UltimateSniper.PLANT_ID = DataMgr.AllocateID();
+            UltimateMegaGatlingPea.PLANT_ID = DataMgr.AllocateID();
+            UltimateFirePea.BULLET_ID = DataMgr.AllocateID();
+            UltimateCherryPea.BULLET_ID = DataMgr.AllocateID();
+            UltimateExplosivePea.BULLET_ID = DataMgr.AllocateID();
             #region GameObject assignment
             FireMeteor2 = assetBundle.GetAsset<GameObject>("BigStar");
             FireMeteor2.AddComponent<FireMeteor>();
@@ -402,21 +343,21 @@ namespace UltimateSniper
     }
     // Token: 0x02000023 RID: 35
     [HarmonyPatch(typeof(Zombie), nameof(Zombie.GetDamage))]
-public class ZombieGetDamagePatch
-{
-    // Token: 0x0600011C RID: 284 RVA: 0x00005920 File Offset: 0x00003B20
-    [HarmonyPrefix]
-    public static void Prefix(Zombie __instance, DmgType theDamageType, ref int theDamage)
+    public class ZombieGetDamagePatch
     {
-        if (__instance.TryGetComponent<ZombieBurn_2>(out var _) && !__instance.effects.ContainsKey(EffectType.Freeze))
+        // Token: 0x0600011C RID: 284 RVA: 0x00005920 File Offset: 0x00003B20
+        [HarmonyPrefix]
+        public static void Prefix(Zombie __instance, DamageType theDamageType, ref int theDamage)
         {
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue15))
+            if (__instance.TryGetComponent<ZombieBurn_2>(out var _) && !__instance.effects.ContainsKey(EffectType.Freeze))
             {
-                theDamage = Mathf.CeilToInt(theDamage * 2.5f);
-                return;
+                if (Lawnf.TravelAdvanced((AdvBuff)15))
+                {
+                    theDamage = Mathf.CeilToInt(theDamage * 2.5f);
+                    return;
+                }
+                theDamage = Mathf.CeilToInt(theDamage * 1.5f);
             }
-            theDamage = Mathf.CeilToInt(theDamage * 1.5f);
         }
     }
-}
 }

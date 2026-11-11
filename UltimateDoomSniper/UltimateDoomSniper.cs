@@ -55,7 +55,7 @@ namespace UltimateDoomSniper
                             dmg *= 4;
                         }
                     }
-                    z.TakeDamage(DmgType.NormalAll, dmg, plant.thePlantType); //100 % crit chance
+                    z.TakeDamage(dmg, plant.ToIDamageMaker(), DamageType.NormalAll, plant.thePlantType); //100 % crit chance
                     if (MathHelper.ApproximatelyZero(plant.crazeTimer)) plant.craze++;
                     if (plant.attributeCount >= (Lawnf.TravelAdvanced(Plugin.Buff2) ? 151 : 301))
                     {

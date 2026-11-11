@@ -1,4 +1,4 @@
-![🌱PVZ Fusion Custom Plant Class Framework](https://forthebadge.com/api/badges/generate?panels=3&primaryLabel=pvzrh&secondaryLabel=Custom+plant+class+framework&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=900&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=600&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&tertiaryLabel=1.0.5&tertiaryBGColor=%232674A4&tertiaryTextColor=%23FFFFFF&tertiaryFontSize=12&tertiaryFontWeight=500&tertiaryLetterSpacing=2&tertiaryFontFamily=Roboto&tertiaryTextTransform=uppercase&scale=2&secondaryTextShadowColor=%23000000&secondaryTextShadowOffsetX=1.5&secondaryTextShadowOffsetY=1.5&secondaryTextShadowBlur=2)
+![🌱PVZ Fusion Custom Plant Class Framework](https://forthebadge.com/api/badges/generate?panels=3&primaryLabel=pvzrh&secondaryLabel=Custom+plant+class+framework&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=900&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=600&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&tertiaryLabel=1.0.7&tertiaryBGColor=%232674A4&tertiaryTextColor=%23FFFFFF&tertiaryFontSize=12&tertiaryFontWeight=500&tertiaryLetterSpacing=2&tertiaryFontFamily=Roboto&tertiaryTextTransform=uppercase&scale=2&secondaryTextShadowColor=%23000000&secondaryTextShadowOffsetX=1.5&secondaryTextShadowOffsetY=1.5&secondaryTextShadowBlur=2)
 
 ---
 
@@ -59,6 +59,7 @@ The current framework is split across several assemblies. Keep the framework DLL
 | `CustomPlantClass.dll` | `CustomPlantClass`, `CustomPlantClass.Main` | Plant, zombie, level, and plugin APIs |
 | `CustomPlantClass.Runtime.Core.dll` | `CustomPlantClass.Runtime.Core`, `CustomPlantClass.Main`, `CustomPlantClass.Registry` | Runtime helpers, asset loading, logging, collections, and registries |
 | `CustomPlantClass.Runtime.Tasks.dll` | `CustomPlantClass.Runtime.Tasks` | Async delay and scheduling helpers |
+| `CustomPlantClass.CustomizeLib.BepInEx.dll` | `CustomPlantClass.CustomizeLib.BepInEx`, etc... | CustomizeLib replacement. |
 | `CustomPlantClass.Runtime.CSharp.dll` | `CustomPlantClass.Runtime.CSharp` | Runtime compilation support |
 
 Some APIs retained their namespace but moved into `CustomPlantClass.Runtime.Core.dll`. Others moved namespaces: for example, use `CustomPlantClass.Runtime.Core.ModLogger`, `CustomPlantClass.Runtime.Core.GameObjectMgr`, and `CustomPlantClass.Runtime.Core.GeneralTools`. The [API reference](API.md) lists current namespaces and legacy replacements.
@@ -74,11 +75,14 @@ Some APIs retained their namespace but moved into `CustomPlantClass.Runtime.Core
 - [x] Registries and an event manager for cross mod communication
 - [x] Custom structs and data types for easier data storage
 - [x] A central command dispatcher for mods to communicate with each other and external apps via TCP
+- [x] IPC support
 - [x] An async state machine runner that replaces UniTask and Task.Delay with sub frame timing
 - [x] Python like support for collections
 - [x] A bridge for converting data from Il2cpp collections to managed collections
+- [x] Compatibility layer for using Linq with Il2cpp collections.
 - [x] Runtime compilation of mods
 - [x] An interrupt system
+- [x] Central configuration manager for mods
 - [x] Full support for the easier .NET based F# language
 - [ ] A way to run mods in Lua
 - [ ] A visual plant creator that allows modders or designers to create plants with minimal coding
@@ -88,7 +92,7 @@ Some APIs retained their namespace but moved into `CustomPlantClass.Runtime.Core
 
 ## Installation
 
-1. Install this custom fork of BepInEx 6.0.0 and [CustomizeLib](https://pan.quark.cn/s/6461fdaccff5#/list/share) -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located) and also locate customizelib in any of salmon's mods and put it in. TEMPORARY WARNING: Do not use the August 22 version, and if you insist, use dnspy to remove the native hooks in Customizelib on Plant.Update and Plant.FixedUpdate
+1. Install this custom fork of [BepInEx 6.0.0](https://pan.quark.cn/s/6461fdaccff5#/list/share) -> 融合版/融合Mod/鲑鱼MOD整理/BepinEX版本/BepInEx前置框架 and download all files in the folder and place them into the game's directory (where PlantsVsZombiesRH.exe is located).
 2. Locate the release for PVZ Fusion Custom Plant Class Framework in the releases tab in this repo and download it into: gamedirectory/BepInEx/plugins
 3. Run the game. You should see a black window open up and its name should be: BepInEx 6.0.0 dev - PlantsVsZombiesRH.exe. When the game is fully booted up and it is in the main menu, wait 5 seconds and close the game.
 4. You should see a folder called interop in the BepInEx folder
@@ -98,7 +102,7 @@ Some APIs retained their namespace but moved into `CustomPlantClass.Runtime.Core
 
 ### Prerequisites
 
-- Medium to advanced understanding in the C# coding language
+- Medium to advanced understanding in the C# coding language or basic understanding in the F# coding language
 - Medium understanding in making AssetBundles in Unity
 - A 64 bit computer running Windows 10 or later
 - Basic drawing and animating capibilities in Unity
@@ -171,7 +175,7 @@ C# uses exceptions for exceptional failures; catch them where the mod can recove
 ### 📚Guide
 
 1. Create your modding folder.
-2. Install tools like [DnSpy 6.1.8 .Net Framework](https://github.com/dnSpy/dnSpy/releases/tag/v6.1.8), [Il2CppDumper](https://github.com/Perfare/Il2CppDumper/releases), Tuanjie editor 2022.3, [Microsoft Visual Studio Code](https://apps.microsoft.com/detail/xp9khm4bk9fz7q), and idealy a dissasembler.
+2. Install tools like [DnSpy 6.1.8 .Net Framework](https://github.com/dnSpy/dnSpy/releases/tag/v6.1.8), [Il2CppDumper](https://github.com/Perfare/Il2CppDumper/releases), Tuanjie editor 2022.3, [Microsoft Visual Studio Code](https://apps.microsoft.com/detail/xp9khm4bk9fz7q), and idealy a dissasembler. If you don't have the means of obtaining a disassembler, get [Samboy Coding's Cpp2Il](https://github.com/SamboyCoding/Cpp2IL/tree/development) and download the whole code. Then, run the build.ps1 file in the terminal. Finally, locate the built exe and run it according to its read me.
 3. Put your tools into the buid folder in their own folders.
 4. Create a folder and name it combinemod. This will be your build folder.
 5. Download the [modding tools template](https://github.com/daisyqd-gif/PVZRH-modding-tools/releases) and extract `sourcecode.zip` into your `combinemod` folder.
@@ -189,16 +193,17 @@ C# uses exceptions for exceptional failures; catch them where the mod can recove
 
 ```csharp
 global using BepInEx;
-global using CustomizeLib.BepInEx;
-global using HarmonyLib;
-global using System.Reflection;
-global using UnityEngine;
+global using CustomPlantClass.CustomizeLib;
 global using CustomPlantClass;
 global using CustomPlantClass.Main;
 global using CustomPlantClass.Runtime.Core;
+global using CustomPlantClass.Runtime.Tasks;
+global using CustomPlantClass.Runtime.Core;
+global using HarmonyLib;
+global using System.Reflection;
+global using UnityEngine;
 global using Random = UnityEngine.Random;
 global using System.Threading.Tasks;
-global using CustomPlantClass.Runtime.Tasks;
 
 namespace GatlingPea
 {
@@ -322,75 +327,82 @@ namespace GatlingPea
         protected override bool IsAsyncPF => true;
         protected override async Task SuperShoot_Async()
         {
-            isPF = true;
-            plant.invincible = true;
-            plant.uncrashable = true;
-            plant.anim.SetBool("shooting", true);
-            plant.flashCountDown = 5f;
-            plant.isFlashing = true;
-
-            int total = 90;
-
-            for (int i = 0; i < total; i++)
+            try
             {
-                if (plant == null || plant.IsDestroyed()) return;
-                Vector3 pos = plant.shoot.position;
-                Bullet b = CreateBullet.Instance.SetBullet(
-                    pos.x, pos.y, plant.thePlantRow,
-                    BulletType.Bullet_pea,
-                    BulletMoveWay.MoveRight
-                );
+                isPF = true;
+                plant.invincible = true;
+                plant.uncrashable = true;
+                plant.anim.SetBool("shooting", true);
+                plant.flashCountDown = 5f;
+                plant.isFlashing = true;
 
-                b.Damage = plant.attackDamage;
-                b.fromType = plant.thePlantType;
-                
-                if(plant.thePlantRow < 0)
+                int total = 90;
+
+                for (int i = 0; i < total; i++)
                 {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
+                    if (plant == null || plant.IsDestroyed()) return;
+                    Vector3 pos = plant.shoot.position;
+                    Bullet b = CreateBullet.Instance.SetBullet(
                         pos.x, pos.y, plant.thePlantRow,
                         BulletType.Bullet_pea,
                         BulletMoveWay.MoveRight
                     );
 
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                }
-                else
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow-1,
-                        BulletType.Bullet_pea,
-                        BulletMoveWay.MoveRight_threePeater
-                    );
+                    b.Damage = plant.attackDamage;
+                    b.fromType = plant.thePlantType;
+                    
+                    if(plant.thePlantRow < 0)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x, pos.y, plant.thePlantRow,
+                            BulletType.Bullet_pea,
+                            BulletMoveWay.MoveRight
+                        );
 
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                }
-                
-                if(plant.thePlantRow > plant.board.rowNum - 1)
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow,
-                        BulletType.Bullet_pea,
-                        BulletMoveWay.MoveRight
-                    );
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x, pos.y, plant.thePlantRow-1,
+                            BulletType.Bullet_pea,
+                            BulletMoveWay.MoveRight_threePeater
+                        );
 
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                }
-                else
-                {
-                    Bullet b1 = CreateBullet.Instance.SetBullet(
-                        pos.x, pos.y, plant.thePlantRow+1,
-                        BulletType.Bullet_pea,
-                        BulletMoveWay.MoveRight_threePeater
-                    );
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    
+                    if(plant.thePlantRow > plant.board.rowNum - 1)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x, pos.y, plant.thePlantRow,
+                            BulletType.Bullet_pea,
+                            BulletMoveWay.MoveRight
+                        );
 
-                    b1.Damage = plant.attackDamage;
-                    b1.fromType = plant.thePlantType;
-                }
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x, pos.y, plant.thePlantRow+1,
+                            BulletType.Bullet_pea,
+                            BulletMoveWay.MoveRight_threePeater
+                        );
 
-                await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                        b1.Damage = plant.attackDamage;
+                        b1.fromType = plant.thePlantType;
+                    }
+
+                    await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                }
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
             }
         }
     }
@@ -417,6 +429,8 @@ namespace GatlingPea
 ## F# mod support
 
 ![f#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=Made+with&secondaryLabel=F%23&primaryBGColor=%2331C4F3&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase&primaryIcon=fsharp&primaryIconColor=%23FFFFFF&primaryIconSize=16&primaryIconPosition=left)
+
+![out of order](https://img.shields.io/badge/Out_Of_Order-2f6f9f)
 
 F# mods compile to .NET assemblies and can use the same BepInEx and framework APIs as C# mods. This section assumes you already know a programming language and focuses on project setup and interop.
 
@@ -582,7 +596,7 @@ internal static class ExampleClass_UpdateValue_Patch
 
 - `__instance` is the patched object instance. It is not available when patching a static method.
 - Target method arguments are matched by name. Use `ref` when a prefix or postfix needs to change an argument.
-- `__result` refers to the target method's return value. Use `ref` to change it in a postfix.
+- `__result` refers to the target method's return value. Use `ref` to change it in a postfix or set it in a prefix.
 - Patch methods should be static. Include only the special parameters and original arguments your patch needs.
 - If the target method is overloaded, specify the argument types in the `[HarmonyPatch]` declaration so Harmony can select the intended overload.
 
@@ -648,16 +662,16 @@ Not every managed patch pattern works reliably with IL2CPP. In particular, this 
 
 | Bug | Severity | Fix |
 | :- | :-: | :- |
-| Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Don't |
+| Patching hot virtuals crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Do not do this until the native hook technology is finalized, then use a native hook. |
+| Debuffs can't be registered because doing so will cause game crashes. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | A fix is coming |
 | Exceptions thrown in async state machines will go uncaught and crashes the game. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Wrap all async methods with try/catch blocks |
-| System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | |
+| System.Collections.Immutable can't be resolved. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Reinstall the .NET runtime and remove the game folder. After doing so, reinstall bepinex into the game and replace only basic plugins until the issue is resolved. |
 | F# mods break bepinex. | ![Bug](https://img.shields.io/badge/High-red?style=flat-square) | Locate the f# core runtime and drag it into the bepinex folder |
 | Index out of range exception thrown in the custom levels menu. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Ignore this bug, it doesn't break anyting. |
-| Rogue almanac breaks sometimes. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. Replace those mods with hengming's rogue shooting catalog. |
+| Plant almanac is almost fully broken. | ![Bug](https://img.shields.io/badge/Medium-orange?style=flat-square) | Do not use the almanac normally for a little while until the fix arrives. To navigate to a specific plant's almanac, place it in the Dou Qu Qu I Zombie level and press `c` on it. |
 | Some sniper plants shoot peas instead of sniping zombies. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Change the overriden shoot method from Animshoot_Custom to Shoot_Custom |
 | Some mods are missing from the release. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Those mods are not ready for release. |
-| Mods that use unitask will fail. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Use salmon's or gaoshu's modified il2cppinterop |
-| Custom rogue shooting plants will never appear because of the unlock system. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Delete all rogue shooting mods that don't inject into the almanac. A permanent fix is coming. |
+| Mods that use unitask will fail. | ![Bug](https://img.shields.io/badge/Low-green?style=flat-square) | Use salmon's or gaoshu's modified il2cppinterop. After replacing il2cppinterop, delete the interop folder in the BepInEx folder and run the game again. |
 
 [![Static Badge](https://img.shields.io/badge/Click%20me%20to%20open%20the%20error%20fixes%20repo-green?style=for-the-badge)](https://github.com/daisyqd-gif/PVZRH-Modding-Patches)
 

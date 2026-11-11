@@ -84,7 +84,12 @@ namespace MegaGatlingExpansion
                 {
                     // strip second armor immediately so it matches “gun taken” state
                     if (newZombie.theSecondArmorMaxHealth > 0)
-                        newZombie.TakeDamage(DmgType.Normal, newZombie.theSecondArmorMaxHealth);
+                    {
+                        newZombie.theSecondArmorHealth = 0;
+                        newZombie.theSecondArmorMaxHealth = 0;
+                        newZombie.TakeDamage(1,null,DamageType.Normal);
+                    }
+                        
                 }
 
                 z.Die(1);

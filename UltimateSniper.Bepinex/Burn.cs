@@ -58,7 +58,7 @@ namespace UltimateSniper
             {
                 if (collider == null || collider.IsDestroyed() || collider.gameObject == null || collider.gameObject.IsDestroyed()) continue;
                 if (!collider.gameObject.TryGetComponent<Zombie>(out var zombie) || zombie == null || zombie.IsDestroyed()) continue;
-                zombie.TakeDamage(DmgType.Carred, damage, UltimateMegaGatlingPea.PLANT_ID);
+                zombie.TakeDamage(damage, null, DamageType.NormalAll, UltimateMegaGatlingPea.PLANT_ID);
             }
         }
 

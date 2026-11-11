@@ -113,8 +113,15 @@ namespace CustomPlantClass.Runtime.Tasks
                 WhenDone = whenDone
             });
         }
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary/>
+        public void Update()
+        {
+            if(Plugin.delayType == AllowedDelayTypes.Update)
+            {
+                OnPlayerLoop();
+            }
+        }
+        /// <summary/>
         public void FixedUpdate()
         {
             for (int i = entries.Count - 1; i >= 0; i--)
@@ -145,13 +152,9 @@ namespace CustomPlantClass.Runtime.Tasks
                 entries.RemoveAt(i);
             }
         }
+        /// <summary/>
         public static float prevTime = Time.time;
-        /*
-        public void Update()
-        {
-            OnPlayerLoop();
-        }
-        */
+        /// <summary/>
         public static void OnPlayerLoop()
         {
             float dt = Time.time - prevTime;
@@ -195,7 +198,6 @@ namespace CustomPlantClass.Runtime.Tasks
                 }
             }
         }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
     /// <summary>
     /// Schedules and advances predicate-based waits.
@@ -228,8 +230,15 @@ namespace CustomPlantClass.Runtime.Tasks
         {
             entries.Add(new Entry { awaiter = awaiter, action = action });
         }
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary/>
+        public void Update()
+        {
+            if(Plugin.delayType == AllowedDelayTypes.Update)
+            {
+                OnPlayerLoop();
+            }
+        }
+        /// <summary/>
         public static void OnPlayerLoop()
         {
             for (int i = entries.Count - 1; i >= 0; i--)
@@ -256,6 +265,5 @@ namespace CustomPlantClass.Runtime.Tasks
                 }
             }
         }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

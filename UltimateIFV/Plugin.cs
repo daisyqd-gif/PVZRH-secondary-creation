@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using System;
 global using System.Reflection;
@@ -179,10 +179,10 @@ namespace UltimateIFV
                 });
             }
 
-            CustomCore.RegisterCustomBanMix(DataContainer.PlantId_blover, () => (Lawnf.TravelAdvanced(AdvBuff.EnumValue24) && Lawnf.TravelAdvanced(AdvBuff.EnumValue24)) ||
+            CustomCore.RegisterCustomBanMix(DataContainer.PlantId_blover, () => (Lawnf.TravelAdvanced((AdvBuff)24) && Lawnf.TravelAdvanced((AdvBuff)24)) ||
                 Board.Instance.boardTag.enableAllTravelPlant || Board.Instance.boardTag.isSuperRandom || Board.Instance.boardTag.isUltimateSuperRandom || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
-            CustomCore.RegisterCustomBanMix(DataContainer.PlantId_ironPuff, () => (Lawnf.TravelAdvanced(AdvBuff.EnumValue24) && Lawnf.TravelAdvanced(AdvBuff.EnumValue24)) ||
+            CustomCore.RegisterCustomBanMix(DataContainer.PlantId_ironPuff, () => (Lawnf.TravelAdvanced((AdvBuff)24) && Lawnf.TravelAdvanced((AdvBuff)24)) ||
                 Board.Instance.boardTag.enableAllTravelPlant || Board.Instance.boardTag.isSuperRandom || Board.Instance.boardTag.isUltimateSuperRandom || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
 
@@ -250,13 +250,13 @@ namespace UltimateIFV
         {
             get
             {
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage * 2;
+                if (Lawnf.TravelUltimate((UltiBuff)51)) return _plant.attackDamage * 2;
                 return _plant.attackDamage;
             }
         }
         public override Bullet Shoot_Custom()
         {
-            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)))
+            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(6f)))
             {
                 StartPF();
             }
@@ -349,10 +349,10 @@ namespace UltimateIFV
             bullet.velocity = v;
 
             // 5. Buffs
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue24))
+            if (Lawnf.TravelAdvanced((AdvBuff)24))
                 bullet.Damage *= 3;
 
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue25))
+            if (Lawnf.TravelAdvanced((AdvBuff)25))
                 bullet.Damage *= 3;
         }
     }
@@ -543,7 +543,7 @@ namespace UltimateIFV
         }
     }
 
-    [HarmonyPatch(typeof(TypeData),nameof(TypeData.InitSnowPlants))]
+    [HarmonyPatch(typeof(TypeData),MethodType.StaticConstructor)]
     public static class TypeData_StaticConstructor_Patch
     {
         [HarmonyPostfix]

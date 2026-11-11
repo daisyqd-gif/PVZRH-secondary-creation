@@ -78,12 +78,6 @@
             <param name="thePlantType">The plant type to register.</param>
             <param name="config">The plant's config.</param>
         </member>
-        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomExpertPlant(PlantType,GameLevel.RogueShooting.BaseConfig,System.Int32)">
-            <summary>Reserved overload for registering an expert plant with a cost.</summary>
-            <param name="thePlantType">The plant type to register.</param>
-            <param name="config">The plant's config.</param>
-            <param name="cost">The planned plant cost.</param>
-        </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.RogueConfigs">
             <summary>Maps custom plant types to their Rogue Shooting config data.</summary>
         </member>
@@ -229,16 +223,24 @@
             <summary>Registers the mod's runtime components and IL2CPP config and buff types.</summary>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.MyPluginInfo">
-            <summary>Identifies this plugin to BepInEx.</summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginGuid">
-            <summary>The plugin's unique identifier.</summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginName">
-            <summary>The plugin's display name.</summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginVersion">
-            <summary>The plugin's version.</summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.PlaceHolderConfig">
             <summary>Provides fallback config data for a plant whose Rogue Shooting data is unavailable.</summary>
@@ -650,10 +652,15 @@
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateStarTorch">
             <summary>Configuration identifier for Ultimate Star Torch.</summary>
         </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.JalaGatling">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent">
             <summary>Applies a registered curse and reverses it when its condition is met.</summary>
         </member>
-        <member name="M:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent.Init(CustomizeLib.BepInEx.BuffID,CustomizeLib.BepInEx.BuffID,System.Func{Plant,System.Boolean},System.Action,PlantType)">
+        <member name="M:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent.Init(CustomPlantClass.CustomizeLib.BuffID,CustomPlantClass.CustomizeLib.BuffID,System.Func{Plant,System.Boolean},System.Action,PlantType)">
             <summary>Initializes the curse and its reversal callbacks.</summary>
             <param name="curseBuff">The curse buff to remove when reversed.</param>
             <param name="reversed">The buff granted when the curse is reversed.</param>

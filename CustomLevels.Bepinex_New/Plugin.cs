@@ -1,5 +1,5 @@
 ﻿// Global imports for the entire loader
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using BepInEx;
 global using BepInEx.Unity.IL2CPP;
 global using UnityEngine;

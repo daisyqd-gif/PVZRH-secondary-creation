@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CustomizeLib.BepInEx;
-using CustomizeLib.BepInEx.ExtensionData.Basic;
+using CustomPlantClass.CustomizeLib;
+using CustomPlantClass.CustomizeLib.ExtensionData.Basic;
 using CustomPlantClass.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -188,7 +188,7 @@ namespace FreezingCherry.BepInEx
                 if (zombie.isMindControlled) continue;
                 zombie.SetFreeze(10f);
                 zombie.SetCold(15f);
-                zombie.TakeDamage(DmgType.IceAll, plant.attackDamage * 150, plant.thePlantType);
+                zombie.TakeDamage(plant.attackDamage * 150, plant.ToIDamageMaker(), DamageType.IceAll, plant.thePlantType);
             }
             Vector3 position = plant.axis.position;
             for (int angle = 0; angle < 360; angle += 5)
@@ -302,7 +302,7 @@ namespace FreezingCherry.BepInEx
                     int damage = 7200;
                     if (z.GetAttrTimers().freezeTimer > 0f)
                         damage *= 4;
-                    z.TakeDamage(DmgType.NormalAll, damage, PlantID);
+                    z.TakeDamage(damage, plant.ToIDamageMaker(), DamageType.NormalAll, PlantID);
                 };
                 int column = UnityEngine.Random.Range(0, Board.Instance.columnNum);
                 int row = UnityEngine.Random.Range(0, Board.Instance.rowNum);

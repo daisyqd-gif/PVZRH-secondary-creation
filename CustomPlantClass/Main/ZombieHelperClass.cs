@@ -178,7 +178,7 @@ namespace CustomPlantClass.Main
         }
         internal static void TrySetDTierZombies(Board board, int theWave, int theRound, List<ZombieType> zombieTypes)
         {
-            if (theRound >= 13 && board.boardTag.isRogue && board.boardTag.isTravel || theWave > 80 && board.boardTag.rogueShooting)
+            if (theRound >= 13 && board.boardTag.isTravel || theWave > 80 && board.boardTag.rogueShooting)
             {
                 foreach (var i in DataMgr.Level4Zombies)
                 {

@@ -10,7 +10,7 @@ namespace MegaGatlingExpansion
         public override BulletType GetBulletType_Custom() => BulletType.Bullet_extremeSnowPea;
         public override Bullet Shoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
+            if ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
             {
                 isPF = true;
                 plant.board.boardAction.CreateFreeze(plant.axis.position);
@@ -28,7 +28,7 @@ namespace MegaGatlingExpansion
         public override BulletType GetBulletType_Custom() => BulletProfile.ExtremeFirePea;
         public override Bullet Shoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
+            if ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
             {
                 isPF = true;
                 plant.board.boardAction.CreateFireLine(plant.thePlantRow);
@@ -52,7 +52,7 @@ namespace MegaGatlingExpansion
         public override BulletType GetBulletType_Custom() => BulletType.Bullet_endoSun;
         public override Bullet Shoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
+            if ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp)
             {
                 isPF = true;
                 StartPF();
@@ -136,7 +136,7 @@ namespace MegaGatlingExpansion
         }
         public float GetChance()
         {
-            if (Lawnf.TravelUltimate(UltiBuff.EnumValue50)) return PFChance*3 + plant.magnetCount * 3;
+            if (Lawnf.TravelUltimate((UltiBuff)50)) return PFChance*3 + plant.magnetCount * 3;
             else return PFChance + plant.magnetCount;
         }
         public override string GetTextString() => "充能:" + AttributeCount_Custom + "\n大招概率:" + Mathf.Min(100, GetChance()) + "%";

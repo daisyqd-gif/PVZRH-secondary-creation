@@ -2,8 +2,8 @@
 
 global using BepInEx;
 global using BepInEx.Unity.IL2CPP;
-global using CustomizeLib.BepInEx;
-global using CustomizeLib.BepInEx.ExtensionData.Basic;
+global using CustomPlantClass.CustomizeLib;
+global using CustomPlantClass.CustomizeLib.ExtensionData.Basic;
 global using HarmonyLib;
 global using System;
 global using System.Collections;
@@ -126,7 +126,7 @@ namespace MegaGatlingExpansion
                     MusicAudio=assetBundle.GetAsset<AudioClip>("MD_UB"),
                     LevelSprite=assetBundle.GetAsset<GameObject>("SuperGatlingPreview").GetComponent<SpriteRenderer>().sprite,
                     TravelUnlocks=new(){TravelUnlocks.UltimateGatling},
-                    AdvBuffs=new(){AdvBuff.EnumValue1000,AdvBuff.EnumValue1003,AdvBuff.EnumValue11000},
+                    AdvBuffs=new(){(AdvBuff)1000,(AdvBuff)1003,(AdvBuff)11000},
                     ZombieTypes=new(){ZombieType.PeaShooterZombie,ZombieType.NormalZombie,
                     ZombieType.GatlingPeaZombie,ZombieType.RandomGargantuar, ZombieType.RandomZombie, ZombieType.RandomPlusZombie,
                     ZombieType.SnowGatlingPeaZombie,ZombieType.GatlingFootballZombie, ZombieType.PenguinZombie, ZombieType.ZombieLoonNut,
@@ -146,11 +146,11 @@ namespace MegaGatlingExpansion
             //Plant registration
             {
                 // Base Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, MegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, MegaGatlingPea>(
                     PlantTypeExpand.MegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantType.GatlingPea, (int)PlantType.Peashooter),
                         ((int)PlantType.Peashooter, (int)PlantType.GatlingPea),
                         ((int)PlantType.SplitPea,   (int)PlantType.DoubleShooter),
@@ -167,18 +167,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.MegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantType.GatlingPea, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.GatlingPea),
-                        ((int)PlantType.SplitPea,   (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.SplitPea)
-                    },
-                    1.4f,
-                    0f,
-                    20,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.MegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.MegaGatlingPea, CardLevel.Blue);
@@ -247,11 +236,11 @@ namespace MegaGatlingExpansion
                 );
 
                 // Fire Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, FireMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, FireMegaGatlingPea>(
                     PlantTypeExpand.FireMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperFireGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperFireGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Jalapeno),
                         ((int)PlantType.Jalapeno, PlantTypeExpand.MegaGatlingPea),
 
@@ -278,28 +267,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.FireMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperFireGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperFireGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Jalapeno),
-                        ((int)PlantType.Jalapeno, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.JalaGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.JalaGatling),
-
-                        ((int)PlantType.JalaSplit,   (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.JalaSplit),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.JalaPeashooter),
-                        ((int)PlantType.JalaPeashooter, (int)PlantType.GatlingPea),
-
-                        ((int)PlantType.SplitPea,   (int)PlantType.JalaDoubleshooter),
-                        ((int)PlantType.JalaDoubleshooter, (int)PlantType.SplitPea)
-                    },
-                    1.4f,
-                    0f,
-                    1000,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.FireMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.FireMegaGatlingPea, CardLevel.Blue);
@@ -307,11 +275,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.FireMegaGatlingPea, "初版火辣超级机枪射手", "");
 
                 // Small Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, SmallMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, SmallMegaGatlingPea>(
                     smallID,
                     assetBundle.GetAsset<GameObject>("SuperSmallGatling"),
                     assetBundle.GetAsset<GameObject>("SuperSmallGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantType.SmallPuff, PlantTypeExpand.MegaGatlingPea),
 
                         ((int)PlantType.PeaPuff, (int)PlantType.GatlingPea),
@@ -333,23 +301,7 @@ namespace MegaGatlingExpansion
                     smallID,
                     assetBundle.GetAsset<GameObject>("SkinSuperSmallGatling"),
                     assetBundle.GetAsset<GameObject>("SuperSmallGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantType.SmallPuff, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.PeaPuff, (int)PlantType.GatlingPea),
-
-                        ((int)PlantType.DoublePuff, (int)PlantType.SplitPea),
-
-                        ((int)PlantType.SplitPuff, (int)PlantType.DoubleShooter),
-
-                        ((int)PlantType.GatlingPuff, (int)PlantType.Peashooter),
-                    },
-                    1.4f,
-                    0f,
-                    20,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(smallID);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(smallID, CardLevel.Blue);
@@ -358,11 +310,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(smallID, "初版小喷超级机枪射手", "");
 
                 // Ice Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, IceMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, IceMegaGatlingPea>(
                     PlantTypeExpand.IceMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperSnowGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperSnowGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.IceShroom),
                         ((int)PlantType.IceShroom, PlantTypeExpand.MegaGatlingPea),
 
@@ -389,28 +341,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.IceMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperSnowGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperSnowGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.IceShroom),
-                        ((int)PlantType.IceShroom, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.SnowGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.SnowGatling),
-
-                        ((int)PlantType.SnowSplit,   (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.SnowSplit),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.SnowPeaShooter),
-                        ((int)PlantType.SnowPeaShooter, (int)PlantType.GatlingPea),
-
-                        ((int)PlantType.SplitPea,   (int)PlantType.DoubleSnow),
-                        ((int)PlantType.DoubleSnow, (int)PlantType.SplitPea)
-                    },
-                    1.4f,
-                    0f,
-                    250,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.IceMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.IceMegaGatlingPea, CardLevel.Blue);
@@ -418,11 +349,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.IceMegaGatlingPea, "初版寒冰超级机枪射手", "");
 
                 // Sun Mega Gatling
-                CustomCore.RegisterCustomPlant<PeaSunFlower, SunMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<PeaSunFlower, SunMegaGatlingPea>(
                     PlantTypeExpand.SunMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperSunGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperSunGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.SunFlower),
                         ((int)PlantType.SunFlower, PlantTypeExpand.MegaGatlingPea),
 
@@ -440,30 +371,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.SunMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperSunGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperSunGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.SunFlower),
-                        ((int)PlantType.SunFlower, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.PeaSunFlower, (int)PlantType.GatlingPea),
-                        ((int)PlantType.GatlingPea, (int)PlantType.PeaSunFlower) //only pea sunflower for some reason
-                    },
-                    1.4f,
-                    10f,
-                    20,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.SunMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.SunMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.SunMegaGatlingPea, "初版阳光超级机枪射手", "");
 
                 // Goo Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, GooMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, GooMegaGatlingPea>(
                     PlantTypeExpand.GooMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperPoisonGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperPoisonGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Garlic),
                         ((int)PlantType.Garlic, PlantTypeExpand.MegaGatlingPea),
 
@@ -490,39 +409,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.GooMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperPoisonGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperPoisonGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Garlic),
-                        ((int)PlantType.Garlic, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.GarlicGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.GarlicGatling),
-
-                        ((int)PlantType.GarlicSplit,   (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.GarlicSplit),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.GarlicPea),
-                        ((int)PlantType.GarlicPea, (int)PlantType.GatlingPea),
-
-                        ((int)PlantType.SplitPea,   (int)PlantType.GarlicRepeater),
-                        ((int)PlantType.GarlicRepeater, (int)PlantType.SplitPea)
-                    },
-                    1.4f,
-                    0f,
-                    500,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.GooMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.GooMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.GooMegaGatlingPea, "初版毒液超级机枪射手", "");
 
                 // Lantern Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, LightMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, LightMegaGatlingPea>(
                     lanternID,
                     assetBundle.GetAsset<GameObject>("SuperLanternGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperLanternGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Plantern),
                         ((int)PlantType.Plantern, PlantTypeExpand.MegaGatlingPea),
 
@@ -549,34 +447,13 @@ namespace MegaGatlingExpansion
                     lanternID,
                     assetBundle.GetAsset<GameObject>("SkinSuperLanternGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperLanternGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.Plantern),
-                        ((int)PlantType.Plantern, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.LanternGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.LanternGatling),
-
-                        ((int)PlantType.LanternSplit,   (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.LanternSplit),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.LanternPea),
-                        ((int)PlantType.LanternPea, (int)PlantType.GatlingPea),
-
-                        ((int)PlantType.SplitPea,   (int)PlantType.LanternRepeater),
-                        ((int)PlantType.LanternRepeater, (int)PlantType.SplitPea)
-                    },
-                    1.4f,
-                    0f,
-                    500,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(lanternID);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(lanternID, CardLevel.Blue);
                 CustomCore.TypeMgrExtra.IsSmallRangeLantern.Add(lanternID);
                 CustomCore.AddPlantAlmanacStrings(lanternID, "初版流光超级机枪射手", "");
-                /*CustomCore.RegisterCustomPlantClickEvent(lanternID, (Plant p) =>
+                /*DataMgr.RegisterCustomPlantClickEvent(lanternID, (Plant p) =>
                 {
                     if (p.TryGetComponent<LightMegaGatlingPea>(out var a))
                     {
@@ -592,11 +469,11 @@ namespace MegaGatlingExpansion
                 });
 
                 // Electric Mega Gatling (fixed ID)
-                CustomCore.RegisterCustomPlant<Shooter, ElectricMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, ElectricMegaGatlingPea>(
                     PlantTypeExpand.ElectricMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperElectricGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperElectricGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.ElectricOnion),
                         ((int)PlantType.ElectricOnion, PlantTypeExpand.MegaGatlingPea)
                     },
@@ -611,27 +488,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.ElectricMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperElectricGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperElectricGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.ElectricOnion),
-                        ((int)PlantType.ElectricOnion, PlantTypeExpand.MegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    1000,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.ElectricMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.ElectricMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.ElectricMegaGatlingPea, "初版电能超级机枪射手", "");
 
                 // Primal Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, PrimalMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, PrimalMegaGatlingPea>(
                     PlantTypeExpand.PrimalMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperPrimalGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperPrimalGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.IronPea),
                         ((int)PlantType.IronPea, PlantTypeExpand.MegaGatlingPea)
                     },
@@ -646,27 +514,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.PrimalMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperPrimalGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperPrimalGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.IronPea),
-                        ((int)PlantType.IronPea, PlantTypeExpand.MegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    100,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.PrimalMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.PrimalMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.PrimalMegaGatlingPea, "初版原始超级机枪射手", "");
 
                 // Chrono Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, ChronoMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, ChronoMegaGatlingPea>(
                     PlantTypeExpand.ChronoMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperChronoGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperChronoGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.PortalPea),
                         ((int)PlantType.PortalPea, PlantTypeExpand.MegaGatlingPea)
                     },
@@ -681,16 +540,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.ChronoMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperChronoGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperChronoGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.PortalPea),
-                        ((int)PlantType.PortalPea, PlantTypeExpand.MegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    20,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.ChronoMegaGatlingPea);
                 CustomCore.TypeMgrExtra.IsMagnetPlants.Add(PlantTypeExpand.ChronoMegaGatlingPea);
@@ -698,11 +548,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.ChronoMegaGatlingPea, "初版时空超级机枪射手", "");
 
                 // Doom Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, DoomMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, DoomMegaGatlingPea>(
                     PlantTypeExpand.DoomMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperDoomGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperDoomGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantType.DoomGatling, (int)PlantType.Peashooter),
                         ((int)PlantType.Peashooter, (int)PlantType.DoomGatling),
 
@@ -723,22 +573,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.DoomMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperDoomGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperDoomGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantType.DoomGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.DoomGatling),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.DoomPeashooter),
-                        ((int)PlantType.DoomPeashooter, (int)PlantType.GatlingPea),
-
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.DoomShroom),
-                        ((int)PlantType.DoomShroom, PlantTypeExpand.MegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    1800,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.DoomMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.DoomMegaGatlingPea, CardLevel.Purple);
@@ -750,11 +585,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.DoomMegaGatlingPea, "初版毁灭超级机枪射手", "");
 
                 // Ultimate Doom Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, UltimateDoomMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, UltimateDoomMegaGatlingPea>(
                     PlantTypeExpand.UltimateDoomMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("UltimateSuperDoomGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("UltimateSuperDoomGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         (PlantTypeExpand.DoomMegaGatlingPea, (int)PlantType.DoomShroom),
                         ((int)PlantType.DoomShroom, PlantTypeExpand.DoomMegaGatlingPea),
 
@@ -775,22 +610,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.UltimateDoomMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinUltimateSuperDoomGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("UltimateSuperDoomGatlingPreview"),
-                    new List<(int, int)> {
-                        (PlantTypeExpand.DoomMegaGatlingPea, (int)PlantType.DoomShroom),
-                        ((int)PlantType.DoomShroom, PlantTypeExpand.DoomMegaGatlingPea),
-
-                        ((int)PlantType.DoomGatling, (int)PlantType.DoomPeashooter),
-                        ((int)PlantType.DoomPeashooter, (int)PlantType.DoomGatling),
-
-                        ((int)PlantType.UltimateDoomGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.UltimateDoomGatling)
-                    },
-                    1.4f,
-                    0f,
-                    1800,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.UltimateDoomMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.UltimateDoomMegaGatlingPea, CardLevel.Gold);
@@ -802,11 +622,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.UltimateDoomMegaGatlingPea, "初版余烬毁灭超级机枪射手", "");
 
                 // Regular Cherry Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, RegularCherryMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, RegularCherryMegaGatlingPea>(
                     PlantTypeExpand.RegularCherryMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("RegularSuperCherryGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("RegularSuperCherryGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         (PlantTypeExpand.MegaGatlingPea, (int)PlantType.CherryBomb),
                         ((int)PlantType.CherryBomb, PlantTypeExpand.MegaGatlingPea),
 
@@ -833,39 +653,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.RegularCherryMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinRegularSuperCherryGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("RegularSuperCherryGatlingPreview"),
-                    new List<(int, int)> {
-                        (PlantTypeExpand.MegaGatlingPea, (int)PlantType.CherryBomb),
-                        ((int)PlantType.CherryBomb, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.CherryGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.CherryGatling),
-
-                        ((int)PlantType.CherrySplit, (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.CherrySplit),
-
-                        ((int)PlantType.DoubleCherry, (int)PlantType.SplitPea),
-                        ((int)PlantType.SplitPea, (int)PlantType.DoubleCherry),
-
-                        ((int)PlantType.Cherryshooter, (int)PlantType.GatlingPea),
-                        ((int)PlantType.GatlingPea, (int)PlantType.Cherryshooter)
-                    },
-                    1.4f,
-                    0f,
-                    40,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.RegularCherryMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.RegularCherryMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.RegularCherryMegaGatlingPea, "初版樱桃超级机枪射手", "");
 
                 // Cherry Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, CherryMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, CherryMegaGatlingPea>(
                     PlantTypeExpand.CherryMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperCherryGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperCherryGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantType.UltimateGatling, (int)PlantType.Peashooter),
                         ((int)PlantType.Peashooter, (int)PlantType.UltimateGatling),
 
@@ -883,35 +682,23 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.CherryMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperCherryGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperCherryGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantType.UltimateGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.UltimateGatling),
-
-                        (PlantTypeExpand.RegularCherryMegaGatlingPea, (int)PlantType.SuperCherryShooter),
-                        ((int)PlantType.SuperCherryShooter, PlantTypeExpand.RegularCherryMegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    GameStrategy.SuperCherryDamage,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.CherryMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.CherryMegaGatlingPea, CardLevel.Gold);
                 CustomCore.AddUltimatePlant(PlantTypeExpand.CherryMegaGatlingPea);
-                /*CustomCore.RegisterCustomBanMix(PlantTypeExpand.CherryMegaGatlingPea, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate(UltiBuff.EnumValue2) && Lawnf.TravelUltimate(UltiBuff.EnumValue3)) ||
+                /*CustomCore.RegisterCustomBanMix(PlantTypeExpand.CherryMegaGatlingPea, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate((UltiBuff)2) && Lawnf.TravelUltimate((UltiBuff)3)) ||
                 Board.Instance.boardTag.enableAllTravelPlant || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
                     //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.CherryMegaGatlingPea, "终极樱桃机枪(SP究极樱桃射手)", "");
 
                 // Hypno Cherry Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, HypnoCherryMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, HypnoCherryMegaGatlingPea>(
                     PlantTypeExpand.HypnoMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperHypnoGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperHypnoGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         (PlantTypeExpand.MegaGatlingPea, (int)PlantType.HypnoShroom),
                         ((int)PlantType.HypnoShroom, PlantTypeExpand.MegaGatlingPea),
 
@@ -938,39 +725,18 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.HypnoMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperHypnoGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperHypnoGatlingPreview"),
-                    new List<(int, int)> {
-                        (PlantTypeExpand.MegaGatlingPea, (int)PlantType.HypnoShroom),
-                        ((int)PlantType.HypnoShroom, PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.HypnoGatling, (int)PlantType.Peashooter),
-                        ((int)PlantType.Peashooter, (int)PlantType.HypnoGatling),
-
-                        ((int)PlantType.HypnoSplit, (int)PlantType.DoubleShooter),
-                        ((int)PlantType.DoubleShooter, (int)PlantType.HypnoSplit),
-
-                        ((int)PlantType.HypnoRepeater, (int)PlantType.SplitPea),
-                        ((int)PlantType.SplitPea, (int)PlantType.HypnoRepeater),
-
-                        ((int)PlantType.HypnoPeashooter, (int)PlantType.GatlingPea),
-                        ((int)PlantType.GatlingPea, (int)PlantType.HypnoPeashooter)
-                    },
-                    1.4f,
-                    0f,
-                    40,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.HypnoMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.HypnoMegaGatlingPea, CardLevel.Blue);
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.HypnoMegaGatlingPea, "初版魅惑超级机枪射手", "");
 
                 // Three-lane Mega Gatling
-                CustomCore.RegisterCustomPlant<ThreePeater, ThreeMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<ThreePeater, ThreeMegaGatlingPea>(
                     PlantTypeExpand.ThreeMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.ThreePeater),
                         ((int)PlantType.ThreePeater, (int)PlantTypeExpand.MegaGatlingPea),
 
@@ -988,19 +754,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.ThreeMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperThreeGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperThreeGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int)PlantTypeExpand.MegaGatlingPea, (int)PlantType.ThreePeater),
-                        ((int)PlantType.ThreePeater, (int)PlantTypeExpand.MegaGatlingPea),
-
-                        ((int)PlantType.GatlingPea, (int)PlantType.AllPeater),
-                        ((int)PlantType.AllPeater, (int)PlantType.GatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    210,
-                    300,
-                    5f,
-                    500,
+                    p => {},
                     new List<(BulletType, List<GameObject?>)>
                     {
                         (BulletType.Bullet_pea,new List<GameObject?> {assetBundle.GetAsset<GameObject>("Bullet_pea_super")})
@@ -1011,11 +765,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.ThreeMegaGatlingPea, "初版三线超级机枪射手", "");
 
                 // Wild Mega Gatling
-                CustomCore.RegisterCustomPlant<Shooter, WildMegaGatlingPea>(
+                DataMgr.RegisterCustomPlant<Shooter, WildMegaGatlingPea>(
                     PlantTypeExpand.WildMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperWildGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperWildGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int) PlantTypeExpand.MegaGatlingPea, (int) PlantType.GatlingPea),
                         ((int) PlantType.GatlingPea, (int) PlantTypeExpand.MegaGatlingPea)
                     },
@@ -1030,16 +784,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.WildMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperWildGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperWildGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int) PlantTypeExpand.MegaGatlingPea, (int) PlantType.GatlingPea),
-                        ((int) PlantType.GatlingPea, (int) PlantTypeExpand.MegaGatlingPea)
-                    },
-                    1.4f,
-                    0f,
-                    210,
-                    300,
-                    5f,
-                    500,
+                    p => {},
                     new List<(BulletType, List<GameObject?>)>
                     {
                         (BulletType.Bullet_pea,new List<GameObject?> {assetBundle.GetAsset<GameObject>("Bullet_pea_super")})
@@ -1050,11 +795,11 @@ namespace MegaGatlingExpansion
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.WildMegaGatlingPea, "初版狂野超级机枪射手", "");
 
                 // Wild Mega Gatling
-                CustomCore.RegisterCustomPlant<Plant, StarMegaGating>(
+                DataMgr.RegisterCustomPlant<Plant, StarMegaGating>(
                     PlantTypeExpand.StarMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SuperStarGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperStarGatlingPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int) PlantTypeExpand.MegaGatlingPea, (int) PlantType.StarFruit),
                         ((int) PlantType.StarFruit, (int) PlantTypeExpand.MegaGatlingPea),
                         ((int) PlantType.StarPea, (int) PlantType.GatlingPea),
@@ -1071,18 +816,7 @@ namespace MegaGatlingExpansion
                     PlantTypeExpand.StarMegaGatlingPea,
                     assetBundle.GetAsset<GameObject>("SkinSuperStarGatlingPrefab"),
                     assetBundle.GetAsset<GameObject>("SuperStarGatlingPreview"),
-                    new List<(int, int)> {
-                        ((int) PlantTypeExpand.MegaGatlingPea, (int) PlantType.StarFruit),
-                        ((int) PlantType.StarFruit, (int) PlantTypeExpand.MegaGatlingPea),
-                        ((int) PlantType.StarPea, (int) PlantType.GatlingPea),
-                        ((int) PlantType.GatlingPea, (int) PlantType.StarPea)
-                    },
-                    1.4f,
-                    0f,
-                    20,
-                    300,
-                    5f,
-                    500
+                    p => {}
                 );
                 CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantTypeExpand.StarMegaGatlingPea);
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.StarMegaGatlingPea, CardLevel.Blue);
@@ -1090,11 +824,11 @@ namespace MegaGatlingExpansion
 
 
                 // Cherry Mega Gatling Blover
-                CustomCore.RegisterCustomPlant<UltimateGatlingBlover, UltimateExplodeGatlingBlover>(
+                DataMgr.RegisterCustomPlant<UltimateGatlingBlover, UltimateExplodeGatlingBlover>(
                     PlantTypeExpand.ExplodeGatlingBlover,
                     assetBundle.GetAsset<GameObject>("UltimateGatlingBloverPrefab"),
                     assetBundle.GetAsset<GameObject>("UltimateGatlingBloverPreview"),
-                    new List<(int, int)> {
+                    new List<(ID, ID)> {
                         ((int)PlantTypeExpand.CherryMegaGatlingPea, (int)PlantType.Blover),
                         ((int)PlantType.Blover, (int)PlantTypeExpand.CherryMegaGatlingPea)
                     },
@@ -1110,7 +844,7 @@ namespace MegaGatlingExpansion
                 CustomCore.TypeMgrExtra.LevelPlants.Add(PlantTypeExpand.ExplodeGatlingBlover, CardLevel.Gold);
                 CustomCore.AddUltimatePlant(PlantTypeExpand.ExplodeGatlingBlover);
                 /*
-                CustomCore.RegisterCustomBanMix(PlantTypeExpand.ExplodeGatlingBlover, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate(UltiBuff.EnumValue2) && Lawnf.TravelUltimate(UltiBuff.EnumValue3)) ||
+                CustomCore.RegisterCustomBanMix(PlantTypeExpand.ExplodeGatlingBlover, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate((UltiBuff)2) && Lawnf.TravelUltimate((UltiBuff)3)) ||
                 Utils.EnableTravelPlant() || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
                     //*/

@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using System.Reflection;
 global using UnityEngine;
 global using System.Collections;
@@ -117,7 +117,7 @@ namespace UltimatePortalGatling
         public override string GetTextString() => $"充能 : {counter}";
         public override BulletType GetBulletType()
         {
-            if (counter >= 12 || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && counter >= 6))
+            if (counter >= 12 || (Lawnf.TravelUltimate((UltiBuff)50) && counter >= 6))
             {
                 counter = 0;
                 return Core.BulletType_Portal;
@@ -146,14 +146,14 @@ namespace UltimatePortalGatling
         {
             get
             {
-                if(Lawnf.TravelUltimate(UltiBuff.EnumValue51)) return _plant.attackDamage*2;
+                if(Lawnf.TravelUltimate((UltiBuff)51)) return _plant.attackDamage*2;
                 return _plant.attackDamage;
             }
         }
         public override Bullet Shoot_Custom()
         {
             ApplyPortalAura();
-            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)))
+            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(6f)))
             {
                 StartPF();
             }
@@ -198,11 +198,11 @@ namespace UltimatePortalGatling
             zombie.SetPortaled(1.5f);
             if(!zombie.TryGetEffect<PortalEffect>(EffectType.Portal,out var _)) //deals 1 million damage to immune zombies
             {
-                zombie.TakeDamage(DmgType.MaxDamage,1000000,_bullet.fromType);
+                zombie.TakeDamage(1000000,_bullet.ToIDamageMaker(),DamageType.MaxDamage,_bullet.fromType);
             }
             else
             {
-                zombie.TakeDamage(DmgType.Normal,_bullet.Damage,_bullet.fromType);
+                zombie.TakeDamage(_bullet.Damage,_bullet.ToIDamageMaker(),DamageType.Normal,_bullet.fromType);
             }
             InstanceManager.ParticleManager.SetParticle(ParticleType.ProtalPeaSplat,_bullet.col.bounds.center);
             _bullet.PlaySound(zombie);

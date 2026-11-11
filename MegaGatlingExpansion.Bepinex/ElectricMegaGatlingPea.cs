@@ -25,14 +25,14 @@ namespace MegaGatlingExpansion
                     b.Damage = GetDmg();
                     b.fromType = plant.thePlantType;
                     b.normalSpeed *= 2;
-                    b.transform.Rotate(0,0,UltiBuff.EnumValue51.IsActive() ? 0 : Random.Range(-15,15) );
+                    b.transform.Rotate(0,0,((UltiBuff)51).IsActive() ? 0 : Random.Range(-15,15) );
                     plant.shootingCurse ++;
                     b.GetComponent<ElectricPea>().isPF = true;
                 }
                 SuperEnd();
                 return b;
             }
-            if (((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp) && !((AdvBuff)Plugin.CurseBuff).IsActive())
+            if (((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || plant.starUp) && !((AdvBuff)Plugin.CurseBuff).IsActive())
             {
                 StartPF();
             }

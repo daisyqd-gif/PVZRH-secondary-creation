@@ -29,7 +29,7 @@ namespace MegaGatlingExpansion
         public override string GetTextString() => "充能:" + attr + "\n光能:" + _plant.attributeCount;
         public override Bullet Shoot_Custom()
         {
-            if (!isPF && ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= 3 + _plant.currentLightLevel * 3) || Random.Range(0, 100) <= 1 + _plant.currentLightLevel))
+            if (!isPF && ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= 3 + _plant.currentLightLevel * 3) || Random.Range(0, 100) <= 1 + _plant.currentLightLevel))
             {
                 return Super();
             }
@@ -78,7 +78,7 @@ namespace MegaGatlingExpansion
                 b.fromType = _plant.thePlantType;
                 b.transform.Rotate(0, 0, j * 3);
                 b_curr = b;
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue51)) b.Damage *= 2;
+                if (Lawnf.TravelUltimate((UltiBuff)51)) b.Damage *= 2;
             }
             attr = Math.Min(attr + 1, 3);
             return b_curr;
@@ -183,7 +183,7 @@ namespace MegaGatlingExpansion
                 attrcd = 0.5f;
                 _plant.attributeCount += _plant.currentLightLevel;
                 int max = 1000;
-                int level = Lawnf.TravelUltimateLevel(UltiBuff.EnumValue48);
+                int level = Lawnf.TravelUltimateLevel((UltiBuff)48);
                 if (level == 1) max = 2000;
                 else if (level == 2) max = 10000;
                 _plant.attributeCount = Mathf.Clamp(_plant.attributeCount, 0, max);
@@ -198,8 +198,10 @@ namespace MegaGatlingExpansion
             if (zombie != null)
             {
                 zombie.TakeDamage(
-                    DmgType.NormalAll,                     // DmgType.Normal
+                                         // DmgType.Normal
                     damage,
+                    _plant.Cast<IDamageMaker>(),
+                    DamageType.NormalAll,
                     _plant.thePlantType,   // used for damage attribution
                     false
                 );
@@ -298,11 +300,11 @@ namespace MegaGatlingExpansion
             float attackTimer = 0.1f;
 
             int max = 1000;
-            int level = Lawnf.TravelUltimateLevel(UltiBuff.EnumValue48);
+            int level = Lawnf.TravelUltimateLevel((UltiBuff)48);
             if (level == 1) max = 2000;
             else if (level == 2) max = 10000;
 
-            bool chao = Lawnf.TravelAdvanced(AdvBuff.EnumValue3007);
+            bool chao = Lawnf.TravelAdvanced((AdvBuff)3007);
 
             while (true)
             {
@@ -352,7 +354,7 @@ namespace MegaGatlingExpansion
                     }
 
                     // TravelUltimate(0x31) bonus
-                    if (Lawnf.TravelUltimate(UltiBuff.EnumValue49))
+                    if (Lawnf.TravelUltimate((UltiBuff)49))
                     {
                         if (plant.attributeCount < 999)
                             charge += charge * 3f;
@@ -530,7 +532,7 @@ namespace MegaGatlingExpansion
 
             int front1 = _plant.thePlantColumn + 1;
             if (plant.thePlantColumn <= front1) return false;
-            if (Lawnf.TravelAdvanced(AdvBuff.EnumValue3007) && plant.thePlantType == PlantType.UltimatePlantern) return true;
+            if (Lawnf.TravelAdvanced((AdvBuff)3007) && plant.thePlantType == PlantType.UltimatePlantern) return true;
             return plant.thePlantRow == _plant.thePlantRow;
         }
         public bool CheckZombie(Zombie zombie)

@@ -20,8 +20,8 @@ namespace CustomPlantClass.Runtime.CSharp
         public override void Load()
         {
             Instance = this;
-            var assemblies = Compile.LoadAllScripts();
-            Compile.ExecuteAllScripts(assemblies);
+            var assemblies = Compiler.LoadAllScripts();
+            Compiler.ExecuteAllScripts(assemblies);
         }
     }
     public class MyPluginInfo

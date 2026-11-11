@@ -1,6 +1,6 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
-using CustomizeLib.BepInEx;
+using CustomPlantClass.CustomizeLib;
 using HarmonyLib;
 using System.Reflection;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace UltiFireThree{
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), null);
             BuffID= (AdvBuff)Compatibility.CustomCore_Old.RegisterCustomBuff(
                 "冰火两冲天: The ice and fire effects can now coexist, ultimate winter melon will fire to all zombies in its lane at the same time, and ultimate fire allpeater will cause the portaled effect.",
-                BuffType.AdvancedBuff, ()=>TravelStore.Instance != null && Board.Instance!=null && Lawnf.TravelUltimate(UltiBuff.EnumValue40) && Lawnf.TravelUltimate(UltiBuff.EnumValue41) && Lawnf.TravelAdvanced(AdvBuff.EnumValue9) && Lawnf.TravelAdvanced(AdvBuff.EnumValue8),
+                BuffType.AdvancedBuff, ()=>TravelStore.Instance != null && Board.Instance!=null && Lawnf.TravelUltimate((UltiBuff)40) && Lawnf.TravelUltimate((UltiBuff)41) && Lawnf.TravelAdvanced((AdvBuff)9) && Lawnf.TravelAdvanced((AdvBuff)8),
                 25000,PlantType.EndoFlame,1,default
             );
             Log.LogInfo($"{PluginName} {PluginVersion} loaded.");

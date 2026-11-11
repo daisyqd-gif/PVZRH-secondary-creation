@@ -28,7 +28,7 @@ namespace MegaGatlingExpansion
             try
             {
                 plant.anim.SetBool("shooting", true);
-                if (UltiBuff.EnumValue51.IsActive())
+                if (((UltiBuff)51).IsActive())
                 {
                     plant.flashCountDown = 5f;
                     plant.isFlashing = true;

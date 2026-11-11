@@ -44,7 +44,7 @@ namespace MegaGatlingExpansion
         }
         public override Bullet Shoot_Custom()
         {
-            if ((Lawnf.TravelUltimate(UltiBuff.EnumValue50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || _plant.starUp)
+            if ((Lawnf.TravelUltimate((UltiBuff)50) && Random.Range(0, 100) <= PFChance*3) || Random.Range(0, 100) <= PFChance || _plant.starUp)
             {
                 if(isPF)
                 {

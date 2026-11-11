@@ -30,12 +30,12 @@ namespace UltimateSniper
         }
         public void AttackZombie(Zombie zombie, int damage)
         {
-            if (hitCount >= 12 || (hitCount >= 12 && Lawnf.TravelUltimate(UltiBuff.EnumValue51)) || (plant.starUp && hitCount >= 4) || (plant.starUp && hitCount >= 2 && Lawnf.TravelUltimate(UltiBuff.EnumValue51)))
+            if (hitCount >= 12 || (hitCount >= 12 && Lawnf.TravelUltimate((UltiBuff)51)) || (plant.starUp && hitCount >= 4) || (plant.starUp && hitCount >= 2 && Lawnf.TravelUltimate((UltiBuff)51)))
             {
-                if (Lawnf.TravelUltimate(UltiBuff.EnumValue50)) plant.anim.SetTriggerString("shoot");
+                if (Lawnf.TravelUltimate((UltiBuff)50)) plant.anim.SetTriggerString("shoot");
                 if (zombie.theHealth >= 100000000)
                 {
-                    zombie.TakeDamage(DmgType.Carred, 100000000, plant.thePlantType);
+                    zombie.TakeDamage(100000000, plant.ToIDamageMaker(), DamageType.Carred, plant.thePlantType);
                 }
                 else
                 {

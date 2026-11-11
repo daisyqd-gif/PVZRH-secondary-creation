@@ -5,9 +5,9 @@ namespace MegaGatlingExpansion
         public int counter = 0;
         public override BulletType GetBulletType_Custom()
         {
-            if (counter >= 16 || (counter >= 4 && Lawnf.TravelAdvanced(AdvBuff.EnumValue3)) || Random.Range(0, 100) < 5)
+            if (counter >= 16 || (counter >= 4 && Lawnf.TravelAdvanced((AdvBuff)3)) || Random.Range(0, 100) < 5)
             {
-                if (!Lawnf.TravelAdvanced(AdvBuff.EnumValue2))
+                if (!Lawnf.TravelAdvanced((AdvBuff)2))
                 {
                     plant.thePlantAttackCountDown = 3f;
                 }
@@ -25,9 +25,9 @@ namespace MegaGatlingExpansion
     {
         public override BulletType GetBulletType_Custom()
         {
-            if (counter >= 16 || (counter >= 4 && Lawnf.TravelAdvanced(AdvBuff.EnumValue3)) || Random.Range(0, 100) < 5)
+            if (counter >= 16 || (counter >= 4 && Lawnf.TravelAdvanced((AdvBuff)3)) || Random.Range(0, 100) < 5)
             {
-                if (!Lawnf.TravelAdvanced(AdvBuff.EnumValue2))
+                if (!Lawnf.TravelAdvanced((AdvBuff)2))
                 {
                     plant.thePlantAttackCountDown = 3f;
                 }

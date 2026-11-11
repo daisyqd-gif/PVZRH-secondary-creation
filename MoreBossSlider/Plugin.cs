@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using System.Reflection;
 global using UnityEngine;
 global using CustomPlantClass.Main;

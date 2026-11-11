@@ -82,6 +82,12 @@
             Gets the token associated with this component's lifetime.
             </summary>
         </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.MonobehaviourCancellationToken.Awake">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.CancellationTokenExt.MonobehaviourCancellationToken.OnDestroy">
+            <summary/>
+        </member>
         <member name="T:CustomPlantClass.Runtime.Tasks.PlayerLoopTask">
             <summary>
             Helper for registering events that run on player loop update
@@ -139,6 +145,18 @@
             <param name="awaiter">The delay awaiter to complete.</param>
             <param name="whenDone">The action to invoke after completion.</param>
         </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.Update">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.FixedUpdate">
+            <summary/>
+        </member>
+        <member name="F:CustomPlantClass.Runtime.Tasks.DelayScheduler.prevTime">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.DelayScheduler.OnPlayerLoop">
+            <summary/>
+        </member>
         <member name="T:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler">
             <summary>
             Schedules and advances predicate-based waits.
@@ -156,6 +174,12 @@
             </summary>
             <param name="awaiter">The wait awaiter to check.</param>
             <param name="action">The action to invoke after the wait completes.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler.Update">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Tasks.WaitUntilScheduler.OnPlayerLoop">
+            <summary/>
         </member>
         <member name="T:CustomPlantClass.Runtime.Tasks.Delay">
             <summary>

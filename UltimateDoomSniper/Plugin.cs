@@ -1,5 +1,5 @@
 global using BepInEx;
-global using CustomizeLib.BepInEx;
+global using CustomPlantClass.CustomizeLib;
 global using HarmonyLib;
 global using System;
 global using System.Reflection;
@@ -214,7 +214,7 @@ namespace UltimateDoomSniper
             DataMgr.AddCustomWeakUltimatePlant(PlantID_Sniper2,true);
             
             (_,BaseBuff buffConfig) = RegistryHelper.RegisterCustomQualitativeChangeBuff("死神之力","获得词条：死神之力",PlantID_Sniper2);
-            (_,BaseBuff buffConfig2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("神射手","每一发子弹都会造成爆头伤害",PlantID,() => TravelMgr.Instance.GetNormalBuff(AdvBuff.EnumValue12002));
+            (_,BaseBuff buffConfig2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("神射手","每一发子弹都会造成爆头伤害",PlantID,() => TravelMgr.Instance.GetNormalBuff((AdvBuff)12002));
             BaseBuff buffConfig3 = RegistryHelper.MakeBuffType(new()
             {
                 CustomPlantType = PlantID,

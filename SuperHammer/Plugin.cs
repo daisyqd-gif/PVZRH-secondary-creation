@@ -2,7 +2,7 @@ global using BepInEx;
 global using BepInEx.Unity.IL2CPP;
 global using HarmonyLib;
 global using System.Reflection;
-using CustomizeLib.BepInEx;
+using CustomPlantClass.CustomizeLib;
 using CustomPlantClass;
 using UnityEngine;
 

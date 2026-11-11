@@ -96,7 +96,7 @@ namespace CustomPlantClass.Examples
                     if (hit.collider.TryGetComponent(out Zombie zombie))
                     {
                         var hasEmber = zombie.TryGetEffect<EmberEffect>(EffectType.Ember, out var _);
-                        int finalDamage = hasEmber || Lawnf.TravelAdvanced(AdvBuff.EnumValue12002) ? damage * 6 : damage;
+                        int finalDamage = hasEmber || Lawnf.TravelAdvanced((AdvBuff)12002) ? damage * 6 : damage;
                         AttackEffect(zombie, finalDamage);
                         hitCount++;
                         if (MathHelper.ApproximatelyZero(plant.crazeTimer))
@@ -125,7 +125,7 @@ namespace CustomPlantClass.Examples
         }
         public virtual Zombie AttackEffect(Zombie zombie, int dmg)
         {
-            zombie.TakeDamage(DmgType.NormalAll, dmg, plant.thePlantType);
+            zombie.TakeDamage(dmg, plant.ToIDamageMaker(), DamageType.NormalAll, plant.thePlantType);
             return zombie;
         }
         public virtual void DoomOnZombie(Zombie z) { }

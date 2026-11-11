@@ -10,8 +10,8 @@ namespace CustomPlantClass.Runtime.Core
     {
         static List<T> ToIl2CppList<T>(System.Collections.Generic.IEnumerable<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-
+            ArgumentNullException.ThrowIfNull(source);
+            
             var result = new List<T>();
             foreach (T item in source) result.Add(item);
             return result;
@@ -24,13 +24,13 @@ namespace CustomPlantClass.Runtime.Core
 
         static System.Collections.Generic.IEnumerable<T> GetManagedEnumerable<T>(List<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return Enumerate(source);
         }
 
         static System.Collections.Generic.IEnumerable<T> GetManagedEnumerable<T>(HashSet<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return Enumerate(source);
         }
 
@@ -46,19 +46,20 @@ namespace CustomPlantClass.Runtime.Core
 
         static IEnumerable<T> GetIl2CppEnumerable<T>(List<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Cast<IEnumerable<T>>();
         }
 
         static IEnumerable<T> GetIl2CppEnumerable<T>(HashSet<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Cast<IEnumerable<T>>();
         }
 
         /// <summary>
-        /// Returns the source as an enumerable sequence.
+        /// Returns the input typed as IEnumerable.
         /// </summary>
+        /// <returns>The input sequence typed as IEnumerable.</returns>
         public static IEnumerable<T> AsEnumerable<T>(this List<T> source)
         {
             ArgumentNullException.ThrowIfNull(source);
@@ -66,8 +67,9 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Returns the source as an enumerable sequence.
+        /// Returns the input typed as IEnumerable.
         /// </summary>
+        /// <returns>The input sequence typed as IEnumerable.</returns>
         public static IEnumerable<T> AsEnumerable<T>(this HashSet<T> source)
         {
             ArgumentNullException.ThrowIfNull(source);
@@ -75,80 +77,94 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Creates a new IL2CPP list containing the source elements.
+        /// Creates a List from an IEnumerable.
         /// </summary>
+        /// <returns>A List that contains elements from the input sequence.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> ToList<T>(this IEnumerable<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToList(source);
         }
 
         /// <summary>
-        /// Creates a new IL2CPP list containing the source elements.
+        /// Creates a List from an IEnumerable.
         /// </summary>
+        /// <returns>A List that contains elements from the input sequence.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> ToList<T>(this HashSet<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToList(GetIl2CppEnumerable(source));
         }
 
         /// <summary>
-        /// Creates a new IL2CPP list containing the source elements.
+        /// Creates a List from an IEnumerable.
         /// </summary>
+        /// <returns>A List that contains elements from the input sequence.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> ToList<T>(this List<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToList(GetIl2CppEnumerable(source));
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this HashSet<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(GetIl2CppEnumerable(source));
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements, using the specified equality comparer when provided.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this List<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(GetIl2CppEnumerable(source));
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements, using the specified equality comparer when provided.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(source);
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements, using the specified equality comparer when provided.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this List<T> source, IEqualityComparer<T> comparer)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(GetIl2CppEnumerable(source), comparer);
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements, using the specified equality comparer when provided.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this HashSet<T> source, IEqualityComparer<T> comparer)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(GetIl2CppEnumerable(source), comparer);
         }
 
         /// <summary>
-        /// Creates an IL2CPP hash set from the source elements, using the specified equality comparer when provided.
+        /// Creates a HashSet from an IEnumerable.
         /// </summary>
+        /// <returns>A System.Collections.Generic.HashSet that contains values of type TSource selected from the input sequence.</returns>
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer)
         {
             return Il2CppSystem.Linq.Enumerable.ToHashSet(source, comparer);
         }
 
         /// <summary>
-        /// Filters the source elements based on a predicate.
+        /// Filters a sequence of values based on a predicate.
         /// </summary>
+        /// <returns>An IEnumerable that contains elements from the input sequence that satisfy the condition.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> Where<T>(this List<T> source, Func<T, bool> predicate)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -156,8 +172,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Filters the source elements based on a predicate.
+        /// Filters a sequence of values based on a predicate.
         /// </summary>
+        /// <returns>An IEnumerable that contains elements from the input sequence that satisfy the condition.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> Where<T>(this HashSet<T> source, Func<T, bool> predicate)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -165,8 +183,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Filters the source elements based on a predicate.
+        /// Filters a sequence of values based on a predicate.
         /// </summary>
+        /// <returns>An IEnumerable that contains elements from the input sequence that satisfy the condition.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> Where<T>(this List<T> source, Func<T, int, bool> predicate)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -177,8 +197,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Filters the source elements based on a predicate.
+        /// Filters a sequence of values based on a predicate.
         /// </summary>
+        /// <returns>An IEnumerable that contains elements from the input sequence that satisfy the condition.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<T> Where<T>(this HashSet<T> source, Func<T, int, bool> predicate)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -189,8 +211,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Projects each source element into a new form.
+        /// Projects each element of a sequence into a new form by incorporating the element's index.
         /// </summary>
+        /// <returns>An IEnumerable whose elements are the result of invoking the transform function on each element of source.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<TResult> Select<TSource, TResult>(this List<TSource> source, Func<TSource, TResult> selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -198,8 +222,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Projects each source element into a new form.
+        /// Projects each element of a sequence into a new form by incorporating the element's index.
         /// </summary>
+        /// <returns>An IEnumerable whose elements are the result of invoking the transform function on each element of source.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<TResult> Select<TSource, TResult>(this HashSet<TSource> source, Func<TSource, TResult> selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -207,8 +233,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Projects each source element into a new form.
+        /// Projects each element of a sequence into a new form by incorporating the element's index.
         /// </summary>
+        /// <returns>An IEnumerable whose elements are the result of invoking the transform function on each element of source.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<TResult> Select<TSource, TResult>(this List<TSource> source, Func<TSource, int, TResult> selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -216,8 +244,10 @@ namespace CustomPlantClass.Runtime.Core
         }
 
         /// <summary>
-        /// Projects each source element into a new form.
+        /// Projects each element of a sequence into a new form by incorporating the element's index.
         /// </summary>
+        /// <returns>An IEnumerable whose elements are the result of invoking the transform function on each element of source.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static List<TResult> Select<TSource, TResult>(this HashSet<TSource> source, Func<TSource, int, TResult> selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -263,7 +293,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static bool Any<T>(this List<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count != 0;
         }
 
@@ -272,7 +302,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static bool Any<T>(this HashSet<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count != 0;
         }
 
@@ -317,7 +347,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static int Count<T>(this List<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count;
         }
 
@@ -326,7 +356,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static int Count<T>(this HashSet<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count;
         }
 
@@ -361,7 +391,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static bool Contains<T>(this HashSet<T> source, T value)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Contains(value);
         }
 
@@ -610,7 +640,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static long LongCount<T>(this List<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count;
         }
 
@@ -619,7 +649,7 @@ namespace CustomPlantClass.Runtime.Core
         /// </summary>
         public static long LongCount<T>(this HashSet<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            ArgumentNullException.ThrowIfNull(source);
             return source.Count;
         }
 

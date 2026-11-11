@@ -1,3 +1,4 @@
+using CustomPlantClass.Runtime.Core;
 using CustomPlantClass.Runtime.Tasks;
 
 namespace CustomPlantClass.Examples
@@ -11,10 +12,10 @@ namespace CustomPlantClass.Examples
         {
             return BulletType.Bullet_hypnoPea;
         }
-        public override int AttackDamage => Lawnf.TravelUltimate(UltiBuff.EnumValue51) ? _plant.attackDamage * 2 : _plant.attackDamage;
+        public override int AttackDamage => Lawnf.TravelUltimate((UltiBuff)51) ? _plant.attackDamage * 2 : _plant.attackDamage;
         public override Bullet Shoot_Custom()
         {
-            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate(UltiBuff.EnumValue50) && PlantMgr.GetPercent(6f)))
+            if (PlantMgr.GetPercent(2f) || (Lawnf.TravelUltimate((UltiBuff)50) && PlantMgr.GetPercent(6f)))
             {
                 StartPF();
             }
@@ -45,7 +46,7 @@ namespace CustomPlantClass.Examples
             }
             catch( Exception e)
             {
-                ModLogger.LogError(e.ToString());
+                ModLogger.LogError(e);
             }
         }
         public override void SuperEnd()
