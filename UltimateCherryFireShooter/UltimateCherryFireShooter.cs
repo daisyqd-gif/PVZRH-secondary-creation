@@ -10,7 +10,7 @@ namespace UltimateCherryFireShooter_Remade
     {
         public override void OnSpawn()
         {
-            if (Utils.InGame() && _plant.board != null && _plant != null)
+            if (Tools.InGame() && _plant.board != null && _plant != null)
             {
                 for (int i = 0; i < _plant.board.rowNum; i++)
                 {
@@ -99,7 +99,7 @@ namespace UltimateCherryFireShooter_Remade
         public override Transform FindShoot() => transform.FindChild("Shoot");
         public async override void OnSpawn()
         {
-            if (Utils.InGame() && _plant.board != null && _plant != null)
+            if (Tools.InGame() && _plant.board != null && _plant != null)
             {
                 CreateExplosion();
             }

@@ -41,6 +41,7 @@ namespace CustomPlantClass.CustomizeLib
         {
             public static List<PlantType> BigNut { get; set; } = [];
             public static List<ZombieType> BigZombie { get; set; } = [];
+            public static List<ZombieType> BossZombie { get; set; } = [];
             public static List<PlantType> DoubleBoxPlants { get; set; } = [];
             public static List<ZombieType> EliteZombie { get; set; } = [];
             public static List<ZombieType> DriverZombie { get; set; } = [];
@@ -71,6 +72,130 @@ namespace CustomPlantClass.CustomizeLib
             public static List<ZombieType> WaterZombie { get; set; } = [];
             public static List<PlantType> UncrashablePlants { get; set; } = [];
             public static Dictionary<PlantType, CardLevel> LevelPlants { get; set; } = [];
+        }
+        [Flags]
+        public enum ZombieTypeData
+        {
+            None = 0,
+            IsGargantuarZombie = 1 << 0,
+            IsEliteZombie = 1 << 1,
+            IsDriverZombie = 1 << 2,
+            IsFlyingZombie = 1 << 3,
+            DisableRandomGenerate = 1 << 4,
+            DisableBungiDrop = 1 << 5,
+            UltimateZombie = 1 << 6,
+            UselessHypnoZombie = 1 << 7,
+            IsWaterZombie = 1 << 8,
+            IsBossZombie = 1 << 9
+        }
+        [Flags]
+        public enum PlantTypeData
+        {
+            None = 0,
+            IsFortressNut = 1 << 0,
+            IsTwoTile = 1 << 1,
+            IsFlying = 1 << 2,
+            IsSpikeWeed = 1 << 3,
+            IsCustomPlant = 1 << 4,
+            IsFirePlant = 1 << 5,
+            IsIcePlant = 1 << 6,
+            IsMagneticPlant = 1 << 7,
+            IsWallNut = 1 << 8,
+            IsPlantern = 1 << 9,
+            IsFlowerPot = 1 << 10,
+            IsPotatoMine = 1 << 11,
+            IsPuffShroom = 1 << 12,
+            IsPumpkin = 1 << 13,
+            IsSmallRangeLight = 1 << 14,
+            IsSpecial = 1 << 15,
+            IsSpikeRock = 1 << 16,
+            IsTallNut = 1 << 17,
+            IsTangleKelp = 1 << 18,
+            IsWaterPlant = 1 << 19,
+            IsUmbrella = 1 << 20,
+            IsUncrashable = 1 << 21
+        }
+
+        /// <summary>
+        /// Adds a plant type to the corresponding TypeMgrExtra category lists.
+        /// </summary>
+        /// <param name="plantType">The plant type to register.</param>
+        /// <param name="data">The categories the plant belongs to.</param>
+        public static void RegisterPlantTypeData(PlantType plantType, PlantTypeData data)
+        {
+            if ((data & PlantTypeData.IsFortressNut) != 0 && !TypeMgrExtra.BigNut.Contains(plantType))
+                TypeMgrExtra.BigNut.Add(plantType);
+            if ((data & PlantTypeData.IsTwoTile) != 0 && !TypeMgrExtra.DoubleBoxPlants.Contains(plantType))
+                TypeMgrExtra.DoubleBoxPlants.Add(plantType);
+            if ((data & PlantTypeData.IsFlying) != 0 && !TypeMgrExtra.FlyingPlants.Contains(plantType))
+                TypeMgrExtra.FlyingPlants.Add(plantType);
+            if ((data & PlantTypeData.IsSpikeWeed) != 0 && !TypeMgrExtra.IsCaltrop.Contains(plantType))
+                TypeMgrExtra.IsCaltrop.Add(plantType);
+            if ((data & PlantTypeData.IsCustomPlant) != 0 && !TypeMgrExtra.IsCustomPlant.Contains(plantType))
+                TypeMgrExtra.IsCustomPlant.Add(plantType);
+            if ((data & PlantTypeData.IsFirePlant) != 0 && !TypeMgrExtra.IsFirePlant.Contains(plantType))
+                TypeMgrExtra.IsFirePlant.Add(plantType);
+            if ((data & PlantTypeData.IsIcePlant) != 0 && !TypeMgrExtra.IsIcePlant.Contains(plantType))
+                TypeMgrExtra.IsIcePlant.Add(plantType);
+            if ((data & PlantTypeData.IsMagneticPlant) != 0 && !TypeMgrExtra.IsMagnetPlants.Contains(plantType))
+                TypeMgrExtra.IsMagnetPlants.Add(plantType);
+            if ((data & PlantTypeData.IsWallNut) != 0 && !TypeMgrExtra.IsNut.Contains(plantType))
+                TypeMgrExtra.IsNut.Add(plantType);
+            if ((data & PlantTypeData.IsPlantern) != 0 && !TypeMgrExtra.IsPlantern.Contains(plantType))
+                TypeMgrExtra.IsPlantern.Add(plantType);
+            if ((data & PlantTypeData.IsFlowerPot) != 0 && !TypeMgrExtra.IsPot.Contains(plantType))
+                TypeMgrExtra.IsPot.Add(plantType);
+            if ((data & PlantTypeData.IsPotatoMine) != 0 && !TypeMgrExtra.IsPotatoMine.Contains(plantType))
+                TypeMgrExtra.IsPotatoMine.Add(plantType);
+            if ((data & PlantTypeData.IsPuffShroom) != 0 && !TypeMgrExtra.IsPuff.Contains(plantType))
+                TypeMgrExtra.IsPuff.Add(plantType);
+            if ((data & PlantTypeData.IsPumpkin) != 0 && !TypeMgrExtra.IsPumpkin.Contains(plantType))
+                TypeMgrExtra.IsPumpkin.Add(plantType);
+            if ((data & PlantTypeData.IsSmallRangeLight) != 0 && !TypeMgrExtra.IsSmallRangeLantern.Contains(plantType))
+                TypeMgrExtra.IsSmallRangeLantern.Add(plantType);
+            if ((data & PlantTypeData.IsSpecial) != 0 && !TypeMgrExtra.IsSpecialPlant.Contains(plantType))
+                TypeMgrExtra.IsSpecialPlant.Add(plantType);
+            if ((data & PlantTypeData.IsSpikeRock) != 0 && !TypeMgrExtra.IsSpickRock.Contains(plantType))
+                TypeMgrExtra.IsSpickRock.Add(plantType);
+            if ((data & PlantTypeData.IsTallNut) != 0 && !TypeMgrExtra.IsTallNut.Contains(plantType))
+                TypeMgrExtra.IsTallNut.Add(plantType);
+            if ((data & PlantTypeData.IsTangleKelp) != 0 && !TypeMgrExtra.IsTangkelp.Contains(plantType))
+                TypeMgrExtra.IsTangkelp.Add(plantType);
+            if ((data & PlantTypeData.IsWaterPlant) != 0 && !TypeMgrExtra.IsWaterPlant.Contains(plantType))
+                TypeMgrExtra.IsWaterPlant.Add(plantType);
+            if ((data & PlantTypeData.IsUmbrella) != 0 && !TypeMgrExtra.UmbrellaPlants.Contains(plantType))
+                TypeMgrExtra.UmbrellaPlants.Add(plantType);
+            if ((data & PlantTypeData.IsUncrashable) != 0 && !TypeMgrExtra.UncrashablePlants.Contains(plantType))
+                TypeMgrExtra.UncrashablePlants.Add(plantType);
+        }
+
+        /// <summary>
+        /// Adds a zombie type to the corresponding TypeMgrExtra category lists.
+        /// </summary>
+        /// <param name="zombieType">The zombie type to register.</param>
+        /// <param name="data">The categories the zombie belongs to.</param>
+        public static void RegisterZombieTypeData(ZombieType zombieType, ZombieTypeData data)
+        {
+            if ((data & ZombieTypeData.IsGargantuarZombie) != 0 && !TypeMgrExtra.BigZombie.Contains(zombieType))
+                TypeMgrExtra.BigZombie.Add(zombieType);
+            if ((data & ZombieTypeData.IsEliteZombie) != 0 && !TypeMgrExtra.EliteZombie.Contains(zombieType))
+                TypeMgrExtra.EliteZombie.Add(zombieType);
+            if ((data & ZombieTypeData.IsDriverZombie) != 0 && !TypeMgrExtra.DriverZombie.Contains(zombieType))
+                TypeMgrExtra.DriverZombie.Add(zombieType);
+            if ((data & ZombieTypeData.IsFlyingZombie) != 0 && !TypeMgrExtra.IsAirZombie.Contains(zombieType))
+                TypeMgrExtra.IsAirZombie.Add(zombieType);
+            if ((data & ZombieTypeData.DisableRandomGenerate) != 0 && !TypeMgrExtra.NotRandomZombie.Contains(zombieType))
+                TypeMgrExtra.NotRandomZombie.Add(zombieType);
+            if ((data & ZombieTypeData.DisableBungiDrop) != 0 && !TypeMgrExtra.NotRandomBungiZombie.Contains(zombieType))
+                TypeMgrExtra.NotRandomBungiZombie.Add(zombieType);
+            if ((data & ZombieTypeData.UltimateZombie) != 0 && !TypeMgrExtra.UltimateZombie.Contains(zombieType))
+                TypeMgrExtra.UltimateZombie.Add(zombieType);
+            if ((data & ZombieTypeData.UselessHypnoZombie) != 0 && !TypeMgrExtra.UselessHypnoZombie.Contains(zombieType))
+                TypeMgrExtra.UselessHypnoZombie.Add(zombieType);
+            if ((data & ZombieTypeData.IsWaterZombie) != 0 && !TypeMgrExtra.WaterZombie.Contains(zombieType))
+                TypeMgrExtra.WaterZombie.Add(zombieType);
+            if ((data & ZombieTypeData.IsBossZombie) != 0 && !TypeMgrExtra.BossZombie.Contains(zombieType))
+                TypeMgrExtra.BossZombie.Add(zombieType);
         }
 
         /// <summary>
@@ -697,7 +822,7 @@ namespace CustomPlantClass.CustomizeLib
                 CustomSkinIndex[(PlantType)id] = index;
             }
         }
-
+        
         /// <summary>
         /// 注册自定义植物皮肤
         /// </summary>
@@ -714,7 +839,7 @@ namespace CustomPlantClass.CustomizeLib
         /// <param name="cd">卡槽cd</param>
         /// <param name="sun">阳光</param>
         /// <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
-        public static void RegisterCustomPlantSkin<TBase, TClass>([NotNull] int id, [NotNull] GameObject prefab,
+        public static void RegisterCustomPlantSkin<TBase, TClass>([NotNull] ID id, [NotNull] GameObject prefab,
             [NotNull] GameObject preview,
             List<(int, int)> fusions, float attackInterval, float produceInterval, int attackDamage, int maxHealth,
             float cd, int sun, List<(BulletType, List<GameObject?>)>? bulletSkinList = null)
@@ -804,7 +929,7 @@ namespace CustomPlantClass.CustomizeLib
         /// <param name="cd">卡槽cd</param>
         /// <param name="sun">阳光</param>
         /// <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
-        public static void RegisterCustomPlantSkin<TBase>([NotNull] int id, [NotNull] GameObject prefab,
+        public static void RegisterCustomPlantSkin<TBase>([NotNull] ID id, [NotNull] GameObject prefab,
             [NotNull] GameObject preview,
             List<(int, int)> fusions, float attackInterval, float produceInterval, int attackDamage, int maxHealth,
             float cd, int sun, List<(BulletType, List<GameObject?>)>? bulletSkinList = null)
@@ -885,7 +1010,7 @@ namespace CustomPlantClass.CustomizeLib
         /// <param name="preview">植物预览预制体</param>
         /// <param name="ctor">数据绑定函数</param>
         /// <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
-        public static void RegisterCustomPlantSkin<TBase>([NotNull] int id, [NotNull] GameObject prefab,
+        public static void RegisterCustomPlantSkin<TBase>([NotNull] ID id, [NotNull] GameObject prefab,
             [NotNull] GameObject preview, Action<TBase> ctor, List<(BulletType, List<GameObject?>)>? bulletSkinList = null)
             where TBase : Plant
         {
@@ -938,7 +1063,7 @@ namespace CustomPlantClass.CustomizeLib
         /// <param name="bulletType">皮肤子弹类型</param>
         /// <param name="bullet">皮肤子弹预制体</param>
         /// <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
-        public static void RegisterCustomPlantSkin<TBase, TClass>([NotNull] int id, [NotNull] GameObject prefab,
+        public static void RegisterCustomPlantSkin<TBase, TClass>([NotNull] ID id, [NotNull] GameObject prefab,
             [NotNull] GameObject preview, Action<TBase> ctor, List<(BulletType, List<GameObject?>)>? bulletSkinList = null)
             where TBase : Plant where TClass : MonoBehaviour
         {
@@ -1240,15 +1365,14 @@ namespace CustomPlantClass.CustomizeLib
         /// <param name="cost">开大花费</param>
         /// <param name="skill">要运行的大招函数</param>
         /// <param name="defaultCost">默认开大花费</param>
-        public static void RegisterSuperSkill([NotNull] int id, [NotNull] Func<Plant, int> cost,
+        public static void RegisterSuperSkill([NotNull] ID id, [NotNull] Func<Plant, int> cost,
             [NotNull] Action<Plant> skill, [NotNull] int defaultCost = 1000) => SuperSkills.Add((PlantType)id, (cost, skill, defaultCost));
-
 
         /// <summary>
         /// 添加自定义究极植物
         /// </summary>
         /// <param name="plantType">要设为究极植物的植物类型</param>
-        public static void AddUltimatePlant([NotNull] PlantType plantType) => CustomUltimatePlants.Add(plantType);
+        public static void AddUltimatePlant([NotNull] ID plantType) => CustomUltimatePlants.Add(plantType);
         /*
         /// <summary>
         /// 注册自定义强究植物

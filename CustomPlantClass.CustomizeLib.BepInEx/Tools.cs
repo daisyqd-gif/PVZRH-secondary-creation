@@ -44,6 +44,109 @@ namespace CustomPlantClass.CustomizeLib
             }
             Harmony.CreateAndPatchAll(assembly);
         }
+        public static bool InGame() => GameAPP.theGameStatus is GameStatus.InGame or GameStatus.Pause;
+
+        public static bool IsCustomLevel(out CustomLevelData levelData)
+        {
+            if (GameAPP.theBoardType == CustomLevelType)
+            {
+                levelData = CustomCore.CustomLevels[GameAPP.theBoardLevel];
+                return true;
+            }
+            else
+            {
+                levelData = default;
+                return false;
+            }
+        }
+
+        public static bool IsGameRunning() => GameAPP.theGameStatus is GameStatus.InGame;
+
+        public static bool IsNotNull<T>(this T obj) => obj is not null;
+
+        public static int ToInt(this bool value) => value ? 1 : 0;
+
+        public static LevelType CustomLevelType => (LevelType)66;
+
+        /// <summary>
+        /// 获取卡牌GameObject
+        /// </summary>
+        /// <returns>卡牌GameObject，Child 0:PacketBg背景图，Child 1：默认展示，1有CardUI组件</returns>
+        public static GameObject? GetColorfulCardGameObject()
+        {
+            if (Board.Instance is not null && !Board.Instance.boardTag.isIZ)
+            {
+                GameObject? MyCard = null;
+                MyCard = InGameUI.Instance.SeedBank.transform.parent.FindChild("Bottom/SeedLibrary/Grid/CardPagesContainer/ColorCards/SampleGrid(Clone)").GetChild(0).gameObject;
+                return MyCard;
+            }
+            else if (Board.Instance is not null && Board.Instance.boardTag.isIZ)
+            {
+
+                GameObject? MyCard = null;
+                MyCard = IZBottomMenu.Instance.plantLibrary.transform.FindChild("Grid/ColorfulCards/Page1/CattailGirl").gameObject;
+                return MyCard;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取卡牌GameObject
+        /// </summary>
+        /// <returns>卡牌GameObject，Child 0:PacketBg背景图，Child 1:二次选卡，Child 2：默认展示，12均有CardUI组件</returns>
+        public static GameObject? GetNormalCardGameObject()
+        {
+            if (Board.Instance is not null && !Board.Instance.boardTag.isIZ)
+            {
+                GameObject? MyCard = null;
+                MyCard = InGameUI.Instance.SeedBank.transform.parent.FindChild("Bottom/SeedLibrary/Grid/CardPagesContainer/NormalCards/SampleGrid(Clone)").GetChild(0).gameObject;
+                return MyCard;
+            }
+            else if (Board.Instance is not null && Board.Instance.boardTag.isIZ)
+            {
+                GameObject? MyCard = null;
+                MyCard = IZBottomMenu.Instance.plantLibrary.transform.FindChild("Grid/Main/Page1/PeaShooter").gameObject;
+                return MyCard;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取彩卡选卡父级
+        /// </summary>
+        /// <returns></returns>
+        public static Transform? GetColorfulCardParent()
+        {
+            if (Board.Instance != null && !Board.Instance.boardTag.isIZ)
+            {
+                return InGameUI.Instance.SeedBank.transform.parent.FindChild("Bottom/SeedLibrary/Grid/CardPagesContainer/ColorCards/SampleGrid(Clone)");
+            }
+            else if (Board.Instance != null && Board.Instance.boardTag.isIZ)
+            {
+                return IZBottomMenu.Instance.plantLibrary.transform.FindChild("Grid/ColorfulCards/Page1");
+            }
+            return null;
+        }
+
+        public static Transform? GetNormalCardParent()
+        {
+            if (Board.Instance != null && Board.Instance.boardTag.isTowerDefence)
+            {
+                return InGameUI.Instance.SeedBank.transform.parent.FindChild("Bottom/SeedLibrary/Grid/CardPagesContainer/TowerCards/Page1");
+            }
+            else if (Board.Instance != null && !Board.Instance.boardTag.isIZ)
+            {
+                return InGameUI.Instance.SeedBank.transform.parent.FindChild("Bottom/SeedLibrary/Grid/CardPagesContainer/NormalCards/SampleGrid(Clone)");
+            }
+            else if (Board.Instance != null && Board.Instance.boardTag.isIZ)
+            {
+                return IZBottomMenu.Instance.plantLibrary.transform.FindChild("Grid/Pages/Page1");
+            }
+            return null;
+        }
+
+        public static bool IsCheat() => GameAPP.developerMode;
+        public static bool EnableTravelPlant() => Board.Instance.boardTag.enableAllTravelPlant || Board.Instance.boardTag.isSuperRandom || Board.Instance.boardTag.isUltimateSuperRandom || IsCheat() || Board.Instance.boardTag.isTravel;
     }
     public struct ID
     {
@@ -56,6 +159,7 @@ namespace CustomPlantClass.CustomizeLib
         public ID(CherryBombType id) { this.id = (int)id; }
         public ID(MusicType id) { this.id = (int)id; }
         public ID(EffectType id) { this.id = (int)id; }
+        public ID(GridItemType id) {  this.id = (int)id; }
         public ID(Zombie.ZombieColor id) {  this.id = (int)id; }
         public static implicit operator int(ID id) => id.id;
         public static implicit operator PlantType(ID id) => (PlantType)id.id;
@@ -65,6 +169,7 @@ namespace CustomPlantClass.CustomizeLib
         public static implicit operator CherryBombType(ID id) => (CherryBombType)id.id;
         public static implicit operator MusicType(ID id) => (MusicType)id.id;
         public static implicit operator EffectType(ID id) => (EffectType)id.id;
+        public static implicit operator GridItemType(ID id) => (GridItemType)id.id;
         public static implicit operator Zombie.ZombieColor(ID id) => (Zombie.ZombieColor)id.id;
 
         public static implicit operator ID(int i) => new ID(i);
@@ -75,6 +180,7 @@ namespace CustomPlantClass.CustomizeLib
         public static implicit operator ID(CherryBombType id) => new ID(id);
         public static implicit operator ID(MusicType id) => new ID(id);
         public static implicit operator ID(EffectType id) => new ID(id);
+        public static implicit operator ID(GridItemType id) => new ID(id);
         public static implicit operator ID(Zombie.ZombieColor id) => new ID(id);
 
         public override string ToString()
@@ -104,6 +210,31 @@ namespace CustomPlantClass.CustomizeLib
         public static implicit operator BuffID(int id) => new BuffID(id);
     }
 
+    public struct EnumContainer<T> where T : Enum
+    {
+        public int id = 0;
+        public EnumContainer(int id) { this.id = id; }
+        public EnumContainer(T id) { this.id = Convert.ToInt32(id); }
+        public EnumContainer(Enum id) { this.id = Convert.ToInt32(id); }
+        public static implicit operator T(EnumContainer<T> id) => (T)Enum.ToObject(typeof(T), id.id);
+        public static implicit operator int(EnumContainer<T> id) => id.id;
+        public static implicit operator EnumContainer<T>(T i) => new EnumContainer<T>(i);
+        public static implicit operator EnumContainer<T>(Enum i) => new EnumContainer<T>(i);
+        public static implicit operator EnumContainer<T>(int i) => new EnumContainer<T>(i);
+
+        public TEnum Cast<TEnum>() where TEnum : Enum =>
+            (TEnum)Enum.ToObject(typeof(TEnum), id);
+
+        public static EnumContainer<T> Cast<TValue>(TValue value) =>
+            new EnumContainer<T>((int)(dynamic)value);
+
+        public T Unbox()
+        {
+            return (T)Enum.ToObject(typeof(T), id);
+        }
+    }
+
+    [Obsolete("Use RegisteredPlugin or ModPlugin instead")]
     public class CorePlugin : BasePlugin
     {
         public static List<Action> OnGameInitAction = new();

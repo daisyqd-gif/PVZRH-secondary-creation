@@ -1,0 +1,673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomPlantClass.RogueShootingManager</name>
+    </assembly>
+    <members>
+        <member name="T:CustomPlantClass.RogueShootingManager.Roles">
+            <summary>Classifies a plant by its role in a Rogue Shooting run.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.Roles.Attacker">
+            <summary>Deals damage to enemies.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.Roles.Supporter">
+            <summary>Provides utility or support.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.Roles.Defense">
+            <summary>Protects the player's defenses.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.Roles.Insta">
+            <summary>Provides an explosive or one-use effect.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.Roles.Producer">
+            <summary>Produces resources.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.ShootingBuffType">
+            <summary>Classifies a buff by its source or upgrade category.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.UniqueUpgrade">
+            <summary>A plant-specific upgrade.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.QualitativeChange">
+            <summary>A qualitative change to a plant.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.SuperUpgrade">
+            <summary>A super-upgrade for a plant.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.General">
+            <summary>A general-purpose buff.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.CurseBuff">
+            <summary>A curse effect.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingBuffType.MissionBuff">
+            <summary>A buff offered as part of a mission or trial.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.RegistryHelper">
+            <summary>Registers custom plants and buffs for Rogue Shooting.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.Specs">
+            <summary>Maps generated config identifiers to their custom config data.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.Buffs">
+            <summary>Maps generated buff identifiers to their custom buff data.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.RogueBuffs">
+            <summary>Maps plant types to their registered custom Rogue Shooting buffs.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.MakeConfigType(CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig)">
+            <summary>Generates and registers an IL2CPP config type for a custom plant.</summary>
+            <param name="spec">The config data used by the generated type.</param>
+            <returns>An instance of the generated plant config.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.MakeBuffType(CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff)">
+            <summary>Generates and registers an IL2CPP buff type for a custom buff.</summary>
+            <param name="buff">The buff data used by the generated type.</param>
+            <returns>An instance of the generated buff.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.RegisterBuffsForPlant(PlantType,System.Boolean,System.Boolean,System.Boolean,CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff[])">
+            <summary>Registers custom buffs and selected standard upgrades for a plant.</summary>
+            <param name="thePlantType">The plant that receives the buffs.</param>
+            <param name="damageBuff">Whether to add the standard damage upgrade.</param>
+            <param name="speedBuff">Whether to add the standard speed upgrade.</param>
+            <param name="starUp">Whether to add the standard star upgrade.</param>
+            <param name="buffs">Additional custom buffs to register.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomExpertPlant(PlantType,GameLevel.RogueShooting.BaseConfig)">
+            <summary>Registers a plant as an expert plant and adds its config.</summary>
+            <param name="thePlantType">The plant type to register.</param>
+            <param name="config">The plant's config.</param>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.RogueConfigs">
+            <summary>Maps custom plant types to their Rogue Shooting config data.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomRogueShootingPlant(PlantType,GameLevel.RogueShooting.BaseConfig)">
+            <summary>Registers a custom plant config for Rogue Shooting.</summary>
+            <param name="thePlantType">The plant type to register.</param>
+            <param name="config">The plant's config.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomRogueShootingPlant(PlantType,GameLevel.RogueShooting.BaseConfig,System.Int32)">
+            <summary>Reserved overload for registering a custom plant with a cost.</summary>
+            <param name="thePlantType">The plant type to register.</param>
+            <param name="config">The plant's config.</param>
+            <param name="cost">The planned plant cost.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomBaseRogueShootingPlant(PlantType,GameLevel.RogueShooting.BaseConfig)">
+            <summary>Registers a custom plant config as a base plant in Rogue Shooting.</summary>
+            <param name="thePlantType">The plant type to register.</param>
+            <param name="config">The plant's config.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomBaseRogueShootingPlant(PlantType,GameLevel.RogueShooting.BaseConfig,System.Int32)">
+            <summary>Reserved overload for registering a base plant with a cost.</summary>
+            <param name="thePlantType">The plant type to register.</param>
+            <param name="config">The plant's config.</param>
+            <param name="cost">The planned plant cost.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomEvolutionPathway(PlantType,PlantType[])">
+            <summary>
+            Placeholder
+            Please register the upgrade buffs separately.
+            </summary>
+            <param name="thePlantType">The plant type of the starting plant</param>
+            <param name="order"> Ascending from base->intermediate->final</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomBattleBuff(System.String,System.String,System.Int32,System.Object)">
+            <summary>Reserved method for registering a custom battle buff.</summary>
+            <param name="name">The buff name.</param>
+            <param name="desc">The buff description.</param>
+            <param name="cost">The buff cost.</param>
+            <param name="unknown_type">Reserved data whose type is not yet defined.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.AddCustomCurseMissionBuff(System.String,System.String,System.Action{GameLevel.RogueShooting.ShootingManager})">
+            <summary>Registers a mission buff that may be offered as a trial.</summary>
+            <param name="name_formatted">The buff name before its trial prefix is applied.</param>
+            <param name="desc">The buff description.</param>
+            <param name="onGet">Runs when the trial buff is acquired.</param>
+            <returns>The registered advanced buff identifier.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.InjectUpgradeBuff(CustomPlantClass.RogueShootingManager.RSConfigType,PlantType)">
+            <summary>Injects an upgrade buff that transforms a configured base plant.</summary>
+            <param name="BasePlant">The base plant's config identifier.</param>
+            <param name="resultPlant">The plant type produced by the upgrade.</param>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.QualitativeChangeText">
+            <summary>The title prefix used for qualitative-change buffs.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.CurseText">
+            <summary>The title prefix used for curse buffs.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RegistryHelper.ReversedCurseText">
+            <summary>The title prefix used for reversed-curse buffs.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.RegisterCustomCurseBuff(System.String,System.String,System.String,PlantType,System.Func{Plant,System.Boolean},System.Action,System.Action)">
+            <summary>Registers paired curse and reversal buffs for a plant.</summary>
+            <param name="name">The shared name of the curse and its reversal.</param>
+            <param name="curseDesc">The curse description.</param>
+            <param name="reversedDesc">The description shown after reversal.</param>
+            <param name="thePlantType">The plant associated with the curse.</param>
+            <param name="CanReverse">Determines when the curse can be reversed.</param>
+            <param name="OnCurse">Optionally runs when the curse is acquired.</param>
+            <param name="OnReverseEvent">Optionally runs when the curse is reversed.</param>
+            <returns>The curse identifier, reversal identifier, and generated buff config.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.GetStringFromRole(CustomPlantClass.RogueShootingManager.Roles)">
+            <summary>Gets the display label associated with a plant role.</summary>
+            <param name="role">The role to format.</param>
+            <returns>The localized role label.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.FormatBuffTitle(CustomPlantClass.RogueShootingManager.ShootingBuffType,System.String)">
+            <summary>Prefixes a buff title according to its category.</summary>
+            <param name="buffType">The category that determines the prefix.</param>
+            <param name="Title">The title to format.</param>
+            <returns>The title with its category prefix.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RegistryHelper.RegisterCustomQualitativeChangeBuff(System.String,System.String,PlantType,System.Action)">
+            <summary>Registers a qualitative-change buff for a plant.</summary>
+            <param name="name">The buff name.</param>
+            <param name="desc">The buff description.</param>
+            <param name="thePlantType">The plant associated with the buff.</param>
+            <param name="OnGetBuff">Optionally runs when the buff is acquired.</param>
+            <returns>The advanced buff identifier and generated buff config.</returns>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.ShootingManagerPatch">
+            <summary>Integrates registered custom plants and trial buffs with the shooting manager.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.Awake_Postfix(GameLevel.RogueShooting.ShootingManager)">
+            <summary>Adds registered custom plants after the shooting manager awakens.</summary>
+            <param name="__instance">The shooting manager being initialized.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.StartAwake_Postfix(GameLevel.RogueShooting.ShootingManager)">
+            <summary>Adds registered custom plants after the shooting manager starts.</summary>
+            <param name="__instance">The shooting manager being initialized.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.RegisterMissionBuff_Postfix(GameLevel.RogueShooting.ShootingManager,MultipleChoiceMenu@)">
+            <summary>Adds an eligible custom trial buff to the mission selection menu.</summary>
+            <param name="__instance">The shooting manager for the current run.</param>
+            <param name="menu">The mission buff menu to update.</param>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch">
+            <summary>Temporarily filters custom plant configs while building the game almanac.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.LastGoodDir">
+            <summary>Gets or sets the most recently built almanac directory.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Build_Prefix(GameLevel.RogueShooting.ShootingAlmanacDirectory@)">
+            <summary>Temporarily removes unlisted custom configs before the catalog is built.</summary>
+            <param name="__result">Receives a fallback directory if the original build fails.</param>
+            <returns><see langword="true"/> to run the original build.</returns>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Build_Postfix(GameLevel.RogueShooting.ShootingAlmanacDirectory)">
+            <summary>Restores temporarily removed configs and injects registered plants into the result.</summary>
+            <param name="__result">The directory produced by the catalog build.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Finalizer(System.Exception,GameLevel.RogueShooting.ShootingAlmanacDirectory@)">
+            <summary>Recovers from an invalid-operation build failure using the last valid directory.</summary>
+            <param name="__exception">The exception thrown by the original build, if any.</param>
+            <param name="__result">The directory produced by the build.</param>
+            <returns>The unhandled exception, or <see langword="null"/> when the failure is recovered.</returns>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector">
+            <summary>Injects custom plants into a built shooting almanac directory.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector.ResetInjected">
+            <summary>Clears the set of almanac directories already injected.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector.Inject(GameLevel.RogueShooting.ShootingAlmanacDirectory)">
+            <summary>Adds registered custom plant entries to an almanac directory once.</summary>
+            <param name="source">The directory to update.</param>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.Plugin">
+            <summary>Initializes the Rogue Shooting expansion and its IL2CPP types.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.Plugin.InitializeMod">
+            <summary>Registers the mod's runtime components and IL2CPP config and buff types.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.MyPluginInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginGuid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.MyPluginInfo.PluginVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.PlaceHolderConfig">
+            <summary>Provides fallback config data for a plant whose Rogue Shooting data is unavailable.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.#ctor(System.IntPtr)">
+            <summary>Wraps an existing IL2CPP config pointer.</summary>
+            <param name="ptr">Pointer to the native config.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.#ctor(PlantType)">
+            <summary>Creates a placeholder config for a plant type.</summary>
+            <param name="thePlantType">The plant represented by the config.</param>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.PlantType">
+            <summary>Gets the plant represented by this config.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.Buffs">
+            <summary>Gets the buffs available to the placeholder plant.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.ReinforcePlant(Plant)">
+            <summary>Reinforces the plant; the placeholder config applies no changes.</summary>
+            <param name="plant">The plant to reinforce.</param>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.PlaceHolderConfig.Role">
+            <summary>Gets the fallback role label for the placeholder config.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.RogueClass_BUFF">
+            <summary>Adapts custom Rogue Shooting buff data to the game's buff API.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.#ctor(System.IntPtr)">
+            <summary>Wraps an existing IL2CPP buff pointer.</summary>
+            <param name="ptr">Pointer to the native buff.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.#ctor(CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff)">
+            <summary>Creates a game buff from custom Rogue Shooting buff data.</summary>
+            <param name="buff">The custom buff definition.</param>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.buff">
+            <summary>Gets the custom definition represented by this buff.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.ShowType">
+            <summary>Gets the plant type associated with this buff.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.Title">
+            <summary>Gets the buff's display title.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.Description">
+            <summary>Gets the buff's display description.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.OnGet">
+            <summary>Invokes the custom callback when the buff is acquired.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.MaxCount">
+            <summary>Gets the maximum number of times this buff can be acquired.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.AppearWeight">
+            <summary>Gets the relative probability that this buff appears.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.GetRandomQuality">
+            <summary>Chooses a buff quality using the current run's luck.</summary>
+            <returns>The randomly selected buff quality.</returns>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.randomquality">
+            <summary>Gets the generated quality used for general buffs.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_BUFF.Rarity">
+            <summary>Gets the quality associated with this buff category.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG">
+            <summary>Adapts custom Rogue Shooting config data to the game's config API.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.#ctor(System.IntPtr)">
+            <summary>Wraps an existing IL2CPP config pointer.</summary>
+            <param name="ptr">Pointer to the native config.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.#ctor(CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig)">
+            <summary>Creates a game config from custom Rogue Shooting config data.</summary>
+            <param name="cfg">The custom plant config definition.</param>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.config">
+            <summary>Gets the custom config data represented by this config.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.PlantType">
+            <summary>Gets the plant type represented by this config.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.Buffs">
+            <summary>Gets the custom buffs available to this plant.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.ReinforcePlant(Plant)">
+            <summary>Invokes the custom reinforcement callback for the plant.</summary>
+            <param name="plant">The plant to reinforce.</param>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.RogueClass_CONFIG.Role">
+            <summary>Gets the custom role label for this plant.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogFixer">
+            <summary>Validates the almanac catalog and falls back to its last valid directory.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogFixer.Build_Prefix(GameLevel.RogueShooting.ShootingAlmanacDirectory@)">
+            <summary>Allows the original catalog build only when its referenced configs exist.</summary>
+            <param name="__result">Receives the last valid directory when the original build is skipped.</param>
+            <returns><see langword="true"/> to run the original build; otherwise, uses the cached directory.</returns>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.RSConfigType">
+            <summary>Identifies a built-in plant configuration in Rogue Shooting.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateGatling">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHelmetGatling">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateLanternSplit">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.DoomSniper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.FireSniper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateJalaGatling">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigSniper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.MagicSnowPea2">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BambooDragon">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateChomper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateTallNut">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.MagnetNut">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ThreeMine">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.DoomChomper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigChomper">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SnowGatlingPuff">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.IFVIronPuff">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateFume">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimatePoisonFume">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateGloom">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperGatlingGloom">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.HypnoEmperor">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHypnoDoom">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHypno">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateDoomScared">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CattailLour">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.NuclearSquash">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperThreePeater">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigGatling">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ObsidianSpike">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ObsidianWallNut">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCactus">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateStar">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.AbyssSwordStar">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCabbage">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCabbageCannon">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateMelon">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSpring">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.GoldMelon">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateWinterMelon">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCorn">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.LaserUmbrella">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBamboo">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSpruce">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BlackHoleTorch">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSniperGatling">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateMinigun">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperThreePeater_sp">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBlover">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.EmeraleBlover">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateStarTorch">
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent">
+            <summary>Applies a registered curse and reverses it when its condition is met.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent.Init(CustomPlantClass.CustomizeLib.BuffID,CustomPlantClass.CustomizeLib.BuffID,System.Func{Plant,System.Boolean},System.Action,PlantType)">
+            <summary>Initializes the curse and its reversal callbacks.</summary>
+            <param name="curseBuff">The curse buff to remove when reversed.</param>
+            <param name="reversed">The buff granted when the curse is reversed.</param>
+            <param name="canreverse">Determines whether the plant can reverse the curse.</param>
+            <param name="onreverse">Runs after the curse is reversed.</param>
+            <param name="thePlantType">The plant type monitored for reversal.</param>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent.FixedUpdate">
+            <summary>Checks whether the configured plant has reversed its curse.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.StandardNames">
+            <summary>Reserved name keys for standard Rogue Shooting text.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.StandardNames.NameDict">
+            <summary>Maps standard text keys to their corresponding display strings.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.StandardNames.Name">
+            <summary>Identifies a standard Rogue Shooting text entry.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.StandardNames.Name.Upgrade">
+            <summary>The standard upgrade title.</summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.StandardNames.Name.QualitativeChange">
+            <summary>The qualitative-change title.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig">
+            <summary>Defines the custom plant data used to create a Rogue Shooting config.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig.#ctor">
+            <summary>Defines the custom plant data used to create a Rogue Shooting config.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig.CustomPlantType">
+            <summary>Gets or sets the plant represented by this config.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig.CustomBuffs">
+            <summary>Gets or sets a factory for this plant's buffs.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig.CustomReinforcePlant">
+            <summary>Gets or sets the callback that reinforces this plant.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingConfig.CustomRole">
+            <summary>Gets or sets the plant's displayed role.</summary>
+        </member>
+        <member name="T:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff">
+            <summary>Defines a custom buff shown for a plant in Rogue Shooting.</summary>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.#ctor">
+            <summary>Defines a custom buff shown for a plant in Rogue Shooting.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.CustomPlantType">
+            <summary>Gets or sets the plant associated with this buff.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.CustomTitle">
+            <summary>Gets or sets the buff title.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.CustomDescription">
+            <summary>Gets or sets the buff description.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.CustomBuffType">
+            <summary>Gets or sets the category that controls the buff's presentation.</summary>
+        </member>
+        <member name="P:CustomPlantClass.RogueShootingManager.CustomRogueShootingBuff.CustomOnGet">
+            <summary>Gets or sets the callback invoked when the buff is acquired.</summary>
+        </member>
+    </members>
+</doc>

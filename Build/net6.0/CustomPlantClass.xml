@@ -397,6 +397,30 @@
             <param name="asm">The assembly whose mod name should be resolved.</param>
             <returns>The resolved mod name, or <c>Unknown</c> if no name can be found.</returns>
         </member>
+        <member name="T:CustomPlantClass.Main.MultipleChoiceMenuOptions">
+            <summary>
+            Options for multiple choice menu items
+            </summary>
+            <param name="Name">Name</param>
+            <param name="Text">Description</param>
+            <param name="Callback">Called when the item is selected</param>
+            <param name="displayPlantType">Displayed plant type, can be PlantType.Nothing if displaying a zombie</param>
+            <param name="displayZombieType">Displayed zombie type, can be ZombieType.Nothing if displaying a zplant</param>
+            <param name="displayQuality">The quality of the menu item</param>
+            <param name="Interactable"></param>
+        </member>
+        <member name="M:CustomPlantClass.Main.MultipleChoiceMenuOptions.#ctor(System.String,System.String,System.Action,PlantType,ZombieType,UI.Quality,System.Boolean)">
+            <summary>
+            Options for multiple choice menu items
+            </summary>
+            <param name="Name">Name</param>
+            <param name="Text">Description</param>
+            <param name="Callback">Called when the item is selected</param>
+            <param name="displayPlantType">Displayed plant type, can be PlantType.Nothing if displaying a zombie</param>
+            <param name="displayZombieType">Displayed zombie type, can be ZombieType.Nothing if displaying a zplant</param>
+            <param name="displayQuality">The quality of the menu item</param>
+            <param name="Interactable"></param>
+        </member>
         <member name="T:CustomPlantClass.Main.DataMgr">
             <summary>
             Central utility manager for all custom plant registration,
@@ -662,6 +686,51 @@
             and its variant, including their parent plant recipes.
             </summary>
         </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatPlantBuff(System.String,System.ValueTuple{System.String,System.String},System.ValueTuple{System.String,System.String},System.Boolean,System.Boolean)">
+            <summary>
+            Formats proprietary buff text for a weak or strong ultimate. Can also be used for synergy buffs
+            </summary>
+            <param name="buffName">the name of the buff</param>
+            <param name="basePlantAndEffect">Item1: the name of the base plant, Item2: the effect of the buff on the base plant</param>
+            <param name="variantPlantAndEffect">Item1: the name of the variant plant, Item2: the effect of the buff on the variant plant</param>
+            <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+            <param name="allowSPInheridence">Set to true if the buff can be partially or fully inherited by sp forms</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatUpgradablePlantBuff(System.String,System.ValueTuple{System.String,System.String},System.String,System.ValueTuple{System.String,System.String},System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Formats upgradable proprietary buff text for a weak or strong ultimate.
+            </summary>
+            <param name="buffName">the name of the buff</param>
+            <param name="basePlantAndEffect">Item1: the name of the base plant, Item2: the effect of the buff on the base plant</param>
+            <param name="variantPlantAndEffect">Item1: the name of the variant plant, Item2: the effect of the buff on the variant plant</param>
+            <param name="upgradeEffect">Base plant upgrade effect</param>
+            <param name="variantUpgradeEffect">Variant upgrade effect</param>
+            <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+            <param name="allowSPInheridence">Set to true if the buff can be partially or fully inherited by sp forms</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatPlantBuff(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Formats open buff text for a weak or strong ultimate.
+            </summary>
+            <param name="buffName">the name of the buff</param>
+            <param name="effect">the name of the buff</param>
+            <param name="variantName">Name of the variant to be unlocked</param>
+            <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.DataMgr.FormatUpgradablePlantBuff(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Formats open buff text for a weak or strong ultimate.
+            </summary>
+            <param name="buffName">the name of the buff</param>
+            <param name="effect">the name of the buff</param>
+            <param name="upgradeEffect">Base plant upgrade effect</param>
+            <param name="variantName">Name of the variant to be unlocked</param>
+            <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+            <returns></returns>
+        </member>
         <member name="M:CustomPlantClass.Main.DataMgr.FormatStrongUltimateUnlockBuff(System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Formats the unlock text for a strong-ultimate plant and its variant,
@@ -788,6 +857,96 @@
             <summary>
             Provides baseline health and damage values
             for standard and ultimate zombies.
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.NormalZombieDamage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.NormalZombieHealth">
+            <summary>
+            Normal zombie's health including headless state (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.ConeHealth">
+            <summary>
+            Cone (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.BucketHealth">
+            <summary>
+            Bucket (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.DoorHealth">
+            <summary>
+            Screen door (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.PaperHealth">
+            <summary>
+            Newspaper (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.HelmetHealth">
+            <summary>
+            Football helmet (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.BrickHeadHealth">
+            <summary>
+            pvz2 brick head (not counting base health)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.GiantHealth">
+            <summary>
+            gargantuar
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieA_Health_Light">
+            <summary>
+            For base tier rogue zombies with light armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieA_Health_Armored">
+            <summary>
+            For base tier rogue zombies with heavy armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieB_Health_Light">
+            <summary>
+            For 2nd tier rogue zombies with light armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieB_Health_Armored">
+            <summary>
+            For 2nd tier rogue zombies with heavy armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieC_Health_Light">
+            <summary>
+            For 3rd tier rogue zombies with light armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieC_Health_Armored">
+            <summary>
+            For 3rd tier rogue zombies with heavy armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieD_Health_Light">
+            <summary>
+            For 4th tier rogue zombies with light armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.UltiZombieD_Health_Armored">
+            <summary>
+            For 4th tier rogue zombies with heavy armor
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.DefaultZombieStats.IHateYou">
+            <summary>
+            Please don't
             </summary>
         </member>
         <member name="T:CustomPlantClass.Main.RogueZombieHealth">
@@ -1318,17 +1477,26 @@
             Core metadata for defining a custom plant.
             </summary>
         </member>
-        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.PlantId">
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.#ctor">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.#ctor(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary/>
+            <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+            <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+            <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData.PlantId">
             <summary>
             The plant ID of the plant
             </summary>
         </member>
-        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Prefab">
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData.Prefab">
             <summary>
             The plant's prefab
             </summary>
         </member>
-        <member name="F:CustomPlantClass.Main.BaseCustomPlantData.Preview">
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData.Preview">
             <summary>
             The plant's preview image
             </summary>
@@ -1427,6 +1595,281 @@
             <param name="prefab">The plant's prefab</param>
             <param name="preview">The plant's preview</param>
             <returns>The default struct</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Create``1(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Creates a default struct for the plant
+            </summary>
+            <param name="id">The plant ID of the plant</param>
+            <param name="prefab">The plant's prefab</param>
+            <param name="preview">The plant's preview</param>
+            <returns>The default struct</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Create``2(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Creates a default struct for the plant
+            </summary>
+            <param name="id">The plant ID of the plant</param>
+            <param name="prefab">The plant's prefab</param>
+            <param name="preview">The plant's preview</param>
+            <returns>The default struct</returns>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Register``1">
+            <summary>
+            Registers a custom plant.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData.Register``2">
+            <summary>
+            Registers a custom plant.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomPlantData`1">
+            <summary>
+            Core metadata for defining a custom plant. Automatically adds the plant component
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`1.op_Implicit(CustomPlantClass.Main.BaseCustomPlantData{`0})~CustomPlantClass.Main.BaseCustomPlantData">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`1.#ctor(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary/>
+            <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+            <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+            <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`1.PlantId">
+            <summary>
+            The plant ID of the plant
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`1.Prefab">
+            <summary>
+            The plant's prefab
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`1.Preview">
+            <summary>
+            The plant's preview image
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.Fusions">
+            <summary>
+            How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.AttackInterval">
+            <summary>
+            How fast should the plant attack (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.ProduceInterval">
+            <summary>
+            How fast should the plant produce sun (Set to 0 for non producers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.AttackDamage">
+            <summary>
+            How much damage should the plant do when attacking (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.MaxHealth">
+            <summary>
+            How much health should this plant have (Non defensive plants usually have 300)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.Cd">
+            <summary>
+            How long should the seed's cooldown be
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.Sun">
+            <summary>
+            How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.DefaultBullet">
+            <summary>
+            The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.CanPF">
+            <summary>
+            Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.CanStarUp">
+            <summary>
+            Sets if a plant can star up or not
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.CardColor">
+            <summary>
+            The card level of the plant
+            Normal plants: White
+            Fused plants: Green
+            Super plants: Blue
+            Weak ultimates / normal ultimates: Purple
+            Strong ultimates: Gold
+            Treasure mode exclusive plants: Red (Can't be imitated)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.IsRainbowCard">
+            <summary>
+            Sets if the plant will appear in the rainbow card menu
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.IsUltimatePlant">
+            <summary>
+            Sets if the plant is travel locked
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.CardRepeatAmt">
+            <summary>
+            Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.Name">
+            <summary>
+            The name to be displayed in the almanac
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`1.AlmanacEntry">
+            <summary>
+            The description of the plant shown in the almanac
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`1.Register">
+            <summary>
+            Registers a custom plant.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:CustomPlantClass.Main.BaseCustomPlantData`2">
+            <summary>
+            Core metadata for defining a custom plant. Automatically adds the plant component and adds another component
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`2.op_Implicit(CustomPlantClass.Main.BaseCustomPlantData{`0,`1})~CustomPlantClass.Main.BaseCustomPlantData">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`2.op_Implicit(CustomPlantClass.Main.BaseCustomPlantData{`0,`1})~CustomPlantClass.Main.BaseCustomPlantData{`0}">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`2.#ctor(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary/>
+            <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+            <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+            <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`2.PlantId">
+            <summary>
+            The plant ID of the plant
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`2.Prefab">
+            <summary>
+            The plant's prefab
+            </summary>
+        </member>
+        <member name="P:CustomPlantClass.Main.BaseCustomPlantData`2.Preview">
+            <summary>
+            The plant's preview image
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.Fusions">
+            <summary>
+            How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.AttackInterval">
+            <summary>
+            How fast should the plant attack (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.ProduceInterval">
+            <summary>
+            How fast should the plant produce sun (Set to 0 for non producers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.AttackDamage">
+            <summary>
+            How much damage should the plant do when attacking (Set to 0 for non attackers)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.MaxHealth">
+            <summary>
+            How much health should this plant have (Non defensive plants usually have 300)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.Cd">
+            <summary>
+            How long should the seed's cooldown be
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.Sun">
+            <summary>
+            How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.DefaultBullet">
+            <summary>
+            The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.CanPF">
+            <summary>
+            Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.CanStarUp">
+            <summary>
+            Sets if a plant can star up or not
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.CardColor">
+            <summary>
+            The card level of the plant
+            Normal plants: White
+            Fused plants: Green
+            Super plants: Blue
+            Weak ultimates / normal ultimates: Purple
+            Strong ultimates: Gold
+            Treasure mode exclusive plants: Red (Can't be imitated)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.IsRainbowCard">
+            <summary>
+            Sets if the plant will appear in the rainbow card menu
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.IsUltimatePlant">
+            <summary>
+            Sets if the plant is travel locked
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.CardRepeatAmt">
+            <summary>
+            Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.Name">
+            <summary>
+            The name to be displayed in the almanac
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.Main.BaseCustomPlantData`2.AlmanacEntry">
+            <summary>
+            The description of the plant shown in the almanac
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Main.BaseCustomPlantData`2.Register">
+            <summary>
+            Registers a custom plant.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="T:CustomPlantClass.Main.BasePlantSkinData">
             <summary>

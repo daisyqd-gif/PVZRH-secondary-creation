@@ -69,7 +69,7 @@ namespace SuperRandomCollection
             if (config.levelZombieInRandom) total += 2;
             if (config.strongUltiZombieInRandom) total += 2;
             if (config.leaderInRandom) total += 6;
-            if (GameAPP.theGameStatus == GameStatus.InGame && plant != null && UnityEngine.Random.Range(1, 101) <= total && plant.board != null && (plant.board.boardTag.isSuperRandom || plant.board.boardTag.isIZ))
+            if (GameAPP.theGameStatus == GameStatus.InGame && plant != null && Random.Range(1, 101) <= total && plant.board != null && (plant.board.boardTag.isSuperRandom || plant.board.boardTag.isIZ))
             {
                 plant.StarUp();
                 plant.starUp = true;
@@ -85,7 +85,7 @@ namespace SuperRandomCollection
             var axis = plant.axis.transform.position;
             var x = axis.x;
             plant.Die();
-            var v = UnityEngine.Random.Range(1, 101);
+            var v = Random.Range(1, 101);
             var list = GetAllowZombies();
             if (v <= 60) // 普通
             {
@@ -127,7 +127,7 @@ namespace SuperRandomCollection
                         if (!data.travelDebuffs.Contains(kvp.Key))
                             list.Add(kvp.Key);
                     }
-                    var debuff = list[UnityEngine.Random.Range(0, list.Count)];
+                    var debuff = list[Random.Range(0, list.Count)];
                     data.travelDebuffs.Add(debuff);
                     InGameText.Instance.ShowText($"抽到僵尸词条：{TravelDictionary.debuffData[debuff].Item1}", 5f);
                 }
@@ -137,7 +137,7 @@ namespace SuperRandomCollection
                     foreach (var (id, _) in TravelDictionary.ultimateBuffsText)
                         if (!data.ultiBuffs.Contains(id) && !data.ultiBuffs.Contains(id))
                             list.Add(id);
-                    var ultiBuff = list[UnityEngine.Random.Range(0, list.Count)];
+                    var ultiBuff = list[Random.Range(0, list.Count)];
                     data.ultiBuffs.Add(ultiBuff);
                     InGameText.Instance.ShowText($"抽到强究词条：{TravelDictionary.ultimateBuffsText[ultiBuff]}", 5f);
                 }
@@ -147,7 +147,7 @@ namespace SuperRandomCollection
                     foreach (var (id, _) in TravelDictionary.advancedBuffsText)
                         if (!data.advBuffs.Contains(id))
                             list.Add(id);
-                    var advBuff = list[UnityEngine.Random.Range(0, list.Count)];
+                    var advBuff = list[Random.Range(0, list.Count)];
                     data.advBuffs.Add(advBuff);
                     InGameText.Instance.ShowText($"抽到普通词条：{TravelDictionary.advancedBuffsText[advBuff]}", 5f);
                 }
@@ -177,7 +177,7 @@ namespace SuperRandomCollection
                 if (type == ZombieType.ZombieBoss || type == ZombieType.ZombieBoss2)
                     zombie.AddComponent<ClearCold>().zombie = zombie;
                 float timer = 1f;
-                switch (UnityEngine.Random.Range(0, 3))
+                switch (Random.Range(0, 3))
                 {
                     case 0:
                         timer = 0.8f;
@@ -226,7 +226,7 @@ namespace SuperRandomCollection
         [HarmonyPrefix]
         public static void Prefix(ref PlantType theSeedType)
         {
-            if (theSeedType == ZombieImitater.PlantID && UnityEngine.Random.Range(0, 2) == 0)
+            if (theSeedType == ZombieImitater.PlantID && Random.Range(0, 2) == 0)
                 theSeedType = ZombieImitater.PlantIDRed;
         }
     }

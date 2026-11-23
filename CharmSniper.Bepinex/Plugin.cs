@@ -38,14 +38,16 @@ namespace CharmSniper
                 );
 
                 // Fill out the plant metadata
-                BaseCustomPlantData Data = new BaseCustomPlantData()
+                BaseCustomPlantData Data = new BaseCustomPlantData
+                (
+                    DataMgr.AllocateID(), // Automatically assigns a unique ID
+
+                    assetBundle.GetAsset<GameObject>("CharmSniperPrefab"),   // Main plant prefab
+                    assetBundle.GetAsset<GameObject>("CharmSniperPreview") // Card preview prefab
+                )
                 {
-                    PlantId = DataMgr.AllocateID(), // Automatically assigns a unique ID
 
-                    Prefab = assetBundle.GetAsset<GameObject>("CharmSniperPrefab"),   // Main plant prefab
-                    Preview = assetBundle.GetAsset<GameObject>("CharmSniperPreview"), // Card preview prefab
-
-                    Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.SniperPea, PlantType.HypnoShroom), (PlantType.SuperHypnoGatling, PlantType.Peashooter) }), // Optional fusion recipes
+                    Fusions = ListHelper.MirrorList(new List<(ID, ID)>() { (PlantType.SniperPea, PlantType.HypnoShroom), (PlantType.SuperHypnoGatling, PlantType.Peashooter) }), // Optional fusion recipes
 
                     AttackInterval = 1.5f,   // Time between attacks (shooters only)
                     ProduceInterval = 0f,  // Time between sun/production cycles

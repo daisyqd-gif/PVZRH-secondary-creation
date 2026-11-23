@@ -203,6 +203,12 @@
             <param name="b">The second point.</param>
             <returns>The distance between the points, squared.</returns>
         </member>
+        <member name="M:CustomPlantClass.Main.MathHelper.Distance(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>Calculates the squared distance between two points.</summary>
+            <param name="a">The first point.</param>
+            <param name="b">The second point.</param>
+            <returns>The distance between the points.</returns>
+        </member>
         <member name="M:CustomPlantClass.Main.MathHelper.RotateVector(UnityEngine.Vector2,System.Single)">
             <summary>Rotates a vector by the specified angle.</summary>
             <param name="v">The vector to rotate.</param>
@@ -521,12 +527,210 @@
             <summary>Initializes a custom item type with an ID.</summary>
             <param name="id">The integer ID to store.</param>
         </member>
+        <member name="T:CustomPlantClass.Runtime.Core.GeneralTools">
+            <summary>
+            General tools for various purposes
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute(System.Action,System.Single)">
+            <summary>Runs an action after the specified delay.</summary>
+            <param name="a">The action to run.</param>
+            <param name="delaySeconds">The delay before running the action, in seconds.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.DefaultNull``1(``0@,``0)">
+            <summary>
+            Sets a default parameter for non compile time constants.
+            </summary>
+            <remarks>
+            Usage:
+            <code>
+            public static void ExampleMethod(NonConstant parameter = null)
+            {
+                GeneralTools.DefaultNull(parameter,NonConstant.GetValue());
+            }
+            </code>
+            </remarks>
+            <param name="parameter">The parameter being defaulted</param>
+            <param name="defaultValue">The default value of the parameter</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.DefaultParameter``1(``0@,``0)">
+            <summary>
+            Sets a default parameter for non compile time constants.
+            </summary>
+            <remarks>
+            Usage:
+            <code>
+            public static void ExampleMethod(NonConstant parameter = default)
+            {
+                GeneralTools.DefaultParameter(parameter,NonConstant.GetValue());
+            }
+            </code>
+            </remarks>
+            <param name="parameter">The parameter being defaulted</param>
+            <param name="defaultValue">The default value of the parameter</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute``1(System.Action{``0},``0,System.Single)">
+            <summary>Runs an action with a parameter after the specified delay.</summary>
+            <typeparam name="T">The type of the action parameter.</typeparam>
+            <param name="a">The action to run.</param>
+            <param name="parameter">The value passed to the action.</param>
+            <param name="delaySeconds">The delay before running the action, in seconds.</param>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute``2(System.Func{``0,``1},``0,System.Single)">
+            <summary>Runs a function with a parameter after the specified delay and returns its result.</summary>
+            <typeparam name="T">The type of the function parameter.</typeparam>
+            <typeparam name="Tout">The type of the function result.</typeparam>
+            <param name="a">The function to run.</param>
+            <param name="parameter">The value passed to the function.</param>
+            <param name="delaySeconds">The delay before running the function, in seconds.</param>
+            <returns>A task that completes with the function's result.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetCollidersInCone(UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask,System.Int32)">
+            <summary>
+            Returns a list of colliders within a cone-shaped area defined by the origin, direction, maximum distance, and cone angle.
+            </summary>
+            <param name="origin">The origin point of the cone</param>
+            <param name="direction">The direction the cone is facing</param>
+            <param name="maxDistance">The maximum distance of the cone</param>
+            <param name="coneAngle">The angle of the cone in degrees</param>
+            <param name="layerMask">The layer mask to use for the raycasts</param>
+            <param name="rayCount">The number of rays to cast within the cone</param>
+            <returns>A null checked list of colliders within a cone-shaped area</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetCollider2DsInOval(UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask)">
+            <param name="center">The center of the oval</param>
+            <param name="radiusX">The X radius of the oval</param>
+            <param name="radiusY">The Y radius of the oval</param>
+            <param name="layerMask">The layer of the collider</param>
+            <returns>All colliders in an oval</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes">
+            <summary>
+            Registers all eligible derived types from the calling assembly
+            with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes(System.Reflection.Assembly)">
+            <summary>
+            Registers eligible derived types from an assembly
+            with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.EnsureTypeRegistered``1">
+            <summary>
+            Ensures the specified custom component type
+            is registered with the IL2CPP class injector.
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllDerivedTypes(System.Reflection.Assembly[],System.Type,System.Boolean)">
+            <summary>
+            Gets the types in the specified assemblies that derive from the given base type.
+            </summary>
+            <param name="asms">The assemblies to search.</param>
+            <param name="baseType">The base type to match.</param>
+            <param name="containBase">Whether to include the base type itself when present.</param>
+            <returns>The matching types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllDerivedTypes``1(System.Reflection.Assembly[],System.Boolean)">
+            <summary>
+            Gets the types in the specified assemblies that derive from the given type.
+            </summary>
+            <typeparam name="T">The base type to match.</typeparam>
+            <param name="asms">The assemblies to search.</param>
+            <param name="containBase">Whether to include the base type itself when present.</param>
+            <returns>The matching types.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes">
+            <summary>
+            Gets all types from the assemblies loaded in the current application domain.
+            </summary>
+            <returns>All types from the loaded assemblies.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes(System.Reflection.Assembly[])">
+            <summary>
+            Gets all types from the specified assemblies.
+            </summary>
+            <param name="asms">The assemblies to search.</param>
+            <returns>All types found in the specified assemblies.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes(System.Reflection.Assembly)">
+            <summary>
+            Gets all types from the specified assembly.
+            </summary>
+            <param name="asm">The assembly to search.</param>
+            <returns>All types found in the specified assembly.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.IsSubTypeOf(System.Type,System.Type,System.Boolean)">
+            <summary>Determines whether a type derives from or implements the specified base type.</summary>
+            <param name="type">The type to inspect.</param>
+            <param name="baseType">The base type or interface to match.</param>
+            <param name="containBase">Whether to include the type itself in the match.</param>
+            <returns><see langword="true"/> if the type matches; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.ControlFlow(System.Boolean,System.Func{System.Boolean,System.Boolean})">
+            <summary>
+            Used to run code in if statements.
+            </summary>
+            <param name="input">The input bool</param>
+            <param name="func">Takes in the input bool.</param>
+            <returns>The result of the func</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.ControlFlow``1(``0,System.Boolean,System.Func{``0,System.Boolean,System.Boolean})">
+            <summary>
+            Used to run code in if statements.
+            </summary>
+            <typeparam name="T">The type of the instance</typeparam>
+            <param name="instance"/>
+            <param name="input">The input bool</param>
+            <param name="func">Takes in the input bool and the input instance.</param>
+            <returns>The result of the func</returns>
+        </member>
+        <member name="T:CustomPlantClass.Runtime.Core.Il2CPPTools">
+            <summary>
+            Provides tools for Il2cpp
+            </summary>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPTools.TryCast``1(Il2CppSystem.Object,``0@)">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:CustomPlantClass.Runtime.Core.Il2CPPEnumerable">
             <summary>
             Provides LINQ-style query operators for IL2CPP lists and hash sets.
             </summary>
         </member>
         <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.List{``0})">
+            <summary>
+            Returns the input typed as IEnumerable.
+            </summary>
+            <returns>The input sequence typed as IEnumerable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns the input typed as IEnumerable.
+            </summary>
+            <returns>The input sequence typed as IEnumerable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <summary>
+            Returns the input typed as IEnumerable.
+            </summary>
+            <returns>The input sequence typed as IEnumerable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Returns the input typed as IEnumerable.
+            </summary>
+            <returns>The input sequence typed as IEnumerable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <summary>
+            Returns the input typed as IEnumerable.
+            </summary>
+            <returns>The input sequence typed as IEnumerable.</returns>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.AsEnumerable``1(Il2CppSystem.Collections.Generic.IList{``0})">
             <summary>
             Returns the input typed as IEnumerable.
             </summary>
@@ -1131,6 +1335,1452 @@
             Applies an accumulator function over the source elements.
             </summary>
         </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SelectMany``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,Il2CppSystem.Collections.Generic.List{``1}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.All``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Contains``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAt``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAtOrDefault``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Take``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Skip``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.TakeWhile``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SkipWhile``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Reverse``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderBy``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderByDescending``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``2(Il2CppSystem.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToList``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Int32,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Int32,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SelectMany``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,Il2CppSystem.Collections.Generic.List{``1}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.All``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Contains``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAt``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAtOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Take``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Skip``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.TakeWhile``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SkipWhile``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Reverse``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderBy``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderByDescending``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},System.Func{``0,``0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``2(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},``1,System.Func{``1,``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToList``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Int32,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Int32,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SelectMany``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,Il2CppSystem.Collections.Generic.List{``1}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.All``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Contains``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAt``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAtOrDefault``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Take``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Skip``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.TakeWhile``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SkipWhile``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Reverse``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderBy``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderByDescending``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},System.Func{``0,``0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``2(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},``1,System.Func{``1,``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToList``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Int32,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Int32,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SelectMany``2(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,Il2CppSystem.Collections.Generic.List{``1}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.All``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Contains``1(Il2CppSystem.Collections.Generic.IList{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAt``1(Il2CppSystem.Collections.Generic.IList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAtOrDefault``1(Il2CppSystem.Collections.Generic.IList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.IList{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Take``1(Il2CppSystem.Collections.Generic.IList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Skip``1(Il2CppSystem.Collections.Generic.IList{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.TakeWhile``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SkipWhile``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Reverse``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderBy``2(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderByDescending``2(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``1(Il2CppSystem.Collections.Generic.IList{``0},System.Func{``0,``0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``2(Il2CppSystem.Collections.Generic.IList{``0},``1,System.Func{``1,``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToList``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ToHashSet``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Where``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Int32,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Select``2(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Int32,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SelectMany``2(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,Il2CppSystem.Collections.Generic.List{``1}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Any``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.All``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Count``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Contains``1(Il2CppSystem.Collections.Generic.ICollection{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.First``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.FirstOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Single``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SingleOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Last``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LastOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAt``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.ElementAtOrDefault``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.LongCount``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.DefaultIfEmpty``1(Il2CppSystem.Collections.Generic.ICollection{``0},``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Take``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Skip``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.TakeWhile``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SkipWhile``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Reverse``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Distinct``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEqualityComparer{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderBy``2(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.OrderByDescending``2(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``1(Il2CppSystem.Collections.Generic.ICollection{``0},System.Func{``0,``0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Aggregate``2(Il2CppSystem.Collections.Generic.ICollection{``0},``1,System.Func{``1,``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IReadOnlyCollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.IList{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.ICollection{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Concat``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Union``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Intersect``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Except``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.SequenceEqual``1(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.List{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IEnumerable{``0},Il2CppSystem.Collections.Generic.HashSet{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.List{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.HashSet{``0},Il2CppSystem.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.List{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyList{``0},Il2CppSystem.Collections.Generic.HashSet{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.List{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IReadOnlyCollection{``0},Il2CppSystem.Collections.Generic.HashSet{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.List{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.IList{``0},Il2CppSystem.Collections.Generic.HashSet{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.List{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
+        <member name="M:CustomPlantClass.Runtime.Core.Il2CPPEnumerable.Zip``3(Il2CppSystem.Collections.Generic.ICollection{``0},Il2CppSystem.Collections.Generic.HashSet{``1},System.Func{``0,``1,``2})">
+            <inheritdoc/>
+        </member>
         <member name="T:CustomPlantClass.Runtime.Core.ModLogger">
             <summary>
             Provides logging helpers that tag messages with a mod name,
@@ -1284,6 +2934,9 @@
         <member name="T:CustomPlantClass.Runtime.Core.RegisteredPlugin">
             <inheritdoc/>
         </member>
+        <member name="P:CustomPlantClass.Runtime.Core.RegisteredPlugin.harmony">
+            <summary/>
+        </member>
         <member name="M:CustomPlantClass.Runtime.Core.RegisteredPlugin.Load">
             <inheritdoc/>
         </member>
@@ -1306,114 +2959,6 @@
             <summary>
             Runs when the game starts
             </summary>
-        </member>
-        <member name="T:CustomPlantClass.Runtime.Core.GeneralTools">
-            <summary>
-            General tools for various purposes
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute(System.Action,System.Single)">
-            <summary>Runs an action after the specified delay.</summary>
-            <param name="a">The action to run.</param>
-            <param name="delaySeconds">The delay before running the action, in seconds.</param>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute``1(System.Action{``0},``0,System.Single)">
-            <summary>Runs an action with a parameter after the specified delay.</summary>
-            <typeparam name="T">The type of the action parameter.</typeparam>
-            <param name="a">The action to run.</param>
-            <param name="parameter">The value passed to the action.</param>
-            <param name="delaySeconds">The delay before running the action, in seconds.</param>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.WaitAndExecute``2(System.Func{``0,``1},``0,System.Single)">
-            <summary>Runs a function with a parameter after the specified delay and returns its result.</summary>
-            <typeparam name="T">The type of the function parameter.</typeparam>
-            <typeparam name="Tout">The type of the function result.</typeparam>
-            <param name="a">The function to run.</param>
-            <param name="parameter">The value passed to the function.</param>
-            <param name="delaySeconds">The delay before running the function, in seconds.</param>
-            <returns>A task that completes with the function's result.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetCollidersInCone(UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask,System.Int32)">
-            <summary>
-            Returns a list of colliders within a cone-shaped area defined by the origin, direction, maximum distance, and cone angle.
-            </summary>
-            <param name="origin">The origin point of the cone</param>
-            <param name="direction">The direction the cone is facing</param>
-            <param name="maxDistance">The maximum distance of the cone</param>
-            <param name="coneAngle">The angle of the cone in degrees</param>
-            <param name="layerMask">The layer mask to use for the raycasts</param>
-            <param name="rayCount">The number of rays to cast within the cone</param>
-            <returns>A null checked list of colliders within a cone-shaped area</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetCollider2DsInOval(UnityEngine.Vector2,System.Single,System.Single,UnityEngine.LayerMask)">
-            <param name="center">The center of the oval</param>
-            <param name="radiusX">The X radius of the oval</param>
-            <param name="radiusY">The Y radius of the oval</param>
-            <param name="layerMask">The layer of the collider</param>
-            <returns>All colliders in an oval</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes">
-            <summary>
-            Registers all eligible derived types from the calling assembly
-            with the IL2CPP class injector.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.AutoRegisterTypes(System.Reflection.Assembly)">
-            <summary>
-            Registers eligible derived types from an assembly
-            with the IL2CPP class injector.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.EnsureTypeRegistered``1">
-            <summary>
-            Ensures the specified custom component type
-            is registered with the IL2CPP class injector.
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllDerivedTypes(System.Reflection.Assembly[],System.Type,System.Boolean)">
-            <summary>
-            Gets the types in the specified assemblies that derive from the given base type.
-            </summary>
-            <param name="asms">The assemblies to search.</param>
-            <param name="baseType">The base type to match.</param>
-            <param name="containBase">Whether to include the base type itself when present.</param>
-            <returns>The matching types.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllDerivedTypes``1(System.Reflection.Assembly[],System.Boolean)">
-            <summary>
-            Gets the types in the specified assemblies that derive from the given type.
-            </summary>
-            <typeparam name="T">The base type to match.</typeparam>
-            <param name="asms">The assemblies to search.</param>
-            <param name="containBase">Whether to include the base type itself when present.</param>
-            <returns>The matching types.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes">
-            <summary>
-            Gets all types from the assemblies loaded in the current application domain.
-            </summary>
-            <returns>All types from the loaded assemblies.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes(System.Reflection.Assembly[])">
-            <summary>
-            Gets all types from the specified assemblies.
-            </summary>
-            <param name="asms">The assemblies to search.</param>
-            <returns>All types found in the specified assemblies.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.GetAllTypes(System.Reflection.Assembly)">
-            <summary>
-            Gets all types from the specified assembly.
-            </summary>
-            <param name="asm">The assembly to search.</param>
-            <returns>All types found in the specified assembly.</returns>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.Core.GeneralTools.IsSubTypeOf(System.Type,System.Type,System.Boolean)">
-            <summary>Determines whether a type derives from or implements the specified base type.</summary>
-            <param name="type">The type to inspect.</param>
-            <param name="baseType">The base type or interface to match.</param>
-            <param name="containBase">Whether to include the type itself in the match.</param>
-            <returns><see langword="true"/> if the type matches; otherwise, <see langword="false"/>.</returns>
         </member>
         <member name="T:CustomPlantClass.Runtime.Core.ReflectionHelper">
             <summary>

@@ -525,8 +525,8 @@ namespace CustomPlantClass.RogueShootingManager
             var buffText_curse=$"诅咒-{name}：{curseDesc}";
             var buffName=$"诅咒：{name}";
             var buffText_reversed=$"祝福-{name}：{reversedDesc}";
-            BuffID buff_Curse = Compatibility.CustomCore_Old.RegisterCustomBuff(buffText_curse,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType);
-            BuffID buff_Reversed = Compatibility.CustomCore_Old.RegisterCustomBuff(buffText_reversed,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType);
+            BuffID buff_Curse =CustomCore.RegisterCustomBuff(buffText_curse,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType,1,almanac:AlmanacBuffType.Shooting);
+            BuffID buff_Reversed = CustomCore.RegisterCustomBuff(buffText_reversed,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType,1,almanac:AlmanacBuffType.Shooting);
             BaseBuff rogueBuff = MakeBuffType(new()
             {
                 CustomPlantType = thePlantType,
@@ -589,7 +589,7 @@ namespace CustomPlantClass.RogueShootingManager
         public static (BuffID AdvBuff,BaseBuff buffConfig) RegisterCustomQualitativeChangeBuff(string name, string desc, PlantType thePlantType, Action OnGetBuff = null)
         {
             string name_formatted = $"质变-{name}：";
-            BuffID buff = Compatibility.CustomCore_Old.RegisterCustomBuff(name_formatted+desc,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType);
+            BuffID buff = CustomCore.RegisterCustomBuff(name_formatted+desc,BuffType.AdvancedBuff,()=>Board.Instance!=null && Board.Instance.boardTag.rogueShooting,5000,thePlantType,1,almanac:AlmanacBuffType.Shooting);
             BaseBuff rogueBuff = MakeBuffType(new()
             {
                 CustomPlantType = thePlantType,
@@ -602,21 +602,6 @@ namespace CustomPlantClass.RogueShootingManager
                 }
             });
             return (buff,rogueBuff);
-        }
-        private static bool IsManagedAssembly(string path)
-        {
-            try
-            {
-                // Try to read metadata; if it fails, it's native
-                using var stream = File.OpenRead(path);
-                using var peReader = new System.Reflection.PortableExecutable.PEReader(stream);
-
-                return peReader.HasMetadata;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }

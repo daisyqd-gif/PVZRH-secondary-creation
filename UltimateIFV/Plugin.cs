@@ -40,18 +40,18 @@ namespace UltimateIFV
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new(
+                DataContainer.PlantId_ironPuff,
+                assetBundle.GetAsset<GameObject>("UltimateIFVIronPuffPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateIFVIronPuffPreview")
+            )
             {
-                PlantId = DataContainer.PlantId_ironPuff, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateIFVIronPuffPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("UltimateIFVIronPuffPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(
+                Fusions = ListHelper.MirrorList(new List<(ID, ID)>(
                     [(PlantType.IFVIronPuff, PlantType.Peashooter), (DataContainer.PlantId_blover, PlantType.Magnetshroom)]
                 )), // Optional fusion recipes
 
@@ -101,18 +101,18 @@ namespace UltimateIFV
 
             DataMgr.RegisterCustomPlant<IFVIronPuff, UltimateIFVIronPuff>(Data);
             // Fill out the plant metadata
-            BaseCustomPlantData Data2 = new BaseCustomPlantData()
+            BaseCustomPlantData Data2 = new(
+                DataContainer.PlantId_blover,
+                assetBundle.GetAsset<GameObject>("UltimateIFVBloverPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateIFVBloverPreview")
+            )
             {
-                PlantId = DataContainer.PlantId_blover, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateIFVBloverPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("UltimateIFVBloverPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(
+                Fusions = ListHelper.MirrorList(new List<(ID, ID)>(
                     [(PlantType.IFVBlover, PlantType.Peashooter), (DataContainer.PlantId_ironPuff, PlantType.Blover)]
                 )), // Optional fusion recipes
 
@@ -482,9 +482,8 @@ namespace UltimateIFV
             }
             else
             {
-                if (selectedPlant is IFVBlover)
+                if (selectedPlant is IFVBlover ifv)
                 {
-                    var ifv = selectedPlant as IFVBlover;
                     var wingman = ifv.wingman;
                     Vector2Int pos = new(mouse.theMouseColumn, mouse.theMouseRow);
                     wingman.SetTarget(pos);
@@ -549,7 +548,7 @@ namespace UltimateIFV
         [HarmonyPostfix]
         public static void Postfix()
         {
-            global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo("Added IFV plants to TypeMgr");
+            ModLogger.LogInfo("Added IFV plants to TypeMgr");
             Plugin.TypeMgrPatch();
         }
     }

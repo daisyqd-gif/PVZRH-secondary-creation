@@ -24,6 +24,7 @@ namespace UltimateDoomSniper
         public static ID ParticleID = -1;
         public static BuffID Buff1 = -1;
         public static BuffID Buff2 = -1;
+        public static AdvBuff SPUpgradeBuff = (AdvBuff)(-1);
         public override void InitializeMod()
         {
             //AttributeMgr.LoadAllAttributes(Assembly.GetExecutingAssembly());
@@ -38,21 +39,19 @@ namespace UltimateDoomSniper
         }
         public override void InitializeBuffs()
         {
-            Buff1 = Compatibility.CustomCore_Old.RegisterCustomBuff("防空炮：解锁死神狙击射手的锁空锁空并将解锁毁灭狙击射手, 毁灭狙击射手的攻击间隔缩短至4秒", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
-            Buff2 = Compatibility.CustomCore_Old.RegisterCustomBuff("死神之力：死神狙击射手狂热时间*2, 狂热能量需求/2, 大招需求/2, 毁灭狙击射手只会爆头", BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
+            Buff1 = CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("防空炮",("死神猎手","解锁锁定空中目标的能力"),("毁灭狙击射手","攻击间隔缩短至4秒"),true,true), BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
+            Buff2 = CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("死神之力",("死神猎手","狂热时间*2, 狂热能量需求/2, 大招需求/2"),("毁灭狙击射手","枪枪爆头"),false,true), BuffType.AdvancedBuff, () => true, 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
+            SPUpgradeBuff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatSPUpgradeBuff("究极死神猎手","死神猎手","毁灭菇","究极毁灭狙击射手","毁灭狙击射手"), BuffType.AdvancedBuff, () => TravelStore.Instance != null && Lawnf.TravelAdvanced(Buff1) && Lawnf.TravelAdvanced(Buff2), 5000, PlantType.DoomSniper, 1, BuffBgType.Day);
         }
         public override void InitializePlants()
         {
-
             // Fill out the plant metadata
-            BaseCustomPlantData Data2 = new BaseCustomPlantData()
+            BaseCustomPlantData Data2 = new BaseCustomPlantData(
+                PlantID_Sniper1,
+                assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPrefab"),
+                assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPreview"))
             {
-                PlantId = PlantID_Sniper1, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("ExplodeDoomSniperPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
+                Fusions = ListHelper.MirrorList(new()
                 {
                     (PlantType.DoomSniper,PlantType.Peashooter)
                 }), // Optional fusion recipes
@@ -95,14 +94,12 @@ namespace UltimateDoomSniper
             };
             DataMgr.RegisterCustomPlant<FireSniper,DestroySniper>(Data2);
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new BaseCustomPlantData(
+                PlantID,
+                assetBundle.GetAsset<GameObject>("UltimateDoomSniperPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateDoomSniperPreview"))
             {
-                PlantId = PlantID, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateDoomSniperPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateDoomSniperPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
+                Fusions = ListHelper.MirrorList(new()
                 {
                     (PlantType.DoomSniper,PlantType.DoomShroom),
                     (PlantID_Sniper1,PlantType.DoomPeashooter),
@@ -151,20 +148,18 @@ namespace UltimateDoomSniper
             };
 
             // Register the plant and retrieve its ID
-            CustomCore.RegisterCustomBanMix(DataMgr.RegisterCustomPlant<DoomSniper, UltimateDoomSniper>(Data), () => (Lawnf.TravelAdvanced(Buff1) && Lawnf.TravelAdvanced(Buff2)) || Utils.EnableTravelPlant(), null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+            CustomCore.RegisterCustomBanMix(DataMgr.RegisterCustomPlant<DoomSniper, UltimateDoomSniper>(Data), () => SPUpgradeBuff.IsActive() || Tools.EnableTravelPlant(), null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
             DataMgr.AddGameStartAction(() =>
             {
                 GameAPP.resourcesManager.plantPrefabs[PlantType.DoomSniper].AddComponent<DoomSniperComponent>();
             });
             // Fill out the plant metadata
-            BaseCustomPlantData Data3 = new BaseCustomPlantData()
+            BaseCustomPlantData Data3 = new BaseCustomPlantData(
+                PlantID_Sniper2,
+                assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPreview"))
             {
-                PlantId = PlantID_Sniper2, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateExplodeDoomSniperPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new()
+                Fusions = ListHelper.MirrorList(new()
                 {
                     (PlantID_Sniper1,PlantType.DoomShroom),
                     (PlantType.DoomSniper,PlantType.DoomPeashooter),
@@ -207,9 +202,9 @@ namespace UltimateDoomSniper
                 },
                 usageconditions: "旅行模式")    // Almanac description (CN + EN recommended)
             };
-            CustomCore.RegisterCustomBanMix(DataMgr.RegisterCustomPlant<SniperPea, UltimateDestroySniper>(Data3), () => (Lawnf.TravelAdvanced(Buff1) && Lawnf.TravelAdvanced(Buff2)) || Utils.EnableTravelPlant(), null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
+            CustomCore.RegisterCustomBanMix(DataMgr.RegisterCustomPlant<SniperPea, UltimateDestroySniper>(Data3), () => (Lawnf.TravelAdvanced(Buff1) && Lawnf.TravelAdvanced(Buff2)) || Tools.EnableTravelPlant(), null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
 
-            DataMgr.AddCustomWeakUltimatePlant(PlantType.DoomSniper,true,PlantID_Sniper1,() => Lawnf.TravelAdvanced(Buff1) || Utils.EnableTravelPlant());
+            DataMgr.AddCustomWeakUltimatePlant(PlantType.DoomSniper,true,PlantID_Sniper1,() => Lawnf.TravelAdvanced(Buff1) || Tools.EnableTravelPlant());
             DataMgr.AddCustomWeakUltimatePlant(PlantID,false);
             DataMgr.AddCustomWeakUltimatePlant(PlantID_Sniper2,true);
             

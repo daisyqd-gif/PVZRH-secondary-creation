@@ -2,6 +2,7 @@ using System;
 
 namespace UltimateSniper
 {
+    /*
     public class FireMeteor : MonoBehaviour
     {
         public float g = -9.8f;
@@ -88,8 +89,8 @@ namespace UltimateSniper
                 CreateParticle.SetParticle(Plugin.Doom_Big_Fire_ID, transform.position, 2);
                 // Custom damage formula
                 int damage = Mathf.CeilToInt(3600f * Mathf.Max(1f,
-                    Mathf.Pow(2f, _damage / 50f)) * UltimateMegaGatlingPea.Multiplier);
-                UltimateMegaGatlingPea.Multiplier = 1;
+                    Mathf.Pow(2f, _damage / 50f)) * UltimateSniper.Multiplier);
+                UltimateSniper.Multiplier = 1;
                 // Damage ALL enemy zombies
                 var zombies = Board.Instance.zombieArray;
                 if (zombies != null)
@@ -154,4 +155,5 @@ namespace UltimateSniper
             }
         }
     }
+    */
 }

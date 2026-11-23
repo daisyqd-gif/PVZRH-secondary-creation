@@ -1277,6 +1277,7 @@ namespace CustomPlantClass.Main
             CustomStrongUltiPlants[(int)thePlantType] = (i, default, desc);
             CustomTravelUnlocks.Add((TravelUnlocks)i);
         }
+        #region string formatters
         /// <summary>
         /// Formats the strong-ultimate upgrade text for an unlocked plant
         /// and its variant, including their parent plant recipes.
@@ -1289,12 +1290,109 @@ namespace CustomPlantClass.Main
             string baseVariantUltimateName
         )
         {
-            return "<color=red>【SP进化】</color>：\n" +
+            return "<color=#800080>【SP进化】</color>：\n" +
                 $"<nobr>解锁<color=red>{unlockedPlantName}</color>\n" +
                 $"{baseUltimateName} + {parentPlant2Name}</nobr>\n" +
                 $"<nobr>解锁<color=red>{unlockedVariantPlantName}</color>\n" +
                 $"{baseVariantUltimateName} + {parentPlant2Name}</nobr>\n" +
                 "继承原转换配方";
+        }
+        /// <summary>
+        /// Formats proprietary buff text for a weak or strong ultimate. Can also be used for synergy buffs
+        /// </summary>
+        /// <param name="buffName">the name of the buff</param>
+        /// <param name="basePlantAndEffect">Item1: the name of the base plant, Item2: the effect of the buff on the base plant</param>
+        /// <param name="variantPlantAndEffect">Item1: the name of the variant plant, Item2: the effect of the buff on the variant plant</param>
+        /// <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+        /// <param name="allowSPInheridence">Set to true if the buff can be partially or fully inherited by sp forms</param>
+        /// <returns></returns>
+        public static string FormatPlantBuff(
+            string buffName,
+            (string,string) basePlantAndEffect,
+            (string,string) variantPlantAndEffect = default,
+            bool isUnlockVariant = false,
+            bool allowSPInheridence = false
+        )
+        {
+            return $"{buffName}：\n"+
+                    (isUnlockVariant && variantPlantAndEffect != default && !string.IsNullOrWhiteSpace(variantPlantAndEffect.Item1)
+                    ? $"<nobr>·解锁<color=red>{variantPlantAndEffect.Item1}</color></nobr>\n" : "")+
+                    $"◆<color=red>{basePlantAndEffect.Item1}</color>：{basePlantAndEffect.Item2}\n"+
+                    (variantPlantAndEffect != default && !string.IsNullOrWhiteSpace(variantPlantAndEffect.Item1)
+                    ? $"◆<color=red>{variantPlantAndEffect.Item1}</color>：{variantPlantAndEffect.Item2}\n" : "")+
+                    (allowSPInheridence ? "◆进阶形态共享以上效果" : "");
+        }
+        /// <summary>
+        /// Formats upgradable proprietary buff text for a weak or strong ultimate.
+        /// </summary>
+        /// <param name="buffName">the name of the buff</param>
+        /// <param name="basePlantAndEffect">Item1: the name of the base plant, Item2: the effect of the buff on the base plant</param>
+        /// <param name="variantPlantAndEffect">Item1: the name of the variant plant, Item2: the effect of the buff on the variant plant</param>
+        /// <param name="upgradeEffect">Base plant upgrade effect</param>
+        /// <param name="variantUpgradeEffect">Variant upgrade effect</param>
+        /// <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+        /// <param name="allowSPInheridence">Set to true if the buff can be partially or fully inherited by sp forms</param>
+        /// <returns></returns>
+        public static string FormatUpgradablePlantBuff(
+            string buffName,
+            (string,string) basePlantAndEffect,
+            string upgradeEffect,
+            (string,string) variantPlantAndEffect = default,
+            string variantUpgradeEffect = "",
+            bool isUnlockVariant = false,
+            bool allowSPInheridence = false
+        )
+        {
+            return $"{buffName}：\n"+
+                    (isUnlockVariant && variantPlantAndEffect != default && !string.IsNullOrWhiteSpace(variantPlantAndEffect.Item1)
+                    ? $"<nobr>·解锁<color=red>{variantPlantAndEffect.Item1}</color></nobr>\n" : "")+
+                    $"◆<color=red>{basePlantAndEffect.Item1}</color>：{basePlantAndEffect.Item2}\n"+
+                    $"<color=#FF7400>升级</color>：{upgradeEffect}"+
+                    (variantPlantAndEffect != default && !string.IsNullOrWhiteSpace(variantPlantAndEffect.Item1)
+                    ? $"◆<color=red>{variantPlantAndEffect.Item1}</color>：{variantPlantAndEffect.Item2}\n"+
+                    $"<color=#FF7400>升级</color>：{variantUpgradeEffect}" : "")+
+                    (allowSPInheridence ? "◆进阶形态共享以上效果" : "");
+        }
+        /// <summary>
+        /// Formats open buff text for a weak or strong ultimate.
+        /// </summary>
+        /// <param name="buffName">the name of the buff</param>
+        /// <param name="effect">the name of the buff</param>
+        /// <param name="variantName">Name of the variant to be unlocked</param>
+        /// <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+        /// <returns></returns>
+        public static string FormatPlantBuff(
+            string buffName,
+            string effect,
+            string variantName = "",
+            bool isUnlockVariant = false
+        )
+        {
+            return $"{buffName}："+
+                    (isUnlockVariant && !string.IsNullOrWhiteSpace(variantName)
+                    ? $"<nobr>·解锁<color=red>{variantName}</color></nobr>\n" : "")+$"\n{effect}";
+        }
+        /// <summary>
+        /// Formats open buff text for a weak or strong ultimate.
+        /// </summary>
+        /// <param name="buffName">the name of the buff</param>
+        /// <param name="effect">the name of the buff</param>
+        /// <param name="upgradeEffect">Base plant upgrade effect</param>
+        /// <param name="variantName">Name of the variant to be unlocked</param>
+        /// <param name="isUnlockVariant">Set to true if this buff unlocks the variant</param>
+        /// <returns></returns>
+        public static string FormatUpgradablePlantBuff(
+            string buffName,
+            string effect,
+            string upgradeEffect,
+            string variantName = "",
+            bool isUnlockVariant = false
+        )
+        {
+            return $"{buffName}："+
+                    (isUnlockVariant && !string.IsNullOrWhiteSpace(variantName)
+                    ? $"<nobr>·解锁<color=red>{variantName}</color></nobr>\n" : "")+$"\n{effect}"+
+                    $"<color=#FF7400>升级</color>：{upgradeEffect}";
         }
         /// <summary>
         /// Formats the unlock text for a strong-ultimate plant and its variant,
@@ -1331,6 +1429,7 @@ namespace CustomPlantClass.Main
                     $"{basePlant1}+{baseplant2}</nobr>";
 
         }
+        #endregion
         /// <summary>
         /// Registers a custom level 4 zombie based on a level 3 type
         /// and assigns its spawn level and weight.
@@ -1647,26 +1746,78 @@ namespace CustomPlantClass.Main
     public class DefaultZombieStats
     {
         #region Fields
-        #pragma warning disable CS1591 // Public constants are intentionally excluded from XML documentation
+        /// <summary>
+        /// 
+        /// </summary>
         public const int NormalZombieDamage = 50;
+        /// <summary>
+        /// Normal zombie's health including headless state (not counting base health)
+        /// </summary>
         public const int NormalZombieHealth = 270;
+        /// <summary>
+        /// Cone (not counting base health)
+        /// </summary>
         public const int ConeHealth = 370;
+        /// <summary>
+        /// Bucket (not counting base health)
+        /// </summary>
         public const int BucketHealth = 1100;
+        /// <summary>
+        /// Screen door (not counting base health)
+        /// </summary>
         public const int DoorHealth = 1100;
+        /// <summary>
+        /// Newspaper (not counting base health)
+        /// </summary>
         public const int PaperHealth = 200;
+        /// <summary>
+        /// Football helmet (not counting base health)
+        /// </summary>
         public const int HelmetHealth = 1400;
+        /// <summary>
+        /// pvz2 brick head (not counting base health)
+        /// </summary>
         public const int BrickHeadHealth = 2190; //2390 - 270 + 70 = this
+        /// <summary>
+        /// gargantuar
+        /// </summary>
         public const int GiantHealth = 3000;
+        /// <summary>
+        /// For base tier rogue zombies with light armor
+        /// </summary>
         public const int UltiZombieA_Health_Light = 3000;
+        /// <summary>
+        /// For base tier rogue zombies with heavy armor
+        /// </summary>
         public const int UltiZombieA_Health_Armored = 6000;
+        /// <summary>
+        /// For 2nd tier rogue zombies with light armor
+        /// </summary>
         public const int UltiZombieB_Health_Light = 6000;
+        /// <summary>
+        /// For 2nd tier rogue zombies with heavy armor
+        /// </summary>
         public const int UltiZombieB_Health_Armored = 12000;
+        /// <summary>
+        /// For 3rd tier rogue zombies with light armor
+        /// </summary>
         public const int UltiZombieC_Health_Light = 12000;
+        /// <summary>
+        /// For 3rd tier rogue zombies with heavy armor
+        /// </summary>
         public const int UltiZombieC_Health_Armored = 24000;
+        /// <summary>
+        /// For 4th tier rogue zombies with light armor
+        /// </summary>
         public const int UltiZombieD_Health_Light = 24000;
+        /// <summary>
+        /// For 4th tier rogue zombies with heavy armor
+        /// </summary>
         public const int UltiZombieD_Health_Armored = 48000;
+        /// <summary>
+        /// Please don't
+        /// </summary>
         public const int IHateYou = 240000;
-        #pragma warning restore CS1591
         #endregion
     }
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using CustomPlantClass.CustomizeLib.ExtensionData.Basic;
 using CustomPlantClass.CustomizeLib.UnmanagedTools;
+using CustomPlantClass.Runtime.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -325,30 +326,37 @@ namespace CustomPlantClass.CustomizeLib.Patch
                                 continue;
                             foreach (var (bulletID, list) in it.BulletList)
                             {
-                                if (bulletID == (BulletType)(-1)) continue;
-                                foreach (var bullet in list)
+                                try
                                 {
-                                    if (bullet != null)
+                                    if (bulletID == (BulletType)(-1)) continue;
+                                    foreach (var bullet in list)
                                     {
-                                        if (!CustomCore.CustomBulletSkinReplace.ContainsKey((plantType, index)))
-                                            CustomCore.CustomBulletSkinReplace.Add((plantType, index), new Dictionary<BulletType, List<BulletType>>
+                                        if (bullet != null)
                                         {
-                                            { bulletID, CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)] }
-                                        });
-                                        else
-                                        {
-                                            if (CustomCore.CustomBulletSkinReplace[(plantType, index)].ContainsKey(bulletID))
+                                            if (!CustomCore.CustomBulletSkinReplace.ContainsKey((plantType, index)))
+                                                CustomCore.CustomBulletSkinReplace.Add((plantType, index), new Dictionary<BulletType, List<BulletType>>
                                             {
-                                                for (int i = CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)].Count - 1; i >= 0; i--)
-                                                {
-                                                    var itb = CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)][i];
-                                                    CustomCore.CustomBulletSkinReplace[(plantType, index)][bulletID].Add(itb);
-                                                }
-                                            }
+                                                { bulletID, CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)] }
+                                            });
                                             else
-                                                CustomCore.CustomBulletSkinReplace[(plantType, index)].Add(bulletID, CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)]);
+                                            {
+                                                if (CustomCore.CustomBulletSkinReplace[(plantType, index)].ContainsKey(bulletID))
+                                                {
+                                                    for (int i = CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)].Count - 1; i >= 0; i--)
+                                                    {
+                                                        var itb = CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)][i];
+                                                        CustomCore.CustomBulletSkinReplace[(plantType, index)][bulletID].Add(itb);
+                                                    }
+                                                }
+                                                else
+                                                    CustomCore.CustomBulletSkinReplace[(plantType, index)].Add(bulletID, CustomCore.CustomBulletsSkinID[(plantType, bulletID, index)]);
+                                            }
                                         }
                                     }
+                                }
+                                catch(Exception e)
+                                {
+                                    ModLogger.LogError(e);
                                 }
                             }
                         }
@@ -610,7 +618,7 @@ namespace CustomPlantClass.CustomizeLib.Patch
 
         public static void ShowCards()
         {
-            GameObject? MyColorfulCard = Utils.GetColorfulCardGameObject();
+            GameObject? MyColorfulCard = Tools.GetColorfulCardGameObject();
             List<PlantType> cardsOnSeedBank = new List<PlantType>();
             Dictionary<PlantType, List<bool>> cardsOnSeedBankExtra = new Dictionary<PlantType, List<bool>>();
             GameObject? seedGroup = null;
@@ -695,7 +703,7 @@ namespace CustomPlantClass.CustomizeLib.Patch
                 }
             }
 
-            GameObject? MyNormalCard = Utils.GetNormalCardGameObject();
+            GameObject? MyNormalCard = Tools.GetNormalCardGameObject();
             if (MyNormalCard == null)
                 return;
             foreach (var (pt, (list, times)) in CustomCore.CustomNormalCards)
@@ -844,6 +852,7 @@ namespace CustomPlantClass.CustomizeLib.Patch
                     newUnlockToPlant[(TravelUnlocks)item.Key] = item.Value.Item1;
                 TravelDictionary.UnlockToPlant = newUnlockToPlant;
 
+                /*
                 // debuffData
                 var newDebuffData = new Il2CppSystem.Collections.Generic.Dictionary<TravelDebuff, Il2CppSystem.ValueTuple<string, ZombieType>>();
                 foreach (var item in TravelDictionary.debuffData)
@@ -852,6 +861,7 @@ namespace CustomPlantClass.CustomizeLib.Patch
                     newDebuffData.DictionarySetItem((TravelDebuff)item.Key,
                         new Il2CppSystem.ValueTuple<string, ZombieType>(item.Value.Item1, item.Value.Item2));
                 TravelDictionary.debuffData = newDebuffData;
+                */
 
                 var newPlantInfo = new Il2CppSystem.Collections.Generic.Dictionary
                     <PlantType, Il2CppSystem.ValueTuple<Il2CppSystem.Nullable<PlantType>, Il2CppSystem.Object, Il2CppSystem.Object, bool>>();

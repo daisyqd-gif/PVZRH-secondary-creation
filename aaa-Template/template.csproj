@@ -12,6 +12,7 @@
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

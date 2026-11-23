@@ -21,18 +21,19 @@
     <EmbeddedResource Include="datamgr" /> <!-- Change abname to the name of the assetbundle or remove if it is not a custom plant mod -->
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CustomPlantClass.CustomizeLib.BepInEx\CustomPlantClass.CustomizeLib.BepInEx.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Runtime.Core\CustomPlantClass.Runtime.Core.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Runtime.Tasks\CustomPlantClass.Runtime.Tasks.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Networking\CustomPlantClass.Networking.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Runtime.CSharp\CustomPlantClass.Runtime.CSharp.csproj" />
+  </ItemGroup>
+
   <!-- Import shared references -->
   
   <ItemGroup>
-    <ProjectReference Include="..\CustomPlantClass.CustomizeLib.BepInEx\CustomPlantClass.CustomizeLib.BepInEx.csproj" />
     <Reference Include="0Harmony" Private="false">
       <HintPath>..\lib\BepInEx\core\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.Runtime.Tasks" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="CustomPlantClass.Runtime.Core" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>..\lib\BepInEx\interop\Assembly-CSharp.dll</HintPath>
@@ -45,13 +46,6 @@
     </Reference>
     <None Include="..\lib\BepInEx\core\BepInEx.Core.xml">
       <Link>BepInEx.Core.xml</Link>
-      <CopyToOutputDirectory>false</CopyToOutputDirectory>
-    </None>
-    <Reference Include="CustomPlantClass.Runtime.Core" Private="false">
-      <HintPath>..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.dll</HintPath>
-    </Reference>
-    <None Include="..\lib\BepInEx\plugins\CustomPlantClass.Runtime.Core.xml">
-      <Link>CustomPlantClass.Runtime.Core.xml</Link>
       <CopyToOutputDirectory>false</CopyToOutputDirectory>
     </None>
     <Reference Include="BepInEx.Preloader.Core" Private="false">

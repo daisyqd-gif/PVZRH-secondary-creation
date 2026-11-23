@@ -191,6 +191,7 @@ namespace CustomPlantClass
         public virtual Bullet Shoot_Custom()
         {
             Bullet b = PlantMgr.SetBullet(_plant, GetBulletType(), GetBulletMoveWay(), AttackDamage); //applies fields automatically
+            UniqueEffect(b);
             int soundId = Random.Range(3, 5);
             GameAPP.PlaySound(soundId, 0.5f, 1.0f);
             return b;
@@ -199,6 +200,7 @@ namespace CustomPlantClass
         public virtual Bullet Shoot2_Custom()
         {
             Bullet b = PlantMgr.SetBullet(_plant, GetBulletType2(), GetBulletMoveWay2(), AttackDamage2); //applies fields automatically
+            UniqueEffect2(b);
             int soundId = Random.Range(3, 5);
             GameAPP.PlaySound(soundId, 0.5f, 1.0f);
             return b;
@@ -206,9 +208,11 @@ namespace CustomPlantClass
 
         public virtual void AnimShoot_Custom() => Shoot1();
         public virtual void AnimShoot2_Custom() => Shoot2();
+        protected virtual void UniqueEffect(Bullet b) { }
+        protected virtual void UniqueEffect2(Bullet b) { }
         public virtual void FixedUpdate()
         {
-            if (GameAPP.theGameStatus == GameStatus.InGame && Board.Instance != null && _plant != null && _plant.healthSlider != null)
+            if (GameAPP.theGameStatus == GameStatus.InGame && Instance != null && _plant != null && _plant.healthSlider != null)
             {
                 _plant.healthSlider.ProgressFill = sliderCount;
                 _plant.healthSlider.progressMaxValue = maxSliderCount;

@@ -44,14 +44,16 @@ namespace UltimatePortalGatling
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData PortalData = new BaseCustomPlantData()
+            BaseCustomPlantData PortalData = new BaseCustomPlantData<Shooter, SuperPortalGatling>
+            (
+                PortalPlantType, // Automatically assigns a unique ID
+
+                assetBundle.GetAsset<GameObject>("PortalSuperGatlingPrefab"),   // Main plant prefab
+                assetBundle.GetAsset<GameObject>("PortalSuperGatlingPreview")
+            ) // Card preview prefab
             {
-                PlantId = PortalPlantType, // Automatically assigns a unique ID
 
-                Prefab = assetBundle.GetAsset<GameObject>("PortalSuperGatlingPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("PortalSuperGatlingPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID, ID)>(){(PlantType.UltimatePortalSniper,PlantType.Peashooter),(PlantType.UltimateHelmetGatling,PlantType.PortalPea)}), // Optional fusion recipes
+                Fusions = ListHelper.MirrorList(new List<(ID, ID)>(){(PlantType.UltimatePortalSniper,PlantType.Peashooter),(PlantType.UltimateHelmetGatling,PlantType.PortalPea)}), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -91,11 +93,10 @@ namespace UltimatePortalGatling
                     "</color>\n" +
                     "<color=#3D1400>融合配方：</color><color=red>究极超时空狙击射手 + 豌豆射手</color>"
                     // Almanac description (CN + EN recommended)
-            };
+            }.Register();
 
             // Register the plant and retrieve its ID
-            ID plantID1 = DataMgr.RegisterCustomPlant<Shooter, SuperPortalGatling>(PortalData);
-            CustomCore.TypeMgrExtra.IsMagnetPlants.Add(plantID1);
+            CustomCore.TypeMgrExtra.IsMagnetPlants.Add(PortalPlantType);
 
             CustomCore.RegisterCustomBullet<Bullet_pea,UltimatePortalPea>(BulletType_Portal,assetBundle.GetAsset<GameObject>("Bullet_portalPea"));
 

@@ -13,6 +13,7 @@ namespace HorseBossPhase2
         public void Awake()
         {
             center = transform.GetChild(0);
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * 2;
         }
         public void FixedUpdate()
         {

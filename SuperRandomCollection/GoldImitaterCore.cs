@@ -17,7 +17,7 @@ namespace SuperRandomCollection
         public void Load()
         {
             var ab = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "goldimitater");
-            DataMgr.RegisterCustomPlant<Imitater, GoldImitater>(GoldImitater.PlantID, ab.GetAsset<GameObject>("GoldImitaterPrefab"),
+            DataMgr.RegisterCustomPlant<Imitater, GoldImitater>(GoldImitater.PlantID.id, ab.GetAsset<GameObject>("GoldImitaterPrefab"),
                 ab.GetAsset<GameObject>("GoldImitaterPreview"), [], 0f, 0f, 0, 300, 15, 50);
             CustomCore.RegisterCustomPlantSkin<Imitater, GoldImitater>(GoldImitater.PlantID, ab.GetAsset<GameObject>("GoldImitaterPrefabNewYear"),
                 ab.GetAsset<GameObject>("GoldImitaterPreviewNewYear"), [], 0f, 0f, 0, 300, 15, 50);
@@ -43,14 +43,14 @@ namespace SuperRandomCollection
                 "<color=#955300>价格：</color><color=red>50</color>\n" +
                 "<color=#955300>冷却：</color><color=red>15秒</color>");
             CustomCore.RegisterCustomCardToColorfulCards((PlantType)GoldImitater.PlantID, 14);
-            GoldImitater.buff = CustomCore.RegisterCustomBuff("孤注一掷：黄金模仿者出现究极植物与究极僵尸的概率大幅提高", BuffType.AdvancedBuff, () => true, 5000, plantType: (PlantType)GoldImitater.PlantID);
+            GoldImitater.buff = CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("超级随机 - 孤注一掷",("黄金模仿者","出现究极植物与究极僵尸的概率大幅提高"),allowSPInheridence:true), BuffType.AdvancedBuff, () => true, 5000, plantType: (PlantType)GoldImitater.PlantID);
         }
     }
 
     public class GoldImitater : MonoBehaviour
     {
         public static BuffID buff = -1;
-        public static int PlantID = 1931;
+        public static ID PlantID = 1931;
 
         public void Start()
         {

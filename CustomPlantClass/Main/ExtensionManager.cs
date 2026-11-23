@@ -4,10 +4,12 @@ namespace CustomPlantClass.Main
 
     public static class ExtensionManager
     {
+        [Obsolete("ID now supports auto casting")]
         public static GridItemType ToGridItemType(this ID self)
         {
             return (GridItemType)self.id;
         }
+        [Obsolete("ID now supports auto casting")]
         public static ID ToID(this GridItemType self)
         {
             return (int)self;
@@ -147,16 +149,41 @@ namespace CustomPlantClass.Main
 
             return temp[Random.Range(0, temp.Count)];
         }
+    }
+    public static class GameExtensions
+    {
         public static bool IsActive(this TravelUnlocks self) => Lawnf.TravelUnlock(self);
         public static bool IsActive(this AdvBuff self) => Lawnf.TravelAdvanced(self);
         public static bool IsActive(this UltiBuff self) => Lawnf.TravelUltimate(self);
         public static bool IsActive(this TravelDebuff self) => Lawnf.TravelDebuff(self);
         public static bool IsActive(this InvestBuff self) => Lawnf.TravelInvest(self);
+        public static void Activate(this TravelUnlocks self) => TravelMgr.Instance.UnlockPlant(self);
+        public static void Activate(this AdvBuff self) => TravelMgr.Instance.GetNormalBuff(self);
+        public static void Activate(this UltiBuff self) => TravelMgr.Instance.GetUltiBuff(self);
+        public static void Activate(this UltiBuff self, bool allowUpgrade = false) => TravelMgr.Instance.GetUltiBuff(self, allowUpgrade);
+        public static void Activate(this TravelDebuff self) => TravelMgr.Instance.GetDebuff(self);
+        public static void Activate(this InvestBuff self) => TravelMgr.Instance.GetInvestBuff(self);
         public static int GetBuffLevel(this UltiBuff self) => Lawnf.TravelUltimateLevel(self);
         public static bool IsActiveUnlock(this BuffID self) => Lawnf.TravelUnlock(self);
         public static bool IsActiveAdv(this BuffID self) => Lawnf.TravelAdvanced(self);
         public static bool IsActiveUlti(this BuffID self) => Lawnf.TravelUltimate(self);
         public static bool IsActiveDebuff(this BuffID self) => Lawnf.TravelDebuff(self);
         public static int GetBuffLevelUlti(this BuffID self) => Lawnf.TravelUltimateLevel(self);
+        public static void ActivateUnlock(this BuffID self) => TravelMgr.Instance.UnlockPlant(self);
+        public static void ActivateAdv(this BuffID self) => TravelMgr.Instance.GetNormalBuff(self);
+        public static void ActivateUlti(this BuffID self) => TravelMgr.Instance.GetUltiBuff(self);
+        public static void ActivateUlti(this BuffID self, bool allowUpgrade = false) => TravelMgr.Instance.GetUltiBuff(self, allowUpgrade);
+        public static void ActivateDebuff(this BuffID self) => TravelMgr.Instance.GetDebuff(self);
+        /*
+        public static Plant SetPlant( this CreatePlant self, int newColumn, int newRow, ID theSeedType, Plant targetPlant = null, Vector2 puffV = default, bool isFreeSet = false, bool withEffect = true, Plant hidplant = null, TravelRoguePlantData travelRogueData = null)
+        {
+            return self.SetPlant( newColumn, newRow, theSeedType, targetPlant, puffV, isFreeSet, withEffect, hidplant, travelRogueData );
+        }
+
+        public static Zombie SetZombie( this CreateZombie self, int theRow, ID theZombieType, float theX = 9.9f, bool isMindControlled = false, bool ignoreTerrain = false )
+        {
+            return self.SetZombie( theRow, theZombieType, theX, isMindControlled, ignoreTerrain );
+        }
+        */
     }
 }

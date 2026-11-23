@@ -12,17 +12,17 @@ namespace CustomPlantClass.Examples
         {
             PluginBehaviour.AddComponentToPlugin<StaticExamples>();
         }
-        public static void UltimateGatling_StarShoot(BaseCustomPlant plant, BulletType theBulletType)
+        public static void UltimateGatling_StarShoot(Shooter plant, BulletType theBulletType)
         {
             plant.StartCoroutine(StarShoot_UltimateGatling_Internal(plant, theBulletType));
         }
-        private static IEnumerator StarShoot_UltimateGatling_Internal(BaseCustomPlant plant, BulletType theBulletType)
+        private static IEnumerator StarShoot_UltimateGatling_Internal(Shooter plant, BulletType theBulletType)
         {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    PlantMgr.SetBullet(plant._plant, theBulletType, BulletMoveWay.SuperGatling, new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), Random.Range(-15f, 15f)).normalSpeed = Random.Range(12f, 14f);
+                    PlantMgr.SetBullet(plant, theBulletType, BulletMoveWay.SuperGatling, new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), Random.Range(-15f, 15f)).normalSpeed = Random.Range(12f, 14f);
                 }
                 yield return new WaitForFixedUpdate();
             }
@@ -31,7 +31,7 @@ namespace CustomPlantClass.Examples
         (
             Board board,
             Vector2 position,
-            GameObject glow,
+            GameObject glow = null,
             float growTargetScale = 40f,
             float growStep = 0.4f,
             int frameDelayMs = 8,
@@ -56,7 +56,7 @@ namespace CustomPlantClass.Examples
             );
         }
 
-        private static async void Shrink_Internal
+        internal static async void Shrink_Internal
         (
             Board board,
             GameObject glow,
@@ -200,9 +200,11 @@ namespace CustomPlantClass.Examples
         }
         public static void KillAllZombies()
         {
-            foreach( var i in Lawnf.GetAllZombies(Board.Instance).ToSystemList()) 
+            var z = Lawnf.GetAllZombies(Instance);
+            List<Zombie> z2 = [..z];
+            foreach( var j in z2 ) 
             {
-                i.Die(1);
+                j.Die(1);
             }
         }
         public static void CreateRadiation(Board board, Vector2 pos, PlantType fromType = PlantType.NuclearDoomCherry, int damage = 3600)

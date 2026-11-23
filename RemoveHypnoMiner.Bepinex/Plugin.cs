@@ -14,7 +14,7 @@ namespace RemoveHypnoMiner
         public override void Load()
         {
             DataMgr.AddCustomOnZombieSpawnEvent(ZombieType.HypnoJalapenoPickaxeZombie,ZombieType.RandomZombie,(Zombie z)=>{z.Die(1);return true;});
-            DataMgr.AddCustomOnZombieSpawnEvent(ZombieType.Jackbox_c,ZombieType.Jackbox_b,(Zombie z)=>{z.Die(1);return true;});
+            //DataMgr.AddCustomOnZombieSpawnEvent(ZombieType.Jackbox_c,ZombieType.Jackbox_b,(Zombie z)=>{z.Die(1);return true;});
             DataMgr.AddCustomOnZombieSpawnEvent(ZombieType.UltimateSwordZombie,ZombieType.EternalZombie_c,(Zombie z)=>{z.Die(1);return true;});
 
             Log.LogInfo($"{PluginName} {PluginVersion} loaded.");

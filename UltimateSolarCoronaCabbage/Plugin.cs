@@ -39,14 +39,16 @@ namespace UltimateSolarCoronaCabbage_Remade
             DataContainer.theBulletType=DataMgr.AllocateID();
             CustomCore.RegisterCustomBullet<Bullet_sunCabbage>(DataContainer.theBulletType,assetBundle.GetAsset<GameObject>("Bullet_DoubleSuncabbage"));
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new BaseCustomPlantData
+            (
+                DataMgr.AllocateID(), // Automatically assigns a unique ID
+
+                assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePrefab"),   // Main plant prefab
+                assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePreview")
+            )// Card preview prefab
             {
-                PlantId = DataMgr.AllocateID(), // Automatically assigns a unique ID
 
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateSolarCoronaCabbagePreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new(){(PlantType.UltimateCabbage,PlantType.UltimateCabbage)}), // Optional fusion recipes
+                Fusions = ListHelper.MirrorList(new(){(PlantType.UltimateCabbage,PlantType.UltimateCabbage)}), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
                 ProduceInterval = 2f,  // Time between sun/production cycles

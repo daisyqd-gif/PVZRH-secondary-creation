@@ -8,7 +8,7 @@ namespace UltimateSniper
         public bool isSkill = false;
         public int MeteorCD = 200;
         public override string GetTextString() => "充能:" + energy;
-        public static bool IsRogue { get => ShootingManager.Instance != null || Board.Instance.boardTag.rogueShooting; }
+        public static bool IsRogue => ShootingManager.Instance != null || Board.Instance.boardTag.rogueShooting;
         public override Transform FindShoot() => transform.FindChild("GatlingPea_head/Shoot");
         public IEnumerator Shooting()
         {
@@ -39,15 +39,15 @@ namespace UltimateSniper
         }
         public override Bullet Shoot_Custom()
         {
-            if ( IsRogue && Lawnf.TravelAdvanced(Plugin.Buff2) )
+            if (_plant.starUp) _plant.StartCoroutine(Shooting());
+            else if ( IsRogue && Lawnf.TravelAdvanced(Plugin.Buff2) )
             {
                 SetBullet(default, 15);
                 SetBullet(default, -15);
             }
-            if (_plant.starUp) _plant.StartCoroutine(Shooting());
-            return SetBullet();
+            return _plant.starUp ? null : SetBullet();
         }
-        public void Clicked()
+        public override void OnClicked(Mouse mouse)
         {
             if (energy >= 50 && !isSkill && !IsRogue)
             {

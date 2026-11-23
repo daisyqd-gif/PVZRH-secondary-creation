@@ -10,8 +10,10 @@
 
     <!-- IL2CPP mods don't need dependency/runtime files -->
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <LangVersion>latest</LangVersion>
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>$(MSBuildThisFileDirectory)..\Build\net6.0\CustomPlantClass.Unmanaged.xml</DocumentationFile>
   </PropertyGroup>
 

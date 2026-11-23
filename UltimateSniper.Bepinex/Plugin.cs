@@ -12,6 +12,7 @@ global using CustomPlantClass.Main;
 using CustomPlantClass.RogueShootingManager;
 using GameLevel.RogueShooting;
 using CustomPlantClass.Examples;
+using AlmanacData;
 
 
 namespace UltimateSniper
@@ -24,8 +25,8 @@ namespace UltimateSniper
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
 
         #region Custom GameObjects
-        public static GameObject FireMeteor2 = null;
-        public static GameObject ZombieBurn = null;
+        //public static GameObject FireMeteor2 = null;
+        //public static GameObject ZombieBurn = null;
         public static GameObject FireStar = null;
         public static GameObject IceStar = null;
         //public static GameObject Doom1 = null;
@@ -53,19 +54,19 @@ namespace UltimateSniper
         public static ID Doom_Big_Fire_ID = DataMgr.AllocateID();
         public static ID cherryType = DataMgr.AllocateID();
         public static ID ParticleID = DataMgr.AllocateID();
+        public static ID Skin_Bullet_ultimateJalaPea = DataMgr.AllocateID();
+        public static ID Skin_Bullet_dragonFlame = DataMgr.AllocateID();
         #endregion
         public override void InitializePlants()
         {
 
             #region Ultimate Sniper
             
-            BaseCustomPlantData Data_Red = new BaseCustomPlantData()
+            BaseCustomPlantData Data_Red = new BaseCustomPlantData(
+                UltimateSniper.PLANT_ID,
+                assetBundle.GetAsset<GameObject>("FireSniperPrefab"),
+                assetBundle.GetAsset<GameObject>("FireSniperPreview"))
             {
-                PlantId = UltimateSniper.PLANT_ID, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("FireSniperPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("FireSniperPreview"), // Card preview prefab
-
                 Fusions = new(), // Optional fusion recipes
 
                 AttackInterval = 3f,   // Time between attacks (shooters only)
@@ -110,24 +111,30 @@ namespace UltimateSniper
             };
             DataMgr.RegisterCustomPlant<SniperPea, UltimateSniper>(Data_Red);
             #endregion
+            #region Skin
             CustomCore.RegisterCustomPlantSkin<UltimateJalaGatling>(
-                (int)PlantType.UltimateJalaGatling,
+                PlantType.UltimateJalaGatling,
                 assetBundle.GetAsset<GameObject>("SuperSnowGatlingPrefab"), // I forgot to rename the prefab. Evolution: super snow gatling -> its own plant -> now a skin
                 assetBundle.GetAsset<GameObject>("SuperSnowGatlingPreview"),
                 p =>
                 {
                     p.shoot = p.transform.FindChild("GatlingPea_head/Shoot");
                     p.back =  p.transform.FindChild("Back/Back (1)").GetComponent<SpriteRenderer>();
-                });
+                }
+                //,new()
+                //{
+                //    (BulletType.Bullet_ultimateJalaPea, new() { assetBundle.GetAsset<GameObject>("Bullet_firePea_ultimate") }),
+                //    (BulletType.Bullet_dragonFlame, new() { assetBundle.GetAsset<GameObject>("Bullet_cherryPea_ultimate_explosive") })
+                //}
+            );
+            #endregion
             #region Ultimate Flame Gatling
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new(
+                UFlameGatling,
+                assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPreview"))
             {
-                PlantId = UFlameGatling, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateFlameGatlingPreview"), // Card preview prefab
-
                 Fusions = ListHelper.MirrorList(new([(PlantType.JalaGatling, PlantType.PortalDoom), (UFlameSniper, PlantType.Peashooter)])), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
@@ -168,13 +175,11 @@ namespace UltimateSniper
                 "<color=#3D1400>词条1</color><color=red>:星火燎原:灼烧范围提升至3×3，灼烧值上限×3</color>\n<color=#3D1400>词条2:</color><color=red>飞沙走石:赤焰陨星的留下的子弹数量×3，所有子弹伤害×3</color>\n\n" +
                 "<color=#3D1400>究极炽焰机枪原本只是个普通机枪射手，某天被僵尸踩了叶子后，气得把豌豆换成了火球，还拿了个全息底座让自己“飞”了起来。</color>"    // Almanac description (CN + EN recommended)
             };
-            BaseCustomPlantData Data2 = new BaseCustomPlantData()
+            BaseCustomPlantData Data2 = new(
+                UFlameSniper,
+                assetBundle.GetAsset<GameObject>("UltimateFlameSniperPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateFlameSniperPreview"))
             {
-                PlantId = UFlameSniper, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateFlameSniperPreview"), // Card preview prefab
-
                 Fusions = ListHelper.MirrorTuple((UFlameGatling, PlantType.Peashooter)), // Optional fusion recipes
 
                 AttackInterval = 1f,   // Time between attacks (shooters only)
@@ -205,31 +210,30 @@ namespace UltimateSniper
 
                 Name = "究极炽焰狙击射手",           // Plant name (shown in UI)
                 AlmanacEntry = "“燃尽，此身！”\n\n" +
-                "尚未撰写\n<color=#3D1400>融合配方：</color><color=red>火辣机枪射手+超时空毁灭菇</color>"
+                "尚未撰写\n<color=#3D1400>融合配方：</color><color=red>究极炽焰机枪+豌豆射手</color>"
             };
 
             // Register the plant and retrieve its ID
             DataMgr.RegisterCustomPlant<UltimateGatling, UltimateFlameGatling_Remade>(Data);
             CustomCore.TypeMgrExtra.IsFirePlant.Add(UFlameGatling);
-            CustomCore.CustomPlantClicks.Add(UFlameGatling, (Plant p) =>
-            {
-                if (p.TryGetComponent<UltimateFlameGatling_Remade>(out var a)) a.Clicked();
-            });
             DataMgr.RegisterCustomPlant<FireSniper, UltimateFlameSniper>(Data2);
             CustomCore.TypeMgrExtra.IsFirePlant.Add(UFlameSniper);
             #endregion
 
             #region Bullets
-            CustomCore.RegisterCustomBullet<Bullet_firePea, UltimateFirePea>(UltimateFirePea.BULLET_ID, assetBundle.GetAsset<GameObject>("Bullet_firePea_ultimate"));
-            CustomCore.RegisterCustomBullet<Bullet_superCherry, UltimateCherryPea>(UltimateCherryPea.BULLET_ID, assetBundle.GetAsset<GameObject>("Bullet_cherryPea_ultimate"));
-            CustomCore.RegisterCustomBullet<Bullet_superCherry, UltimateExplosivePea>(UltimateExplosivePea.BULLET_ID, assetBundle.GetAsset<GameObject>("Bullet_cherryPea_ultimate_explosive"));
+            CustomCore.RegisterCustomBullet<Bullet_ultimateJalaPea>(Skin_Bullet_ultimateJalaPea, assetBundle.GetAsset<GameObject>("Bullet_firePea_ultimate"));
+            CustomCore.RegisterCustomBullet<Bullet_dragonFlame>(Skin_Bullet_dragonFlame, assetBundle.GetAsset<GameObject>("Bullet_cherryPea_ultimate"));
+            //CustomCore.RegisterCustomBullet<Bullet_superCherry, UltimateExplosivePea>(UltimateExplosivePea.BULLET_ID, assetBundle.GetAsset<GameObject>("Bullet_cherryPea_ultimate_explosive"));
 
-            CustomCore.RegisterCustomBullet<Bullet_sword, FlamePea>(BType_Flame, assetBundle.GetAsset<GameObject>("Bullet_flamePea"));
+            CustomCore.RegisterCustomBullet<Bullet_pea, FlamePea>(BType_Flame, assetBundle.GetAsset<GameObject>("Bullet_flamePea"));
             CustomCore.RegisterCustomBullet<Bullet_sword, FlamePea>(BType_FireFlame, assetBundle.GetAsset<GameObject>("Bullet_flamePea_fire"));
             CustomCore.RegisterCustomBullet<Bullet_sword, FlamePea_Explosive>(BType_Explode, assetBundle.GetAsset<GameObject>("Bullet_flamePea_Star"));
             #endregion
 
             #region misc
+            DataMgr.RegisterCustomStarUp(UltimateSniper.PLANT_ID);
+
+            /*
             CustomCore.RegisterSuperSkill(UltimateMegaGatlingPea.PLANT_ID, (Plant p) => 1000, (Plant p) =>
             {
                 if (p.TryGetComponent<UltimateMegaGatlingPea>(out var comp))
@@ -237,14 +241,13 @@ namespace UltimateSniper
                     comp.plant.StartCoroutine(comp.SuperShoot_Custom());
                 }
             });
-
-            DataMgr.RegisterCustomStarUp(UltimateSniper.PLANT_ID);
             DataMgr.RegisterCustomStarUp(UltimateMegaGatlingPea.PLANT_ID); DataMgr.AddCustomStrongUltimatePlant
             (
                 UFlameGatling,
                 DataMgr.FormatStrongUltimateUnlockBuff("究极炽焰机枪", "火辣机枪射手", "超时空毁灭菇", "究极炽焰狙击射手", "豌豆射手", "豌豆射手"),
                 Buff0, Buff1, BuffBgType.Day, UFlameSniper
             );
+            */
 
             //DataMgr.AddCustomPlantUpgrade(PlantType.FireSniper, UltimateSniper.PLANT_ID, 5f);
             //DataMgr.AddCustomPlantUpgrade(UFlameGatling, UltimateMegaGatlingPea.PLANT_ID, 5f);
@@ -254,8 +257,8 @@ namespace UltimateSniper
         }
         public override void InitializeBuffs()
         {
-            Buff0 = Compatibility.CustomCore_Old.RegisterCustomBuff("星火燎原：究极炽焰机枪灼烧范围提升至3×3，灼烧值上限×3", BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
-            Buff1 = Compatibility.CustomCore_Old.RegisterCustomBuff("飞沙走石：究极炽焰机枪赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星", BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
+            Buff0 = CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("星火燎原 II",("究极炽焰机枪","灼烧范围提升至3×3，灼烧值上限×3"),("究极炽焰狙击射手","同样效果")), BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
+            Buff1 = CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("飞沙走石",("究极炽焰机枪","赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星"),("究极炽焰狙击射手","头像照要求 / 2")), BuffType.UltimateBuff, () => true, 3000, UFlameGatling, 1, BuffBgType.Day);
             (Buff_Curse, Buff2, BaseBuff wildfire1) = RegistryHelper.RegisterCustomCurseBuff("山火", "子弹失去传送效果。当灼烧造成100万伤害时， 反转诅咒。", "灼烧将传播", UFlameGatling, (p) => p.shootingCurse >= 1_000_000);
             (AdvBuff _, BaseBuff Buff1_2) = RegistryHelper.RegisterCustomQualitativeChangeBuff("飞沙走石", "究极炽焰机枪赤焰陨星的留下的子弹数量×3，所有子弹伤害×3，当充能超过200时究极炽焰机枪将使用75充能召唤2个赤焰陨星", UFlameGatling, () => TravelMgr.Instance.GetNormalBuff(Buff1));
             BaseBuff uBuff = RegistryHelper.MakeBuffType(new CustomRogueShootingBuff()
@@ -304,18 +307,15 @@ namespace UltimateSniper
         {
             assetBundle = CustomCore.GetAssetBundle(Assembly.GetExecutingAssembly(), "ultimatesniper");
             UltimateSniper.PLANT_ID = DataMgr.AllocateID();
-            UltimateMegaGatlingPea.PLANT_ID = DataMgr.AllocateID();
-            UltimateFirePea.BULLET_ID = DataMgr.AllocateID();
-            UltimateCherryPea.BULLET_ID = DataMgr.AllocateID();
-            UltimateExplosivePea.BULLET_ID = DataMgr.AllocateID();
+            //UltimateMegaGatlingPea.PLANT_ID = DataMgr.AllocateID();
             #region GameObject assignment
-            FireMeteor2 = assetBundle.GetAsset<GameObject>("BigStar");
-            FireMeteor2.AddComponent<FireMeteor>();
-            FireMeteor2.GetComponent<SortingGroup>().sortingLayerName = "fog";
+            //FireMeteor2 = assetBundle.GetAsset<GameObject>("BigStar");
+            //FireMeteor2.AddComponent<FireMeteor>();
+            //FireMeteor2.GetComponent<SortingGroup>().sortingLayerName = "fog";
 
-            ZombieBurn = assetBundle.GetAsset<GameObject>("ZombieBurn");
-            ZombieBurn.AddComponent<Burn>();
-            ZombieBurn.GetComponent<SortingGroup>().sortingLayerName = "fog";
+            //ZombieBurn = assetBundle.GetAsset<GameObject>("ZombieBurn");
+            //ZombieBurn.AddComponent<Burn>();
+            //ZombieBurn.GetComponent<SortingGroup>().sortingLayerName = "fog";
 
             //Doom1 = assetBundle.GetAsset<GameObject>("Doom_bright");
             //Doom1.AddComponent<CustomParticle>();
@@ -341,11 +341,9 @@ namespace UltimateSniper
             UltimateTorchBehaviour.AddBulletToPool(BType_Flame, BType_FireFlame);
         }
     }
-    // Token: 0x02000023 RID: 35
     [HarmonyPatch(typeof(Zombie), nameof(Zombie.GetDamage))]
     public class ZombieGetDamagePatch
     {
-        // Token: 0x0600011C RID: 284 RVA: 0x00005920 File Offset: 0x00003B20
         [HarmonyPrefix]
         public static void Prefix(Zombie __instance, DamageType theDamageType, ref int theDamage)
         {
@@ -357,6 +355,53 @@ namespace UltimateSniper
                     return;
                 }
                 theDamage = Mathf.CeilToInt(theDamage * 1.5f);
+            }
+        }
+    }
+    [HarmonyPatch(typeof(Lawnf), nameof(Lawnf.GetName), [typeof(PlantType)])]
+    public class Lawnf_GetName_Patch
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(PlantType thePlantType, ref string __result)
+        {
+            if (thePlantType == PlantType.UltimateJalaGatling && SkinMgr.IsPlantSkinEnable(thePlantType))
+            {
+                __result = "终极炽焰机枪射手";
+                return false;
+            }
+            return true;
+        }
+    }
+    [HarmonyPatch(typeof(UltimateJalaGatling), nameof(UltimateJalaGatling.GetBulletType))]
+    public class UltimateJalaGatling_GetBulletType_Patch
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(UltimateJalaGatling __instance, ref BulletType __result)
+        {
+            if (SkinMgr.IsPlantSkinEnable(__instance.thePlantType))
+            {
+                __result = __instance.dragonMode ? Plugin.Skin_Bullet_dragonFlame : Plugin.Skin_Bullet_ultimateJalaPea;
+                return false;
+            }
+            return true;
+        }
+    }
+    [HarmonyPatch(typeof(AlmanacDataLoader), nameof(AlmanacDataLoader.GetPlantData))]
+    public class AlmanacDataLoader_GetPlantData_Patch
+    {
+        [HarmonyPrefix]
+        public static void Postfix(PlantType type, ref PlantInfo __result)
+        {
+            if (__result != null && type == PlantType.UltimateJalaGatling && SkinMgr.IsPlantSkinEnable(type))
+            {
+                __result.name = "终极炽焰机枪射手";
+                __result.introduce = "<color=#3D1400>获得真实火焰力量的究极炽焰机枪</color>";
+                __result.info = "散射子弹凝聚明火，觉醒状态下发射炽焰子弹。\n\n"+
+                "<color=#3D1400>使用条件：</color><color=red>神秘模式</color>\n"+
+                "<color=#3D1400>伤害：</color><color=red>300×10/0.33秒\n"+
+                "1500×5/0.66秒（炽焰子弹）</color>\n<color=#3D1400>特点：</color><color=red>点击可切换攻击模式。子弹均在±15°内散射</color>\n"+
+                "<color=#A86A44>散射模式：</color><color=red>每轮获取1能量</color>\n"+
+                "<color=#A86A44>炽焰模式：</color><color=red>每轮消耗3能量。子弹无限穿透，最多飞行5格</color>";
             }
         }
     }

@@ -4,6 +4,7 @@ using CustomPlantClass.Runtime;
 
 namespace UltimateSniper
 {
+    /*
     public class Burn : MonoBehaviour
     {
         public int damage = 0;
@@ -58,7 +59,7 @@ namespace UltimateSniper
             {
                 if (collider == null || collider.IsDestroyed() || collider.gameObject == null || collider.gameObject.IsDestroyed()) continue;
                 if (!collider.gameObject.TryGetComponent<Zombie>(out var zombie) || zombie == null || zombie.IsDestroyed()) continue;
-                zombie.TakeDamage(damage, null, DamageType.NormalAll, UltimateMegaGatlingPea.PLANT_ID);
+                zombie.TakeDamage(damage, null, DamageType.NormalAll, UltimateSniper.PLANT_ID);
             }
         }
 
@@ -85,6 +86,7 @@ namespace UltimateSniper
             return result.GetComponent<Burn>();
         }
     }
+    */
     // Token: 0x02000011 RID: 17
     public class ZombieBurn_2 : MonoBehaviour
     {
@@ -108,7 +110,7 @@ namespace UltimateSniper
         // Token: 0x0600007E RID: 126 RVA: 0x000044A8 File Offset: 0x000026A8
         public void Update()
         {
-            if (Utils.IsGameRunning() && Prop0 != null && !Prop0.beforeDying)
+            if (Tools.IsGameRunning() && Prop0 != null && !Prop0.beforeDying)
             {
                 if (Lawnf.TravelAdvanced(Plugin.Buff0))
                 {

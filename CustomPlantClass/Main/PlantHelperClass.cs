@@ -1,3 +1,4 @@
+using CustomPlantClass.Runtime.Core;
 using CustomPlantClass.Runtime.Tasks;
 
 namespace CustomPlantClass.Main
@@ -431,36 +432,43 @@ namespace CustomPlantClass.Main
             Material mat = null
         )
         {
-            var obj = new GameObject("Line", typeof(LineRenderer).ToIl2CppType());
-            obj.transform.SetParent(parent);
-            var line = obj.GetComponent<LineRenderer>();
-
-            line.positionCount = 2;
-            line.SetPosition(0, from);
-            line.SetPosition(1, to);
-            line.startWidth = startWidth;
-            line.endWidth = endWidth;
-            line.startColor = fromColor;
-            line.endColor = toColor;
-            line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}", row);
-
-            float a = stayTime;
-
-            if (token == null) token = new();
-
-            do
+            try
             {
-                a -= Time.deltaTime * 5;
-                var color1 = line.startColor;
-                var color2 = line.endColor;
-                color1.a = a;
-                color2.a = a;
-                line.startColor = color1;
-                line.endColor = color2;
-                await DelayTask.WaitForFixedUpdate(token);
+                var obj = new GameObject("Line", typeof(LineRenderer).ToIl2CppType());
+                obj.transform.SetParent(parent);
+                var line = obj.GetComponent<LineRenderer>();
+
+                line.positionCount = 2;
+                line.SetPosition(0, from);
+                line.SetPosition(1, to);
+                line.startWidth = startWidth;
+                line.endWidth = endWidth;
+                line.startColor = fromColor;
+                line.endColor = toColor;
+                line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
+                line.sortingLayerName = string.Format("plant{0}", row);
+
+                float a = stayTime;
+
+                if (token == null) token = new();
+
+                do
+                {
+                    a -= Time.deltaTime * 5;
+                    var color1 = line.startColor;
+                    var color2 = line.endColor;
+                    color1.a = a;
+                    color2.a = a;
+                    line.startColor = color1;
+                    line.endColor = color2;
+                    await DelayTask.WaitForFixedUpdate(token);
+                }
+                while (a > 0f && !token.IsCanceled);
             }
-            while (a > 0f && !token.IsCanceled);
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
         }
         /// <summary>Creates a line renderer through the supplied points and fades it after the specified time.</summary>
         /// <param name="parent">The transform that will parent the line object.</param>
@@ -481,43 +489,50 @@ namespace CustomPlantClass.Main
             Material mat = null, params Vector2[] pts
         )
         {
-            if (pts.Length < 1)
+            try
             {
-                Debug.LogWarning("Can't make a line with 1 point!");
-                return;
-            }
-            var obj = new GameObject("Line", typeof(LineRenderer).ToIl2CppType());
-            obj.transform.SetParent(parent);
-            var line = obj.GetComponent<LineRenderer>();
+                if (pts.Length < 1)
+                {
+                    Debug.LogWarning("Can't make a line with 1 point!");
+                    return;
+                }
+                var obj = new GameObject("Line", typeof(LineRenderer).ToIl2CppType());
+                obj.transform.SetParent(parent);
+                var line = obj.GetComponent<LineRenderer>();
 
-            line.positionCount = pts.Length;
-            for (int i = 0; i < pts.Length; i++)
+                line.positionCount = pts.Length;
+                for (int i = 0; i < pts.Length; i++)
+                {
+                    line.SetPosition(i, pts[i]);
+                }
+                line.startWidth = startWidth;
+                line.endWidth = endWidth;
+                line.startColor = fromColor;
+                line.endColor = toColor;
+                line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
+                line.sortingLayerName = string.Format("plant{0}", row);
+
+                float a = stayTime;
+
+                if (token == null) token = new();
+
+                do
+                {
+                    a -= Time.deltaTime * 5;
+                    var color1 = line.startColor;
+                    var color2 = line.endColor;
+                    color1.a = a;
+                    color2.a = a;
+                    line.startColor = color1;
+                    line.endColor = color2;
+                    await DelayTask.WaitForFixedUpdate(token);
+                }
+                while (a > 0f && !token.IsCanceled);
+            }
+            catch(Exception e)
             {
-                line.SetPosition(i, pts[i]);
+                ModLogger.LogError(e);
             }
-            line.startWidth = startWidth;
-            line.endWidth = endWidth;
-            line.startColor = fromColor;
-            line.endColor = toColor;
-            line.sharedMaterial = mat ?? Resources.Load<Material>("Plants/ElectricOnion/electirc");
-            line.sortingLayerName = string.Format("plant{0}", row);
-
-            float a = stayTime;
-
-            if (token == null) token = new();
-
-            do
-            {
-                a -= Time.deltaTime * 5;
-                var color1 = line.startColor;
-                var color2 = line.endColor;
-                color1.a = a;
-                color2.a = a;
-                line.startColor = color1;
-                line.endColor = color2;
-                await DelayTask.WaitForFixedUpdate(token);
-            }
-            while (a > 0f && !token.IsCanceled);
         }
         /// <summary>Creates and fades a two-point line renderer using an IL2CPP cancellation token.</summary>
         /// <param name="parent">The transform that will parent the line object.</param>

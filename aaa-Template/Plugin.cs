@@ -75,16 +75,18 @@ namespace Template
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
-            {
+            BaseCustomPlantData Data = new BaseCustomPlantData
+                (
                 PlantId = DataContainer.PlantId, // Automatically assigns a unique ID
 
                 Prefab = assetBundle.GetAsset<GameObject>("xxxPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("xxxPreview"), // Card preview prefab, hirearchy must be this
+                Preview = assetBundle.GetAsset<GameObject>("xxxPreview") // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
+                )
+                {
 
                 Fusions = new List<(ID, ID)>(), // Optional fusion recipes
 

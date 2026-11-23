@@ -10,6 +10,9 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using CustomPlantClass.Main;
+using UI;
+using Random = UnityEngine.Random;
+using GameLevel.RogueShooting;
 
 namespace SuperRandomCollection
 {
@@ -153,7 +156,7 @@ namespace SuperRandomCollection
             if (config.levelZombieInRandom) total += 2;
             if (config.strongUltiZombieInRandom) total += 2;
             if (config.leaderInRandom) total += 6;
-            if (GameAPP.theGameStatus == GameStatus.InGame && plant != null && UnityEngine.Random.Range(1, 101) <= total && plant.board != null && (plant.board.boardTag.isSuperRandom || plant.board.boardTag.isIZ))
+            if (GameAPP.theGameStatus == GameStatus.InGame && plant != null && Random.Range(1, 101) <= total && plant.board != null && (plant.board.boardTag.isSuperRandom || plant.board.boardTag.isIZ))
             {
                 plant.StarUp();
                 plant.starUp = true;
@@ -166,13 +169,108 @@ namespace SuperRandomCollection
             if (plant == null) return;
             plant.TryBeActive();
         }
-
+        public string ProbabilityToString(Probability p)
+        {
+            switch (p)
+            {
+                case Probability.NormalPlant: return "普通植物";
+                case Probability.UltimatePlant: return "究极植物";
+                case Probability.NormalZombie: return "普通僵尸";
+                case Probability.UltimateZombie: return "究极僵尸";
+                case Probability.Boss: return "领袖僵尸";
+                case Probability.Event: return "随机事件";
+                default: return "随机";
+            }
+        }
+        public PlantType ProbabilityToPt(Probability p)
+        {
+            switch (p)
+            {
+                case Probability.NormalPlant: return PlantType.Peashooter;
+                case Probability.UltimatePlant: return PlantType.UltimateGatling;
+                case Probability.NormalZombie: return PlantType.Nothing;
+                case Probability.UltimateZombie: return PlantType.Nothing;
+                case Probability.Boss: return PlantType.Nothing;
+                default:
+                case Probability.Event: return PlantType.Present;
+            }
+        }
+        public ZombieType ProbabilityToZt(Probability p)
+        {
+            switch (p)
+            {
+                case Probability.NormalPlant: return ZombieType.Nothing;
+                case Probability.UltimatePlant: return ZombieType.Nothing;
+                case Probability.NormalZombie: return ZombieType.NormalZombie;
+                case Probability.UltimateZombie: return ZombieType.CherryPaperZ95;
+                case Probability.Boss: return ZombieType.UltimatePaperZombie;
+                default:
+                case Probability.Event: return ZombieType.Nothing;
+            }
+        }
         public void AnimSpawn()
         {
-            var random = UnityEngine.Random.Range(1, 101);
+            var random = Random.Range(1, 101);
             var type = Probability.Event;
 
             // 使用累积概率数组进行判断
+            if (plant.starUp)
+            {
+                var type1 = Probability.Event;
+                random = Random.Range(1, 101);
+                for (int i = 0; i < 6; i++)
+                {
+                    if (random <= CumulativeProbabilities[i])
+                    {
+                        type1 = (Probability)i;
+                        break;
+                    }
+                }
+                var type2 = Probability.Event;
+                random = Random.Range(1, 101);
+                for (int i = 0; i < 6; i++)
+                {
+                    if (random <= CumulativeProbabilities[i])
+                    {
+                        type2 = (Probability)i;
+                        break;
+                    }
+                }
+                var type3 = Probability.Event;
+                random = Random.Range(1, 101);
+                for (int i = 0; i < 6; i++)
+                {
+                    if (random <= CumulativeProbabilities[i])
+                    {
+                        type3 = (Probability)i;
+                        break;
+                    }
+                }
+                var menu = GameAPP.UIManager.Push(UIType.MultipleChoiceMenu, false).GetComponent<MultipleChoiceMenu>();
+                if (menu == null)
+                {
+                    ModLogger.LogError("menu is null");
+                }
+                var t1 = () =>
+                {
+                    AnimSpawn_half(type1);
+                };
+                menu.RegisterOption(ProbabilityToString(type1)," ",t1,ProbabilityToPt(type1),ProbabilityToZt(type1),Quality.random,true);
+                var t2 = () =>
+                {
+                    AnimSpawn_half(type2);
+                };
+                menu.RegisterOption(ProbabilityToString(type2)," ",t2,ProbabilityToPt(type2),ProbabilityToZt(type2),Quality.random,true);
+                var t3 = () =>
+                {
+                    AnimSpawn_half(type3);
+                };
+                menu.RegisterOption(ProbabilityToString(type3)," ",t3,ProbabilityToPt(type3),ProbabilityToZt(type3),Quality.random,true);
+                menu.RegisterWindow(3);
+                menu.SetCancelable(false);
+                menu.SetRefreshable(false);
+                return;
+            }
             for (int i = 0; i < 6; i++)
             {
                 if (random <= CumulativeProbabilities[i])
@@ -200,6 +298,53 @@ namespace SuperRandomCollection
             CreateParticle.SetParticle((int)ParticleType.RandomCloud, plant.axis.position + new Vector3(0f, 0.5f, 0f), 11);
             plant.Die(Plant.DieReason.BySelf);
         }
+        /*
+        private void ShowBuff(bool luckyShow = false)
+        {
+            if (Lawnf.TravelDebuff(TravelDebuff.Shooting_命运无常))
+            {
+                int luckyChange = Random.Range(-27, 24);
+                InGameText.Instance.DelayShow($"命运无常：获得了{luckyChange}幸运", 3f, 1);
+                Lucky = _lucky + luckyChange / 100f;
+            }
+
+            var menu = GameAPP.UIManager.Push(UIType.MultipleChoiceMenu2, false) as MultipleChoiceMenu;
+            if (menu == null)
+                throw new InvalidOperationException("The shooting buff menu could not be opened.");
+
+            RegisterCoreBuff(menu);
+            RegisterOtherBuff(menu);
+            if (hellMode)
+                RefisterMissionBuff(menu);
+            RegisterExpertBuff(menu);
+
+            menu.SetCancelable(false, true);
+            if (Lawnf.TravelAdvanced(AdvBuff.Shooting_交易Max))
+                refreshCount = (int)Math.Truncate(_lucky * 2) - 1;
+
+            menu.KeySelect = true;
+        }
+        */
+        public void AnimSpawn_half(Probability type)
+        {
+            switch (type)
+            {
+                case Probability.NormalPlant:
+                case Probability.UltimatePlant:
+                    SetPlant(type);
+                    break;
+                case Probability.NormalZombie:
+                case Probability.UltimateZombie:
+                case Probability.Boss:
+                    SetZombie(type);
+                    break;
+                case Probability.Event:
+                    GetEvent();
+                    break;
+            }
+            CreateParticle.SetParticle((int)ParticleType.RandomCloud, plant.axis.position + new Vector3(0f, 0.5f, 0f), 11);
+            plant.Die(Plant.DieReason.BySelf);
+        }
         #nullable enable
         public void SetPlant(Probability probability)
         {
@@ -208,20 +353,20 @@ namespace SuperRandomCollection
             {
                 case Probability.NormalPlant:
                     {
-                        var pt = NormalPlants[UnityEngine.Random.Range(0, NormalPlants.Count)];
+                        var pt = NormalPlants[Random.Range(0, NormalPlants.Count)];
                         for (int i = 0; i < (TypeMgr.IsPuff(pt) ? 3 : 1); i++)
                             p = CreatePlant.Instance.SetPlant(plant.thePlantColumn, plant.thePlantRow, pt, isFreeSet: true);
                     }
                     break;
                 case Probability.UltimatePlant:
                     {
-                        var pt = UltiPlants[UnityEngine.Random.Range(0, UltiPlants.Count)];
+                        var pt = UltiPlants[Random.Range(0, UltiPlants.Count)];
                         for (int i = 0; i < (TypeMgr.IsPuff(pt) ? 3 : 1); i++)
                             p = CreatePlant.Instance.SetPlant(plant.thePlantColumn, plant.thePlantRow, pt, isFreeSet: true);
                     }
                     break;
             }
-            if (p != null && StarUp() && UnityEngine.Random.Range(0, 10) == 0 && p.OnStarUp())
+            if (p != null && StarUp() && Random.Range(0, 10) == 0 && p.OnStarUp())
             {
                 p.starUp = true;
                 p.StarUp();
@@ -233,10 +378,10 @@ namespace SuperRandomCollection
 
         public void ReinforcePlant(Plant plant, float healthMin, float healthMax, float speedMin, float speedMax)
         {
-            float healthMultiplier = UnityEngine.Random.Range(healthMin, healthMax);
+            float healthMultiplier = Random.Range(healthMin, healthMax);
             plant.ModifyHealth((PlantHealthAdder)5, healthMultiplier, false);
             plant.ModifyDamage((PlantDamageAdder)44, healthMultiplier, false, float.MaxValue.GetNullable());
-            float speedMultiplier = UnityEngine.Random.Range(speedMin, speedMax);
+            float speedMultiplier = Random.Range(speedMin, speedMax);
             plant.attributeSpeed = speedMultiplier;
             plant.attackSpeedAdder = speedMultiplier - 1f;
             plant.thePlantSpeed = speedMultiplier * plant.thePlantSpeed;
@@ -251,17 +396,17 @@ namespace SuperRandomCollection
             {
                 case Probability.NormalZombie:
                     {
-                        zt = NormalZombies[UnityEngine.Random.Range(0, NormalZombies.Count)];
+                        zt = NormalZombies[Random.Range(0, NormalZombies.Count)];
                     }
                     break;
                 case Probability.UltimateZombie:
                     {
-                        zt = UltiZombies[UnityEngine.Random.Range(0, UltiZombies.Count)];
+                        zt = UltiZombies[Random.Range(0, UltiZombies.Count)];
                     }
                     break;
                 case Probability.Boss:
                     {
-                        zt = BossZombies[UnityEngine.Random.Range(0, BossZombies.Count)];
+                        zt = BossZombies[Random.Range(0, BossZombies.Count)];
                     }
                     break;
             }
@@ -282,7 +427,7 @@ namespace SuperRandomCollection
             Board.Instance.isEveStarted = tmp;
             if (z == null) return;
             var multi = 1f;
-            switch (UnityEngine.Random.Range(0, 3))
+            switch (Random.Range(0, 3))
             {
                 case 0:
                     multi = 0.8f;
@@ -302,9 +447,9 @@ namespace SuperRandomCollection
                 case ZombieType.ZombieBoss:
                 case ZombieType.ZombieBoss2:
                     {
-                        var v = UnityEngine.Random.Range(10f, 500f);
+                        var v = Random.Range(10f, 500f);
                         if (plant.starUp)
-                            v = UnityEngine.Random.Range(100f, 500f);
+                            v = Random.Range(100f, 500f);
                         v = (float)Math.Round(v, 1, MidpointRounding.AwayFromZero);
                         z.theHealth = (int)(v * z.theHealth);
                         z.theMaxHealth = (int)(v * z.theMaxHealth);
@@ -321,9 +466,9 @@ namespace SuperRandomCollection
 
             if (UltimateGoldImitaterCore.OtherBoss.Contains(z.theZombieType))
             {
-                var v = UnityEngine.Random.Range(10f, 50f);
+                var v = Random.Range(10f, 50f);
                 if (plant.starUp)
-                    v = UnityEngine.Random.Range(25f, 100f);
+                    v = Random.Range(25f, 100f);
                 v = (float)Math.Round(v, 1, MidpointRounding.AwayFromZero);
                 z.theHealth = (int)(v * z.theHealth);
                 z.theMaxHealth = (int)(v * z.theMaxHealth);
@@ -336,7 +481,7 @@ namespace SuperRandomCollection
 
         public void ReinforceZombie(Zombie zombie, float healthMin, float healthMax, float speedMin, float speedMax, float scaleMin, float scaleMax)
         {
-            float healthMultiplier = UnityEngine.Random.Range(healthMin, healthMax);
+            float healthMultiplier = Random.Range(healthMin, healthMax);
             Lawnf.SetZombieHealth(zombie, healthMultiplier);
 
             zombie.theAttackDamage = (int)(zombie.theAttackDamage * healthMultiplier);
@@ -344,13 +489,13 @@ namespace SuperRandomCollection
 
             if (zombie.theZombieType != ZombieType.FootballBoss)
             {
-                float speedMultiplier = UnityEngine.Random.Range(speedMin, speedMax);
+                float speedMultiplier = Random.Range(speedMin, speedMax);
                 zombie.theOriginSpeed = zombie.theOriginSpeed * speedMultiplier;
             }
 
             if (UltimateGoldImitaterCore.OtherBoss.Contains(zombie.theZombieType))
             {
-                float scaleMultiplier = UnityEngine.Random.Range(scaleMin, scaleMax);
+                float scaleMultiplier = Random.Range(scaleMin, scaleMax);
 
                 Vector3 position = zombie.axis.position;
                 zombie.transform.localScale = zombie.transform.localScale * scaleMultiplier;
@@ -361,82 +506,261 @@ namespace SuperRandomCollection
 
         public void GetEvent()
         {
-            var eventid = UnityEngine.Random.Range(0, 3);
-            switch (eventid)
+            if(!plant.starUp)
             {
-                case 0:
+                var eventid = Random.Range(0, 5);
+                switch (eventid)
+                {
+                    case 0:
+                        {
+                            var pool = new List<PlantType>()
+                            {
+                                PlantType.DiamondImitater,
+                                PlantID,
+                                GoldImitater.PlantID
+                            };
+                            for (int i = 0; i < Random.Range(0, 100); i++)
+                                pool.Add(pool[Random.Range(0, pool.Count)]);
+                            for (int i = 0; i < 10; i++)
+                                Lawnf.SetDroppedCard(plant.axis.position + new Vector3(0f, 0.5f, 0f), pool[Random.Range(0, pool.Count)]);
+                        }
+                        InGameText.Instance.ShowText("模仿十连抽！", 3f);
+                        break;
+                    case 1:
+                        {
+                            var mgr = GameAPP.Instance.GetOrAddComponent<TravelMgr>();
+                            int value = Random.Range(1, 101);
+                            var data = mgr.data;
+                            if (value <= Random.Range(0, 101))
+                            {
+                                switch (Random.Range(0, 2))
+                                {
+                                    case 0:
+                                        {
+                                            var list = new List<AdvBuff>();
+                                            foreach (var (id, _) in TravelDictionary.advancedBuffsText)
+                                                if (!data.advBuffs.Contains(id))
+                                                    list.Add(id);
+                                            var advBuff = list[Random.Range(0, list.Count)];
+                                            TravelMgr.Instance.GetNormalBuff(advBuff);
+                                            InGameText.Instance.ShowText($"抽到普通词条：{TravelDictionary.advancedBuffsText[advBuff]}", 5f);
+                                        }
+                                        break;
+                                    case 1:
+                                        {
+                                            var list = new List<UltiBuff>();
+                                            foreach (var (id, _) in TravelDictionary.ultimateBuffsText)
+                                                if (!data.ultiBuffs.Contains(id) && !data.ultiBuffs.Contains(id))
+                                                    list.Add(id);
+                                            var ultiBuff = list[Random.Range(0, list.Count)];
+                                            TravelMgr.Instance.GetUltiBuff(ultiBuff);
+                                            InGameText.Instance.ShowText($"抽到强究词条：{TravelDictionary.ultimateBuffsText[ultiBuff]}", 5f);
+                                        }
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                var list = new List<TravelDebuff>();
+                                foreach (var kvp in TravelDictionary.debuffData)
+                                {
+                                    if (!data.travelDebuffs.Contains(kvp.Key))
+                                        list.Add(kvp.Key);
+                                }
+                                var debuff = list[Random.Range(0, list.Count)];
+                                TravelMgr.Instance.GetDebuff(debuff);
+                                InGameText.Instance.ShowText($"抽到僵尸词条：{TravelDictionary.debuffData[debuff].Item1}", 5f);
+                            }
+                        }
+                        break;
+                    case 2:
+                        {
+                            for (int i = 0; i < Random.Range(0, 4000); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.NormalSun, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            InGameText.Instance.ShowText("大量阳光！", 3f);
+                        }
+                        break;
+                    case 3:
+                        {
+                            for (int i = 0; i < Random.Range(0, 80); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SilverCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            for (int i = 0; i < Random.Range(0, 80); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.GoldCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            for (int i = 0; i < Random.Range(0, 80); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.DiamondCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            for (int i = 0; i < Random.Range(0, 80); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SmallSilverCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            for (int i = 0; i < Random.Range(0, 80); i++)
+                            {
+                                CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SmallGoldCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                            }
+                            InGameText.Instance.ShowText("大量金钱！", 3f);
+                        }
+                        break;
+                    case 4:
+                        /*
+                        BaseMenu menu1 = GameAPP.UIManager.Push(UIType.MultipleChoiceMenu2, false);
+                        if(menu1 is MultipleChoiceMenu menu)
+                        {
+                            menu.SetCancelable(true);
+                            menu.SetRefreshable(false);
+                            menu.Interactable = true;
+                            var q = GetRandomQuality();
+    #pragma warning disable CS0219 // Variable is assigned but its value is never used
+                            int dmgpercent = 0;
+    #pragma warning restore CS0219 // Variable is assigned but its value is never used
+                            switch (q)
+                            {
+                                default:
+                                case Quality.Default:
+                                    dmgpercent = 10;
+                                    break;
+                                case Quality.silver:
+                                    dmgpercent = 20;
+                                    break;
+                                case Quality.gold:
+                                    dmgpercent = 30;
+                                    break;
+                                case Quality.diamond:
+                                    dmgpercent = 50;
+                                    break;
+                                case Quality.iridescent:
+                                    dmgpercent = 100;
+                                    break;
+                                case Quality.supremeRed:
+                                    dmgpercent = 300;
+                                    break;
+                            }
+                            var a = () => TravelMgr.Instance.ampl
+                            menu.RegisterOption("伤害增幅",$"全体植物获得{dmgpercent}%伤害增幅\n当前增幅：{1:F0}%")
+                            var a = () =>
+                            {
+                            };
+                            menu.RegisterOption("通用战术","从多个选项中自选一种战术词条",a,(PlantType)PlantID,ZombieType.Nothing,Quality.iridescent);
+                        }
+                        */
+                        InGameText.Instance.ShowText("通用战术！", 3f);
+                        ShootingGroupBuff.ShowGeneralBuffMenu();
+                        break;
+                }
+            }
+            else
+            {
+                var menu = GameAPP.UIManager.Push(UIType.MultipleChoiceMenu2, false).GetComponent<MultipleChoiceMenu>();
+                if (menu == null)
+                {
+                    ModLogger.LogError("menu is null");
+                }
+                var a = ShootingGroupBuff.ShowGeneralBuffMenu;
+                menu.RegisterOption("通用战术","",a,(PlantType)PlantID,ZombieType.Nothing,Quality.iridescent);
+                var b = () =>
+                {
                     {
                         var pool = new List<PlantType>()
-                    {
-                        PlantType.DiamondImitater,
-                        PlantID
-                    };
-                        if (GameAPP.resourcesManager.allPlants.Contains((PlantType)1931))
-                            pool.Add((PlantType)1931);
-                        for (int i = 0; i < UnityEngine.Random.Range(0, 100); i++)
-                            pool.Add(pool[UnityEngine.Random.Range(0, pool.Count)]);
+                        {
+                            PlantType.DiamondImitater,
+                            PlantID,
+                            GoldImitater.PlantID
+                        };
+                        for (int i = 0; i < Random.Range(0, 100); i++)
+                            pool.Add(pool[Random.Range(0, pool.Count)]);
                         for (int i = 0; i < 10; i++)
-                            Lawnf.SetDroppedCard(plant.axis.position + new Vector3(0f, 0.5f, 0f), pool[UnityEngine.Random.Range(0, pool.Count)]);
+                            Lawnf.SetDroppedCard(plant.axis.position + new Vector3(0f, 0.5f, 0f), pool[Random.Range(0, pool.Count)]);
                     }
-                    InGameText.Instance.ShowText("模仿十连抽！", 3f);
-                    break;
-                case 1:
+                };
+                menu.RegisterOption("模仿十连抽","",b,(PlantType)PlantID,ZombieType.Nothing,Quality.iridescent);
+                var c = () =>
+                {
                     {
+
                         var mgr = GameAPP.Instance.GetOrAddComponent<TravelMgr>();
-                        int value = UnityEngine.Random.Range(1, 101);
+                        int value = Random.Range(1, 101);
                         var data = mgr.data;
-                        if (value <= UnityEngine.Random.Range(0, 101))
+                        switch (Random.Range(0, 2))
                         {
-                            switch (UnityEngine.Random.Range(0, 2))
-                            {
-                                case 0:
-                                    {
-                                        var list = new List<AdvBuff>();
-                                        foreach (var (id, _) in TravelDictionary.advancedBuffsText)
-                                            if (!data.advBuffs.Contains(id))
-                                                list.Add(id);
-                                        var advBuff = list[UnityEngine.Random.Range(0, list.Count)];
-                                        TravelMgr.Instance.GetNormalBuff(advBuff);
-                                        InGameText.Instance.ShowText($"抽到普通词条：{TravelDictionary.advancedBuffsText[advBuff]}", 5f);
-                                    }
-                                    break;
-                                case 1:
-                                    {
-                                        var list = new List<UltiBuff>();
-                                        foreach (var (id, _) in TravelDictionary.ultimateBuffsText)
-                                            if (!data.ultiBuffs.Contains(id) && !data.ultiBuffs.Contains(id))
-                                                list.Add(id);
-                                        var ultiBuff = list[UnityEngine.Random.Range(0, list.Count)];
-                                        TravelMgr.Instance.GetUltiBuff(ultiBuff);
-                                        InGameText.Instance.ShowText($"抽到强究词条：{TravelDictionary.ultimateBuffsText[ultiBuff]}", 5f);
-                                    }
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            var list = new List<TravelDebuff>();
-                            foreach (var kvp in TravelDictionary.debuffData)
-                            {
-                                if (!data.travelDebuffs.Contains(kvp.Key))
-                                    list.Add(kvp.Key);
-                            }
-                            var debuff = list[UnityEngine.Random.Range(0, list.Count)];
-                            TravelMgr.Instance.GetDebuff(debuff);
-                            InGameText.Instance.ShowText($"抽到僵尸词条：{TravelDictionary.debuffData[debuff].Item1}", 5f);
+                            case 0:
+                                {
+                                    var list = new List<AdvBuff>();
+                                    foreach (var (id, _) in TravelDictionary.advancedBuffsText)
+                                        if (!data.advBuffs.Contains(id))
+                                            list.Add(id);
+                                    var advBuff = list[Random.Range(0, list.Count)];
+                                    TravelMgr.Instance.GetNormalBuff(advBuff);
+                                    InGameText.Instance.ShowText($"抽到普通词条：{TravelDictionary.advancedBuffsText[advBuff]}", 5f);
+                                }
+                                break;
+                            case 1:
+                                {
+                                    var list = new List<UltiBuff>();
+                                    foreach (var (id, _) in TravelDictionary.ultimateBuffsText)
+                                        if (!data.ultiBuffs.Contains(id) && !data.ultiBuffs.Contains(id))
+                                            list.Add(id);
+                                    var ultiBuff = list[Random.Range(0, list.Count)];
+                                    TravelMgr.Instance.GetUltiBuff(ultiBuff);
+                                    InGameText.Instance.ShowText($"抽到强究词条：{TravelDictionary.ultimateBuffsText[ultiBuff]}", 5f);
+                                }
+                                break;
                         }
                     }
-                    break;
-                case 2:
+                };
+                menu.RegisterOption("抽到词条","",c,(PlantType)PlantID,ZombieType.Nothing,Quality.iridescent);
+                var d = () =>
+                {
+                    for (int i = 0; i < Random.Range(0, 4000); i++)
                     {
-                        for (int i = 0; i < UnityEngine.Random.Range(0, 4000); i++)
-                        {
-                            CreateItem.Instance.SetCoin(0, 0, (int)ItemType.NormalSun, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
-                        }
-                        InGameText.Instance.ShowText("大量阳光！", 3f);
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.NormalSun, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
                     }
-                    break;
+                    for (int i = 0; i < Random.Range(0, 80); i++)
+                    {
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SilverCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                    }
+                    for (int i = 0; i < Random.Range(0, 80); i++)
+                    {
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.GoldCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                    }
+                    for (int i = 0; i < Random.Range(0, 80); i++)
+                    {
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.DiamondCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                    }
+                    for (int i = 0; i < Random.Range(0, 80); i++)
+                    {
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SmallSilverCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                    }
+                    for (int i = 0; i < Random.Range(0, 80); i++)
+                    {
+                        CreateItem.Instance.SetCoin(0, 0, (int)ItemType.SmallGoldCoin, 0, plant.axis.position + new Vector3(0f, 0.5f, 0f));
+                    }
+                };
+                menu.RegisterOption("补充阳光与金币","",d,(PlantType)PlantID,ZombieType.Nothing,Quality.iridescent);
+                menu.RegisterWindow(5);
+                menu.SetCancelable(false);
+                menu.SetRefreshable(false);
             }
+        }
+        public static Quality GetRandomQuality()
+        {
+            var qVal = Random.value;
+            if (qVal < 0.1f)
+                return Quality.supremeRed;
+            else if (qVal < 1f)
+                return Quality.iridescent;
+            else if (qVal < 3f)
+                return Quality.diamond;
+            else if (qVal < 15f)
+                return Quality.gold;
+            else if (qVal < 45f)
+                return Quality.silver;
+            return Quality.Default;
         }
 
         public void FeedPlant(PlantType pt)
@@ -445,7 +769,7 @@ namespace SuperRandomCollection
             GameAPP.PlaySound(125, 0.5f, 1.0f);
             var newPlant = CreatePlant.Instance.SetPlant(plant.thePlantColumn, plant.thePlantRow, PlantID, isFreeSet: true).GetComponent<UltimateGoldImitater>();
             var arr = Enum.GetValues<Probability>();
-            var prob = arr[UnityEngine.Random.Range(0, arr.Length)];
+            var prob = arr[Random.Range(0, arr.Length)];
             if (plant.attributeCount >= 4)
             {
                 newPlant.isLock = true;
@@ -467,17 +791,17 @@ namespace SuperRandomCollection
                 var tempList = allProbabilities.Cast<Probability>().ToList();
                 for (int i = 0; i < 2 && tempList.Count > 0; i++)
                 {
-                    int randomIndex = UnityEngine.Random.Range(0, tempList.Count);
+                    int randomIndex = Random.Range(0, tempList.Count);
                     selectedProbabilities.Add(tempList[randomIndex]);
                     tempList.RemoveAt(randomIndex);
                 }
 
                 // 确定是否有buff
-                var hasBuff = Lawnf.TravelAdvanced(UltimateGoldImitater.buff) || plant.starUp;
+                var hasBuff = Lawnf.TravelAdvanced(buff) || plant.starUp;
 
                 // 设置两个选中的概率为38%以上（随机38-100%）
-                float targetPercentage1 = UnityEngine.Random.Range(38f, 100f);
-                float targetPercentage2 = UnityEngine.Random.Range(38f, 100f);
+                float targetPercentage1 = Random.Range(38f, 100f);
+                float targetPercentage2 = Random.Range(38f, 100f);
 
                 // 确保总概率不超过100%
                 float totalTargetPercentage = targetPercentage1 + targetPercentage2;
@@ -575,7 +899,7 @@ namespace SuperRandomCollection
             }
 
             // 正常模式：生成随机概率
-            var hasBuff = Lawnf.TravelAdvanced(UltimateGoldImitater.buff) || plant.starUp;
+            var hasBuff = Lawnf.TravelAdvanced(buff) || plant.starUp;
             int remainingTotal = 100;
 
             // 生成前5项的实际概率值
@@ -597,7 +921,7 @@ namespace SuperRandomCollection
                 if (maxValue < basep) maxValue = basep;
 
                 // 随机生成当前项的实际概率（在保底和最大值之间）
-                ActualProbabilities[i] = UnityEngine.Random.Range(basep, maxValue + 1);
+                ActualProbabilities[i] = Random.Range(basep, maxValue + 1);
                 remainingTotal -= ActualProbabilities[i];
             }
 
@@ -663,6 +987,19 @@ namespace SuperRandomCollection
                     $"随机事件：{plant.ActualProbabilities[5]}%";
                 __result += str;
                 __result.TrimEnd();
+            }
+        }
+    }
+    [HarmonyPatch(typeof(ShootingGroupBuff))]
+    public static class ShootingGroupBuff_Patch
+    {
+        [HarmonyPatch(nameof(ShootingGroupBuff.CanReceiveTacticMax))]
+        [HarmonyPostfix]
+        public static void GetPlantInfo_PostFix(ref bool __result)
+        {
+            if (Board.Instance != null && Board.Instance.boardTag.isSuperRandom && !Board.Instance.boardTag.rogueShooting)
+            {
+                __result = true;
             }
         }
     }

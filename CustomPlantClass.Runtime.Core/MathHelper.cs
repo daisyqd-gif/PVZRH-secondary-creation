@@ -118,13 +118,12 @@ namespace CustomPlantClass.Main
         /// <param name="a">The first point.</param>
         /// <param name="b">The second point.</param>
         /// <returns>The distance between the points, squared.</returns>
-        public static float DistanceSq(Vector2 a, Vector2 b)
-        {
-            float dx = a.x - b.x;
-            float dy = a.y - b.y;
-            return dx * dx + dy * dy;
-        }
-
+        public static float DistanceSq(Vector2 a, Vector2 b) => Mathf.Pow( a.x - b.x , 2 ) + Mathf.Pow( a.y - b.y, 2 );
+        /// <summary>Calculates the squared distance between two points.</summary>
+        /// <param name="a">The first point.</param>
+        /// <param name="b">The second point.</param>
+        /// <returns>The distance between the points.</returns>
+        public static float Distance(Vector2 a, Vector2 b) => Mathf.Sqrt( Mathf.Pow( a.x - b.x , 2 ) + Mathf.Pow( a.y - b.y, 2 ) );
         /// <summary>Rotates a vector by the specified angle.</summary>
         /// <param name="v">The vector to rotate.</param>
         /// <param name="degrees">The rotation angle in degrees.</param>
@@ -254,7 +253,7 @@ namespace CustomPlantClass.Main
         /// <param name="v">The value to test.</param>
         /// <param name="eps">The comparison tolerance.</param>
         /// <returns><see langword="true"/> if the absolute value is below the tolerance.</returns>
-        public static bool ApproximatelyZero(float v, float eps = 0.0001f)
+        public static bool ApproximatelyZero(this float v, float eps = 0.0001f)
             => Mathf.Abs(v) < eps;
 
         // ============================================================

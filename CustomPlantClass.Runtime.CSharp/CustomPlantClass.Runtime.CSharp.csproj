@@ -10,7 +10,7 @@
 
     <!-- IL2CPP mods don't need dependency/runtime files -->
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-    <GenerateDependencyFile>true</GenerateDependencyFile>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
     <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

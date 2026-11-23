@@ -346,315 +346,259 @@
         <member name="T:CustomPlantClass.RogueShootingManager.RSConfigType">
             <summary>Identifies a built-in plant configuration in Rogue Shooting.</summary>
         </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Peashooter">
-            <summary>Configuration identifier for Peashooter.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CherryGatling">
-            <summary>Configuration identifier for Cherry Gatling.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.HelmetGatling">
-            <summary>Configuration identifier for Helmet Gatling.</summary>
-        </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateGatling">
-            <summary>Configuration identifier for Ultimate Gatling.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHelmetGatling">
-            <summary>Configuration identifier for Ultimate Helmet Gatling.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.LanternSplit">
-            <summary>Configuration identifier for Lantern Split.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateLanternSplit">
-            <summary>Configuration identifier for Ultimate Lantern Split.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SniperPea">
-            <summary>Configuration identifier for Sniper Pea.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.DoomSniper">
-            <summary>Configuration identifier for Doom Sniper.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.FireSniper">
-            <summary>Configuration identifier for Fire Sniper.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SnowPeaShooter">
-            <summary>Configuration identifier for Snow Pea Shooter.</summary>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateJalaGatling">
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigSniper">
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.MagicSnowPea2">
-            <summary>Configuration identifier for Magic Snow Pea 2.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.WallNut">
-            <summary>Configuration identifier for Wall Nut.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperChomper">
-            <summary>Configuration identifier for Super Chomper.</summary>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BambooDragon">
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateChomper">
-            <summary>Configuration identifier for Ultimate Chomper.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.TallNut">
-            <summary>Configuration identifier for Tall Nut.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateTallNut">
-            <summary>Configuration identifier for Ultimate Tall Nut.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CabbageNut">
-            <summary>Configuration identifier for Cabbage Nut.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.MelonNut">
-            <summary>Configuration identifier for Melon Nut.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.MagnetNut">
-            <summary>Configuration identifier for Magnet Nut.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.PotatoMine">
-            <summary>Configuration identifier for Potato Mine.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.PeaMine">
-            <summary>Configuration identifier for Pea Mine.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ThreeMine">
-            <summary>Configuration identifier for Three Mine.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Chomper">
-            <summary>Configuration identifier for Chomper.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CherryChomper">
-            <summary>Configuration identifier for Cherry Chomper.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.DoomChomper">
-            <summary>Configuration identifier for Doom Chomper.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BigChomper">
-            <summary>Configuration identifier for Big Chomper.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigChomper">
-            <summary>Configuration identifier for Ultimate Big Chomper.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SmallPuff">
-            <summary>Configuration identifier for Small Puff.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.IcePuff">
-            <summary>Configuration identifier for Ice Puff.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SnowGatlingPuff">
-            <summary>Configuration identifier for Snow Gatling Puff.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.IronPuff">
-            <summary>Configuration identifier for Iron Puff.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.IFVIronPuff">
-            <summary>Configuration identifier for IFV Iron Puff.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.FumeShroom">
-            <summary>Configuration identifier for Fume Shroom.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.IceFumeShroom">
-            <summary>Configuration identifier for Ice Fume Shroom.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateFume">
-            <summary>Configuration identifier for Ultimate Fume.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.GarlicFume">
-            <summary>Configuration identifier for Garlic Fume.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimatePoisonFume">
-            <summary>Configuration identifier for Ultimate Poison Fume.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.GloomShroom">
-            <summary>Configuration identifier for Gloom Shroom.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateGloom">
-            <summary>Configuration identifier for Ultimate Gloom.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.HypnoShroom">
-            <summary>Configuration identifier for Hypno Shroom.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.HypnoNut">
-            <summary>Configuration identifier for Hypno Nut.</summary>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperGatlingGloom">
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.HypnoEmperor">
-            <summary>Configuration identifier for Hypno Emperor.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ScaredyShroom">
-            <summary>Configuration identifier for Scaredy Shroom.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperHypno">
-            <summary>Configuration identifier for Super Hypno.</summary>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHypnoDoom">
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateHypno">
-            <summary>Configuration identifier for Ultimate Hypno.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ScaredyDoom">
-            <summary>Configuration identifier for Scaredy Doom.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateDoomScared">
-            <summary>Configuration identifier for Ultimate Doom Scared.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Squash">
-            <summary>Configuration identifier for Squash.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Squalour">
-            <summary>Configuration identifier for Squalour.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CattailLour">
-            <summary>Configuration identifier for Cattail Lour.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CherrySquash">
-            <summary>Configuration identifier for Cherry Squash.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.NuclearSquash">
-            <summary>Configuration identifier for Nuclear Squash.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ThreePeater">
-            <summary>Configuration identifier for Three Peater.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ThreeSquash">
-            <summary>Configuration identifier for Three Squash.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperThreePeater">
-            <summary>Configuration identifier for Super Three Peater.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BigGatling">
-            <summary>Configuration identifier for Big Gatling.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBigGatling">
-            <summary>Configuration identifier for Ultimate Big Gatling.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Caltrop">
-            <summary>Configuration identifier for Caltrop.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SpikeRock">
-            <summary>Configuration identifier for Spike Rock.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ObsidianSpike">
-            <summary>Configuration identifier for Obsidian Spike.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CaltropNut">
-            <summary>Configuration identifier for Caltrop Nut.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.ObsidianWallNut">
-            <summary>Configuration identifier for Obsidian Wall Nut.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Cactus">
-            <summary>Configuration identifier for Cactus.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.DoomCactus">
-            <summary>Configuration identifier for Doom Cactus.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCactus">
-            <summary>Configuration identifier for Ultimate Cactus.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.StarFruit">
-            <summary>Configuration identifier for Star Fruit.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperStar">
-            <summary>Configuration identifier for Super Star.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateStar">
-            <summary>Configuration identifier for Ultimate Star.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SwordStar">
-            <summary>Configuration identifier for Sword Star.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.AbyssSwordStar">
-            <summary>Configuration identifier for Abyss Sword Star.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Cabbagepult">
-            <summary>Configuration identifier for Cabbagepult.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.GoldCabbage">
-            <summary>Configuration identifier for Gold Cabbage.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCabbage">
-            <summary>Configuration identifier for Ultimate Cabbage.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.CabbageCannon">
-            <summary>Configuration identifier for Cabbage Cannon.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCabbageCannon">
-            <summary>Configuration identifier for Ultimate Cabbage Cannon.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Melonpult">
-            <summary>Configuration identifier for Melonpult.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperMelon">
-            <summary>Configuration identifier for Super Melon.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateMelon">
-            <summary>Configuration identifier for Ultimate Melon.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.FireMelon">
-            <summary>Configuration identifier for Fire Melon.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSpring">
-            <summary>Configuration identifier for Ultimate Spring.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SilverMelon">
-            <summary>Configuration identifier for Silver Melon.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.GoldMelon">
-            <summary>Configuration identifier for Gold Melon.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.WinterMelon">
-            <summary>Configuration identifier for Winter Melon.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateWinterMelon">
-            <summary>Configuration identifier for Ultimate Winter Melon.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Cornpult">
-            <summary>Configuration identifier for Cornpult.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.PortalCorn">
-            <summary>Configuration identifier for Portal Corn.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateCorn">
-            <summary>Configuration identifier for Ultimate Corn.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Umbrellaleaf">
-            <summary>Configuration identifier for Umbrellaleaf.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.LanternUmbrella">
-            <summary>Configuration identifier for Lantern Umbrella.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.LaserUmbrella">
-            <summary>Configuration identifier for Laser Umbrella.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.Bamboo">
-            <summary>Configuration identifier for Bamboo.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.LotusBamboo">
-            <summary>Configuration identifier for Lotus Bamboo.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBamboo">
-            <summary>Configuration identifier for Ultimate Bamboo.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SpruceShooter">
-            <summary>Configuration identifier for Spruce Shooter.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperSpruce">
-            <summary>Configuration identifier for Super Spruce.</summary>
+            <summary>
+            Terminal plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSpruce">
-            <summary>Configuration identifier for Ultimate Spruce.</summary>
+            <summary>
+            Terminal plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.BlackHoleTorch">
+            <summary>
+            Expert plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateSniperGatling">
-            <summary>Configuration identifier for Ultimate Sniper Gatling.</summary>
+            <summary>
+            Expert plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateMinigun">
-            <summary>Configuration identifier for Ultimate Minigun.</summary>
+            <summary>
+            Expert plant
+            </summary>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.SuperThreePeater_sp">
+            <summary>
+            Expert plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateBlover">
-            <summary>Configuration identifier for Ultimate Blover.</summary>
+            <summary>
+            Expert plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.EmeraleBlover">
-            <summary>Configuration identifier for Emerale Blover.</summary>
+            <summary>
+            Expert plant
+            </summary>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.UltimateStarTorch">
-            <summary>Configuration identifier for Ultimate Star Torch.</summary>
-        </member>
-        <member name="F:CustomPlantClass.RogueShootingManager.RSConfigType.JalaGatling">
             <summary>
-            
+            Expert plant
             </summary>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.CustomShootingCurseComponent">

@@ -34,6 +34,7 @@ namespace MegaGatlingExpansion
         public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
         public static bool IsOverpowered = false;
         public static bool AllowZombieReplace = false;
+        public static bool PerformanceMode = false;
         public static int Buff1 = -1;
         public static int Buff2 = -1;
         public static int Buff3 = -1;
@@ -845,7 +846,7 @@ namespace MegaGatlingExpansion
                 CustomCore.AddUltimatePlant(PlantTypeExpand.ExplodeGatlingBlover);
                 /*
                 CustomCore.RegisterCustomBanMix(PlantTypeExpand.ExplodeGatlingBlover, () => (TravelMgr.Instance != null && TravelMgr.Instance.GetUnlocksPool().Contains(TravelUnlocks.UltimateGatling) && Lawnf.TravelUltimate((UltiBuff)2) && Lawnf.TravelUltimate((UltiBuff)3)) ||
-                Utils.EnableTravelPlant() || GameAPP.developerMode,
+                Tools.EnableTravelPlant() || GameAPP.developerMode,
                     null, () => InGameText.Instance.ShowText("该配方需要抽取", 3f));
                     //*/
                 CustomCore.AddPlantAlmanacStrings(PlantTypeExpand.ExplodeGatlingBlover, "终极浮空樱桃机枪(SP究极浮空樱桃射手)", "");
@@ -1200,6 +1201,7 @@ namespace MegaGatlingExpansion
             RegistryHelper.AddCustomEvolutionPathway(PlantType.Peashooter, PlantType.Peashooter, PlantType.GatlingPea, PlantTypeExpand.MegaGatlingPea);
             RegistryManager.CreateConfigRegistry("MegaGatlingPeaDLC","Enable super mode", "Enables overpowered mode for mega gatlings", (entry) => IsOverpowered = entry.Value, false);
             RegistryManager.CreateConfigRegistry("MegaGatlingPeaDLC","Allow boss replacement", "Enables ultimate gatling paper to randomly replace ultimate professor Z", (entry) => AllowZombieReplace = entry.Value, false);
+            RegistryManager.CreateConfigRegistry("MegaGatlingPeaDLC","Enabe performance mode", "Turn in if low on memory or on low performance pcs. Replaces async machines with ienumerators. Electric bullet attack frequency / 3 but damage * 3.", (entry) => PerformanceMode = entry.Value, false);
             Log.LogInfo($"{PluginGuid} {PluginVersion} loaded.");
         }
     }

@@ -34,18 +34,19 @@ namespace StarPeashooter
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data_Double = new BaseCustomPlantData()
+            BaseCustomPlantData Data_Double = new BaseCustomPlantData
+            (
+                DataContainer.PlantId_Double, // Automatically assigns a unique ID
+                assetBundle.GetAsset<GameObject>("StarDoubleShooterPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("StarDoubleShooterPreview") // Card preview prefab, hirearchy must be this
+            )
             {
-                PlantId = DataContainer.PlantId_Double, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("StarDoubleShooterPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("StarDoubleShooterPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
+                Fusions = ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.Peashooter),(PlantType.DoubleShooter,PlantType.StarFruit)])
                 ), // Optional fusion recipes
@@ -80,18 +81,19 @@ namespace StarPeashooter
                 AlmanacEntry = "xxx"    // Almanac description, use DataMgr.CreateAlmanacEntry for automatic formatting
             };
             // Fill out the plant metadata
-            BaseCustomPlantData Data_Split = new BaseCustomPlantData()
-            {
-                PlantId = DataContainer.PlantId_Split, // Automatically assigns a unique ID
+            BaseCustomPlantData Data_Split = new BaseCustomPlantData(
+                DataContainer.PlantId_Split, // Automatically assigns a unique ID
 
-                Prefab = assetBundle.GetAsset<GameObject>("StarSplitPeaPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("StarSplitPeaPreview"), // Card preview prefab, hirearchy must be this
+                assetBundle.GetAsset<GameObject>("StarSplitPeaPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("StarSplitPeaPreview") // Card preview prefab, hirearchy must be this
+            )
+            {
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
+                Fusions = ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.DoubleShooter),(PlantType.SplitPea,PlantType.StarFruit),
                     (DataContainer.PlantId_Double,PlantType.Peashooter)])
@@ -127,18 +129,19 @@ namespace StarPeashooter
                 AlmanacEntry = "xxx"    // Almanac description, use DataMgr.CreateAlmanacEntry for automatic formatting
             };
             // Fill out the plant metadata
-            BaseCustomPlantData Data_Gatling = new BaseCustomPlantData()
+            BaseCustomPlantData Data_Gatling = new BaseCustomPlantData
+            (
+                DataContainer.PlantId_Gatling, // Automatically assigns a unique ID
+                assetBundle.GetAsset<GameObject>("StarGatlingPeaPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("StarGatlingPeaPreview") // Card preview prefab, hirearchy must be this
+            )
             {
-                PlantId = DataContainer.PlantId_Gatling, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("StarGatlingPeaPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("StarGatlingPeaPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
+                Fusions = ListHelper.MirrorList
                 (
                     new([(PlantType.StarPea,PlantType.SplitPea),(PlantType.GatlingPea,PlantType.StarFruit),
                     (DataContainer.PlantId_Double,PlantType.DoubleShooter),(DataContainer.PlantId_Split,PlantType.Peashooter)])
@@ -174,18 +177,19 @@ namespace StarPeashooter
                 AlmanacEntry = "xxx"    // Almanac description, use DataMgr.CreateAlmanacEntry for automatic formatting
             };
             // Fill out the plant metadata
-            BaseCustomPlantData Data_Super = new BaseCustomPlantData()
+            BaseCustomPlantData Data_Super = new BaseCustomPlantData
+            (
+                DataContainer.PlantId_Super, // Automatically assigns a unique ID
+                assetBundle.GetAsset<GameObject>("StarSuperGatlingPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("StarSuperGatlingPreview") // Card preview prefab, hirearchy must be this
+            )
             {
-                PlantId = DataContainer.PlantId_Super, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("StarSuperGatlingPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("StarSuperGatlingPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
 
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList
+                Fusions = ListHelper.MirrorList
                 (
                     new([(PlantType.SniperPea,PlantType.StarPea),(PlantType.SuperGatling,PlantType.StarFruit),
                     (PlantType.StarSniper,PlantType.Peashooter)])
@@ -225,8 +229,8 @@ namespace StarPeashooter
             DataMgr.RegisterCustomPlant<Shooter, SplitStarPea>(Data_Split);
             DataMgr.RegisterCustomPlant<Shooter, GatlingStarPea>(Data_Gatling);
             DataMgr.RegisterCustomPlant<Shooter, SuperStarGatling>(Data_Super);
-            CustomCore.AddFusion((int)PlantType.StarSniper,DataContainer.PlantId_Super,(int)PlantType.Peashooter);
-            CustomCore.AddFusion((int)PlantType.StarSniper,(int)PlantType.Peashooter,DataContainer.PlantId_Super);
+            CustomCore.AddFusion(PlantType.StarSniper,DataContainer.PlantId_Super,PlantType.Peashooter);
+            CustomCore.AddFusion(PlantType.StarSniper,PlantType.Peashooter,DataContainer.PlantId_Super);
 
             Log.LogInfo($"{MyPluginInfo.PluginName} {MyPluginInfo.PluginVersion} loaded.");
         }

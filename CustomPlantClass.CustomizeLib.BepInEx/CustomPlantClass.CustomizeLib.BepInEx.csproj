@@ -16,6 +16,11 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>$(MSBuildProjectDirectory)\CustomPlantClass.CustomizeLib.BepInEx.xml</DocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <!--<DefineConstants>ENABLE_DEBUFF</DefineConstants>-->
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>$(NoWarn);MSB3277;$(NoWarn);1591</NoWarn>
   </PropertyGroup>

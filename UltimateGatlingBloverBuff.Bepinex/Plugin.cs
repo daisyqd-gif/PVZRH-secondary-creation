@@ -16,7 +16,7 @@ namespace UltimateGatlingBloverBuff{
     {
         public const string PluginGuid = "UltimateGatlingBloverBuff.Bepinex";
         public const string PluginName = "UltimateGatlingBloverBuff";
-        public const string PluginVersion = CustomPlantClass.MyPluginInfo.TargetVersion;
+        public const string PluginVersion = MyPluginInfo.TargetVersion;
         public override void Load()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), null);
@@ -65,11 +65,22 @@ namespace UltimateGatlingBloverBuff{
             }
         }
     }
-    [HarmonyPatch(typeof(UltimateGatlingBlover), nameof(UltimateGatlingBlover.AttributeEvent))]
-    public static class Shoot1_Patch
+    [HarmonyPatch(typeof(UltimateGatlingBlover))]
+    public static class UltimateGatlingBlover_Patch
     {
+        [HarmonyPatch(nameof(UltimateGatlingBlover.Start))]
+        [HarmonyPrefix]
+        public static bool Start_Prefix(UltimateGatlingBlover __instance)
+        {
+            if(__instance.board==null) return true;
+            __instance.board?.OnPlantCreate(__instance);
+            __instance.UpdateText();
+            __instance.ReplaceSprite();
+            return false;
+        }
+        [HarmonyPatch(nameof(UltimateGatlingBlover.AttributeEvent))]
         [HarmonyPostfix]
-        public static void Postfix(UltimateGatlingBlover __instance)
+        public static void AttributeEvent_Postfix(UltimateGatlingBlover __instance)
         {
             if (__instance != null && __instance.thePlantType==PlantType.UltimateGatlingBlover)
             {
@@ -79,19 +90,6 @@ namespace UltimateGatlingBloverBuff{
                     component.StartCoroutine(component.Shooting());
                 }
             }
-        }
-    }
-    [HarmonyPatch(typeof(UltimateGatlingBlover), nameof(UltimateGatlingBlover.Start))]
-    public static class Start_Patch
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(UltimateGatlingBlover __instance)
-        {
-            if(__instance.board==null) return true;
-            __instance.board?.OnPlantCreate(__instance);
-            __instance.UpdateText();
-            __instance.ReplaceSprite();
-            return false;
         }
     }
 }

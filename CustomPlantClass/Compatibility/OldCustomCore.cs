@@ -16,7 +16,7 @@ namespace CustomPlantClass
             /// <param name="level">最大等级</param>
             /// <param name="bg">背景</param>
             /// <returns>词条ID</returns>
-            public static int RegisterCustomBuff(string text, BuffType buffType, Func<bool> canUnlock, int cost,
+            public static BuffID RegisterCustomBuff(string text, BuffType buffType, Func<bool> canUnlock, int cost,
                 PlantType plantType = PlantType.Nothing, int level = 1, BuffBgType bg = default) =>
                 RegisterCustomBuff(text, buffType, canUnlock, cost, PlantType.Nothing, false, plantType, level, bg);
 

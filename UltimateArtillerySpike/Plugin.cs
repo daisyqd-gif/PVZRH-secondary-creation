@@ -14,6 +14,7 @@ global using CustomPlantClass.RogueShootingManager;
 global using GameLevel.RogueShooting;
 global using CustomPlantClass.Runtime.Tasks;
 using Unity.VisualScripting;
+using CustomPlantClass.Runtime.Core;
 namespace UltimateArtillerySpike
 {
     [BepInPlugin(MyPluginInfo.PluginGuid, MyPluginInfo.PluginName, MyPluginInfo.PluginVersion)]
@@ -46,12 +47,13 @@ namespace UltimateArtillerySpike
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new BaseCustomPlantData
+            (
+                DataContainer.PlantId_Spike, // Automatically assigns a unique ID
+                assetBundle.GetAsset<GameObject>("CabbageCaltropPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("CabbageCaltropPreview")
+            ) // Card preview prefab, hirearchy must be this
             {
-                PlantId = DataContainer.PlantId_Spike, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("CabbageCaltropPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("CabbageCaltropPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
@@ -91,12 +93,13 @@ namespace UltimateArtillerySpike
 
             DataMgr.RegisterCustomPlant<MelonCaltrop, UltimateArtillerySpike>(Data);
             // Fill out the plant metadata
-            BaseCustomPlantData Data2 = new BaseCustomPlantData()
+            BaseCustomPlantData Data2 = new BaseCustomPlantData
+            (
+                DataContainer.PlantId_Blover, // Automatically assigns a unique ID
+                assetBundle.GetAsset<GameObject>("MelonBloverPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("MelonBloverPreview") // Card preview prefab, hirearchy must be this
+            )
             {
-                PlantId = DataContainer.PlantId_Blover, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("MelonBloverPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("MelonBloverPreview"), // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
@@ -143,9 +146,9 @@ namespace UltimateArtillerySpike
             });
 
             CustomCore.RegisterCustomCherry(DataContainer.ParticleId,assetBundle.GetAsset<GameObject>("BombCloud"));
-
-            DataContainer.BuffID_Range = (UltiBuff)Compatibility.CustomCore_Old.RegisterCustomBuff("霰弹枪：究极重炮卷心瓜地刺将分3行而不是1行触发。",BuffType.UltimateBuff,()=> true, 5000,DataContainer.PlantId_Spike);
-            DataContainer.BuffID_Reduce = (UltiBuff)Compatibility.CustomCore_Old.RegisterCustomBuff("快速攻击：究极重炮卷心瓜地刺超级技能冷却/2 (2级将/4) 。",BuffType.UltimateBuff,()=> true, 5000,DataContainer.PlantId_Spike,2,default);
+            //"霰弹枪：究极重炮卷心瓜地刺将分3行而不是1行触发。"
+            DataContainer.BuffID_Range = (UltiBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("霰弹枪",("重炮卷心瓜地刺","将分3行而不是1行触发"),("究极卷心瓜浮艇","词条效果尚未创建")),BuffType.UltimateBuff,()=> true, 5000,DataContainer.PlantId_Spike);
+            DataContainer.BuffID_Reduce = (UltiBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatUpgradablePlantBuff("快速攻击",("重炮卷心瓜地刺","超级技能冷却降至 25 秒"),"超级技能冷却降至 12 秒",("究极卷心瓜浮艇","词条效果尚未创建"),"词条效果尚未创建"),BuffType.UltimateBuff,()=> true, 5000,DataContainer.PlantId_Spike,2,default);
             DataMgr.AddCustomStrongUltimatePlant
             (
                 DataContainer.PlantId_Spike,
@@ -276,14 +279,13 @@ namespace UltimateArtillerySpike
                 var zombies = Physics2D.OverlapCircleAll(_plant.shoot.position,CoreTools.ColumnX * (Lawnf.TravelUltimate(Plugin.DataContainer.BuffID_Range) ? 3 : 1),LayerMask.GetMask("Zombie"))
                 .Where(col => col.IsObjExist() && col.TryGetComponent<Zombie>(out var zombie) && zombie.IsObjExist()). // 找到所有存在zombie组件的碰撞体
                     Select(zombie => zombie.GetComponent<Zombie>()).ToList();
-                if (zombies.Count <= 0)
-                    goto ShootBullets;
-                foreach( var z in zombies)
+                if (zombies.Count > 0)
                 {
-                    plant.OnAttack(z);
+                    foreach( var z in zombies)
+                    {
+                        plant.OnAttack(z);
+                    }
                 }
-
-                ShootBullets:
                 CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(StoredBullets, (b)=>ShootOnce(b.theBulletType,b.theDamage,GetRandomPosition()));
                 StoredBullets.Clear();
                 return;
@@ -301,11 +303,16 @@ namespace UltimateArtillerySpike
         }
         public void AnimAttack()
         {
-            if (Lawnf.TravelUltimate(Plugin.DataContainer.BuffID_Range))
+            if (!plant.board.boardTag.rogueShooting)
             {
-                var zombies = Physics2D.OverlapCircleAll(_plant.shoot.position,CoreTools.ColumnX * (Lawnf.TravelUltimate(Plugin.DataContainer.BuffID_Range) ? 3 : 1),LayerMask.GetMask("Zombie"))
-                .Where(col => col.IsObjExist() && col.TryGetComponent<Zombie>(out var zombie) && zombie.IsObjExist()). // 找到所有存在zombie组件的碰撞体
-                    Select(zombie => zombie.GetComponent<Zombie>()).ToList();
+                var zombies = 
+                Physics2D.OverlapCircleAll
+                (
+                    _plant.shoot.position,CoreTools.ColumnX * (Lawnf.TravelUltimate(Plugin.DataContainer.BuffID_Range)? 3 : 1),
+                    LayerMask.GetMask("Zombie")
+                )
+                .Where(col => col.IsObjExist() && col.TryGetComponent<Zombie>(out var zombie) && zombie.IsObjExist())
+                .Select(zombie => zombie.GetComponent<Zombie>()).ToList(); // 找到所有存在zombie组件的碰撞体
                 foreach( var z in zombies)
                 {
                     AccumulatedEnergy ++;
@@ -317,6 +324,10 @@ namespace UltimateArtillerySpike
                     StoredBullets.Enqueue((Plugin.DataContainer.BulletId,_plant.attackDamage));
                     _plant.anim.SetTriggerString("supply");
                 }
+            }
+            else
+            {
+                AnimSupply();
             }
         }
         Vector2 GetRandomPosition()
@@ -472,7 +483,7 @@ namespace UltimateArtillerySpike
         {
             if(Board.Instance != null && data.TryCast<BulletMovement>() != null)
             {
-                CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(Lawnf.GetPlants(Plugin.DataContainer.PlantId_Spike,Board.Instance).ToSystemList(), (Plant p) =>
+                CollectionHelper.ActionPerItem(Lawnf.GetPlants(Plugin.DataContainer.PlantId_Spike,Board.Instance).ToSystemList(), (Plant p) =>
                 {
                     if(p!= null && p.TryGetComponent<UltimateArtillerySpike>(out var spike))
                     {

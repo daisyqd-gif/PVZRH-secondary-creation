@@ -23,6 +23,143 @@ namespace MegaGatlingExpansion
         {
             return "headPos2/ThreePeater_head2/ThreePeater_mouth/Shoot";
         }
+        public override IEnumerator SuperShoot()
+        {
+            plant.anim.SetBool("shooting", true);
+            if (((UltiBuff)51).IsActive())
+            {
+                plant.flashCountDown = 5f;
+                plant.isFlashing = true;
+
+                int total = 210;
+
+                for (int i = 0; i < total; i++)
+                {
+                    if (plant == null || plant.IsDestroyed()) yield break;
+                    Vector3 pos = plant.shoot.position;
+                    Bullet b = CreateBullet.Instance.SetBullet(
+                        pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                        GetBulletType_Custom(),
+                        GetBulletMoveWay()
+                    );
+
+                    b.Damage = plant.attackDamage*2;
+                    b.fromType = plant.thePlantType;
+                    
+                    if(plant.thePlantRow < 0)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                            GetBulletType_Custom(),
+                            BulletMoveWay.MoveRight
+                        );
+
+                        b1.Damage = plant.attackDamage*2;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow-1,
+                            GetBulletType_Custom(),
+                            BulletMoveWay.MoveRight_threePeater
+                        );
+
+                        b1.Damage = plant.attackDamage*2;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    
+                    if(plant.thePlantRow > plant.board.rowNum - 1)
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow,
+                            GetBulletType_Custom(),
+                            BulletMoveWay.MoveRight
+                        );
+
+                        b1.Damage = plant.attackDamage*2;
+                        b1.fromType = plant.thePlantType;
+                    }
+                    else
+                    {
+                        Bullet b1 = CreateBullet.Instance.SetBullet(
+                            pos.x + Random.Range(-0.25f,0.25f), pos.y + Random.Range(-0.25f,0.25f), plant.thePlantRow+1,
+                            GetBulletType_Custom(),
+                            BulletMoveWay.MoveRight_threePeater
+                        );
+
+                        b1.Damage = plant.attackDamage*2;
+                        b1.fromType = plant.thePlantType;
+                    }
+
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            else
+            {
+                int total = 42;
+                const int phaseSize = 14;
+
+                for (int i = 0; i < total; i++)
+                {
+                    if (plant == null || plant.IsDestroyed()) yield break;
+                    int phase = i / phaseSize;
+                    int idx = i % phaseSize;
+
+                    float mainAngle;
+                    switch (phase)
+                    {
+                        case 0: // 0 → 90
+                            mainAngle = 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        case 1: // 90 → 0
+                            mainAngle = 90f - 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        case 2: // repeat 0 → 90 (AllPeater only)
+                            mainAngle = 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        case 3: // repeat 90 → 0 (AllPeater only)
+                            mainAngle = 90f - 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        case 4: // repeat 0 → 90 (AllPeater only)
+                            mainAngle = 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        case 5: // repeat 90 → 0 (AllPeater only)
+                            mainAngle = 90f - 90f / (phaseSize - 1) * idx;
+                            break;
+
+                        default:
+                            mainAngle = 0f;
+                            break;
+                    }
+                    Vector3 pos = plant.shoot.position;
+                    float[] angles = [ 90-mainAngle, mainAngle, 0f, -mainAngle, 270+mainAngle ];
+                    
+                    CustomPlantClass.Runtime.Core.CollectionHelper.ActionPerItem(angles, (angle =>
+                    {
+                        Bullet b = CreateBullet.Instance.SetBullet(
+                            pos.x, pos.y, plant.thePlantRow,
+                            GetBulletType_Custom(),
+                            GetBulletMoveWay()
+                        );
+
+                        b.Damage = plant.attackDamage;
+                        b.fromType = plant.thePlantType;
+                        b.transform.Rotate(0, 0, angle);
+                    }));
+
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            ReplaceSprite_Custom();
+
+            plant.anim.SetBool("shooting", false);
+        }
         protected override async Task SuperShoot_Async()
         {
             try

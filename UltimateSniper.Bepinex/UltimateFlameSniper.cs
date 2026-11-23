@@ -23,7 +23,7 @@ namespace UltimateSniper
         }
         public void AttackZombie(Zombie zombie, int damage)
         {
-            if (hitCount >= (Lawnf.TravelUltimate(Plugin.Buff2) ? 125 : 250) || plant.starUp)
+            if (hitCount >= (Lawnf.TravelUltimate(Plugin.Buff1) ? 125 : 250) || plant.starUp)
             {
                 if (Lawnf.TravelUltimate((UltiBuff)50) || plant.starUp) plant.anim.SetTriggerString("shoot");
                 damage *= 6;

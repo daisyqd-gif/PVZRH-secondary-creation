@@ -10,7 +10,7 @@ namespace FreezingCherry.BepInEx
         public float timer = 0.5f;
         public float lifeTimer = 10f;
         public int damage = 10800;
-        public PlantType fromType = UltimateFreezingCherry.PlantID;
+        public PlantType fromType = Plugin.Ultimate_PlantID;
 
         public void Awake()
         {

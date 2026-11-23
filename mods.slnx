@@ -86,6 +86,9 @@
   <Folder Name="/UltimateFreezingCherry/">
     <Project Path="UltimateFreezingCherry/FreezingCherry.BepInEx.csproj" />
   </Folder>
+  <Folder Name="/UltimateGarlicShooter/">
+    <Project Path="UltimateGarlicShooter/UltimateGarlicShooter.csproj" />
+  </Folder>
   <!--<Folder Name="/UltimateGatlingSupport/">
     <Project Path="UltimateGatlingSupport/template.csproj" />
   </Folder>-->

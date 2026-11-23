@@ -31,10 +31,7 @@ namespace MoreDolphinZombie
             DataContainer.ZombieId_D=DataMgr.AllocateID();
         }
 
-        [System.Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override void InitializeZombies()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
         {
             CustomCore.RegisterCustomZombie<DolphinGatlingZombie,DolphinGatlingZombie_a>
             (
@@ -68,7 +65,7 @@ namespace MoreDolphinZombie
             );
             CustomCore.TypeMgrExtra.WaterZombie.Add(DataContainer.ZombieId_D);
             DataMgr.AddCustomLevel4Zombie((ID)DataContainer.ZombieId_D,DataContainer.ZombieId_C);
-            DataMgr.AddLevelZombie(DataContainer.ZombieId_A,DataContainer.ZombieId_B,DataContainer.ZombieId_C);
+            DataMgr.AddLevelZombie(DataContainer.ZombieId_A,"",DataContainer.ZombieId_B,"",DataContainer.ZombieId_C,"",true);
             ModRegistryManager.AddToRegistry("NeutralZombies",DataContainer.ZombieId_A);
             ModRegistryManager.AddToRegistry("NeutralZombies",DataContainer.ZombieId_B);
             ModRegistryManager.AddToRegistry("NeutralZombies",DataContainer.ZombieId_C);
@@ -78,10 +75,10 @@ namespace MoreDolphinZombie
         }
         public override void InitializeConditions()
         {
-            TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_A);
-            TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_B);
-            TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_C);
-            TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_D);
+            //TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_A);
+            //TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_B);
+            //TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_C);
+            //TypeMgr.UltieZombie_level_water.Add(DataContainer.ZombieId_D);
         }
     }
     public class DolphinGatlingZombie_a : MonoBehaviour
@@ -142,7 +139,7 @@ namespace MoreDolphinZombie
             bullet.Damage=GameStrategy.ZombieSuperCherryDamage;
 
             // Play random shoot sound (3–5)
-            int soundId = UnityEngine.Random.Range(3, 5);
+            int soundId = Random.Range(3, 5);
             GameAPP.PlaySound(soundId, 0.5f, 1.0f);
         }
     }
@@ -192,7 +189,7 @@ namespace MoreDolphinZombie
             bullet.Damage=GameStrategy.ZombieSuperCherryDamage;
 
             // Play random shoot sound (3–5)
-            int soundId = UnityEngine.Random.Range(3, 5);
+            int soundId = Random.Range(3, 5);
             GameAPP.PlaySound(soundId, 0.5f, 1.0f);
         }
     }

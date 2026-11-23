@@ -13,6 +13,7 @@ global using CustomPlantClass.Main;
 global using CustomPlantClass.RogueShootingManager;
 global using GameLevel.RogueShooting;
 global using CustomPlantClass.Runtime;
+using CustomPlantClass.Runtime.Core;
 
 namespace FireSniperPuff
 {
@@ -148,7 +149,7 @@ namespace FireSniperPuff
             }
             catch (Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(MyPluginInfo.PluginName + " load failed.\n" + e.ToString());
+                ModLogger.LogError(MyPluginInfo.PluginName + " load failed.\n" + e.ToString());
             }
         }
     }

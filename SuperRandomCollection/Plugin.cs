@@ -38,7 +38,7 @@ namespace SuperRandomCollection
                 id_PresentImitater,
                 PresentImitaterAssets.GetAsset<GameObject>("PresentImitaterPrefab"),
                 PresentImitaterAssets.GetAsset<GameObject>("PresentImitaterPreview"),
-                new([(245, 256), (256, 245)]),
+                [(245, 256), (256, 245)],
                 0f, 0f, 0, 300, 60f, 300
             );
             CustomCore.AddPlantAlmanacStrings
@@ -77,6 +77,149 @@ namespace SuperRandomCollection
             new GoldimitaterCore().Load();
             new UltimateGoldImitaterCore().Load();
             new ZombieImitaterCore().Load();
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 万剑归宗","解锁<color=red>究极剑仙杨桃</color>的融合配方\n剑仙杨桃+剑仙杨桃"),BuffType.AdvancedBuff,() => true, 5000, PlantType.AbyssSwordStar);
+                CustomCore.RegisterCustomBanMix(PlantType.AbyssSwordStar,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.AbyssSwordStar,PlantType.SwordStar,PlantType.SwordStar);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            //CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 极致火力","解锁<color=red>究极速射樱桃射手</color>的融合配方\n究极樱桃射手+超级机枪射手"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateMinigun); //The more miniguns mod provides this natively
+            
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 赤渊蚀月","解锁<color=red>究极血月神卷心菜</color>的融合配方\n究极月亮神卷心菜+幻灭菇"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateRedLunar);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateRedLunar,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateRedLunar,PlantType.UltimateLunarCabbage,PlantType.SuperHypnoDoom);
+                CustomCore.AddFusion(PlantType.UltimateRedLunar,PlantType.SuperHypnoDoom,PlantType.UltimateLunarCabbage);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 复制中心","解锁<color=red>究极模仿者大麦</color>的融合配方\n黑曜石大麦+模仿者"),BuffType.AdvancedBuff,() => true, 5000, PlantType.ImitateWheat);
+                CustomCore.RegisterCustomBanMix(PlantType.ImitateWheat,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.ImitateWheat,PlantType.Imitater,PlantType.ObsidianWheat);
+                CustomCore.AddFusion(PlantType.ImitateWheat,PlantType.ObsidianWheat,PlantType.Imitater);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 熠熠生辉","解锁<color=red>究极炽阳向日葵</color>的融合配方\n究极向日葵+阳光炸弹"),BuffType.AdvancedBuff,() => true, 5000, PlantType.SolarSunflower);
+                CustomCore.RegisterCustomBanMix(PlantType.SolarSunflower,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.SolarSunflower,PlantType.UltimateSunflower,PlantType.SunBomb);
+                CustomCore.AddFusion(PlantType.SolarSunflower,PlantType.SunBomb,PlantType.UltimateSunflower);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 等价交换","解锁<color=red>无妄菇</color>的融合配方\n幻灭菇+贪欲菇"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateHypnoDoom);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateHypnoDoom,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateHypnoDoom,PlantType.SuperHypnoDoom,PlantType.GoldHypnoDoom);
+                CustomCore.AddFusion(PlantType.UltimateHypnoDoom,PlantType.GoldHypnoDoom,PlantType.SuperHypnoDoom);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 蒜毒骤发","解锁<color=red>究极影蚀大喷菇</color>的融合配方\n究极影蚀大喷菇+究极影蚀射手"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimatePoisonFume);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimatePoisonFume,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimatePoisonFume,PlantType.UltimateFume,PlantType.UltimateGarlicSplit);
+                CustomCore.AddFusion(PlantType.UltimatePoisonFume,PlantType.UltimateGarlicSplit,PlantType.UltimateFume);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 原始回归","解锁<color=red>原始阳光帝果</color>的融合配方\n阳光帝果+阳光帝果"),BuffType.AdvancedBuff,() => true, 5000, PlantType.AcientSunNut);
+                CustomCore.RegisterCustomBanMix(PlantType.AcientSunNut,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.AcientSunNut,PlantType.SuperSunNut,PlantType.SuperSunNut);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 坚不可摧","解锁<color=red>究极不朽高坚果</color>的融合配方\n究极黑曜石高坚果+究极黑曜石辣椒菇"),BuffType.AdvancedBuff,() => true, 5000, PlantType.BedRockTallNut);
+                CustomCore.RegisterCustomBanMix(PlantType.BedRockTallNut,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.BedRockTallNut,PlantType.UltimateTallNut,PlantType.UltimateJalapeno);
+                CustomCore.AddFusion(PlantType.BedRockTallNut,PlantType.UltimateJalapeno,PlantType.UltimateTallNut);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 专家邀请","解锁<color=red>究极武装大嘴花</color>的融合配方\n大嘴狙击射手+坚果超级机枪射手"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateSniperGatling);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateSniperGatling,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateSniperGatling,PlantType.SniperChomper,PlantType.SuperNutShooter);
+                CustomCore.AddFusion(PlantType.UltimateSniperGatling,PlantType.SuperNutShooter,PlantType.SniperChomper);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 鱼丸护体","解锁<color=red>究极机械坚果</color>的融合配方\n超级机械坚果+堡垒坚果"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateMachineNut);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateMachineNut,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateMachineNut,PlantType.SuperMachineNut,PlantType.HugeWallNut);
+                CustomCore.AddFusion(PlantType.UltimateMachineNut,PlantType.HugeWallNut,PlantType.SuperMachineNut);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 群星交汇","解锁<color=red>究极星辰大帝</color>的融合配方\n究极杨桃大帝+究极杨桃大帝"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateHolyStar);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateHolyStar,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateHolyStar,PlantType.UltimateStar,PlantType.UltimateStar);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 九龙至尊","解锁<color=red>飓风之龙</color>的融合配方\n烈焰竹龙+究极浴火三线射手\n"),BuffType.AdvancedBuff,() => true, 5000, PlantType.UltimateJalaGatling);
+                CustomCore.RegisterCustomBanMix(PlantType.UltimateJalaGatling,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.UltimateJalaGatling,PlantType.BambooDragon,PlantType.SuperThreePeater_sp);
+                CustomCore.AddFusion(PlantType.UltimateJalaGatling,PlantType.SuperThreePeater_sp,PlantType.BambooDragon);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
+            try
+            {
+                AdvBuff buff = (AdvBuff)CustomCore.RegisterCustomBuff(DataMgr.FormatPlantBuff("神秘融合 - 平行宇宙","解锁<color=red>平行时空树桩</color>的融合配方\n摇钱三线树桩+时空碎片\n"),BuffType.AdvancedBuff,() => true, 5000, PlantType.BlackHoleTorch);
+                CustomCore.RegisterCustomBanMix(PlantType.BlackHoleTorch,()=>buff.IsActive());
+                CustomCore.AddFusion(PlantType.BlackHoleTorch,PlantType.GoldThreeTorch,PlantType.PortalPlant);
+                CustomCore.AddFusion(PlantType.BlackHoleTorch,PlantType.PortalPlant,PlantType.GoldThreeTorch);
+                CustomCore.RegisterCustomUseItemOnPlantEvent(PlantType.BlackHoleTorch,BucketType.PortalHeart,PlantType.BlackHoleTorch);
+            }
+            catch(Exception e)
+            {
+                ModLogger.LogError(e);
+            }
         }
         public static Dictionary<PlantType,HashSet<PlantType>> MixDatas = new();
         public static void OnInit()
@@ -135,38 +278,6 @@ namespace SuperRandomCollection
             }
             transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             Destroy(this);
-        }
-    }
-    [HarmonyPatch(typeof(Board), nameof(Board.Start))]
-    public static class Board_Start_Patch
-    {
-        [HarmonyPostfix]
-        public static void Postfix(Board __instance)
-        {
-            if (__instance == null) return; //let the game handle it
-            bool isMyLevel = false;
-
-            // 1. Check row count
-            if (__instance.rowNum == 6)
-            {
-                // 2. Check wave count
-                if (__instance.theMaxWave == 100)
-                {
-                    // 3. Check BoardTag flags
-                    var tag = __instance.boardTag;
-
-                    if (tag.isSuperRandom &&
-                        tag.enableAllTravelPlant &&
-                        tag.disableSelectCard)
-                    {
-                        isMyLevel = true;
-                    }
-                }
-            }
-            if (isMyLevel)
-            {
-                TravelMgr.Instance.GetNormalBuff((AdvBuff)10006); //prevents zomboss self killing bug
-            }
         }
     }
     [HarmonyPatch(typeof(Imitater), nameof(Imitater.AnimExplode))]

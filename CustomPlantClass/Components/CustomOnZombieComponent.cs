@@ -15,7 +15,7 @@ namespace CustomPlantClass
         public override float RemoveCountDown { get; set; } = 5f;
         public virtual PlantType FromType { get; } = PlantType.Nothing;
         private GameObject obj_cache = null!;
-        public Board board => Board.Instance;
+        public Board board => Instance;
         public override void OnAddEffect()
         {
             if (zombie == null)

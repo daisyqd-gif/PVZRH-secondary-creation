@@ -152,7 +152,7 @@ namespace MegaGatlingExpansion
                 b.normalSpeed /= 2;
                 b.GetComponent<ElectricPea>().isPF = false;
             }
-            ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,_bullet.col.bounds.center).transform.localScale *= 4;
+            if(!Plugin.PerformanceMode)ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,_bullet.col.bounds.center).transform.localScale *= 4;
             stopSpawn=true;
             return true;
         }
@@ -166,7 +166,7 @@ namespace MegaGatlingExpansion
                 return;
 
             // Aura tick timer
-            AttrCountDown -= Time.deltaTime;
+            AttrCountDown -= (Plugin.PerformanceMode ? 0.33f : 1f) * Time.deltaTime;
             if (AttrCountDown > 0f && !Plugin.IsOverpowered)
                 return;
 
@@ -201,9 +201,9 @@ namespace MegaGatlingExpansion
                         !IsElectricPlant.Contains(p.thePlantType))
                     {
                         foundTarget=true;
-                        if(p.axis != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position,lim:false);
-                        p.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>());
-                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,p.axis.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(p.axis != null && !Plugin.PerformanceMode && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,p.axis.position,lim:false);
+                        p.TakeDamage(_bullet.Damage * 3 * (Plugin.PerformanceMode ? 3 : 1), _bullet.Cast<IDamageMaker>());
+                        if(!Plugin.PerformanceMode && counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,p.axis.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
 
@@ -217,9 +217,9 @@ namespace MegaGatlingExpansion
                         z.isMindControlled)
                     {
                         foundTarget=true;
-                        if(z.col != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
-                        z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless);
-                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(z.col != null && !Plugin.PerformanceMode && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        z.TakeDamage(_bullet.Damage * 3 * (Plugin.PerformanceMode ? 3 : 1), _bullet.Cast<IDamageMaker>(), DamageType.Shieldless);
+                        if(!Plugin.PerformanceMode && counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                         continue;
                     }
                 }
@@ -237,37 +237,37 @@ namespace MegaGatlingExpansion
                         !z.isMindControlled)
                     {
                         foundTarget=true;
-                        if(z.col != null && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
-                        z.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
+                        if(z.col != null && !Plugin.PerformanceMode && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,z.col.bounds.center,lim:false);
+                        z.TakeDamage(_bullet.Damage * 3 * (Plugin.PerformanceMode ? 3 : 1), _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
                         if (PlantMgr.GetPercent(5f))
                         {
                             z.Buttered(0.5f,false);
                         }
-                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(!Plugin.PerformanceMode && counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,z.col.bounds.center,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<ZombieBall>(out var ball) && !ball.plant)
                     {
                         foundTarget=true;
-                        if(counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position,lim:false);
-                        ball.bulletTime ++;
+                        if(!Plugin.PerformanceMode && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,ball.transform.position,lim:false);
+                        ball.bulletTime += Plugin.PerformanceMode ? 3 : 1;
                         if(ball.bulletTime >= 31) ball.Die();
-                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,ball.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(!Plugin.PerformanceMode && counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,ball.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                     if(col.TryGetComponent<FreezedPlant>(out var freezed))
                     {
                         foundTarget=true;
-                        if(counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position,lim:false);
+                        if(!Plugin.PerformanceMode && counter < 50) ParticleManager.Instance.SetParticle(ParticleType.ElectricSplat,freezed.transform.position,lim:false);
                         if (freezed.fired)
                         {
                             freezed.lightCountDown = 0.2f;
-                            freezed.fireCount --;
+                            freezed.fireCount -= Plugin.PerformanceMode ? 3 : 1;
                             if(freezed.fireCount <1) freezed.Die();
                         }
                         else
                         {
-                            freezed.TakeDamage(_bullet.Damage * 3, _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
+                            freezed.TakeDamage(_bullet.Damage * 3 * (Plugin.PerformanceMode ? 3 : 1), _bullet.Cast<IDamageMaker>(), DamageType.Shieldless, _bullet.fromType);
                         }
-                        if(counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,freezed.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
+                        if(!Plugin.PerformanceMode && counter < 50) PlantMgr.CreateLine(_bullet.transform,_bullet.transform.position,freezed.transform.position,Color.cyan,Color.white,_bullet.theBulletRow,token);
                     }
                 }
             }

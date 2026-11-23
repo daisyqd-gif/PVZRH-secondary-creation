@@ -178,7 +178,45 @@ namespace MegaGatlingExpansion
             yield return null;
         }//*/
         public virtual int BulletCountPF => 1;
-        protected override bool IsAsyncPF => true;
+        protected override bool IsAsyncPF => !Plugin.PerformanceMode;
+        public override IEnumerator SuperShoot()
+        {
+            plant.anim.SetBool("shooting", true);
+
+            int total = 150 + 10;
+
+            if (plant.skinType != 0)
+            {
+                total += 30;
+            }
+
+            for (int i = 0; i < total/5; i++)
+            {
+                if (plant == null || plant.IsDestroyed()) yield break;
+                Vector3 pos = plant.shoot.position;
+                for (int j = 0; j < (BulletCountPF+_plant.shootingLevel) * 5; j++)
+                {
+                    Bullet b = CreateBullet.Instance.SetBullet(
+                        pos.x + Random.Range(-0.25f,0.25f),
+                        pos.y + Random.Range(-0.25f,0.25f),
+                        plant.thePlantRow,
+                        GetBulletType_Custom_PF(),
+                        GetBulletMoveWay()
+                    );
+                    if (b.theBulletType == BulletType.Bullet_doom_big || b.theBulletType == BulletType.Bullet_doom_big_ulti) { b.theStatus = BulletStatus.Doom_big; b.Damage = GetDmg() * 6; }
+                    else b.Damage = GetDmg();
+                    b.fromType = plant.thePlantType;
+                    b.transform.Rotate(0, 0, Random.Range(-15f, 15f));
+                    if (Lawnf.TravelUltimate((UltiBuff)51)) b.Damage *= 2;
+                }
+
+                //await DelayTask.DelayScaled(0.1f,() => _plant.attributeSpeed,token);
+                yield return new WaitForSeconds(0.1f);
+            }
+            ReplaceSprite_Custom();
+
+            plant.anim.SetBool("shooting", false);
+        }
         protected override async Task SuperShoot_Async()
         {
             try

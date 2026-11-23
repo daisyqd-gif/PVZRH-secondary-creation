@@ -181,7 +181,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								catch (Exception ex)
 								{
-									global::CustomPlantClass.Runtime.Core.ModLogger.LogError(ex.ToString());
+                                    Runtime.Core.ModLogger.LogError(ex.ToString());
 								}
 							}
 						}
@@ -191,7 +191,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.ToString());
+                Runtime.Core.ModLogger.LogError(t.ToString());
                 RestoreRemovedConfigs();
 				result = false;
 			}
@@ -218,7 +218,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.Message);
+                Runtime.Core.ModLogger.LogError(t.Message);
 			}
 		}
         /// <summary>Recovers from an invalid-operation build failure using the last valid directory.</summary>
@@ -232,7 +232,7 @@ namespace CustomPlantClass.RogueShootingManager
 		{
 			if (__exception is InvalidOperationException)
 			{
-				global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"[Almanac] Build threw: {__exception.Message}");
+                Runtime.Core.ModLogger.LogError($"[Almanac] Build threw: {__exception.Message}");
 
 				// If this run failed, fall back to last known good directory
 				if (__result == null && LastGoodDir != null)
@@ -262,7 +262,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception t)
 			{
-				global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.Message);
+                Runtime.Core.ModLogger.LogError(t.Message);
 			}
 		}
 		private static Type GetConfigType(BaseConfig config)
@@ -294,7 +294,7 @@ namespace CustomPlantClass.RogueShootingManager
 				bool flag = textAsset == null || string.IsNullOrEmpty(textAsset.text);
 				if (flag)
 				{
-					global::CustomPlantClass.Runtime.Core.ModLogger.LogError($"The catalog is invalid! Please fix any errors!");
+                    Runtime.Core.ModLogger.LogError($"The catalog is invalid! Please fix any errors!");
 					return hashSet;
 				}
 				ShootingAlmanacIndexFile shootingAlmanacIndexFile = JsonUtility.FromJson<ShootingAlmanacIndexFile>(textAsset.text);
@@ -319,7 +319,7 @@ namespace CustomPlantClass.RogueShootingManager
 			}
 			catch (Exception e)
 			{
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.Message);
+                Runtime.Core.ModLogger.LogError(e.Message);
 			}
 			return hashSet;
 		}
@@ -379,7 +379,7 @@ namespace CustomPlantClass.RogueShootingManager
 						}
 						catch (Exception t)
 						{
-							global::CustomPlantClass.Runtime.Core.ModLogger.LogError(t.ToString());
+                            Runtime.Core.ModLogger.LogError(t.ToString());
 						}
 					}
 				}
@@ -536,7 +536,7 @@ namespace CustomPlantClass.RogueShootingManager
 					{
 						PlantType key = keyValuePair.Key;
 						Il2CppSystem.Collections.Generic.List<Il2CppSystem.Collections.Generic.List<PlantType>> list = BuildRoutes(key);
-						global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] BuildRoutes({key}) produced {routes.Count} routes");
+                        Runtime.Core.ModLogger.LogInfo($"[EVOLUTION] BuildRoutes({key}) produced {routes.Count} routes");
 						bool flag3 = list == null || list.Count == 0;
 						if (!flag3)
 						{
@@ -551,7 +551,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								else
 								{
-									global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
+                                    Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 								}
 							}
 							else
@@ -583,7 +583,7 @@ namespace CustomPlantClass.RogueShootingManager
 									bool flag8 = readOnlyCollection != null;
 									if (!flag8)
 									{
-										global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
+                                        Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 										continue;
 									}
 									for (int j = 0; j < readOnlyCollection.Count; j++)
@@ -607,7 +607,7 @@ namespace CustomPlantClass.RogueShootingManager
 								}
 								else
 								{
-                                    global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn($"TryCast merged routes failed: {key}");
+                                    Runtime.Core.ModLogger.LogWarn($"TryCast merged routes failed: {key}");
 								}
 							}
 						}
@@ -774,7 +774,7 @@ namespace CustomPlantClass.RogueShootingManager
             }
             catch(Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
+                Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 
@@ -898,7 +898,7 @@ namespace CustomPlantClass.RogueShootingManager
 					{
 						Dfs(node2, ancestors, path, result); // recursive search algorithm
 					}
-					global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"[DFS] node={node}, children={string.Join(" , ", list.ToSystemList())}");
+                    Runtime.Core.ModLogger.LogInfo($"[DFS] node={node}, children={string.Join(" , ", list.ToSystemList())}");
 				}
 				else
 				{
@@ -908,7 +908,7 @@ namespace CustomPlantClass.RogueShootingManager
 						list2.Add(i);
 					}
 					result.Add(list2);
-					global::CustomPlantClass.Runtime.Core.ModLogger.LogInfo($"Completed route: {string.Join(" -> ", path.ToSystemList())}");
+                    Runtime.Core.ModLogger.LogInfo($"Completed route: {string.Join(" -> ", path.ToSystemList())}");
 				}
 				path.RemoveAt(path.Count - 1);
 				ancestors.Remove(node);
@@ -950,7 +950,7 @@ namespace CustomPlantClass.RogueShootingManager
 						bool flag4 = readOnlyCollection != null;
 						if (!flag4)
 						{
-							global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Unable to read original base plant list! Aborting injection.");
+                                Runtime.Core.ModLogger.LogWarn("Unable to read original base plant list! Aborting injection.");
 							return;
 						}
 						for (int j = 0; j < readOnlyCollection.Count; j++)
@@ -975,13 +975,13 @@ namespace CustomPlantClass.RogueShootingManager
 				}
 				else
 				{
-					global::CustomPlantClass.Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
+                        Runtime.Core.ModLogger.LogWarn("Invalid data detected!");
 				}
 			}
             }
             catch(Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
+                Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 
@@ -1079,14 +1079,14 @@ namespace CustomPlantClass.RogueShootingManager
 					}
 					else
 					{
-						global::CustomPlantClass.Runtime.Core.ModLogger.LogError("Invalid data found!");
+                            Runtime.Core.ModLogger.LogError("Invalid data found!");
 					}
 				}
 			}
             }
             catch(Exception e)
             {
-                global::CustomPlantClass.Runtime.Core.ModLogger.LogError(e.ToString());
+                Runtime.Core.ModLogger.LogError(e.ToString());
             }
 		}
 

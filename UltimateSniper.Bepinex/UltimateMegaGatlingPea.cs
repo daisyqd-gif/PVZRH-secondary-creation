@@ -2,6 +2,7 @@ using CustomPlantClass.Runtime;
 
 namespace UltimateSniper
 {
+    /*
     public class UltimateMegaGatlingPea : BaseCustomPlant
     {
         public static ID PLANT_ID = 13036;//ID is a customizelib type used in all modern plant mods
@@ -165,4 +166,5 @@ namespace UltimateSniper
             }
         }
     }
+    */
 }

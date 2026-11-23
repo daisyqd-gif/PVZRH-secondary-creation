@@ -35,14 +35,13 @@ namespace VIPGoldenMelon
             );
 
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new BaseCustomPlantData(
+                DataMgr.AllocateID(),
+                assetBundle.GetAsset<GameObject>("MelonpultPrefab"),
+                assetBundle.GetAsset<GameObject>("MelonpultPreview")
+            )
             {
-                PlantId = DataMgr.AllocateID(), // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("MelonpultPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("MelonpultPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorList(new List<(ID,ID)>{(PlantType.GoldMelon,PlantType.Marigold)}), // Optional fusion recipes
+                Fusions = ListHelper.MirrorList(new List<(ID,ID)>{(PlantType.GoldMelon,PlantType.Marigold)}), // Optional fusion recipes
 
                 AttackInterval = 3f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles

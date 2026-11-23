@@ -18,7 +18,7 @@ namespace CustomPlantClass
         [HarmonyPriority(Priority.Last)]
         public static void CheckMix_Postfix(CreatePlant __instance, ref Plant __result)
         {
-            if (__result == null || !Utils.InGame()) return;
+            if (__result == null || !Tools.InGame()) return;
 
             if (!DataMgr.replaceList.TryGetValue(__result.thePlantType, out var entry))
                 return;
@@ -86,7 +86,7 @@ namespace CustomPlantClass
         [HarmonyPostfix]
         public static void SetZombie_Postfix(CreateZombie __instance, ref Zombie __result, bool isMindControlled)
         {
-            if (__result == null || !Utils.InGame()) return;
+            if (__result == null || !Tools.InGame()) return;
             if (!DataMgr.onZombieTypeSpawnActionList.ContainsKey(__result.theZombieType)) return;
             var a = DataMgr.onZombieTypeSpawnActionList[__result.theZombieType];
             if (a.Item2.Invoke(__result) && GameAPP.theGameStatus == GameStatus.InGame)
@@ -345,7 +345,7 @@ namespace CustomPlantClass
         [HarmonyPatch(nameof(Plant.Die))]
         public static bool Die_Prefix(Plant __instance, DieReason reason)
         {
-            if (__instance == null || !Utils.InGame()) return true;
+            if (__instance == null || !Tools.InGame()) return true;
             var p = __instance;
             if (/*__instance.TryGetComponent<BaseCustomPlant>(out var p)*/ true)
             {
@@ -624,7 +624,7 @@ namespace CustomPlantClass
         [HarmonyPrefix]
         public static void Die_Prefix(Zombie __instance, ref int reason)
         {
-            if (__instance == null || !Utils.InGame()) return;
+            if (__instance == null || !Tools.InGame()) return;
             if (__instance.theStatus == ZombieStatus.Dying)
             {
                 if (reason == __instance.dieReason)
@@ -641,7 +641,7 @@ namespace CustomPlantClass
         [HarmonyPostfix]
         public static void Awake_Postfix(Zombie __instance)
         {
-            if (__instance == null || !Utils.InGame())
+            if (__instance == null || !Tools.InGame())
                 return;
 
             if (!DataMgr.zombieDatas.TryGetValue(__instance.theZombieType, out var data))
@@ -1197,9 +1197,9 @@ namespace CustomPlantClass
             if (wave % 10 == 0)
             {
                 ZombieMgr.TrySetDTierZombies(
-                    Board.Instance,
+                    Instance,
                     wave,
-                    Board.Instance.theCurrentSurvivalRound,
+                    Instance.theCurrentSurvivalRound,
                     [.. InitZombieList.zombieToSpawns]
                 );
             }
@@ -1582,7 +1582,7 @@ namespace CustomPlantClass
         {
             if(PatchData.TryGetCustomLevel(GameAPP.theBoardType,GameAPP.theBoardLevel, out var data))
             {
-                data.EnterGameAction(Board.Instance);
+                data.EnterGameAction(Instance);
             }
         }
     }

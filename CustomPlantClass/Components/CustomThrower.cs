@@ -1,3 +1,5 @@
+using CustomPlantClass.Runtime.Core;
+
 namespace CustomPlantClass
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -6,7 +8,16 @@ namespace CustomPlantClass
         protected Vector2 firstPostion;
         protected float firstTime;
         protected virtual float flightTime { get; set; } = 1.5f;
-        protected virtual bool CheckRange(Zombie zombie) => _plant.axis.position.x < zombie.axis.position.x;
+        protected virtual bool CheckRange(Zombie zombie)
+        {
+            if (zombie != null)
+            {
+                Vector3 position = zombie.axis.position;
+                Vector3 position2 = _plant.axis.position;
+                return !MathHelper.ApproximatelyZero(position.x - position2.x) && !(position.x < position2.x);
+            }
+            return false;
+        }
         protected virtual Zombie ThrowerSearchZombie()
         {
             var board = _plant.board;
@@ -78,25 +89,6 @@ namespace CustomPlantClass
             if (_plant.shoot == null || zombie == null)
                 return;
 
-            // where the projectile starts
-            Vector2 projectilePosition = _plant.shoot.position;
-
-            // target motion + position
-            Vector2 targetVelocity = zombie.Velocity;
-            Vector2 targetCurrentPosition = zombie.ColliderPosition;
-
-            // Lawnf helper: compute arc parameters for a given flight time
-            // returns something like: [t, vx, vy, gravityOrDeltaVy]
-            float[] arc = MathHelper.CalculateProjectileWithSpeed(
-                projectilePosition,
-                targetVelocity,
-                targetCurrentPosition,
-                flightTime
-            );
-
-            if (arc == null || arc.Length < 4)
-                return;
-
             // spawn bullet at shoot point
             Bullet b = PlantMgr.SetBullet(
                 _plant,
@@ -109,29 +101,30 @@ namespace CustomPlantClass
                 return;
 
             b.ThrowTo(zombie);
-
-            if (_plant.melonSputter)
-                b.melonSputter = true;
+            b.melonSputter = _plant.melonSputter;
 
             // hook for subclasses (Winter, Lava, Gold, etc.)
             UniqueEffect(b);
         }
+        protected virtual bool IsUmbrellaValid(Plant p)
+        {
+            return IsUmbrella(p) && p.axis.position.x < firstPostion.x;
+        }
         // v = projectile start position (shoot point)
         // returns (arcParams, umbrellaPlant)
-        protected virtual (float[] arc, Plant umbrella) FindUmbrella(Vector2 v)
+        protected virtual Plant FindUmbrella(Vector2 v)
         {
             var board = _plant.board;
             if (board == null)
-                return (null, null);
+                return null;
 
             var gridSystem = board.gridSystem;
             if (gridSystem == null)
-                return (null, null);
+                return null;
 
             int col = _plant.thePlantColumn;
             int row = _plant.thePlantRow;
 
-            float[] bestArc = null;
             Plant bestUmbrella = null;
 
             // scan columns from this plant to the right
@@ -140,55 +133,22 @@ namespace CustomPlantClass
                 var grid = gridSystem.GetGrid(col, row);
                 if (grid == null || grid.plants == null)
                     break;
-
-                foreach (var p in grid.plants.Cast<Il2CppSystem.Collections.Generic.List<Plant>>())
+                foreach (var p in grid.plants.ToList())
                 {
                     if (p == null)
                         continue;
 
-                    // decompiler mangled types; this is really "is umbrella plant?"
-                    if (!IsUmbrella(p))
+                    if (!IsUmbrellaValid(p))
                         continue;
 
-                    var pos = p.axis.position;
-
-                    // must be to the left of firstPostion.x (where we first targeted)
-                    if (pos.x >= firstPostion.x)
-                        continue;
-
-                    // compute where umbrella will be at catch time
-                    // vanilla adds +0.75f on Y
-                    var umbrellaPos = new Vector2(pos.x, pos.y + 0.75f);
-
-                    float t1 = firstTime;          // when we first locked target
-                    float t2 = Time.time;          // now
-
-                    // Lawnf helper: solve arc that goes from v → umbrellaPos over flightTime,
-                    // given timing info (t1, t2)
-                    float[] arc = MathHelper.CalculateProjectileParameters(
-                        v,
-                        t1,
-                        umbrellaPos,   // "firstPlace"
-                        t2,
-                        umbrellaPos,   // "secondPlace" (same here)
-                        flightTime
-                    );
-
-                    if (arc != null)
-                    {
-                        bestArc = arc;
-                        bestUmbrella = p;
-                        break;
-                    }
-                }
-
-                if (bestArc != null)
+                    bestUmbrella = p;
                     break;
+                }
 
                 col++;
             }
 
-            return (bestArc, bestUmbrella);
+            return bestUmbrella;
         }
         // Called by animation event
         public override Bullet Shoot_Custom()
@@ -218,7 +178,7 @@ namespace CustomPlantClass
                 return null;
 
             // 1) Umbrella branch
-            (var _, Plant umbrella) = FindUmbrella(startPos);
+            Plant umbrella = FindUmbrella(startPos);
             if (umbrella != null)
             {
                 b.ThrowTo(umbrella, new(startPos), new(flightTime));
@@ -234,15 +194,13 @@ namespace CustomPlantClass
             }
 
             // 3) Fallback: grid-based speed
-            Vector2 targetVelocity = Vector2.zero;
             Board board = _plant.board;
             if (board != null && board.gridSystem != null)
             {
                 var grid = board.gridSystem.GetGrid(board.columnNum - 1, _plant.thePlantRow);
                 if (grid != null)
                 {
-                    Vector2 targetPos = grid.Position;
-                    b.SetSpeed(startPos, targetVelocity, targetPos, flightTime);
+                    b.ThrowTo(grid.Position, new(startPos), new(flightTime));
                     goto ApplyCommon;
                 }
             }
@@ -278,14 +236,10 @@ namespace CustomPlantClass
             // Euclidean distance
             return Mathf.Sqrt(dx * dx + dy * dy);
         }
-        protected virtual bool IsUmbrella(Plant p)
-        {
-            // this is where you map the weird IL2CPP checks
-            // to something sane like:
-            return p.thePlantType == PlantType.CabbageUmbrella
+        protected virtual bool IsUmbrella(Plant p) =>
+            p.thePlantType == PlantType.CabbageUmbrella
                 || p.thePlantType == PlantType.EmeraldUmbrella;
-        }
-        // Called by a second animation event (e.g. double‑lob, splash, etc.)
+        // Called by animation event
         public override Bullet Shoot2_Custom()
         {
             if (_plant.shoot == null)
@@ -313,12 +267,10 @@ namespace CustomPlantClass
                 return null;
 
             // 1) Umbrella branch
-            (var _, Plant umbrella) = FindUmbrella(startPos);
+            Plant umbrella = FindUmbrella(startPos);
             if (umbrella != null)
             {
-                var arcStart = new Il2CppSystem.Nullable<Vector2>(startPos);
-
-                b.ThrowTo(umbrella, arcStart);
+                b.ThrowTo(umbrella, new(startPos), new(flightTime));
                 goto ApplyCommon;
             }
 
@@ -326,22 +278,18 @@ namespace CustomPlantClass
             Zombie z = _plant.targetZombie;
             if (z != null && z.col != null)
             {
-                var arcStart = new Il2CppSystem.Nullable<Vector2>(startPos);
-
-                b.ThrowTo(z, arcStart);
+                b.ThrowTo(z, new(startPos), new(flightTime));
                 goto ApplyCommon;
             }
 
             // 3) Fallback: grid-based speed
-            Vector2 targetVelocity = Vector2.zero;
             Board board = _plant.board;
             if (board != null && board.gridSystem != null)
             {
                 var grid = board.gridSystem.GetGrid(board.columnNum - 1, _plant.thePlantRow);
                 if (grid != null)
                 {
-                    Vector2 targetPos = grid.Position;
-                    b.SetSpeed(startPos, targetVelocity, targetPos, 2);
+                    b.ThrowTo(grid.Position, new(startPos), new(flightTime));
                     goto ApplyCommon;
                 }
             }
@@ -362,7 +310,6 @@ namespace CustomPlantClass
 
             return b;
         }
-        protected virtual void UniqueEffect(Bullet b) { }
         public override BulletType GetBulletType() => BulletType.Bullet_cabbage;
         public override BulletType GetBulletType2() => GetBulletType();
         protected virtual Vector2 GetZombiePosition(Zombie zombie)

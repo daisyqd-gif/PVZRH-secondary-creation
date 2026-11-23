@@ -176,7 +176,7 @@ namespace UltimateRepeater
         public void Enter()
         {
             entered=true;
-            if(Utils.IsGameRunning()) StartPF();
+            if(Tools.IsGameRunning()) StartPF();
             _plant.anim.SetBoolString("active",true);
         }
         public override void StartPF()

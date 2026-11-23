@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CustomPlantClass.CustomizeLib;
 using CustomPlantClass.CustomizeLib.ExtensionData.Basic;
+using CustomPlantClass.Main;
 using CustomPlantClass.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -13,9 +14,6 @@ namespace FreezingCherry.BepInEx
     public class FreezingCherry : MonoBehaviour
     {
         //public static ID PlantID = 1957;
-        public static ID ParticleID = 1957;
-        public static BuffID buff1 = -1; // 凝冰之力
-        public static BuffID buff2 = -1; // 霜灭
 
         public static GameObject? IceDoomPrefab = null;
         public static int maxCard = 8;
@@ -23,6 +21,27 @@ namespace FreezingCherry.BepInEx
         public IceCherry plant => gameObject.GetComponent<IceCherry>();
         public int spawnTime = 0;
         public List<DroppedCard> cards = new();
+
+        bool isInit = false;
+
+        public Dictionary<BulletType,(int,Action<FreezingCherry,Bullet>?)> _bulletList = new();
+
+        public Dictionary<BulletType,(int,Action<FreezingCherry,Bullet>?)> BulletList
+        {
+            get
+            {
+                if (!isInit)
+                {
+                    var a = ModRegistryManager.GetRegistry<(BulletType,int,Action<FreezingCherry,Bullet>?)>("CherryBullets")!;
+                    foreach( var i in a )
+                    {
+                        _bulletList[i.Item1] = (i.Item2,i.Item3);
+                    }
+                    isInit = true;
+                }
+                return _bulletList;
+            }
+        }
 
         public virtual bool AddEnergy(Collider2D collision)
         {
@@ -32,7 +51,7 @@ namespace FreezingCherry.BepInEx
             if (bullet.Team == Team.AI)
                 return false;
             int energy = 0;
-
+            /*
             switch (bullet.theBulletType)
             {
                 case BulletType.Bullet_cherry:
@@ -69,8 +88,14 @@ namespace FreezingCherry.BepInEx
                 default:
                     return false;
             }
+            */
+            if(BulletList.TryGetValue(bullet.theBulletType,out var val))
+            {
+                energy = val.Item1;
+                if(val.Item2 != null) val.Item2(this,bullet);
+            }
             CreateParticle.SetParticle((int)ParticleType.SnowPeaSplat, new Vector2(bullet.transform.position.x, bullet.transform.position.y), bullet.theBulletRow);
-            if (Lawnf.TravelAdvanced(buff1))
+            if (Lawnf.TravelAdvanced(Plugin.buff1))
                 energy *= 2;
             plant.attributeCount += energy;
             GameAPP.PlaySound(68, 0.5f, 1.0f);
@@ -87,7 +112,7 @@ namespace FreezingCherry.BepInEx
                 cherry.SetData("FreezingCherry_CreateByCherry", true);
                 cherry.SetData("FreezingCherry_FromType", plant.thePlantType);
                 if (cards.Count >= maxCard)
-                    cherry.existTime = Lawnf.TravelAdvanced(buff2) ? 7.5f : 15f;
+                    cherry.existTime = Lawnf.TravelAdvanced(Plugin.buff2) ? 7.5f : 15f;
                 else
                     cards.Add(cherry);
                 spawnTime++;
@@ -114,14 +139,14 @@ namespace FreezingCherry.BepInEx
                             cards.Add(doom);
                     }
                     else
-                        doom.existTime = Lawnf.TravelAdvanced(buff2) ? 7.5f : 15f;
+                        doom.existTime = Lawnf.TravelAdvanced(Plugin.buff2) ? 7.5f : 15f;
                     spawnTime = 0;
                 }
                 if (cards.Count > maxCard)
                 {
                     for (int i = maxCard; i < cards.Count; i++)
                     {
-                        cards[i].existTime = Lawnf.TravelAdvanced(buff2) ? 7.5f : 15f;
+                        cards[i].existTime = Lawnf.TravelAdvanced(Plugin.buff2) ? 7.5f : 15f;
                         cards.RemoveAt(i);
                     }
                 }
@@ -137,15 +162,7 @@ namespace FreezingCherry.BepInEx
 
     public class UltimateFreezingCherry : FreezingCherry
     {
-        public static ID PlantID = 1958;
-        public static ID BulletID = 1958;
-        public static new ID ParticleID = 1958;
-        public static ID DoomParticle = 1959;
-        public static ID IceDoomSprite = 1960;
-        public static BuffID buff = -1;
-        public static GameObject? IceRadiation = null;
-        public static ID CherryID = 1958;
-        public static ID CherrySmallID = 1959;
+        //public static ID PlantID = 1958;
 
         public void Awake()
         {
@@ -175,13 +192,13 @@ namespace FreezingCherry.BepInEx
         {
             plant.anim.SetInteger("cureentStatus", 2);
             plant.board.boardAction.SetDoom(0, 0, false, true, plant.axis.transform.position, 18000, existParticle: false, fromType: plant.thePlantType);
-            CreateParticle.SetParticle(IceDoomSprite, plant.axis.transform.position, 11);
+            CreateParticle.SetParticle(Plugin.IceDoomSprite, plant.axis.transform.position, 11);
             plant.StartCoroutine(CreateBomb());
         }
 
         public void SuperEnd()
         {
-            CreateParticle.SetParticle(DoomParticle, plant.axis.transform.position, 11);
+            CreateParticle.SetParticle(Plugin.DoomParticle, plant.axis.transform.position, 11);
             foreach (var zombie in Lawnf.GetAllZombies())
             {
                 if (zombie == null) continue;
@@ -194,15 +211,15 @@ namespace FreezingCherry.BepInEx
             for (int angle = 0; angle < 360; angle += 5)
             {
                 // 创建子弹
-                Bullet bullet = CreateBullet.Instance.SetBullet(position.x, position.y, plant.thePlantRow, BulletID, BulletMoveWay.Free, false);
+                Bullet bullet = CreateBullet.Instance.SetBullet(position.x, position.y, plant.thePlantRow, Plugin.BulletID, BulletMoveWay.Free, false);
                 if (bullet != null)
                 {
                     bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
                     bullet.Damage = plant.attackDamage * 150;
-                    bullet.fromType = UltimateFreezingCherry.PlantID;
+                    bullet.fromType = Plugin.Ultimate_PlantID;
                 }
             }
-            Instantiate(IceRadiation, plant.axis.transform.position, Quaternion.identity, plant.board.transform);
+            Instantiate(Plugin.IceRadiation, plant.axis.transform.position, Quaternion.identity, plant.board.transform);
             plant.board.iceDoomFreezeTime += 10f;
             plant.board.StartCoroutine(CreateBomb());
             plant.Die(Plant.DieReason.BySelf);
@@ -238,12 +255,12 @@ namespace FreezingCherry.BepInEx
             Bullet? bullet = null;
             if (zombie != null)
             {
-                bullet = CreateBullet.Instance.SetBullet(shoot.x, shoot.y, zombie.theZombieRow, BulletID, BulletMoveWay.Throw);
+                bullet = CreateBullet.Instance.SetBullet(shoot.x, shoot.y, zombie.theZombieRow, Plugin.BulletID, BulletMoveWay.Throw);
                 bullet.ThrowTo(zombie, new(), 1.5f.GetNullable());
             }
             else
             {
-                bullet = CreateBullet.Instance.SetBullet(shoot.x, shoot.y, Mouse.Instance.GetRowFromY(position.x, position.y), BulletID, BulletMoveWay.Throw);
+                bullet = CreateBullet.Instance.SetBullet(shoot.x, shoot.y, Mouse.Instance.GetRowFromY(position.x, position.y), Plugin.BulletID, BulletMoveWay.Throw);
                 bullet.ThrowTo(position, new(), 1.5f.GetNullable());
             }
             bullet.Damage = plant.attackDamage;
@@ -302,12 +319,12 @@ namespace FreezingCherry.BepInEx
                     int damage = 7200;
                     if (z.GetAttrTimers().freezeTimer > 0f)
                         damage *= 4;
-                    z.TakeDamage(damage, plant.ToIDamageMaker(), DamageType.NormalAll, PlantID);
+                    z.TakeDamage(damage, plant.ToIDamageMaker(), DamageType.NormalAll, Plugin.Ultimate_PlantID);
                 };
                 int column = UnityEngine.Random.Range(0, Board.Instance.columnNum);
                 int row = UnityEngine.Random.Range(0, Board.Instance.rowNum);
                 var position = new Vector2(Mouse.Instance.GetBoxXFromColumn(column), Mouse.Instance.GetBoxYFromRow(row));
-                Board.Instance.boardAction.CreateCherryExplode(position, row, CherryID, 7200, PlantID, action);
+                Board.Instance.boardAction.CreateCherryExplode(position, row, Plugin.CherryID, 7200, Plugin.Ultimate_PlantID, action);
             }
             catch (Exception)
             {

@@ -33,14 +33,12 @@ namespace UltimateCherryFireShooter_Remade
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
+            BaseCustomPlantData Data = new(
+                PlantTypeFire,
+                assetBundle.GetAsset<GameObject>("UltimateCherryFireShooterPrefab"),
+                assetBundle.GetAsset<GameObject>("UltimateCherryFireShooterPreview"))
             {
-                PlantId = PlantTypeFire, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("UltimateCherryFireShooterPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("UltimateCherryFireShooterPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorTuple((PlantType.UltimateGatling,PlantType.Jalapeno)), // Optional fusion recipes
+                Fusions = ListHelper.MirrorTuple((PlantType.UltimateGatling,PlantType.Jalapeno)), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles
@@ -81,14 +79,12 @@ namespace UltimateCherryFireShooter_Remade
             CustomCore.TypeMgrExtra.IsFirePlant.Add(plantID);
 
             // Fill out the plant metadata
-            BaseCustomPlantData Data_final = new BaseCustomPlantData()
+            BaseCustomPlantData Data_final = new(
+                PlantTypeFinal,
+                assetBundle.GetAsset<GameObject>("FinalCherryFireGatlingPrefab"),
+                assetBundle.GetAsset<GameObject>("FinalCherryFireGatlingPreview"))
             {
-                PlantId = PlantTypeFinal, // Automatically assigns a unique ID
-
-                Prefab = assetBundle.GetAsset<GameObject>("FinalCherryFireGatlingPrefab"),   // Main plant prefab
-                Preview = assetBundle.GetAsset<GameObject>("FinalCherryFireGatlingPreview"), // Card preview prefab
-
-                Fusions = global::CustomPlantClass.Main.ListHelper.MirrorTuple((PlantTypeFire,PlantType.Jalapeno)), // Optional fusion recipes
+                Fusions = ListHelper.MirrorTuple((PlantTypeFire,PlantType.Jalapeno)), // Optional fusion recipes
 
                 AttackInterval = 1.5f,   // Time between attacks (shooters only)
                 ProduceInterval = 0f,  // Time between sun/production cycles

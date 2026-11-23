@@ -103,8 +103,9 @@ namespace HorseBossPhase2
                         __instance.onDeath = null;
                     }
                 }
-                __instance.theStatus = (ZombieStatus)10086;
-                __instance.Die(2);
+                //__instance.theStatus = (ZombieStatus)10086;
+                //__instance.Die(2);
+                HorseBoss_Die_Patch.Die_ReversePatch(__instance,2);
             }
             return false;
         }
@@ -115,7 +116,8 @@ namespace HorseBossPhase2
         [HarmonyPatch(typeof(Zombie),nameof(Zombie.Die))]
         [HarmonyReversePatch]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void Die_ReversePatch(HorseBoss __instance, int reason = 0) { }
+        public static void Die_ReversePatch(Zombie __instance, int reason = 0) { }
+        /*
         [HarmonyPatch(typeof(HorseBoss),nameof(HorseBoss.Die))]
         [HarmonyPrefix]
         public static bool Die_Prefix(HorseBoss __instance, int reason)
@@ -124,6 +126,7 @@ namespace HorseBossPhase2
             Die_ReversePatch(__instance, reason);
             return false;
         }
+        */
     }
     [HarmonyPatch(typeof(TypeMgr))]
     public static class TypeMgr_Patch

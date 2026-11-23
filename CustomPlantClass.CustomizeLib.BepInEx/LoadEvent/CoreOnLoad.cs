@@ -1,4 +1,5 @@
-﻿using CustomPlantClass.CustomizeLib.Hook;
+﻿using CustomLevels.Bepinex;
+using CustomPlantClass.CustomizeLib.Hook;
 using CustomPlantClass.CustomizeLib.ToolInterfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CustomPlantClass.CustomizeLib.LoadEvent
         public static void OnLoad()
         {
             //EventListenr.AddListener(ListenerType.OnGameLaunch, ApplyNativeHookTools.RunAll);
+            CLevel_Load_Plugin.Load();
         }
     }
 }

@@ -32,5 +32,36 @@ namespace CustomPlantClass.Main
         {
             InstanceManager.Board.boardAction.CreateFireLine(theFireRow, damage, fromZombie, fix, shake, action, fromType);
         }
+        public static void CreateMultipleChoiceMenu(List<MultipleChoiceMenuOptions> options, int refreshCount = 9999, int itemCount = 5, bool enableRefresh = true, bool enableTurnPage = false, bool enableCancel = false)
+        {
+            var menu = GameAPP.UIManager.Push(UIType.MultipleChoiceMenu2).GetComponent<MultipleChoiceMenu>();
+            foreach(var option in options)
+            {
+                menu.RegisterOption(option.Name, option.Text, option.Callback, option.displayPlantType, option.displayZombieType, option.displayQuality, option.Interactable);
+            }
+            menu.RegisterWindow(itemCount.AtMost(5));
+            menu.SetRefreshable(enableRefresh,refreshCount,false,true,enableTurnPage);
+            menu.SetCancelable(enableCancel);
+        }
+    }
+    /// <summary>
+    /// Options for multiple choice menu items
+    /// </summary>
+    /// <param name="Name">Name</param>
+    /// <param name="Text">Description</param>
+    /// <param name="Callback">Called when the item is selected</param>
+    /// <param name="displayPlantType">Displayed plant type, can be PlantType.Nothing if displaying a zombie</param>
+    /// <param name="displayZombieType">Displayed zombie type, can be ZombieType.Nothing if displaying a zplant</param>
+    /// <param name="displayQuality">The quality of the menu item</param>
+    /// <param name="Interactable"></param>
+    public struct MultipleChoiceMenuOptions(string Name, string Text, Action Callback, PlantType displayPlantType = PlantType.EndoFlame, ZombieType displayZombieType = ZombieType.Nothing, Quality displayQuality = Quality.Default, bool Interactable = true)
+    {
+        public string Name { get; init; } = Name;
+        public string Text { get; init; } = Text;
+        public Action Callback { get; init; } = Callback;
+        public PlantType displayPlantType { get; init; } = displayPlantType;
+        public ZombieType displayZombieType { get; init; } = displayZombieType;
+        public Quality displayQuality { get; init; } = displayQuality;
+        public bool Interactable { get; init; } = Interactable;
     }
 }

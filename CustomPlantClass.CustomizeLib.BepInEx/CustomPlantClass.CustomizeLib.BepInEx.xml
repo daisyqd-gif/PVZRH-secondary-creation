@@ -4,6 +4,20 @@
         <name>CustomPlantClass.CustomizeLib.BepInEx</name>
     </assembly>
     <members>
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterPlantTypeData(PlantType,CustomPlantClass.CustomizeLib.CustomCore.PlantTypeData)">
+            <summary>
+            Adds a plant type to the corresponding TypeMgrExtra category lists.
+            </summary>
+            <param name="plantType">The plant type to register.</param>
+            <param name="data">The categories the plant belongs to.</param>
+        </member>
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterZombieTypeData(ZombieType,CustomPlantClass.CustomizeLib.CustomCore.ZombieTypeData)">
+            <summary>
+            Adds a zombie type to the corresponding TypeMgrExtra category lists.
+            </summary>
+            <param name="zombieType">The zombie type to register.</param>
+            <param name="data">The categories the zombie belongs to.</param>
+        </member>
         <member name="T:CustomPlantClass.CustomizeLib.CustomCore.TypeMgrExtraSkin">
             <summary>
             用于储存皮肤的数据
@@ -232,7 +246,7 @@
             <param name="cd">卡槽cd</param>
             <param name="sun">阳光</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``2(System.Int32,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``2(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
             <summary>
             注册自定义植物皮肤
             </summary>
@@ -250,7 +264,7 @@
             <param name="sun">阳光</param>
             <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``1(System.Int32,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``1(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}},System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
             <summary>
             注册自定义植物皮肤
             </summary>
@@ -267,7 +281,7 @@
             <param name="sun">阳光</param>
             <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``1(System.Int32,UnityEngine.GameObject,UnityEngine.GameObject,System.Action{``0},System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``1(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Action{``0},System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
             <summary>
             注册自定义植物皮肤(用于给原有植物添加皮肤)
             </summary>
@@ -278,7 +292,7 @@
             <param name="ctor">数据绑定函数</param>
             <param name="bulletSkinList">切换皮肤时切换的皮肤子弹</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``2(System.Int32,UnityEngine.GameObject,UnityEngine.GameObject,System.Action{``0},System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterCustomPlantSkin``2(CustomPlantClass.CustomizeLib.ID,UnityEngine.GameObject,UnityEngine.GameObject,System.Action{``0},System.Collections.Generic.List{System.ValueTuple{BulletType,System.Collections.Generic.List{UnityEngine.GameObject}}})">
             <summary>
             注册自定义植物皮肤(用于给原有植物添加皮肤)
             </summary>
@@ -416,7 +430,7 @@
             <param name="zombie">僵尸预制体</param>
             <param name="data">僵尸数据</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterSuperSkill(System.Int32,System.Func{Plant,System.Int32},System.Action{Plant},System.Int32)">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.RegisterSuperSkill(CustomPlantClass.CustomizeLib.ID,System.Func{Plant,System.Int32},System.Action{Plant},System.Int32)">
             <summary>
             注册植物大招
             </summary>
@@ -425,7 +439,7 @@
             <param name="skill">要运行的大招函数</param>
             <param name="defaultCost">默认开大花费</param>
         </member>
-        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.AddUltimatePlant(PlantType)">
+        <member name="M:CustomPlantClass.CustomizeLib.CustomCore.AddUltimatePlant(CustomPlantClass.CustomizeLib.ID)">
             <summary>
             添加自定义究极植物
             </summary>
@@ -1368,6 +1382,24 @@
             触发监听器
             </summary>
             <param name="type">事件类型</param>
+        </member>
+        <member name="M:CustomPlantClass.CustomizeLib.Tools.GetColorfulCardGameObject">
+            <summary>
+            获取卡牌GameObject
+            </summary>
+            <returns>卡牌GameObject，Child 0:PacketBg背景图，Child 1：默认展示，1有CardUI组件</returns>
+        </member>
+        <member name="M:CustomPlantClass.CustomizeLib.Tools.GetNormalCardGameObject">
+            <summary>
+            获取卡牌GameObject
+            </summary>
+            <returns>卡牌GameObject，Child 0:PacketBg背景图，Child 1:二次选卡，Child 2：默认展示，12均有CardUI组件</returns>
+        </member>
+        <member name="M:CustomPlantClass.CustomizeLib.Tools.GetColorfulCardParent">
+            <summary>
+            获取彩卡选卡父级
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:CustomPlantClass.CustomizeLib.CoreTools.GetAdvBuffByString(System.String)">
             <summary>

@@ -26,6 +26,7 @@
   
 1. `CustomBigStar` -> Big star monobehaviour (undocumented)
 2. `BaseCustomBullet` -> Used for creating custom bullets, overridable methods are structured like prefixes, returning `true` will run the original method, returning `false` will skip the original method.(Currently supports `bullet_pea` and `bullet_cabbage` as its TBase) Example impl:
+
 <details>
 <summary>Click to show code</summary>
 
@@ -146,14 +147,17 @@ public interface IPlantCannonAimHandler
 
 13. `PlantSkinComponent`, `BulletComponent`, `ZombieComponent` -> Contains a getter property to get their respective property on its gameobject
 14. `CustomPlantClass.ModLogger` -> Legacy logger. Use `CustomPlantClass.Runtime.Core.ModLogger` for current code.
+
 </details>
 
 ## CustomPlantClass.Level
+
 <details>
 <summary>Click to show section</summary>
   
 1. `BranchAdventureManager` -> Used to register custom branch adventures (Incomplete! do not use until verified!)
 2. `CustomLevelMgr` -> Used to load custom levels into the game. API (full code in repo):
+
 <details>
 <summary>Click to show code</summary>
 
@@ -173,6 +177,7 @@ public class CustomLevelMgr : MonoBehaviour
 </details>
 
 3. `LevelProgressionManager` -> Used to track what custom levels are completed. API  (full code in repo):
+
 <details>
 <summary>Click to show code</summary>
 
@@ -189,6 +194,7 @@ public static class LevelProgressionManager
 </details>
 
 ## CustomPlantClass.Examples (Provides inheretable classes for base game plants)
+
 <details>
 <summary>Click to show section</summary>
   
@@ -196,13 +202,16 @@ public static class LevelProgressionManager
 2. `DoomSniper_Example`
 3. `SniperPea_Example`
 4. `SuperHypnoGatling_Example`
+
 </details>
 
 ## CustomPlantClass.Main
+
 <details>
 <summary>Click to show section</summary>
   
 1. `AssetMgr` (`CustomPlantClass.Main`, supplied by `CustomPlantClass.Runtime.Core.dll`) -> Loads and caches asset bundles and embedded resources. API (full code in repo):
+
 <details>
 <summary>Click to show code</summary>
 
@@ -256,6 +265,7 @@ public sealed class AssetDispatcher
 </details>
 
 2. `DataMgr` -> The core of the framework and contains most APIs. API  (full code in repo):
+
 <details>
 <summary>Click to show code</summary>
 
@@ -854,6 +864,7 @@ public static class MathHelper
 </details>
 
 11. `StructManager`
+
 <details>
 <summary>Click to show code</summary>
 
@@ -1321,7 +1332,8 @@ Unlike `IPCManager.PingMod`, `TCPManager.PingMod` only queues its ping command l
 
 The public abstract `TCPBase` is a lower-level WebSocket server/client base for custom implementations. Subclasses provide `int port` and `OnCommandReceived(string message, string data)`; `StartServer()`, `StartClient()`, and `StartAuto()` start its transport, while `SendMessage(message, data)` and `ProcessCommands()` send and dispatch messages. Each start method throws `InvalidOperationException` if that instance is already running.
 
-## CustomPlantClass.Runtime.CSharp:
+## CustomPlantClass.Runtime.CSharp
+
 1. This namespace is only a dll and is used to compile code on the go. An example mod:
 
 <details>
@@ -1381,7 +1393,7 @@ public static class Bullet_ultimateCactus_SetPenetrationTime_Patch
 
 </details>
 
-## CustomPlantClass.RogueShootingManager:
+## CustomPlantClass.RogueShootingManager
 
 <details>
 <summary>Click to show code</summary>

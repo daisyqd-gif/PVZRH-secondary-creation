@@ -1,4 +1,4 @@
-#nullable enable
+
 namespace CustomPlantClass.Main
 {
     /// <summary>
@@ -6,59 +6,76 @@ namespace CustomPlantClass.Main
     /// </summary>
     public struct BaseCustomPlantData
     {
+        /// <summary/>
+        [Obsolete("Please preset the ID, prefab, and preview")]
+        public BaseCustomPlantData()
+        {
+            
+        }
+        /// <summary/>
+        /// <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+        /// <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+        /// <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        public BaseCustomPlantData(ID PlantId, GameObject Prefab, GameObject Preview)
+        {
+            this.PlantId=PlantId;
+            this.Prefab=Prefab;
+            this.Preview=Preview;
+        }
         /// <summary>
         /// The plant ID of the plant
         /// </summary>
-        public ID PlantId;
+        public ID PlantId { get; set; }
         /// <summary>
         /// The plant's prefab
         /// </summary>
-        public GameObject Prefab;
+        public GameObject Prefab { get; set; }
         /// <summary>
         /// The plant's preview image
         /// </summary>
-        public GameObject Preview;
+        public GameObject Preview { get; set; }
 
         /// <summary>
         /// How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
         /// </summary>
-        public List<(ID, ID)> Fusions;
+#nullable enable
+        public List<(ID, ID)> Fusions = new();
         /// <summary>
         /// How fast should the plant attack (Set to 0 for non attackers)
         /// </summary>
-        public float AttackInterval;
+        public float AttackInterval = 0f;
         /// <summary>
         /// How fast should the plant produce sun (Set to 0 for non producers)
         /// </summary>
-        public float ProduceInterval;
+        public float ProduceInterval = 0f;
         /// <summary>
         /// How much damage should the plant do when attacking (Set to 0 for non attackers)
         /// </summary>
-        public int AttackDamage;
+        public int AttackDamage = 0;
         /// <summary>
         /// How much health should this plant have (Non defensive plants usually have 300)
         /// </summary>
-        public int MaxHealth;
+        public int MaxHealth = 300;
         /// <summary>
         /// How long should the seed's cooldown be
         /// </summary>
-        public float Cd;
+        public float Cd = 1.5f;
         /// <summary>
         /// How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
         /// </summary>
-        public int Sun;
+        public int Sun = 0;
         /// <summary>
         /// The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
         /// </summary>
-        public BulletType DefaultBullet;
+        public BulletType DefaultBullet = BulletType.Bullet_pea;
         /// <summary>
         /// Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
         /// </summary>
-        public bool CanPF;
+        public bool CanPF = false;
         /// <summary>
         /// Sets if a plant can star up or not
         /// </summary>
-        public bool CanStarUp;
+        public bool CanStarUp = false;
         /// <summary>
         /// The card level of the plant
         /// Normal plants: White
@@ -68,27 +85,27 @@ namespace CustomPlantClass.Main
         /// Strong ultimates: Gold
         /// Treasure mode exclusive plants: Red (Can't be imitated)
         /// </summary>
-        public CardLevel CardColor;
+        public CardLevel CardColor = CardLevel.White;
         /// <summary>
         /// Sets if the plant will appear in the rainbow card menu
         /// </summary>
-        public bool IsRainbowCard;
+        public bool IsRainbowCard = false;
         /// <summary>
         /// Sets if the plant is travel locked
         /// </summary>
-        public bool IsUltimatePlant;
+        public bool IsUltimatePlant = false;
         /// <summary>
         /// Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
         /// </summary>
-        public int CardRepeatAmt;
+        public int CardRepeatAmt = 1;
         /// <summary>
         /// The name to be displayed in the almanac
         /// </summary>
-        public string Name;
+        public string Name = "二创占位符";
         /// <summary>
         /// The description of the plant shown in the almanac
         /// </summary>
-        public string AlmanacEntry;
+        public string AlmanacEntry = "未知";
 
         /// <summary>
         /// Creates a default struct for the plant
@@ -102,11 +119,12 @@ namespace CustomPlantClass.Main
             GameObject prefab,
             GameObject preview
         ) => new BaseCustomPlantData
+        (
+            id,
+            prefab,
+            preview
+        )
         {
-            PlantId = id,
-            Prefab = prefab,
-            Preview = preview,
-
             // defaults
             Fusions = [],
             AttackInterval = 0f,
@@ -125,6 +143,395 @@ namespace CustomPlantClass.Main
             Name = "",
             AlmanacEntry = ""
         };
+        /// <summary>
+        /// Creates a default struct for the plant
+        /// </summary>
+        /// <param name="id">The plant ID of the plant</param>
+        /// <param name="prefab">The plant's prefab</param>
+        /// <param name="preview">The plant's preview</param>
+        /// <returns>The default struct</returns>
+        public static BaseCustomPlantData<T> Create<T>(
+            ID id,
+            GameObject prefab,
+            GameObject preview
+        )
+        where T : Plant => new BaseCustomPlantData<T>
+        (
+            id,
+            prefab,
+            preview
+        )
+        {
+            // defaults
+            Fusions = [],
+            AttackInterval = 0f,
+            ProduceInterval = 0f,
+            AttackDamage = 0,
+            MaxHealth = 300,
+            Cd = 0f,
+            Sun = 0,
+            DefaultBullet = BulletType.Bullet_pea,
+            CanPF = false,
+            CanStarUp = false,
+            CardColor = CardLevel.White,
+            IsRainbowCard = false,
+            IsUltimatePlant = false,
+            CardRepeatAmt = 1,
+            Name = "",
+            AlmanacEntry = ""
+        };
+        /// <summary>
+        /// Creates a default struct for the plant
+        /// </summary>
+        /// <param name="id">The plant ID of the plant</param>
+        /// <param name="prefab">The plant's prefab</param>
+        /// <param name="preview">The plant's preview</param>
+        /// <returns>The default struct</returns>
+        public static BaseCustomPlantData<T1,T2> Create<T1,T2>(
+            ID id,
+            GameObject prefab,
+            GameObject preview
+        )
+        where T1 : Plant where T2 : MonoBehaviour=> new BaseCustomPlantData<T1,T2>
+        (
+            id,
+            prefab,
+            preview
+        )
+        {
+            // defaults
+            Fusions = [],
+            AttackInterval = 0f,
+            ProduceInterval = 0f,
+            AttackDamage = 0,
+            MaxHealth = 300,
+            Cd = 0f,
+            Sun = 0,
+            DefaultBullet = BulletType.Bullet_pea,
+            CanPF = false,
+            CanStarUp = false,
+            CardColor = CardLevel.White,
+            IsRainbowCard = false,
+            IsUltimatePlant = false,
+            CardRepeatAmt = 1,
+            Name = "",
+            AlmanacEntry = ""
+        };
+        
+        /// <summary>
+        /// Registers a custom plant.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        public BaseCustomPlantData Register<T>()
+        where T : Plant
+        {
+            DataMgr.RegisterCustomPlant<T>(this);
+            return this;
+        }
+        
+        /// <summary>
+        /// Registers a custom plant.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        public BaseCustomPlantData Register<T1,T2>()
+        where T1 : Plant where T2 : MonoBehaviour
+        {
+            DataMgr.RegisterCustomPlant<T1, T2>(this);
+            return this;
+        }
+    }
+    /// <summary>
+    /// Core metadata for defining a custom plant. Automatically adds the plant component
+    /// </summary>
+    public struct BaseCustomPlantData<T> where T : Plant
+    {
+        /// <summary/>
+        public static implicit operator BaseCustomPlantData(BaseCustomPlantData<T> self)
+        {
+            return new BaseCustomPlantData(self.PlantId, self.Prefab, self.Preview)
+            {
+                // defaults
+                Fusions = self.Fusions,
+                AttackInterval = self.AttackInterval,
+                ProduceInterval = self.ProduceInterval,
+                AttackDamage = self.AttackDamage,
+                MaxHealth = self.MaxHealth,
+                Cd = self.Cd,
+                Sun = self.Sun,
+                DefaultBullet = self.DefaultBullet,
+                CanPF = self.CanPF,
+                CanStarUp = self.CanStarUp,
+                CardColor = self.CardColor,
+                IsRainbowCard = self.IsRainbowCard,
+                IsUltimatePlant = self.IsUltimatePlant,
+                CardRepeatAmt = self.CardRepeatAmt,
+                Name = self.Name,
+                AlmanacEntry = self.AlmanacEntry
+            };
+        }
+        /// <summary/>
+        /// <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+        /// <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+        /// <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        public BaseCustomPlantData(ID PlantId, GameObject Prefab, GameObject Preview)
+        {
+            this.PlantId=PlantId;
+            this.Prefab=Prefab;
+            this.Preview=Preview;
+            Prefab.AddComponent<T>();
+        }
+        /// <summary>
+        /// The plant ID of the plant
+        /// </summary>
+        public ID PlantId { get; set; }
+        /// <summary>
+        /// The plant's prefab
+        /// </summary>
+        public GameObject Prefab { get; set; }
+        /// <summary>
+        /// The plant's preview image
+        /// </summary>
+        public GameObject Preview { get; set; }
+
+        /// <summary>
+        /// How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
+        /// </summary>
+        public List<(ID, ID)> Fusions = new();
+        /// <summary>
+        /// How fast should the plant attack (Set to 0 for non attackers)
+        /// </summary>
+        public float AttackInterval = 0f;
+        /// <summary>
+        /// How fast should the plant produce sun (Set to 0 for non producers)
+        /// </summary>
+        public float ProduceInterval = 0f;
+        /// <summary>
+        /// How much damage should the plant do when attacking (Set to 0 for non attackers)
+        /// </summary>
+        public int AttackDamage = 0;
+        /// <summary>
+        /// How much health should this plant have (Non defensive plants usually have 300)
+        /// </summary>
+        public int MaxHealth = 300;
+        /// <summary>
+        /// How long should the seed's cooldown be
+        /// </summary>
+        public float Cd = 1.5f;
+        /// <summary>
+        /// How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
+        /// </summary>
+        public int Sun = 0;
+        /// <summary>
+        /// The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
+        /// </summary>
+        public BulletType DefaultBullet = BulletType.Bullet_pea;
+        /// <summary>
+        /// Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
+        /// </summary>
+        public bool CanPF = false;
+        /// <summary>
+        /// Sets if a plant can star up or not
+        /// </summary>
+        public bool CanStarUp = false;
+        /// <summary>
+        /// The card level of the plant
+        /// Normal plants: White
+        /// Fused plants: Green
+        /// Super plants: Blue
+        /// Weak ultimates / normal ultimates: Purple
+        /// Strong ultimates: Gold
+        /// Treasure mode exclusive plants: Red (Can't be imitated)
+        /// </summary>
+        public CardLevel CardColor = CardLevel.White;
+        /// <summary>
+        /// Sets if the plant will appear in the rainbow card menu
+        /// </summary>
+        public bool IsRainbowCard = false;
+        /// <summary>
+        /// Sets if the plant is travel locked
+        /// </summary>
+        public bool IsUltimatePlant = false;
+        /// <summary>
+        /// Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
+        /// </summary>
+        public int CardRepeatAmt = 1;
+        /// <summary>
+        /// The name to be displayed in the almanac
+        /// </summary>
+        public string Name = "二创占位符";
+        /// <summary>
+        /// The description of the plant shown in the almanac
+        /// </summary>
+        public string AlmanacEntry = "未知";
+
+        /// <summary>
+        /// Registers a custom plant.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        public BaseCustomPlantData<T> Register()
+        {
+            DataMgr.RegisterCustomPlant<T>(this);
+            return this;
+        }
+    }
+    /// <summary>
+    /// Core metadata for defining a custom plant. Automatically adds the plant component and adds another component
+    /// </summary>
+    public struct BaseCustomPlantData<T1,T2> where T1 : Plant where T2 : MonoBehaviour
+    {
+        /// <summary/>
+        public static implicit operator BaseCustomPlantData(BaseCustomPlantData<T1,T2> self)
+        {
+            return new BaseCustomPlantData(self.PlantId, self.Prefab, self.Preview)
+            {
+                // defaults
+                Fusions = self.Fusions,
+                AttackInterval = self.AttackInterval,
+                ProduceInterval = self.ProduceInterval,
+                AttackDamage = self.AttackDamage,
+                MaxHealth = self.MaxHealth,
+                Cd = self.Cd,
+                Sun = self.Sun,
+                DefaultBullet = self.DefaultBullet,
+                CanPF = self.CanPF,
+                CanStarUp = self.CanStarUp,
+                CardColor = self.CardColor,
+                IsRainbowCard = self.IsRainbowCard,
+                IsUltimatePlant = self.IsUltimatePlant,
+                CardRepeatAmt = self.CardRepeatAmt,
+                Name = self.Name,
+                AlmanacEntry = self.AlmanacEntry
+            };
+        }
+        /// <summary/>
+        public static implicit operator BaseCustomPlantData<T1>(BaseCustomPlantData<T1,T2> self)
+        {
+            return new BaseCustomPlantData<T1>(self.PlantId, self.Prefab, self.Preview)
+            {
+                // defaults
+                Fusions = self.Fusions,
+                AttackInterval = self.AttackInterval,
+                ProduceInterval = self.ProduceInterval,
+                AttackDamage = self.AttackDamage,
+                MaxHealth = self.MaxHealth,
+                Cd = self.Cd,
+                Sun = self.Sun,
+                DefaultBullet = self.DefaultBullet,
+                CanPF = self.CanPF,
+                CanStarUp = self.CanStarUp,
+                CardColor = self.CardColor,
+                IsRainbowCard = self.IsRainbowCard,
+                IsUltimatePlant = self.IsUltimatePlant,
+                CardRepeatAmt = self.CardRepeatAmt,
+                Name = self.Name,
+                AlmanacEntry = self.AlmanacEntry
+            };
+        }
+        /// <summary/>
+        /// <param name="PlantId">Plant's identifacation number, must not be colliding with another.</param>
+        /// <param name="Prefab">Plant's prefab, must be a gameobject with a rigidbody, 2 collider 2ds, and an animator. Children can be anything.</param>
+        /// <param name="Preview">Plant's preview, must be a gameobject with only a spriterenderer</param>
+        public BaseCustomPlantData(ID PlantId, GameObject Prefab, GameObject Preview)
+        {
+            this.PlantId=PlantId;
+            this.Prefab=Prefab;
+            this.Preview=Preview;
+            Prefab.AddComponent<T1>();
+            Prefab.AddComponent<T2>();
+        }
+        /// <summary>
+        /// The plant ID of the plant
+        /// </summary>
+        public ID PlantId { get; set; }
+        /// <summary>
+        /// The plant's prefab
+        /// </summary>
+        public GameObject Prefab { get; set; }
+        /// <summary>
+        /// The plant's preview image
+        /// </summary>
+        public GameObject Preview { get; set; }
+
+        /// <summary>
+        /// How to fuse this plant (Can be an empty list for infusable plants, order sensitive)
+        /// </summary>
+        public List<(ID, ID)> Fusions = new();
+        /// <summary>
+        /// How fast should the plant attack (Set to 0 for non attackers)
+        /// </summary>
+        public float AttackInterval = 0f;
+        /// <summary>
+        /// How fast should the plant produce sun (Set to 0 for non producers)
+        /// </summary>
+        public float ProduceInterval = 0f;
+        /// <summary>
+        /// How much damage should the plant do when attacking (Set to 0 for non attackers)
+        /// </summary>
+        public int AttackDamage = 0;
+        /// <summary>
+        /// How much health should this plant have (Non defensive plants usually have 300)
+        /// </summary>
+        public int MaxHealth = 300;
+        /// <summary>
+        /// How long should the seed's cooldown be
+        /// </summary>
+        public float Cd = 1.5f;
+        /// <summary>
+        /// How much sun should this plant cost (for fusable plants, add up the full cost of all of its ancestors)
+        /// </summary>
+        public int Sun = 0;
+        /// <summary>
+        /// The bullet type the plant should fire (Set to BulletType.Bullet_pea for non shooters)
+        /// </summary>
+        public BulletType DefaultBullet = BulletType.Bullet_pea;
+        /// <summary>
+        /// Sets if a plant can have a super skill or not. The plant must have 1 component that implements ICustomPF
+        /// </summary>
+        public bool CanPF = false;
+        /// <summary>
+        /// Sets if a plant can star up or not
+        /// </summary>
+        public bool CanStarUp = false;
+        /// <summary>
+        /// The card level of the plant
+        /// Normal plants: White
+        /// Fused plants: Green
+        /// Super plants: Blue
+        /// Weak ultimates / normal ultimates: Purple
+        /// Strong ultimates: Gold
+        /// Treasure mode exclusive plants: Red (Can't be imitated)
+        /// </summary>
+        public CardLevel CardColor = CardLevel.White;
+        /// <summary>
+        /// Sets if the plant will appear in the rainbow card menu
+        /// </summary>
+        public bool IsRainbowCard = false;
+        /// <summary>
+        /// Sets if the plant is travel locked
+        /// </summary>
+        public bool IsUltimatePlant = false;
+        /// <summary>
+        /// Sets the amount of times the plant's seed packet can be selected if it is a rainbow card (Set to 0 if it is not a rainbow card)
+        /// </summary>
+        public int CardRepeatAmt = 1;
+        /// <summary>
+        /// The name to be displayed in the almanac
+        /// </summary>
+        public string Name = "二创占位符";
+        /// <summary>
+        /// The description of the plant shown in the almanac
+        /// </summary>
+        public string AlmanacEntry = "未知";
+
+        /// <summary>
+        /// Registers a custom plant.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        public BaseCustomPlantData<T1,T2> Register()
+        {
+            DataMgr.RegisterCustomPlant<T1,T2>(this);
+            return this;
+        }
     }
 
     /// <summary>
