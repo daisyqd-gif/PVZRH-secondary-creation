@@ -4,6 +4,27 @@
 
 ![C#](https://forthebadge.com/api/badges/generate?panels=2&primaryLabel=Made+with&secondaryLabel=C%23%2014&primaryBGColor=%239179e4&primaryTextColor=%23FFFFFF&secondaryBGColor=%23389AD5&secondaryTextColor=%23FFFFFF&primaryFontSize=12&primaryFontWeight=600&primaryLetterSpacing=2&primaryFontFamily=Roboto&primaryTextTransform=uppercase&secondaryFontSize=12&secondaryFontWeight=900&secondaryLetterSpacing=2&secondaryFontFamily=Montserrat&secondaryTextTransform=uppercase)
 
+[![forthebadge](data:image/svg+xml;base64,PHN2ZyBkYXRhLXYtNWE3NzIzNWE9IiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTk0LjYzOTc4NTc2NjYwMTU2IiBoZWlnaHQ9IjM1IiB2aWV3Qm94PSIwIDAgMTk0LjYzOTc4NTc2NjYwMTU2IDM1IiBjbGFzcz0iYmFkZ2Utc3ZnIj48ZGVmcyBkYXRhLXYtNWE3NzIzNWE9IiI+PCEtLS0tPjwhLS0tLT48IS0tLS0+PC9kZWZzPjxyZWN0IGRhdGEtdi01YTc3MjM1YT0iIiB3aWR0aD0iNzcuMzI5NTY2OTU1NTY2NCIgaGVpZ2h0PSIzNSIgZmlsbD0iI2ZmMDAwMCIvPjxyZWN0IGRhdGEtdi01YTc3MjM1YT0iIiB4PSI3Ny4zMjk1NjY5NTU1NjY0IiB3aWR0aD0iMTE3LjMxMDIxODgxMTAzNTE2IiBoZWlnaHQ9IjM1IiBmaWxsPSIjZmY1MjMzIi8+PCEtLS0tPjx0ZXh0IGRhdGEtdi01YTc3MjM1YT0iIiB4PSIzOC42NjQ3ODM0Nzc3ODMyIiB5PSIxNy41IiBkeT0iMC4zNWVtIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iUm9ib3RvLCBzYW5zLXNlcmlmIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiIgZm9udC13ZWlnaHQ9IjYwMCIgZm9udC1zdHlsZT0ibm9ybWFsIiB0ZXh0LWRlY29yYXRpb249Im5vbmUiIGZpbGwtb3BhY2l0eT0iMSIgZm9udC12YXJpYW50PSJub3JtYWwiIHN0eWxlPSJ0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyI+Tk9USUNFPC90ZXh0PjwhLS0tLT48dGV4dCBkYXRhLXYtNWE3NzIzNWE9IiIgeD0iMTM1Ljk4NDY3NjM2MTA4Mzk4IiB5PSIxNy41IiBkeT0iMC4zNWVtIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iTW9udHNlcnJhdCwgc2Fucy1zZXJpZiIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjkwMCIgbGV0dGVyLXNwYWNpbmc9IjIiIGZvbnQtc3R5bGU9Im5vcm1hbCIgdGV4dC1kZWNvcmF0aW9uPSJub25lIiBmaWxsLW9wYWNpdHk9IjEiIGZvbnQtdmFyaWFudD0ibm9ybWFsIiBzdHlsZT0idGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsiPlVQREFURSA0LjE8L3RleHQ+PCEtLS0tPjwvc3ZnPg==)](https://forthebadge.com)
+
+> [!IMPORTANT]
+> Customizelib is being migrated to this framework. Please understand that there are numerous bugs due to the latest update. Do not use gaoshu's mods with this framework as it will cause a catastrophic failure of the Runtime.CSharp module of the framework and break all mods that use Runtime.CSharp, RogueShootingManager, and BulletBehaviour. The developers of the framework are working hard to recreate these mods to be compatible with this framework.
+
+- [x] Ultimate garlic shooter
+- [x] Ultimate cherry fire shooter
+- [x] Ultimate solar corona cabbage
+- [x] Ultimate flame gatling
+- [ ] Sniper dlc
+- [ ] Ultimate destroyer gatling
+- [ ] Ultimate frost cattail
+- [ ] Ultimate lave melon
+- [ ] Ultimate doom mine
+- [ ] Super big gatling
+- [ ] Ultimate cherry sniper chomper
+- [ ] Obsidian chomper / Obsidian dragon chomper
+- [ ] Abyssal devil chomper
+- [ ] Ultimate edelman alloy tall nut / chomper
+- [ ] Ultimate explode cherry shooter
+
 A modular, extensible gameplay framework for Plants vs. Zombies Fusion that allows modders to create custom plants, zombies, effects, projectiles, and gameplay systems using clean C# APIs.
 > Note: .Net 8.0 or .Net 10.0 might have to be installed for some mods to work. If ususual errors start appearing, try instaling .Net runtime 8.0 or 10.0
 >

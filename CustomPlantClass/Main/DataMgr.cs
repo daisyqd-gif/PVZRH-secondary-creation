@@ -851,6 +851,118 @@ namespace CustomPlantClass.Main
 
             return PlantId;
         }
+        internal static ID RegisterCustomPlant
+        (
+            ID PlantId,
+            GameObject Prefab,
+            GameObject Preview,
+            IEnumerable<(ID,ID)>? Fusions = null,
+            float AttackInterval = 0f,
+            float ProduceInterval = 0f,
+            int AttackDamage = 0,
+            int MaxHealth = 300,
+            float Cd = 0f,
+            int Sun = 0,
+            BulletType DefaultBullet = BulletType.Bullet_pea,
+            bool CanPF = false,
+            bool CanStarUp = false,
+            CardLevel CardColor = CardLevel.White,
+            bool IsRainbowCard = false,
+            bool IsUltimatePlant = false,
+            int CardRepeatAmt = 1,
+            string Name = "",
+            string AlmanacEntry = ""
+        )
+        {
+            EnsureGameNotStarted();
+
+            var fusions = Fusions?
+                .Select(p => ((int)p.Item1, (int)p.Item2))
+                ?? new List<(int, int)>();
+            if (RegisteredPlants.Contains(PlantId))
+            {
+                throw new InvalidOperationException($"Duplicate Plant ID {(int)PlantId}");
+            }
+            RegisteredPlants.Add(PlantId);
+            AddGameStartAction(delegate
+            {
+                //Prefab
+                Il2CppSystem.Collections.Generic.List<GameObject> lst = new();
+                GameAPP.resourcesManager.plantPrefabs.Add(PlantId, Prefab);
+                GameAPP.resourcesManager.plantPrefabs[PlantId].AddComponent<PlantTagAdder>();
+                lst.Add(GameAPP.resourcesManager.plantPrefabs[PlantId]);
+                GameAPP.resourcesManager._plantPrefabs.Add(PlantId, lst);
+                GameAPP.resourcesManager.allPlants.Add(PlantId);
+                Plant plant = GameAPP.resourcesManager.plantPrefabs[PlantId].GetComponent<Plant>();
+                plant.thePlantType = PlantId;
+                plant.tag = "Plant";
+                plant.gameObject.layer = LayerMask.NameToLayer("Plant");
+                //Preview
+                Il2CppSystem.Collections.Generic.List<GameObject> lst2 = new();
+                GameAPP.resourcesManager.plantPreviews.Add(PlantId, Preview);
+                GameAPP.resourcesManager.plantPreviews[PlantId].tag = "Preview";
+                lst2.Add(GameAPP.resourcesManager.plantPreviews[PlantId]);
+                GameAPP.resourcesManager._plantPreviews.Add(PlantId, lst2);
+                //Data
+                PlantDataManager.PlantData_Default[PlantId] = new()
+                {
+                    thePlantType = PlantId,
+                    maxHealth = MaxHealth,
+                    cost = Sun,
+                    attackInterval = AttackInterval,
+                    produceInterval = ProduceInterval,
+                    cd = Cd,
+                    attackDamage = AttackDamage
+                };
+                PlantDataManager.unlocked.Add(PlantId, true);
+                if (Fusions != null)
+                    foreach (var recipe in Fusions)
+                    {
+                        MixData.AddOrderedRecipe(recipe.Item1, recipe.Item2, PlantId);
+                    }
+            });
+
+            if (CanPF)
+            {
+                CustomCore.RegisterSuperSkill(
+                    PlantId,
+                    p => 1000,
+                    p =>
+                    {
+                        if (p.TryGetInterface<ICustomPF>(out var plant))
+                            plant.StartPF();
+                    }
+                );
+            }
+
+            if (CanStarUp)
+                CustomStarUps.Add(PlantId);
+
+            if (IsRainbowCard)
+                CustomCore.RegisterCustomCardToColorfulCards(PlantId, CardRepeatAmt);
+
+            if (IsUltimatePlant)
+                AddCustomUltiPlant(PlantId);
+
+            plantBulletTypes.TryAdd(PlantId, DefaultBullet);
+
+            CustomCore.TypeMgrExtra.IsCustomPlant.Add(PlantId);
+            AddLevelPlant(PlantId, CardColor);
+            CustomCore.AddPlantAlmanacStrings(PlantId, Name, AlmanacEntry);
+            CustomPlantCount++;
+            CustomPlantDatas.Add(PlantId,new()
+                {
+                    thePlantType = PlantId,
+                    maxHealth = MaxHealth,
+                    cost = Sun,
+                    attackInterval = AttackInterval,
+                    produceInterval = ProduceInterval,
+                    cd = Cd,
+                    attackDamage = AttackDamage
+                });
+
+            return PlantId;
+        }
         /// <summary>
         /// Registers a custom plant using BaseCustomPlantData.
         /// </summary>
@@ -858,6 +970,17 @@ namespace CustomPlantClass.Main
             where TBase : Plant
         {
             return RegisterCustomPlant<TBase>
+            (
+                data.PlantId,data.Prefab,data.Preview,
+                data.Fusions,data.AttackInterval,data.ProduceInterval,
+                data.AttackDamage,data.MaxHealth,data.Cd,data.Sun,
+                data.DefaultBullet,data.CanPF,data.CanStarUp,data.CardColor,
+                data.IsRainbowCard,data.IsUltimatePlant,data.CardRepeatAmt,data.Name,data.AlmanacEntry
+            );
+        }
+        internal static ID RegisterCustomPlant(BaseCustomPlantData data)
+        {
+            return RegisterCustomPlant
             (
                 data.PlantId,data.Prefab,data.Preview,
                 data.Fusions,data.AttackInterval,data.ProduceInterval,

@@ -170,51 +170,49 @@
             <returns>The advanced buff identifier and generated buff config.</returns>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.ShootingManagerPatch">
-            <summary>Integrates registered custom plants and trial buffs with the shooting manager.</summary>
+            <summary/>
+        </member>
+        <member name="F:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.selectedCurseBuffs">
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.Reset">
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.Awake_Postfix(GameLevel.RogueShooting.ShootingManager)">
-            <summary>Adds registered custom plants after the shooting manager awakens.</summary>
-            <param name="__instance">The shooting manager being initialized.</param>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.StartAwake_Postfix(GameLevel.RogueShooting.ShootingManager)">
-            <summary>Adds registered custom plants after the shooting manager starts.</summary>
-            <param name="__instance">The shooting manager being initialized.</param>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingManagerPatch.RegisterMissionBuff_Postfix(GameLevel.RogueShooting.ShootingManager,MultipleChoiceMenu@)">
-            <summary>Adds an eligible custom trial buff to the mission selection menu.</summary>
-            <param name="__instance">The shooting manager for the current run.</param>
-            <param name="menu">The mission buff menu to update.</param>
+            <summary/>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch">
-            <summary>Temporarily filters custom plant configs while building the game almanac.</summary>
+            <summary/>
         </member>
         <member name="F:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.LastGoodDir">
-            <summary>Gets or sets the most recently built almanac directory.</summary>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Build_Prefix(GameLevel.RogueShooting.ShootingAlmanacDirectory@)">
-            <summary>Temporarily removes unlisted custom configs before the catalog is built.</summary>
-            <param name="__result">Receives a fallback directory if the original build fails.</param>
-            <returns><see langword="true"/> to run the original build.</returns>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Build_Postfix(GameLevel.RogueShooting.ShootingAlmanacDirectory)">
-            <summary>Restores temporarily removed configs and injects registered plants into the result.</summary>
-            <param name="__result">The directory produced by the catalog build.</param>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.Finalizer(System.Exception,GameLevel.RogueShooting.ShootingAlmanacDirectory@)">
-            <summary>Recovers from an invalid-operation build failure using the last valid directory.</summary>
-            <param name="__exception">The exception thrown by the original build, if any.</param>
-            <param name="__result">The directory produced by the build.</param>
-            <returns>The unhandled exception, or <see langword="null"/> when the failure is recovered.</returns>
+            <summary/>
+        </member>
+        <member name="M:CustomPlantClass.RogueShootingManager.ShootingAlmanacCatalogPatch.RestoreRemovedConfigs">
+            <summary/>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector">
-            <summary>Injects custom plants into a built shooting almanac directory.</summary>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector.ResetInjected">
-            <summary>Clears the set of almanac directories already injected.</summary>
+            <summary/>
         </member>
         <member name="M:CustomPlantClass.RogueShootingManager.AlmanacDirectoryInjector.Inject(GameLevel.RogueShooting.ShootingAlmanacDirectory)">
-            <summary>Adds registered custom plant entries to an almanac directory once.</summary>
-            <param name="source">The directory to update.</param>
+            <summary/>
         </member>
         <member name="T:CustomPlantClass.RogueShootingManager.Plugin">
             <summary>Initializes the Rogue Shooting expansion and its IL2CPP types.</summary>

@@ -389,7 +389,7 @@ namespace CustomPlantClass.RogueShootingManager
         {
             
         }
-        internal static List<(string name, string desc, Func<ShootingManager,bool> canGet, Action<ShootingManager> onGet)> CustomMissionBuffs = new();
+        internal static List<(string name, string desc, Func<ShootingManager,bool> canGet, Action<ShootingManager> onGet, AdvBuff buff)> CustomMissionBuffs = new();
         /// <summary>Registers a mission buff that may be offered as a trial.</summary>
         /// <param name="name_formatted">The buff name before its trial prefix is applied.</param>
         /// <param name="desc">The buff description.</param>
@@ -411,7 +411,7 @@ namespace CustomPlantClass.RogueShootingManager
             string internalName = $"试炼 - {name_formatted}：{desc}";
 
             // Register buff
-            BuffID buff = Compatibility.CustomCore_Old.RegisterCustomBuff(
+            BuffID buff = CustomCore.RegisterCustomBuff(
                 internalName,
                 BuffType.AdvancedBuff,
                 () => Board.Instance != null && Board.Instance.boardTag.rogueShooting,
@@ -420,7 +420,7 @@ namespace CustomPlantClass.RogueShootingManager
             );
 
             // Add to your mission buff list
-            CustomMissionBuffs.Add((displayTitle, desc, mgr => !Lawnf.TravelAdvanced(buff), onGet));
+            CustomMissionBuffs.Add((displayTitle, desc, mgr => !Lawnf.TravelAdvanced(buff), onGet, buff));
 
             // TODO: return actual AdvBuff once Rogue Shooting update drops
             return buff;

@@ -11,6 +11,7 @@ using CustomPlantClass.Registry;
 using HarmonyLib;
 using UnityEngine;
 [assembly: InternalsVisibleTo("CustomPlantClass")]
+[assembly: InternalsVisibleTo("CustomPlantClass.RogueShootingManager")]
 
 namespace CustomPlantClass.Runtime.Core
 {

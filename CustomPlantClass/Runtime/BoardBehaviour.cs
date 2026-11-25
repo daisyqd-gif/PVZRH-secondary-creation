@@ -132,35 +132,28 @@ namespace CustomPlantClass.Runtime
     /// <summary>
     /// An attribute to run an attribute on a field when the board is destroyed.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    public sealed class ActionOnBoardDestroyAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class ExecuteOnBoardDestroyAttribute : Attribute
     {
-        /// <summary>
-        /// The action to run
-        /// </summary>
-        public Func<object> Action { get; }
-
         /// <summary>
         /// An attribute to run an attribute on a field when the board is destroyed.
         /// </summary>
-        public ActionOnBoardDestroyAttribute(Func<object> action)
-        {
-            Action = action;
-        }
+        public ExecuteOnBoardDestroyAttribute()
+        {}
     }
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class ResetRegistry
     {
         private static readonly List<(FieldInfo field, object defaultValue)> entries = new();
-        private static readonly List<(FieldInfo field, Func<object> action)> entries2 = new();
+        private static readonly List<MethodInfo> entries2 = new();
 
         public static void Register(FieldInfo field, object defaultValue)
         {
             entries.Add((field, defaultValue));
         }
-        public static void Register(FieldInfo field, Func<object> action)
+        public static void Register(MethodInfo field)
         {
-            entries.Add((field, action));
+            entries2.Add(field);
         }
 
         public static void ResetAll()
@@ -170,10 +163,10 @@ namespace CustomPlantClass.Runtime
                 ModLogger.LogInfo($"Defaulted field {field.Name}.");
                 field.SetValue(null, defaultValue); // static fields
             }
-            foreach (var (field, action) in entries2)
+            foreach (var method in entries2)
             {
-                ModLogger.LogInfo($"Defaulted field {field.Name}.");
-                field.SetValue(null, action()); // static fields
+                ModLogger.LogInfo($"Ran field {method.Name}.");
+                method.Invoke(null,null);
             }
         }
     }
@@ -194,6 +187,9 @@ namespace CustomPlantClass.Runtime
             var fields = type.GetFields(
                 BindingFlags.Static | BindingFlags.Instance |
                 BindingFlags.Public | BindingFlags.NonPublic);
+            var methods = type.GetMethods(
+                BindingFlags.Static | BindingFlags.Instance |
+                BindingFlags.Public | BindingFlags.NonPublic);
 
             foreach (var field in fields)
             {
@@ -210,15 +206,14 @@ namespace CustomPlantClass.Runtime
                 ResetRegistry.Register(field, defaultValue);
                 ModLogger.LogInfo($"Found field defaulter for field {field.Name}.");
             }
-            foreach (var field in fields)
+
+            foreach (var method in methods)
             {
-                var attr = field.GetCustomAttribute<ActionOnBoardDestroyAttribute>();
+                var attr = method.GetCustomAttribute<ExecuteOnBoardDestroyAttribute>();
                 if (attr == null) continue;
 
-                Func<object> defaultValue = attr.Action;
-
-                ResetRegistry.Register(field, defaultValue);
-                ModLogger.LogInfo($"Found field defaulter for field {field.Name}.");
+                ResetRegistry.Register(method);
+                ModLogger.LogInfo($"Found method runner for field {method.Name}.");
             }
         }
         private static void ScanAllManagedAssemblies()

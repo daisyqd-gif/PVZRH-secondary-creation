@@ -36,7 +36,9 @@ namespace MowerFix{
             ZombieType.DolphinGatlingZombie,
             ZombieType.ImpKing,
             ZombieType.HorseBoss,
-            ZombieType.SummonedHorse
+            ZombieType.SummonedHorse,
+            ZombieType.SnowBirdZombie,
+            ZombieType.SnowCrab
         };
         public override void Load()
         {

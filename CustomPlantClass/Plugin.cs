@@ -13,6 +13,8 @@ namespace CustomPlantClass
         public static AssetBundle assetBundle;
         //internal static Plugin plugin;
         public static Plugin Instance { get; private set; }
+        public static object Buffs { get; set; }
+
         public static bool Loaded = false;
         public static GameObject behaviourObject;
         public override void Load()

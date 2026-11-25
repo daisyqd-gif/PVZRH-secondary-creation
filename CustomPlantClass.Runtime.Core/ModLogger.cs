@@ -17,17 +17,17 @@ namespace CustomPlantClass.Runtime.Core
         /// Gets the BepInEx log source used by this logger.
         /// </summary>
         public static ManualLogSource Log => Log_Lazy.Value;
-        private static void SafeInfo(string msg)
+        internal static void SafeInfo(string msg)
         {
             Log.LogInfo(msg);
         }
 
-        private static void SafeWarn(string msg)
+        internal static void SafeWarn(string msg)
         {
             Log.LogWarning(msg);
         }
 
-        private static void SafeError(string msg)
+        internal static void SafeError(string msg)
         {
             Log.LogError(msg);
         }

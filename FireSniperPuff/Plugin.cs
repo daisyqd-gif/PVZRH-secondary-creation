@@ -45,13 +45,14 @@ namespace FireSniperPuff
                 );
 
                 // Fill out the plant metadata
-                BaseCustomPlantData Data = new BaseCustomPlantData()
+                BaseCustomPlantData Data = new BaseCustomPlantData
+                (
+                    DataMgr.AllocateID(), // Automatically assigns a unique ID
+
+                    assetBundle.GetAsset<GameObject>("SniperPuffPrefab"),   // Main plant prefab
+                    assetBundle.GetAsset<GameObject>("SniperPuffPreview") // Card preview prefab
+                )
                 {
-                    PlantId = DataMgr.AllocateID(), // Automatically assigns a unique ID
-
-                    Prefab = assetBundle.GetAsset<GameObject>("SniperPuffPrefab"),   // Main plant prefab
-                    Preview = assetBundle.GetAsset<GameObject>("SniperPuffPreview"), // Card preview prefab
-
                     Fusions = ListHelper.MirrorList(new () { (PlantType.SniperPuff, PlantType.Jalapeno) }), // Optional fusion recipes
 
                     AttackInterval = 3f,   // Time between attacks (shooters only)

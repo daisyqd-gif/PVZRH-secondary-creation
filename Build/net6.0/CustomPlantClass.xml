@@ -2428,17 +2428,12 @@
             Use this constructor to reset a field to a specific value (Please check that the field type is correct!).
             </summary>
         </member>
-        <member name="T:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute">
+        <member name="T:CustomPlantClass.Runtime.ExecuteOnBoardDestroyAttribute">
             <summary>
             An attribute to run an attribute on a field when the board is destroyed.
             </summary>
         </member>
-        <member name="P:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute.Action">
-            <summary>
-            The action to run
-            </summary>
-        </member>
-        <member name="M:CustomPlantClass.Runtime.ActionOnBoardDestroyAttribute.#ctor(System.Func{System.Object})">
+        <member name="M:CustomPlantClass.Runtime.ExecuteOnBoardDestroyAttribute.#ctor">
             <summary>
             An attribute to run an attribute on a field when the board is destroyed.
             </summary>

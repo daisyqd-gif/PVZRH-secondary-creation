@@ -42,16 +42,18 @@ namespace EvilSuperGatling
         public override void InitializePlants()
         {
             // Fill out the plant metadata
-            BaseCustomPlantData Data = new BaseCustomPlantData()
-            {
-                PlantId = DataContainer.PlantId, // Automatically assigns a unique ID
+            BaseCustomPlantData Data = new BaseCustomPlantData
+            (
+                DataContainer.PlantId, // Automatically assigns a unique ID
 
-                Prefab = assetBundle.GetAsset<GameObject>("EvilSuperGatlingPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
-                Preview = assetBundle.GetAsset<GameObject>("EvilSuperGatlingPreview"), // Card preview prefab, hirearchy must be this
+                assetBundle.GetAsset<GameObject>("EvilSuperGatlingPrefab"),   // Main plant prefab, must copy an original prefab and delete the script component and then edit
+                assetBundle.GetAsset<GameObject>("EvilSuperGatlingPreview") // Card preview prefab, hirearchy must be this
                 /*
                     root-> transform, spriterenderer
                     nothing else
                 */
+            )
+            {
 
                 Fusions = new List<(ID, ID)>(), // Optional fusion recipes
 

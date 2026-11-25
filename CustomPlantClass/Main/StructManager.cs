@@ -370,7 +370,7 @@ namespace CustomPlantClass.Main
         /// <exception cref="InvalidOperationException"></exception>
         public BaseCustomPlantData<T> Register()
         {
-            DataMgr.RegisterCustomPlant<T>(this);
+            DataMgr.RegisterCustomPlant(this);
             return this;
         }
     }
@@ -529,7 +529,7 @@ namespace CustomPlantClass.Main
         /// <exception cref="InvalidOperationException"></exception>
         public BaseCustomPlantData<T1,T2> Register()
         {
-            DataMgr.RegisterCustomPlant<T1,T2>(this);
+            DataMgr.RegisterCustomPlant(this);
             return this;
         }
     }

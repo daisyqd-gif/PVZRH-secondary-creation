@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomPlantClass.Runtime.Core\CustomPlantClass.Runtime.Core.csproj" />
+    <ProjectReference Include="..\CustomPlantClass.Runtime.Tasks\CustomPlantClass.Runtime.Tasks.csproj" />
   </ItemGroup>
 
   <!-- Import shared references -->

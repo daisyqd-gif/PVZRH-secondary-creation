@@ -65,6 +65,9 @@
   <Folder Name="/StarUp.Bepinex/">
     <Project Path="StarUp.Bepinex/StarUpManager.csproj" />
   </Folder>
+  <Folder Name="/SuperDowngrade_RS/">
+    <Project Path="SuperDowngrade_RS/SuperDowngrade_RS.csproj" />
+  </Folder>
   <Folder Name="/SuperGatling_RS/">
     <Project Path="SuperGatling_RS/SuperGatling_RS.csproj" />
   </Folder>
